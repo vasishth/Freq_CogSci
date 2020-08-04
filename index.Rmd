@@ -13,7 +13,7 @@ lof: false
 fontsize: 12pt
 site: bookdown::bookdown_site
 description: "Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction"
-url: 'https\://bookdown.org/yihui/bookdown/'
+url: 'https\://github.com/vasishth/Freq_CogSci'
 github-repo: rstudio/bookdown
 cover-image: images/temporarycover.jpg
 output:
@@ -66,15 +66,15 @@ to-do: add a Mackay type chapter ordering for different scenarios.
 
 ## Online materials
 
-The entire book, including all data and source code, is available online for free on [https://github.com/vasishth/frequentist_book](https://github.com/vasishth/frequentist_book). The exercise solutions are provided there as a pdf (to-do).
+The entire book, including all data and source code, is available online from [https://github.com/vasishth/Fre    q\_CogSci](https://github.com/vasishth/Freq_CogSci). Solutions to the exercises will be provided (to-do).
 
 ## Software needed
 
 Before you start, please install
 
   - [R](https://cran.r-project.org/) (and [RStudio](https://www.rstudio.com/) or any other IDE)
-  - The R packages `MASS`, `dplyr`, `purrr`, `readr`, `extraDistr`, `ggplot2`, `brms`, and `bayesplot`:
-    - They can be installed in the usual way: `install.packages(c("MASS", "dplyr", "purrr", "readr", "extraDistr", "ggplot2", "brms", "bayesplot"))`. 
+  - The R packages `MASS`, `dplyr`, `purrr`, `readr`, `extraDistr`, `ggplot2`:
+    - They can be installed in the usual way: `install.packages(c("MASS", "dplyr", "purrr", "readr", "extraDistr", "ggplot2"))`. 
 
 In every R session, we'll need to set a seed (this ensures that the random numbers are always the same). 
 
