@@ -1,0 +1,306 @@
+# Hypothesis testing using the likelihood ratio test
+
+We started the book with the one-sample t-test. There, we had the following procedure:
+
+- Given independent and identically distributed data $y$, define a null hypothesis: $H_0:  \mu=\mu_0$
+- Compute the sample mean $\bar{y}$ and the standard error SE 
+- Reject the null hypothesis if the absolute value of $\bar{y}/SE$ is larger than $2$.
+
+Here, we turn to a closely related test: the *likelihood ratio test statistic*. 
+
+## The likelihood ratio test: The theory
+
+Suppose that $X_1,\dots, X_n$ are independent and normally distributed with mean $\mu$ and standard deviation $\sigma$ (assume for simplicity that $\sigma$ is known). 
+
+Let the null hypothesis be $H_0: \mu=\mu_0$ and the alternative be $H_1: \mu\neq \mu_0$. Here, $\mu_0$ is a number, such as $0$.
+
+The likelihood of the  data $y$ can be computed under the null model, in which $\mu=\mu_0$, and under the alternative model, in which $\mu$ has some specific alternative value. To make this concrete, imagine 10 data points being generated from a Normal(0,1).
+
+```{r}
+y<-rnorm(10)
+```
+
+We can compute the joint likelihood under a null hypothesis that $\mu=0$:
+
+```{r}
+likNULL<-prod(dnorm(y,mean=0,sd=1))
+```
+
+On the log scale, we would need to add the log likelihoods of each data point:
+
+```{r}
+loglikNULL<-sum(dnorm(y,mean=0,sd=1,log=TRUE))
+loglikNULL
+```
+
+Similarly, we can compute the log likelihood with $\mu$ equal to the maximum likelihood estimate of $\mu$, the sample mean. 
+
+```{r}
+loglikALT<-sum(dnorm(y,mean=mean(y),sd=1,log=TRUE))
+loglikALT
+```
+
+Essentially, the likelihood ratio test compares the ratio of likelihoods of the two models; on the log scale, the difference in log likelihood is taken. 
+The likelihood ratio test then chooses the model with the higher log likelihood, provided that the higher likelihood is high enough (we will just make this more precise).  
+
+One can specify the test in general terms as follows. Suppose that the likelihood is with respect to some parameter $\theta$. We can evaluate the likelihood at  $\mu_0$, the null hypothesis value of the parameter, and evaluate the likelihood using the maximum likelihood estimate $\hat\theta$ of the parameter. The likelihood ratio can then be written as follows:
+
+\begin{equation}
+\Lambda = \frac{max_{\theta\in \omega_0}(lik(\theta))}{max_{\theta\in \omega_1)}(lik(\theta))}
+\end{equation}
+
+where, $\omega_0=\{\mu_0\}$ and $\omega_1=\{\forall \mu \mid \mu\neq \mu_0\}$. The function max just selects the maximum value of  any choices of parameter values; in the case of the null hypothesis there is only one value, $\mu_0$. In the case of the alternative model, the maximum likelihood estimate $\hat\theta$ is the maximum value.
+
+Now, assuming that the data are coming from a normal distribution, the numerator of the likelihood ratio statistic is:
+
+\begin{equation}
+\frac{1}{(\sigma\sqrt{2\pi})^n} 
+           exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)
+\end{equation}
+
+For the denominator, the MLE $\bar{X}$ is taken as $\mu$:
+
+\begin{equation}
+\frac{1}{(\sigma\sqrt{2\pi})^n} exp \left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2 \right)
+\end{equation}
+
+The likelihood ratio statistic is then:
+
+\begin{equation}
+\Lambda = 
+\frac{\frac{1}{(\sigma\sqrt{2\pi})^n} 
+           exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)}{\frac{1}{(\sigma\sqrt{2\pi})^n} 
+           exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2  \right)}
+\end{equation}
+
+Canceling out common terms:
+
+\begin{equation}
+\Lambda = 
+\frac{exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)}{
+        exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2  \right)}
+\end{equation}
+
+
+Taking logs:
+
+\begin{equation}
+\begin{split}
+\log \Lambda =& 
+\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)-\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2  \right)\\
+=& -\frac{1}{2\sigma^2} \left( \sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2 \right)\\
+\end{split}
+\end{equation}
+
+Now, it is a standard algebraic trick to  rewrite  $\sum_{i=1}^n (X_i -\mu_0)^2$ as a sum of two terms:
+
+\begin{equation}
+\sum_{i=1}^n (X_i -\mu_0)^2 = \sum_{i=1}^n (X_i - \bar{X})^2 + n(\bar{X} - \mu_0)^2 
+\end{equation}
+
+If we rearrange terms, we obtain:
+
+\begin{equation}
+\sum_{i=1}^n (X_i -\mu_0)^2 - \sum_{i=1}^n (X_i - \bar{X})^2 = n(\bar{X} - \mu_0)^2 
+\end{equation}
+
+Now, we just established above that $\log \Lambda$ is:
+
+\begin{equation}
+\log \Lambda= -\frac{1}{2\sigma^2} \left( \sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2 \right)
+\end{equation}
+
+Consider the term in the brackets:
+
+\begin{equation}
+(\sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2)
+\end{equation}
+
+This can be rewritten as:
+
+\begin{equation}
+n(\bar{X} - \mu_0)^2
+\end{equation}
+
+Rewriting in this way gives us:
+
+\begin{equation}
+\ell = -\frac{1}{2\sigma^2}   n(\bar{X} - \mu_0)^2 
+\end{equation}
+
+Rearranging terms:
+
+\begin{equation}
+-2 \ell =    \frac{n(\bar{X} - \mu_0)^2 }{\sigma^2}
+\end{equation}
+
+
+Or even more transparently:
+
+\begin{equation}
+-2 \ell =    \frac{(\bar{X} - \mu_0)^2 }{\frac{\sigma^2}{n}}
+\end{equation}
+
+This should remind you of the t-test! Basically, just like in the t-test, what this is saying is that we reject the null when $\mid \bar{X} - \mu_0\mid$, or negative two  times the difference in log likelihood, is large!
+
+Now we will  define what it means for $-2\ell$ to be large. We will define the *likelihood ratio test statistic* as follows. Here, $Lik(\theta)$ refers to the likelihood given some value  $\theta$ for the parameter, and 
+$logLik(\theta)$  refers to the log likelihood. 
+
+\begin{equation}
+\begin{split}
+\Lambda =& -2\times (Lik(\theta_0)/Lik(\theta_1)) \\
+\log \Lambda=& -2\times \{logLik(\theta_0)-logLik(\theta_1)\}\\
+\end{split}
+\end{equation}
+
+where $\theta_1$ and $\theta_0$ are the estimates of $\theta$ under the alternative and null hypotheses, respectively. The likelihood ratio test rejects $H_0$ if $\log \Lambda$ is sufficiently large. As the sample size approaches infinity, $\log \Lambda$ approaches the chi-squared  distribution:
+
+\begin{equation}
+\log \Lambda \rightarrow \chi_r^2  \hbox{ as }  n \rightarrow \infty
+\end{equation}
+
+where $r$ is called the degrees of freedom and is the difference in the number of parameters under the null and alternative hypotheses.
+
+The above result is called *Wilks' theorem*. The proof of Wilks' theorem is fairly involved but you can find it  in Lehmann's textbook *Testing Statistical Hypotheses*.
+
+Note that sometimes you will see the form:
+
+\begin{equation}
+ \log \Lambda = 2 \{\ell(\theta_1) - \ell(\theta_0)\}
+\end{equation}
+
+It should be clear that both statements are saying the same thing; in the second case, we are just subtracting the null hypothesis log likelihood from the alternative hypothesis log likelihood, so the negative sign disappears.
+
+That's the theory. Let's see how the likelihood ratio test works for (a)  simulated data, and (b) our running example, the English relative clause data from  @grodner.
+
+## A practical example using simulated data
+
+A practical example will make the usage of this test clear.
+Let's just simulate a linear model:
+
+```{r}
+x<-1:10
+y<- 10 + 20*x+rnorm(10,sd=10)
+```
+
+Here, the null hypothesis that the slope is 0 is  false (it has value 20). Now, we fit a null hypothesis model, without a slope:
+
+```{r}
+## null hypothesis model:
+m0<-lm(y~1)
+```
+
+We will compare this model's log likelihood with that of the alternative model, which includes an estimate of the slope:
+
+```{r}
+## alternative hypothesis model:
+m1<-lm(y~x)
+```
+
+The difference in log likelihood, multiplied with -2, is:
+
+```{r}
+LogLambda<- -2*(logLik(m0)-logLik(m1))
+## observed value:
+LogLambda[1]
+```
+
+The difference in the number of parameters in the two models is one, so $-2\log\Lambda$ has the distribution $\chi_1^2$. Is the observed value of $-2\log\Lambda$  unexpected under this distribution? We can calculate the probability of obtaining the likelihood ratio statistic we observed above, or a  value more extreme, given the $\chi_1^2$ distribution. 
+
+
+```{r}
+pchisq(LogLambda[1],df=1,lower.tail=FALSE)
+```
+
+Just like the critical  t-value in the t-test, the critical chi-squared value here is:
+
+```{r}
+## critical value:
+qchisq(0.95,df=1)
+```
+
+If minus two times the observed difference in log likelihood is larger than this critical value, we reject the null hypothesis.
+
+
+Note that in the likelihood test above, we are comparing one nested model against another: the null hypothesis model is nested inside the alternative hypothesis model.  What this means is that the alternative hypothesis model contains all the parameters in the null hypothesis model (i.e., the intercept) plus another one (the slope).
+
+## A real-life example: The English relative  clause data
+
+The likelihood ratio test is also the way that hypothesis testing is done with the linear mixed model. Here is how it works. Let's look again at the @grodner English relative clause data. The null hypothesis here refers to the slope parameter. When we have the sum contrast coding, the intercept $\beta_0$ refers to the grand mean, and the slope $\beta_1$ is the amount by which subject and object relative clause mean reading times deviate from the grand mean.  Testing the null hypothesis that $\beta_0$ is 0 amounts to testing whether there is any difference in means between the two relative clause types. This becomes clear if we consider the following. 
+
+Let object relatives be coded as $+1$ and subject relatives as $-1$. Then, the mean reading time $\mu_{or}$ for object relatives in the linear mixed model is: 
+
+\begin{equation}
+\mu_{or}=\beta_0 + \beta_1
+\end{equation}
+
+Similarly, the mean reading time $\mu_{sr}$ for subject relatives is:
+
+\begin{equation}
+\mu_{sr}=\beta_0 - \beta_1
+\end{equation}
+
+If the null hypothesis is that $\mu_{or}-\mu_{sr}=0$, then this amounts to saying that:
+
+\begin{equation}
+(\beta_0 + \beta_1)-(\beta_0 - \beta_1)=0
+\end{equation}
+
+Removing the brackets gives us:
+
+\begin{equation}
+\beta_0 + \beta_1-\beta_0 + \beta_1 = 0
+\end{equation}
+
+This yields the equation:
+
+\begin{equation}
+2\beta_1= 0
+\end{equation}
+
+
+Dividing both sides of the equation by 2, we get the null hypothesis that $\beta_1=0$.
+
+Let's load the data, set up the contrast coding, and fit the null versus the alternative models. We will fit varying intercept and varying slopes for subject and item, without correlations for items. We don't attempt to fit the so-called "maximal model" here with respect to the items random effects because we would get a singularity in the variance covariance matrix. 
+
+````{r}
+gg05e1<-read.table("data/grodnergibsonE1crit.txt",header=TRUE)
+
+gg05e1$so <- ifelse(gg05e1$condition=="objgap",1,-1)
+gg05e1$logrt<-log(gg05e1$rawRT)
+
+library(lme4)
+m0<-lmer(logrt~1 + (1+so|subject)+(1+so||item),gg05e1)
+m1<-lmer(logrt~1 + so + (1+so|subject)+(1+so||item),gg05e1)
+```
+
+Next, we compare the two models' log likelihoods. There is a function in the `lme4` package that achieves that: the `anova` function:
+
+```{r}
+anova(m0,m1)
+```
+
+You can confirm from the output that the `Chisq` value shown is minus two times the difference in log likelihood of the two models. The p-value is computed using the chi-squared distribution with one degree of freedom because in the two models the difference in the number of parameters is one:
+
+```{r}
+round(pchisq(5.95,df=1,lower.tail=FALSE),3)
+```
+
+It is common in the psycholinguistics literature to use the t-value from the linear mixed model output to conduct the hypothesis test on the slope:
+
+```{r}
+summary(m1)$coefficients
+```
+
+The more general method for hypothesis testing is the likelihood ratio test shown above. 
+
+One can also use the likelihood ratio test to evaluate whether a variance compoonent should be included or not. For example, is the correlation parameter justified for the subjects random effects? One can test this in the following way:
+
+```{r}
+m1<-lmer(logrt~1 + so + (1+so|subject)+(1+so||item),gg05e1)
+m1NoCorr<-lmer(logrt~1 + so + (1+so||subject)+(1+so||item),gg05e1)
+anova(m1,m1NoCorr)
+```
+
+The test indicates that we can reject the null hypothesis that the correlation parameter is 0.  
+

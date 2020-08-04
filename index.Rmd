@@ -1,0 +1,105 @@
+--- 
+title: "Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction"
+author: "Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl"
+date: "`r Sys.Date()`"
+knit: "bookdown::render_book"
+documentclass: krantz
+bibliography: [FreqBook.bib]
+biblio-style: apalike
+link-citations: yes
+colorlinks: yes
+lot: false
+lof: false
+fontsize: 12pt
+site: bookdown::bookdown_site
+description: "Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction"
+url: 'https\://bookdown.org/yihui/bookdown/'
+github-repo: rstudio/bookdown
+cover-image: images/temporarycover.jpg
+output:
+  bookdown::gitbook:
+    highlight: breezedark
+---
+
+```{r setup, include=FALSE}
+options(
+  htmltools.dir.version = FALSE, formatR.indent = 2,
+  width = 55, digits = 4, warnPartialMatchAttr = FALSE, warnPartialMatchDollar = FALSE
+)
+
+local({
+  r = getOption('repos')
+  if (!length(r) || identical(unname(r['CRAN']), '@CRAN@'))
+    r['CRAN'] = 'https://cran.rstudio.com' 
+  options(repos = r)
+})
+
+lapply(c('DT', 'citr', 'formatR', 'svglite'), function(pkg) {
+  if (system.file(package = pkg) == '') install.packages(pkg)
+})
+```
+
+# Preface {-}
+
+```{r eval=FALSE,fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), fig.link='https://www.crcpress.com/product/isbn/9781138700109'}
+knitr::include_graphics('images/temporarycover.jpg', dpi = NA)
+```
+
+This book is intended to be a relatively complete introduction to the application of linear mixed models in areas related to linguistics and psychology; throughout, we use the programming language R. Our target audience is cognitive scientists (e.g., linguists and psychologists) who carry out behavioral experiments, and who are interested in learning the foundational ideas behind modern statistical methodology from the ground up and in a principled manner. 
+
+Many excellent introductory textbooks already exist that discuss data analysis in great detail. Our book is different from existing books in two respects. First, our main focus is on showing how to analyze data from planned experiments involving repeated measures; this type of experimental data involves complexities that are distinct from the problems one encounters when analyzing observational data. We provide many examples of data-sets involving eyetracking (visual world and reading), self-paced reading, event-related potentials, reaction time, acceptability rating judgements, speeded grammaticality judgements, and question-response accuracies.  Second, from the very outset, we stress a particular workflow that has as its centerpiece simulating data; we aim to teach a philosophy that involves thinking hard about the assumed underlying generative process, **even before the data are collected**. The data analysis approach that we hope to teach through this book involves a cycle of experiment design analysis and model validation using simulated data.     
+
+## Prerequisites 
+
+This book assumes high school arithmetic and algebra. We also expect that the reader already knows basic constructs in the programming language R [@R-base], such as writing for-loops. For newcomers to R, we provide a quick introduction in the appendix that covers all the constructs used in the book. For those lacking background in R, there are many good online resources on R that they can consult as needed. Examples are: [R for data science](https://r4ds.had.co.nz/), and [Efficient R programming](https://csgillespie.github.io/efficientR/).
+
+
+```{block2, type='rmdnote'}
+provide comprehensive book recommendations 
+```
+
+## How to read this book
+
+The chapters in this book are intended to be read in sequence, but during the first pass through the book, the reader should feel free to skip the sections marked with an asterisk. These sections provide a more formal development that will be useful when the reader transitions to more advanced textbooks like @Gelman14.  
+
+to-do: add a Mackay type chapter ordering for different scenarios.
+
+## Online materials
+
+The entire book, including all data and source code, is available online for free on [https://github.com/vasishth/frequentist_book](https://github.com/vasishth/frequentist_book). The exercise solutions are provided there as a pdf (to-do).
+
+## Software needed
+
+Before you start, please install
+
+  - [R](https://cran.r-project.org/) (and [RStudio](https://www.rstudio.com/) or any other IDE)
+  - The R packages `MASS`, `dplyr`, `purrr`, `readr`, `extraDistr`, `ggplot2`, `brms`, and `bayesplot`:
+    - They can be installed in the usual way: `install.packages(c("MASS", "dplyr", "purrr", "readr", "extraDistr", "ggplot2", "brms", "bayesplot"))`. 
+
+In every R session, we'll need to set a seed (this ensures that the random numbers are always the same). 
+
+```{r load, cache =FALSE, message=FALSE}
+set.seed(42)
+library(MASS)
+##be careful to load dplyr after MASS
+library(dplyr)
+library(purrr)
+library(readr)
+library(extraDistr)
+library(ggplot2)
+```
+
+
+## Acknowledgements
+
+We are grateful to the many generations of students at the University of Potsdam, various summer schools at ESSLLI, the LOT winter school, other short courses we have taught at various institutions, and the annual summer school on Statistical Methods for Linguistics and Psychology (SMLP) at the University of Potsdam. The participants in these courses helped us considerably in improving the material presented here. We are also grateful to members of Vasishth lab for comments on earlier drafts of this book.
+
+
+```{block2, type='flushright', html.tag='p'}
+Shravan Vasishth, 
+Daniel Schad, 
+Audrey Bürki,
+Reinhold Kliegl, 
+Potsdam, Germany
+```
+
