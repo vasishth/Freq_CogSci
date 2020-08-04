@@ -193,7 +193,9 @@ Normal(y|\mu,\sigma)=f(y)= \frac{1}{\sqrt{2\pi \sigma^2}} \exp \left(-\frac{(y-\
 
 Here, $\mu$ is the mean, and $\sigma$ is the standard deviation of the Normal distribution that the reading times have been sampled from.
 
-We can visualize the Normal distribution for particular values of $\mu$ and $\sigma$ as a PDF (using ```dnorm```), a CDF (using ```pnorm```), and the inverse CDF (using ```qnorm```). See Figure \@ref(fig:normdistrn). It is clear from the figure that these are three different ways of looking at the same information. 
+We can visualize the Normal distribution for particular values of $\mu$ and $\sigma$ as a PDF (using ```dnorm```), a CDF (using ```pnorm```), and the inverse CDF (using ```qnorm```). See Figure \@ref(fig:normdistrn). 
+
+In the figure, the PDF gives us the density for each possible value of our data $y$; the CDF tells us the probability of observing a value like y or some value less than that (written: $P(Y<y)$); and the inverse CDF gives us the quantile $y$ such that $P(Y<y)$ is some specific value between 0 and 1. These are three different ways of looking at the same information. 
 
 ```{r, normdistrn,echo=FALSE,fig.cap="The PDF, CDF, and inverse CDF for the $Normal(\\mu=0,\\sigma=1)$." }
 op<-par(mfrow=c(1,3),pty="s")
@@ -202,11 +204,13 @@ plot(function(y) dnorm(y,mean=0,sd=1), -3, 3,
               ylab="density",xlab="y")
 plot(function(y) pnorm(y,mean=0,sd=1), -3, 3,
       main = "CDF of Y ~ Normal(0,1)",
-              ylab="probability",xlab="y")
+              ylab="Prob(Y<y)",xlab="y")
 plot(function(y) qnorm(y,mean=0,sd=1), 0, 1,
       main = "Inverse CDF of Y ~ Normal(0,1)",
-              ylab="y",xlab="probability")
+              ylab="y",xlab="P(Y<y)")
 ```
+
+One important fact about the normal distribution is that 95% of the probability mass is covered by approximately plus/minus 1.96 times the standard deviation about the mean. Thus,  the range $\mu\pm 1.96\times \sigma$ will cover approximately 95% of the area under the curve. We will approximate this by talking about $\mu\pm 2\times \sigma$.
 
 As in the discrete example, the PDF, CDF, and inverse of the CDF allow us to ask questions like:
 
@@ -293,7 +297,8 @@ mean(y);var(y)
 
 Again, depending on the sample size, the sample mean and sample variance may or may not be close to the true values of the respective parameters, despite the fact that these are maximum likelihood estimates. 
 
-This completes our informal discussion of random variable theory. We now summarize what we have learnt so far.
+One other important detail about probability distributions is that one can have a joint distribution defined for more than one random variable. We consider this situation next, considering the continuous case only. 
+
 
 ## Bivariate/multivariate distributions
 
@@ -333,7 +338,7 @@ The joint distribution of $U_0$ and $U_1$ is defined as follows:
 
 A visualization will help. The figure below shows a bivariate distribution with correlation zero, a positive and a negative correlation.
 
-```{r}
+```{r echo=FALSE}
 library(mvtnorm)
 op<-par(mfrow=c(1,3),pty="s")
 u0 <- u1 <- seq(from = -3, to = 3, length.out = 30)
@@ -356,12 +361,19 @@ persp(u0, u1, z, theta = -30, phi = 30, ticktype = "simple",
       main="Negative correlation")
 ```
 
-In this book, we will make use of such multivariate distributions a lot, and it will soon become important to know how to generate simulated bivariate data that is correlated. Suppose we want to generate 100 correlated pairs of data, with correlation $\rho=0.6$. Each random variable has mean 0, and standard deviation 1. Here is how we would generate such data:
+In this book, we will make use of such multivariate distributions a lot, and it will soon become important to know how to generate simulated bivariate data that is correlated. Suppose we want to generate 100 correlated pairs of data, with correlation $\rho=0.6$. The two random variables have mean 0, and standard deviations 5 and 10 respectively. 
+
+Here is how we would generate such data. First, define a variance covariance matrix; then, use the multivariate analog of the `rnorm` function, `mvrnorm`, to generate $100$ data-points.
 
 ```{r}
 library(MASS)
-Sigma<-matrix(c(1,.6,.6,1),byrow=FALSE,ncol=2)
-u<-mvrnorm(100,mu=c(0,0),Sigma=Sigma)
+## define a variance-covariance matrix:
+Sigma<-matrix(c(5^2,5*10*.6,5*10*.6,10^2),
+              byrow=FALSE,ncol=2)
+## generate data:
+u<-mvrnorm(n=100,
+           mu=c(0,0),
+           Sigma=Sigma)
 head(u)
 ```
 
@@ -372,6 +384,37 @@ plot(u[,1],u[,2])
 ```
 
 As an exercise, try changing the correlation to $0$ or to $-0.6$, and then plot the bivariate distribution that results.
+
+One final useful thing to notice about the variance-covariance matrix is that it can be decomposed into the component standard deviations and an underlying correlation matrix. For example, consider the matrix above:
+
+```{r}
+Sigma
+```
+
+One can decompose the matrix as follows. The matrix can be seen as the product of a diagonal matrix of the standard deviations and the correlation matrix:
+
+```{r}
+## sds:
+(sds<-c(5,10))
+## diagonal matrix:
+(sd_diag<-diag(sds))
+## correlation matrix:
+(corrmatrix<-matrix(c(1,0.6,0.6,1),ncol=2))
+```
+
+Given these two matrices, one can reassemble the variance covariance matrix:
+
+```{r}
+sd_diag%*%corrmatrix%*%sd_diag                   
+```
+
+There is a built-in convenience function, sdcor3cov in the SIN package that does this calculation, taking the vector of standard deviatios (not the diagonal matrix) and the correlation matrix to yield the variance covariance matrix:
+
+```{r}
+SIN::sdcor2cov(stddev=sds,corr=corrmatrix)
+```
+
+We will be using this function a lot when simulating data from linear mixed models.
 
 ## Summary of useful R functions relating to univariate distributions
 
@@ -449,15 +492,17 @@ The above integral is simply summing up the area under the curve between the poi
 
 A final point here is that we can go back and forth between the PDF and the CDF. If the PDF is $f(y)$, then the CDF that allows us to compute quantities like $P(Y<b)$ is just the integral $F(Y<b)=\int_{-\infty}^b f(y)\, dy$. If we differentiate the CDF, we get the PDF back: $d(F(y))/dy=f(y)$.
 
+
+
 ## Further reading
 
-A quick review of the mathematical foundations needed for statistics is available in the short book by @fox2009mathematical. @morin2016probability and @blitzstein2014introduction are accessible introductions to probability theory.
+A quick review of the mathematical foundations needed for statistics is available in the short book by @fox2009mathematical. @morin2016probability and @blitzstein2014introduction are accessible introductions to probability theory. @kerns contains a very well-written general introduction to random variable theory, but assumes the reader knows the basics of calculus.
 
-## Exercises
+## Exercises {#sec:Foundationsexercises}
 
-### Practice using the ```pnorm``` function
+### Practice using the ```pnorm``` function {#sec:Foundationsexercisespnorm}
 
-#### Part 1
+#### Part 1 {#sec:FoundationsexercisespnormPart1}
 
 ```{r echo=FALSE}
 ## DATA GENERATION
@@ -476,7 +521,7 @@ sol<-pnorm(q1,mean=abs(mean.val),sd=abs(sd.val))-pnorm(q2,mean=abs(mean.val),sd=
 
 Given a normal distribution with mean ```r abs(mean.val)``` and standard deviation ```r abs(sd.val)```, use the pnorm function to calculate the probability of obtaining values between ```r format(q1)``` and ```r format(q2)``` from this distribution.
 
-#### Part 2
+#### Part 2 {#sec:FoundationsexercisespnormPart2}
 
 ```{r echo=FALSE}
 mu<-round(rnorm(1,mean=51,sd=2),digits=0)
@@ -498,7 +543,7 @@ Given a normal distribution with mean ```r mu``` and standard deviation ```r sig
 - a score of ```r q``` or more
 - a score of ```r q1``` or more
 
-#### Part 3
+#### Part 3 {#sec:FoundationsexercisespnormPart3}
 
 ```{r echo=FALSE}
 mu<-round(runif(1,min=45,max=55),digits=0)
@@ -515,9 +560,9 @@ Given a normal distribution with mean ```r mu``` and standard deviation ```r sig
 - a score between ```r mu-3``` and ```r mu+3```.
 - a score of ```mu+1``` or more.
 
-### Practice using the ```qnorm``` function
+### Practice using the ```qnorm``` function {#sec:Foundationsexercisesqnorm}
 
-#### Part 1
+#### Part 1 {#sec:FoundationsexercisesqnormPart1}
 
 ```{r echo=FALSE}
 prob1<-round(runif(1,min=0,max=1),digits=2)
@@ -538,7 +583,7 @@ Compute the lower and upper boundaries such that:
 - the area (the probability) to the left of the lower boundary is ```r prob1```. 
 - the area (the probability) to the left of the upper boundary is ```r prob2```.
 
-#### Part 2
+#### Part 2 {#sec:FoundationsexercisesqnormPart2}
 
 ```{r echo=FALSE}
 mu<-round(runif(1,min=50,max=60),digits=3)
@@ -554,7 +599,7 @@ Given a normal distribution with mean ```r mu``` and standard deviation ```r sig
 
 
 
-### Practice using ```qt```
+### Practice using ```qt``` {#sec:Foundationsexercisesqt}
 
 ```{r echo=FALSE}
 n<-round(runif(1,min=140,max=170))
@@ -578,7 +623,7 @@ with mean ```r mu```, and standard deviation ```r sigma```. Next, we are going t
 - Next, compute the lower bound of the 95\% confidence interval using the estimated standard error and the critical t-value.
 - Finally, compute the upper bound of the 95\% confidence interval using the estimated standard error and the critical t-value.
 
-### Maximum likelihood estimation 1
+### Maximum likelihood estimation 1 {#sec:FoundationsexercisesMLE1}
 
 ```{r echo=FALSE}
 x<-round(rnorm(1,mean=12,sd=5),3)
@@ -597,7 +642,7 @@ The function ```dnorm``` gives the likelihood given a data point (or multiple da
 - the likelihood of the data point ```r x``` assuming a mean of ```r mn[2]``` and standard deviation 5.
 - the likelihood of the data point ```r x``` assuming a mean of ```r mn[1]``` and standard deviation 5.
 
-### Maximum likelihood estimation 2
+### Maximum likelihood estimation 2 {#sec:FoundationsexercisesMLE2}
 
 ```{r echo=FALSE}
 x<-round(rnorm(10,mean=500,sd=10),0)
@@ -643,4 +688,14 @@ sum(dnorm(c(5,10),mean=10,sd=2,log=TRUE))
 - The sum of the log-likelihoods of the data-points x, using as the mean the MLE from the sample, and standard deviation 5.
 - What is the sum of the log-likelihood if the mean used to compute the log-likelihood is ```r mn-2```? 
 - Which value for the mean, the MLE or ```r mn-2```, gives the higher log-likelihood? 
+
+
+### Generating bivariate data {#sec:Foundationsexercisesbivar}
+
+Generate 50 data points from two random variables X and Y, where $X\sim Normal(50,100)$ and $Y\sim Normal(100,20)$. The correlation between the random variables is  0.7. Plot the simulated data points from Y against those from X.
+
+### Generating multivariate data {#sec:Foundationsexercisesmultivar}
+
+The bivariate case can be generalized to more than two dimensions.
+Generate 50 data points from three random variables X, Y, and Z, where $X\sim Normal(50,100)$, $Y\sim Normal(100,20)$, and $Z\sim Normal(200,50)$. The correlation between the random variables X and Y is  0.5, between X and Z is 0.2, an between Y and Z is 0.7. Here, you will have to define a $3\times 3$ variance covariance matrix, with the pairwise covariances in the off-diagonals. Plot the simulated data points as two-dimensional figures: Y against X, Y against Z, and X against Z.
 
