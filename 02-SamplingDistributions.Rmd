@@ -719,14 +719,14 @@ Power is a function of three variables:
 - the standard deviation
 - the sample size.
 
-There are two ways that one can compute power: either one can use the built-in R function, `power.t.test`, or one can use simulation. Both methods yield comparable results.
+There are two ways that one can compute power in connection with the t-test: either one can use the built-in R function, `power.t.test`, or one can use simulation. 
 
 
 #### Power calculation using the power.t.test
 
-Suppose that we have an expectation that an effect size is 15 ms $\pm 5$ ms (this could be based on the predictions of a theoretical model, or prior data); suppose also that prior experiments show standard deviations ranging from 100 to 300 ms. This is enough information to compute a power curve as a function of effect size and standard deviation. See Figure \@ref(fig:powercurve).
+Suppose that we have an expectation that an effect size is 15 ms $\pm 5$ ms (this could be based on the predictions of a theoretical model, or prior data); suppose also that prior experiments show standard deviations ranging from 100 to 300 ms. This is enough information to compute a power curve as a function of effect size and standard deviation. See Figure \@ref(fig:powercurve) and the associated code below.
 
-```{r powercurve,echo=FALSE,fig.cap="An illustration of a power curve for 10 participants, as a function of standard deviation, and three estimates of the effect: 15, 10, and 20."}
+```{r powercurve,fig.cap="An illustration of a power curve for 10 participants, as a function of standard deviation, and three estimates of the effect: 15, 10, and 20."}
 sds<-seq(100,300,by=1)
 lower<-power.t.test(delta=15-5,sd=sds,n=10,strict =TRUE)$power
 upper<-power.t.test(delta=15+5,sd=sds,n=10,strict =TRUE)$power
@@ -794,26 +794,26 @@ lines(sds,lowess(power_meanval)$y,lty=1)
 
 ```
 
-In the above example, simulation-based power calculation is overkill, and completely unnecessary because we have `power.t.test`. However, the technique shown above will be extended and will become our bread-and-butter method once we switch to power calculations for complicated linear mixed models. There, no closed form calculation can be done to compute power; simulation will be the only way.
+In the above example, simulation-based power calculation is overkill, and completely unnecessary because we have `power.t.test`. However, the technique shown above will be extended and will become our bread-and-butter method once we switch to power calculations for complicated linear mixed models. There, no closed form calculation can be done to compute power, at least not without oversimplifying the model; simulation will be the only practical way to calculate power.
 
 It is important to appreciate the fact that power is a *function*; it isn't a single number. Because we can never be sure what the true effect size is, or what the true standard deviation is, we should always aim to report a power function, as a function of plausible values of the relevant parameters.  
 
 ### The p-value
 
-Continuing with our t-test example, the t.test function in R will not only print out a t-value as shown above, but also a probability known as a *p-value*. This is the probability of obtaining the observed t-value that we did, or some value more extreme than that, conditional on the assumption that the null hypothesis is true.
+Continuing with our t-test example, the `t.test` function in R will not only print out a t-value as shown above, but also a probability known as a *p-value*. This is the probability of obtaining the observed t-value that we did, or some value more extreme than that, conditional on the assumption that the null hypothesis is true.
 
-We can compute the p-value "by hand". This can be computed, as done earlier, simply by calculating the area under the curve that lies beyond the observed t-value. It is common to take the tail probability on either side of the t-distribution. 
+We can compute the p-value "by hand". This can be computed, as done earlier, simply by calculating the area under the curve that lies beyond the observed t-value. It is standard practice to take the tail probability on both sides of the t-distribution. 
 
 ```{r}
 (t_value<-t.test(y,mu=450)$statistic)
 2*pt(abs(t_value),df=n-1,lower.tail=FALSE)
 ```
 
-The area from both sides of the tail is taken because it is conventional to do a *two-sided t-test*: our null hypothesis is that $\mu=450$, and our alternative hypothesis is two-sided: $\mu$ is either less than 450 or $\mu$ is larger than 450. When we reject the null hypothesis, we are accepting this alternative, that  $\mu$ could be some value other than 450. Notice that this alternative hypothesis is remarkably vague; we would reject the null hypothesis regardless of whether the sample mean turns out to be 600 or -600, for example. The  practical implication is that the p-value gives us  the  strength of the evidence against the null hypothesis; it doesn't give us  evidence in favor of  a specific alternative, such  as saying that $\mu$ is positive or negative in sign. In psychology and allied disciplines, whenever the p-value falls below $0.05$, it is common practice to write "there was reliable evidence for the predicted effect." This statement  is  technically incorrect; we only have evidence against the null. By looking at the sample mean and its sign, we are making a very big leap that we  have evidence for the specific sample mean we happened to get. As we will see below, the sample mean can be wildly far from the true mean that produced the data. 
+The area from both sides of the tail is taken because it is conventional to do a so-called *two-sided t-test*: our null hypothesis is that $\mu=450$, and our alternative hypothesis is two-sided: $\mu$ is either less than 450 or $\mu$ is larger than 450. When we reject the null hypothesis, we are accepting this alternative, that  $\mu$ could be some value other than 450. Notice that this alternative hypothesis is remarkably vague; we would reject the null hypothesis regardless of whether the sample mean turns out to be 600 or -600, for example. The  practical implication is that the p-value gives us  the  strength of the evidence against the null hypothesis; it doesn't give us  evidence in favor of  a specific alternative, such  as saying that $\mu$ is positive or negative in sign. In psychology and allied disciplines, whenever the p-value falls below $0.05$, it is common practice to write something along the lines that "there was reliable evidence for the predicted effect." This statement  is  technically incorrect; we only ever have evidence against the null. By looking at the sample mean and its sign, we are making a very big leap that we  have evidence for the specific sample mean we happened to get. As we will see below, the sample mean can be wildly far from the true mean that produced the data. 
 
-One need not have done a two-sided alternative; one could have defined the alternative to be one-sided. In that case, one would compute only one side of the area under the curve. This kind of one-sided test is not normally done, but one can imagine a situation where a one-sided test is justified (for example, when only one sign of the effect is possible, or if there is a strong theoretical reason to expect only one particular sign---positive or negative---on an effect). That said, in their careers as scientists, none of the authors of this book have ever had occasion to use a one-sided test.
+One need not have done a two-sided alternative; one could have defined the alternative to be one-sided. In that case, one would compute only one side of the area under the curve. This kind of one-sided test is not normally done, but one can imagine a situation where a one-sided test is justified (for example, when only one sign of the effect is possible, or if there is a strong theoretical reason to expect only one particular sign---positive or negative---on an effect). That said, in their scientific career, none of the authors of this book have ever had occasion to use a one-sided test.
 
-The p-value is always interpreted with reference to the pre-defined Type I error. Conventionally, we reject the null if $p<0.05$. This is because we set the Type I error at 0.05. Keep in mind that Type I error and the p-value are two distinct quantities. 
+The p-value is always interpreted with reference to the pre-defined Type I error. Conventionally, we reject the null if $p<0.05$. This is because we set the Type I error at 0.05. Keep in mind that Type I error and the p-value are two distinct things. 
 Type I error is the probability of your incorrectly rejecting the null under repeated sampling. This is not the same thing as your p-value. The latter will be obtained from a particular experiment, and will vary from experiment to experiment; it is a random variable. Type I error is a value we fix in advance.
 
 #### *The distribution of the p-value under the null hypothesis
@@ -860,13 +860,13 @@ P(Z\leq z) =& P(F(T)\leq z)\\
 \end{split}
 \end{equation}
 
-It is for this reason that statisticians like Andrew Gelman periodically point out that "the null hypothesis significance test is a specific random number generator". The practical implication of this observation is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as power) are as or even more important.
+It is for this reason that statisticians like Andrew Gelman periodically point out that "the null hypothesis significance test is a specific random number generator". The practical implication of this observation is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are as or even more important.
 
 ### Type M and S error in the face of low power
 
 Beyond Type I and II error, there are also two other kinds of error to be aware of. These are Type M and S error; both sources of error are closely related to statistical power.
 
-The terms Type M and S error were introduced by @Gelman14, but the ideas has been in existence for some time [@hedges1984estimation,@lane1978estimating. @powerfailure refer to Type M and S error as the ''winner's curse'' and ''the vibration of effects.'' In related work, @ioannidis2008most discusses refers to the vibration ratio in the context of epidemiology.
+The terms Type M and S error were introduced by @Gelman14, but the ideas has been in existence for some time [@hedges1984estimation,@lane1978estimating]. @powerfailure refer to Type M and S error as the "winner's curse" and "the vibration of effects." In related work, @ioannidis2008most discusses refers to the vibration ratio in the context of epidemiology.
 
 Type S and M error can be illustrated with the following example.
 Suppose your true effect size is believed to be $D=15$, 
@@ -874,7 +874,7 @@ then we can compute (apart from statistical power) the following error rates, wh
 
 - **Type S error**: the probability that the sign of the effect is incorrect, given that the result is statistically significant.
 - **Type M error**: the expectation of the ratio of the absolute magnitude of the effect to the hypothesized true effect size, given that result is significant. 
-Gelman and Carlin also call this the exaggeration ratio, which is perhaps more descriptive than ''Type M error''.
+Gelman and Carlin also call this the exaggeration ratio, which is perhaps more descriptive than "Type M error".
 
 Suppose that our particular study has standard error $46$, and sample size $37$. And suppose that our true $\mu=15$, as stated above. Then, we can compute statistical power, Type S and M error through simulation in the following manner:
 
@@ -902,7 +902,7 @@ Power can be computed by simply determining the proportion of times that the abs
 
 Power is quite low here (we deliberately chose an example with  low power to illustrate Type S and M error). 
 
-Next, we figure out which of the cases are statistically signifciant (which simulated values yield $p<0.05$). As a rough criterion, we use a t-value of 2 to declare $p<0.05$; we could have done this more precisely by working out an exact critical t-value.
+Next, we figure out which of the cases are statistically significant (which simulated values yield $p<0.05$). As a criterion, we use a t-value of 2 to declare $p<0.05$; we could have done this more precisely by working out an exact critical t-value.
 
 ```{r}
 ## which results in drep are significant at alpha=0.05?
@@ -918,13 +918,13 @@ Type S error is the proportion of significant cases with the wrong sign (sign er
 (typem_sig<-mean(abs(drep[signif])/D))
 ```
 
-In this scenario, when power is approximately 6%, whenever we get a significant effect, the probability of obtaining the wrong  sign is a  whopping 18% and the effect is likely to be 7 times larger than its true magnitude. The practical implication is as follows.
+In this scenario, when power is approximately 6%, whenever we get a significant effect, the probability of obtaining the wrong  sign is a  whopping `r round(types_sig*100)`% and the effect is likely to be `r typem_sig` times larger than its true magnitude. The practical implication is as follows.
 
-When power is low, relying on the p-value (statistical significance) to declare an effect as being present will be misleading because the decision will be  based on an overestimate of the effect (Type M error), and the sign of the effect will often be wrong. This isn't just a theoretical point; it has real-world  consequences for theory  development. For extended examples from psycholinguistics regarding this point, see @VasishthMertzenJaegerGelman2018.
+When power is low, relying on the p-value (statistical significance) to declare an effect as being present will be misleading because the decision will be  based on an overestimate of the effect (Type M error), and even the sign of the effect could be wrong. This isn't just a theoretical point; it has real-world  consequences for theory  development. For an  example from psycholinguistics regarding this point, see @VasishthMertzenJaegerGelman2018.
 
-Another useful way to  visualize Type M and S error  is through the so-called funnel plot. As shown in Figure \@ref(fig:funnel) 
+Another useful way to  visualize Type M and S error  is through the so-called funnel plot. As shown in Figure \@ref(fig:funnel), estimates obtained from low-powered studies will tend to be exaggerated (the lower part of the funnel), and as power goes up, the effect estimates start to cluster tightly around the true value of the effect. 
 
-```{r funnel,echo=FALSE,fig.cap="An illustration of a funnel plot. Shown are repeated samples of an effect estimate under different values of power, where the true value  of the effect is 15. Significant effects are colored. The lower the power, the wider the fluctuation of the effect; it is the exaggerated effects that end up statistically significant, even though they are very biased relative to the true value. As power goes up, the effect estimates start to cluster around the true value. Low power leads to exaggerated estimates of the effect, especially if the data are filtered by statistical significance."}
+```{r funnel,echo=FALSE,fig.cap="An illustration of a funnel plot. Shown are repeated samples of an effect estimate under different values of power, where the true value  of the effect is 15 (marked by the vertical line). Significant effects are shaded gray. The lower the power, the wider the fluctuation of the effect; under low power, it is the exaggerated effects that end up statistically significant, even though they are very biased relative to the true value. As power goes up, the effect estimates start to cluster around the true value, and significant effects are also accurate estimates of the effect. Thus, low power leads to exaggerated estimates of the effect, especially if the data are filtered by statistical significance."}
 ## funnel plot:
 truemu<-15
 sampsize<-seq(10,10000,by=10)
@@ -951,12 +951,14 @@ plot(jitter(means),jitter(power),
 abline(v=15)
 
 sig_effects<-subset(means_df,sig==1)
-points(sig_effects$means,sig_effects$pow,pch=21,bg='#FF000088')
+
+points(sig_effects$means,sig_effects$pow,pch=21,
+       bg='#CACACA')
 ```
 
 What is important to appreciate here is the fact that significant effects "point to the truth" just in case power is high; when power is low, either null results will frequently be found even if the null is false, and those results that turn out significant will be based on Type M error. 
 
-In many fields, it is practically impossible to conduct a high-powered study. What should one do in this situation? When reporting results that are likely based on an underpowered study, the best approach ia to openly acknowledge the power limitation, to attempt to conduct a direct replication of the effect to establish robustness, and to attempt to synthesize the evidence from existing knowlege.  
+In many fields, it is practically impossible to conduct a high-powered study. What should one do in this situation? When reporting results that are likely based on an underpowered study, the best approach ia to openly acknowledge the power limitation, to attempt to conduct a direct replication of the effect to establish robustness, and to attempt to synthesize the evidence from existing knowlege [@cumming2014new].  
 
 By direct replication, we mean that the study should be run multiple times with the same materials and design but new participants, to establish whether effect estimates in the original study and the replication study are consistent with each other. Direct replications stand in contrast to so-called conceptual replications, which are not exact repetitions of the original design, but involve some further or slightly different but related experimental manipulation. Conceptual replications are also a very useful tool for cross-validating the existence of an effect.
 
@@ -965,16 +967,15 @@ Direct  replications will always differ from the original study in some way or a
 
 ### Searching for significance
 
-The NHST procedure is essentially a decision procedure: if $p<0.05$, we reject the null hypothesis; otherwise, we fail to reject the null. Because significant results are easier to publish than non-significant results, and because editors of journals look more kindly upon significant results, a common approach taken by researchers (including the first author, when he was a graduate student) is the following:
+The NHST procedure is essentially a decision procedure: if $p<0.05$, we reject the null hypothesis; otherwise, we fail to reject the null. Because significant results are easier to publish than non-significant results, a common approach taken by researchers (including the first author of this book, when he was a graduate student) is to run the experiment and periodically check if statistical significance has been reached. The procedure can be described as follows:
 
 - The experimenter gathers $n$ data points, then checks for significance (is $p<0.05$ or not?). 
 - If the result is not significant, he gets more data (say, $n$ more data points). Then he checks for significance, and repeats.
 
 Since time and money are limited, he might decide to stop collecting data after some multiple of $n$ have been collected. 
 
-
-One can play with different scenarios here. Suppose that $n$ is initially $15$.  
-Under the standard assumptions of frequentist met, we set Type I error to be $0.05$. Let's suppose that the null hypothesis that $\mu=0$ is in fact true, and that standard deviation is 250, as in our Type M/S error example above. 
+One can simulate different scenarios here. Suppose that $n$ is initially $15$.  
+Under the standard assumptions, we set Type I error to be $0.05$. Let's suppose that the null hypothesis that $\mu=0$ is in fact true, and that standard deviation is 250. 
 
 ```{r}
 ##Standard properties of the t-test:
@@ -998,7 +999,7 @@ Type I error rate is about 5%, consistent with our expectations:
 round(table(pvals<0.05)[2]/nsim,2)
 ```
 
-But the situation quickly deteriorates as soon as adopt the strategy outlined above. We will also track the distribution of the t-statistic below.
+But the situation quickly deteriorates as soon as we adopt the strategy outlined above. Below, we will also track the distribution of the t-statistic.
 
 ```{r}
 pvals<-NULL
@@ -1056,7 +1057,9 @@ This kind of statistical test calls for a two-sample t-test. Note here that we a
 The function call in R for a two-sample t-test is shown below:
 
 ```{r}
-t.test(F1data$female,F1data$male,paired=FALSE,var.equal=TRUE)
+t.test(F1data$female,F1data$male,
+       paired=FALSE,
+       var.equal=TRUE)
 ```
 
 This t-test is computing the following t-statistic:
@@ -1110,11 +1113,11 @@ Incidentally, notice that the p-value in the paired t-test is statistically sign
 
 Which analysis is correct, the two-sample t-test or the paired t-test? It all depends on your assumptions about what the data represent. If you consider the data paired, for the reasons given above, then a paired test is called for. If the pairing (the same vowel and language in each row) is unlikely to create a dependency between the two data points in a row (here, domain knowledge is required), we can treat this as unpaired data. In fact, in the book by @johnson2011quantitative where these data were presented, the data were analyzed as a two-sample t-test. 
 
-Next, we look at a perhaps subtle point about the paired t-test.
+Next, we look at some perhaps subtle points about the paired t-test.
 
 ### Common mistakes involving the t-test
 
-The paired t-test assumes that each row in the data-frame is independent of the other rows. This implies that the data-frame cannot have more than one row for a particular pair. In other words, the data frame cannot have repeated measurements spread out across rows.  
+The paired t-test assumes that each row in the data-frame is independent of the other rows. This implies that the data-frame cannot have more than one row for a particular pair. In other words, the data-frame cannot have repeated measurements spread out across rows.  
 
 For example, doing a paired t-test on this hypothetical data-frame would be incorrect:
   
@@ -1126,7 +1129,7 @@ female & male & vowel & language \\
 \hline
 391 & 339 & i & W.Apache \\ 
 400 & 320 & i & W.Apache \\ 
-\vdots & \vdots & \vdots & \vdots\\
+$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$\\
 \hline
 \end{tabular}
 \end{table}
@@ -1143,7 +1146,7 @@ condition a & condition b & subject & item \\
 \hline
 391 & 339 & 1 & 1 \\ 
 400 & 320 & 1 & 2 \\ 
-\vdots & \vdots & \vdots & \vdots\\
+$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$\\
 \hline
 \end{tabular}
 \end{table}
@@ -1162,6 +1165,7 @@ First, load the data containing reading times from the region of interest (the r
 
 ```{r}
 gg05e1 <- read.table("data/grodnergibsonE1crit.txt",
+                     
                      header=TRUE)
 
 head(gg05e1)
@@ -1176,13 +1180,13 @@ t(xtabs(~item+condition,gg05e1))
 ```
   
   
-We want to stress once more that it is the researcher's responsibility to make sure that the t-test's assumptions are  met. For example, one could fit a two-sample t-test to the data as provided. The two-sample t-test can be implemented using the syntax shown below:
+It is important to stress once more that it is the researcher's responsibility to make sure that the t-test's assumptions are  met. For example, one could fit a two-sample t-test to the data as provided. The two-sample t-test can be implemented using the syntax shown below:
 
 ```{r}
 t.test(rawRT~condition,gg05e1)
 ```
 
-This t-test is incorrect for several reasons, but one egregious error here is that the data are paired (each  subject delivers data for both  conditions). 
+This t-test is incorrect for several reasons, but the most egregious error here is that the data are paired (each  subject delivers data for both  conditions), and that property of the data is being ignored. 
 
 Another common mistake is to do a paired t-test on the data as provided. Again, the t.test function will happily return a meaningless result:
   
@@ -1190,7 +1194,7 @@ Another common mistake is to do a paired t-test on the data as provided. Again, 
 t.test(rawRT~condition,paired=TRUE,gg05e1)
 ```
   
-Here, the degrees of freedom indicate that we have fit the incorrect model. There are 42 subjects and 16 items, and the presentation of items to subjects uses a Latin square (each subject sees only one condition per item). The 335 degrees of freedom come from $42\times 8=336$ data points, minus one. Why do we say $42\times 8$ and not $42\times 16$? That is because each subject will return eight differences in reading time for each condition: each subject gives us eight subject-relative data points and eight object-relative data points.  
+Here, the degrees of freedom indicate that we have fit the incorrect model. There are 42 subjects and 16 items, and the presentation of items to subjects uses a Latin square design (each subject sees only one condition per item). The 335 degrees of freedom come from $42\times 8=336$ data points, minus one. Why do we say $42\times 8$ and not $42\times 16$? That is because each subject will return eight differences in reading time for each condition: each subject gives us eight subject-relative data points and eight object-relative data points.  
 
 For each of the 42 subjects, the t-test function internally creates a vector of eight data points of subject relatives and subtracts the vector of eight data points of object relatives. That is how we end up with  $42\times 8=336$ data points. 
 
@@ -1201,20 +1205,21 @@ What is needed is a *single* data-point for each subject and condition, and for 
 Consider the by-subjects aggregation procedure below. Now we have only one data-point for each condition and subject:
 
 ```{r}
-bysubj<-aggregate(rawRT~subject+condition,mean,
-                           data=gg05e1)
+bysubj<-aggregate(rawRT~subject+condition,
+                  mean,
+                  data=gg05e1)
 t(xtabs(~subject+condition,bysubj))
 ```
 
 
-Notice that the data are correlated: the longer the subject relative clause data from a participant, the longer their object relative clause data.
+Notice that the data are correlated: the longer the subject relative clause data from a participant, the longer their object relative clause data:
 
 ```{r}
 SRdata<-subset(bysubj,condition=="subjgap")$rawRT
 ORdata<-subset(bysubj,condition=="objgap")$rawRT
 plot(SRdata,ORdata)
-cor(SRdata,ORdata)
 abline(lm(ORdata~SRdata))
+cor(SRdata,ORdata)
 ```
 
 Returning to the t-test, by aggregating the data the t-test's assumptions are met, and the degrees of freedom for this by-subjects analysis are now correct ($42-1=41$):
