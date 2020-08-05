@@ -22,6 +22,10 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(tidy.opts=list(width.cutoff=40),
+               tidy=TRUE)
+
 options(
   htmltools.dir.version = FALSE, formatR.indent = 2,
   width = 55, digits = 4, warnPartialMatchAttr = FALSE, warnPartialMatchDollar = FALSE
