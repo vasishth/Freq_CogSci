@@ -2,11 +2,13 @@
 
 ## From the t-test to the linear (mixed) model
 
-We begin with the @grodner self-paced reading data we saw in the previous chapter. Load the data and compute the means by condition:
+We begin with the @grodner self-paced reading data we saw in the previous chapter. Load the data and compute the means by condition at the relative clause verb:
 
 ```{r}
-gg05e1<-read.table("data/grodnergibsonE1crit.txt",header=TRUE)
-means<-round(with(gg05e1,tapply(rawRT,IND=condition,
+gg05e1<-read.table("data/grodnergibsonE1crit.txt",
+                   header=TRUE)
+means<-round(with(gg05e1,tapply(rawRT,
+                                IND=condition,
                             mean)))
 means
 ```
@@ -16,11 +18,16 @@ As predicted by theory, object relatives (labeled objgap here) are read slower t
 As discussed in the previous chapter, a paired t-test can be done to evaluate whether we have evidence against the null hypothesis that object relatives and subject relatives have identical reading times. However, we have to aggregate the data by subjects and by items first. 
 
 ```{r}
-bysubj<-aggregate(rawRT~subject+condition,
+bysubj<-aggregate(rawRT~subject+
+                    condition,
                   mean,data=gg05e1)
-byitem<-aggregate(rawRT~item+condition,mean,data=gg05e1)
-t.test(rawRT~condition,paired=TRUE,bysubj)$statistic
-t.test(rawRT~condition,paired=TRUE,byitem)$statistic
+byitem<-aggregate(rawRT~item+
+                    condition,
+                  mean,data=gg05e1)
+t.test(rawRT~condition,
+       paired=TRUE,bysubj)$statistic
+t.test(rawRT~condition,
+       paired=TRUE,byitem)$statistic
 ```
 
 What these two t-tests show is that both by subjects and by items, there is strong evidence against the null hypothesis that the object and relatives have identical reading times. 
@@ -78,11 +85,13 @@ Solving for $s$:
 So, our model for the relative clause data consists of two equations:
 
 Object relatives:
+
 \begin{equation}
 y = 471 -102\times 0 + \varepsilon \hfill \hbox{ where } \varepsilon \sim Normal(0,213)
 \end{equation}
 
 Subject  relatives:
+
 \begin{equation}
 y = 471 - 102\times 1 + \varepsilon \hbox{ where } \varepsilon \sim Normal(0,213)
 \end{equation}
@@ -118,7 +127,7 @@ bysubj$condition<-factor(bysubj$condition)
 contrasts(bysubj$condition)
 ```
 
-We will discuss coding in  detail in a chapter later on, but right now the simple 0,1 coding above---called treatment contrasts---is enough for our purposes.
+We will discuss coding in  detail in a later chapter, but right now the simple 0,1 coding above---called treatment contrasts---is enough for our purposes.
 
 Thus, what the linear model above gives us is two numbers: the mean object relative reading time (471), and the *difference* between object and subject relative (-102). We can extract the two coefficients by typing:
 
@@ -136,11 +145,11 @@ bysubj$condition<-factor(bysubj$condition,
 contrasts(bysubj$condition)
 ```
 
-Now, the intercept is the mean of the subject relatives, and the slope is the difference between object and subject relative reading time. Note that  the  sign of the t-value has changed. 
+Now, the intercept is the mean of the subject relatives, and the slope is the difference between object and subject relative reading time. Note that  the  sign of the t-value has changed---the sign depends on the contrast coding. 
 
 ```{r}
 m1a<-lm(rawRT~condition,bysubj)
-summary(m1a)
+summary(m1a)$coefficients
 ```
 
 Let's switch back to the original  factor level ordering:
@@ -192,14 +201,12 @@ When discussing linear models, we will make a distinction between the unknown tr
 .
 - Estimated mean subject relative processing time: $\hat\beta_0+\hat\beta_1=`r round(coef(m0)[1])`+`r round(coef(m0)[2])`=`r round(coef(m0)[1])+(round(coef(m0)[2]))`$.
 
-These are estimates of the unknown values $\beta_0, \beta_1$.
-
 ## Sum coding
 
 We have established so far that the mathematical form of the model is:
 
 \begin{equation}
-rawRT = \beta_0 + \beta_1 condition + \varepsilon
+rt = \beta_0 + \beta_1 condition + \varepsilon
 \end{equation}
 
 We can change the contrast coding of the `condition` vector in the following way. First, recode the levels of the condition column as shown below.
@@ -249,9 +256,16 @@ Subject relative reading times:
 rt = 420\mathbf{\times 1} + 51\mathbf{\times (-1)} + \varepsilon
 \end{equation}
 
+One could write it in a single line as:
+
+\begin{equation}
+rt = 420 + 51\times condition + \varepsilon
+\end{equation}
+
+
 ## Checking model assumptions
 
-It is an assumption of the linear model that the residuals are (approximately) normally distributed, That is what the statement $\varepsilon\sim Normal(0,\sigma)$ implies. As we will see later, it is important to check that model assumptions are approximately satisfied.
+It is an assumption of the linear model that the residuals are (approximately) normally distributed, That is what the statement $\varepsilon\sim Normal(0,\sigma)$ implies. It is important to check that model assumptions are approximately satisfied; this is because the null hypothesis significance testing procedure requires approximate normality of residuals.
 
 Here is how we can check whether this normality assumption is met:
 
@@ -328,7 +342,7 @@ round(t.test(rawRT~condition,bysubj,
 ```
 
 
-The paired t-test has an equivalent in the linear modeling framework: the linear mixed model. We turn next to this extension of the simple linear model. The command corresponding to the   paired t-test in the  linear moodeling framework is:
+The paired t-test has an equivalent in the linear modeling framework: the linear mixed model. We turn next to this extension of the simple linear model. The command corresponding to the   paired t-test in the  linear modeling framework is:
 
 ```{r}
 m0.lmer<-lmer(rawRT~condition+(1|subject),bysubj)
@@ -349,11 +363,11 @@ $Cov(X_1, X2)$ is the covariance between the two  random variables and  is defin
 Cov(X_1, X_2) = \rho \sqrt{Var(X_1)}\sqrt{Var(X_2)}
 \end{equation}
 
-You can find the proofs of the above assertions in books like [Rice](https://www.amazon.com/Mathematical-Statistics-Analysis-Available-Enhanced/dp/0534399428).
+You can find the proofs of the above assertions in books like @rice1995mathematical.
 
 As discussed earlier, a paired t-test is used when you have paired data from subject $i=1,...,n$ in two conditions, say conditions 1 and 2. Let's write the data as two vectors $X_{1}, X_{2}$. Because the pairs of data points are coming from the same subject, they are correlated with some correlation $\rho$. Assume that both conditions 1 and 2 have standard deviation $\sigma$. 
 
-Let's generate some simulated data as an example. Assume that $\sigma = 1$,
+To make this discussion concrete, let's generate some simulated bivariate data that are correlated. Assume that $\sigma = 1$,
 $\rho=0.5$, and that the data are balanced. 
 
 ```{r}
@@ -367,12 +381,12 @@ Sigma<-Sigma/2
 Sigma
 
 ## simulated data:
-randvars <- mvrnorm(n=samplesize, mu=mu, Sigma=Sigma, empirical=TRUE)
-head(randvars)
+x <- mvrnorm(n=samplesize, mu=mu, Sigma=Sigma, empirical=TRUE)
+head(x)
 
 n<-samplesize
-x1<-randvars[,1]
-x2<-randvars[,2]
+x1<-x[,1]
+x2<-x[,2]
 x1
 x2
 ```
@@ -380,7 +394,9 @@ x2
 To carry out the paired t-test, 
 we need to know the variance of $X_1-X_2$ because the t-statistic will be:
 
-$t_{n-1} = \frac{X_1 - X_2}{\sqrt{Var(X_1 - X_2)/n}}$
+\begin{equation}
+t_{n-1} = \frac{X_1 - X_2}{\sqrt{Var(X_1 - X_2)/n}}
+\end{equation}
 
 Now,
 
@@ -388,13 +404,17 @@ Now,
 Var(X_1 - X_2) = \sigma^2 + \sigma^2 - 2 \rho \sigma\sigma = 2\sigma^2 (1-\rho)
 \end{equation}
 
-Now let's compute the t-statistic using the above formula. Let the actual data be $x_1, x_2$.
+Now let's compute the t-statistic using the above formula. Let the actual data vectors be $x_1, x_2$.
 
-$t_{n-1} = \frac{mean(x_1) - mean(x_2)}{\sqrt{Var(X_1 - X_2)/n}}$
+\begin{equation}
+t_{n-1} = \frac{mean(x_1) - mean(x_2)}{\sqrt{Var(X_1 - X_2)/n}}
+\end{equation}
 
 This simplifies to:
 
-$t_{n-1} = \frac{mean(x_1) - mean(x_2)}{\sqrt{2\sigma^2(1-\rho)/n}}$
+\begin{equation}
+t_{n-1} = \frac{mean(x_1) - mean(x_2)}{\sqrt{2\sigma^2(1-\rho)/n}}
+\end{equation}
 
 Now compare the paired t-test output and the by-hand calculation:
 
@@ -404,9 +424,7 @@ t.test(x1,x2,paired=TRUE)$statistic
 (mean(x1)-mean(x2))/sqrt((2*stddev^2*(1-rho))/n)
 ```
 
-The linear mixed model arises in the following situation. 
-
-Suppose we have $i$ subjects and $j=1,2$ conditions. For simplicity, assume that each subject sees each condition once (e.g., the by-subjects aggregated English relative clause data), so we have two data points from each subject. In other words, the data are paired.
+The linear mixed model we present next will fit exactly the same model as in the paired t-test above.  To  see this, suppose we have $i$ subjects and $j=1,2$ conditions. For simplicity, assume that each subject sees each condition once (e.g., the by-subjects aggregated English relative clause data), so we have two data points from each subject. In other words, the data are paired.
 
 Then, for condition 1, the dependent variable can be described by the equation:
 
@@ -420,7 +438,7 @@ $y_{i2} = \beta_0 + \delta + u0_i + \varepsilon_{i2}$
 
 Here, $\delta$ is the additional time taken to process condition 2 (thus, this is the treatment contrast coding we saw earlier in this chapter). 
 
-If we subtract the equation for conodition 2 from the equation for condition 1, the resulting equation is:
+If we subtract the equation for condition 2 from the equation for condition 1, the resulting equation is:
 
 $d_i=y_{i1} - y_{i2}= \delta + (\varepsilon_{i1}-\varepsilon_{i2})$
 
@@ -435,12 +453,14 @@ Var(y_{i1}-y_{i2}) = \sigma^2 + \sigma^2-2\rho\sigma^2=2\sigma^2(1-\rho)
 The generative distribution for $d_i$, the pairwise differences in the two conditions, is
 
 \begin{equation}
-d \sim Normal(\delta, 2\sigma^2(1-\rho))
+d \sim Normal(\delta, \sqrt{2\sigma^2(1-\rho)})
 \end{equation}
 
-So, the paired t-test will deliver exactly the same t-score as the above linear model. 
+But that is exactly the same  standard deviation as the one used in the paired t-test. 
 
-Let's check this using our simulated data:
+So, the paired t-test will deliver exactly the same t-score as the above linear mixed model. 
+
+Let's check that this is true using our simulated data. In the code below, the term  `(1|subj)` is the adjustment by subject to the intercepts---the term $u0_i$ above.
 
 ```{r}
 library(lme4)
@@ -452,13 +472,13 @@ contrasts(dat$cond)
 summary(m<-lmer(y~cond+(1|subj),dat))
 ```
 
-The t-statistic from the linear mixed model is exactly the same as the paired t-test.
+The t-statistic from the linear mixed model is exactly the same as that from the paired t-test.
+
+With this as background, we are ready to look at linear mixed models in detail.
 
 ## Linear mixed models
 
-Now we are ready to look at linear mixed models in detail.
-
-Returning to our SR/OR relative clause data from English (Grodner and Gibson, Expt 1). First we load the data as usual.  We define relative clause type as a sum coded predictor, and create a new column called `so` that holds  log-transformed reading time. 
+We return to our subject and object relative clause data from English (Grodner and Gibson, Expt 1). First we load the data as usual, define relative clause type as a sum coded predictor, and create a new column called `so` that represents the contrast coding ($\pm 1$ sum contrasts), and  a column that holds log-transformed reading time. 
 
 ```{r}
 gg05e1<-read.table("data/grodnergibsonE1crit.txt",header=TRUE)
@@ -467,7 +487,7 @@ gg05e1$so <- ifelse(gg05e1$condition=="objgap",1,-1)
 gg05e1$logrt<-log(gg05e1$rawRT)
 ```
 
-Recall that these data have multiple measurements from each subject for each conditiono:
+Recall that these data have multiple measurements from each subject for each condition:
 
 ```{r}
 t(xtabs(~subject+condition, gg05e1))
