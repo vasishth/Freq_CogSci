@@ -577,7 +577,9 @@ summary(lmer(logrt~condition+(1|subject),
              bysubj))$coefficients[2,]
 ```
 
-The above lmList model we just fit is called *repeated measures regression*. We now look at how to model unaggregated data using the linear mixed model. Incidentally, this model is now only of historical interest, and useful only for understanding the linear mixed model, which is the modern standard approach.  
+The above lmList model we just fit is called *repeated measures regression*. We now look at how to model unaggregated data using the linear mixed model. Incidentally, this repeated measures regression model is now only of historical interest, and useful only for understanding the linear mixed model, which is the modern standard approach.  
+
+We turn next to three main types of linear mixed model; other variants will be introduced in later chapters.
 
 ### Model type 1: Varying intercepts
 
@@ -612,9 +614,9 @@ Fixed effects:
 so           0.06202    0.01475   4.205
 ```
 
-One thing to notice is that the coefficients (intercept and slope) of the fixed effects of the above model are identical to those in the linear model `m0` above. What is different between  the linear model and the linear mixed model is the standard error. 
+One thing to notice is that the coefficients (intercept and slope) of the fixed effects of the above model are identical to those in the linear model `m0` above. What is different between  the linear model and the linear mixed model is the standard error. In the latter, the standard error is determined by more than one source of variance, as we explain below.
 
-The varying intercepts for each subject can be viewed by typing:
+The intercept adjustments for each subject can be viewed by typing:
 
 ```{r}
 ## first 10 subjects' intercept adjustments:
@@ -628,6 +630,8 @@ library(lattice)
 print(dotplot(ranef(m0.lmer,condVar=TRUE)))
 ```
 
+### The formal statement of the varying intercepts model
+
 The model `m0.lmer` above prints out the following type of linear model.  $i$ indexes subject, and $j$ indexes items. 
 
 Once we know the subject id and the item id, we know which subject saw which condition:
@@ -637,21 +641,21 @@ Once we know the subject id and the item id, we know which subject saw which con
 subset(gg05e1,subject==1 & item == 1)
 ```
 
+The mathematical form of the linear mixed model is:
 
 \begin{equation}
 y_{ij} = \beta_0 + u_{0i}+\beta_1\times so_{ij} + \varepsilon_{ij}
 \end{equation}
 
-The *only* new thing here is the by-subject adjustment to the intercept.
-
-- Note that these by-subject adjustments to the intercept $u_{0i}$ are assumed by lmer to come from a normal distribution centered around 0: 
+The *only* new thing here beyond the linear model we  saw earlier is the by-subject adjustment to the intercept. These by-subject adjustments to the intercept $u_{0i}$ are assumed by lmer to come from a normal distribution centered around 0: 
 
 \begin{equation}
 u_{0i} \sim Normal(0,\sigma_{u0})
 \end{equation}
 
-- The ordinary linear model m0 has one intercept $\beta_0$ for all subjects, whereas the linear mixed model with varying intercepts `m0.lmer` has a different intercept ($\beta_0 + u_{0i}$) for each subject $i$.
-- We can visualize the adjustments for each subject to the intercepts as shown below.
+The ordinary linear model m0 has one intercept $\beta_0$ for all subjects, whereas this linear mixed model with varying intercepts `m0.lmer` has a different intercept ($\beta_0 + u_{0i}$) for each subject $i$.
+
+We can visualize the adjustments for each subject to the intercepts as shown below.
 
 
 ```{r echo=FALSE}
@@ -671,34 +675,41 @@ abline(a=ab[i,1],b=ab[i,2])
 abline(lm(logrt~so,gg05e1),lwd=3,col="gray")
 ```
 
-#### The formal statement of the varying intercepts linear mixed model
 
-The formal statement of varying intercepts linear mixed model is as follows; i indexes subjects, j items.
-
-\begin{equation}
-y_{ij} = \beta_0 + u_{0i}+(\beta_1)\times so_{ij} + \varepsilon_{ij}
-\end{equation}
-
-There are two variance components here:
+An important point is that in this  model there are two variance components or sources of variance (cf. the linear model, which had only one):
 
 - $u_0 \sim Normal(0,\sigma_{u0})$
 - $\varepsilon \sim Normal(0,\sigma)$
 
+These two standard deviations  determine the standard error of the $\beta_1$ slope parameter.
+
 ### Model type 2: Varying intercepts and slopes, without a correlation
 
-Note that, unlike the figure associated with the `lmlist.fm1` model above, which also involves fitting separate models for each subject, the model `m0.lmer` assumes *different intercepts* for each subject *but the same slope*. 
+Unlike the figure associated with the `lmlist.fm1` model above, which also involves fitting separate models for each subject, the model `m0.lmer` assumes *different intercepts* for each subject *but the same slope*. 
 
-We can have lmer fit different intercepts as well as different slopes for each subject. To achieve this, assume now that each subject's slope is also adjusted:
+We can choose to fit different intercepts as well as different slopes for each subject. To achieve this, assume now that each subject's slope is also adjusted by subject:
 
 \begin{equation}
 y_{ij} = \beta_0 + u_{0i}+(\beta_1+u_{1i})\times so_{ij} + \varepsilon_{ij}
 \end{equation}
 
-That is, we additionally assume that $u_{1i} \sim Normal(0,\sigma_{u1})$.
+That is, we additionally assume that $u_{1i} \sim Normal(0,\sigma_{u1})$. The `lmer` notation for fitting separate intercepts and slopes is `(1+so||subject)`. We will just explain what the double vertical bars represent.
 
 ```{r}
 m1.lmer<-lmer(logrt~so+(1+so||subject),gg05e1)
 ```
+
+The output of this model will now show that there are not two but three sources of variability. These are:
+
+- $u_0 \sim Normal(0,\sigma_{u0})$
+- $u_1 \sim Normal(0,\sigma_{u1})$
+- $\varepsilon \sim Normal(0,\sigma)$
+
+In particular, the model estimates the following standard deviations:
+
+- $\hat\sigma_{u0}=0.317$
+- $\hat\sigma_{u0}=0.110$
+- $\hat\sigma = 0.365$.
 
 ```
 Random effects:
@@ -716,7 +727,7 @@ so            0.0620     0.0221    2.81
 
 These fits for each subject are visualized below (the gray line shows the model with a single intercept and slope, i.e., our old model `m0`):
 
-```{r}
+```{r echo=FALSE}
 a<-fixef(m1.lmer)[1]
 b<-fixef(m1.lmer)[2]
 
@@ -783,22 +794,28 @@ abline(a=ab[i,1],b=ab[i,2])
 abline(lm(logrt~so,gg05e1),lwd=3,col="gray")
 ```
 
+What is striking is that each subject's estimated best fit line is "smooothed out" compared to the lmList fits. This aspect of the linear mixed model is called shrinkage; we return to this point presently.
 
 #### Visualizing random effects
+
+As before, it is instructive to visualize the individual level adjustments to the intercept and slope:
+
 
 ```{r}
 print(dotplot(ranef(m1.lmer,condVar=TRUE)))
 ```
 
+What this is showing is wide variability in the mean reading times between subjects, but very little variation in the slope between subjects.
+
 #### The formal statement of varying intercepts and varying slopes linear mixed model
 
-Again, i indexes subjects, j items.
+Here is the full statement of the varying intercept and slopes model. Again, i indexes subjects, j items.
 
 \begin{equation}
 y_{ij} = \beta_0 + u_{0i}+(\beta_1+u_{1i})\times so_{ij} + \varepsilon_{ij}
 \end{equation}
 
-There are now three variance components:
+As mentioned before, there are now three variance components:
 
 - $u_0 \sim Normal(0,\sigma_{u0})$
 - $u_1 \sim Normal(0,\sigma_{u1})$
@@ -808,13 +825,16 @@ There are now three variance components:
 
 #### Crossed random effects for subjects and for items
 
-Notice that subjects and items are fully crossed:
+Now, one interesting fact about the varying intercepts and slopes model is that it doesn't capture all the sources of variance yet. The items also contribute sources of variance: just like subjects, items may also have different intercepts and slopes.
+
+
+Notice that subjects and items are fully crossed: each subject sees each item once.
 
 ```{r}
 head(xtabs(~subject+item,gg05e1))
 ```
 
-Linear mixed model with crossed subject and items random effects.
+Linear mixed model with crossed subject and items random effects can be defined with the following syntax:
 
 ```{r}
 m2.lmer<-lmer(logrt~so+(1+so||subject)+
