@@ -841,6 +841,8 @@ m2.lmer<-lmer(logrt~so+(1+so||subject)+
 (1+so||item),gg05e1)
 ```
 
+Analogously to the preceding example, now there are five variance components:
+
 ```
 Random effects:
  Groups    Name        Variance Std.Dev.
@@ -857,27 +859,24 @@ Fixed effects:
 so            0.0620     0.0242    2.56
 ```
 
-
-```{r}
-print(dotplot(ranef(m2.lmer,condVar=TRUE))$subject)
-```
+The item intercept and slope adjustments can be visualized as well. Notice that there is a lot less item-level variation; this is often the case in planned experiments like this one, where the experimental items are carefully constructed to vary as little as possible. 
 
 ```{r}
 print(dotplot(ranef(m2.lmer,condVar=TRUE))$item)
 ```
 
-
+One thing missing in the above models is any assumption about the relationship between the intercept and slope adjustements by subject and by item. It is possible that the intercept and slope adjustments are correlated: e.g., there could be a theoretical prediction that says that the slower a subject's average reading time, the larger the difference between object and subject relative clause reading times. This kind of prediction can be tested by testing what the correlation is between the varying intercepts and slopes. We turn to this model next.
 
 ### Model type 3: Varying intercepts and varying slopes, with correlation
 
-Linear mixed model with crossed subject and items random effects, with a correlation between varying intercepts and slopes.
+A correlation can be introduced between the intercept and slope adjustments by using a single vertical bar instead of two vertical bars in the random effects structure:
 
 ```{r}
 m3.lmer<-lmer(logrt~so+(1+so|subject)+(1+so|item),
               gg05e1)
 ```
 
-To understand what this model is doing, we have to understand what a bivariate/multivariate distribution is.
+To understand what this model is doing, we have to recall what a bivariate/multivariate distribution is.
 
 
 ```
@@ -886,7 +885,7 @@ Random effects:
  subject  (Intercept) 0.10103  0.3178       
           so          0.01228  0.1108   0.58
  item     (Intercept) 0.00172  0.0415       
-          so          0.00196  0.0443   1.00 <= degenerate
+          so          0.00196  0.0443   1.00 <= degeneracy
  Residual             0.12984  0.3603       
 Number of obs: 672, groups:  subject, 42; item, 16
 
@@ -897,27 +896,14 @@ so            0.0620     0.0247    2.51
 ```
 
 
-The correlations (0.58 and 1.00) you see in the model output below are the correlations between the varying intercepts and slopes for subjects and for items.
+The correlations (0.58 and 1.00) you see in the model output below are the correlations between the varying intercepts and slopes for subjects and for items. Notice that the variance covariance matrix for items is degenerate: its correlation is 1. This matrix cannot be inverted. 
 
-```
-Random effects:
- Groups   Name        Variance Std.Dev. Corr
- subject  (Intercept) 0.10103  0.3178       
-          so          0.01228  0.1108   0.58
- item     (Intercept) 0.00172  0.0415       
-          so          0.00196  0.0443   1.00 <= degenerate
- Residual             0.12984  0.3603       
-Number of obs: 672, groups:  subject, 42; item, 16
+When the correlation is +1 or -1 or near these numbers, this means that the optimizer in lme4 is unable to estimate the correlation parameter, due to there not being enough data. If you are in such a situation, you are better off not trying to estimate this parameter with the data you have, and instead fitting one of the simpler models. For a different perspective, see the paper by @barr2013, and the papers by @BatesEtAlParsimonious, and @hannesBEAP.
 
-Fixed effects:
-            Estimate Std. Error t value
-(Intercept)   5.8831     0.0520  113.09
-so            0.0620     0.0247    2.51
-```
 
 #### Formal statement of varying intercepts and varying slopes linear mixed model with correlation
 
-As usual, i indexes subjects, j items.
+As usual, i indexes subjects, j items. The only new thing in this model is the item-level effects, and the specification of the variance-covariance matrix for subjects and items, in order to include the correlation parameters.
 
 \begin{equation}
 y_{ij} = \alpha + u_{0i} + w_{0j} + (\beta + u_{1i} + w_{1j}) * so_{ij} + \varepsilon_{ij}
@@ -970,14 +956,18 @@ where $\varepsilon_{ij} \sim Normal(0,\sigma)$ and
 \end{equation}
 
 
-
 #### Visualizing the random effects
+
+One can visualize the correlation between intercepts and slopes by subjects. The positive correlation of 0.58 between subject intercept and slope adjustments implies that slower subjects show larger effects. However, the dotplot below doesn't show a convincing pattern: 
 
 ```{r}
 print(dotplot(ranef(m3.lmer,condVar=TRUE))$subject)
 ```
 
-These are degenerate estimates:
+When we talk about hypothesis testing, we will look at what inferences we can draw from this correlation.
+
+The dotplot showing the item-level effects shows a perfect correlation between intercept and slope adjustments, but as mentioned above these are from a degenerate variance covariance matrix and not meaningful.
+
 
 ```{r}
 print(dotplot(ranef(m3.lmer,condVar=TRUE))$item)
