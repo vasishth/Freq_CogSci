@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.4 From the paired t-test to the linear mixed model | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
+  <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.4 From the paired t-test to the linear mixed model | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
+  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="github-repo" content="rstudio/bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.4 From the paired t-test to the linear mixed model | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
+  
+  <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+
+<meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
+
+
+<meta name="date" content="2020-08-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="checking-model-assumptions.html"/>
+<link rel="next" href="linear-mixed-models.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #232629;
+    color: #7a7c7d;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+div.sourceCode
+  { color: #cfcfc2; background-color: #232629; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #cfcfc2; } /* Normal */
+code span.al { color: #95da4c; } /* Alert */
+code span.an { color: #3f8058; } /* Annotation */
+code span.at { color: #2980b9; } /* Attribute */
+code span.bn { color: #f67400; } /* BaseN */
+code span.bu { color: #7f8c8d; } /* BuiltIn */
+code span.cf { color: #fdbc4b; } /* ControlFlow */
+code span.ch { color: #3daee9; } /* Char */
+code span.cn { color: #27aeae; } /* Constant */
+code span.co { color: #7a7c7d; } /* Comment */
+code span.cv { color: #7f8c8d; } /* CommentVar */
+code span.do { color: #a43340; } /* Documentation */
+code span.dt { color: #2980b9; } /* DataType */
+code span.dv { color: #f67400; } /* DecVal */
+code span.er { color: #da4453; } /* Error */
+code span.ex { color: #0099ff; } /* Extension */
+code span.fl { color: #f67400; } /* Float */
+code span.fu { color: #8e44ad; } /* Function */
+code span.im { color: #27ae60; } /* Import */
+code span.in { color: #c45b00; } /* Information */
+code span.kw { color: #cfcfc2; } /* Keyword */
+code span.op { color: #cfcfc2; } /* Operator */
+code span.ot { color: #27ae60; } /* Other */
+code span.pp { color: #27ae60; } /* Preprocessor */
+code span.re { color: #2980b9; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #da4453; } /* SpecialString */
+code span.st { color: #f44f4f; } /* String */
+code span.va { color: #27aeae; } /* Variable */
+code span.vs { color: #da4453; } /* VerbatimString */
+code span.wa { color: #da4453; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Authoring Books with R Markdown</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="0.2" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.2</b> How to read this book</a></li>
+<li class="chapter" data-level="0.3" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.3</b> Online materials</a></li>
+<li class="chapter" data-level="0.4" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.4</b> Software needed</a></li>
+<li class="chapter" data-level="0.5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="part"><span><b>I Foundational ideas</b></span></li>
+<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a><ul>
+<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.1.1</b> The mean and variance of the Binomial distribution</a></li>
+<li class="chapter" data-level="1.1.2" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.1.2</b> What information does a probability distribution provide?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
+<li class="chapter" data-level="1.3" data-path="bivariatemultivariate-distributions.html"><a href="bivariatemultivariate-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Bivariate/multivariate distributions</a></li>
+<li class="chapter" data-level="1.4" data-path="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><a href="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Summary of useful R functions relating to univariate distributions</a></li>
+<li class="chapter" data-level="1.5" data-path="summary-of-random-variable-theory.html"><a href="summary-of-random-variable-theory.html"><i class="fa fa-check"></i><b>1.5</b> *Summary of random variable theory</a></li>
+<li class="chapter" data-level="1.6" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.6</b> Further reading</a></li>
+<li class="chapter" data-level="1.7" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.7</b> Exercises</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisespnorm"><i class="fa fa-check"></i><b>1.7.1</b> Practice using the <code>pnorm</code> function</a></li>
+<li class="chapter" data-level="1.7.2" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqnorm"><i class="fa fa-check"></i><b>1.7.2</b> Practice using the <code>qnorm</code> function</a></li>
+<li class="chapter" data-level="1.7.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqt"><i class="fa fa-check"></i><b>1.7.3</b> Practice using <code>qt</code></a></li>
+<li class="chapter" data-level="1.7.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.7.4</b> Maximum likelihood estimation 1</a></li>
+<li class="chapter" data-level="1.7.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.7.5</b> Maximum likelihood estimation 2</a></li>
+<li class="chapter" data-level="1.7.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.7.6</b> Generating bivariate data</a></li>
+<li class="chapter" data-level="1.7.7" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.7.7</b> Generating multivariate data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a><ul>
+<li class="chapter" data-level="2.1" data-path="the-central-limit-theorem-using-simulation.html"><a href="the-central-limit-theorem-using-simulation.html"><i class="fa fa-check"></i><b>2.1</b> The central limit theorem using simulation</a></li>
+<li class="chapter" data-level="2.2" data-path="three-examples-of-the-sampling-distribution.html"><a href="three-examples-of-the-sampling-distribution.html"><i class="fa fa-check"></i><b>2.2</b> Three examples of the sampling distribution</a></li>
+<li class="chapter" data-level="2.3" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.3</b> The confidence interval, and what it’s good for</a></li>
+<li class="chapter" data-level="2.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.4</b> Hypothesis testing: The one sample t-test</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-one-sample-t-test"><i class="fa fa-check"></i><b>2.4.1</b> The one-sample t-test</a></li>
+<li class="chapter" data-level="2.4.2" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-i-ii-error-and-power"><i class="fa fa-check"></i><b>2.4.2</b> Type I, II error, and power</a></li>
+<li class="chapter" data-level="2.4.3" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#how-to-compute-power-for-the-one-sample-t-test"><i class="fa fa-check"></i><b>2.4.3</b> How to compute power for the one-sample t-test</a></li>
+<li class="chapter" data-level="2.4.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-p-value"><i class="fa fa-check"></i><b>2.4.4</b> The p-value</a></li>
+<li class="chapter" data-level="2.4.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.4.5</b> Type M and S error in the face of low power</a></li>
+<li class="chapter" data-level="2.4.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.4.6</b> Searching for significance</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.5</b> The two-sample t-test vs. the paired t-test</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.5.1</b> Common mistakes involving the t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.6</b> Exercises</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.6.1</b> Part 1</a></li>
+<li class="chapter" data-level="2.6.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.6.2</b> Part 2</a></li>
+<li class="chapter" data-level="2.6.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.6.3</b> Part 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a><ul>
+<li class="chapter" data-level="3.1" data-path="from-the-t-test-to-the-linear-mixed-model.html"><a href="from-the-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.1</b> From the t-test to the linear (mixed) model</a></li>
+<li class="chapter" data-level="3.2" data-path="sum-coding.html"><a href="sum-coding.html"><i class="fa fa-check"></i><b>3.2</b> Sum coding</a></li>
+<li class="chapter" data-level="3.3" data-path="checking-model-assumptions.html"><a href="checking-model-assumptions.html"><i class="fa fa-check"></i><b>3.3</b> Checking model assumptions</a></li>
+<li class="chapter" data-level="3.4" data-path="from-the-paired-t-test-to-the-linear-mixed-model.html"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.4</b> From the paired t-test to the linear mixed model</a></li>
+<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
+<li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.7" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html"><i class="fa fa-check"></i><b>3.7</b> Exercises:</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.7.1</b> Part 1</a></li>
+<li class="chapter" data-level="3.7.2" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.7.2</b> Part 2</a></li>
+<li class="chapter" data-level="3.7.3" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.7.3</b> Part 3</a></li>
+<li class="chapter" data-level="3.7.4" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.7.4</b> Part 4</a></li>
+<li class="chapter" data-level="3.7.5" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.7.5</b> Part 5</a></li>
+<li class="chapter" data-level="3.7.6" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.7.6</b> Part 6</a></li>
+<li class="chapter" data-level="3.7.7" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.7.7</b> Part 7</a></li>
+<li class="chapter" data-level="3.7.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.7.8</b> Part 8</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a><ul>
+<li class="chapter" data-level="4.1" data-path="the-likelihood-ratio-test-the-theory.html"><a href="the-likelihood-ratio-test-the-theory.html"><i class="fa fa-check"></i><b>4.1</b> The likelihood ratio test: The theory</a></li>
+<li class="chapter" data-level="4.2" data-path="a-practical-example-using-simulated-data.html"><a href="a-practical-example-using-simulated-data.html"><i class="fa fa-check"></i><b>4.2</b> A practical example using simulated data</a></li>
+<li class="chapter" data-level="4.3" data-path="a-real-life-example-the-english-relative-clause-data.html"><a href="a-real-life-example-the-english-relative-clause-data.html"><i class="fa fa-check"></i><b>4.3</b> A real-life example: The English relative clause data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>5</b> Using simulation to understand your model</a><ul>
+<li class="chapter" data-level="5.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>5.1</b> A reminder: The maximal linear mixed model</a></li>
+<li class="chapter" data-level="5.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>5.2</b> Obtain estimates from a previous study</a></li>
+<li class="chapter" data-level="5.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>5.3</b> Decide on a range of plausible values of the effect size</a></li>
+<li class="chapter" data-level="5.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>5.4</b> Extract parameter estimates</a></li>
+<li class="chapter" data-level="5.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>5.5</b> Define a function for generating data</a></li>
+<li class="chapter" data-level="5.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>5.6</b> Repeated generation of data to compute power</a></li>
+<li class="chapter" data-level="5.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>5.7</b> What you can now do</a></li>
+<li class="chapter" data-level="5.8" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>5.8</b> Exercises</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>5.8.1</b> Part 1</a></li>
+<li class="chapter" data-level="5.8.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>5.8.2</b> Part 2</a></li>
+<li class="chapter" data-level="5.8.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>5.8.3</b> Part 3</a></li>
+<li class="chapter" data-level="5.8.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>5.8.4</b> Part 4</a></li>
+<li class="chapter" data-level="5.8.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>5.8.5</b> Part 5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>6</b> Important distributions</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="from-the-paired-t-test-to-the-linear-mixed-model" class="section level2">
+<h2><span class="header-section-number">3.4</span> From the paired t-test to the linear mixed model</h2>
+<p>One interesting point to notice is that the observed t-value of the paired t-test and the t-test printed out by the linear model don’t match:</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">t.test</span>(rawRT <span class="op">~</span><span class="st"> </span>condition, bysubj, <span class="dt">paired =</span> <span class="ot">TRUE</span>)<span class="op">$</span>statistic</a></code></pre></div>
+<pre><code>##     t 
+## 3.109</code></pre>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">summary</span>(m0)<span class="op">$</span>coefficients, <span class="dv">2</span>)[, <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)]</a></code></pre></div>
+<pre><code>##                  Estimate Std. Error t value
+## (Intercept)         471.4      31.13   15.14
+## conditionsubjgap   -102.3      44.02   -2.32</code></pre>
+<p>This is because the linear model implements the unpaired (i.e., two sample) t-test:</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="kw">summary</span>(<span class="kw">lm</span>(rawRT <span class="op">~</span><span class="st"> </span>condition, bysubj))</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = rawRT ~ condition, data = bysubj)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -303.4 -116.4  -51.6   49.1  853.3 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)         471.4       31.1   15.14   &lt;2e-16
+## conditionsubjgap   -102.3       44.0   -2.32    0.023
+## 
+## Residual standard error: 202 on 82 degrees of freedom
+## Multiple R-squared:  0.0618,	Adjusted R-squared:  0.0503 
+## F-statistic:  5.4 on 1 and 82 DF,  p-value: 0.0226</code></pre>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">t.test</span>(rawRT <span class="op">~</span><span class="st"> </span>condition, bysubj, <span class="dt">paired =</span> <span class="ot">FALSE</span>)<span class="op">$</span>statistic, </a>
+<a class="sourceLine" id="cb181-2" data-line-number="2">  <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>##    t 
+## 2.32</code></pre>
+<p>The paired t-test has an equivalent in the linear modeling framework: the linear mixed model. We turn next to this extension of the simple linear model. The command corresponding to the paired t-test in the linear modeling framework is:</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1">m0.lmer &lt;-<span class="st"> </span><span class="kw">lmer</span>(rawRT <span class="op">~</span><span class="st"> </span>condition <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb183-2" data-line-number="2"><span class="st">  </span>subject), bysubj)</a>
+<a class="sourceLine" id="cb183-3" data-line-number="3"><span class="kw">summary</span>(m0.lmer)<span class="op">$</span>coefficients</a></code></pre></div>
+<pre><code>##                  Estimate Std. Error t value
+## (Intercept)         471.4      31.13  15.143
+## conditionsubjgap   -102.3      32.90  -3.109</code></pre>
+<p>To understand the connection between the paired t-test and the above command, it is necessary to consider how a paired t-test is assembled.</p>
+<p>First, some background. If you have two random variables that have correlation <span class="math inline">\(\rho\)</span>, the variance of the difference between the two random variables is:</p>
+<p><span class="math display">\[\begin{equation}
+Var(X_1-X_2)=Var(X_1) + Var(X_2) - 2\times Cov(X_1, X2)
+\end{equation}\]</span></p>
+<p><span class="math inline">\(Cov(X_1, X2)\)</span> is the covariance between the two random variables and is defined as:</p>
+<p><span class="math display">\[\begin{equation}
+Cov(X_1, X_2) = \rho \sqrt{Var(X_1)}\sqrt{Var(X_2)}
+\end{equation}\]</span></p>
+<p>You can find the proofs of the above assertions in books like <span class="citation">Rice (<a href="#ref-rice1995mathematical">1995</a>)</span>.</p>
+<p>As discussed earlier, a paired t-test is used when you have paired data from subject <span class="math inline">\(i=1,...,n\)</span> in two conditions, say conditions 1 and 2. Let’s write the data as two vectors <span class="math inline">\(X_{1}, X_{2}\)</span>. Because the pairs of data points are coming from the same subject, they are correlated with some correlation <span class="math inline">\(\rho\)</span>. Assume that both conditions 1 and 2 have standard deviation <span class="math inline">\(\sigma\)</span>.</p>
+<p>To make this discussion concrete, let’s generate some simulated bivariate data that are correlated. Assume that <span class="math inline">\(\sigma = 1\)</span>,
+<span class="math inline">\(\rho=0.5\)</span>, and that the data are balanced.</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="kw">library</span>(MASS)</a>
+<a class="sourceLine" id="cb185-2" data-line-number="2">samplesize &lt;-<span class="st"> </span><span class="dv">12</span></a>
+<a class="sourceLine" id="cb185-3" data-line-number="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb185-4" data-line-number="4">rho &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb185-5" data-line-number="5">stddev &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb185-6" data-line-number="6">Sigma &lt;-<span class="st"> </span><span class="kw">matrix</span>(stddev, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb185-7" data-line-number="7"><span class="st">  </span><span class="kw">diag</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb185-8" data-line-number="8">Sigma &lt;-<span class="st"> </span>Sigma<span class="op">/</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb185-9" data-line-number="9">Sigma</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]  1.0  0.5
+## [2,]  0.5  1.0</code></pre>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="co">## simulated data:</span></a>
+<a class="sourceLine" id="cb187-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt">n =</span> samplesize, <span class="dt">mu =</span> mu, <span class="dt">Sigma =</span> Sigma, </a>
+<a class="sourceLine" id="cb187-3" data-line-number="3">  <span class="dt">empirical =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb187-4" data-line-number="4"><span class="kw">head</span>(x)</a></code></pre></div>
+<pre><code>##         [,1]    [,2]
+## [1,] -0.4241 -1.1746
+## [2,]  0.4285  0.1175
+## [3,] -1.1445 -1.6417
+## [4,]  2.1234  0.1617
+## [5,] -0.9182  0.3638
+## [6,]  0.6915  1.6569</code></pre>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1">n &lt;-<span class="st"> </span>samplesize</a>
+<a class="sourceLine" id="cb189-2" data-line-number="2">x1 &lt;-<span class="st"> </span>x[, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb189-3" data-line-number="3">x2 &lt;-<span class="st"> </span>x[, <span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb189-4" data-line-number="4">x1</a></code></pre></div>
+<pre><code>##  [1] -0.4241  0.4285 -1.1445  2.1234 -0.9182  0.6915
+##  [7] -0.3609  0.2910  0.9116  1.8084  0.4441 -0.2508</code></pre>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1">x2</a></code></pre></div>
+<pre><code>##  [1] -1.17458  0.11751 -1.64174  0.16166  0.36377
+##  [6]  1.65688  1.12933 -0.26363  1.21378  1.22185
+## [11] -0.41870  0.03387</code></pre>
+<p>To carry out the paired t-test,
+we need to know the variance of <span class="math inline">\(X_1-X_2\)</span> because the t-statistic will be:</p>
+<p><span class="math display">\[\begin{equation}
+t_{n-1} = \frac{X_1 - X_2}{\sqrt{Var(X_1 - X_2)/n}}
+\end{equation}\]</span></p>
+<p>Now,</p>
+<p><span class="math display">\[\begin{equation}
+Var(X_1 - X_2) = \sigma^2 + \sigma^2 - 2 \rho \sigma\sigma = 2\sigma^2 (1-\rho)
+\end{equation}\]</span></p>
+<p>Now let’s compute the t-statistic using the above formula. Let the actual data vectors be <span class="math inline">\(x_1, x_2\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+t_{n-1} = \frac{mean(x_1) - mean(x_2)}{\sqrt{Var(X_1 - X_2)/n}}
+\end{equation}\]</span></p>
+<p>This simplifies to:</p>
+<p><span class="math display">\[\begin{equation}
+t_{n-1} = \frac{mean(x_1) - mean(x_2)}{\sqrt{2\sigma^2(1-\rho)/n}}
+\end{equation}\]</span></p>
+<p>Now compare the paired t-test output and the by-hand calculation:</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="kw">t.test</span>(x1, x2, <span class="dt">paired =</span> <span class="ot">TRUE</span>)<span class="op">$</span>statistic</a></code></pre></div>
+<pre><code>##      t 
+## 0.3464</code></pre>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1">(<span class="kw">mean</span>(x1) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x2))<span class="op">/</span><span class="kw">sqrt</span>((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>stddev<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb195-2" data-line-number="2"><span class="st">  </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>rho))<span class="op">/</span>n)</a></code></pre></div>
+<pre><code>## [1] 0.3464</code></pre>
+<p>The linear mixed model we present next will fit exactly the same model as in the paired t-test above. To see this, suppose we have <span class="math inline">\(i\)</span> subjects and <span class="math inline">\(j=1,2\)</span> conditions. For simplicity, assume that each subject sees each condition once (e.g., the by-subjects aggregated English relative clause data), so we have two data points from each subject. In other words, the data are paired.</p>
+<p>Then, for condition 1, the dependent variable can be described by the equation:</p>
+<p><span class="math inline">\(y_{i1} = \beta_0 + u0_i + \varepsilon_{i1}\)</span></p>
+<p>Here, <span class="math inline">\(\beta_0\)</span> is the mean reading time, and <span class="math inline">\(\varepsilon\)</span> is the usual residual error term. The interesting new term is <span class="math inline">\(u0_i\)</span>. This is the adjustment to the mean reading time for subject <span class="math inline">\(i\)</span>. That is, if some subject is slower than average, <span class="math inline">\(u0_i\)</span> will be a positive number; if a subject is faster than average, then that subject’s adjustment <span class="math inline">\(u0_i\)</span> will be negative in sign; and if a subject has exactly the same reading time as the mean for all subjects, then <span class="math inline">\(u0_i\)</span> for that subject will be 0.</p>
+<p>Similarly, for condition 2, the dependent variable is described by the equation:</p>
+<p><span class="math inline">\(y_{i2} = \beta_0 + \delta + u0_i + \varepsilon_{i2}\)</span></p>
+<p>Here, <span class="math inline">\(\delta\)</span> is the additional time taken to process condition 2 (thus, this is the treatment contrast coding we saw earlier in this chapter).</p>
+<p>If we subtract the equation for condition 2 from the equation for condition 1, the resulting equation is:</p>
+<p><span class="math inline">\(d_i=y_{i1} - y_{i2}= \delta + (\varepsilon_{i1}-\varepsilon_{i2})\)</span></p>
+<p>The expectation of <span class="math inline">\(d_i\)</span> is <span class="math inline">\(\delta\)</span> because the expectation of the <span class="math inline">\(\varepsilon\)</span> terms is 0 (we set up the model such that <span class="math inline">\(\varepsilon \sim Normal(0,\sigma)\)</span>).</p>
+<p>Now, assuming that the error terms are correlated with correlation <span class="math inline">\(\rho\)</span>, the result presented at the beginning of this section applies:</p>
+<p><span class="math display">\[\begin{equation}
+Var(y_{i1}-y_{i2}) = \sigma^2 + \sigma^2-2\rho\sigma^2=2\sigma^2(1-\rho)
+\end{equation}\]</span></p>
+<p>The generative distribution for <span class="math inline">\(d_i\)</span>, the pairwise differences in the two conditions, is</p>
+<p><span class="math display">\[\begin{equation}
+d \sim Normal(\delta, \sqrt{2\sigma^2(1-\rho)})
+\end{equation}\]</span></p>
+<p>But that is exactly the same standard deviation as the one used in the paired t-test.</p>
+<p>So, the paired t-test will deliver exactly the same t-score as the above linear mixed model.</p>
+<p>Let’s check that this is true using our simulated data. In the code below, the term <code>(1|subj)</code> is the adjustment by subject to the intercepts—the term <span class="math inline">\(u0_i\)</span> above.</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="kw">library</span>(lme4)</a>
+<a class="sourceLine" id="cb197-2" data-line-number="2">dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">y =</span> <span class="kw">c</span>(x1, x2), <span class="dt">cond =</span> <span class="kw">rep</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], </a>
+<a class="sourceLine" id="cb197-3" data-line-number="3">  <span class="dt">each =</span> n), <span class="dt">subj =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb197-4" data-line-number="4">dat<span class="op">$</span>cond &lt;-<span class="st"> </span><span class="kw">factor</span>(dat<span class="op">$</span>cond)</a>
+<a class="sourceLine" id="cb197-5" data-line-number="5"><span class="kw">contrasts</span>(dat<span class="op">$</span>cond) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb197-6" data-line-number="6"><span class="kw">contrasts</span>(dat<span class="op">$</span>cond)</a></code></pre></div>
+<pre><code>##   [,1]
+## a    1
+## b   -1</code></pre>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="kw">summary</span>(m &lt;-<span class="st"> </span><span class="kw">lmer</span>(y <span class="op">~</span><span class="st"> </span>cond <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>subj), </a>
+<a class="sourceLine" id="cb199-2" data-line-number="2">  dat))</a></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: y ~ cond + (1 | subj)
+##    Data: dat
+## 
+## REML criterion at convergence: 65.6
+## 
+## Scaled residuals: 
+##    Min     1Q Median     3Q    Max 
+## -1.226 -0.533  0.032  0.487  1.737 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  subj     (Intercept) 0.5      0.707   
+##  Residual             0.5      0.707   
+## Number of obs: 24, groups:  subj, 12
+## 
+## Fixed effects:
+##             Estimate Std. Error t value
+## (Intercept)    0.250      0.250    1.00
+## cond1          0.050      0.144    0.35
+## 
+## Correlation of Fixed Effects:
+##       (Intr)
+## cond1 0.000</code></pre>
+<p>The t-statistic from the linear mixed model is exactly the same as that from the paired t-test.</p>
+<p>With this as background, we are ready to look at linear mixed models in detail.</p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-rice1995mathematical">
+<p>Rice, John A. 1995. <em>Mathematical statistics and data analysis</em>. Duxbury press Belmont, CA.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="checking-model-assumptions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-mixed-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/03-LinearModels.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

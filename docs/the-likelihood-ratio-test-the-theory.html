@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.1 The likelihood ratio test: The theory | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
+  <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.1 The likelihood ratio test: The theory | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
+  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="github-repo" content="rstudio/bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.1 The likelihood ratio test: The theory | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
+  
+  <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+
+<meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
+
+
+<meta name="date" content="2020-08-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="hypothesis-testing-using-the-likelihood-ratio-test.html"/>
+<link rel="next" href="a-practical-example-using-simulated-data.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #232629;
+    color: #7a7c7d;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+div.sourceCode
+  { color: #cfcfc2; background-color: #232629; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #cfcfc2; } /* Normal */
+code span.al { color: #95da4c; } /* Alert */
+code span.an { color: #3f8058; } /* Annotation */
+code span.at { color: #2980b9; } /* Attribute */
+code span.bn { color: #f67400; } /* BaseN */
+code span.bu { color: #7f8c8d; } /* BuiltIn */
+code span.cf { color: #fdbc4b; } /* ControlFlow */
+code span.ch { color: #3daee9; } /* Char */
+code span.cn { color: #27aeae; } /* Constant */
+code span.co { color: #7a7c7d; } /* Comment */
+code span.cv { color: #7f8c8d; } /* CommentVar */
+code span.do { color: #a43340; } /* Documentation */
+code span.dt { color: #2980b9; } /* DataType */
+code span.dv { color: #f67400; } /* DecVal */
+code span.er { color: #da4453; } /* Error */
+code span.ex { color: #0099ff; } /* Extension */
+code span.fl { color: #f67400; } /* Float */
+code span.fu { color: #8e44ad; } /* Function */
+code span.im { color: #27ae60; } /* Import */
+code span.in { color: #c45b00; } /* Information */
+code span.kw { color: #cfcfc2; } /* Keyword */
+code span.op { color: #cfcfc2; } /* Operator */
+code span.ot { color: #27ae60; } /* Other */
+code span.pp { color: #27ae60; } /* Preprocessor */
+code span.re { color: #2980b9; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #da4453; } /* SpecialString */
+code span.st { color: #f44f4f; } /* String */
+code span.va { color: #27aeae; } /* Variable */
+code span.vs { color: #da4453; } /* VerbatimString */
+code span.wa { color: #da4453; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Authoring Books with R Markdown</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="0.2" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.2</b> How to read this book</a></li>
+<li class="chapter" data-level="0.3" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.3</b> Online materials</a></li>
+<li class="chapter" data-level="0.4" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.4</b> Software needed</a></li>
+<li class="chapter" data-level="0.5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="part"><span><b>I Foundational ideas</b></span></li>
+<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a><ul>
+<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.1.1</b> The mean and variance of the Binomial distribution</a></li>
+<li class="chapter" data-level="1.1.2" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.1.2</b> What information does a probability distribution provide?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
+<li class="chapter" data-level="1.3" data-path="bivariatemultivariate-distributions.html"><a href="bivariatemultivariate-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Bivariate/multivariate distributions</a></li>
+<li class="chapter" data-level="1.4" data-path="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><a href="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Summary of useful R functions relating to univariate distributions</a></li>
+<li class="chapter" data-level="1.5" data-path="summary-of-random-variable-theory.html"><a href="summary-of-random-variable-theory.html"><i class="fa fa-check"></i><b>1.5</b> *Summary of random variable theory</a></li>
+<li class="chapter" data-level="1.6" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.6</b> Further reading</a></li>
+<li class="chapter" data-level="1.7" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.7</b> Exercises</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisespnorm"><i class="fa fa-check"></i><b>1.7.1</b> Practice using the <code>pnorm</code> function</a></li>
+<li class="chapter" data-level="1.7.2" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqnorm"><i class="fa fa-check"></i><b>1.7.2</b> Practice using the <code>qnorm</code> function</a></li>
+<li class="chapter" data-level="1.7.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqt"><i class="fa fa-check"></i><b>1.7.3</b> Practice using <code>qt</code></a></li>
+<li class="chapter" data-level="1.7.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.7.4</b> Maximum likelihood estimation 1</a></li>
+<li class="chapter" data-level="1.7.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.7.5</b> Maximum likelihood estimation 2</a></li>
+<li class="chapter" data-level="1.7.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.7.6</b> Generating bivariate data</a></li>
+<li class="chapter" data-level="1.7.7" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.7.7</b> Generating multivariate data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a><ul>
+<li class="chapter" data-level="2.1" data-path="the-central-limit-theorem-using-simulation.html"><a href="the-central-limit-theorem-using-simulation.html"><i class="fa fa-check"></i><b>2.1</b> The central limit theorem using simulation</a></li>
+<li class="chapter" data-level="2.2" data-path="three-examples-of-the-sampling-distribution.html"><a href="three-examples-of-the-sampling-distribution.html"><i class="fa fa-check"></i><b>2.2</b> Three examples of the sampling distribution</a></li>
+<li class="chapter" data-level="2.3" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.3</b> The confidence interval, and what it’s good for</a></li>
+<li class="chapter" data-level="2.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.4</b> Hypothesis testing: The one sample t-test</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-one-sample-t-test"><i class="fa fa-check"></i><b>2.4.1</b> The one-sample t-test</a></li>
+<li class="chapter" data-level="2.4.2" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-i-ii-error-and-power"><i class="fa fa-check"></i><b>2.4.2</b> Type I, II error, and power</a></li>
+<li class="chapter" data-level="2.4.3" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#how-to-compute-power-for-the-one-sample-t-test"><i class="fa fa-check"></i><b>2.4.3</b> How to compute power for the one-sample t-test</a></li>
+<li class="chapter" data-level="2.4.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-p-value"><i class="fa fa-check"></i><b>2.4.4</b> The p-value</a></li>
+<li class="chapter" data-level="2.4.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.4.5</b> Type M and S error in the face of low power</a></li>
+<li class="chapter" data-level="2.4.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.4.6</b> Searching for significance</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.5</b> The two-sample t-test vs. the paired t-test</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.5.1</b> Common mistakes involving the t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.6</b> Exercises</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.6.1</b> Part 1</a></li>
+<li class="chapter" data-level="2.6.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.6.2</b> Part 2</a></li>
+<li class="chapter" data-level="2.6.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.6.3</b> Part 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a><ul>
+<li class="chapter" data-level="3.1" data-path="from-the-t-test-to-the-linear-mixed-model.html"><a href="from-the-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.1</b> From the t-test to the linear (mixed) model</a></li>
+<li class="chapter" data-level="3.2" data-path="sum-coding.html"><a href="sum-coding.html"><i class="fa fa-check"></i><b>3.2</b> Sum coding</a></li>
+<li class="chapter" data-level="3.3" data-path="checking-model-assumptions.html"><a href="checking-model-assumptions.html"><i class="fa fa-check"></i><b>3.3</b> Checking model assumptions</a></li>
+<li class="chapter" data-level="3.4" data-path="from-the-paired-t-test-to-the-linear-mixed-model.html"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.4</b> From the paired t-test to the linear mixed model</a></li>
+<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
+<li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.7" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html"><i class="fa fa-check"></i><b>3.7</b> Exercises:</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.7.1</b> Part 1</a></li>
+<li class="chapter" data-level="3.7.2" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.7.2</b> Part 2</a></li>
+<li class="chapter" data-level="3.7.3" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.7.3</b> Part 3</a></li>
+<li class="chapter" data-level="3.7.4" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.7.4</b> Part 4</a></li>
+<li class="chapter" data-level="3.7.5" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.7.5</b> Part 5</a></li>
+<li class="chapter" data-level="3.7.6" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.7.6</b> Part 6</a></li>
+<li class="chapter" data-level="3.7.7" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.7.7</b> Part 7</a></li>
+<li class="chapter" data-level="3.7.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.7.8</b> Part 8</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a><ul>
+<li class="chapter" data-level="4.1" data-path="the-likelihood-ratio-test-the-theory.html"><a href="the-likelihood-ratio-test-the-theory.html"><i class="fa fa-check"></i><b>4.1</b> The likelihood ratio test: The theory</a></li>
+<li class="chapter" data-level="4.2" data-path="a-practical-example-using-simulated-data.html"><a href="a-practical-example-using-simulated-data.html"><i class="fa fa-check"></i><b>4.2</b> A practical example using simulated data</a></li>
+<li class="chapter" data-level="4.3" data-path="a-real-life-example-the-english-relative-clause-data.html"><a href="a-real-life-example-the-english-relative-clause-data.html"><i class="fa fa-check"></i><b>4.3</b> A real-life example: The English relative clause data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>5</b> Using simulation to understand your model</a><ul>
+<li class="chapter" data-level="5.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>5.1</b> A reminder: The maximal linear mixed model</a></li>
+<li class="chapter" data-level="5.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>5.2</b> Obtain estimates from a previous study</a></li>
+<li class="chapter" data-level="5.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>5.3</b> Decide on a range of plausible values of the effect size</a></li>
+<li class="chapter" data-level="5.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>5.4</b> Extract parameter estimates</a></li>
+<li class="chapter" data-level="5.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>5.5</b> Define a function for generating data</a></li>
+<li class="chapter" data-level="5.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>5.6</b> Repeated generation of data to compute power</a></li>
+<li class="chapter" data-level="5.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>5.7</b> What you can now do</a></li>
+<li class="chapter" data-level="5.8" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>5.8</b> Exercises</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>5.8.1</b> Part 1</a></li>
+<li class="chapter" data-level="5.8.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>5.8.2</b> Part 2</a></li>
+<li class="chapter" data-level="5.8.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>5.8.3</b> Part 3</a></li>
+<li class="chapter" data-level="5.8.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>5.8.4</b> Part 4</a></li>
+<li class="chapter" data-level="5.8.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>5.8.5</b> Part 5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>6</b> Important distributions</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="the-likelihood-ratio-test-the-theory" class="section level2">
+<h2><span class="header-section-number">4.1</span> The likelihood ratio test: The theory</h2>
+<p>Suppose that <span class="math inline">\(X_1,\dots, X_n\)</span> are independent and normally distributed with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span> (assume for simplicity that <span class="math inline">\(\sigma\)</span> is known).</p>
+<p>Let the null hypothesis be <span class="math inline">\(H_0: \mu=\mu_0\)</span> and the alternative be <span class="math inline">\(H_1: \mu\neq \mu_0\)</span>. Here, <span class="math inline">\(\mu_0\)</span> is a number, such as <span class="math inline">\(0\)</span>.</p>
+<p>The likelihood of the data <span class="math inline">\(y\)</span> can be computed under the null model, in which <span class="math inline">\(\mu=\mu_0\)</span>, and under the alternative model, in which <span class="math inline">\(\mu\)</span> has some specific alternative value. To make this concrete, imagine 10 data points being generated from a Normal(0,1).</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>)</a></code></pre></div>
+<p>We can compute the joint likelihood under a null hypothesis that <span class="math inline">\(\mu=0\)</span>:</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1">likNULL &lt;-<span class="st"> </span><span class="kw">prod</span>(<span class="kw">dnorm</span>(y, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>))</a></code></pre></div>
+<p>On the log scale, we would need to add the log likelihoods of each data point:</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1">loglikNULL &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">dnorm</span>(y, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb256-2" data-line-number="2">  <span class="dt">log =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb256-3" data-line-number="3">loglikNULL</a></code></pre></div>
+<pre><code>## [1] -11.6</code></pre>
+<p>Similarly, we can compute the log likelihood with <span class="math inline">\(\mu\)</span> equal to the maximum likelihood estimate of <span class="math inline">\(\mu\)</span>, the sample mean.</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" data-line-number="1">loglikALT &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">dnorm</span>(y, <span class="dt">mean =</span> <span class="kw">mean</span>(y), </a>
+<a class="sourceLine" id="cb258-2" data-line-number="2">  <span class="dt">sd =</span> <span class="dv">1</span>, <span class="dt">log =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb258-3" data-line-number="3">loglikALT</a></code></pre></div>
+<pre><code>## [1] -11.59</code></pre>
+<p>Essentially, the likelihood ratio test compares the ratio of likelihoods of the two models; on the log scale, the difference in log likelihood is taken.
+The likelihood ratio test then chooses the model with the higher log likelihood, provided that the higher likelihood is high enough (we will just make this more precise).</p>
+<p>One can specify the test in general terms as follows. Suppose that the likelihood is with respect to some parameter <span class="math inline">\(\theta\)</span>. We can evaluate the likelihood at <span class="math inline">\(\mu_0\)</span>, the null hypothesis value of the parameter, and evaluate the likelihood using the maximum likelihood estimate <span class="math inline">\(\hat\theta\)</span> of the parameter. The likelihood ratio can then be written as follows:</p>
+<p><span class="math display">\[\begin{equation}
+\Lambda = \frac{max_{\theta\in \omega_0}(lik(\theta))}{max_{\theta\in \omega_1)}(lik(\theta))}
+\end{equation}\]</span></p>
+<p>where, <span class="math inline">\(\omega_0=\{\mu_0\}\)</span> and <span class="math inline">\(\omega_1=\{\forall \mu \mid \mu\neq \mu_0\}\)</span>. The function max just selects the maximum value of any choices of parameter values; in the case of the null hypothesis there is only one value, <span class="math inline">\(\mu_0\)</span>. In the case of the alternative model, the maximum likelihood estimate <span class="math inline">\(\hat\theta\)</span> is the maximum value.</p>
+<p>Now, assuming that the data are coming from a normal distribution, the numerator of the likelihood ratio statistic is:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{1}{(\sigma\sqrt{2\pi})^n} 
+           exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)
+\end{equation}\]</span></p>
+<p>For the denominator, the MLE <span class="math inline">\(\bar{X}\)</span> is taken as <span class="math inline">\(\mu\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+\frac{1}{(\sigma\sqrt{2\pi})^n} exp \left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2 \right)
+\end{equation}\]</span></p>
+<p>The likelihood ratio statistic is then:</p>
+<p><span class="math display">\[\begin{equation}
+\Lambda = 
+\frac{\frac{1}{(\sigma\sqrt{2\pi})^n} 
+           exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)}{\frac{1}{(\sigma\sqrt{2\pi})^n} 
+           exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2  \right)}
+\end{equation}\]</span></p>
+<p>Canceling out common terms:</p>
+<p><span class="math display">\[\begin{equation}
+\Lambda = 
+\frac{exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)}{
+        exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2  \right)}
+\end{equation}\]</span></p>
+<p>Taking logs:</p>
+<p><span class="math display">\[\begin{equation}
+\begin{split}
+\log \Lambda =&amp; 
+\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)-\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2  \right)\\
+=&amp; -\frac{1}{2\sigma^2} \left( \sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2 \right)\\
+\end{split}
+\end{equation}\]</span></p>
+<p>Now, it is a standard algebraic trick to rewrite <span class="math inline">\(\sum_{i=1}^n (X_i -\mu_0)^2\)</span> as a sum of two terms:</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i=1}^n (X_i -\mu_0)^2 = \sum_{i=1}^n (X_i - \bar{X})^2 + n(\bar{X} - \mu_0)^2 
+\end{equation}\]</span></p>
+<p>If we rearrange terms, we obtain:</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i=1}^n (X_i -\mu_0)^2 - \sum_{i=1}^n (X_i - \bar{X})^2 = n(\bar{X} - \mu_0)^2 
+\end{equation}\]</span></p>
+<p>Now, we just established above that <span class="math inline">\(\log \Lambda\)</span> is:</p>
+<p><span class="math display">\[\begin{equation}
+\log \Lambda= -\frac{1}{2\sigma^2} \left( \sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2 \right)
+\end{equation}\]</span></p>
+<p>Consider the term in the brackets:</p>
+<p><span class="math display">\[\begin{equation}
+(\sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2)
+\end{equation}\]</span></p>
+<p>This can be rewritten as:</p>
+<p><span class="math display">\[\begin{equation}
+n(\bar{X} - \mu_0)^2
+\end{equation}\]</span></p>
+<p>Rewriting in this way gives us:</p>
+<p><span class="math display">\[\begin{equation}
+\ell = -\frac{1}{2\sigma^2}   n(\bar{X} - \mu_0)^2 
+\end{equation}\]</span></p>
+<p>Rearranging terms:</p>
+<p><span class="math display">\[\begin{equation}
+-2 \ell =    \frac{n(\bar{X} - \mu_0)^2 }{\sigma^2}
+\end{equation}\]</span></p>
+<p>Or even more transparently:</p>
+<p><span class="math display">\[\begin{equation}
+-2 \ell =    \frac{(\bar{X} - \mu_0)^2 }{\frac{\sigma^2}{n}}
+\end{equation}\]</span></p>
+<p>This should remind you of the t-test! Basically, just like in the t-test, what this is saying is that we reject the null when <span class="math inline">\(\mid \bar{X} - \mu_0\mid\)</span>, or negative two times the difference in log likelihood, is large!</p>
+<p>Now we will define what it means for <span class="math inline">\(-2\ell\)</span> to be large. We will define the <em>likelihood ratio test statistic</em> as follows. Here, <span class="math inline">\(Lik(\theta)\)</span> refers to the likelihood given some value <span class="math inline">\(\theta\)</span> for the parameter, and
+<span class="math inline">\(logLik(\theta)\)</span> refers to the log likelihood.</p>
+<p><span class="math display">\[\begin{equation}
+\begin{split}
+\Lambda =&amp; -2\times (Lik(\theta_0)/Lik(\theta_1)) \\
+\log \Lambda=&amp; -2\times \{logLik(\theta_0)-logLik(\theta_1)\}\\
+\end{split}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_0\)</span> are the estimates of <span class="math inline">\(\theta\)</span> under the alternative and null hypotheses, respectively. The likelihood ratio test rejects <span class="math inline">\(H_0\)</span> if <span class="math inline">\(\log \Lambda\)</span> is sufficiently large. As the sample size approaches infinity, <span class="math inline">\(\log \Lambda\)</span> approaches the chi-squared distribution:</p>
+<p><span class="math display">\[\begin{equation}
+\log \Lambda \rightarrow \chi_r^2  \hbox{ as }  n \rightarrow \infty
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(r\)</span> is called the degrees of freedom and is the difference in the number of parameters under the null and alternative hypotheses.</p>
+<p>The above result is called <em>Wilks’ theorem</em>. The proof of Wilks’ theorem is fairly involved but you can find it in Lehmann’s textbook <em>Testing Statistical Hypotheses</em>.</p>
+<p>Note that sometimes you will see the form:</p>
+<p><span class="math display">\[\begin{equation}
+ \log \Lambda = 2 \{\ell(\theta_1) - \ell(\theta_0)\}
+\end{equation}\]</span></p>
+<p>It should be clear that both statements are saying the same thing; in the second case, we are just subtracting the null hypothesis log likelihood from the alternative hypothesis log likelihood, so the negative sign disappears.</p>
+<p>That’s the theory. Let’s see how the likelihood ratio test works for (a) simulated data, and (b) our running example, the English relative clause data from <span class="citation">Grodner and Gibson (<a href="#ref-grodner">2005</a>)</span>.</p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-grodner">
+<p>Grodner, Daniel, and Edward Gibson. 2005. “Consequences of the Serial Nature of Linguistic Input.” <em>Cognitive Science</em> 29: 261–90.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="hypothesis-testing-using-the-likelihood-ratio-test.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-practical-example-using-simulated-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/04-HypTest.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
