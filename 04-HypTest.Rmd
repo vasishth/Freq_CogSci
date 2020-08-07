@@ -254,12 +254,14 @@ Removing the brackets gives us:
 
 This yields the equation:
 
-\begin{equation}
+\begin{equation} \label{eq:nullhypsumcontrast}
 2\beta_1= 0
 \end{equation}
 
 
 Dividing both sides of the equation by 2, we get the null hypothesis that $\beta_1=0$.
+
+Incidentally, if we had rescaled the contrast coding to be not $\pm 1$ but $\pm 1/2$, the parameter $\beta_1$ would represent exactly the difference between the two means, and null hypothesis in equation \@ref(eq:nullhypsumcontrast) would have come out to be  $\beta_1= 0$. This is why it is sometimes better to recode the contrasts as $\pm 1/2$ rather than $\pm 1$. See @SchadEtAlcontrasts for details; we will discuss this in the contrast coding chapter as well.
 
 Let's load the data, set up the contrast coding, and fit the null versus the alternative models. We will fit varying intercept and varying slopes for subject and item, without correlations for items. We don't attempt to fit the so-called "maximal model" here with respect to the items random effects because we would get a singularity in the variance covariance matrix. 
 
@@ -294,7 +296,7 @@ summary(m1)$coefficients
 
 The more general method for hypothesis testing is the likelihood ratio test shown above. 
 
-One can also use the likelihood ratio test to evaluate whether a variance compoonent should be included or not. For example, is the correlation parameter justified for the subjects random effects? One can test this in the following way:
+One can also use the likelihood ratio test to evaluate whether a variance component should be included or not. For example, is the correlation parameter justified for the subjects random effects? Recall that we had a correlation of 0.58. Is this statistically significant? One can test this in the following way:
 
 ```{r}
 m1<-lmer(logrt~1 + so + (1+so|subject)+(1+so||item),gg05e1)
@@ -302,5 +304,74 @@ m1NoCorr<-lmer(logrt~1 + so + (1+so||subject)+(1+so||item),gg05e1)
 anova(m1,m1NoCorr)
 ```
 
-The test indicates that we can reject the null hypothesis that the correlation parameter is 0.  
+The test indicates that we can reject the null hypothesis that the correlation parameter is 0.  We will return to this parameter in the chapter on simulation.
+
+## Exercises {#sec:HypTestExercises}
+
+### Chinese relative clauses {#sec:HypTestExercisesChinese}
+
+Load the following two data-sets:
+
+```{r}
+gibsonwu<-read.table("data/gibsonwucrit.txt",header=TRUE)
+gibsonwu2<-read.table("data/gibsonwu2012datarepeat.txt",header=TRUE)
+```
+
+The data are taken from two oexperiments that investigate (inter alia) the effect of relative clause type on reading time in Chinese. The data are from @gibsonwu and @VasishthetalPLoSOne2013 respectively. The second data-set is a direct replication attempt of the first.
+
+Chinese relative clauses are interesting theoretically because they are prenominal: the relative clause appears before the head noun. Figure \ref{fig:chineserc} shows an example.
+
+```{r chinesercfig,fig.cap="\\label{fig:chineserc} An example of subjects vs. object relative clauses in Chinese."}
+knitr::include_graphics("figures/chineserc.png")
+```
+
+The consequence of Chinese relative clauses being prenominal  is that the distance between the gap in relative clause and the head noun is larger in subject relatives than object relatives (see Figure \ref{fig:chineserc}). @hsiao03 have claimed that the larger distance in subject relatives leads to longer reading time at the head noun. Under this view, the prediction is that subject relatives are harder to process than object relatives. If this is true, this is interesting because in most other languages that have been studied, subject relatives are easier to process than object relatives; so Chinese will be a very unusual exception cross-linguistically.
+
+The data provided are for the critical region (the head noun). The experiment method is self-paced reading, so we have reading times in milliseconds. 
+
+The research  question is whether the difference in reading times between object and subject relative clauses is negative. For both data-sets, investigate this question by  (a) fitting a paired t-test (by-subjects and by items), (b) fitting the most complex linear mixed model you  can to the data and then interpreting the t-value, and (c) the likelihood ratio test.  What can we conclude  about the research question?
+
+### Agreement attraction in comprehension {#sec:HypTestExerciseAgrmt}
+
+Load the following data:
+
+```{r}
+datE1<-read.table("data/dillonE1.txt",header=TRUE)
+```
+
+The data are taken from an experiment that investigate (inter alia) the effect of number similarity between a noun and the auxiliary verb in sentences like the following. There are two levels to a factor called Int(erference): low and high. 
+
+- low: The key to the cabinet *are* on the table
+- high: The key to the *cabinets* *are* on the table
+
+Here, in the condition marked *high*, the auxiliary verb *are* is predicted to be read faster than in the condition marked *low*, because the plural marking on the noun *cabinets* leads the reader to think that the sentence is grammatical. (Note that both sentences are ungrammatical.) This phenomenon, where the high condition is read faster than the low condition, is called **agreement attraction**.
+
+The data provided are for the critical region (the auxiliary verb *are*). The experiment method is eyetracking; we have total reading times in milliseconds. 
+
+The research  question is whether the difference in reading times between high and low conditions is negative. 
+
+- First, figure out  which linear mixed model is  appropriate for these data (varying intercepts only? varying intercepts and slopes? with or without correlations?).
+- Then, carry out a statistical test using (a) the paired t-test (using the t.test function), (b) the t-test of the linear mixed model, and (c) the likelihood ratio test. What is your conclusion? Is there evidence for agreement attraction in the data? 
+
+
+### The grammaticality illusion {#sec:HypTestExerciseGramCE}
+
+Load the following data-sets:
+
+```{r}
+english<-read.table("data/embeddingenglish.txt",header=TRUE)
+dutch<-read.table("data/embeddingdutch.txt",header=TRUE)
+```
+
+In an offline accuracy rating study on English double center-embedding constructions, @gibsonthomas99 found that grammatical constructions (e.g., example a below) were no less acceptable than ungrammatical constructions (e.g., example b) where a middle verb phrase (e.g., was cleaning every week) was missing.
+
+(a) The apartment that the maid who the service had sent over was cleaning every week was well decorated. 
+
+(b) *The apartment that the maid who the service had sent over --- was well decorated
+
+Based on these results from English, @gibsonthomas99 proposed that working-memory overload leads the comprehender to forget the prediction of the upcoming verb phrase (VP), which reduces working-memory load. This came to be known as the *VP-forgetting hypothesis*. The prediction is that in the word immediately following  the final verb, the grammatical condition (which is coded as +1 in the data-frames) should be harder to read than the ungrammatical condition (which is coded as -1). 
+
+The data provided above test this hypothesis using self-paced reading for English [@VSLK08], and for Dutch [@FrankEtAl2015]. The data provided are for the critical region (the noun phrase, labeled NP1, following the final verb).  We have reading times in log milliseconds. 
+
+Is there support for the VP-forgetting hypothesis cross-linguistically, from English and Dutch?
 
