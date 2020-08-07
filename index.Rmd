@@ -18,12 +18,12 @@ github-repo: rstudio/bookdown
 cover-image: images/temporarycover.jpg
 output:
   bookdown::gitbook:
-    highlight: breezedark
+    highlight: tango
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(tidy.opts=list(width.cutoff=40),
+opts_chunk$set(tidy.opts=list(width.cutoff=50),
                tidy=TRUE)
 
 options(
