@@ -898,15 +898,15 @@ so            0.0620     0.0247    2.51
 
 The correlations (0.58 and 1.00) you see in the model output below are the correlations between the varying intercepts and slopes for subjects and for items. Notice that the variance covariance matrix for items is degenerate: its correlation is 1. This matrix cannot be inverted. 
 
-When the correlation is +1 or -1 or near these numbers, this means that the optimizer in lme4 is unable to estimate the correlation parameter, due to there not being enough data. If you are in such a situation, you are better off not trying to estimate this parameter with the data you have, and instead fitting one of the simpler models. For a different perspective, see the paper by @barr2013, and the papers by @BatesEtAlParsimonious, and @hannesBEAP.
+When the correlation is +1 or -1 or near these numbers, this means that the optimizer in lme4 is unable to estimate the correlation parameter, usually due to there not being enough data. If you are in such a situation, you are better off not trying to estimate this parameter with the data you have, and instead fitting one of the simpler models. We will return to this point when discussing model selection.  For further discussion, see @barr2013,  @BatesEtAlParsimonious, and @hannesBEAP.
 
 
 #### Formal statement of varying intercepts and varying slopes linear mixed model with correlation
 
-As usual, i indexes subjects, j items. The only new thing in this model is the item-level effects, and the specification of the variance-covariance matrix for subjects and items, in order to include the correlation parameters.
+As usual, i indexes subjects, j items. The vector `so` is the sum-coded factor levels: +1 for object relatives and -1 for subject relatives. The only new thing in this model is the item-level effects, and the specification of the variance-covariance matrix for subjects and items, in order to include the correlation parameters.
 
 \begin{equation}
-y_{ij} = \alpha + u_{0i} + w_{0j} + (\beta + u_{1i} + w_{1j}) * so_{ij} + \varepsilon_{ij}
+y_{ij} = \alpha + u_{0i} + w_{0j} + (\beta + u_{1i} + w_{1j}) \times so_{ij} + \varepsilon_{ij}
 \end{equation}
 
 where $\varepsilon_{ij} \sim Normal(0,\sigma)$ and 
@@ -964,6 +964,14 @@ One can visualize the correlation between intercepts and slopes by subjects. The
 print(dotplot(ranef(m3.lmer,condVar=TRUE))$subject)
 ```
 
+The correlation pattern is easier to see if we plot the slope adjustments against the intercept adjustments.
+
+```{r}
+plot(ranef(m3.lmer)$subject[,1],ranef(m3.lmer)$subject[,2],
+xlab="Intercept adjustments (subject)",
+ylab="Slope adjustments")
+```
+
 When we talk about hypothesis testing, we will look at what inferences we can draw from this correlation.
 
 The dotplot showing the item-level effects shows a perfect correlation between intercept and slope adjustments, but as mentioned above these are from a degenerate variance covariance matrix and not meaningful.
@@ -976,10 +984,10 @@ print(dotplot(ranef(m3.lmer,condVar=TRUE))$item)
 ## Shrinkage in linear mixed models
 
 The estimate of the effect by participant is smaller than when we fit a separate linear model to the subject's data. 
-This is called shrinkage in linear mixed models: the individual level estimates are shunk towards the mean slope.
-The less data we have from a given subject, the more the shrinkage.
+This is called shrinkage in linear mixed models: the individual level estimates are shrunk towards the mean slope.
+The less data we have from a given subject, the greater the shrinkage.
 
-```{r}
+```{r shrinkage,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "The figures show linear model fits (the grand mean estimates) for three subjects; shown are the simple linear model fit on all the data (gray line), the lmList model fit to the individual subject's data (black line), and the linear mixed model fit (the broken line). In all three subjects' models, the linear mixed model estimates are shrunk towards the grand mean (gray line) estimates.", tidy = FALSE}
 op<-par(mfrow=c(1,3),pty="s")
 coefs<-coef(lmlist.fm1)
 intercepts<-coefs[1]
@@ -1036,7 +1044,7 @@ abline(lm(log(rawRT)~so,gg05e1),lwd=3,col="gray")
 
 #### Shrinkage in action: when data are missing
 
-Let's randomly delete some data from one subject:
+The importance and value of shrinkage becomes clear once we simulate a situation where there is some missing data. Missingness can happen in experiments, either due to lost measurements (arising from computer error or programming errors), or some other reason.  To see what happens when we have missing data, let's randomly delete some data from one subject. We will randomly delete 50% of subject 37's data:
 
 ```{r}
 set.seed(4321)
@@ -1044,8 +1052,15 @@ set.seed(4321)
 rand<-rbinom(1,n=16,prob=0.5)
 ```
 
+Here are subject 37's reading times (16 data points):
+
 ```{r}
 gg05e1[which(gg05e1$subject==37),]$rawRT
+```
+
+Now, we randomly delete half the data:
+
+```{r}
 gg05e1$deletedRT<-gg05e1$rawRT
 gg05e1[which(gg05e1$subject==37),]$deletedRT<-
   ifelse(rand,NA,
@@ -1053,14 +1068,14 @@ gg05e1[which(gg05e1$subject==37),]$deletedRT<-
 ```
 
 
-Now subject 37's estimates are going to be pretty wild:
+Now subject 37's estimates are going to be pretty wild, because they are based on much less data (even one extreme value can strongly influence the mean):
 
 
 ```{r}
 subset(gg05e1,subject==37)$deletedRT
 ```
 
-```{r}
+```{r echo=FALSE}
 ## original no pooling estimate:
 lmList.fm1_old<-lmList(log(rawRT)~so|subject,gg05e1)
 coefs_old<-coef(lmList.fm1_old)
@@ -1072,7 +1087,7 @@ intercepts_old$intercept[37]
 slopes_old$so[37]
 ```
 
-```{r}
+```{r echo=FALSE}
 ## on deleted data:
 lmList.fm1_deleted<-lmList(log(deletedRT)~so|subject,gg05e1)
 coefs<-coef(lmList.fm1_deleted)
@@ -1086,7 +1101,7 @@ slopes$so[37]
 
 Now fit the hierarchical model and examine subject 37's estimates on undeleted vs deleted data:
 
-```{r echo=FALSE}
+```{r shrinkage2,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "The figures show linear model fits (the grand mean estimates) for subject 37. When using lmList, deleting data leads to very different estimates; but using lmer, deleting half the data from this subject hardly affects the individual subject's estimates.", tidy = FALSE}
 plot(jitter(gg05e1$so,.5),
         log(gg05e1$rawRT),axes=FALSE,
         xlab="Condition",ylab="rt (log ms)",
@@ -1118,25 +1133,28 @@ abline(b0+u0[37],b1+u1[37],lty=2,col="gray",lwd=1)
 abline(b0_old+u0_old[37],b1_old+u1_old[37],lty=2,col="gray",lwd=3)
 
 ## complete pooling:
-abline(lm(log(rawRT)~so,gg05e1),lwd=3,col="red")
+abline(lm(log(rawRT)~so,gg05e1),lwd=3,col="gray")
 
 legend(x=-1,y=10,
        lty=c(1,1,2,2,1),
        lwd=c(1,4,1,2,3),
-       col=c("black","black","red","red","orange"),
-       legend=c("lmList (no pooling) deleted data",
-                "lmList (no pooling) original data",
-                "lmer (partial pooling) deleted data",
-                "lmer (partial pooling) original data",
-                "linear model (complete pooling) original data"))
+       col=c("black","black","gray","gray","gray"),
+       legend=c("lmList  deleted data",
+                "lmList  original data",
+                "lmer  deleted data",
+                "lmer  original data",
+                "linear model original data"))
 
 ```
 
-What we see here is that the estimates from the hierarchical model are barely affected by the missingness, but the estimates from the no-pooling model are heavily affected.
-This means that linear mixed models will give you more robust estimates (think Type M error!) compared to no pooling models.
-This is one reason why linear mixed models are such a big deal. 
+What we see here is that the estimates from the hierarchical model are barely affected by the missingness, but the estimates from the lmList model are heavily affected.
+This means that linear mixed models will give you more robust estimates (think Type M error!) compared to no pooling models. This property of shrinkage is one reason why linear mixed models are so important in cognitive science. 
 
-## Exercises: {#sec:LMExercises}
+## Summary 
+
+
+
+## Exercises {#sec:LMExercises}
 
 Download the data-set E1\_data.csv. Then run the following commands to load the `lme4` library and to set up your data for analysis:
 
@@ -1155,13 +1173,13 @@ crit<-subset(dat,Position==word_n)
 
 The data consist of a repeated measures experiment comparing two conditions which are labeled Type 1 and Type 2. The column Sub refers to subject id, and the column ID refers to item id. RT refers to reading time in seconds (we have converted it above to milliseconds); NA is missing data. You can ignore the other columns. This is a standard Latin square design. We will work with the data frame `crit` below.
 
-### Part 1 {#sec:LMExercisesPart1}
+### By-subjects t-test {#sec:LMExercisesPart1}
 
 Using RT as a dependent variable, carry out the appropriate by-subjects t-test to evaluate the null hypothesis that there is no difference between the conditions labeled Type 1 and 2. Write down all the R commands needed to do the appropriate t-test, and the resulting t-value and p-value. State whether we can reject the null hypothesis given the results of the t-test; explain why.
 
-### Part 2 {#sec:LMExercisesPart2}
+### Fitting a linear mixed model  {#sec:LMExercisesPart2}
 
-Now,  using the data-frame called crit above as the data frame, fit a linear mixed model (called M0) with the column called Type coded as  sum contrasts.  
+Now,  using the data-frame called `crit` above as the data-frame, fit a linear mixed model (called M0) with the column called Type coded as  sum contrasts.  
 
 ```{r echo=FALSE}
 crit$Type<-factor(crit$Type)
@@ -1170,7 +1188,7 @@ contrasts(crit$Type)<-contr.sum(2)
 
 Assume varying intercepts for subjects and varying intercepts for items (varying intercepts are sometimes called random intercepts). Write down the linear mixed models command, and  write down the fixed-effects estimates (Intercept and slope) along with their standard errors. State whether we can reject the null hypothesis given the results of the t-value shown in the linear mixed model output; explain why.
 
-### Part 3 {#sec:LMExercisesPart3}
+### t-test vs. linear mixed model {#sec:LMExercisesPart3}
 
  Why do the results of the t-test and the linear mixed model M0 differ? 
 
@@ -1188,14 +1206,15 @@ M0<-lmer(RT~SO+(1|Sub)+(1|ID),
 #summary(M0)
 ```
 
+
+### Power calculation using power.t.test {#sec:LMExercisesPart4}
+
 ```{r echo=FALSE}
 d<-subset(crit_subj,Type==1)$RT-subset(crit_subj,Type==2)$RT
 stddev<-sd(d)
 n<-length(d)
 SE<-round(stddev/sqrt(n))
 ```
-
-### Part 4 {#sec:LMExercisesPart4}
 
 The researcher wants to achieve 80% statistical power in a future study. Based on the available data above, she determines that the standard error (note: not the standard deviation!) of the difference in means between the conditions Type 1 and Type 2 is `r SE`.  She has reason to believe that the true  difference in means is 30 ms. What is the number of participants (to the nearest whole number) needed to  achieve approximately 80% power? Use the power.t.test function to compute your answer. Write down the `power.t.test` function specification you used, as well as the number of participants needed, based on the output of the power.t.test function. 
 
@@ -1209,7 +1228,7 @@ power.t.test(delta = 30,
              alternative = "two.sided")$n
 ```
 
-### Part 5 {#sec:LMExercisesPart5}
+### Residuals {#sec:LMExercisesPart5}
 
 The plot below shows the distribution of the residuals from model M0 plotted against the standard normal distribution with mean 0 and  standard  deviation 1. Explain what the plot tells us  about one of the model assumptions of the linear mixed model M0 that you fit earlier.
 
@@ -1220,11 +1239,11 @@ library(car)
 qqPlot(residuals(M0))
 ```
 
-### Part 6 {#sec:LMExercisesPart6}
+### Understanding contrast coding {#sec:LMExercisesPart6}
 
 Using only your estimates of the intercept and the slope in model M0's fixed effects output, write down the mean of the  condition labeled Type 1 in the data, and the mean of the condition labeled Type 2.
 
-### Part 7 {#sec:LMExercisesPart7}
+### Understanding  the  fixed-effects output {#sec:LMExercisesPart7}
 
 Suppose that the model M0's output for the fixed effects analysis were as follows. SO is a sum-coded contrast specification for the conditions labeled Type.
 
@@ -1240,7 +1259,7 @@ results
 
 What is the value of the standard error of the slope (SO), which is labeled NA above?
 
-### Part 8 {#sec:LMExercisesPart8}
+### Understanding the null hypothesis test {#sec:LMExercisesPart8}
 
 A researcher fits a linear mixed model to compare the reading times between two conditions (a) and (b), just like in the  above study. Her hypothesis is that the mean for condition (a) is larger than the  mean for (b). She observes that condition a has sample mean 500 ms, and condition (b) has  sample mean 450 ms.  She also establishes from the linear mixed model that the t-value is 1.94. The approximate p-value associated with  this t-value is `r round(2*pnorm(-1.94),3)`. Answer the following: (A) Do we have evidence against the null hypothesis and (B) do we have evidence for the particular research hypothesis that the researcher has? 
 
