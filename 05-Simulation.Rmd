@@ -9,10 +9,12 @@ Let's think about how to simulate data given a Latin-square $2$ condition repeat
 
 Recall the structure of the linear mixed model that can be used to fit the @grodner data. We will discuss the so-called maximal model here---varying intercepts and slopes for subject and for item, with correlations---because that is the most general case.
 
-In the model specification below, $i$ indexes subjects, $j$ items. Every row in the data-frame can be uniquely identified by the subject and item id, because this is a Latin square design and each subject sees exactly one instance of each item in a particular condition.
+In the model specification below, $i$ indexes subjects, $j$ items. The vector `so` has the sum contrast coding as usual: object relatives are coded as +1/2 and subject relatives as -1/2. We use this coding instead of $\pm 1$ as before, because now the slope will reflect the effect size rather than two times the effect size (see the hypothesis testing chapter).
+
+Every row in the data-frame can be uniquely identified by the subject and item id, because this is a Latin square design and each subject sees exactly one instance of each item in a particular condition.
 
 \begin{equation}
-y_{ij} = \beta_0 + u_{0i} + w_{0j} + (\beta_1 + u_{1i} + w_{1j}) * so_{ij} + \varepsilon_{ij}
+y_{ij} = \beta_0 + u_{0i} + w_{0j} + (\beta_1 + u_{1i} + w_{1j}) \times so_{ij} + \varepsilon_{ij}
 \end{equation}
 
 where $\varepsilon_{ij} \sim Normal(0,\sigma)$ and 
@@ -61,6 +63,7 @@ where $\varepsilon_{ij} \sim Normal(0,\sigma)$ and
 \right)
 \end{equation}
 
+$\beta_0$ and $\beta_1$ are the intercept and slope, representing the grand mean and the deviation from the grand mean in each condition. $u$ are the subject level adjustments, and $w$ the item level adjustments to the intercept and slope.  
 The above mathematical model expresses a generative process. In order to produce simulated data using the above process, we have to decide on some parameter values. We do this by estimating the parameters from the @grodner study. 
 
 ## Obtain estimates from a previous study
@@ -69,6 +72,7 @@ First we load and prepare the relative clause data for data analysis.
 
 ```{r}
 gg05e1<-read.table("data/grodnergibsonE1crit.txt",header=TRUE)
+
 
 gg05e1$so <- ifelse(gg05e1$condition=="objgap",1/2,-1/2)
 gg05e1$logrt<-log(gg05e1$rawRT)
@@ -81,7 +85,9 @@ library(lme4)
 m<-lmer(logrt ~ so + 
           (1+so|subject) + 
           (1+so|item), 
-        data=gg05e1)
+        data=gg05e1,
+        ## "switch off" warnings:
+        control=lmerControl(calc.derivs=FALSE))
 ```
 
 The model summary shows that we can reject the null hypothesis of no difference in relative clauses:
@@ -96,12 +102,14 @@ What we are doing below will *look* like post-hoc power because we are using exi
 
 ## Decide on a range of plausible values of the effect size
 
-Notice that the effect in milliseconds is relatively large:
+Notice that the effect in milliseconds is relatively large, given the estimates from similar phenomena in reading studies in psycholinguistics [@JaegerEngelmannVasishth2017]:
 
 ```{r}
 b0<-summary(m)$coefficients[1,1]
 b1<-summary(m)$coefficients[2,1]
-## effect estimate:
+## effect estimate in log ms:
+b1
+## effect estimate in ms:
 exp(b0+b1*(0.5))-exp(b0+b1*(-0.5))
 ```
 
@@ -128,21 +136,21 @@ On the ms scale we see that that's a *lot* of uncertainty in the effect size! Wi
 We can take the above uncertainty of the $\hat\beta_1$ estimator into account (on the log ms scale---remember that the model is based on log rt) by assuming that the effect has the following uncertainty on the log ms scale: 
 
 \begin{equation}
-\hbox{effect } \sim Normal(0.12,0.05)
+\beta_1 \sim Normal(0.12,0.05)
 \end{equation}
 
 Here, we are doing something that is, strictly speaking, Bayesian in thinking. We are describing our uncertainty about the true effect from the best estimate we have---existing data. To talk about the uncertainty, we are (ab)using the 95\% confidence interval (treating it like its telling us the range of plausible values). Recall that strictly speaking, in the frequentist paradigm, one cannot talk about the probability distribution of the effect size---in frequentist theory, the true value of the parameter is a point value, it has no distribution. The range $\hat\beta_1 \pm 2\times SE$ refers to the estimated mean of the sampling distribution of the sample means, and to the standard deviation of this sampling distribution. Thus, strictly speaking, this range does not reflect our uncertainty about the true parameter's value. Having said this, we are going to use the effect estimates from our model fit as a starting point for our power analysis because this  is the best information we have so far about the English relative clause design.
 
 ## Extract parameter estimates
 
-Next, in preparation for ther power analysis, we extract all the parameter estimates from the model we have fit above. The parameters are:
+Next, in preparation for the power analysis, we extract all the parameter estimates from the model we have fit above. The parameters are:
 
 - The two fixed effects (the $\beta$ parameters)
 - The residuals' standard deviation
 - The standard deviations of the subject intercept and slope adjustments, and the corresponding correlation matrix.
 - The standard deviations of the item intercept and slope adjustments, and the corresponding correlation matrix.
 
-The correlation matrices and the subject/item random effects standard deviations are used to assemble the variance covariance matrix; this is done using the `sdcor2cov` function from the `SIN` package. For the variance covariance matrix for items random effects, we use an intermediate value of 0.5 for the correlation parameter because the linear mixed model was unable to estimate the parameter. 
+The correlation matrices and the subject/item random effects standard deviations are used to assemble the variance covariance matrix; this is done using the `sdcor2cov` function from the `SIN` package; recall the discussion in chapter 1. For the variance covariance matrix for items random effects, we use an intermediate value of 0.5 for the correlation parameter because the linear mixed model was unable to estimate the parameter. 
 
 ```{r}
 ## extract parameter estimates:
@@ -152,7 +160,8 @@ subj_ranefsd<-round(attr(VarCorr(m)$subject,"stddev"),4)
 subj_ranefcorr<-round(attr(VarCorr(m)$subject,"corr"),1)
 
 ## assemble variance-covariance matrix for subjects:
-Sigma_u<-SIN::sdcor2cov(stddev=subj_ranefsd,corr=subj_ranefcorr)
+Sigma_u<-SIN::sdcor2cov(stddev=subj_ranefsd,
+                        corr=subj_ranefcorr)
 ## check that the matrix can be inverted:
 solve(Sigma_u)
 
@@ -161,12 +170,15 @@ item_ranefcorr<-round(attr(VarCorr(m)$item,"corr"),1)
 
 ## assemble variance matrix for items:
 ## ## this won't work:
-#Sigma_w<-SIN::sdcor2cov(stddev=item_ranefsd,corr=item_ranefcorr)
+#Sigma_w<-SIN::sdcor2cov(stddev=item_ranefsd,
+#corr=item_ranefcorr)
 #solve(Sigma_w)
 ## choose some intermediate values for correlations:
 corr_matrix<-(diag(2) + matrix(rep(1,4),ncol=2))/2
 
-Sigma_w<-SIN::sdcor2cov(stddev=item_ranefsd,corr=corr_matrix)
+Sigma_w<-SIN::sdcor2cov(stddev=item_ranefsd,
+                        corr=corr_matrix)
+## matrix inverts:
 solve(Sigma_w)
 ```
 
@@ -178,7 +190,11 @@ Next, we define a function that generates repeated measures data given the param
 - Then, given the condition id, and the subject and item ids in each row of the data frame, generate data row-by-row. 
 
 
-We explain these steps next. First, consider how one can create a Latin-square design. Suppose we have four items and four subjects. For such an experiment, we would create two groups, g1 and g2, with the following layout.
+We explain these steps next. 
+
+### Generate a Latin-square design
+
+First, consider how one can create a Latin-square design. Suppose we have four items and four subjects. For such an experiment, we would create two groups, g1 and g2, with the following layout.
 
 ```{r}
 nitem<-4
@@ -191,7 +207,7 @@ g2<-data.frame(item=1:nitem,
 g1; g2
 ```
 
-Half the total number of subjects will be assigned to group 1 and half to group 2.
+Half the total number of subjects will be assigned to group 1 and half to group 2:
 
 ```{r}  
   ## assemble data frame:
@@ -213,7 +229,9 @@ Finally, the contrast coding for each  row in the data-frame is set up:
   simdat$so<-ifelse(simdat$cond=="a",-1/2,1/2)
 ```
 
-Then, we proceed row-by-row in this data frae, and generate data for each subject, item, and condition. For example, the first row of our simulated data-set has subject id:
+### Generate data row-by-row
+
+Then, we proceed row-by-row in this data frame, and generate data for each subject, item, and condition. For example, the first row of our simulated data-set has subject id:
 
 ```{r}
 simdat[1,]$subj
@@ -238,7 +256,7 @@ These three pieces of information are what we need to generate data for the firs
 \beta_0 + u_{0i} + w_{0j} + (\beta+1 + u_{1i} + w_{1j})\times so + \varepsilon \hbox{ where } \varepsilon \sim N(0,\sigma)
 \end{equation}
 
-The terms u0, w0, and u1, w1, which are the adjustments to the intercepts and slopes by subject and item, are stored in two matrices that are generated randomly each time that we simulate new subjects/items. This is done by using the `mvrnorm` function in the MASS library. For example, given the variance covariance matrix for subjects `Sigma_u` that we created above, the subject random effects (intercept and slope adjustments) for 10 subjects can be generated in a matrix as follows:
+The terms u0, w0, and u1, w1, which are the adjustments to the intercepts and slopes by subject and item, are stored in two matrices that are generated randomly each time that we simulate new subjects/items. Recall from chapter 1 how bivariate data are generated. The intercept and slope adjustments will be generated using the `mvrnorm` function in the MASS library. For example, given the variance covariance matrix for subjects `Sigma_u` that we created above, the subject random effects (intercept and slope adjustments) for 10 subjects can be generated in a matrix as follows:
 
 ```{r}
 library(MASS)
@@ -278,11 +296,12 @@ rlnorm(1,beta[1] +    u[1,1] + w[1,1] +
 
 For subject 2, all that would change is the subject id: instead of `u[1,1]`, and `u[1,2]` we would write `u[2,1]` and `u[2,2]`. The for-loop below works through the `simdat` data-frame row by row, looks up the subject id, the item id for that row, and the condition coding for that row, and fills in the simulated reading time using the above code. This is how the simulated data are generated.
 
-Here is the complete code for generating the data:
+Here is the complete function for generating simulated data. It uses all the bits of code we discussed above.
 
 ```{r}
 library(MASS)
-## assumes that no. of subjects and no. of items is divisible by 2.
+## assumes that no. of subjects and 
+## no. of items is divisible by 2.
 gen_sim_lnorm2<-function(nitem=16,
                          nsubj=42,
                          beta=NULL,
@@ -363,6 +382,8 @@ Everything checks out.
 
 ## Repeated generation of data to compute power
 
+With the function for simulating data ready, we are now able to repeatedly generated simulated data. Next, we generate data 100 times, fit a linear mixed model each time, and extract the t-value from each linear mixed model fit. The vector t-values is then used to compute power: we simply look at the proportion of absolute t-values that exceed the value 2. 
+
 ```{r message=FALSE,warning=FALSE,results="asis",cache=TRUE}
 nsim<-100
 sotval<-rep(NA,nsim)
@@ -377,7 +398,8 @@ dat<-gen_sim_lnorm2(nitem=16,
                       sigma_e=sigma_e)
 
 ## fit model to sim data:
-m<-lmer(log(rt)~so+(1+so|subj)+(1+so|item),dat)
+m<-lmer(log(rt)~so+(1+so|subj)+(1+so|item),dat,
+        control=lmerControl(calc.derivs=FALSE))
 ## extract the t-value
 sotval[i]<-summary(m)$coefficients[2,3]
 }
@@ -399,6 +421,10 @@ Here, we will assume that the true effect has the following range of plausible v
 .12+2*.05
 ```
 
+We will run two for-loops now: the first for-loop selects one of the plausible values as the value for the slope, and then the second for-loop runs 100 simulations to compute power for that effect size.
+
+This time, instead of ignoring convergence problems, we can record the proportion of times that we get a convergence failure or problem, and we can discard that result:
+
 ```{r cache=TRUE,warning=FALSE,message=FALSE,results="hide",cache=TRUE}
 nsim<-100
 ## effect size possibilities:
@@ -415,7 +441,8 @@ for(i in 1:nsim){
                        Sigma_w=Sigma_w,
                       sigma_e=sigma_e)
 
-## no correlations estimated to avoid convergence problems: 
+## no correlations estimated to 
+## minimize convergence problems: 
 ## analysis done after log-transforming:  
 m<-lmer(log(rt) ~ so + (so||subj) + 
           (so||item), data=dat_sim)
@@ -429,6 +456,8 @@ sotvals[j,i]<-summary(m)$coefficients[2,3]
 rowMeans(failed)
 ```
 
+Power can now be computed for each effect size:
+
 ```{r}
 pow<-rep(NA,length(b1_est))
 for(k in 1:length(b1_est)){
@@ -438,9 +467,7 @@ for(k in 1:length(b1_est)){
 pow
 ```
 
-There is a lot of uncertainty about the power estimate here!
-
-
+Notice that there is a lot of uncertainty about the power estimate here!
 
 Recall that power is a **function** of 
 
@@ -458,13 +485,19 @@ Given the above code and workflow, you can now figure out how many subjects you 
 
 You can also study Type I  error properties of your model as a function of whether the model is a maximal model  or a  varying intercepts only model.
 
-Example: Compute power as a function of sample size:
+Example: Compute power as a function of effect size and sample size. Note that the number of subjects has to be even, otherwise the simulation code will fail! One could put in a test for this in the code: if the number of subjects is divisible by 2, the modulo function should return 0:
+
+```{r}
+10%%2
+11%%2
+```
 
 ```{r}
 ## define a function for computing power 
 ## (as a function of effect size and 
 ## subject sample size:
 compute_power<-function(b=NULL,nsubjects=28){
+if(nsubjects%%2!=0){stop("No. of subjects must be divisible by 2.")}  
 nsim<-100
 sotvals<-rep(NA,nsim)
 failed<-rep(0,nsim)
@@ -489,33 +522,43 @@ sotvals[i]<-summary(m)$coefficients[2,3]
 }}
 
 ## proportion of convergence failures and power:
-c(mean(failed),mean(abs(sotvals)>2,na.rm=TRUE))
+paste(print("Prop. of convergence failures:"),mean(failed),sep=" ")
+paste(print("Power:"),mean(abs(sotvals)>2,na.rm=TRUE),sep=" ")
 }
 ```
 
 ```{r message=FALSE,warning=FALSE,results="asis"}
-## usage:
+## usage: this will halt function 
+## with an error message
+# compute_power(b=0.03,nsubjects=29)
+
 compute_power(b=0.03,nsubjects=28)
 ```
 
 ## Exercises {#sec:Simulationexercises}
 
-### Part 1 {#sec:SimulationexercisesPart1}
+### Drawing a power curve given a range of effect sizes {#sec:SimulationexercisesPart1}
 
 Use the simulation code as provided to compute a power function for effects sizes for the relative clause effect ranging from 0.025, 0.05, 0.10, and 0.15, given that you have 16 items and 42 participants.
 
-### Part 2 {#sec:SimulationexercisesPart2}
+### Power and log-transformation {#sec:SimulationexercisesPart2}
 
 Modify the simulation code to generate not log-normally distributed data, but normally distributed data. Refit the @grodner data using raw reading times (i.e., do not log-transform them), and then use the parameter estimates from the data to compute a power function for effects sizes for the relative clause effect ranging from 10, 30, 60, 80 ms, given that you have 16 items and 42 participants. Compare your power curve with that of Part 1. 
 
-### Part 3 {#sec:SimulationexercisesPart3}
+### Evaluating models by generating simulated data {#sec:SimulationexercisesPart3}
 
-Generate data from the simulation function assuming a log-normal likelihood and then generate data from the function you wrote in Part 2 that assumes a normal likelihood. Compare the two sets of  simulated data to the observed distributions. Which simulation code produces more realistic data, and why?
+Generate data from the simulation function assuming a log-normal likelihood and then generate data from the function you wrote in Part 2 that assumes a normal likelihood. Compare the distributions of the two sets of  simulated data to the observed distributions. Which simulation code produces more realistic data, and why?
 
-### Part 4 {#sec:SimulationexercisesPart4}
+### Using simulation to check parameter recovery {#sec:SimulationexercisesPart4}
 
 Check whether the simulation code you wrote assuming a normal likelihood can recover the parameters. 
 
-### Part 5 {#sec:SimulationexercisesPart5}
+### Sample size calculations using simulation {#sec:SimulationexercisesPart5}
 
-Load the data gibsonwu2012.txt. Use simulation to determine how many subjects you would need to achieve power of 80%, given 16 items, and an effect size of  0.02 on the log ms scale. Draw a power curve: on the x-axis show the number of subjects, and on the y-axis the estimated power. Now draw two further curves, one for an effect size of 0.05 and another for an effect size of 0.10. This gives you a power curve, taking the uncertainty in the effect size into account.
+Load the data-set shown below: 
+
+```{r}
+gibsonwu<-read.table("data/gibsonwucrit.txt")
+```
+
+Use simulation to determine how many subjects you would need to achieve power of 80%, given 16 items, and an effect size of  0.02 on the log ms scale. Draw a power curve: on the x-axis show the number of subjects, and on the y-axis the estimated power. Now draw two further curves, one for an effect size of 0.05 and another for an effect size of 0.10. This gives you a power curve, taking the uncertainty in the effect size into account.
