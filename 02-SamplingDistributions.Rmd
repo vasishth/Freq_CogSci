@@ -132,7 +132,9 @@ Let $f(Y)$ be the pdf of a random variable $Y$, and assume that the pdf has mean
 \bar{Y} \sim Normal(\mu,\sigma^2/n) \quad  E[Y]=\mu,Var(Y)=\sigma^2 \quad \hbox{ when n is large}
 \end{equation}
 
-For us, the practical implication of this result is huge. From a *single* sample $y_1,\dots, y_n$, we can derive the distribution of *hypothetical* sample means under repeated sampling. That is, it becomes possible to say something about what the plausible and implausible values of the sample mean are. This is the basis for all hypothesis testing and statistical inference in the frequentist framework that we will look at in this book.
+For us, the practical implication of this result is huge. From a *single* sample $y_1,\dots, y_n$, we can derive the distribution of *hypothetical* sample means under repeated sampling. That is, it becomes possible to say something about what the plausible and implausible values of the sample mean are under repeated sampling. This is the basis for all hypothesis testing and statistical inference in the frequentist framework that we will look at in this book.
+
+Sometimes the central limit theorem is misunderstood to imply that the distribution that is assumed to generate the data is always going to be normal. It is important to understand that there are two distributions we are talking about here. First, there is the distribution that the data were generated from; this need not be normal. For example, you could get data from a Normal, Exponential, Gamma, or other distribution. Second, there is the sampling distribution of the *sample mean* under repeated sampling. It is the sampling distribution that the central limit theorem is about, not the distribution that generated the data.
 
 ## Three examples of the sampling distribution
 
@@ -1234,7 +1236,7 @@ The paired t-test illustrated above is actually not the best way to analyze this
 
 ## Exercises {#sec:SamplingDistrnexercises}
 
-### Part 1 {#sec:SamplingDistrnexercisesPart1}
+### Computing the p-value {#sec:SamplingDistrnexercisesPart1}
 
 A paired t-test is done with data from 10 participants. The t-value from the test is 2.1. What is the p-value associated with a two-sided null hypothesis test? 
 
@@ -1242,11 +1244,11 @@ A paired t-test is done with data from 10 participants. The t-value from the tes
 round(2*pt(-2.1,df=9),3)
 ```
 
-### Part 2 {#sec:SamplingDistrnexercisesPart2}
+### Computing the t-value {#sec:SamplingDistrnexercisesPart2}
 
  If the p-value from a two-sided null hypothesis test had been 0.09, what  would be the associated absolute t-value (i.e., ignoring the sign on the t-value)?  The number of participants is 10, as above.
 
-### Part 3 {#sec:SamplingDistrnexercisesPart3}
+### Type I and II error {#sec:SamplingDistrnexercisesPart3}
 
 Given that Type I error is 0.01; what is the highest value possible for Type II error?  
 
