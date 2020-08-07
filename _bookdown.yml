@@ -1,4 +1,4 @@
-book_filename: bookdown
+book_filename: Freq_CogSci
 repo: https://github.com/rstudio/bookdown/
 output_dir: _book
 clean: [packages.bib, bookdown.bbl]
