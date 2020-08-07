@@ -24,7 +24,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2020-08-06" />
+<meta name="date" content="2020-08-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="linear-mixed-models.html"/>
-<link rel="next" href="sec-LMExercises.html"/>
+<link rel="next" href="summary.html"/>
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
@@ -76,46 +76,42 @@ pre.numberSource a.sourceLine::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    background-color: #232629;
-    color: #7a7c7d;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { color: #cfcfc2; background-color: #232629; }
+  { background-color: #f8f8f8; }
 @media screen {
 a.sourceLine::before { text-decoration: underline; }
 }
-code span. { color: #cfcfc2; } /* Normal */
-code span.al { color: #95da4c; } /* Alert */
-code span.an { color: #3f8058; } /* Annotation */
-code span.at { color: #2980b9; } /* Attribute */
-code span.bn { color: #f67400; } /* BaseN */
-code span.bu { color: #7f8c8d; } /* BuiltIn */
-code span.cf { color: #fdbc4b; } /* ControlFlow */
-code span.ch { color: #3daee9; } /* Char */
-code span.cn { color: #27aeae; } /* Constant */
-code span.co { color: #7a7c7d; } /* Comment */
-code span.cv { color: #7f8c8d; } /* CommentVar */
-code span.do { color: #a43340; } /* Documentation */
-code span.dt { color: #2980b9; } /* DataType */
-code span.dv { color: #f67400; } /* DecVal */
-code span.er { color: #da4453; } /* Error */
-code span.ex { color: #0099ff; } /* Extension */
-code span.fl { color: #f67400; } /* Float */
-code span.fu { color: #8e44ad; } /* Function */
-code span.im { color: #27ae60; } /* Import */
-code span.in { color: #c45b00; } /* Information */
-code span.kw { color: #cfcfc2; } /* Keyword */
-code span.op { color: #cfcfc2; } /* Operator */
-code span.ot { color: #27ae60; } /* Other */
-code span.pp { color: #27ae60; } /* Preprocessor */
-code span.re { color: #2980b9; } /* RegionMarker */
-code span.sc { color: #3daee9; } /* SpecialChar */
-code span.ss { color: #da4453; } /* SpecialString */
-code span.st { color: #f44f4f; } /* String */
-code span.va { color: #27aeae; } /* Variable */
-code span.vs { color: #da4453; } /* VerbatimString */
-code span.wa { color: #da4453; } /* Warning */
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -131,7 +127,7 @@ code span.wa { color: #da4453; } /* Warning */
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Authoring Books with R Markdown</a></li>
+<li><a href="./">Linear Mixed Models in Linguistics and Psychology</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
@@ -179,9 +175,9 @@ code span.wa { color: #da4453; } /* Warning */
 <li class="chapter" data-level="2.5.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.5.1</b> Common mistakes involving the t-test</a></li>
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.6</b> Exercises</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.6.1</b> Part 1</a></li>
-<li class="chapter" data-level="2.6.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.6.2</b> Part 2</a></li>
-<li class="chapter" data-level="2.6.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.6.3</b> Part 3</a></li>
+<li class="chapter" data-level="2.6.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.6.1</b> Computing the p-value</a></li>
+<li class="chapter" data-level="2.6.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.6.2</b> Computing the t-value</a></li>
+<li class="chapter" data-level="2.6.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.6.3</b> Type I and II error</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a><ul>
@@ -196,36 +192,45 @@ code span.wa { color: #da4453; } /* Warning */
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
-<li class="chapter" data-level="3.7" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html"><i class="fa fa-check"></i><b>3.7</b> Exercises:</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.7.1</b> Part 1</a></li>
-<li class="chapter" data-level="3.7.2" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.7.2</b> Part 2</a></li>
-<li class="chapter" data-level="3.7.3" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.7.3</b> Part 3</a></li>
-<li class="chapter" data-level="3.7.4" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.7.4</b> Part 4</a></li>
-<li class="chapter" data-level="3.7.5" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.7.5</b> Part 5</a></li>
-<li class="chapter" data-level="3.7.6" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.7.6</b> Part 6</a></li>
-<li class="chapter" data-level="3.7.7" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.7.7</b> Part 7</a></li>
-<li class="chapter" data-level="3.7.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.7.8</b> Part 8</a></li>
+<li class="chapter" data-level="3.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
+<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
+<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
+<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
+<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
+<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
+<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
+<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a><ul>
 <li class="chapter" data-level="4.1" data-path="the-likelihood-ratio-test-the-theory.html"><a href="the-likelihood-ratio-test-the-theory.html"><i class="fa fa-check"></i><b>4.1</b> The likelihood ratio test: The theory</a></li>
 <li class="chapter" data-level="4.2" data-path="a-practical-example-using-simulated-data.html"><a href="a-practical-example-using-simulated-data.html"><i class="fa fa-check"></i><b>4.2</b> A practical example using simulated data</a></li>
 <li class="chapter" data-level="4.3" data-path="a-real-life-example-the-english-relative-clause-data.html"><a href="a-real-life-example-the-english-relative-clause-data.html"><i class="fa fa-check"></i><b>4.3</b> A real-life example: The English relative clause data</a></li>
+<li class="chapter" data-level="4.4" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html"><i class="fa fa-check"></i><b>4.4</b> Exercises</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExercisesChinese"><i class="fa fa-check"></i><b>4.4.1</b> Chinese relative clauses</a></li>
+<li class="chapter" data-level="4.4.2" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseAgrmt"><i class="fa fa-check"></i><b>4.4.2</b> Agreement attraction in comprehension</a></li>
+<li class="chapter" data-level="4.4.3" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseGramCE"><i class="fa fa-check"></i><b>4.4.3</b> The grammaticality illusion</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>5</b> Using simulation to understand your model</a><ul>
 <li class="chapter" data-level="5.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>5.1</b> A reminder: The maximal linear mixed model</a></li>
 <li class="chapter" data-level="5.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>5.2</b> Obtain estimates from a previous study</a></li>
 <li class="chapter" data-level="5.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>5.3</b> Decide on a range of plausible values of the effect size</a></li>
 <li class="chapter" data-level="5.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>5.4</b> Extract parameter estimates</a></li>
-<li class="chapter" data-level="5.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>5.5</b> Define a function for generating data</a></li>
+<li class="chapter" data-level="5.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>5.5</b> Define a function for generating data</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>5.5.1</b> Generate a Latin-square design</a></li>
+<li class="chapter" data-level="5.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>5.5.2</b> Generate data row-by-row</a></li>
+</ul></li>
 <li class="chapter" data-level="5.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>5.6</b> Repeated generation of data to compute power</a></li>
 <li class="chapter" data-level="5.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>5.7</b> What you can now do</a></li>
 <li class="chapter" data-level="5.8" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>5.8</b> Exercises</a><ul>
-<li class="chapter" data-level="5.8.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>5.8.1</b> Part 1</a></li>
-<li class="chapter" data-level="5.8.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>5.8.2</b> Part 2</a></li>
-<li class="chapter" data-level="5.8.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>5.8.3</b> Part 3</a></li>
-<li class="chapter" data-level="5.8.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>5.8.4</b> Part 4</a></li>
-<li class="chapter" data-level="5.8.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>5.8.5</b> Part 5</a></li>
+<li class="chapter" data-level="5.8.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>5.8.1</b> Drawing a power curve given a range of effect sizes</a></li>
+<li class="chapter" data-level="5.8.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>5.8.2</b> Power and log-transformation</a></li>
+<li class="chapter" data-level="5.8.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>5.8.3</b> Evaluating models by generating simulated data</a></li>
+<li class="chapter" data-level="5.8.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>5.8.4</b> Using simulation to check parameter recovery</a></li>
+<li class="chapter" data-level="5.8.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>5.8.5</b> Sample size calculations using simulation</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="important-distributions.html"><a href="important-distributions.html"><i class="fa fa-check"></i><b>6</b> Important distributions</a></li>
@@ -255,54 +260,43 @@ code span.wa { color: #da4453; } /* Warning */
 <p>The estimate of the effect by participant is smaller than when we fit a separate linear model to the subject’s data.
 This is called shrinkage in linear mixed models: the individual level estimates are shrunk towards the mean slope.
 The less data we have from a given subject, the greater the shrinkage.</p>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-112-1.svg" width="672" /></p>
+<div class="figure"><span id="fig:shrinkage"></span>
+<img src="Freq_CogSci_files/figure-html/shrinkage-1.svg" alt="The figures show linear model fits (the grand mean estimates) for three subjects; shown are the simple linear model fit on all the data (gray line), the lmList model fit to the individual subject's data (black line), and the linear mixed model fit (the broken line). In all three subjects' models, the linear mixed model estimates are shrunk towards the grand mean (gray line) estimates." width="75%" />
+<p class="caption">
+FIGURE 3.1: The figures show linear model fits (the grand mean estimates) for three subjects; shown are the simple linear model fit on all the data (gray line), the lmList model fit to the individual subject’s data (black line), and the linear mixed model fit (the broken line). In all three subjects’ models, the linear mixed model estimates are shrunk towards the grand mean (gray line) estimates.
+</p>
+</div>
 <div id="shrinkage-in-action-when-data-are-missing" class="section level4">
 <h4><span class="header-section-number">3.6.0.1</span> Shrinkage in action: when data are missing</h4>
-<p>Let’s randomly delete some data from one subject:</p>
+<p>The importance and value of shrinkage becomes clear once we simulate a situation where there is some missing data. Missingness can happen in experiments, either due to lost measurements (arising from computer error or programming errors), or some other reason. To see what happens when we have missing data, let’s randomly delete some data from one subject. We will randomly delete 50% of subject 37’s data:</p>
 <div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">4321</span>)</a>
 <a class="sourceLine" id="cb237-2" data-line-number="2"><span class="co">## choose some data randomly to remove:</span></a>
 <a class="sourceLine" id="cb237-3" data-line-number="3">rand &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dt">n =</span> <span class="dv">16</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<p>Here are subject 37’s reading times (16 data points):</p>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1">gg05e1[<span class="kw">which</span>(gg05e1<span class="op">$</span>subject <span class="op">==</span><span class="st"> </span><span class="dv">37</span>), ]<span class="op">$</span>rawRT</a></code></pre></div>
 <pre><code>##  [1]  770  536  686  578  457  487 2419  884 3365  233
 ## [11]  715  671 1104  281 1081  971</code></pre>
+<p>Now, we randomly delete half the data:</p>
 <div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" data-line-number="1">gg05e1<span class="op">$</span>deletedRT &lt;-<span class="st"> </span>gg05e1<span class="op">$</span>rawRT</a>
 <a class="sourceLine" id="cb240-2" data-line-number="2">gg05e1[<span class="kw">which</span>(gg05e1<span class="op">$</span>subject <span class="op">==</span><span class="st"> </span><span class="dv">37</span>), ]<span class="op">$</span>deletedRT &lt;-<span class="st"> </span><span class="kw">ifelse</span>(rand, </a>
-<a class="sourceLine" id="cb240-3" data-line-number="3">  <span class="ot">NA</span>, gg05e1[<span class="kw">which</span>(gg05e1<span class="op">$</span>subject <span class="op">==</span><span class="st"> </span><span class="dv">37</span>), </a>
-<a class="sourceLine" id="cb240-4" data-line-number="4">    ]<span class="op">$</span>rawRT)</a></code></pre></div>
-<p>Now subject 37’s estimates are going to be pretty wild:</p>
+<a class="sourceLine" id="cb240-3" data-line-number="3">  <span class="ot">NA</span>, gg05e1[<span class="kw">which</span>(gg05e1<span class="op">$</span>subject <span class="op">==</span><span class="st"> </span><span class="dv">37</span>), ]<span class="op">$</span>rawRT)</a></code></pre></div>
+<p>Now subject 37’s estimates are going to be pretty wild, because they are based on much less data (even one extreme value can strongly influence the mean):</p>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" data-line-number="1"><span class="kw">subset</span>(gg05e1, subject <span class="op">==</span><span class="st"> </span><span class="dv">37</span>)<span class="op">$</span>deletedRT</a></code></pre></div>
 <pre><code>##  [1]  770   NA  686  578   NA   NA   NA   NA 3365  233
 ## [11]   NA  671 1104   NA   NA  971</code></pre>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1"><span class="co">## original no pooling estimate:</span></a>
-<a class="sourceLine" id="cb243-2" data-line-number="2">lmList.fm1_old &lt;-<span class="st"> </span><span class="kw">lmList</span>(<span class="kw">log</span>(rawRT) <span class="op">~</span><span class="st"> </span>so <span class="op">|</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb243-3" data-line-number="3"><span class="st">  </span>subject, gg05e1)</a>
-<a class="sourceLine" id="cb243-4" data-line-number="4">coefs_old &lt;-<span class="st"> </span><span class="kw">coef</span>(lmList.fm1_old)</a>
-<a class="sourceLine" id="cb243-5" data-line-number="5">intercepts_old &lt;-<span class="st"> </span>coefs_old[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb243-6" data-line-number="6"><span class="kw">colnames</span>(intercepts_old) &lt;-<span class="st"> &quot;intercept&quot;</span></a>
-<a class="sourceLine" id="cb243-7" data-line-number="7">slopes_old &lt;-<span class="st"> </span>coefs_old[<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb243-8" data-line-number="8"><span class="co">## subject 37&#39;s original estimates:</span></a>
-<a class="sourceLine" id="cb243-9" data-line-number="9">intercepts_old<span class="op">$</span>intercept[<span class="dv">37</span>]</a></code></pre></div>
 <pre><code>## [1] 6.617</code></pre>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1">slopes_old<span class="op">$</span>so[<span class="dv">37</span>]</a></code></pre></div>
 <pre><code>## [1] 0.3554</code></pre>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1"><span class="co">## on deleted data:</span></a>
-<a class="sourceLine" id="cb247-2" data-line-number="2">lmList.fm1_deleted &lt;-<span class="st"> </span><span class="kw">lmList</span>(<span class="kw">log</span>(deletedRT) <span class="op">~</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb247-3" data-line-number="3"><span class="st">  </span>so <span class="op">|</span><span class="st"> </span>subject, gg05e1)</a>
-<a class="sourceLine" id="cb247-4" data-line-number="4">coefs &lt;-<span class="st"> </span><span class="kw">coef</span>(lmList.fm1_deleted)</a>
-<a class="sourceLine" id="cb247-5" data-line-number="5">intercepts &lt;-<span class="st"> </span>coefs[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb247-6" data-line-number="6"><span class="kw">colnames</span>(intercepts) &lt;-<span class="st"> &quot;intercept&quot;</span></a>
-<a class="sourceLine" id="cb247-7" data-line-number="7">slopes &lt;-<span class="st"> </span>coefs[<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb247-8" data-line-number="8"><span class="co">## subject 37&#39;s new estimates on deleted</span></a>
-<a class="sourceLine" id="cb247-9" data-line-number="9"><span class="co">## data:</span></a>
-<a class="sourceLine" id="cb247-10" data-line-number="10">intercepts<span class="op">$</span>intercept[<span class="dv">37</span>]</a></code></pre></div>
 <pre><code>## [1] 6.688</code></pre>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" data-line-number="1">slopes<span class="op">$</span>so[<span class="dv">37</span>]</a></code></pre></div>
 <pre><code>## [1] 0.3884</code></pre>
 <p>Now fit the hierarchical model and examine subject 37’s estimates on undeleted vs deleted data:</p>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-118-1.svg" width="672" /></p>
-<p>What we see here is that the estimates from the hierarchical model are barely affected by the missingness, but the estimates from the no-pooling model are heavily affected.
-This means that linear mixed models will give you more robust estimates (think Type M error!) compared to no pooling models.
-This is one reason why linear mixed models are such a big deal.</p>
+<div class="figure"><span id="fig:shrinkage2"></span>
+<img src="Freq_CogSci_files/figure-html/shrinkage2-1.svg" alt="The figures show linear model fits (the grand mean estimates) for subject 37. When using lmList, deleting data leads to very different estimates; but using lmer, deleting half the data from this subject hardly affects the individual subject's estimates." width="75%" />
+<p class="caption">
+FIGURE 3.2: The figures show linear model fits (the grand mean estimates) for subject 37. When using lmList, deleting data leads to very different estimates; but using lmer, deleting half the data from this subject hardly affects the individual subject’s estimates.
+</p>
+</div>
+<p>What we see here is that the estimates from the hierarchical model are barely affected by the missingness, but the estimates from the lmList model are heavily affected.
+This means that linear mixed models will give you more robust estimates (think Type M error!) compared to no pooling models. This property of shrinkage is one reason why linear mixed models are so important in cognitive science.</p>
 </div>
 </div>
             </section>
@@ -311,7 +305,7 @@ This is one reason why linear mixed models are such a big deal.</p>
         </div>
       </div>
 <a href="linear-mixed-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sec-LMExercises.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="summary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
@@ -353,7 +347,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown.pdf", "bookdown.epub", "bookdown.mobi"],
+"download": ["Freq_CogSci.pdf", "Freq_CogSci.epub", "Freq_CogSci.mobi"],
 "toc": {
 "collapse": "none"
 }

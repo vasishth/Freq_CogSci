@@ -219,7 +219,7 @@
 
 \title{Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction}
 \author{Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl}
-\date{2020-08-06}
+\date{2020-08-07}
 
 \begin{document}
 \maketitle
@@ -1247,7 +1247,9 @@ Let \(f(Y)\) be the pdf of a random variable \(Y\), and assume that the pdf has 
 \bar{Y} \sim Normal(\mu,\sigma^2/n) \quad  E[Y]=\mu,Var(Y)=\sigma^2 \quad \hbox{ when n is large}
 \end{equation}
 
-For us, the practical implication of this result is huge. From a \emph{single} sample \(y_1,\dots, y_n\), we can derive the distribution of \emph{hypothetical} sample means under repeated sampling. That is, it becomes possible to say something about what the plausible and implausible values of the sample mean are. This is the basis for all hypothesis testing and statistical inference in the frequentist framework that we will look at in this book.
+For us, the practical implication of this result is huge. From a \emph{single} sample \(y_1,\dots, y_n\), we can derive the distribution of \emph{hypothetical} sample means under repeated sampling. That is, it becomes possible to say something about what the plausible and implausible values of the sample mean are under repeated sampling. This is the basis for all hypothesis testing and statistical inference in the frequentist framework that we will look at in this book.
+
+Sometimes the central limit theorem is misunderstood to imply that the distribution that is assumed to generate the data is always going to be normal. It is important to understand that there are two distributions we are talking about here. First, there is the distribution that the data were generated from; this need not be normal. For example, you could get data from a Normal, Exponential, Gamma, or other distribution. Second, there is the sampling distribution of the \emph{sample mean} under repeated sampling. It is the sampling distribution that the central limit theorem is about, not the distribution that generated the data.
 
 \hypertarget{three-examples-of-the-sampling-distribution}{%
 \section{Three examples of the sampling distribution}\label{three-examples-of-the-sampling-distribution}}
@@ -2444,17 +2446,17 @@ The paired t-test illustrated above is actually not the best way to analyze this
 \section{Exercises}\label{sec:SamplingDistrnexercises}}
 
 \hypertarget{sec:SamplingDistrnexercisesPart1}{%
-\subsection{Part 1}\label{sec:SamplingDistrnexercisesPart1}}
+\subsection{Computing the p-value}\label{sec:SamplingDistrnexercisesPart1}}
 
 A paired t-test is done with data from 10 participants. The t-value from the test is 2.1. What is the p-value associated with a two-sided null hypothesis test?
 
 \hypertarget{sec:SamplingDistrnexercisesPart2}{%
-\subsection{Part 2}\label{sec:SamplingDistrnexercisesPart2}}
+\subsection{Computing the t-value}\label{sec:SamplingDistrnexercisesPart2}}
 
 If the p-value from a two-sided null hypothesis test had been 0.09, what would be the associated absolute t-value (i.e., ignoring the sign on the t-value)? The number of participants is 10, as above.
 
 \hypertarget{sec:SamplingDistrnexercisesPart3}{%
-\subsection{Part 3}\label{sec:SamplingDistrnexercisesPart3}}
+\subsection{Type I and II error}\label{sec:SamplingDistrnexercisesPart3}}
 
 Given that Type I error is 0.01; what is the highest value possible for Type II error?
 
@@ -3871,12 +3873,14 @@ The estimate of the effect by participant is smaller than when we fit a separate
 This is called shrinkage in linear mixed models: the individual level estimates are shrunk towards the mean slope.
 The less data we have from a given subject, the greater the shrinkage.
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-112-1.pdf}
+\begin{figure}
+\includegraphics[width=0.75\linewidth]{bookdown_files/figure-latex/shrinkage-1} \caption{The figures show linear model fits (the grand mean estimates) for three subjects; shown are the simple linear model fit on all the data (gray line), the lmList model fit to the individual subject's data (black line), and the linear mixed model fit (the broken line). In all three subjects' models, the linear mixed model estimates are shrunk towards the grand mean (gray line) estimates.}\label{fig:shrinkage}
+\end{figure}
 
 \hypertarget{shrinkage-in-action-when-data-are-missing}{%
 \subsubsection{Shrinkage in action: when data are missing}\label{shrinkage-in-action-when-data-are-missing}}
 
-Let's randomly delete some data from one subject:
+The importance and value of shrinkage becomes clear once we simulate a situation where there is some missing data. Missingness can happen in experiments, either due to lost measurements (arising from computer error or programming errors), or some other reason. To see what happens when we have missing data, let's randomly delete some data from one subject. We will randomly delete 50\% of subject 37's data:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3885,6 +3889,8 @@ Let's randomly delete some data from one subject:
 \NormalTok{rand <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{n =} \DecValTok{16}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+Here are subject 37's reading times (16 data points):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3897,6 +3903,8 @@ Let's randomly delete some data from one subject:
 ## [11]  715  671 1104  281 1081  971
 \end{verbatim}
 
+Now, we randomly delete half the data:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{gg05e1}\OperatorTok{$}\NormalTok{deletedRT <-}\StringTok{ }\NormalTok{gg05e1}\OperatorTok{$}\NormalTok{rawRT}
@@ -3906,7 +3914,7 @@ Let's randomly delete some data from one subject:
 \end{Highlighting}
 \end{Shaded}
 
-Now subject 37's estimates are going to be pretty wild:
+Now subject 37's estimates are going to be pretty wild, because they are based on much less data (even one extreme value can strongly influence the mean):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3919,58 +3927,17 @@ Now subject 37's estimates are going to be pretty wild:
 ## [11]   NA  671 1104   NA   NA  971
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{## original no pooling estimate:}
-\NormalTok{lmList.fm1_old <-}\StringTok{ }\KeywordTok{lmList}\NormalTok{(}\KeywordTok{log}\NormalTok{(rawRT) }\OperatorTok{~}\StringTok{ }\NormalTok{so }\OperatorTok{|}\StringTok{ }
-\StringTok{  }\NormalTok{subject, gg05e1)}
-\NormalTok{coefs_old <-}\StringTok{ }\KeywordTok{coef}\NormalTok{(lmList.fm1_old)}
-\NormalTok{intercepts_old <-}\StringTok{ }\NormalTok{coefs_old[}\DecValTok{1}\NormalTok{]}
-\KeywordTok{colnames}\NormalTok{(intercepts_old) <-}\StringTok{ "intercept"}
-\NormalTok{slopes_old <-}\StringTok{ }\NormalTok{coefs_old[}\DecValTok{2}\NormalTok{]}
-\CommentTok{## subject 37's original estimates:}
-\NormalTok{intercepts_old}\OperatorTok{$}\NormalTok{intercept[}\DecValTok{37}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 6.617
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{slopes_old}\OperatorTok{$}\NormalTok{so[}\DecValTok{37}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.3554
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{## on deleted data:}
-\NormalTok{lmList.fm1_deleted <-}\StringTok{ }\KeywordTok{lmList}\NormalTok{(}\KeywordTok{log}\NormalTok{(deletedRT) }\OperatorTok{~}\StringTok{ }
-\StringTok{  }\NormalTok{so }\OperatorTok{|}\StringTok{ }\NormalTok{subject, gg05e1)}
-\NormalTok{coefs <-}\StringTok{ }\KeywordTok{coef}\NormalTok{(lmList.fm1_deleted)}
-\NormalTok{intercepts <-}\StringTok{ }\NormalTok{coefs[}\DecValTok{1}\NormalTok{]}
-\KeywordTok{colnames}\NormalTok{(intercepts) <-}\StringTok{ "intercept"}
-\NormalTok{slopes <-}\StringTok{ }\NormalTok{coefs[}\DecValTok{2}\NormalTok{]}
-\CommentTok{## subject 37's new estimates on deleted}
-\CommentTok{## data:}
-\NormalTok{intercepts}\OperatorTok{$}\NormalTok{intercept[}\DecValTok{37}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 6.688
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{slopes}\OperatorTok{$}\NormalTok{so[}\DecValTok{37}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.3884
@@ -3978,11 +3945,15 @@ Now subject 37's estimates are going to be pretty wild:
 
 Now fit the hierarchical model and examine subject 37's estimates on undeleted vs deleted data:
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-118-1.pdf}
+\begin{figure}
+\includegraphics[width=0.75\linewidth]{bookdown_files/figure-latex/shrinkage2-1} \caption{The figures show linear model fits (the grand mean estimates) for subject 37. When using lmList, deleting data leads to very different estimates; but using lmer, deleting half the data from this subject hardly affects the individual subject's estimates.}\label{fig:shrinkage2}
+\end{figure}
 
-What we see here is that the estimates from the hierarchical model are barely affected by the missingness, but the estimates from the no-pooling model are heavily affected.
-This means that linear mixed models will give you more robust estimates (think Type M error!) compared to no pooling models.
-This is one reason why linear mixed models are such a big deal.
+What we see here is that the estimates from the hierarchical model are barely affected by the missingness, but the estimates from the lmList model are heavily affected.
+This means that linear mixed models will give you more robust estimates (think Type M error!) compared to no pooling models. This property of shrinkage is one reason why linear mixed models are so important in cognitive science.
+
+\hypertarget{summary}{%
+\section{Summary}\label{summary}}
 
 \hypertarget{sec:LMExercises}{%
 \section{Exercises:}\label{sec:LMExercises}}
@@ -4007,44 +3978,44 @@ Download the data-set E1\_data.csv. Then run the following commands to load the 
 The data consist of a repeated measures experiment comparing two conditions which are labeled Type 1 and Type 2. The column Sub refers to subject id, and the column ID refers to item id. RT refers to reading time in seconds (we have converted it above to milliseconds); NA is missing data. You can ignore the other columns. This is a standard Latin square design. We will work with the data frame \texttt{crit} below.
 
 \hypertarget{sec:LMExercisesPart1}{%
-\subsection{Part 1}\label{sec:LMExercisesPart1}}
+\subsection{By-subjects t-test}\label{sec:LMExercisesPart1}}
 
 Using RT as a dependent variable, carry out the appropriate by-subjects t-test to evaluate the null hypothesis that there is no difference between the conditions labeled Type 1 and 2. Write down all the R commands needed to do the appropriate t-test, and the resulting t-value and p-value. State whether we can reject the null hypothesis given the results of the t-test; explain why.
 
 \hypertarget{sec:LMExercisesPart2}{%
-\subsection{Part 2}\label{sec:LMExercisesPart2}}
+\subsection{Fitting a linear mixed model}\label{sec:LMExercisesPart2}}
 
-Now, using the data-frame called crit above as the data frame, fit a linear mixed model (called M0) with the column called Type coded as sum contrasts.
+Now, using the data-frame called \texttt{crit} above as the data-frame, fit a linear mixed model (called M0) with the column called Type coded as sum contrasts.
 
 Assume varying intercepts for subjects and varying intercepts for items (varying intercepts are sometimes called random intercepts). Write down the linear mixed models command, and write down the fixed-effects estimates (Intercept and slope) along with their standard errors. State whether we can reject the null hypothesis given the results of the t-value shown in the linear mixed model output; explain why.
 
 \hypertarget{sec:LMExercisesPart3}{%
-\subsection{Part 3}\label{sec:LMExercisesPart3}}
+\subsection{t-test vs.~linear mixed model}\label{sec:LMExercisesPart3}}
 
 Why do the results of the t-test and the linear mixed model M0 differ?
 
 \hypertarget{sec:LMExercisesPart4}{%
-\subsection{Part 4}\label{sec:LMExercisesPart4}}
+\subsection{Power calculation using power.t.test}\label{sec:LMExercisesPart4}}
 
 The researcher wants to achieve 80\% statistical power in a future study. Based on the available data above, she determines that the standard error (note: not the standard deviation!) of the difference in means between the conditions Type 1 and Type 2 is 21. She has reason to believe that the true difference in means is 30 ms. What is the number of participants (to the nearest whole number) needed to achieve approximately 80\% power? Use the power.t.test function to compute your answer. Write down the \texttt{power.t.test} function specification you used, as well as the number of participants needed, based on the output of the power.t.test function.
 
 \hypertarget{sec:LMExercisesPart5}{%
-\subsection{Part 5}\label{sec:LMExercisesPart5}}
+\subsection{Residuals}\label{sec:LMExercisesPart5}}
 
 The plot below shows the distribution of the residuals from model M0 plotted against the standard normal distribution with mean 0 and standard deviation 1. Explain what the plot tells us about one of the model assumptions of the linear mixed model M0 that you fit earlier.
 
 (You can ignore the numbers below the plot.)
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-124-1.pdf} 9038 10929
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-123-1.pdf} 9038 10929
 726 2544
 
 \hypertarget{sec:LMExercisesPart6}{%
-\subsection{Part 6}\label{sec:LMExercisesPart6}}
+\subsection{Understanding contrast coding}\label{sec:LMExercisesPart6}}
 
 Using only your estimates of the intercept and the slope in model M0's fixed effects output, write down the mean of the condition labeled Type 1 in the data, and the mean of the condition labeled Type 2.
 
 \hypertarget{sec:LMExercisesPart7}{%
-\subsection{Part 7}\label{sec:LMExercisesPart7}}
+\subsection{Understanding the fixed-effects output}\label{sec:LMExercisesPart7}}
 
 Suppose that the model M0's output for the fixed effects analysis were as follows. SO is a sum-coded contrast specification for the conditions labeled Type.
 
@@ -4063,7 +4034,7 @@ Suppose that the model M0's output for the fixed effects analysis were as follow
 What is the value of the standard error of the slope (SO), which is labeled NA above?
 
 \hypertarget{sec:LMExercisesPart8}{%
-\subsection{Part 8}\label{sec:LMExercisesPart8}}
+\subsection{Understanding the null hypothesis test}\label{sec:LMExercisesPart8}}
 
 A researcher fits a linear mixed model to compare the reading times between two conditions (a) and (b), just like in the above study. Her hypothesis is that the mean for condition (a) is larger than the mean for (b). She observes that condition a has sample mean 500 ms, and condition (b) has sample mean 450 ms. She also establishes from the linear mixed model that the t-value is 1.94. The approximate p-value associated with this t-value is 0.052. Answer the following: (A) Do we have evidence against the null hypothesis and (B) do we have evidence for the particular research hypothesis that the researcher has?
 
@@ -4450,7 +4421,7 @@ It is common in the psycholinguistics literature to use the t-value from the lin
 
 The more general method for hypothesis testing is the likelihood ratio test shown above.
 
-One can also use the likelihood ratio test to evaluate whether a variance compoonent should be included or not. For example, is the correlation parameter justified for the subjects random effects? One can test this in the following way:
+One can also use the likelihood ratio test to evaluate whether a variance component should be included or not. For example, is the correlation parameter justified for the subjects random effects? Recall that we had a correlation of 0.58. Is this statistically significant? One can test this in the following way:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4481,7 +4452,110 @@ One can also use the likelihood ratio test to evaluate whether a variance compoo
 ## m1           0.0032
 \end{verbatim}
 
-The test indicates that we can reject the null hypothesis that the correlation parameter is 0.
+The test indicates that we can reject the null hypothesis that the correlation parameter is 0. We will return to this parameter in the chapter on simulation.
+
+\hypertarget{sec:HypTestExercises}{%
+\section{Exercises}\label{sec:HypTestExercises}}
+
+\hypertarget{sec:HypTestExercisesChinese}{%
+\subsection{Chinese relative clauses}\label{sec:HypTestExercisesChinese}}
+
+Load the following two data-sets:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gibsonwu <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/gibsonwucrit.txt"}\NormalTok{, }
+  \DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{gibsonwu2 <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/gibsonwu2012datarepeat.txt"}\NormalTok{, }
+  \DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The data are taken from two oexperiments that investigate (inter alia) the effect of relative clause type on reading time in Chinese. The data are from \citet{gibsonwu} and \citet{VasishthetalPLoSOne2013} respectively. The second data-set is a direct replication attempt of the first.
+
+Chinese relative clauses are interesting theoretically because they are prenominal: the relative clause appears before the head noun. Figure \ref{fig:chineserc} shows an example.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(}\StringTok{"figures/chineserc.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=24.78in]{figures/chineserc} \caption{\label{fig:chineserc} An example of subjects vs. object relative clauses in Chinese.}\label{fig:chinesercfig}
+\end{figure}
+
+The consequence of Chinese relative clauses being prenominal is that the distance between the gap in relative clause and the head noun is larger in subject relatives than object relatives (see Figure \ref{fig:chineserc}). \citet{hsiao03} have claimed that the larger distance in subject relatives leads to longer reading time at the head noun. Under this view, the prediction is that subject relatives are harder to process than object relatives. If this is true, this is interesting because in most other languages that have been studied, subject relatives are easier to process than object relatives; so Chinese will be a very unusual exception cross-linguistically.
+
+The data provided are for the critical region (the head noun). The experiment method is self-paced reading, so we have reading times in milliseconds.
+
+The research question is whether the difference in reading times between object and subject relative clauses is negative. For both data-sets, investigate this question by (a) fitting a paired t-test (by-subjects and by items), (b) fitting the most complex linear mixed model you can to the data and then interpreting the t-value, and (c) the likelihood ratio test. What can we conclude about the research question?
+
+\hypertarget{sec:HypTestExerciseAgrmt}{%
+\subsection{Agreement attraction in comprehension}\label{sec:HypTestExerciseAgrmt}}
+
+Load the following data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datE1 <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/dillonE1.txt"}\NormalTok{, }
+  \DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The data are taken from an experiment that investigate (inter alia) the effect of number similarity between a noun and the auxiliary verb in sentences like the following. There are two levels to a factor called Int(erference): low and high.
+
+\begin{itemize}
+\tightlist
+\item
+  low: The key to the cabinet \emph{are} on the table
+\item
+  high: The key to the \emph{cabinets} \emph{are} on the table
+\end{itemize}
+
+Here, in the condition marked \emph{high}, the auxiliary verb \emph{are} is predicted to be read faster than in the condition marked \emph{low}, because the plural marking on the noun \emph{cabinets} leads the reader to think that the sentence is grammatical. (Note that both sentences are ungrammatical.) This phenomenon, where the high condition is read faster than the low condition, is called \textbf{agreement attraction}.
+
+The data provided are for the critical region (the auxiliary verb \emph{are}). The experiment method is eyetracking; we have total reading times in milliseconds.
+
+The research question is whether the difference in reading times between high and low conditions is negative.
+
+\begin{itemize}
+\tightlist
+\item
+  First, figure out which linear mixed model is appropriate for these data (varying intercepts only? varying intercepts and slopes? with or without correlations?).
+\item
+  Then, carry out a statistical test using (a) the paired t-test (using the t.test function), (b) the t-test of the linear mixed model, and (c) the likelihood ratio test. What is your conclusion? Is there evidence for agreement attraction in the data?
+\end{itemize}
+
+\hypertarget{sec:HypTestExerciseAgrmt}{%
+\subsection{The grammaticality illusion in ungrammatical center embeddings}\label{sec:HypTestExerciseAgrmt}}
+
+Load the following data-sets:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{english <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/embeddingenglish.txt"}\NormalTok{, }
+  \DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{dutch <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/embeddingdutch.txt"}\NormalTok{, }
+  \DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+In an offline accuracy rating study on English double center-embedding constructions, \citet{gibsonthomas97} found that grammatical constructions (e.g., example a below) were no less acceptable than ungrammatical constructions (e.g., example b) where a middle verb phrase (e.g., was cleaning every week) was missing.
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\item
+  The apartment that the maid who the service had sent over was cleaning every week was well decorated.
+\item
+  *The apartment that the maid who the service had sent over --- was well decorated
+\end{enumerate}
+
+Based on these results from English, \citet{gibsonthomas97} proposed that working-memory overload leads the comprehender to forget the prediction of the upcoming verb phrase (VP), which reduces working-memory load. This came to be known as the \emph{VP-forgetting hypothesis}. The prediction is that in the word immediately following the final verb, the grammatical condition (which is coded as +1 in the data-frames) should be harder to read than the ungrammatical condition (which is coded as -1).
+
+The data provided above test this hypothesis using self-paced reading for English \citep{VSLK08}, and for Dutch \citep{FrankEtAl2015}. The data provided are for the critical region (the noun phrase, labeled NP1, following the final verb). We have reading times in log milliseconds.
+
+Is there support for the VP-forgetting hypothesis cross-linguistically, from English and Dutch?
 
 \hypertarget{using-simulation-to-understand-your-model}{%
 \chapter{Using simulation to understand your model}\label{using-simulation-to-understand-your-model}}
