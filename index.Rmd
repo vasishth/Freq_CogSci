@@ -82,7 +82,7 @@ Before you start, please install
 
 In every R session, we'll need to set a seed (this ensures that the random numbers are always the same). 
 
-```{r load, cache =FALSE, message=FALSE}
+```{r load, cache =FALSE, message=FALSE,include=FALSE}
 set.seed(42)
 library(MASS)
 ##be careful to load dplyr after MASS
@@ -91,6 +91,10 @@ library(purrr)
 library(readr)
 library(extraDistr)
 library(ggplot2)
+library (intoo)
+library (barsurf)
+library (bivariate)
+
 ```
 
 
