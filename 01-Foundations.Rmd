@@ -300,30 +300,179 @@ Again, depending on the sample size, the sample mean and sample variance may or 
 One other important detail about probability distributions is that one can have a joint distribution defined for more than one random variable. We consider this situation next, considering the continuous case only. 
 
 
-## Bivariate/multivariate distributions
+## Bivariate and multivariate distributions
 
-So far, we have only discussed univariate distributions. It is also possible to specify distributions with two or more dimensions. For example, consider the bivariate case:
- two normal random variables $U_0$ and $U_1$, each of which coming from, for example, a Normal(0,1) distribution, with some correlation $\rho$ between the random variables. 
+So far, we have only discussed univariate distributions. It is also possible to specify distributions with two or more dimensions. 
 
-A bivariate distribution for two random variables $U_0$ and $U_1$, each of which comes from a normal distribution, is expressed in terms of the means and standard deviations of each of the two distributions, and the correlation $\rho$ between them. The standard deviations and correlation are expressed in a special form of a $2\times 2$ matrix called a variance covariance matrix $\Sigma$. If $\rho_u$ is the correlation between the two random variables, and $\sigma _{u0}$ and $\sigma _{u1}$ the respective standard deviations, the variance covariance matrix is written as:
+### Example 1: Discrete bivariate distributions
+
+Starting with the discrete case, consider the discrete bivariate distribution shown below. These are data from an experiment  where, inter alia, in each trial a Likert acceptability rating and a question-response accuracy were recorded (the data are from a study by Anna Laurinavichyute, used with permission here).
+
+This figure shows the *joint probability mass function* of two random variables X and Y. The random variable X consists of 7 possible values (this is the 1-7 Likert response scale), and the random variable Y is question-response accuracies, with 0 representing incorrect responses, and 1 representing correct responses. 
+
+```{r bivardiscrete,echo=FALSE,message="FALSE",warning=FALSE,results="asis",fig.cap="Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions."}
+agrmt<-read.csv("data/agrmt_discrete_binomial.csv")
+rating0<-table(subset(agrmt,accuracy==0)$rating)
+rating1<-table(subset(agrmt,accuracy==1)$rating)
+
+ratingsbivar<-data.frame(rating0=rating0,rating1=rating1)
+
+ratingsbivar<-ratingsbivar[,c(2,4)]
+colnames(ratingsbivar)<-c(0,1)
+
+library (intoo)
+library (barsurf)
+library (bivariate)
+library (MASS)
+
+f <- cbvpmf (ratingsbivar)
+plot (f, TRUE,
+       arrows=FALSE)
+```
+
+One can also display the figure as a table. 
+
+```{r}
+probs<-attr(f,"p")
+t(probs)
+```
+
+For each possible value of X and Y, we have a joint probability. Given such a bivariate distribution, there are two useful quantities we can compute: the *marginal* distributions ($p_{X}$ and $p_Y$), and the *conditional* distributions ($p_{X|Y}$ and $p_{Y|X}$).  
+The table below shows the joint probability mass function $p_{X,Y}(x,y)$.
+
+\begin{table}[!htbp] 
+\begin{center}
+\begin{tabular}{c|ccccccc}
+$p_{X,Y}$ & x=1 & x=2 & x=3 & x=4 & x=5 & x=6 & x=7\\
+\hline
+y = 0 & 0.017924 & 0.023277 & 0.040037 & 0.043063 & 0.063315 & 0.048883 & 0.054935\\
+y = 1 & 0.031192 & 0.053305 & 0.085661 & 0.096369 &  0.146881 & 0.153166 &  0.141993\\
+\end{tabular}
+\end{center}
+\caption{The joint PMF for two random variables $X$ and $Y$.}\label{discretebivartable}
+\end{table}
+
+The marginal  distribution $p_Y$ is defined as follows. $S_{X}$ is the support of X, i.e., all the possible values of X.
+
+\begin{equation}
+p_{Y}(y)=\sum_{x\in S_{X}}p_{X,Y}(x,y).\label{eq-marginal-pmf}
+\end{equation}	
+
+Similarly, the marginal distribution $p_X$ is defined as:
+
+\begin{equation}
+p_{X}(x)=\sum_{y\in S_{Y}}p_{X,Y}(x,y).\label{eq-marginal-pmf2}
+\end{equation}	
+
+$p_Y$ is easily computed, by summing up the rows; and $p_X$ by summing up the columns. You can see why this is called the marginal distribution; the result appears in the margins of the table.
+
+```{r}
+#P(Y)
+(PY<-rowSums(t(probs)))
+sum(PY) ## sums to 1
+#P(X)
+(PX<-colSums(t(probs)))
+sum(PX) ## sums to 1
+```
+
+The marginal probabilities sum to 1, as they should. The table below shows the marginal probabilities.
+
+\small
+\begin{table}[!htbp]
+\begin{center}
+\begin{tabular}{c|ccccccc|c}
+$p_{X,Y}$ & x=1 & x=2 & x=3 & x=4 & x=5 & x=6 & x=7 & P(Y)\\
+\hline
+y = 0 & 0.017924 & 0.023277 & 0.040037 & 0.043063 & 0.063315 & 0.048883 & 0.054935 & \textbf{0.29143}\\
+y = 1 & 0.031192 & 0.053305 & 0.085661 & 0.096369 &  0.146881 & 0.153166 &  0.141993 &  \textbf{0.70857}\\
+\hline
+P(X) & \textbf{0.049115} & \textbf{0.076583} & \textbf{0.125698} & \textbf{0.139432} & \textbf{0.210196} & \textbf{0.202048} & \textbf{0.196927}\\
+\end{tabular}
+\end{center}
+\caption{The joint and marginal distributions of X and Y.}\label{discretebivartable2}
+\end{table}
+\normalsize
+
+Notice that to compute the marginal distribution of X, one is summing over all the Ys; and to compute the marginal distribution of Y, one sums over all the X's. We say that we are *marginalizing out* the random variable that we are summing over. One can visualize the two marginal distributions using barplots. 
+
+```{r echo=FALSE}
+op<-par(mfrow=c(1,2),pty="s")
+names(PX)<-1:7
+barplot(PX,main="P(X)")
+barplot(PY,main="P(Y)")
+```
+
+For computing conditional distributions, recall that conditional probability is defined as:
+
+\begin{equation}
+p_{X\mid Y}(x\mid y) = \frac{p_{X,Y}(x,y)}{p_Y(y)}	
+\end{equation}
+
+and 
+
+\begin{equation}
+p_{Y\mid X}(x\mid y) = \frac{p_{X,Y}(x,y)}{p_X(x)}	
+\end{equation}
+
+The conditional distribution of a random variable $X$ given that $Y=y$, where $y$ is some specific (fixed) value, is:
+
+\begin{equation}
+p_{X\mid Y} (x\mid y) = \frac{p_{X,Y}(x,y)}{p_Y(y)}	\quad \hbox{provided } p_Y(y)=P(Y=y)>0
+\end{equation}
+
+As an example, let's consider how $p_{X\mid Y}$ would be computed.
+The possible values of $y$ are $0,1$, and so we have to find the conditional distribution (defined above) for each of these values. I.e., we have to find $p_{X\mid Y}(x\mid y=0)$, and $p_{X\mid Y}(x\mid y=1)$.
+
+Let's do the calculation for $p_{X\mid Y}(x\mid y=0)$.
+
+\begin{equation}
+\begin{split}
+p_{X\mid Y} (1\mid 0) =& \frac{p_{X,Y}(1,0)}{p_Y(0)}\\
+	=&  \frac{0.017924}{0.29143}\\
+	=& `r fractions(0.017924/0.29143)`
+\end{split}	
+\end{equation}
+
+This conditional probability value will occupy the cell X=1, Y=0 in the table below summarizing the conditional probability distribution $p_{X|Y}$. In this way, one can fill in the entire table, which will then represent the conditional distributions $p_{X|Y=0}$ and $p_{X|Y=1}$. The reader may want to take a few minutes to complete the table.  
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{tabular}{c|ccccccc}
+	& x=1 & x=2 & x=3 & x=4 & x=5 & x=6 & x=7\\ 
+\hline	
+$p_{X\mid Y}(x\mid y=0)$  & `r fractions(0.017924/0.29143)` &  & & & & & \\
+$p_{X\mid Y}(x\mid y=1)$  &  &  & & & & &  \\
+\end{tabular}
+\end{center}
+\caption{The conditional probability distribution of X given Y.}
+\label{XgivenY}
+\end{table}
+
+Similarly, one can construct a table that shows $p_{Y|X}$.
+
+### Example 2: Continuous bivariate distributions
+
+Consider now the continuous bivariate case; this time, we will use simulated data. Consider two normal random variables $X$ and $Y$, each of which coming from, for example, a Normal(0,1) distribution, with some correlation $\rho$ between the two random variables. 
+
+A bivariate distribution for two random variables $X$ and $Y$, each of which comes from a normal distribution, is expressed in terms of the means and standard deviations of each of the two distributions, and the correlation $\rho$ between them. The standard deviations and correlation are expressed in a special form of a $2\times 2$ matrix called a variance-covariance matrix $\Sigma$. If $\rho_u$ is the correlation between the two random variables, and $\sigma _{x}$ and $\sigma _{y}$ the respective standard deviations, the variance-covariance matrix is written as:
 
 \begin{equation}\label{eq:covmatfoundations}
 \Sigma
 =
 \begin{pmatrix}
-\sigma _{u0}^2  & \rho _{u}\sigma _{u0}\sigma _{u1}\\
-\rho _{u}\sigma _{u0}\sigma _{u1}    & \sigma _{u1}^2\\
+\sigma _{x}^2  & \rho\sigma _{x}\sigma _{y}\\
+\rho\sigma _{x}\sigma _{y}    & \sigma _{y}^2\\
 \end{pmatrix}
 \end{equation}
 
-The off-diagonals of this matrix contain the covariance between  $U_0$ and $U_1$. 
+The off-diagonals of this matrix contain the covariance between  $X$ and $Y$. 
 
-The joint distribution of $U_0$ and $U_1$ is defined as follows:
+The joint distribution of $X$ and $Y$ is defined as follows:
 
 \begin{equation}\label{eq:jointpriordistfoundations}
 \begin{pmatrix}
-  U_0 \\ 
-  U_1 \\
+  X \\ 
+  Y \\
 \end{pmatrix}
 \sim 
 \mathcal{N}_2 \left(
@@ -336,34 +485,35 @@ The joint distribution of $U_0$ and $U_1$ is defined as follows:
 \end{equation}
 
 
-A visualization will help. The figure below shows a bivariate distribution with correlation zero, a positive and a negative correlation.
+A visualization will help. The figures below shows a bivariate distribution with correlation zero, a positive and a negative correlation.
 
-```{r echo=FALSE}
-library(mvtnorm)
-op<-par(mfrow=c(1,3),pty="s")
-u0 <- u1 <- seq(from = -3, to = 3, length.out = 30)
-Sigma1<-diag(2)
-f <- function(u0, u1) dmvnorm(cbind(u0, u1), mean = c(0, 0),sigma = Sigma1)
-z <- outer(u0, u1, FUN = f)
-persp(u0, u1, z, theta = -30, phi = 30, ticktype = "simple",
+```{r zerocor,echo=FALSE,fig.cap="A bivariate Normal distribution with zero correlation. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
+f1 <- nbvpdf (0, 0, 1, 1, 0)
+#f1 %$% matrix.variances
+plot (f1, all=TRUE, n=20,
       main="No correlation")
-
-Sigma2<-matrix(c(1,.6,.6,1),byrow=FALSE,ncol=2)
-f <- function(u0, u1) dmvnorm(cbind(u0, u1), mean = c(0, 0),sigma = Sigma2)
-z <- outer(u0, u1, FUN = f)
-persp(u0, u1, z, theta = -30, phi = 30, ticktype = "simple",
-      main="Positive correlation")
-
-Sigma3<-matrix(c(1,-.6,-.6,1),byrow=FALSE,ncol=2)
-f <- function(u0, u1) dmvnorm(cbind(u0, u1), mean = c(0, 0),sigma = Sigma3)
-z <- outer(u0, u1, FUN = f)
-persp(u0, u1, z, theta = -30, phi = 30, ticktype = "simple",
-      main="Negative correlation")
 ```
 
-In this book, we will make use of such multivariate distributions a lot, and it will soon become important to know how to generate simulated bivariate data that is correlated. Suppose we want to generate 100 correlated pairs of data, with correlation $\rho=0.6$. The two random variables have mean 0, and standard deviations 5 and 10 respectively. 
+```{r negcor,echo=FALSE,fig.cap="A bivariate Normal distribution with a negative  correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
+f2 <- nbvpdf (0, 0, 1, 1, 0.6)
+#f1 %$% matrix.variances
+plot (f2, all=TRUE, n=20,
+      main="Correlation 0.6")
+```
 
-Here is how we would generate such data. First, define a variance covariance matrix; then, use the multivariate analog of the `rnorm` function, `mvrnorm`, to generate $100$ data-points.
+```{r poscor,echo=FALSE,fig.cap="A bivariate Normal distribution with a positive  correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
+f3 <- nbvpdf (0, 0, 1, 1, -0.6)
+#f1 %$% matrix.variances
+plot (f3, all=TRUE, n=20,
+      main="Correlation -0.6")
+```
+In this book, we will make use of such multivariate distributions a lot, and it will soon become important to know how to generate simulated bivariate or multivariate data that is correlated. So let's look at that next.
+
+### Generate simulated bivariate (multivariate) data 
+
+Suppose we want to generate 100 correlated pairs of data, with correlation $\rho=0.6$. The two random variables have mean 0, and standard deviations 5 and 10 respectively. 
+
+Here is how we would generate such data. First, define a variance-covariance matrix; then, use the multivariate analog of the `rnorm` function, `mvrnorm`, to generate $100$ data-points.
 
 ```{r}
 library(MASS)
@@ -377,7 +527,7 @@ u<-mvrnorm(n=100,
 head(u)
 ```
 
-A plot confirms that the data are positively correlated.
+A plot confirms that the simulated data are positively correlated.
 
 ```{r}
 plot(u[,1],u[,2])
@@ -402,19 +552,19 @@ One can decompose the matrix as follows. The matrix can be seen as the product o
 (corrmatrix<-matrix(c(1,0.6,0.6,1),ncol=2))
 ```
 
-Given these two matrices, one can reassemble the variance covariance matrix:
+Given these two matrices, one can reassemble the variance-covariance matrix:
 
 ```{r}
 sd_diag%*%corrmatrix%*%sd_diag                   
 ```
 
-There is a built-in convenience function, sdcor3cov in the SIN package that does this calculation, taking the vector of standard deviatios (not the diagonal matrix) and the correlation matrix to yield the variance covariance matrix:
+There is a built-in convenience function, `sdcor3cov` in the `SIN` package that does this calculation, taking the vector of standard deviatios (not the diagonal matrix) and the correlation matrix to yield the variance-covariance matrix:
 
 ```{r}
 SIN::sdcor2cov(stddev=sds,corr=corrmatrix)
 ```
 
-We will be using this function a lot when simulating data from linear mixed models.
+We will be using this function a lot when simulating data from hierarchical models.
 
 ## Summary of useful R functions relating to univariate distributions
 
