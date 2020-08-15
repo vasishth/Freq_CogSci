@@ -319,10 +319,6 @@ ratingsbivar<-data.frame(rating0=rating0,rating1=rating1)
 
 ratingsbivar<-ratingsbivar[,c(2,4)]
 colnames(ratingsbivar)<-c(0,1)
-
-library (intoo)
-library (barsurf)
-library (bivariate)
 library (MASS)
 
 f <- cbvpmf (ratingsbivar)
@@ -345,8 +341,8 @@ The table below shows the joint probability mass function $p_{X,Y}(x,y)$.
 \begin{tabular}{c|ccccccc}
 $p_{X,Y}$ & x=1 & x=2 & x=3 & x=4 & x=5 & x=6 & x=7\\
 \hline
-y = 0 & 0.017924 & 0.023277 & 0.040037 & 0.043063 & 0.063315 & 0.048883 & 0.054935\\
-y = 1 & 0.031192 & 0.053305 & 0.085661 & 0.096369 &  0.146881 & 0.153166 &  0.141993\\
+y = 0 & 0.018 & 0.023 & 0.040 & 0.043 & 0.063 & 0.049 & 0.055\\
+y = 1 & 0.031 & 0.053 & 0.086 & 0.096 &  0.147 & 0.153 &  0.142\\
 \end{tabular}
 \end{center}
 \caption{The joint PMF for two random variables $X$ and $Y$.}\label{discretebivartable}
@@ -383,10 +379,10 @@ The marginal probabilities sum to 1, as they should. The table below shows the m
 \begin{tabular}{c|ccccccc|c}
 $p_{X,Y}$ & x=1 & x=2 & x=3 & x=4 & x=5 & x=6 & x=7 & P(Y)\\
 \hline
-y = 0 & 0.017924 & 0.023277 & 0.040037 & 0.043063 & 0.063315 & 0.048883 & 0.054935 & \textbf{0.29143}\\
-y = 1 & 0.031192 & 0.053305 & 0.085661 & 0.096369 &  0.146881 & 0.153166 &  0.141993 &  \textbf{0.70857}\\
+y = 0 & 0.018 & 0.023 & 0.040 & 0.043 & 0.063 & 0.049 & 0.055 &  \textbf{0.291}\\
+y = 1 & 0.031 & 0.053 & 0.086 & 0.096 &  0.147 & 0.153 &  0.142 &  \textbf{0.709}\\
 \hline
-P(X) & \textbf{0.049115} & \textbf{0.076583} & \textbf{0.125698} & \textbf{0.139432} & \textbf{0.210196} & \textbf{0.202048} & \textbf{0.196927}\\
+P(X) & \textbf{0.049} & \textbf{0.077} & \textbf{0.126} & \textbf{0.139} & \textbf{0.210} & \textbf{0.202} & \textbf{0.197}\\
 \end{tabular}
 \end{center}
 \caption{The joint and marginal distributions of X and Y.}\label{discretebivartable2}
@@ -428,8 +424,8 @@ Let's do the calculation for $p_{X\mid Y}(x\mid y=0)$.
 \begin{equation}
 \begin{split}
 p_{X\mid Y} (1\mid 0) =& \frac{p_{X,Y}(1,0)}{p_Y(0)}\\
-	=&  \frac{0.017924}{0.29143}\\
-	=& `r fractions(0.017924/0.29143)`
+	=&  \frac{0.018}{0.291}\\
+	=& `r fractions(0.018/0.291)`
 \end{split}	
 \end{equation}
 
@@ -440,7 +436,7 @@ This conditional probability value will occupy the cell X=1, Y=0 in the table be
 \begin{tabular}{c|ccccccc}
 	& x=1 & x=2 & x=3 & x=4 & x=5 & x=6 & x=7\\ 
 \hline	
-$p_{X\mid Y}(x\mid y=0)$  & `r fractions(0.017924/0.29143)` &  & & & & & \\
+$p_{X\mid Y}(x\mid y=0)$  & `r fractions(0.018/0.291)` &  & & & & & \\
 $p_{X\mid Y}(x\mid y=1)$  &  &  & & & & &  \\
 \end{tabular}
 \end{center}
@@ -484,8 +480,16 @@ The joint distribution of $X$ and $Y$ is defined as follows:
 \right)
 \end{equation}
 
+The joint PDF is written with reference to the two variables $f_{X,Y}(x,y)$. Just as in the discrete case, the marginal distributions can be derived by marginalizing out the other random variable:
 
-A visualization will help. The figures below shows a bivariate distribution with correlation zero, a positive and a negative correlation.
+\begin{equation}
+f_X(x) = \int f_{X,Y}(x,y)\, dy \quad f_Y(y) = \int f_{X,Y}(x,y)\, dx
+\end{equation}
+
+Here, the integral sign $\int$ is the continuous equivalent of the summation sign $\sum$ in the discrete case. Luckily, we will never have to compute such integrals ourselves; but it is important to appreciate how a marginal distribution arises from a bivariate distributation---by integrating out or marginalizing out the other random variable.
+
+
+A visualization will help. The figures below shows a bivariate distribution with correlation zero (Figure \@ref(fig:zerocor)), a positive (Figure \@ref(fig:poscor)) and a negative correlation (Figure \@ref(fig:negcor)).
 
 ```{r zerocor,echo=FALSE,fig.cap="A bivariate Normal distribution with zero correlation. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
 f1 <- nbvpdf (0, 0, 1, 1, 0)
@@ -494,6 +498,14 @@ plot (f1, all=TRUE, n=20,
       main="No correlation")
 ```
 
+```{r poscor,echo=FALSE,fig.cap="A bivariate Normal distribution with a positive  correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
+f3 <- nbvpdf (0, 0, 1, 1, -0.6)
+#f1 %$% matrix.variances
+plot (f3, all=TRUE, n=20,
+      main="Correlation -0.6")
+```
+
+
 ```{r negcor,echo=FALSE,fig.cap="A bivariate Normal distribution with a negative  correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
 f2 <- nbvpdf (0, 0, 1, 1, 0.6)
 #f1 %$% matrix.variances
@@ -501,12 +513,6 @@ plot (f2, all=TRUE, n=20,
       main="Correlation 0.6")
 ```
 
-```{r poscor,echo=FALSE,fig.cap="A bivariate Normal distribution with a positive  correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
-f3 <- nbvpdf (0, 0, 1, 1, -0.6)
-#f1 %$% matrix.variances
-plot (f3, all=TRUE, n=20,
-      main="Correlation -0.6")
-```
 In this book, we will make use of such multivariate distributions a lot, and it will soon become important to know how to generate simulated bivariate or multivariate data that is correlated. So let's look at that next.
 
 ### Generate simulated bivariate (multivariate) data 
@@ -595,7 +601,7 @@ Y : S \rightarrow \mathbb{R}
 
 The random variable associates to each outcome $\omega \in S$ exactly one number $Y(\omega) = y$. $S_Y$ is all the $y$'s (all the possible values of $Y$, the support of $Y$). I.e., $y \in S_Y$. 
 
-Every random variable $Y$ has associated with it a probability mass (distribution)  function (PMF, PDF). I.e., PMF is used for discrete distribu tions and PDF for continuous distributions. The PMF/PDF maps every element of $S_Y$ to a value between 0 and 1.
+Every random variable $Y$ has associated with it a probability mass (distribution)  function (PMF, PDF). I.e., PMF is used for discrete distributions and PDF for continuous distributions. The PMF/PDF maps every element of $S_Y$ to a value between 0 and 1.
 
 \begin{equation}
 p_Y : S_Y \rightarrow [0, 1] 
@@ -642,11 +648,58 @@ The above integral is simply summing up the area under the curve between the poi
 
 A final point here is that we can go back and forth between the PDF and the CDF. If the PDF is $f(y)$, then the CDF that allows us to compute quantities like $P(Y<b)$ is just the integral $F(Y<b)=\int_{-\infty}^b f(y)\, dy$. If we differentiate the CDF, we get the PDF back: $d(F(y))/dy=f(y)$.
 
+In bivariate distributions, the joint CDF is written $F_{X,Y}(a,b)=P(X\leq a, Y\leq b)$, where $-\infty < a,b<\infty$. The *marginal distributions* of $F_X$ and $F_Y$ are the CDFs of each of the associated random variables. The CDF of $X$:
 
+\begin{equation}
+F_X(a) = P(X\leq a) = F_X(a,\infty)	
+\end{equation}
 
+The CDF of $Y$:
+
+\begin{equation}
+F_Y(a) = P(Y\leq b) = F_Y(\infty,b)	
+\end{equation}
+
+$f(x,y)$ is the *joint PDF* of $X$ and $Y$. Every joint PDF satisfies
+
+\begin{equation}
+f(x,y)\geq 0\mbox{ for all }(x,y)\in S_{X,Y},
+\end{equation}
+and
+\begin{equation}
+\iintop_{S_{X,Y}}f(x,y)\,\mathrm{d} x\,\mathrm{d} y=1.
+\end{equation}
+	
+where $S_{X,Y}$ is the joint support of the two random variables.
+
+If X and Y are jointly continuous, they are individually continuous, and their PDFs are:
+
+\begin{equation}
+\begin{split}
+P(X\in A) = & P(X\in A, Y\in (-\infty,\infty))	\\
+= & \int_A \int_{-\infty}^{\infty} f(x,y)\,dy\, dx\\
+= & \int_A f_X(x)\, dx
+\end{split}	
+\end{equation}
+
+\noindent
+where
+
+\begin{equation}
+f_X(x) = \int_{-\infty}^{\infty} f(x,y)\, dy	
+\end{equation}
+
+Similarly:
+
+\begin{equation}
+f_Y(y) =  \int_{-\infty}^{\infty} f(x,y)\, dx		
+\end{equation}
+
+	
+	
 ## Further reading
 
-A quick review of the mathematical foundations needed for statistics is available in the short book by @fox2009mathematical. @morin2016probability and @blitzstein2014introduction are accessible introductions to probability theory. @kerns contains a very well-written general introduction to random variable theory, but assumes the reader knows the basics of calculus.
+For readers interested in the mathematics needed for statistics, the books by @fox2009mathematical, @gill2006essential, and @moore2013mathematics are useful. The essential matrix algebra needed for statistics is discussed in @fieller.  Accessible introductions to probability theory are @morin2016probability and @blitzstein2014introduction. @kerns contains a very well-written and freely available general introduction to random variable theory and statistics, but assumes the reader knows the basics of calculus.
 
 ## Exercises {#sec:Foundationsexercises}
 
