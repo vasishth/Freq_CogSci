@@ -306,7 +306,7 @@ So far, we have only discussed univariate distributions. It is also possible to 
 
 ### Example 1: Discrete bivariate distributions
 
-Starting with the discrete case, consider the discrete bivariate distribution shown below. These are data from an experiment  where, inter alia, in each trial a Likert acceptability rating and a question-response accuracy were recorded (the data are from a study by Anna Laurinavichyute, used with permission here).
+Starting with the discrete case, consider the discrete bivariate distribution shown below. These are data from an experiment  where, inter alia, in each trial a Likert acceptability rating and a question-response accuracy were recorded (the data are from a study by @AnnaLphd, used with permission here).
 
 This figure shows the *joint probability mass function* of two random variables X and Y. The random variable X consists of 7 possible values (this is the 1-7 Likert response scale), and the random variable Y is question-response accuracies, with 0 representing incorrect responses, and 1 representing correct responses. 
 
@@ -480,14 +480,21 @@ The joint distribution of $X$ and $Y$ is defined as follows:
 \right)
 \end{equation}
 
-The joint PDF is written with reference to the two variables $f_{X,Y}(x,y)$. Just as in the discrete case, the marginal distributions can be derived by marginalizing out the other random variable:
+The joint PDF is written with reference to the two variables $f_{X,Y}(x,y)$. It has the property that the area under the curve sums to 1. Formally, we would write this as a double integral: we are summing up the area under the curve for both dimensions X and Y (hence two integrals).
 
 \begin{equation}
-f_X(x) = \int f_{X,Y}(x,y)\, dy \quad f_Y(y) = \int f_{X,Y}(x,y)\, dx
+\iint_{S_{X,Y}} f_{X,Y}(x,y)\, dx dy = 1
 \end{equation}
 
-Here, the integral sign $\int$ is the continuous equivalent of the summation sign $\sum$ in the discrete case. Luckily, we will never have to compute such integrals ourselves; but it is important to appreciate how a marginal distribution arises from a bivariate distributation---by integrating out or marginalizing out the other random variable.
+Here, dx, and dy express whether we are summing the area under the curve along the X axis and the Y axis.
 
+The joint CDF would be written as follows. The equation states that the probability of observing a value like $(u,v)$ or some value smaller than that (i.e., some $(u',v')$, such that $u'<u$ and $v'<v$.
+
+\begin{equation}
+F_{X,Y}(u,v) = P(X<u,Y<v) = \int_{-\infty}^u \int_{-\infty}^v f_{X,Y}(x,y)\, dy dx \hbox{ for } (x,y)\in \mathbb{R}^2
+\end{equation}
+
+As an aside, notice that the support for the normal distribution ranges from minus infinity to plus infinity.  There can however be other PDFs with a more limited support; an example would be a normal distribution whose pdf $f(x)$ is such that the lower bound is truncated at, say, 0. In such a case, the area under the range \int_{-\infty}^0 f(x) \, dx$ will be 0 because the range lies outside the support of the truncated normal distribution. 
 
 A visualization will help. The figures below shows a bivariate distribution with correlation zero (Figure \@ref(fig:zerocor)), a positive (Figure \@ref(fig:poscor)) and a negative correlation (Figure \@ref(fig:negcor)).
 
