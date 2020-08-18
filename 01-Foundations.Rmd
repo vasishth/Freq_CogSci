@@ -486,15 +486,18 @@ The joint PDF is written with reference to the two variables $f_{X,Y}(x,y)$. It 
 \iint_{S_{X,Y}} f_{X,Y}(x,y)\, dx dy = 1
 \end{equation}
 
-Here, dx, and dy express whether we are summing the area under the curve along the X axis and the Y axis.
+Here, the terms $dx$ and $dy$ express the fact that we are summing the area under the curve along the X axis and the Y axis.
 
-The joint CDF would be written as follows. The equation states that the probability of observing a value like $(u,v)$ or some value smaller than that (i.e., some $(u',v')$, such that $u'<u$ and $v'<v$.
+The joint CDF would be written as follows. The equation below gives us the probability of observing a value like $(u,v)$ or some value smaller than that (i.e., some $(u',v')$, such that $u'<u$ and $v'<v$.
 
 \begin{equation}
-F_{X,Y}(u,v) = P(X<u,Y<v) = \int_{-\infty}^u \int_{-\infty}^v f_{X,Y}(x,y)\, dy dx \hbox{ for } (x,y)\in \mathbb{R}^2
+\begin{split}
+F_{X,Y}(u,v) =& P(X<u,Y<v)\\
+             =& \int_{-\infty}^u \int_{-\infty}^v f_{X,Y}(x,y)\, dy dx \hbox{ for } (x,y)\in \mathbb{R}^2\\
+\end{split}
 \end{equation}
 
-As an aside, notice that the support for the normal distribution ranges from minus infinity to plus infinity.  There can however be other PDFs with a more limited support; an example would be a normal distribution whose pdf $f(x)$ is such that the lower bound is truncated at, say, 0. In such a case, the area under the range \int_{-\infty}^0 f(x) \, dx$ will be 0 because the range lies outside the support of the truncated normal distribution. 
+As an aside, notice that the support for the normal distribution ranges from minus infinity to plus infinity.  There can however be other PDFs with a more limited support; an example would be a normal distribution whose pdf $f(x)$ is such that the lower bound is truncated at, say, 0. In such a case, the area under the range $\int_{-\infty}^0 f(x) \, dx$ will be 0 because the range lies outside the support of the truncated normal distribution. 
 
 A visualization will help. The figures below shows a bivariate distribution with correlation zero (Figure \@ref(fig:zerocor)), a positive (Figure \@ref(fig:poscor)) and a negative correlation (Figure \@ref(fig:negcor)).
 
@@ -596,7 +599,7 @@ Table: (\#tab:dpqrfunctions) Important R functions relating to two univariate ra
 
 Other distributions, such as the t-distribution, the Uniform, Exponential, Gamma, etc. Beta, etc., have their own set of d-p-q-r functions in R. The appendix summarizes the properties of the  distributions that we will need in this book.
 
-## *Summary of random variable theory
+## Summary of random variable theory
 
 We can summarize the above informal concepts very compactly if we re-state them in mathematical form. A mathematical statement has the advantage not only of brevity but also of reducing ambiguity.  
 
