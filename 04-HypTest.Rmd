@@ -285,7 +285,7 @@ anova(m0,m1)
 You can confirm from the output that the `Chisq` value shown is minus two times the difference in log likelihood of the two models. The p-value is computed using the chi-squared distribution with one degree of freedom because in the two models the difference in the number of parameters is one:
 
 ```{r}
-round(pchisq(5.95,df=1,lower.tail=FALSE),3)
+round(pchisq(6.15,df=1,lower.tail=FALSE),3)
 ```
 
 It is common in the psycholinguistics literature to use the t-value from the linear mixed model output to conduct the hypothesis test on the slope:
@@ -317,11 +317,11 @@ gibsonwu<-read.table("data/gibsonwucrit.txt",header=TRUE)
 gibsonwu2<-read.table("data/gibsonwu2012datarepeat.txt",header=TRUE)
 ```
 
-The data are taken from two oexperiments that investigate (inter alia) the effect of relative clause type on reading time in Chinese. The data are from @gibsonwu and @VasishthetalPLoSOne2013 respectively. The second data-set is a direct replication attempt of the first.
+The data are taken from two experiments that investigate (inter alia) the effect of relative clause type on reading time in Chinese. The data are from @gibsonwu and @VasishthetalPLoSOne2013 respectively. The second data-set is a direct replication attempt of the first.
 
 Chinese relative clauses are interesting theoretically because they are prenominal: the relative clause appears before the head noun. Figure \ref{fig:chineserc} shows an example.
 
-```{r chinesercfig,fig.cap="\\label{fig:chineserc} An example of subjects vs. object relative clauses in Chinese."}
+```{r chinesercfig,echo=FALSE,angle=-90,fig.height=2,fig.width=3,dev='pdf',fig.cap="\\label{fig:chineserc} An example of subjects vs. object relative clauses in Chinese."}
 knitr::include_graphics("figures/chineserc.png")
 ```
 
