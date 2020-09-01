@@ -452,6 +452,9 @@ if(any( grepl("failed to converge", m@optinfo$conv$lme4$messages) )){
 } else{
 sotvals[j,i]<-summary(m)$coefficients[2,3]
 }}}
+```
+
+```{r}
 ## proportion of convergence failures:
 rowMeans(failed)
 ```
@@ -521,9 +524,9 @@ if(any( grepl("failed to converge", m@optinfo$conv$lme4$messages) )){
 sotvals[i]<-summary(m)$coefficients[2,3]
 }}
 
-## proportion of convergence failures and power:
-paste(print("Prop. of convergence failures:"),mean(failed),sep=" ")
-paste(print("Power:"),mean(abs(sotvals)>2,na.rm=TRUE),sep=" ")
+## power:
+paste("Power:",round(mean(abs(sotvals)>2,
+                          na.rm=TRUE),2),sep=" ")
 }
 ```
 
