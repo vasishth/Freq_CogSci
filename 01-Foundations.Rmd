@@ -274,7 +274,7 @@ Notice here that the probability of any point value in a PDF is always 0. This i
 qnorm(0.975,mean=500,sd=100)
 ```
 
-The above output says that the probability that the random variable is less than $q=695$ is 97.5%.
+The above output says that the probability that the random variable is less than $q=696$ is 97.5%.
 
 * **Generating simulated data**. Given a vector of $n$ independent and identically distributed data $y$, i.e., given that each data point is being generated independently from  $Y \sim Normal(\mu,\sigma)$ for some values of the parameters, the maximum likelihood estimates for the expectation and variance are
 
@@ -310,7 +310,7 @@ Starting with the discrete case, consider the discrete bivariate distribution sh
 
 This figure shows the *joint probability mass function* of two random variables X and Y. The random variable X consists of 7 possible values (this is the 1-7 Likert response scale), and the random variable Y is question-response accuracies, with 0 representing incorrect responses, and 1 representing correct responses. 
 
-```{r bivardiscrete,echo=FALSE,message="FALSE",warning=FALSE,results="asis",fig.cap="Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions."}
+```{r bivardiscrete,message="FALSE",warning=FALSE,results="asis",fig.cap="Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions."}
 agrmt<-read.csv("data/agrmt_discrete_binomial.csv")
 rating0<-table(subset(agrmt,accuracy==0)$rating)
 rating1<-table(subset(agrmt,accuracy==1)$rating)
@@ -321,6 +321,7 @@ ratingsbivar<-ratingsbivar[,c(2,4)]
 colnames(ratingsbivar)<-c(0,1)
 library (MASS)
 
+## function from bivariate package:
 f <- cbvpmf (ratingsbivar)
 plot (f, TRUE,
        arrows=FALSE)
@@ -398,19 +399,7 @@ barplot(PX,main="P(X)")
 barplot(PY,main="P(Y)")
 ```
 
-For computing conditional distributions, recall that conditional probability is defined as:
-
-\begin{equation}
-p_{X\mid Y}(x\mid y) = \frac{p_{X,Y}(x,y)}{p_Y(y)}	
-\end{equation}
-
-and 
-
-\begin{equation}
-p_{Y\mid X}(x\mid y) = \frac{p_{X,Y}(x,y)}{p_X(x)}	
-\end{equation}
-
-The conditional distribution of a random variable $X$ given that $Y=y$, where $y$ is some specific (fixed) value, is:
+For computing conditional distributions, recall that the  conditional distribution of a random variable $X$ given that $Y=y$, where $y$ is some specific (fixed) value, is:
 
 \begin{equation}
 p_{X\mid Y} (x\mid y) = \frac{p_{X,Y}(x,y)}{p_Y(y)}	\quad \hbox{provided } p_Y(y)=P(Y=y)>0
@@ -508,7 +497,7 @@ plot (f1, all=TRUE, n=20,
       main="No correlation")
 ```
 
-```{r poscor,echo=FALSE,fig.cap="A bivariate Normal distribution with a positive  correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
+```{r poscor,echo=FALSE,fig.cap="A bivariate Normal distribution with a positive  correlation of 0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
 f3 <- nbvpdf (0, 0, 1, 1, -0.6)
 #f1 %$% matrix.variances
 plot (f3, all=TRUE, n=20,
@@ -656,7 +645,19 @@ P(Y<a) = F(Y<a) =\int_{-\infty}^{a} f(y)\, dy
 
 The above integral is simply summing up the area under the curve between the points $-\infty$ and $a$; this gives us the probability of observing $a$ or a value smaller than $a$.
 
-A final point here is that we can go back and forth between the PDF and the CDF. If the PDF is $f(y)$, then the CDF that allows us to compute quantities like $P(Y<b)$ is just the integral $F(Y<b)=\int_{-\infty}^b f(y)\, dy$. If we differentiate the CDF, we get the PDF back: $d(F(y))/dy=f(y)$.
+A final point here is that we can go back and forth between the PDF and the CDF. If the PDF is $f(y)$, then the CDF that allows us to compute quantities like $P(Y<b)$ is just the integral:
+
+\begin{equation}
+F(Y<b)=\int_{-\infty}^b f(y)\, dy
+\end{equation}
+
+The above is simply computing the area under the curve $f(y)$, ranging from $b$ to $-\infty$.
+
+Because differentiation is the opposite of integration (this is called the Fundamental Theorem of Calculus), if we differentiate the CDF, we get the PDF back: 
+
+\begin{equation}
+d(F(y))/dy=f(y)
+\end{equation}
 
 In bivariate distributions, the joint CDF is written $F_{X,Y}(a,b)=P(X\leq a, Y\leq b)$, where $-\infty < a,b<\infty$. The *marginal distributions* of $F_X$ and $F_Y$ are the CDFs of each of the associated random variables. The CDF of $X$:
 
@@ -667,7 +668,7 @@ F_X(a) = P(X\leq a) = F_X(a,\infty)
 The CDF of $Y$:
 
 \begin{equation}
-F_Y(a) = P(Y\leq b) = F_Y(\infty,b)	
+F_Y(b) = P(Y\leq b) = F_Y(\infty,b)	
 \end{equation}
 
 $f(x,y)$ is the *joint PDF* of $X$ and $Y$. Every joint PDF satisfies
