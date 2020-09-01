@@ -1,12 +1,12 @@
 # Hypothetical repeated sampling and the t-test
 
-This chapter introduces some of the foundational ideas behind hypothesis testing in the frequentist framework. The key idea if that of hypothetical repeated sampling. When we fit a model to a given data-set, we are assuming that this is one of  potentially infinite numbers of exact repetitions of an experiment. We leverage some amazing  properties of these exact repetitions in order to draw inferences from our particular data. The key idea to understand here is the central limit theorem, to which we turn next.
+This chapter introduces some of the foundational ideas behind hypothesis testing in the frequentist framework. The key idea is that of hypothetical repeated sampling. When we fit a model to a given data-set, we are assuming that this is one of  potentially infinite numbers of exact repetitions of an experiment. We leverage some amazing  properties of these exact repetitions in order to draw inferences from our particular data. The key idea to understand here is the central limit theorem, to which we turn next.
 
 ## The central limit theorem using simulation
 
 Suppose we collect some data, which can be represented by a vector $y$; this is a *single sample*. Given data $y$, and assuming for concreteness that the underlying likelihood is a $Normal(\mu=500,\sigma=100)$, the sample mean and standard deviation, $\bar{y}$ and $s$  give us an estimate of the unknown parameters mean $\mu$ and the standard deviation $\sigma$ that are assumed to generate the data. Figure \@ref(fig:normalsample) shows the distribution of a particular sample, where the number of data points is $n=1000$. Note that in this example the parameters are specified by us, so they are not unknown; in a real data-collection situation, the sample mean and standard deviation are all we have as estimates of the parameters.
 
-```{r normalsample,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "A sample of data y, from the distribution  Normal(500,100).", tidy = FALSE}
+```{r normalsample,out.width='75%', fig.show = "hold", fig.cap = "A sample of data y of size n=100, from the distribution  Normal(500,100).", tidy = FALSE}
 ## sample size:
 n<-1000
 ##  independent and identically distributed sample:
@@ -98,7 +98,6 @@ And the variance of $\bar{Y}$ is
 \begin{split}
 Var(\bar{Y}) =& Var(\frac{1}{n}Y_1 + \dots + \frac{1}{n}
 Y_n)\\
-=& \frac{1}{n} [Var(Y_1 + \dots + Y_n)]\\
 =& \frac{1}{n^2} Var(Y_1 + \dots + Y_n)\\
 \end{split}
 \end{equation}
@@ -122,6 +121,8 @@ E[\bar{Y}] = \mu \quad Var(\bar{Y}) = \frac{\sigma^2}{n}
 \end{equation}
 
 
+The above means that we can estimate the expectation $\bar{Y}$ and the variance  of $\bar{Y}$ from a *single* sample!!
+
 The Central Limit Theorem, not proved here (for a proof, see p. 267 of @millermiller) can be summarized as follows.
 
 **Central Limit Theorem**
@@ -142,7 +143,7 @@ In the above discussion, the underlying pdf we sampled from above was a normal d
 
 The Exponential distribution has a parameter $\lambda$ (parameterized in `R` as a `rate`, $1/\lambda$); its mean is $\lambda$ and its variance is $1/\lambda^2$. The sampling distribution is normal, even though the underlying distribution is an Exponential.
 
-```{r sdsmexp,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "Sampling from an exponential.", tidy = FALSE}
+```{r sdsmexp,echo=FALSE,out.width='85%', fig.show = "hold", fig.cap = "Sampling from an exponential.", tidy = FALSE}
 ## Sampling from an Exponential:
 ## number of experiments:
 k<-100
@@ -163,7 +164,7 @@ lines(density(y_matrix[,i]),lty=2)
 
 ## compute means from each replication:
 y_means<-colMeans(y_matrix)
-hist(y_means,freq=FALSE,main="Sampling distribution of means \n (Data sampled from Exponential)",
+hist(y_means,freq=FALSE,main="Sampling distribution of means \n (Data sampled \n from Exponential)",
      xlab="means under repeated sampling")
 abline(v=mean(y_means),lty=2)
 lines(seq(9,11,by=0.01),
@@ -260,7 +261,8 @@ for(i in 1:nsim){
 ## check how many CIs contain mu:
 CIs<-ifelse(lower<mu & upper>mu,1,0)
 ## approx. 95% of the CIs contain true mean:
-round(table(CIs)[2]/sum(table(CIs)),2)
+#round(table(CIs)[2]/sum(table(CIs)),2)
+mean(CIs)
 ```
 
 Figure \@ref(fig:ciplot) visualizes the coverage properties of the confidence interval in 100 simulations; by coverage we mean here the proportion of cases where the true $\mu$ is contained in the CI.
@@ -317,7 +319,8 @@ arrows(x0,y0=cis[,1],
        x1,y1=cis[,2],length=0,lwd=cis[,3])
 ```
 
-The confidence interval is widely misinterpreted in a Bayesian way, i.e., as representing the range of plausible value of the $\mu$ parameter. This is the wrong interpretation because $\mu$ is a point value by assumption, it doesn't have a PDF associated with it. By contrast, the Bayesian credible interval does have this interpretation. 
+The confidence interval is widely misinterpreted in a Bayesian way, i.e., as representing the range of plausible value of the $\mu$ parameter. This is the wrong interpretation because $\mu$ is a point value by assumption, it doesn't have a PDF associated with it. The frequentist CI is defined with reference to the sampling distribution of the mean under repeated sampling, not the probability distribution of $\mu$.
+By contrast, the Bayesian credible interval does have this interpretation. 
 In practice, we find that in most modeling settings we have encountered, the frequentist and Bayesian credible interval have very similar widths, with the Bayesian interval being slightly wider depending on the prior specifications. 
 
 Given the convoluted meaning of the CI, and the impossibility of interpreting a single CI, it is reasonable to ask: what good is a CI? One can treat the CI as a graphical summary of width of the sampling distribution of the mean---the wider the sampling distribution, the more the implied variability under repeated sampling. The confidence interval can therefore be used as a visual summary of how uncertain we can be about the estimate of the sample mean under hypothetical repeated sampling. See @cumming2014new for a useful perspective relating to using confidence intervals for inference.
@@ -347,7 +350,7 @@ n<-1000
 mu<-500
 sigma<-100
 ## generate simulated data:
-y <- rnorm(1000,mean=500,sd=100)
+y <- rnorm(n,mean=500,sd=100)
 ## compute summary statistics:
 y_bar<-mean(y)
 SE<-sd(y)/sqrt(n)
@@ -408,7 +411,7 @@ T \sim t(n-1)
 For large $n$, the PDF of the random variable $T$ approaches $N(0,1)$. This is illustrated in Figure  \@ref(fig:tnormal); notice that the t-distribution has fatter tails than the normal for small $n$, say $n<20$, but for larger n, the t-distribution and the normal are essentially identical. Incidentally,  when n=2, the t-distribution $t(1)$ is the Cauchy distribution we saw earlier; this distribution is characterized by fat tails, and has no mean or variance defined for it.
 
 
-```{r tnormal,echo=FALSE,fig.cap="A visual comparison of the t-distribution (with degrees of freedom ranging from 1 to 50) with the standard normal distribution (N(0,1))."}
+```{r tnormal,echo=FALSE,fig.cap="A visual comparison of the t-distribution (with degrees of freedom ranging from 1 to 50) with the standard normal distribution (N(0,1)). The dashed line represents the t-distribution, and the solid line the normal distribution."}
 range <- seq(-4,4,.01)  
 
 op<-par(mfrow=c(2,3),mar=c(2,2,3,2),pty="s")
@@ -441,7 +444,7 @@ t=\frac{\bar{y}-\mu}{s/\sqrt{n}}
 What constitutes a large or small observed t-value?
 Intuitively, the t-value from the sample is large when we end up far in *either* tail of the distribution. The two tails of the t-distribution will be referred to as the *rejection region*. The word *region* here refers to the real number line along the x-axis, under the tails of the distribution. The rejection region will go off to infinity on the outer sides, and is demarcated by a vertical line on the inner side of each tail. This is shown in Figure \@ref(fig:tails). It goes off to infinity because the support---the range of possible values---of the random variable that the t-distribution belongs to stretches from minus infinity to plus infinity. 
 
-```{r tails,echo=FALSE,fig.cap="The rejection region in a t-distribution."}
+```{r tails,echo=FALSE,fig.cap="The rejection region in a t-distribution. The rejection region is the x-axis under the gray-colored area."}
 x<-seq(-5,5,by=0.1)
 plot(x,dt(x,df=n),type="l",main="t(n-1)",
      ylab="density")
@@ -492,7 +495,7 @@ This observed t-value is huge and is  telling you the distance of the sample mea
 t=\frac{\bar{y}-\mu_0}{s/\sqrt{n}} \hbox{ or } t\frac{s}{\sqrt{n}}=\bar{y}-\mu_0
 \end{equation}
 
-For large sample sizes, if the absolute t-value $|t|$ is greater than  $2$ (approximately), we will reject the null hypothesis. The choice of $2$ is purely conventional and comes from standard practice in psychology and related disciplines (as we will see in this book, standard practice is sometimes not a good-enough reason to decide on such things!). 
+For large sample sizes, if the absolute t-value $|t|$ is greater than  $2$ (approximately), we will reject the null hypothesis. The choice of $2$ is purely conventional and comes from standard practice in psychology and related disciplines (as we will see in this book, standard practice is sometimes not a good-enough reason to decide on such things!).  
 
 For a smaller sample size $n$, you can compute the exact critical t-value:
 
@@ -734,7 +737,7 @@ lower<-power.t.test(delta=15-5,sd=sds,n=10,strict =TRUE)$power
 upper<-power.t.test(delta=15+5,sd=sds,n=10,strict =TRUE)$power
 meanval<-power.t.test(delta=15,sd=sds,n=10,strict =TRUE)$power
 
-plot(sds,meanval,type="l",main="Power curve (n=10)\n using power.t.test",xlab="standard deviation",ylab="effect size")
+plot(sds,meanval,type="l",main="Power curve (n=10)\n using power.t.test",xlab="standard deviation",ylab="power")
 lines(sds,lower,lty=2)
 lines(sds,upper,lty=2)
 text(200,0.05,"10")
@@ -813,7 +816,7 @@ We can compute the p-value "by hand". This can be computed, as done earlier, sim
 
 The area from both sides of the tail is taken because it is conventional to do a so-called *two-sided t-test*: our null hypothesis is that $\mu=450$, and our alternative hypothesis is two-sided: $\mu$ is either less than 450 or $\mu$ is larger than 450. When we reject the null hypothesis, we are accepting this alternative, that  $\mu$ could be some value other than 450. Notice that this alternative hypothesis is remarkably vague; we would reject the null hypothesis regardless of whether the sample mean turns out to be 600 or -600, for example. The  practical implication is that the p-value gives us  the  strength of the evidence against the null hypothesis; it doesn't give us  evidence in favor of  a specific alternative, such  as saying that $\mu$ is positive or negative in sign. In psychology and allied disciplines, whenever the p-value falls below $0.05$, it is common practice to write something along the lines that "there was reliable evidence for the predicted effect." This statement  is  technically incorrect; we only ever have evidence against the null. By looking at the sample mean and its sign, we are making a very big leap that we  have evidence for the specific sample mean we happened to get. As we will see below, the sample mean can be wildly far from the true mean that produced the data. 
 
-One need not have done a two-sided alternative; one could have defined the alternative to be one-sided. In that case, one would compute only one side of the area under the curve. This kind of one-sided test is not normally done, but one can imagine a situation where a one-sided test is justified (for example, when only one sign of the effect is possible, or if there is a strong theoretical reason to expect only one particular sign---positive or negative---on an effect). That said, in their scientific career, none of the authors of this book have ever had occasion to use a one-sided test.
+One need not have done a two-sided alternative; one could have defined the alternative to be one-sided. In that case, one would compute only one side of the area under the curve. This kind of one-sided test is not normally done, but one can imagine a situation where a one-sided test is justified (for example, when only one sign of the effect is possible, or if there is a strong theoretical reason to expect only one particular sign---positive or negative---on an effect). That said, in their scientific career, only one of the authors of this book has ever had occasion to use a one-sided test.
 
 The p-value is always interpreted with reference to the pre-defined Type I error. Conventionally, we reject the null if $p<0.05$. This is because we set the Type I error at 0.05. Keep in mind that Type I error and the p-value are two distinct things. 
 Type I error is the probability of your incorrectly rejecting the null under repeated sampling. This is not the same thing as your p-value. The latter will be obtained from a particular experiment, and will vary from experiment to experiment; it is a random variable. Type I error is a value we fix in advance.
@@ -831,7 +834,7 @@ It's worth briefly reflecting on the fact that the p-value is a random variable;
 $T=(\bar{X}-\mu)/(\sigma/\sqrt{n})$
 
 This random variable $T$ has some CDF $F(T)$. It is possible to show that if a random variable $Z=F(T)$, i.e., if $Z$ is the 
-CDF for the random variable $T$, then $Z \sim Uniform(0,1)$.
+CDF for the random variable $T$, then $Z$ has a uniform distribution ranging from 0 to 1, $Z \sim Uniform(0,1)$.
 
 This is an amazing fact. To get a grip on this, let's first think about the fact that when a random variable $Z$ comes from a $Uniform(0,1)$ distribution, then $P(Z<z)=z$. Consider some examples:
 
@@ -863,6 +866,21 @@ P(Z\leq z) =& P(F(T)\leq z)\\
 \end{equation}
 
 It is for this reason that statisticians like Andrew Gelman periodically point out that "the null hypothesis significance test is a specific random number generator". The practical implication of this observation is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are as or even more important.
+
+If the above mathemtical derivations are too difficult to follow, don't worry. You can simulate the distribution of the p-value under repeated sampling. Let's do this:
+
+```{r pvalnulltrue,echo=FALSE,fig.cap="The p-value has a uniform distribution when the null hypothesis is true; a demonstration using simulation."}
+nsim<-10000
+pvals<-rep(NA,nsim)
+for(i in 1:nsim){
+  ## Here, mu = 0
+y<-rnorm(100)
+pvals[i]<-t.test(y)$p.value
+}
+
+hist(pvals,freq=FALSE,
+     main="The distrn of p-value\n when null is true")
+```
 
 ### Type M and S error in the face of low power
 
@@ -998,7 +1016,7 @@ for(i in 1:nsim){
 Type I error rate is about 5%, consistent with our expectations:
 
 ```{r}
-round(table(pvals<0.05)[2]/nsim,2)
+round(mean(pvals<0.05),2)
 ```
 
 But the situation quickly deteriorates as soon as we adopt the strategy outlined above. Below, we will also track the distribution of the t-statistic.
@@ -1026,13 +1044,13 @@ tstat[i]<-t.test(x)$statistic
 Now, Type I error rate is much higher than 5%:
 
 ```{r}
-round(table(pvals<0.05)[2]/nsim,2)
+round(mean(pvals<0.05),2)
 ```
 
 Figure \@ref(fig:stoppingrule) shows the distributions of the t-statistic in the standard case vs with the above stopping rule:
 
 ```{r stoppingrule,echo=FALSE,fig.cap="A comparison of the distribution of t-values with an a priori fixed stopping rule, versus a flexible stopping rule conditional on finding significance."}
-plot(density(tstat_standard),main="",xlab="")
+plot(density(tstat_standard),main="",xlab="t-value")
 lines(density(tstat),lty=2)
 ```
 
@@ -1042,7 +1060,7 @@ What is important to realize here is that the inflation in Type I error we obser
 
 In our running example above, we examined the case where we have a single vector of data $y$. This led to the one-sample t-test. 
 
-Next, we consider a case where we have two vectors of data. The data-set below is from @johnson2011quantitative.  Shown below are F1 formant data (in Herz), productions of different vowels by male and female speakers of different languages.
+Next, we consider a case where we have two vectors of data. The data-set below is from @johnson2011quantitative.  Shown below are F1 formant data (in Hertz), productions of different vowels by male and female speakers of different languages. (In a speech wave, different bands of energy centered around particular frequencies are called formants.)
 
 ```{r}
 F1data<-read.table("data/F1_data.txt",header=TRUE)
@@ -1113,7 +1131,7 @@ t.test(F1data$female,F1data$male,paired=TRUE)
   
 Incidentally, notice that the p-value in the paired t-test is statistically significant, unlike the two-sample t-test above. The null hypothesis is the same in both tests, but the significance level leads to different conclusions. 
 
-Which analysis is correct, the two-sample t-test or the paired t-test? It all depends on your assumptions about what the data represent. If you consider the data paired, for the reasons given above, then a paired test is called for. If the pairing (the same vowel and language in each row) is unlikely to create a dependency between the two data points in a row (here, domain knowledge is required), we can treat this as unpaired data. 
+Which analysis is correct, the two-sample t-test or the paired t-test? It all depends on your assumptions about what the data represent. If you consider the data paired, for the reasons given above, then a paired test is called for. If there is no pairing (here, domain knowledge is required), we can treat this as unpaired data. 
 
 Next, we look at some perhaps subtle points about the paired t-test.
 
@@ -1161,7 +1179,9 @@ The solution is to aggregate the data so that each subject (or item) has only *o
 This aggregation allows us to meet the independence assumption of the t-test, but it has a potentially huge drawback: it pretends we have one measurement from each subject for each condition. 
 Later on we will learn how to analyze unaggregated data, but if we want to do a paired t-test, we have no choice but to aggregate the data in this way.
 
-A fully worked example will make this clear. We have repeated measures data on subject versus object relative clauses in English. The data are from a self-paced reading study reported in @grodner, their experiment 1. A theoretical prediction is that in English, object relatives are harder to read than subject relatives, in the relative clause verb region. We want to test this prediction.
+A fully worked example will make this clear. We have repeated measures data on subject versus object relative clauses in English. Subject relative clauses are sentences like *The man who was standing near the doorway laughed*. Here, the phrase (called a relative clause) *who was standing near the doorway* modifies the noun phrase *man*; it is called a subject relative because the noun phrase *man* is the subject of the relative clause. By contrast, object relative clauses are sentences like *The man who was the woman was talking to near the doorway laughed*; here, the *man* is the grammatical object object of the relative clause *who was the woman was talking to near the doorway*.
+
+The data are from a self-paced reading study reported in @grodner, their experiment 1. A theoretical prediction is that in English, object relatives are harder to read than subject relatives, in the relative clause verb region. We want to test this prediction.
 
 First, load the data containing reading times from the region of interest (the relative clause verb):
 
@@ -1236,6 +1256,7 @@ The paired t-test illustrated above is actually not the best way to analyze this
 
 ## Exercises {#sec:SamplingDistrnexercises}
 
+
 ### Computing the p-value {#sec:SamplingDistrnexercisesPart1}
 
 A paired t-test is done with data from 10 participants. The t-value from the test is 2.1. What is the p-value associated with a two-sided null hypothesis test? 
@@ -1253,3 +1274,31 @@ round(2*pt(-2.1,df=9),3)
 Given that Type I error is 0.01; what is the highest value possible for Type II error?  
 
 
+### Practice with the paired t-test     
+
+In a self-paced reading study, @grodner investigated subjects vs. object relative clauses. They analyzed the reading times  at the relative clause verb. However, a reviewer objects that the whole sentence's reading times (total readding times) should be used to evaluate the difference between the two conditions, because one cannot know where the difficulty might arise. It isn't clear whether one should use mean reading times over the entire sentence, or total reading times. 
+Carry out a by-subjects paired t-test on (a) the critical relative clause verb, versus (b) mean reading time over all words in the two sentence types, and (c) total reading times over all words in the two sentence types. Compare the t-value across the three tests, and decide what the appropriate dependent variable might be (Note: there is no correct answer here).
+
+The data are loaded and pre-processed as follows:
+
+```{r}
+## load data:
+library(dplyr)
+gg05e1 <- read.table("data/GrodnerGibson2005E1.csv",sep=",", 
+                     header=TRUE)
+gge1 <- gg05e1 %>% 
+  filter(item != 0)
+
+gge1 <- gge1 %>% mutate(word_positionnew = ifelse(item != 15 & 
+                                                    word_position > 10,
+                                                  word_position-1, word_position)) 
+#there is a mistake in the coding of word position,
+#all items but 15 have regions 10 and higher coded
+#as words 11 and higher
+
+## get data from relative clause verb:
+gge1crit <- subset(gge1, ( condition == "objgap" & 
+                             word_position == 6 ) |
+            ( condition == "subjgap" & word_position == 4 ))
+
+````
