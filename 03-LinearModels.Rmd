@@ -13,7 +13,7 @@ means<-round(with(gg05e1,tapply(rawRT,
 means
 ```
 
-As predicted by theory, object relatives (labeled objgap here) are read slower than subject relatives (labeled subjgap).
+As predicted by theory [@grodner], object relatives (labeled objgap here) are read slower than subject relatives (labeled subjgap).
 
 As discussed in the previous chapter, a paired t-test can be done to evaluate whether we have evidence against the null hypothesis that object relatives and subject relatives have identical reading times. However, we have to aggregate the data by subjects and by items first. 
 
@@ -51,12 +51,16 @@ For now, consider only the by-subject analysis.
 Given the sample means shown above for the two conditions, 
 we can rewrite our best guess about how the object and subject relative clause reading time distributions were generated:
 
-- Object relative: $Normal(471 -  102 \times 0,\hat\sigma)$
-- Subject relative: $Normal(471-102 \times 1,\hat\sigma)$
+- Object relative: $Normal(471,\hat\sigma)$
+- Subject relative: $Normal(369,\hat\sigma)$
+
+This can also be rewritten with respect to the object relative mean and the difference between the two conditions (the reasons for this will become clear presently):
+
+- Object relative: $Normal(471-102\times 0,\hat\sigma)$
+- Subject relative: $Normal(471-102\times 1,\hat\sigma)$
 
 
-
-Note that the two distributions for object and subject relative are assumed to be independent. This assumed independence is expressed by the fact that we define two separate Normal distributions, one for object relatives and the other for subject  relatives. We saw earlier that this independence assumption of independence does not hold in our data, because we have one data point for each RC type from the same subject. However, for now we will ignore this detail; we will fix this  shortcoming later.
+Note that the two distributions for object and subject relative are assumed to be independent. This assumed independence is expressed by the fact that we define two separate Normal distributions, one for object relatives and the other for subject  relatives. We saw earlier that this assumption of independence does not hold in our data, because we have one data point for each RC type from the same subject. However, for now we will ignore this detail; we will fix this  shortcoming later.
 
 The interesting point to notice here is that the mean for the object and subject relatives' distributions can be rewritten as a sum of two terms. A completely equivalent way to express the fact that object relatives are coming from a $Normal(471,\hat\sigma)$ is to say that each object relative data-point can be described by the following equation:
 
@@ -127,7 +131,7 @@ bysubj$condition<-factor(bysubj$condition)
 contrasts(bysubj$condition)
 ```
 
-We will discuss coding in  detail in a later chapter, but right now the simple 0,1 coding above---called treatment contrasts---is enough for our purposes.
+We will discuss contrast coding in  detail in a later chapter, but right now the simple 0,1 coding above---called treatment contrasts---is enough for our purposes.
 
 Thus, what the linear model above gives us is two numbers: the mean object relative reading time (471), and the *difference* between object and subject relative (-102). We can extract the two coefficients by typing:
 
@@ -276,9 +280,8 @@ res.m1<-residuals(m1)
 
 Compare the residuals to the quantiles of the standard normal distribution ($Normal(0,1)$): 
 
-```{r}
-library(car)
-qqPlot(res.m1)
+```{r message=FALSE,warning=FALSE,results="asis",include=FALSE}
+qqnorm(res.m1)
 ```
 
 When the normality assumption is met, the residuals will align perfectly with the quantiles of the standard normal distribution, resulting in a straight diagonal line in the above plot. When the normality assumption is not met, the line will tend to curve away from the diagonal. 
@@ -287,7 +290,7 @@ In the above case, a log transform of the data improves the normality of residua
 
 ```{r}
 m1log<-lm(log(rawRT)~cond,bysubj)
-qqPlot(residuals(m1log))
+qqnorm(residuals(m1log))
 ```
 
 
@@ -303,11 +306,7 @@ The model does not change, only the scale does:
 \log rt = \beta_0 + \beta_1 condition  + \varepsilon 
 \end{equation}
 
-Now, the intercept and slope can be used to compute the reading time in the two conditions:
-
-- Estimated mean object relative reading time: $\hat\beta_0+\hat\beta_1=`r round(coef(m1log)[1],4)`+`r round(coef(m1log)[2],4)`=`r round(coef(m1log)[1],4)+round(coef(m1log)[2],4)`$.
-- Estimated mean subject relative reading time: $\hat\beta_0-\hat\beta_1=`r  round(coef(m1log)[1],4)`-`r round(coef(m1log)[2],4)`=`r  round(coef(m1log)[1],4)-round(coef(m1log)[2],4)`$.
-
+Now, the intercept and slope can be used to compute the reading time in the two conditions.
 Note that because $exp(log(rt))=rt$, to get the mean estimates on the raw ms scale, we just need to exponentiate both sides of the equation:
 
 \begin{equation}
@@ -428,13 +427,13 @@ The linear mixed model we present next will fit exactly the same model as in the
 
 Then, for condition 1, the dependent variable can be described by the equation:
 
-$y_{i1} = \beta_0 + u0_i + \varepsilon_{i1}$
+$y_{i1} = \beta_0 + u_i + \varepsilon_{i1}$
 
-Here, $\beta_0$ is the  mean  reading time, and $\varepsilon$ is the usual residual error term. The interesting new term is $u0_i$. This is the adjustment to the mean reading time for subject $i$. That is, if some subject is slower than average, $u0_i$ will be a positive number; if a subject is faster than average, then that subject's adjustment $u0_i$ will be negative in sign; and if a subject has exactly the same reading time as the mean for all subjects, then $u0_i$ for that subject will be 0. 
+Here, $\beta_0$ is the  mean  reading time, and $\varepsilon$ is the usual residual error term. The interesting new term is $u_i$. This is the adjustment to the mean reading time for subject $i$. That is, if some subject is slower than average, $u_i$ will be a positive number; if a subject is faster than average, then that subject's adjustment $u_i$ will be negative in sign; and if a subject has exactly the same reading time as the mean for all subjects, then $u_i$ for that subject will be 0. 
 
 Similarly, for condition 2, the dependent variable is described  by the equation:
 
-$y_{i2} = \beta_0 + \delta + u0_i + \varepsilon_{i2}$
+$y_{i2} = \beta_0 + \delta + u_i + \varepsilon_{i2}$
 
 Here, $\delta$ is the additional time taken to process condition 2 (thus, this is the treatment contrast coding we saw earlier in this chapter). 
 
@@ -577,7 +576,7 @@ summary(lmer(logrt~condition+(1|subject),
              bysubj))$coefficients[2,]
 ```
 
-The above lmList model we just fit is called *repeated measures regression*. We now look at how to model unaggregated data using the linear mixed model. Incidentally, this repeated measures regression model is now only of historical interest, and useful only for understanding the linear mixed model, which is the modern standard approach.  
+The above lmList model we just fit is called *repeated measures regression*. We now look at how to model unaggregated data using the linear mixed model. Incidentally, this repeated measures regression model is now largely of historical interest, and useful only for understanding the linear mixed model, which is the modern standard approach.  
 
 We turn next to three main types of linear mixed model; other variants will be introduced in later chapters.
 
@@ -687,7 +686,7 @@ These two standard deviations  determine the standard error of the $\beta_1$ slo
 
 Unlike the figure associated with the `lmlist.fm1` model above, which also involves fitting separate models for each subject, the model `m0.lmer` assumes *different intercepts* for each subject *but the same slope*. 
 
-We can choose to fit different intercepts as well as different slopes for each subject. To achieve this, assume now that each subject's slope is also adjusted by subject:
+We can choose to fit different intercepts as well as different slopes for each subject. To achieve this, assume now that each subject's slope is also adjusted:
 
 \begin{equation}
 y_{ij} = \beta_0 + u_{0i}+(\beta_1+u_{1i})\times so_{ij} + \varepsilon_{ij}
@@ -708,7 +707,7 @@ The output of this model will now show that there are not two but three sources 
 In particular, the model estimates the following standard deviations:
 
 - $\hat\sigma_{u0}=0.317$
-- $\hat\sigma_{u0}=0.110$
+- $\hat\sigma_{u1}=0.110$
 - $\hat\sigma = 0.365$.
 
 ```
@@ -988,7 +987,7 @@ This is called shrinkage in linear mixed models: the individual level estimates 
 The less data we have from a given subject, the greater the shrinkage.
 
 ```{r shrinkage,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "The figures show linear model fits (the grand mean estimates) for three subjects; shown are the simple linear model fit on all the data (gray line), the lmList model fit to the individual subject's data (black line), and the linear mixed model fit (the broken line). In all three subjects' models, the linear mixed model estimates are shrunk towards the grand mean (gray line) estimates.", tidy = FALSE}
-op<-par(mfrow=c(1,3),pty="s")
+op<-par(mfrow=c(3,1),pty="s")
 coefs<-coef(lmlist.fm1)
 intercepts<-coefs[1]
 colnames(intercepts)<-"intercept"
@@ -997,7 +996,8 @@ slopes<-coefs[2]
 plot(jitter(gg05e1$so,.5),
         gg05e1$logrt,axes=FALSE,
         xlab="Condition",ylab="rt (log ms)",
-        main="Subject 28's estimates")
+        main="Subject 28's estimates",
+     col="white")
 axis(1,at=c(-1,1),labels=c("SR","OR"))
 axis(2)
 ## no pooling estimate:
@@ -1016,7 +1016,7 @@ abline(lm(log(rawRT)~so,gg05e1),lwd=3,col="gray")
 plot(jitter(gg05e1$so,.5),
         log(gg05e1$rawRT),axes=FALSE,
         xlab="Condition",ylab="rt (log ms)",
-        main="Subject 36's estimates")
+        main="Subject 36's estimates",col="white")
 axis(1,at=c(-1,1),labels=c("SR","OR"))
 axis(2)
 
@@ -1030,7 +1030,7 @@ abline(lm(log(rawRT)~so,gg05e1),lwd=3,col="gray")
 plot(jitter(gg05e1$so,.5),
         log(gg05e1$rawRT),axes=FALSE,
         xlab="Condition",ylab="rt (log ms)",
-        main="Subject 37's estimates")
+        main="Subject 37's estimates",col="white")
 axis(1,at=c(-1,1),labels=c("SR","OR"))
 axis(2)
 ## no pooling estimate:
@@ -1101,11 +1101,12 @@ slopes$so[37]
 
 Now fit the hierarchical model and examine subject 37's estimates on undeleted vs deleted data:
 
-```{r shrinkage2,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "The figures show linear model fits (the grand mean estimates) for subject 37. When using lmList, deleting data leads to very different estimates; but using lmer, deleting half the data from this subject hardly affects the individual subject's estimates.", tidy = FALSE}
+```{r shrinkage2,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "The figure shows linear model fits (the grand mean estimates) for subject 37. When using lmList, deleting data leads to very different estimates; but using lmer, deleting half the data from this subject hardly affects the individual subject's estimates.", tidy = FALSE}
 plot(jitter(gg05e1$so,.5),
         log(gg05e1$rawRT),axes=FALSE,
         xlab="Condition",ylab="rt (log ms)",
-        main="Subject 37's estimates",ylim=c(4.5,10))
+        main="Subject 37's estimates",ylim=c(4.5,10),
+     col="white")
 axis(1,at=c(-1,1),labels=c("SR","OR"))
 axis(2)
 
@@ -1236,7 +1237,7 @@ The plot below shows the distribution of the residuals from model M0 plotted aga
 
 ```{r echo=FALSE,message=FALSE,results="asis"}
 library(car)
-qqPlot(residuals(M0))
+qqnorm(residuals(M0))
 ```
 
 ### Understanding contrast coding {#sec:LMExercisesPart6}
