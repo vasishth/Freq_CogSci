@@ -10,7 +10,27 @@ Whenever we fit a model using one of these types of dependent measures, we make 
 
 In this chapter, we will learn how to make explicit the assumptions about the distribution associated with out data; we will also learn to visualize distributions. In order to do this, we need to understand the concept of a random variable, and some very basic notions of probability theory. As will become apparent in this chapter, it is extremely useful to be able to think about data in terms of the underlying random variable producing the data. We consider the two cases, discrete and continuous, separately.
 
-We will explain the terms *random variable* and *distribution* below through examples.
+We will explain the terms *random variable* and *distribution* below through examples. But it is useful to define the notion of random variable formally.
+
+A random variable, which will be denoted by a variable such as $Y$, is defined as a function from a sample space of possible outcomes $S$ to the real number system: 
+
+\begin{equation}
+Y : S \rightarrow \mathbb{R}
+\end{equation}
+
+The random variable associates to each outcome $\omega$ in the sample space $S$ ($\omega \in S$) exactly one number $Y(\omega) = y$. $S_Y$ will represent a set that contains all the $y$'s (all the possible values of $Y$, which we call the support of $Y$). We can compactly write: $y \in S_Y$. 
+
+Every random variable $Y$ has associated with it a probability mass (distribution)  function (PMF, PDF). I.e., PMF is used for discrete distributions and PDF for continuous distributions. The PMF/PDF maps every element of $S_Y$ to a value between 0 and 1.
+
+\begin{equation}
+p_Y : S_Y \rightarrow [0, 1] 
+\end{equation}
+
+Probability mass functions (discrete case) and probability density functions (continuous case) are functions that assign probabilities (discrete case) or the relative likelihood (continuous case) to all events in a sample space.
+
+The meanings of the terms PMF, PDF, likelihood, etc., will become clear as we discuss examples below. The reader to should revisit the above definition themselves when we discuss concrete examples of random variables below.
+
+
 
 ## Discrete random variables: An example using the Binomial distribution
 
@@ -312,6 +332,50 @@ Again, depending on the sample size, the sample mean and sample variance *from a
 
 One other important detail about probability distributions is that one can have a joint distribution defined for more than one random variable. We consider this situation next. 
 
+## Other common distributions
+
+Here, we briefly present some of the distributions that we will need or use in this book.
+
+### The t-distribution
+
+This continuous distribution, written $t(n-1)$, take as a parameter the degrees of freedom (roughly, the sample size) minus one.  As the degrees of freedom increase to infinity, the distribution approaches the Normal distribution with mean 0 and standard deviation 1.
+
+The pdf is: 
+
+\begin{equation}
+f(x) = \frac{\Gamma((n+1)/2)}{\sqrt{n\pi} \Gamma(n/2)} (1+x^2/n)^{-(n+1)/2} \hbox{Support: } x \in (-\infty, \infty)
+\end{equation}
+
+Its mean is $0$ if $n>1$ and variance $\frac{n}{n-2}$ if $n>2$.
+
+The t-distribution becomes the Cauchy distribution if $n=2$. The Cauchy distribution has  no mean or variance defined for it.
+
+There are four functions in R that serve the same purpose as the dnorm, pnorm, qnorm, rnorm functions for the Normal:
+dt, pt, qt, rt.
+
+
+### Gamma dsitribution
+
+The distribution is written $Gamma(a,\lambda)$, and takes two parameters, $a$ and $\lambda$. 
+
+The pdf is: 
+
+\begin{equation}
+f(x) = \frac{1}{\Gamma(a)}(\lambda x)^ae^{-\lambda x}\frac{1}{x} \hbox{Support: } x \in (0, \infty)
+\end{equation}
+
+The mean is $\frac{a}{\lambda}$  and the variance is $\frac{a}{\lambda^2}$.
+
+### Exponential 
+
+The Exponential, written $Exp(\lambda)$, takes the parameter $\lambda$ and has the PDF:
+
+\begin{equation}
+f(x) = \lambda e^{-\lambda x} \hbox{Support: } x \in (0, \infty)
+\end{equation}
+
+Its mean is $\frac{1}{\lambda}$ and variance $\frac{1}{\lambda^2}$.
+
 ## Bivariate and multivariate distributions
 
 So far, we have only discussed univariate distributions. It is also possible to specify distributions with two or more dimensions. 
@@ -584,6 +648,129 @@ SIN::sdcor2cov(stddev=sds,corr=corrmatrix)
 ```
 
 We will be using this function a lot when simulating data from hierarchical models.
+
+## Likelihood and maximum likelihood estimation
+
+We now turn to an important topic: the idea of likelihood, and of maximum likelihood estimation. Consider as a first example the discrete case, using the Binomial distribution.
+
+Suppose we toss a fair coin 10 times, and count the number of heads; we do this experiment once. Notice below that we set the probability of success to be 0.5. This is because we are assuming that we tossed a fair coin.
+
+```{r}
+(x<-rbinom(1,size=10,prob=0.5))
+```
+
+The *probability* of obtaining this value depends on the parameter we set for $\theta$ in the PMF for the binomial distribution. Here are some possible values for $\theta$ and the resulting probabilities:
+
+```{r}
+dbinom(x,size=10,prob=0.1)
+dbinom(x,size=10,prob=0.3)
+dbinom(x,size=10,prob=0.5)
+dbinom(x,size=10,prob=0.8)
+dbinom(x,size=10,prob=1.0)
+```
+
+The value of $\theta$ that gives us the highest probability will be called the **maximum likelihood estimate**. The function ```dbinom```  (which is a function of $\theta$) is also called a likelihood function, and the maximum value of this function is called the maximum likelihood estimate. We can graphically figure out the maximal value of the ```dbinom``` likelihood function here by plotting the value of the function for all possible values of $\theta$, and checking which is the maximal value:
+
+```{r}
+theta<-seq(0,1,by=0.01)
+plot(theta,dbinom(x,size=10,prob=theta),type="l",
+     ylab="likelihood/probability")
+abline(v=x/10)
+```
+
+It should be clear from the figure that the maximum value corresponds to the proportion of heads: `r  x`/10. This value is called the maximum likelihood estimate (MLE). We can obtain this MLE of $\theta$, which  maximizes the likelihood, by computing:
+
+\begin{equation}
+\hat \theta = \frac{x}{n}
+\end{equation}
+
+where $n$ is sample size, and $x$ is the number of successes. For the analytical derivation of this result, see the Linear Modeling lecture notes:
+https://github.com/vasishth/LM
+
+
+
+The likelihood function in a continuous case is similar to that of the discrete example above, but there is one crucial difference, which we will just get to below. 
+
+Consider the following example. Suppose we have one data point from a Normal distribution, with mean 0 and standard deviation 1:
+
+```{r}
+(x<-rnorm(1))
+```
+
+The likelihood function here is going to depend on two parameters, $\mu$ and $\sigma$. For simplicity, let's assume that $\sigma$ is known to be 1. Let's assume that only $\mu$ is unknown. In this case, the value of $\mu$ that maximizes the likelihood will be the MLE. As before, we can graphically find the MLE by plotting the likelihood function:
+
+```{r}
+mu<-seq(-3,3,by=0.01)
+plot(mu,dnorm(x,mean=mu,
+              sd=1),type="l")
+abline(v=x)
+```
+
+The maximum point in this function will always be the mean of the data; the sample mean is the MLE. In the above case, the mean of the single data point `r x` is the number itself. If we had two data points from a Normal(0,1) distribution, then the likelihood function would be defined as follows. First, let us simulate two data points:
+
+```{r}
+(x1<-rnorm(1))
+(x2<-rnorm(1))
+```
+
+These two data points are independent of each other. Hence, to obtain the joint likelihood, we will have to multiply the likelihoods of each of the numbers, given some value for $\mu$:
+
+```{r eval=FALSE}
+mu<-1
+dnorm(x1,mean=mu)*dnorm(x2,mean=mu)
+```
+
+
+In order to plot the joint likelihood, we need to write a function:
+
+```{r}
+normallik<-function(mu=NULL){
+  dnorm(x1,mean=mu)*dnorm(x2,mean=mu)
+}
+## test:
+normallik(mu=1)
+```
+
+Now, we can plot the likelihood function for these two data points:
+
+```{r}
+mu<-seq(-3,3,by=0.01)
+plot(mu,normallik(mu),type="l")
+abline(v=mean(c(x1,x2)))
+```
+
+Notice that the maximum value of this joint likelihood is the mean of the two data points.
+
+For the normal distribution, where $X \sim N(\mu,\sigma)$, we can get MLEs of $\mu$ and $\sigma$ by computing:
+
+\begin{equation}
+  \hat \mu = \frac{1}{n}\sum x_i = \bar{x}  
+\end{equation}
+
+and
+
+\begin{equation}
+	\hat \sigma ^2 = \frac{1}{n}\sum (x_i-\bar{x})^2
+\end{equation}
+
+you will sometimes see the ``unbiased'' estimate (and this is what R computes) but for large sample sizes the difference is not important:
+
+\begin{equation}
+  \hat \sigma ^2 = \frac{1}{n-1}\sum (x_i-\bar{x})^2
+\end{equation}
+
+Now we come to a crucial difference between the discrete and continuous cases discussed above. The ```dbinom``` is the PMF but is also a likelihood function, when seen as a function of $\theta$. The ```dbinom``` gives us  the *probability* of a particular outcome (given some value of $\theta$). This is not the case in the continuous PDF. For example, the ```dnorm``` function doesn't give us the **probability** of a point value, but rather the **density** or **likelihood**. For this reason, we will make a distinction between the words probability and likelihood; in day to day parlance the two are used interchangeably, but here these two terms have a technical meaning that we will stick to.
+
+A final point to note is that a likelihood function is not a PDF; the area under the curve does not need to sum to 1. 
+
+### The importance of the MLE 
+
+One significance of the MLE is that, having assumed a particular underlying PDF, we can estimate the (unknown) parameters (the mean and variance) of the distribution that we assume to have generated our particular data. For example, in the Binomial case, we have a formula for computing the MLEs of the mean and variance; for the Normal distribution, we have a formula for computing the MLE of the mean and the variance.
+
+
+What are the distributional properties of the mean **under repeated sampling**? This is a question that forms the basis for hypothesis testing in the frequentist paradigm. So we turn to this topic in the next chapter.
+
+
 
 ## Summary of useful R functions relating to univariate distributions
 
