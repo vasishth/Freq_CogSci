@@ -263,7 +263,7 @@ Dividing both sides of the equation by 2, we get the null hypothesis that $\beta
 
 Incidentally, if we had rescaled the contrast coding to be not $\pm 1$ but $\pm 1/2$, the parameter $\beta_1$ would represent exactly the difference between the two means, and null hypothesis in equation \@ref(eq:nullhypsumcontrast) would have come out to be  $\beta_1= 0$. This is why it is sometimes better to recode the contrasts as $\pm 1/2$ rather than $\pm 1$. See @SchadEtAlcontrasts for details; we will discuss this in the contrast coding chapter as well.
 
-Let's load the data, set up the contrast coding, and fit the null versus the alternative models. We will fit varying intercept and varying slopes for subject and item, without correlations for items. We don't attempt to fit the so-called "maximal model" here with respect to the items random effects because we would get a singularity in the variance covariance matrix. 
+Let's load the data, set up the contrast coding, and fit the null versus the alternative models. We will fit varying intercept and varying slopes for subject and item, without correlations for items. We don't attempt to fit a model with by-items varying intercepts and slopes with a correlation  because we would get a singularity in the variance covariance matrix. 
 
 ````{r}
 gg05e1<-read.table("data/grodnergibsonE1crit.txt",header=TRUE)
@@ -275,6 +275,8 @@ library(lme4)
 m0<-lmer(logrt~1 + (1+so|subject)+(1+so||item),gg05e1)
 m1<-lmer(logrt~1 + so + (1+so|subject)+(1+so||item),gg05e1)
 ```
+
+Notice that we keep all random effects in the null model. We say that the null model is nested inside the full model.
 
 Next, we compare the two models' log likelihoods. There is a function in the `lme4` package that achieves that: the `anova` function:
 
@@ -294,7 +296,9 @@ It is common in the psycholinguistics literature to use the t-value from the lin
 summary(m1)$coefficients
 ```
 
-The more general method for hypothesis testing is the likelihood ratio test shown above. 
+The best method for hypothesis testing is the likelihood ratio test shown above. One can use the t-test output from the linear mixed model for hypothesis testing, but this should be done only when the data are balanced. If there is lack of balance (e.g., missing data for whatever reason), the likelihood ratio test is the best way to proceed. One reason for this is that when we talk about the evidence against the null hypothesis, the likelihood ratio test is the only reasonable way to talk about what evidence we have. See @Royall for more discussion of this point.
+
+**to-do: elaborate on the notion of what constitutes evidence against the null.**
 
 One can also use the likelihood ratio test to evaluate whether a variance component should be included or not. For example, is the correlation parameter justified for the subjects random effects? Recall that we had a correlation of 0.58. Is this statistically significant? One can test this in the following way:
 
@@ -329,7 +333,7 @@ The consequence of Chinese relative clauses being prenominal  is that the distan
 
 The data provided are for the critical region (the head noun). The experiment method is self-paced reading, so we have reading times in milliseconds. 
 
-The research  question is whether the difference in reading times between object and subject relative clauses is negative. For both data-sets, investigate this question by  (a) fitting a paired t-test (by-subjects and by items), (b) fitting the most complex linear mixed model you  can to the data and then interpreting the t-value, and (c) the likelihood ratio test.  What can we conclude  about the research question?
+The research hypothesis is whether the difference in reading times between object and subject relative clauses is negative. For both data-sets, investigate this question by  (a) fitting a paired t-test (by-subjects and by items), (b) fitting the most complex linear mixed model you  can to the data and then interpreting the t-value, and (c) the likelihood ratio test.  What can we conclude  about the research question?
 
 ### Agreement attraction in comprehension {#sec:HypTestExerciseAgrmt}
 
