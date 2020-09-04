@@ -1,6 +1,40 @@
 # Hypothetical repeated sampling and the t-test
 
-This chapter introduces some of the foundational ideas behind hypothesis testing in the frequentist framework. The key idea is that of hypothetical repeated sampling. When we fit a model to a given data-set, we are assuming that this is one of  potentially infinite numbers of exact repetitions of an experiment. We leverage some amazing  properties of these exact repetitions in order to draw inferences from our particular data. The key idea to understand here is the central limit theorem, to which we turn next.
+This chapter introduces some of the foundational ideas behind hypothesis testing in the frequentist framework. The key idea is that of hypothetical repeated sampling. When we fit a model to a given data-set, we are assuming that this is one of  potentially infinite numbers of exact repetitions of an experiment. We leverage some amazing  properties of these exact repetitions in order to draw inferences from our particular data. The key idea to understand here is the central limit theorem, to which we will discuss below. Before we do that, it is useful to introduce some terminology relating to typical experiment designs in linguistics and psychology.
+
+## Some terminology surrounding typical experiment designs in linguistics and psychology
+
+An experiment typically involves taking a *random sample* from some population. For example, we could take a sample of participants and record their reading times for two kinds of sentences, for example easy and difficult sentences (how easy and difficult is operationalized is not important at this point). Technically, we are supposed to randomly choose participants; in practice, this randomization rarely happens. Instead we take whatever participants we get,  such as university graduates who happen to apply to participate in an experiment! So, random sampling is an assumption in all the discussions in this chapter, but in practice this assumption may or may not be perfectly met.
+
+One design decision that the researcher must take is whether to collect only one response from each participant in each condition, or whether we collect multiple measures from each participant. If we collect only data point from each participant, we will say that the data points are *independent* of each other. When we collect multiple measurements from each participant, we will say that we have *dependent* data; such multiple measurements are also called *repeated measures*. With repeated measures, there will be some correlation between the data-points because the multiple measurements from a common source.
+
+In psycholinguistics, repeated measures experiments are the norm. Furthermore, it is common to use a so-called *Latin Square* design. To understand this design, suppose we want to conduct an experiment with two conditions, a and b, and that we want each participant to see each condition multiple times (repeated measurements). The way such an experiment (with two conditions) is set up with a Latin Square design is that we would create multiple pairs of items, e.g., items 1a, 1b, 2a, 2b, etc. For example, we are investigating active vs. passive sentences, item 1a could be the active clause *The man threw the ball*, and 1b would thene the passive counterpart *The ball was thrown by the man*. The two versions of the item are therefore minimal pairs---minimally different in that the sentence has the same words, but one is an active clause and the other a passive clause.
+
+Then, we would create two groups of items, G1 and G2. Group G1 would contain items 1a, 2b, 3a, 4b, etc; group G2 would contain items 1b, 2a, 3b, 4a, etc. Thus, if one had 16 items, each group would contain eight instance of each condition. Having set up these two groups, one would then randomly assign each participant to one of the two groups. In this way, from each participant, we would obtain eight repeated measures from each condition. One can (and should) of course randomize the order of presentation in each group, possibly randomizing afresh for each participant. The term Latin Square refers to the fact that the ordering of the conditions forms a square.
+
+---------
+| a  | b |
+| b  | a |
+---------
+
+Each condition appears in each row exactly once. 
+
+The Latin square generalizes beyond two conditions easily. Suppose we have four conditions; then, the Latin Square is:
+
+-----------------
+| a | b | c | d |
+| b | c | d | a |
+| c | d | a | b |
+| d | a | b | d |
+-----------------
+
+
+
+The Latin Square design is attractive for psycholinguistics and psychology because it has some optimality properties. Experiment design and the properties of different designs is a whole field in itself in statistics, but we won't get into these details.  
+
+One consequence of the above repeated measurements design is that we have multiple measurements not just from participants but also from items! Thus, items can also be seen as producing dependent data.  In other words, both participants and items are producing dependent data in this design. Later on, we will see that this has an effect on the type of data analysis one can do. 
+
+With this very brief introduction to experiment design, we now turn to the idea of hypothetical repeated sampling, and the central limit theorem.
 
 ## The central limit theorem using simulation
 
@@ -335,7 +369,8 @@ Due to its simplicity, it is tempting to take only a cursory look at the t-test 
 
 ### The one-sample t-test
 
-As in our running example, suppose we have a random sample $y$ of size $n$, and the data come from a $N(\mu,\sigma)$ distribution, with unknown parameters $\mu$ and $\sigma$. We can estimate $\mu$ from the sample mean $\bar{y}$, which we will sometimes also write as $\hat \mu$. We can also estimate $\sigma$ from the sample standard deviation $s$, which we can also write as  $\hat\sigma$. These estimates in turn  allow us to estimate the sampling distribution of the mean under (hypothetical) repeated sampling:
+As in our running example, suppose we have a random sample $y$ of size $n$, and the data come from a $N(\mu,\sigma)$ distribution, with unknown parameters $\mu$ and $\sigma$. An assumption of the t-test is that the data points are independent in the sense discussed at the beginning of this chapter.
+We can estimate $\mu$ from the sample mean $\bar{y}$, which we will sometimes also write as $\hat \mu$. We can also estimate $\sigma$ from the sample standard deviation $s$, which we can also write as  $\hat\sigma$. These estimates in turn  allow us to estimate the sampling distribution of the mean under (hypothetical) repeated sampling:
 
 \begin{equation}
 N(\hat\mu,\frac{\hat \sigma}{\sqrt{n}})
@@ -737,12 +772,14 @@ lower<-power.t.test(delta=15-5,sd=sds,n=10,strict =TRUE)$power
 upper<-power.t.test(delta=15+5,sd=sds,n=10,strict =TRUE)$power
 meanval<-power.t.test(delta=15,sd=sds,n=10,strict =TRUE)$power
 
-plot(sds,meanval,type="l",main="Power curve (n=10)\n using power.t.test",xlab="standard deviation",ylab="power")
+plot(sds,meanval,type="l",
+     main="Power curve (n=10)\n using power.t.test",
+     xlab="standard deviation",ylab="power")
 lines(sds,lower,lty=2)
 lines(sds,upper,lty=2)
-text(200,0.05,"10")
-text(200,0.054,"15")
-text(200,0.056,"20")
+text(125,0.053,"10")
+text(150,0.054,"15")
+text(175,0.056,"20")
 ```
 
 #### Power calculations using simulation
@@ -821,13 +858,31 @@ One need not have done a two-sided alternative; one could have defined the alter
 The p-value is always interpreted with reference to the pre-defined Type I error. Conventionally, we reject the null if $p<0.05$. This is because we set the Type I error at 0.05. Keep in mind that Type I error and the p-value are two distinct things. 
 Type I error is the probability of your incorrectly rejecting the null under repeated sampling. This is not the same thing as your p-value. The latter will be obtained from a particular experiment, and will vary from experiment to experiment; it is a random variable. Type I error is a value we fix in advance.
 
+<!--
 #### *The distribution of the p-value under the null hypothesis
-
-
 
 We have been talking about a continuous random variable as a dependent measure, and have learnt about the standard two-sided t-test, with a point null hypothesis. When we do such a test, we usually use the p-value to decide whether to reject the null hypothesis or not.
 
-Sometimes, you will hear  statisticians (e.g., Andrew Gelman on his blog) say that the null hypothesis significance test is a specific random number generator. What does that sentence mean? We explain this point here.
+Sometimes, you will hear  statisticians (e.g., Andrew Gelman on his blog) criticize p-values by saying that the null hypothesis significance test is a "specific random number generator". What does that sentence mean? We explain this point here because it is important for understanding the meaning of the p-value.
+
+Suppose that the null hypothesis is in fact true. We will now simulate the distribution of the p-value under repeated sampling:
+
+```{r pvalnulltrue,echo=FALSE,fig.cap="The p-value has a uniform distribution when the null hypothesis is true; a demonstration using simulation."}
+nsim<-10000
+pvals<-rep(NA,nsim)
+for(i in 1:nsim){
+  ## Here, the Null Hypothesis is that mu = 0
+y<-rnorm(100)
+pvals[i]<-t.test(y)$p.value
+}
+
+hist(pvals,freq=FALSE,
+     main="The distrn of p-value\n when null is true")
+```
+
+The distribution of the p-value is uniform---every value between 0 and 1 is equally likely.
+
+We will now formally derive the above fact, that the distribution of the p-value is uniform under the null hypothesis. 
 
 It's worth briefly reflecting on the fact that the p-value is a random variable; call it $Z$. The p-value is the cumulative distribution function (CDF) of the random variable $T$, which itself is a transformation of the random variable $\bar{Y}$: 
 
@@ -865,22 +920,9 @@ P(Z\leq z) =& P(F(T)\leq z)\\
 \end{split}
 \end{equation}
 
-It is for this reason that statisticians like Andrew Gelman periodically point out that "the null hypothesis significance test is a specific random number generator". The practical implication of this observation is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are as or even more important.
+It is for this reason that statisticians like Andrew Gelman periodically point out that "the null hypothesis significance test is a specific random number generator". The practical implication of this criticism of p-values is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are as or even more important.
 
-If the above mathemtical derivations are too difficult to follow, don't worry. You can simulate the distribution of the p-value under repeated sampling. Let's do this:
-
-```{r pvalnulltrue,echo=FALSE,fig.cap="The p-value has a uniform distribution when the null hypothesis is true; a demonstration using simulation."}
-nsim<-10000
-pvals<-rep(NA,nsim)
-for(i in 1:nsim){
-  ## Here, mu = 0
-y<-rnorm(100)
-pvals[i]<-t.test(y)$p.value
-}
-
-hist(pvals,freq=FALSE,
-     main="The distrn of p-value\n when null is true")
-```
+-->
 
 ### Type M and S error in the face of low power
 
@@ -1141,7 +1183,7 @@ The paired t-test assumes that each row in the data-frame is independent of the 
 
 For example, doing a paired t-test on this hypothetical data-frame would be incorrect:
   
-  \begin{table}[ht]
+\begin{table}[ht]
 \centering
 \begin{tabular}{rrrll}
 \hline
@@ -1210,7 +1252,7 @@ t.test(rawRT~condition,gg05e1)
 
 This t-test is incorrect for several reasons, but the most egregious error here is that the data are paired (each  subject delivers data for both  conditions), and that property of the data is being ignored. 
 
-Another common mistake is to do a paired t-test on the data as provided. Again, the t.test function will happily return a meaningless result:
+Another common mistake is to do a paired t-test on the data without checking that the data are independent in the sense discussed above. Again, the t.test function will happily return a meaningless result:
   
 ```{r}
 t.test(rawRT~condition,paired=TRUE,gg05e1)
@@ -1244,7 +1286,7 @@ abline(lm(ORdata~SRdata))
 cor(SRdata,ORdata)
 ```
 
-Returning to the t-test, by aggregating the data the t-test's assumptions are met, and the degrees of freedom for this by-subjects analysis are now correct ($42-1=41$):
+Returning to the t-test, by aggregating the data the  independence assumption of the t-test is met, and the degrees of freedom for this by-subjects analysis are now correct ($42-1=41$):
 
 ```{r}
 t.test(rawRT~condition, bysubj,paired=TRUE)
