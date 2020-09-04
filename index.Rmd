@@ -1,5 +1,5 @@
 --- 
-title: "Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction"
+title: "Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)"
 author: "Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl"
 date: "`r Sys.Date()`"
 knit: "bookdown::render_book"
