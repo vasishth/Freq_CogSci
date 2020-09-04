@@ -697,7 +697,7 @@ Consider the following example. Suppose we have one data point from a Normal dis
 (x<-rnorm(1))
 ```
 
-The likelihood function here is going to depend on two parameters, $\mu$ and $\sigma$. For simplicity, let's assume that $\sigma$ is known to be 1. Let's assume that only $\mu$ is unknown. In this case, the value of $\mu$ that maximizes the likelihood will be the MLE. As before, we can graphically find the MLE by plotting the likelihood function:
+The likelihood function for this data point is going to depend on two parameters, $\mu$ and $\sigma$. For simplicity, let's assume that $\sigma$ is known to be 1 and that only $\mu$ is unknown. In this situation, the value of $\mu$ that maximizes the likelihood will be the MLE. As before, we can graphically find the MLE by plotting the likelihood function:
 
 ```{r}
 mu<-seq(-3,3,by=0.01)
@@ -706,7 +706,7 @@ plot(mu,dnorm(x,mean=mu,
 abline(v=x)
 ```
 
-The maximum point in this function will always be the mean of the data; the sample mean is the MLE. In the above case, the mean of the single data point `r x` is the number itself. If we had two data points from a Normal(0,1) distribution, then the likelihood function would be defined as follows. First, let us simulate two data points:
+The maximum point in this function will always be the sample mean from the data; the sample mean is the MLE. In the above case, the mean of the single data point `r x` is the number itself. If we had two data points from a Normal(0,1) distribution, then the likelihood function would be defined as follows. First, let us simulate two data points:
 
 ```{r}
 (x1<-rnorm(1))
