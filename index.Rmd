@@ -79,8 +79,8 @@ The entire book, including all data and source code, is available online from [h
 Before you start, please install
 
   - [R](https://cran.r-project.org/) (and [RStudio](https://www.rstudio.com/) or any other IDE)
-  - The R packages `MASS`, `dplyr`, `purrr`, `readr`, `extraDistr`, `ggplot2`:
-    - They can be installed in the usual way: `install.packages(c("MASS", "dplyr", "purrr", "readr", "extraDistr", "ggplot2"))`. 
+  - The R packages `MASS`, `dplyr`, `purrr`, `readr`, `extraDistr`, `ggplot2`, `bivariate`,`intoo`,`barsurf`, `SIN`:
+    - They can be installed in the usual way: `install.packages(c("MASS", "dplyr", "purrr", "readr", "extraDistr", "ggplot2","bivariate","intoo","barsurf","SIN"))`. 
 
 In every R session, we'll need to set a seed (this ensures that the random numbers are always the same). 
 
@@ -96,7 +96,7 @@ library(ggplot2)
 library (intoo)
 library (barsurf)
 library (bivariate)
-
+library(SIN)
 ```
 
 
