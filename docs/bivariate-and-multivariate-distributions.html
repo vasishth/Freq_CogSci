@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.4 Bivariate and multivariate distributions | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)</title>
+  <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.4 Bivariate and multivariate distributions | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
+  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="github-repo" content="rstudio/bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.4 Bivariate and multivariate distributions | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)" />
+  
+  <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+
+<meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
+
+
+<meta name="date" content="2020-09-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="other-common-distributions.html"/>
+<link rel="next" href="likelihood-and-maximum-likelihood-estimation.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Linear Mixed Models in Linguistics and Psychology</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="0.2" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.2</b> How to read this book</a></li>
+<li class="chapter" data-level="0.3" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.3</b> Online materials</a></li>
+<li class="chapter" data-level="0.4" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.4</b> Software needed</a></li>
+<li class="chapter" data-level="0.5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="part"><span><b>I Foundational ideas</b></span></li>
+<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a><ul>
+<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.1.1</b> The mean and variance of the Binomial distribution</a></li>
+<li class="chapter" data-level="1.1.2" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.1.2</b> What information does a probability distribution provide?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
+<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.1</b> The t-distribution</a></li>
+<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#gamma-dsitribution"><i class="fa fa-check"></i><b>1.3.2</b> Gamma dsitribution</a></li>
+<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#exponential"><i class="fa fa-check"></i><b>1.3.3</b> Exponential</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.1</b> Example 1: Discrete bivariate distributions</a></li>
+<li class="chapter" data-level="1.4.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.2</b> Example 2: Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.4.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.4.3</b> Generate simulated bivariate (multivariate) data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html#the-importance-of-the-mle"><i class="fa fa-check"></i><b>1.5.1</b> The importance of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><a href="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Summary of useful R functions relating to univariate distributions</a></li>
+<li class="chapter" data-level="1.7" data-path="summary-of-random-variable-theory.html"><a href="summary-of-random-variable-theory.html"><i class="fa fa-check"></i><b>1.7</b> Summary of random variable theory</a></li>
+<li class="chapter" data-level="1.8" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.8</b> Further reading</a></li>
+<li class="chapter" data-level="1.9" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisespnorm"><i class="fa fa-check"></i><b>1.9.1</b> Practice using the <code>pnorm</code> function</a></li>
+<li class="chapter" data-level="1.9.2" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqnorm"><i class="fa fa-check"></i><b>1.9.2</b> Practice using the <code>qnorm</code> function</a></li>
+<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqt"><i class="fa fa-check"></i><b>1.9.3</b> Practice using <code>qt</code></a></li>
+<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 1</a></li>
+<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.5</b> Maximum likelihood estimation 2</a></li>
+<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating bivariate data</a></li>
+<li class="chapter" data-level="1.9.7" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.7</b> Generating multivariate data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a><ul>
+<li class="chapter" data-level="2.1" data-path="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><a href="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><i class="fa fa-check"></i><b>2.1</b> Some terminology surrounding typical experiment designs in linguistics and psychology</a></li>
+<li class="chapter" data-level="2.2" data-path="the-central-limit-theorem-using-simulation.html"><a href="the-central-limit-theorem-using-simulation.html"><i class="fa fa-check"></i><b>2.2</b> The central limit theorem using simulation</a></li>
+<li class="chapter" data-level="2.3" data-path="three-examples-of-the-sampling-distribution.html"><a href="three-examples-of-the-sampling-distribution.html"><i class="fa fa-check"></i><b>2.3</b> Three examples of the sampling distribution</a></li>
+<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a></li>
+<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.1</b> The one-sample t-test</a></li>
+<li class="chapter" data-level="2.5.2" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-i-ii-error-and-power"><i class="fa fa-check"></i><b>2.5.2</b> Type I, II error, and power</a></li>
+<li class="chapter" data-level="2.5.3" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#how-to-compute-power-for-the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.3</b> How to compute power for the one-sample t-test</a></li>
+<li class="chapter" data-level="2.5.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-p-value"><i class="fa fa-check"></i><b>2.5.4</b> The p-value</a></li>
+<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.5</b> Type M and S error in the face of low power</a></li>
+<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.6</b> Searching for significance</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.6.1</b> Common mistakes involving the t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.1</b> Computing the p-value</a></li>
+<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.2</b> Computing the t-value</a></li>
+<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.3</b> Type I and II error</a></li>
+<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.4</b> Practice with the paired t-test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a><ul>
+<li class="chapter" data-level="3.1" data-path="from-the-t-test-to-the-linear-mixed-model.html"><a href="from-the-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.1</b> From the t-test to the linear (mixed) model</a></li>
+<li class="chapter" data-level="3.2" data-path="sum-coding.html"><a href="sum-coding.html"><i class="fa fa-check"></i><b>3.2</b> Sum coding</a></li>
+<li class="chapter" data-level="3.3" data-path="checking-model-assumptions.html"><a href="checking-model-assumptions.html"><i class="fa fa-check"></i><b>3.3</b> Checking model assumptions</a></li>
+<li class="chapter" data-level="3.4" data-path="from-the-paired-t-test-to-the-linear-mixed-model.html"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.4</b> From the paired t-test to the linear mixed model</a></li>
+<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
+<li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
+<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
+<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
+<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
+<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
+<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
+<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
+<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a><ul>
+<li class="chapter" data-level="4.1" data-path="the-likelihood-ratio-test-the-theory.html"><a href="the-likelihood-ratio-test-the-theory.html"><i class="fa fa-check"></i><b>4.1</b> The likelihood ratio test: The theory</a></li>
+<li class="chapter" data-level="4.2" data-path="a-practical-example-using-simulated-data.html"><a href="a-practical-example-using-simulated-data.html"><i class="fa fa-check"></i><b>4.2</b> A practical example using simulated data</a></li>
+<li class="chapter" data-level="4.3" data-path="a-real-life-example-the-english-relative-clause-data.html"><a href="a-real-life-example-the-english-relative-clause-data.html"><i class="fa fa-check"></i><b>4.3</b> A real-life example: The English relative clause data</a></li>
+<li class="chapter" data-level="4.4" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html"><i class="fa fa-check"></i><b>4.4</b> Exercises</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExercisesChinese"><i class="fa fa-check"></i><b>4.4.1</b> Chinese relative clauses</a></li>
+<li class="chapter" data-level="4.4.2" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseAgrmt"><i class="fa fa-check"></i><b>4.4.2</b> Agreement attraction in comprehension</a></li>
+<li class="chapter" data-level="4.4.3" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseGramCE"><i class="fa fa-check"></i><b>4.4.3</b> The grammaticality illusion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>5</b> Using simulation to understand your model</a><ul>
+<li class="chapter" data-level="5.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>5.1</b> A reminder: The maximal linear mixed model</a></li>
+<li class="chapter" data-level="5.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>5.2</b> Obtain estimates from a previous study</a></li>
+<li class="chapter" data-level="5.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>5.3</b> Decide on a range of plausible values of the effect size</a></li>
+<li class="chapter" data-level="5.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>5.4</b> Extract parameter estimates</a></li>
+<li class="chapter" data-level="5.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>5.5</b> Define a function for generating data</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>5.5.1</b> Generate a Latin-square design</a></li>
+<li class="chapter" data-level="5.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>5.5.2</b> Generate data row-by-row</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>5.6</b> Repeated generation of data to compute power</a></li>
+<li class="chapter" data-level="5.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>5.7</b> What you can now do</a></li>
+<li class="chapter" data-level="5.8" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>5.8</b> Exercises</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>5.8.1</b> Drawing a power curve given a range of effect sizes</a></li>
+<li class="chapter" data-level="5.8.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>5.8.2</b> Power and log-transformation</a></li>
+<li class="chapter" data-level="5.8.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>5.8.3</b> Evaluating models by generating simulated data</a></li>
+<li class="chapter" data-level="5.8.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>5.8.4</b> Using simulation to check parameter recovery</a></li>
+<li class="chapter" data-level="5.8.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>5.8.5</b> Sample size calculations using simulation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bivariate-and-multivariate-distributions" class="section level2">
+<h2><span class="header-section-number">1.4</span> Bivariate and multivariate distributions</h2>
+<p>So far, we have only discussed univariate distributions. It is also possible to specify distributions with two or more dimensions.</p>
+<p>Understanding bivariate (and, more generally, multivariate) distributions, and knowing how to simulate data from such distributions, is vital for us because linear mixed models crucially depend on such distributions. If we want to understand linear mixed models, we have to understand multivariate distributions.</p>
+<div id="example-1-discrete-bivariate-distributions" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Example 1: Discrete bivariate distributions</h3>
+<p>Starting with the discrete case, consider the discrete bivariate distribution shown below. These are data from an experiment where, inter alia, in each trial a Likert acceptability rating and a response accuracy (to a yes-no question) were recorded (the data are from a study by <span class="citation">Laurinavichyute (<a href="#ref-AnnaLphd">2020</a>)</span>, used with permission here).</p>
+<p>Figure <a href="bivariate-and-multivariate-distributions.html#fig:bivardiscrete">1.5</a> shows the <em>joint probability mass function</em> of two random variables X and Y. The random variable X consists of 7 possible values (this is the 1-7 Likert response scale), and the random variable Y is response accuracy, with 0 representing incorrect responses, and 1 representing correct responses.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">agrmt &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/agrmt_discrete_binomial.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">rating0 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">subset</span>(agrmt, accuracy <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">$</span>rating)</a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">rating1 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">subset</span>(agrmt, accuracy <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)<span class="op">$</span>rating)</a>
+<a class="sourceLine" id="cb30-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb30-5" data-line-number="5">ratingsbivar &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">rating0 =</span> rating0, <span class="dt">rating1 =</span> rating1)</a>
+<a class="sourceLine" id="cb30-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb30-7" data-line-number="7">ratingsbivar &lt;-<span class="st"> </span>ratingsbivar[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</a>
+<a class="sourceLine" id="cb30-8" data-line-number="8"><span class="kw">colnames</span>(ratingsbivar) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb30-9" data-line-number="9"><span class="kw">library</span>(MASS)</a>
+<a class="sourceLine" id="cb30-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb30-11" data-line-number="11"><span class="co">## function from bivariate package:</span></a>
+<a class="sourceLine" id="cb30-12" data-line-number="12">f &lt;-<span class="st"> </span><span class="kw">cbvpmf</span>(ratingsbivar)</a>
+<a class="sourceLine" id="cb30-13" data-line-number="13"><span class="kw">plot</span>(f, <span class="ot">TRUE</span>, <span class="dt">arrows =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:bivardiscrete"></span>
+<img src="Freq_CogSci_files/figure-html/bivardiscrete-1.svg" alt="Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions." width="672" />
+<p class="caption">
+FIGURE 1.5: Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions.
+</p>
+</div>
+<p>One can also display the figure as a table.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">probs &lt;-<span class="st"> </span><span class="kw">attr</span>(f, <span class="st">&quot;p&quot;</span>)</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw">t</span>(probs)</a></code></pre></div>
+<pre><code>##      [,1]    [,2]    [,3]    [,4]    [,5]    [,6]
+## 0 0.01792 0.02328 0.04004 0.04306 0.06331 0.04888
+## 1 0.03119 0.05331 0.08566 0.09637 0.14688 0.15317
+##      [,7]
+## 0 0.05493
+## 1 0.14199</code></pre>
+<p>For each possible value of X and Y, we have a joint probability. Given such a bivariate distribution, there are two useful quantities we can compute: the <em>marginal</em> distributions (<span class="math inline">\(p_{X}\)</span> and <span class="math inline">\(p_Y\)</span>), and the <em>conditional</em> distributions (<span class="math inline">\(p_{X|Y}\)</span> and <span class="math inline">\(p_{Y|X}\)</span>).<br />
+The table below shows the joint probability mass function <span class="math inline">\(p_{X,Y}(x,y)\)</span>.</p>
+
+<p>The marginal distribution <span class="math inline">\(p_Y\)</span> is defined as follows. <span class="math inline">\(S_{X}\)</span> is the support of X, i.e., all the possible values of X.</p>
+<p><span class="math display">\[\begin{equation}
+p_{Y}(y)=\sum_{x\in S_{X}}p_{X,Y}(x,y).\label{eq-marginal-pmf}
+\end{equation}\]</span></p>
+<p>Similarly, the marginal distribution <span class="math inline">\(p_X\)</span> is defined as:</p>
+<p><span class="math display">\[\begin{equation}
+p_{X}(x)=\sum_{y\in S_{Y}}p_{X,Y}(x,y).\label{eq-marginal-pmf2}
+\end{equation}\]</span></p>
+<p><span class="math inline">\(p_Y\)</span> is easily computed, by summing up the rows; and <span class="math inline">\(p_X\)</span> by summing up the columns. You can see why this is called the marginal distribution; the result appears in the margins of the table.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co"># P(Y)</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">(PY &lt;-<span class="st"> </span><span class="kw">rowSums</span>(<span class="kw">t</span>(probs)))</a></code></pre></div>
+<pre><code>##      0      1 
+## 0.2914 0.7086</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">sum</span>(PY)  <span class="co">## sums to 1</span></a></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># P(X)</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">(PX &lt;-<span class="st"> </span><span class="kw">colSums</span>(<span class="kw">t</span>(probs)))</a></code></pre></div>
+<pre><code>## [1] 0.04912 0.07658 0.12570 0.13943 0.21020 0.20205
+## [7] 0.19693</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">sum</span>(PX)  <span class="co">## sums to 1</span></a></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>The marginal probabilities sum to 1, as they should. The table below shows the marginal probabilities.</p>
+
+<p>Notice that to compute the marginal distribution of X, one is summing over all the Ys; and to compute the marginal distribution of Y, one sums over all the X’s. We say that we are <em>marginalizing out</em> the random variable that we are summing over. One can visualize the two marginal distributions using barplots.</p>
+<div class="figure"><span id="fig:marginalprobs"></span>
+<img src="Freq_CogSci_files/figure-html/marginalprobs-1.svg" alt="Marginal distributions of X and Y." width="672" />
+<p class="caption">
+FIGURE 1.6: Marginal distributions of X and Y.
+</p>
+</div>
+<p>For computing conditional distributions, recall that the conditional distribution of a random variable <span class="math inline">\(X\)</span> given that <span class="math inline">\(Y=y\)</span>, where <span class="math inline">\(y\)</span> is some specific (fixed) value, is:</p>
+<p><span class="math display">\[\begin{equation}
+p_{X\mid Y} (x\mid y) = \frac{p_{X,Y}(x,y)}{p_Y(y)}	\quad \hbox{provided } p_Y(y)=P(Y=y)&gt;0
+\end{equation}\]</span></p>
+<p>As an example, let’s consider how <span class="math inline">\(p_{X\mid Y}\)</span> would be computed.
+The possible values of <span class="math inline">\(y\)</span> are <span class="math inline">\(0,1\)</span>, and so we have to find the conditional distribution (defined above) for each of these values. I.e., we have to find <span class="math inline">\(p_{X\mid Y}(x\mid y=0)\)</span>, and <span class="math inline">\(p_{X\mid Y}(x\mid y=1)\)</span>.</p>
+<p>Let’s do the calculation for <span class="math inline">\(p_{X\mid Y}(x\mid y=0)\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+\begin{split}
+p_{X\mid Y} (1\mid 0) =&amp; \frac{p_{X,Y}(1,0)}{p_Y(0)}\\
+	=&amp;  \frac{0.018}{0.291}\\
+	=&amp; 0.0619
+\end{split}	
+\end{equation}\]</span></p>
+<p>This conditional probability value will occupy the cell X=1, Y=0 in the table below summarizing the conditional probability distribution <span class="math inline">\(p_{X|Y}\)</span>. In this way, one can fill in the entire table, which will then represent the conditional distributions <span class="math inline">\(p_{X|Y=0}\)</span> and <span class="math inline">\(p_{X|Y=1}\)</span>. The reader may want to take a few minutes to complete the table.</p>
+
+<p>Similarly, one can construct a table that shows <span class="math inline">\(p_{Y|X}\)</span>.</p>
+</div>
+<div id="example-2-continuous-bivariate-distributions" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Example 2: Continuous bivariate distributions</h3>
+<p>Consider now the continuous bivariate case; this time, we will use simulated data. Consider two normal random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, each of which coming from, for example, a Normal(0,1) distribution, with some correlation <span class="math inline">\(\rho\)</span> between the two random variables.</p>
+<p>A bivariate distribution for two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, each of which comes from a normal distribution, is expressed in terms of the means and standard deviations of each of the two distributions, and the correlation <span class="math inline">\(\rho\)</span> between them. The standard deviations and correlation are expressed in a special form of a <span class="math inline">\(2\times 2\)</span> matrix called a variance-covariance matrix <span class="math inline">\(\Sigma\)</span>. If <span class="math inline">\(\rho_u\)</span> is the correlation between the two random variables, and <span class="math inline">\(\sigma _{x}\)</span> and <span class="math inline">\(\sigma _{y}\)</span> the respective standard deviations, the variance-covariance matrix is written as:</p>
+<p><span class="math display">\[\begin{equation}\label{eq:covmatfoundations}
+\Sigma
+=
+\begin{pmatrix}
+\sigma _{x}^2  &amp; \rho\sigma _{x}\sigma _{y}\\
+\rho\sigma _{x}\sigma _{y}    &amp; \sigma _{y}^2\\
+\end{pmatrix}
+\end{equation}\]</span></p>
+<p>The off-diagonals of this matrix contain the covariance between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
+<p>The joint distribution of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is defined as follows:</p>
+<p><span class="math display">\[\begin{equation}\label{eq:jointpriordistfoundations}
+\begin{pmatrix}
+  X \\ 
+  Y \\
+\end{pmatrix}
+\sim 
+\mathcal{N}_2 \left(
+\begin{pmatrix}
+  0 \\
+  0 \\
+\end{pmatrix},
+\Sigma
+\right)
+\end{equation}\]</span></p>
+<p>The joint PDF is written with reference to the two variables <span class="math inline">\(f_{X,Y}(x,y)\)</span>. It has the property that the area under the curve sums to 1. Formally, we would write this as a double integral: we are summing up the area under the curve for both dimensions X and Y (hence two integrals).</p>
+<p><span class="math display">\[\begin{equation}
+\iint_{S_{X,Y}} f_{X,Y}(x,y)\, dx dy = 1
+\end{equation}\]</span></p>
+<p>Here, the terms <span class="math inline">\(dx\)</span> and <span class="math inline">\(dy\)</span> express the fact that we are summing the area under the curve along the X axis and the Y axis.</p>
+<p>The joint CDF would be written as follows. The equation below gives us the probability of observing a value like <span class="math inline">\((u,v)\)</span> or some value smaller than that (i.e., some <span class="math inline">\((u&#39;,v&#39;)\)</span>, such that <span class="math inline">\(u&#39;&lt;u\)</span> and <span class="math inline">\(v&#39;&lt;v\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+\begin{split}
+F_{X,Y}(u,v) =&amp; P(X&lt;u,Y&lt;v)\\
+             =&amp; \int_{-\infty}^u \int_{-\infty}^v f_{X,Y}(x,y)\, dy dx \hbox{ for } (x,y)\in \mathbb{R}^2\\
+\end{split}
+\end{equation}\]</span></p>
+<p>As an aside, notice that the support for the normal distribution ranges from minus infinity to plus infinity. There can however be other PDFs with a more limited support; an example would be a normal distribution whose pdf <span class="math inline">\(f(x)\)</span> is such that the lower bound is truncated at, say, 0. In such a case, the area under the range <span class="math inline">\(\int_{-\infty}^0 f(x) \, dx\)</span> will be 0 because the range lies outside the support of the truncated normal distribution.</p>
+<p>A visualization will help. The figures below show a bivariate distribution with correlation zero (Figure <a href="bivariate-and-multivariate-distributions.html#fig:zerocor">1.7</a>), a positive (Figure <a href="bivariate-and-multivariate-distributions.html#fig:poscor">1.8</a>) and a negative correlation (Figure <a href="bivariate-and-multivariate-distributions.html#fig:negcor">1.9</a>).</p>
+<div class="figure"><span id="fig:zerocor"></span>
+<img src="Freq_CogSci_files/figure-html/zerocor-1.svg" alt="A bivariate Normal distribution with zero correlation. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot." width="672" />
+<p class="caption">
+FIGURE 1.7: A bivariate Normal distribution with zero correlation. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
+</p>
+</div>
+<div class="figure"><span id="fig:poscor"></span>
+<img src="Freq_CogSci_files/figure-html/poscor-1.svg" alt="A bivariate Normal distribution with a positive  correlation of 0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot." width="672" />
+<p class="caption">
+FIGURE 1.8: A bivariate Normal distribution with a positive correlation of 0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
+</p>
+</div>
+<div class="figure"><span id="fig:negcor"></span>
+<img src="Freq_CogSci_files/figure-html/negcor-1.svg" alt="A bivariate Normal distribution with a negative  correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot." width="672" />
+<p class="caption">
+FIGURE 1.9: A bivariate Normal distribution with a negative correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
+</p>
+</div>
+<p>In this book, we will make use of such multivariate distributions a lot, and it will soon become important to know how to generate simulated bivariate or multivariate data that is correlated. So let’s look at how to generate simulated data next.</p>
+</div>
+<div id="generate-simulated-bivariate-multivariate-data" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> Generate simulated bivariate (multivariate) data</h3>
+<p>Suppose we want to generate 100 correlated pairs of data, with correlation <span class="math inline">\(\rho=0.6\)</span>. The two random variables have mean 0, and standard deviations 5 and 10 respectively.</p>
+<p>Here is how we would generate such data. First, define a variance-covariance matrix; then, use the multivariate analog of the <code>rnorm</code> function, <code>mvrnorm</code>, to generate <span class="math inline">\(100\)</span> data points.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">library</span>(MASS)</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="co">## define a variance-covariance matrix:</span></a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">Sigma &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">5</span><span class="op">^</span><span class="dv">2</span>, <span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.6</span>, <span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.6</span>, </a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">  <span class="dv">10</span><span class="op">^</span><span class="dv">2</span>), <span class="dt">byrow =</span> <span class="ot">FALSE</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb41-5" data-line-number="5"><span class="co">## generate data:</span></a>
+<a class="sourceLine" id="cb41-6" data-line-number="6">u &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">Sigma =</span> Sigma)</a>
+<a class="sourceLine" id="cb41-7" data-line-number="7"><span class="kw">head</span>(u)</a></code></pre></div>
+<pre><code>##        [,1]    [,2]
+## [1,] -0.453   5.233
+## [2,]  4.222   6.372
+## [3,]  3.602  10.269
+## [4,] -6.151  -4.627
+## [5,] -3.412   6.823
+## [6,] -2.036 -18.415</code></pre>
+<p>A plot confirms that the simulated data are positively correlated.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">plot</span>(u[, <span class="dv">1</span>], u[, <span class="dv">2</span>])</a></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-14-1.svg" width="672" /></p>
+<p>As an exercise, try changing the correlation to <span class="math inline">\(0\)</span> or to <span class="math inline">\(-0.6\)</span>, and then plot the bivariate distribution that results.</p>
+<p>One final useful thing to notice about the variance-covariance matrix is that it can be decomposed into the component standard deviations and an underlying correlation matrix. For example, consider the matrix above:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">Sigma</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   25   30
+## [2,]   30  100</code></pre>
+<p>One can decompose the matrix as follows. The matrix can be seen as the product of a diagonal matrix of the standard deviations and the correlation matrix:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co">## sds:</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">(sds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>))</a></code></pre></div>
+<pre><code>## [1]  5 10</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co">## diagonal matrix:</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">(sd_diag &lt;-<span class="st"> </span><span class="kw">diag</span>(sds))</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    5    0
+## [2,]    0   10</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co">## correlation matrix:</span></a>
+<a class="sourceLine" id="cb50-2" data-line-number="2">(corrmatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="dv">1</span>), <span class="dt">ncol =</span> <span class="dv">2</span>))</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]  1.0  0.6
+## [2,]  0.6  1.0</code></pre>
+<p>Given these two matrices, one can reassemble the variance-covariance matrix:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">sd_diag <span class="op">%*%</span><span class="st"> </span>corrmatrix <span class="op">%*%</span><span class="st"> </span>sd_diag</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   25   30
+## [2,]   30  100</code></pre>
+<p>There is a built-in convenience function, <code>sdcor3cov</code> in the <code>SIN</code> package that does this calculation, taking the vector of standard deviatio ns (not the diagonal matrix) and the correlation matrix to yield the variance-covariance matrix:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">SIN<span class="op">::</span><span class="kw">sdcor2cov</span>(<span class="dt">stddev =</span> sds, <span class="dt">corr =</span> corrmatrix)</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   25   30
+## [2,]   30  100</code></pre>
+<p>We will be using this function a lot when simulating data from hierarchical models.</p>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-AnnaLphd">
+<p>Laurinavichyute, Anna. 2020. “Similarity-Based Interference and Faulty Encoding Accounts of Sentence Processing.” Dissertation, University of Potsdam.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="other-common-distributions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="likelihood-and-maximum-likelihood-estimation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/01-Foundations.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Freq_CogSci.pdf", "Freq_CogSci.epub", "Freq_CogSci.mobi"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

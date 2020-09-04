@@ -31,7 +31,7 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \hypersetup{
-            pdftitle={Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction},
+            pdftitle={Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)},
             pdfauthor={Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl},
             colorlinks=true,
             linkcolor=Maroon,
@@ -217,9 +217,9 @@
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
-\title{Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction}
+\title{Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)}
 \author{Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl}
-\date{2020-08-07}
+\date{2020-09-04}
 
 \begin{document}
 \maketitle
@@ -244,14 +244,16 @@ Dedicated to ...
 \chapter*{Preface}\label{preface}}
 
 
-This book is intended to be a relatively complete introduction to the application of linear mixed models in areas related to linguistics and psychology; throughout, we use the programming language R. Our target audience is cognitive scientists (e.g., linguists and psychologists) who carry out behavioral experiments, and who are interested in learning the foundational ideas behind modern statistical methodology from the ground up and in a principled manner.
+This book (once completed! :) is intended to be a relatively complete introduction to the application of linear mixed models in areas related to linguistics and psychology; throughout, we use the programming language R. Our target audience is cognitive scientists (e.g., linguists and psychologists) who carry out behavioral experiments, and who are interested in learning the foundational ideas behind modern statistical methodology from the ground up and in a principled manner.
 
-Many excellent introductory textbooks already exist that discuss data analysis in great detail. Our book is different from existing books in two respects. First, our main focus is on showing how to analyze data from planned experiments involving repeated measures; this type of experimental data involves complexities that are distinct from the problems one encounters when analyzing observational data. We provide many examples of data-sets involving eyetracking (visual world and reading), self-paced reading, event-related potentials, reaction time, acceptability rating judgements, speeded grammaticality judgements, and question-response accuracies. Second, from the very outset, we stress a particular workflow that has as its centerpiece simulating data; we aim to teach a philosophy that involves thinking hard about the assumed underlying generative process, \textbf{even before the data are collected}. The data analysis approach that we hope to teach through this book involves a cycle of experiment design analysis and model validation using simulated data.
+Many excellent introductory textbooks already exist that discuss data analysis in great detail. Our book is different from existing books in two respects. First, our main focus is on showing how to analyze data from planned experiments involving repeated measures; this type of experimental data involves complexities that are distinct from the problems one encounters when analyzing observational data. We aim to provide many examples, with different types of dependent measures collected in a variety of experimental paradigms, including
+eyetracking data (visual world and reading experiments), response time data (e.g., self-paced reading, picture naming), event-related potential data, ratings (e.g., acceptability ratings), yes/no responses (e.g., speeded grammaticality judgements), and accuracy data. Second, from the very outset, we stress a particular workflow that has as its centerpiece data simulation; we aim to teach a philosophy that involves thinking about the assumed underlying generative process, \emph{even before the data are collected}. By the ``generative process'', we mean the underlying assumptions about the ``process'' that produced the data; what exactly this means will presently become clear.
+The data analysis approach that we hope to teach through this book (once this book is in its final form) involves a cycle of experiment design analysis and model validation using simulated data.
 
 \hypertarget{prerequisites}{%
 \section{Prerequisites}\label{prerequisites}}
 
-This book assumes high school arithmetic and algebra. We also expect that the reader already knows basic constructs in the programming language R \citep{R-base}, such as writing for-loops. For newcomers to R, we provide a quick introduction in the appendix that covers all the constructs used in the book. For those lacking background in R, there are many good online resources on R that they can consult as needed. Examples are: \href{https://r4ds.had.co.nz/}{R for data science}, and \href{https://csgillespie.github.io/efficientR/}{Efficient R programming}.
+This book assumes high school arithmetic and algebra. We also expect that the reader already knows basic constructs in the programming language R \citep{R-base}, such as writing for-loops. For newcomers to R, we will eventually provide a quick introduction in the appendix that covers all the constructs used in the book (this has not yet been done). For those lacking background in R, there are many good online resources on R that they can consult as needed. Examples are: \href{https://r4ds.had.co.nz/}{R for data science}, and \href{https://csgillespie.github.io/efficientR/}{Efficient R programming}. We also assume that the reader has done some data analysis previously, either in linguistics or psychology. This should not be the first statistics-related book they read. The reader should have encountered concepts like parameters and parameter estimation.
 
 \begin{rmdnote}
 provide comprehensive book recommendations
@@ -260,7 +262,7 @@ provide comprehensive book recommendations
 \hypertarget{how-to-read-this-book}{%
 \section{How to read this book}\label{how-to-read-this-book}}
 
-The chapters in this book are intended to be read in sequence, but during the first pass through the book, the reader should feel free to skip the sections marked with an asterisk. These sections provide a more formal development that will be useful when the reader transitions to more advanced textbooks like \citet{Gelman14}.
+The chapters in this book are intended to be read in sequence.
 
 to-do: add a Mackay type chapter ordering for different scenarios.
 
@@ -279,29 +281,16 @@ Before you start, please install
 \item
   \href{https://cran.r-project.org/}{R} (and \href{https://www.rstudio.com/}{RStudio} or any other IDE)
 \item
-  The R packages \texttt{MASS}, \texttt{dplyr}, \texttt{purrr}, \texttt{readr}, \texttt{extraDistr}, \texttt{ggplot2}:
+  The R packages \texttt{MASS}, \texttt{dplyr}, \texttt{purrr}, \texttt{readr}, \texttt{extraDistr}, \texttt{ggplot2}, \texttt{bivariate},\texttt{intoo},\texttt{barsurf}, \texttt{SIN}:
 
   \begin{itemize}
   \tightlist
   \item
-    They can be installed in the usual way: \texttt{install.packages(c("MASS",\ "dplyr",\ "purrr",\ "readr",\ "extraDistr",\ "ggplot2"))}.
+    They can be installed in the usual way: \texttt{install.packages(c("MASS",\ "dplyr",\ "purrr",\ "readr",\ "extraDistr",\ "ggplot2","bivariate","intoo","barsurf","SIN"))}.
   \end{itemize}
 \end{itemize}
 
 In every R session, we'll need to set a seed (this ensures that the random numbers are always the same).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
-\KeywordTok{library}\NormalTok{(MASS)}
-\CommentTok{## be careful to load dplyr after MASS}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(purrr)}
-\KeywordTok{library}\NormalTok{(readr)}
-\KeywordTok{library}\NormalTok{(extraDistr)}
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\end{Highlighting}
-\end{Shaded}
 
 \hypertarget{acknowledgements}{%
 \section{Acknowledgements}\label{acknowledgements}}
@@ -320,11 +309,11 @@ Potsdam, Germany
 \chapter*{About the Authors}\label{about-the-authors}}
 
 
-Shravan Vasishth (\url{http://vasishth.github.io}) is professor of Psycholinguistics at the University of Potsdam, Germany. He holds the chair for Psycholinguistics and Neurolinguistics (Language Processing). After completing his Bachelors degree in Japanese from Jawaharlal Nehru University, New Delhi, India, he spent five years in Osaka, Japan, studying Japanese and then working as a translator in a patent law firm in Osaka. He completed an MS in Computer and Information Science (2000-2002) and a PhD in Linguistics (1997-2002) from the Ohio State University, Columbus, USA, and an MSc in Statistics (2011-2015) from the School of Mathematics and Statistics, University of Sheffield, UK. He is a professional member of the Royal Statistical Society (GradStat ID: 128307), a member of the International Society for Bayesian Analysis, and a lifetime member of the Linguistic Society of America (LSA). He is on the editorial board of the Linguistic Society of America flagship journal Language as their statistics consultant for journal submissions. His research focuses on computational modeling of sentence processing in unimpaired and impaired populations, and the application of mathematical, computational, experimental, and statistical methods (particularly Bayesian methods) in linguistics and psychology. He runs an annual summer school, Statistical Methods in Linguistics and Psychology (SMLP): vasishth.github.io/smlp. He regularly teaches short courses on statistical data analysis (Bayesian and frequentist methods).
+Shravan Vasishth (\url{http://vasishth.github.io}) is professor of Psycholinguistics at the University of Potsdam, Germany. He holds the chair for Psycholinguistics and Neurolinguistics (Language Processing). After completing his Bachelor's degree in Japanese from Jawaharlal Nehru University, New Delhi, India, he spent five years in Osaka, Japan, studying Japanese and then working as a translator in a patent law firm in Osaka. He completed an MS in Computer and Information Science (2000-2002) and a PhD in Linguistics (1997-2002) from the Ohio State University, Columbus, USA, and an MSc in Statistics (2011-2015) from the School of Mathematics and Statistics, University of Sheffield, UK. He is a professional member of the Royal Statistical Society (GradStat ID: 128307), a member of the International Society for Bayesian Analysis, and a lifetime member of the Linguistic Society of America (LSA). He is on the editorial board of the Linguistic Society of America flagship journal Language as their statistics consultant for journal submissions. His research focuses on computational modeling of sentence processing in unimpaired and impaired populations, and the application of mathematical, computational, experimental, and statistical methods (particularly Bayesian methods) in linguistics and psychology. He runs an annual summer school, Statistical Methods in Linguistics and Psychology (SMLP): vasishth.github.io/smlp. He regularly teaches short courses on statistical data analysis (Bayesian and frequentist methods).
 
 Daniel J. Schad (\url{https://danielschad.github.io/}) is an assistant professor in the department of Cognitive Science and AI at Tilburg University. He studied Psychology at the University of Potsdam, Germany, and at the University of Michigan, Ann Arbor, USA. He did a PhD in Cognitive Psychology at the University of Potsdam, working on computational models of eye-movement control and on mindless reading. He then did a five-year post-doc in the novel field of Computational Psychiatry at the Charité, Universität Berlin, Germany (partly also at the University of Potsdam), with research visits at the ETH Zürich, Switzerland, and the University College London, UK, working on model-free and model-based decision-making and Pavlovian-instrumental transfer in alcohol dependence, and on the cognitive and brain mechanisms underlying Pavlovian conditioning. He has worked as a postdoctoral researcher at the University of Potsdam, conducting research on quantitative methods in Cognitive Science, including contrasts, properties of significance tests, Bayesian Workflow, and Bayes factor analyses.
 
-Audrey Bürki (\url{https://audreyburki.github.io/Website/}) leads a research group at the University of Potsdam, Germany. Her research interests are\ldots{} to-do
+Audrey Bürki (\url{https://audreyburki.github.io/Website/}) leads a research group at the University of Potsdam, Germany. She holds a Diploma in Speech Pathology from the University of Neuchâtel (Switzerland), a MA in Phonetic Sciences from the University of Paris 3 (France) and a PhD in linguistics from the University of Geneva (Switzerland). After her PhD she worked as a post-doc at the Universities of York (UK) and Aix-Marseille (France), and as a lecturer in Methodology and Applied statistics at the University of Geneva. Her research combines a theoretical interest for the cognitive architecture of the language production system and a methodological interest for the paradigms and statistical tools that allow collecting and analyzing the relevant data. Her research recruits a variety of methods, including phonetic analyses, corpus analyses, response-time experiments, eye-tracking and Event-Related Potentials.
 
 Reinhold Kliegl (\url{https://www.uni-potsdam.de/de/trainingswissenschaft/mitarbeiter/rkliegl.html}) is a senior professor in the Division of Training and Movement Science, at the University of Potsdam, Germany. His research interests are\ldots{} to-do
 
@@ -336,20 +325,46 @@ Reinhold Kliegl (\url{https://www.uni-potsdam.de/de/trainingswissenschaft/mitarb
 \hypertarget{some-important-facts-about-distributions}{%
 \chapter{Some important facts about distributions}\label{some-important-facts-about-distributions}}
 
-In linguistics and psychology, typical data-sets involve either \emph{discrete} dependent measures such as acceptability ratings on a Likert scale (for example, ranging from 1 to 7), and binary grammaticality judgements, or \emph{continuous} dependent measures such as reading times or reaction times in milliseconds and EEG signals in microvolts. Whenever we fit a model using one of these types of dependent measures, we make some assumptions about how these measurements were generated. In particular, we usually assume that our observed measurements are coming from a particular \emph{probability mass function} (when the data are discrete in nature) \emph{probability density function} (when the data are continuous). Behind these PMFs and PDFs lies the concept of a random variable; as will become apparent in this chapter, it is extremely useful to be able to think about data in terms of the random variable assumed. We consider the two cases, discrete and continuous, separately.
+In linguistics and psychology, typical data-sets involve either \emph{discrete} dependent measures such as acceptability ratings on a Likert scale (for example, ranging from 1 to 7), and binary grammaticality judgements, or \emph{continuous} dependent measures such as reading times or reaction times in milliseconds and EEG signals in microvolts.
+
+Whenever we fit a model using one of these types of dependent measures, we make some assumptions about how these measurements were generated. In particular, we usually assume that our observed measurements are coming from a particular \emph{distribution}. The normal distribution is an example that may be familiar to the reader.
+
+In this chapter, we will learn how to make explicit the assumptions about the distribution associated with out data; we will also learn to visualize distributions. In order to do this, we need to understand the concept of a random variable, and some very basic notions of probability theory. As will become apparent in this chapter, it is extremely useful to be able to think about data in terms of the underlying random variable producing the data. We consider the two cases, discrete and continuous, separately.
+
+We will explain the terms \emph{random variable} and \emph{distribution} below through examples. But it is useful to define the notion of random variable formally.
+
+A random variable, which will be denoted by a variable such as \(Y\), is defined as a function from a sample space of possible outcomes \(S\) to the real number system:
+
+\begin{equation}
+Y : S \rightarrow \mathbb{R}
+\end{equation}
+
+The random variable associates to each outcome \(\omega\) in the sample space \(S\) (\(\omega \in S\)) exactly one number \(Y(\omega) = y\). \(S_Y\) will represent a set that contains all the \(y\)'s (all the possible values of \(Y\), which we call the support of \(Y\)). We can compactly write: \(y \in S_Y\).
+
+Every random variable \(Y\) has associated with it a probability mass (distribution) function (PMF, PDF). I.e., PMF is used for discrete distributions and PDF for continuous distributions. The PMF/PDF maps every element of \(S_Y\) to a value between 0 and 1.
+
+\begin{equation}
+p_Y : S_Y \rightarrow [0, 1] 
+\end{equation}
+
+Probability mass functions (discrete case) and probability density functions (continuous case) are functions that assign probabilities (discrete case) or the relative likelihood (continuous case) to all events in a sample space.
+
+The meanings of the terms PMF, PDF, likelihood, etc., will become clear as we discuss examples below. The reader to should revisit the above definition themselves when we discuss concrete examples of random variables below.
 
 \hypertarget{discrete-random-variables-an-example-using-the-binomial-distribution}{%
 \section{Discrete random variables: An example using the Binomial distribution}\label{discrete-random-variables-an-example-using-the-binomial-distribution}}
 
-Imagine that our data come from a grammaticality judgement task, and that the responses from participants are a sequence of 1's and 0's, where 1 represents the judgment ``grammatical'', and 0 represents the judgement ``ungrammatical''. Assume also that each response, coded as 1 or 0, is generated independently from the others. We can simulate such a sequence of 1s and 0s in R. Here is a case where we run the same experiment \(20\) times (the sample size is \(10\) each time).
+Imagine that our data come from a grammaticality judgement task (participants see or hear sentences and have to decide whether these are grammatical or ungrammatical), and that the responses from participants are a sequence of 1's and 0's, where 1 represents the judgment ``grammatical'', and 0 represents the judgement ``ungrammatical''. Assume also that each response, coded as 1 or 0, is generated independently from the others. We can simulate the outcome of such an experiment (i.e., a sequence of 1s and 0s) in R. Let's generate the outcome of 20 such experiments with a sample size of 10 (i.e., each experiment provides us with 10 responses). For each experiment, we count the number of 1s (or number of ``successes'').
 
 \begin{verbatim}
 ##  [1] 7 7 4 7 6 5 6 3 6 6 5 6 7 4 5 7 8 3 5 5
 \end{verbatim}
 
-The number of successes in each of the \(20\) simulated experiments above is being generated by a \emph{discrete random variable} \(Y\) with a probability distribution \(p(Y)\) called the \textbf{Binomial distribution}.\footnote{When an experiment consists of only a single trial (i.e., we can have a total number of only 0 or 1 successes), \(p(Y)\) is called a \textbf{Bernoulli distribution}.}
+Outcomes such as this one (i.e., number of successes for a variable with two possible outcomes) follow a probability distribution p(Y). In more technical terms, we can say that the number of successes in each of the \(20\) simulated experiments above is being generated by a \emph{discrete random variable} \(Y\) which has associated with it a probability distribution \(p(Y)\) called the \textbf{Binomial distribution}.\footnote{When an experiment consists of only a single trial (i.e., we can have a total number of only 0 or 1 successes), \(p(Y)\) is called a \textbf{Bernoulli distribution}.}
 
-For discrete random variable, the probability distribution \(p(Y)\) is called a \textbf{probability mass function} (PMF). The PMF defines the probability of each possible outcome. In the above example, with \(n=10\) trials, there are 11 possible outcomes: \(0,\dots,10\) successes. Which of these outcomes is most probable depends on a parameter in the Binomial distribution that represents the probability of success. We will call this parameter \(\theta\). The left-hand side plot in Figure \ref{fig:binomplot} shows an example of a Binomial PMF with \(10\) trials and the parameter \(\theta\) with value \(0.5\). Setting \(\theta\) to 0.5 leads to a PMF where the most probable outcome is 5 successes out of 10. If we had set \(\theta\) to, say 0.1, then the most probable outcome would be 1 success out of 10; and if we had set \(\theta\) to 0.9, then the most probable outcome would be 9 successes out of 10.
+For discrete random variable, the probability distribution \(p(Y)\) is called a \textbf{probability mass function} (PMF). The PMF defines the probability of each possible outcome. In the above example, with \(n=10\) trials, there are 11 possible outcomes: \(0,\dots,10\) successes. Which of these outcomes is most probable depends on a numerical value called a \emph{parameter} in the Binomial distribution that represents the probability of success. We will call this parameter \(\theta\). The left-hand side plot in Figure \ref{fig:binomplot} shows an example of a Binomial PMF with \(10\) trials and the parameter \(\theta\) with value \(0.5\). Setting \(\theta\) to 0.5 leads to a PMF where the most probable outcome is 5 successes out of 10. If we had set \(\theta\) to, say 0.1, then the most probable outcome would be 1 success out of 10; and if we had set \(\theta\) to 0.9, then the most probable outcome would be 9 successes out of 10.
+
+As we will see later, when we analyze data, a primary goal will be to compute a so-called \emph{estimate} of the parameter (here, \(\theta\)). In real-life situations, the value of the \(\theta\) parameter will be unknown and unknowable; the data will allow us to compute a ``guess'' about the unknown value of of the parameter. We will call this guess the estimate of the parameter.
 
 \begin{figure}
 \centering
@@ -403,7 +418,7 @@ If we now plot this function for all possible values of \(\theta\), we get the p
 DS comment: do we want to show the code for computing all likelihood values? (maybe this comes later?)
 \end{rmdnote}
 
-What is important about this plot is that it shows that, given the data, the maximum point is at the point \(0.7\), which corresponds to the estimated mean using the formula shown above: \(k/n = 7/10\). Thus, the maximum likelihood estimate (MLE) gives us the most likely value that the parameter \(\theta\) given the data. It is crucial to note here that the phrase ``most likely'' here does not mean that the MLE from a \emph{particular} sample of data invariably gives us an accurate estimate of \(\theta\). For example, if we run our experiment for \(10\) trials and get \(1\) success out of \(10\), the MLE is \(0.10\). We could have happened to observe only one success out of ten even if the true \(\theta\) were \(0.5\). The MLE would however give an accurate estimate of the true parameter as \(n\) approaches infinity.
+What is important about this plot is that it shows that, given the data, the maximum point is at the point \(0.7\), which corresponds to the estimated mean using the formula shown above: \(k/n = 7/10\). Thus, the maximum likelihood estimate (MLE) gives us the most likely value of the parameter \(\theta\) given the data. It is crucial to note here that the phrase ``most likely'' does not mean that the MLE from a \emph{particular} sample of data invariably gives us an accurate estimate of \(\theta\). For example, if we run our experiment for \(10\) trials and get \(1\) success out of \(10\), the MLE is \(0.10\). We could have happened to observe only one success out of ten even if the true \(\theta\) were \(0.5\). The MLE would however give an accurate estimate of the true parameter \(\theta\) as \(n\) approaches infinity.
 
 \hypertarget{what-information-does-a-probability-distribution-provide}{%
 \subsection{What information does a probability distribution provide?}\label{what-information-does-a-probability-distribution-provide}}
@@ -440,7 +455,7 @@ The probabilities of success when \(\theta\) is 0.1 or 0.9 can be computed by re
 \hypertarget{compute-the-cumulative-probability-of-k-or-less-more-than-k-successes}{%
 \subsubsection{Compute the cumulative probability of k or less (more) than k successes}\label{compute-the-cumulative-probability-of-k-or-less-more-than-k-successes}}
 
-Using the \texttt{dbinom} function, we can compute the cumulative probability of obtaining 1 or less, 2 or less successes etc. This is done through a simple summation procedure:
+Instead of the probability of obtaining a given number of successes we could be interested in knowing the cumulative probability of obtaining 1 or less, or 2 or less. We can obtain this information with the \texttt{dbinom} function, through a simple summation procedure:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -563,7 +578,7 @@ The above code generates a sequences of \(1\)'s and \(0\)'s. Repeatedly run the 
 \hypertarget{continuous-random-variables-an-example-using-the-normal-distribution}{%
 \section{Continuous random variables: An example using the Normal distribution}\label{continuous-random-variables-an-example-using-the-normal-distribution}}
 
-We will now revisit the idea of a random variable using a continuous distribution. Imagine that you have a vector of reading time data \(y\) measured in milliseconds and coming from a Normal distribution. The probability density function (PDF) of the Normal distribution is defined as follows:
+We will now revisit the idea of a random variable using a continuous distribution. Imagine that you have a vector of reading time data \(y\) measured in milliseconds and coming from (i.e., generated by) a Normal distribution. The so-called probability density function (PDF) of the Normal distribution is defined as follows:
 
 \begin{equation}
 Normal(y|\mu,\sigma)=f(y)= \frac{1}{\sqrt{2\pi \sigma^2}} \exp \left(-\frac{(y-\mu)^2}{2\sigma^2} \right)
@@ -573,7 +588,11 @@ Here, \(\mu\) is the mean, and \(\sigma\) is the standard deviation of the Norma
 
 We can visualize the Normal distribution for particular values of \(\mu\) and \(\sigma\) as a PDF (using \texttt{dnorm}), a CDF (using \texttt{pnorm}), and the inverse CDF (using \texttt{qnorm}). See Figure \ref{fig:normdistrn}.
 
-In the figure, the PDF gives us the density for each possible value of our data \(y\); the CDF tells us the probability of observing a value like y or some value less than that (written: \(P(Y<y)\)); and the inverse CDF gives us the quantile \(y\) such that \(P(Y<y)\) is some specific value between 0 and 1. These are three different ways of looking at the same information.
+In the figure, the PDF gives us the so-called \emph{density} for each possible value of our data \(y\); ``density'' here is not the probability, rather is it giving us a non-negative number that is the value of the function \(f(y)\) in the equation immediately above. We will return to the concept of density when we do an exercise on \emph{maximum likelihood estimation}.
+
+The CDF tells us the probability of observing a value like y or some value less than that (written: \(P(Y<y)\)); and the inverse CDF gives us the quantile \(y\) such that \(P(Y<y)\) is some specific value between 0 and 1.
+
+The PDF, CDF, and inverse CDF are three different ways of looking at the same information.
 
 \begin{figure}
 \centering
@@ -622,12 +641,12 @@ Notice here that the probability of any point value in a PDF is always 0. This i
 ## [1] 696
 \end{verbatim}
 
-The above output says that the probability that the random variable is less than \(q=695\) is 97.5\%.
+The above output says that the probability that the random variable is less than \(q=696\) is 97.5\%.
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Generating simulated data}. Given a vector of \(n\) independent and identically distributed data \(y\), i.e., given that each data point is being generated independently from \(Y \sim Normal(\mu,\sigma)\) for some values of the parameters, the maximum likelihood estimates for the expectation and variance are
+  \textbf{Generating simulated data}. Given a vector of \(n\) independent and identically distributed data \(y\), i.e., given that each data point is being generated independently from \(Y \sim Normal(\mu,\sigma)\) for some values of the parameters \(\mu,\sigma\), the maximum likelihood estimates for the expectation and variance are
 \end{itemize}
 
 \begin{equation}
@@ -639,7 +658,8 @@ Var(y) = \frac{\sum_{i=1}^n (y_i-
 \bar{y})^2}{n}
 \end{equation}
 
-For example, you could generate \(10\) data points using the \texttt{rnorm} function, and then compute the mean and variance from the simulated data:
+Let's simulate some sample data from a Normal distribution and compute estimates of the mean and variance.\\
+Let's generate \(10\) data points using the \texttt{rnorm} function, and then compute the mean and variance from the simulated data:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -662,35 +682,272 @@ For example, you could generate \(10\) data points using the \texttt{rnorm} func
 ## [1] 13365
 \end{verbatim}
 
-Again, depending on the sample size, the sample mean and sample variance may or may not be close to the true values of the respective parameters, despite the fact that these are maximum likelihood estimates.
+Again, depending on the sample size, the sample mean and sample variance \emph{from a particular sample} may or may not be close to the true values of the respective parameters, despite the fact that these are \emph{maximum likelihood estimates}.
 
-One other important detail about probability distributions is that one can have a joint distribution defined for more than one random variable. We consider this situation next, considering the continuous case only.
+One other important detail about probability distributions is that one can have a joint distribution defined for more than one random variable. We consider this situation next.
 
-\hypertarget{bivariatemultivariate-distributions}{%
-\section{Bivariate/multivariate distributions}\label{bivariatemultivariate-distributions}}
+\hypertarget{other-common-distributions}{%
+\section{Other common distributions}\label{other-common-distributions}}
 
-So far, we have only discussed univariate distributions. It is also possible to specify distributions with two or more dimensions. For example, consider the bivariate case:
-two normal random variables \(U_0\) and \(U_1\), each of which coming from, for example, a Normal(0,1) distribution, with some correlation \(\rho\) between the random variables.
+Here, we briefly present some of the distributions that we will need or use in this book.
 
-A bivariate distribution for two random variables \(U_0\) and \(U_1\), each of which comes from a normal distribution, is expressed in terms of the means and standard deviations of each of the two distributions, and the correlation \(\rho\) between them. The standard deviations and correlation are expressed in a special form of a \(2\times 2\) matrix called a variance covariance matrix \(\Sigma\). If \(\rho_u\) is the correlation between the two random variables, and \(\sigma _{u0}\) and \(\sigma _{u1}\) the respective standard deviations, the variance covariance matrix is written as:
+\hypertarget{the-t-distribution}{%
+\subsection{The t-distribution}\label{the-t-distribution}}
+
+This continuous distribution, written \(t(n-1)\), take as a parameter the degrees of freedom (roughly, the sample size) minus one. As the degrees of freedom increase to infinity, the distribution approaches the Normal distribution with mean 0 and standard deviation 1.
+
+The pdf is:
+
+\begin{equation}
+f(x) = \frac{\Gamma((n+1)/2)}{\sqrt{n\pi} \Gamma(n/2)} (1+x^2/n)^{-(n+1)/2} \hbox{Support: } x \in (-\infty, \infty)
+\end{equation}
+
+Its mean is \(0\) if \(n>1\) and variance \(\frac{n}{n-2}\) if \(n>2\).
+
+The t-distribution becomes the Cauchy distribution if \(n=2\). The Cauchy distribution has no mean or variance defined for it.
+
+There are four functions in R that serve the same purpose as the dnorm, pnorm, qnorm, rnorm functions for the Normal:
+dt, pt, qt, rt.
+
+\hypertarget{gamma-dsitribution}{%
+\subsection{Gamma dsitribution}\label{gamma-dsitribution}}
+
+The distribution is written \(Gamma(a,\lambda)\), and takes two parameters, \(a\) and \(\lambda\).
+
+The pdf is:
+
+\begin{equation}
+f(x) = \frac{1}{\Gamma(a)}(\lambda x)^ae^{-\lambda x}\frac{1}{x} \hbox{Support: } x \in (0, \infty)
+\end{equation}
+
+The mean is \(\frac{a}{\lambda}\) and the variance is \(\frac{a}{\lambda^2}\).
+
+\hypertarget{exponential}{%
+\subsection{Exponential}\label{exponential}}
+
+The Exponential, written \(Exp(\lambda)\), takes the parameter \(\lambda\) and has the PDF:
+
+\begin{equation}
+f(x) = \lambda e^{-\lambda x} \hbox{Support: } x \in (0, \infty)
+\end{equation}
+
+Its mean is \(\frac{1}{\lambda}\) and variance \(\frac{1}{\lambda^2}\).
+
+\hypertarget{bivariate-and-multivariate-distributions}{%
+\section{Bivariate and multivariate distributions}\label{bivariate-and-multivariate-distributions}}
+
+So far, we have only discussed univariate distributions. It is also possible to specify distributions with two or more dimensions.
+
+Understanding bivariate (and, more generally, multivariate) distributions, and knowing how to simulate data from such distributions, is vital for us because linear mixed models crucially depend on such distributions. If we want to understand linear mixed models, we have to understand multivariate distributions.
+
+\hypertarget{example-1-discrete-bivariate-distributions}{%
+\subsection{Example 1: Discrete bivariate distributions}\label{example-1-discrete-bivariate-distributions}}
+
+Starting with the discrete case, consider the discrete bivariate distribution shown below. These are data from an experiment where, inter alia, in each trial a Likert acceptability rating and a response accuracy (to a yes-no question) were recorded (the data are from a study by \citet{AnnaLphd}, used with permission here).
+
+Figure \ref{fig:bivardiscrete} shows the \emph{joint probability mass function} of two random variables X and Y. The random variable X consists of 7 possible values (this is the 1-7 Likert response scale), and the random variable Y is response accuracy, with 0 representing incorrect responses, and 1 representing correct responses.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{agrmt <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/agrmt_discrete_binomial.csv"}\NormalTok{)}
+\NormalTok{rating0 <-}\StringTok{ }\KeywordTok{table}\NormalTok{(}\KeywordTok{subset}\NormalTok{(agrmt, accuracy }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{)}\OperatorTok{$}\NormalTok{rating)}
+\NormalTok{rating1 <-}\StringTok{ }\KeywordTok{table}\NormalTok{(}\KeywordTok{subset}\NormalTok{(agrmt, accuracy }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}\OperatorTok{$}\NormalTok{rating)}
+
+\NormalTok{ratingsbivar <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{rating0 =}\NormalTok{ rating0, }\DataTypeTok{rating1 =}\NormalTok{ rating1)}
+
+\NormalTok{ratingsbivar <-}\StringTok{ }\NormalTok{ratingsbivar[, }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{)]}
+\KeywordTok{colnames}\NormalTok{(ratingsbivar) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(MASS)}
+
+\CommentTok{## function from bivariate package:}
+\NormalTok{f <-}\StringTok{ }\KeywordTok{cbvpmf}\NormalTok{(ratingsbivar)}
+\KeywordTok{plot}\NormalTok{(f, }\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{arrows =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{Freq_CogSci_files/figure-latex/bivardiscrete-1.pdf}
+\caption{\label{fig:bivardiscrete}Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions.}
+\end{figure}
+
+One can also display the figure as a table.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{probs <-}\StringTok{ }\KeywordTok{attr}\NormalTok{(f, }\StringTok{"p"}\NormalTok{)}
+\KeywordTok{t}\NormalTok{(probs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1]    [,2]    [,3]    [,4]    [,5]    [,6]
+## 0 0.01792 0.02328 0.04004 0.04306 0.06331 0.04888
+## 1 0.03119 0.05331 0.08566 0.09637 0.14688 0.15317
+##      [,7]
+## 0 0.05493
+## 1 0.14199
+\end{verbatim}
+
+For each possible value of X and Y, we have a joint probability. Given such a bivariate distribution, there are two useful quantities we can compute: the \emph{marginal} distributions (\(p_{X}\) and \(p_Y\)), and the \emph{conditional} distributions (\(p_{X|Y}\) and \(p_{Y|X}\)).\\
+The table below shows the joint probability mass function \(p_{X,Y}(x,y)\).
+
+\begin{table}[!htbp] 
+\begin{center}
+\begin{tabular}{c|ccccccc}
+$p_{X,Y}$ & x=1 & x=2 & x=3 & x=4 & x=5 & x=6 & x=7\\
+\hline
+y = 0 & 0.018 & 0.023 & 0.040 & 0.043 & 0.063 & 0.049 & 0.055\\
+y = 1 & 0.031 & 0.053 & 0.086 & 0.096 &  0.147 & 0.153 &  0.142\\
+\end{tabular}
+\end{center}
+\caption{The joint PMF for two random variables $X$ and $Y$.}\label{discretebivartable}
+\end{table}
+
+The marginal distribution \(p_Y\) is defined as follows. \(S_{X}\) is the support of X, i.e., all the possible values of X.
+
+\begin{equation}
+p_{Y}(y)=\sum_{x\in S_{X}}p_{X,Y}(x,y).\label{eq-marginal-pmf}
+\end{equation}
+
+Similarly, the marginal distribution \(p_X\) is defined as:
+
+\begin{equation}
+p_{X}(x)=\sum_{y\in S_{Y}}p_{X,Y}(x,y).\label{eq-marginal-pmf2}
+\end{equation}
+
+\(p_Y\) is easily computed, by summing up the rows; and \(p_X\) by summing up the columns. You can see why this is called the marginal distribution; the result appears in the margins of the table.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# P(Y)}
+\NormalTok{(PY <-}\StringTok{ }\KeywordTok{rowSums}\NormalTok{(}\KeywordTok{t}\NormalTok{(probs)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      0      1 
+## 0.2914 0.7086
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(PY)  }\CommentTok{## sums to 1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# P(X)}
+\NormalTok{(PX <-}\StringTok{ }\KeywordTok{colSums}\NormalTok{(}\KeywordTok{t}\NormalTok{(probs)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.04912 0.07658 0.12570 0.13943 0.21020 0.20205
+## [7] 0.19693
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(PX)  }\CommentTok{## sums to 1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+The marginal probabilities sum to 1, as they should. The table below shows the marginal probabilities.
+
+\small
+\begin{table}[!htbp]
+\begin{center}
+\begin{tabular}{c|ccccccc|c}
+$p_{X,Y}$ & x=1 & x=2 & x=3 & x=4 & x=5 & x=6 & x=7 & P(Y)\\
+\hline
+y = 0 & 0.018 & 0.023 & 0.040 & 0.043 & 0.063 & 0.049 & 0.055 &  \textbf{0.291}\\
+y = 1 & 0.031 & 0.053 & 0.086 & 0.096 &  0.147 & 0.153 &  0.142 &  \textbf{0.709}\\
+\hline
+P(X) & \textbf{0.049} & \textbf{0.077} & \textbf{0.126} & \textbf{0.139} & \textbf{0.210} & \textbf{0.202} & \textbf{0.197}\\
+\end{tabular}
+\end{center}
+\caption{The joint and marginal distributions of X and Y.}\label{discretebivartable2}
+\end{table}
+\normalsize
+
+Notice that to compute the marginal distribution of X, one is summing over all the Ys; and to compute the marginal distribution of Y, one sums over all the X's. We say that we are \emph{marginalizing out} the random variable that we are summing over. One can visualize the two marginal distributions using barplots.
+
+\begin{figure}
+\centering
+\includegraphics{Freq_CogSci_files/figure-latex/marginalprobs-1.pdf}
+\caption{\label{fig:marginalprobs}Marginal distributions of X and Y.}
+\end{figure}
+
+For computing conditional distributions, recall that the conditional distribution of a random variable \(X\) given that \(Y=y\), where \(y\) is some specific (fixed) value, is:
+
+\begin{equation}
+p_{X\mid Y} (x\mid y) = \frac{p_{X,Y}(x,y)}{p_Y(y)}	\quad \hbox{provided } p_Y(y)=P(Y=y)>0
+\end{equation}
+
+As an example, let's consider how \(p_{X\mid Y}\) would be computed.
+The possible values of \(y\) are \(0,1\), and so we have to find the conditional distribution (defined above) for each of these values. I.e., we have to find \(p_{X\mid Y}(x\mid y=0)\), and \(p_{X\mid Y}(x\mid y=1)\).
+
+Let's do the calculation for \(p_{X\mid Y}(x\mid y=0)\).
+
+\begin{equation}
+\begin{split}
+p_{X\mid Y} (1\mid 0) =& \frac{p_{X,Y}(1,0)}{p_Y(0)}\\
+	=&  \frac{0.018}{0.291}\\
+	=& 0.0619
+\end{split}	
+\end{equation}
+
+This conditional probability value will occupy the cell X=1, Y=0 in the table below summarizing the conditional probability distribution \(p_{X|Y}\). In this way, one can fill in the entire table, which will then represent the conditional distributions \(p_{X|Y=0}\) and \(p_{X|Y=1}\). The reader may want to take a few minutes to complete the table.
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{tabular}{c|ccccccc}
+	& x=1 & x=2 & x=3 & x=4 & x=5 & x=6 & x=7\\ 
+\hline	
+$p_{X\mid Y}(x\mid y=0)$  & 0.0619 &  & & & & & \\
+$p_{X\mid Y}(x\mid y=1)$  &  &  & & & & &  \\
+\end{tabular}
+\end{center}
+\caption{The conditional probability distribution of X given Y.}
+\label{XgivenY}
+\end{table}
+
+Similarly, one can construct a table that shows \(p_{Y|X}\).
+
+\hypertarget{example-2-continuous-bivariate-distributions}{%
+\subsection{Example 2: Continuous bivariate distributions}\label{example-2-continuous-bivariate-distributions}}
+
+Consider now the continuous bivariate case; this time, we will use simulated data. Consider two normal random variables \(X\) and \(Y\), each of which coming from, for example, a Normal(0,1) distribution, with some correlation \(\rho\) between the two random variables.
+
+A bivariate distribution for two random variables \(X\) and \(Y\), each of which comes from a normal distribution, is expressed in terms of the means and standard deviations of each of the two distributions, and the correlation \(\rho\) between them. The standard deviations and correlation are expressed in a special form of a \(2\times 2\) matrix called a variance-covariance matrix \(\Sigma\). If \(\rho_u\) is the correlation between the two random variables, and \(\sigma _{x}\) and \(\sigma _{y}\) the respective standard deviations, the variance-covariance matrix is written as:
 
 \begin{equation}\label{eq:covmatfoundations}
 \Sigma
 =
 \begin{pmatrix}
-\sigma _{u0}^2  & \rho _{u}\sigma _{u0}\sigma _{u1}\\
-\rho _{u}\sigma _{u0}\sigma _{u1}    & \sigma _{u1}^2\\
+\sigma _{x}^2  & \rho\sigma _{x}\sigma _{y}\\
+\rho\sigma _{x}\sigma _{y}    & \sigma _{y}^2\\
 \end{pmatrix}
 \end{equation}
 
-The off-diagonals of this matrix contain the covariance between \(U_0\) and \(U_1\).
+The off-diagonals of this matrix contain the covariance between \(X\) and \(Y\).
 
-The joint distribution of \(U_0\) and \(U_1\) is defined as follows:
+The joint distribution of \(X\) and \(Y\) is defined as follows:
 
 \begin{equation}\label{eq:jointpriordistfoundations}
 \begin{pmatrix}
-  U_0 \\ 
-  U_1 \\
+  X \\ 
+  Y \\
 \end{pmatrix}
 \sim 
 \mathcal{N}_2 \left(
@@ -702,13 +959,53 @@ The joint distribution of \(U_0\) and \(U_1\) is defined as follows:
 \right)
 \end{equation}
 
-A visualization will help. The figure below shows a bivariate distribution with correlation zero, a positive and a negative correlation.
+The joint PDF is written with reference to the two variables \(f_{X,Y}(x,y)\). It has the property that the area under the curve sums to 1. Formally, we would write this as a double integral: we are summing up the area under the curve for both dimensions X and Y (hence two integrals).
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-11-1.pdf}
+\begin{equation}
+\iint_{S_{X,Y}} f_{X,Y}(x,y)\, dx dy = 1
+\end{equation}
 
-In this book, we will make use of such multivariate distributions a lot, and it will soon become important to know how to generate simulated bivariate data that is correlated. Suppose we want to generate 100 correlated pairs of data, with correlation \(\rho=0.6\). The two random variables have mean 0, and standard deviations 5 and 10 respectively.
+Here, the terms \(dx\) and \(dy\) express the fact that we are summing the area under the curve along the X axis and the Y axis.
 
-Here is how we would generate such data. First, define a variance covariance matrix; then, use the multivariate analog of the \texttt{rnorm} function, \texttt{mvrnorm}, to generate \(100\) data-points.
+The joint CDF would be written as follows. The equation below gives us the probability of observing a value like \((u,v)\) or some value smaller than that (i.e., some \((u',v')\), such that \(u'<u\) and \(v'<v\).
+
+\begin{equation}
+\begin{split}
+F_{X,Y}(u,v) =& P(X<u,Y<v)\\
+             =& \int_{-\infty}^u \int_{-\infty}^v f_{X,Y}(x,y)\, dy dx \hbox{ for } (x,y)\in \mathbb{R}^2\\
+\end{split}
+\end{equation}
+
+As an aside, notice that the support for the normal distribution ranges from minus infinity to plus infinity. There can however be other PDFs with a more limited support; an example would be a normal distribution whose pdf \(f(x)\) is such that the lower bound is truncated at, say, 0. In such a case, the area under the range \(\int_{-\infty}^0 f(x) \, dx\) will be 0 because the range lies outside the support of the truncated normal distribution.
+
+A visualization will help. The figures below show a bivariate distribution with correlation zero (Figure \ref{fig:zerocor}), a positive (Figure \ref{fig:poscor}) and a negative correlation (Figure \ref{fig:negcor}).
+
+\begin{figure}
+\centering
+\includegraphics{Freq_CogSci_files/figure-latex/zerocor-1.pdf}
+\caption{\label{fig:zerocor}A bivariate Normal distribution with zero correlation. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{Freq_CogSci_files/figure-latex/poscor-1.pdf}
+\caption{\label{fig:poscor}A bivariate Normal distribution with a positive correlation of 0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{Freq_CogSci_files/figure-latex/negcor-1.pdf}
+\caption{\label{fig:negcor}A bivariate Normal distribution with a negative correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.}
+\end{figure}
+
+In this book, we will make use of such multivariate distributions a lot, and it will soon become important to know how to generate simulated bivariate or multivariate data that is correlated. So let's look at how to generate simulated data next.
+
+\hypertarget{generate-simulated-bivariate-multivariate-data}{%
+\subsection{Generate simulated bivariate (multivariate) data}\label{generate-simulated-bivariate-multivariate-data}}
+
+Suppose we want to generate 100 correlated pairs of data, with correlation \(\rho=0.6\). The two random variables have mean 0, and standard deviations 5 and 10 respectively.
+
+Here is how we would generate such data. First, define a variance-covariance matrix; then, use the multivariate analog of the \texttt{rnorm} function, \texttt{mvrnorm}, to generate \(100\) data points.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -732,7 +1029,7 @@ Here is how we would generate such data. First, define a variance covariance mat
 ## [6,] -2.036 -18.415
 \end{verbatim}
 
-A plot confirms that the data are positively correlated.
+A plot confirms that the simulated data are positively correlated.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -740,7 +1037,7 @@ A plot confirms that the data are positively correlated.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-13-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-14-1.pdf}
 
 As an exercise, try changing the correlation to \(0\) or to \(-0.6\), and then plot the bivariate distribution that results.
 
@@ -797,7 +1094,7 @@ One can decompose the matrix as follows. The matrix can be seen as the product o
 ## [2,]  0.6  1.0
 \end{verbatim}
 
-Given these two matrices, one can reassemble the variance covariance matrix:
+Given these two matrices, one can reassemble the variance-covariance matrix:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -811,7 +1108,7 @@ Given these two matrices, one can reassemble the variance covariance matrix:
 ## [2,]   30  100
 \end{verbatim}
 
-There is a built-in convenience function, sdcor3cov in the SIN package that does this calculation, taking the vector of standard deviatios (not the diagonal matrix) and the correlation matrix to yield the variance covariance matrix:
+There is a built-in convenience function, \texttt{sdcor3cov} in the \texttt{SIN} package that does this calculation, taking the vector of standard deviatio ns (not the diagonal matrix) and the correlation matrix to yield the variance-covariance matrix:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -825,7 +1122,214 @@ There is a built-in convenience function, sdcor3cov in the SIN package that does
 ## [2,]   30  100
 \end{verbatim}
 
-We will be using this function a lot when simulating data from linear mixed models.
+We will be using this function a lot when simulating data from hierarchical models.
+
+\hypertarget{likelihood-and-maximum-likelihood-estimation}{%
+\section{Likelihood and maximum likelihood estimation}\label{likelihood-and-maximum-likelihood-estimation}}
+
+We now turn to an important topic: the idea of likelihood, and of maximum likelihood estimation. Consider as a first example the discrete case, using the Binomial distribution.
+
+Suppose we toss a fair coin 10 times, and count the number of heads; we do this experiment once. Notice below that we set the probability of success to be 0.5. This is because we are assuming that we tossed a fair coin.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(x <-}\StringTok{ }\KeywordTok{rbinom}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+The \emph{probability} of obtaining this value depends on the parameter we set for \(\theta\) in the PMF for the binomial distribution. Here are some possible values for \(\theta\) and the resulting probabilities:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dbinom}\NormalTok{(x, }\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.001488
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dbinom}\NormalTok{(x, }\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1029
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dbinom}\NormalTok{(x, }\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2461
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dbinom}\NormalTok{(x, }\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{prob =} \FloatTok{0.8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.02642
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dbinom}\NormalTok{(x, }\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{prob =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+The value of \(\theta\) that gives us the highest probability will be called the \textbf{maximum likelihood estimate}. The function \texttt{dbinom} (which is a function of \(\theta\)) is also called a likelihood function, and the maximum value of this function is called the maximum likelihood estimate. We can graphically figure out the maximal value of the \texttt{dbinom} likelihood function here by plotting the value of the function for all possible values of \(\theta\), and checking which is the maximal value:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{theta <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.01}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(theta, }\KeywordTok{dbinom}\NormalTok{(x, }\DataTypeTok{size =} \DecValTok{10}\NormalTok{, }\DataTypeTok{prob =}\NormalTok{ theta), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }
+  \DataTypeTok{ylab =} \StringTok{"likelihood/probability"}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =}\NormalTok{ x}\OperatorTok{/}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+It should be clear from the figure that the maximum value corresponds to the proportion of heads: 5/10. This value is called the maximum likelihood estimate (MLE). We can obtain this MLE of \(\theta\), which maximizes the likelihood, by computing:
+
+\begin{equation}
+\hat \theta = \frac{x}{n}
+\end{equation}
+
+where \(n\) is sample size, and \(x\) is the number of successes. For the analytical derivation of this result, see the Linear Modeling lecture notes:
+\url{https://github.com/vasishth/LM}
+
+The likelihood function in a continuous case is similar to that of the discrete example above, but there is one crucial difference, which we will just get to below.
+
+Consider the following example. Suppose we have one data point from a Normal distribution, with mean 0 and standard deviation 1:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(x <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -1.411
+\end{verbatim}
+
+The likelihood function for this data point is going to depend on two parameters, \(\mu\) and \(\sigma\). For simplicity, let's assume that \(\sigma\) is known to be 1 and that only \(\mu\) is unknown. In this situation, the value of \(\mu\) that maximizes the likelihood will be the MLE. As before, we can graphically find the MLE by plotting the likelihood function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.01}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(mu, }\KeywordTok{dnorm}\NormalTok{(x, }\DataTypeTok{mean =}\NormalTok{ mu, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =}\NormalTok{ x)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+The maximum point in this function will always be the sample mean from the data; the sample mean is the MLE. In the above case, the mean of the single data point -1.4115 is the number itself. If we had two data points from a Normal(0,1) distribution, then the likelihood function would be defined as follows. First, let us simulate two data points:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(x1 <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -1.455
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(x2 <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3584
+\end{verbatim}
+
+These two data points are independent of each other. Hence, to obtain the joint likelihood, we will have to multiply the likelihoods of each of the numbers, given some value for \(\mu\):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu <-}\StringTok{ }\DecValTok{1}
+\KeywordTok{dnorm}\NormalTok{(x1, }\DataTypeTok{mean =}\NormalTok{ mu) }\OperatorTok{*}\StringTok{ }\KeywordTok{dnorm}\NormalTok{(x2, }\DataTypeTok{mean =}\NormalTok{ mu)}
+\end{Highlighting}
+\end{Shaded}
+
+In order to plot the joint likelihood, we need to write a function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{normallik <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{mu =} \OtherTok{NULL}\NormalTok{) \{}
+  \KeywordTok{dnorm}\NormalTok{(x1, }\DataTypeTok{mean =}\NormalTok{ mu) }\OperatorTok{*}\StringTok{ }\KeywordTok{dnorm}\NormalTok{(x2, }\DataTypeTok{mean =}\NormalTok{ mu)}
+\NormalTok{\}}
+\CommentTok{## test:}
+\KeywordTok{normallik}\NormalTok{(}\DataTypeTok{mu =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.00637
+\end{verbatim}
+
+Now, we can plot the likelihood function for these two data points:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mu <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.01}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(mu, }\KeywordTok{normallik}\NormalTok{(mu), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{c}\NormalTok{(x1, x2)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+Notice that the maximum value of this joint likelihood is the mean of the two data points.
+
+For the normal distribution, where \(X \sim N(\mu,\sigma)\), we can get MLEs of \(\mu\) and \(\sigma\) by computing:
+
+\begin{equation}
+  \hat \mu = \frac{1}{n}\sum x_i = \bar{x}  
+\end{equation}
+
+and
+
+\begin{equation}
+	\hat \sigma ^2 = \frac{1}{n}\sum (x_i-\bar{x})^2
+\end{equation}
+
+you will sometimes see the ``unbiased'' estimate (and this is what R computes) but for large sample sizes the difference is not important:
+
+\begin{equation}
+  \hat \sigma ^2 = \frac{1}{n-1}\sum (x_i-\bar{x})^2
+\end{equation}
+
+Now we come to a crucial difference between the discrete and continuous cases discussed above. The \texttt{dbinom} is the PMF but is also a likelihood function, when seen as a function of \(\theta\). The \texttt{dbinom} gives us the \emph{probability} of a particular outcome (given some value of \(\theta\)). This is not the case in the continuous PDF. For example, the \texttt{dnorm} function doesn't give us the \textbf{probability} of a point value, but rather the \textbf{density} or \textbf{likelihood}. For this reason, we will make a distinction between the words probability and likelihood; in day to day parlance the two are used interchangeably, but here these two terms have a technical meaning that we will stick to.
+
+A final point to note is that a likelihood function is not a PDF; the area under the curve does not need to sum to 1.
+
+\hypertarget{the-importance-of-the-mle}{%
+\subsection{The importance of the MLE}\label{the-importance-of-the-mle}}
+
+One significance of the MLE is that, having assumed a particular underlying PDF, we can estimate the (unknown) parameters (the mean and variance) of the distribution that we assume to have generated our particular data. For example, in the Binomial case, we have a formula for computing the MLEs of the mean and variance; for the Normal distribution, we have a formula for computing the MLE of the mean and the variance.
+
+What are the distributional properties of the mean \textbf{under repeated sampling}? This is a question that forms the basis for hypothesis testing in the frequentist paradigm. So we turn to this topic in the next chapter.
 
 \hypertarget{summary-of-useful-r-functions-relating-to-univariate-distributions}{%
 \section{Summary of useful R functions relating to univariate distributions}\label{summary-of-useful-r-functions-relating-to-univariate-distributions}}
@@ -833,7 +1337,7 @@ We will be using this function a lot when simulating data from linear mixed mode
 Table \ref{tab:dpqrfunctions} summarizes the different functions relating to univariate PMFs and PDFs, using the Binomial and Normal as examples.
 
 \begin{longtable}[]{@{}lcc@{}}
-\caption{\label{tab:dpqrfunctions} Important R functions relating to two univariate random variables, the Normal and the Binomial.}\tabularnewline
+\caption{\label{tab:dpqrfunctions} Important R functions relating to two univariate distributions, the Normal and the Binomial.}\tabularnewline
 \toprule
 & Discrete & Continuous\tabularnewline
 \midrule
@@ -851,10 +1355,10 @@ Generate simulated data & rbinom & rnorm\tabularnewline
 \bottomrule
 \end{longtable}
 
-Other distributions, such as the t-distribution, the Uniform, Exponential, Gamma, etc. Beta, etc., have their own set of d-p-q-r functions in R. The appendix summarizes the properties of the distributions that we will need in this book.
+Other distributions, such as the t-distribution, the Uniform, Exponential, Gamma, Beta, etc., have their own set of d-p-q-r functions in R. The appendix summarizes the properties of the distributions that we will need in this book.
 
 \hypertarget{summary-of-random-variable-theory}{%
-\section{*Summary of random variable theory}\label{summary-of-random-variable-theory}}
+\section{Summary of random variable theory}\label{summary-of-random-variable-theory}}
 
 We can summarize the above informal concepts very compactly if we re-state them in mathematical form. A mathematical statement has the advantage not only of brevity but also of reducing ambiguity.
 
@@ -866,7 +1370,7 @@ Y : S \rightarrow \mathbb{R}
 
 The random variable associates to each outcome \(\omega \in S\) exactly one number \(Y(\omega) = y\). \(S_Y\) is all the \(y\)'s (all the possible values of \(Y\), the support of \(Y\)). I.e., \(y \in S_Y\).
 
-Every random variable \(Y\) has associated with it a probability mass (distribution) function (PMF, PDF). I.e., PMF is used for discrete distribu tions and PDF for continuous distributions. The PMF/PDF maps every element of \(S_Y\) to a value between 0 and 1.
+Every random variable \(Y\) has associated with it a probability mass (distribution) function (PMF, PDF). I.e., PMF is used for discrete distributions and PDF for continuous distributions. The PMF/PDF maps every element of \(S_Y\) to a value between 0 and 1.
 
 \begin{equation}
 p_Y : S_Y \rightarrow [0, 1] 
@@ -911,12 +1415,71 @@ P(Y<a) = F(Y<a) =\int_{-\infty}^{a} f(y)\, dy
 
 The above integral is simply summing up the area under the curve between the points \(-\infty\) and \(a\); this gives us the probability of observing \(a\) or a value smaller than \(a\).
 
-A final point here is that we can go back and forth between the PDF and the CDF. If the PDF is \(f(y)\), then the CDF that allows us to compute quantities like \(P(Y<b)\) is just the integral \(F(Y<b)=\int_{-\infty}^b f(y)\, dy\). If we differentiate the CDF, we get the PDF back: \(d(F(y))/dy=f(y)\).
+A final point here is that we can go back and forth between the PDF and the CDF. If the PDF is \(f(y)\), then the CDF that allows us to compute quantities like \(P(Y<b)\) is just the integral:
+
+\begin{equation}
+F(Y<b)=\int_{-\infty}^b f(y)\, dy
+\end{equation}
+
+The above is simply computing the area under the curve \(f(y)\), ranging from \(b\) to \(-\infty\).
+
+Because differentiation is the opposite of integration (this is called the Fundamental Theorem of Calculus), if we differentiate the CDF, we get the PDF back:
+
+\begin{equation}
+d(F(y))/dy=f(y)
+\end{equation}
+
+In bivariate distributions, the joint CDF is written \(F_{X,Y}(a,b)=P(X\leq a, Y\leq b)\), where \(-\infty < a,b<\infty\). The \emph{marginal distributions} of \(F_X\) and \(F_Y\) are the CDFs of each of the associated random variables. The CDF of \(X\):
+
+\begin{equation}
+F_X(a) = P(X\leq a) = F_X(a,\infty)	
+\end{equation}
+
+The CDF of \(Y\):
+
+\begin{equation}
+F_Y(b) = P(Y\leq b) = F_Y(\infty,b)	
+\end{equation}
+
+\(f(x,y)\) is the \emph{joint PDF} of \(X\) and \(Y\). Every joint PDF satisfies
+
+\begin{equation}
+f(x,y)\geq 0\mbox{ for all }(x,y)\in S_{X,Y},
+\end{equation}
+and
+\begin{equation}
+\iintop_{S_{X,Y}}f(x,y)\,\mathrm{d} x\,\mathrm{d} y=1.
+\end{equation}
+
+where \(S_{X,Y}\) is the joint support of the two random variables.
+
+If X and Y are jointly continuous, they are individually continuous, and their PDFs are:
+
+\begin{equation}
+\begin{split}
+P(X\in A) = & P(X\in A, Y\in (-\infty,\infty))	\\
+= & \int_A \int_{-\infty}^{\infty} f(x,y)\,dy\, dx\\
+= & \int_A f_X(x)\, dx
+\end{split}	
+\end{equation}
+
+\noindent
+where
+
+\begin{equation}
+f_X(x) = \int_{-\infty}^{\infty} f(x,y)\, dy	
+\end{equation}
+
+Similarly:
+
+\begin{equation}
+f_Y(y) =  \int_{-\infty}^{\infty} f(x,y)\, dx		
+\end{equation}
 
 \hypertarget{further-reading}{%
 \section{Further reading}\label{further-reading}}
 
-A quick review of the mathematical foundations needed for statistics is available in the short book by \citet{fox2009mathematical}. \citet{morin2016probability} and \citet{blitzstein2014introduction} are accessible introductions to probability theory. \citet{kerns} contains a very well-written general introduction to random variable theory, but assumes the reader knows the basics of calculus.
+For readers interested in the mathematics needed for statistics, the books by \citet{fox2009mathematical}, \citet{gill2006essential}, and \citet{moore2013mathematics} are useful. The essential matrix algebra needed for statistics is discussed in \citet{fieller}. Accessible introductions to probability theory are \citet{morin2016probability} and \citet{blitzstein2014introduction}. \citet{kerns} contains a very well-written and freely available general introduction to random variable theory and statistics, but assumes the reader knows the basics of calculus.
 
 \hypertarget{sec:Foundationsexercises}{%
 \section{Exercises}\label{sec:Foundationsexercises}}
@@ -927,35 +1490,35 @@ A quick review of the mathematical foundations needed for statistics is availabl
 \hypertarget{sec:FoundationsexercisespnormPart1}{%
 \subsubsection{Part 1}\label{sec:FoundationsexercisespnormPart1}}
 
-Given a normal distribution with mean \texttt{73} and standard deviation \texttt{101}, use the pnorm function to calculate the probability of obtaining values between \texttt{30} and \texttt{-47} from this distribution.
+Given a normal distribution with mean \texttt{12} and standard deviation \texttt{102}, use the pnorm function to calculate the probability of obtaining values between \texttt{-148} and \texttt{166} from this distribution.
 
 \hypertarget{sec:FoundationsexercisespnormPart2}{%
 \subsubsection{Part 2}\label{sec:FoundationsexercisespnormPart2}}
 
 Calculate the following probabilities.
-Given a normal distribution with mean \texttt{50} and standard deviation \texttt{3}, what is the probability of getting
+Given a normal distribution with mean \texttt{51} and standard deviation \texttt{4}, what is the probability of getting
 
 \begin{itemize}
 \tightlist
 \item
-  a score of \texttt{40} or less
+  a score of \texttt{42} or less
 \item
-  a score of \texttt{40} or more
+  a score of \texttt{42} or more
 \item
-  a score of \texttt{59} or more
+  a score of \texttt{58} or more
 \end{itemize}
 
 \hypertarget{sec:FoundationsexercisespnormPart3}{%
 \subsubsection{Part 3}\label{sec:FoundationsexercisespnormPart3}}
 
-Given a normal distribution with mean \texttt{55} and standard deviation \texttt{6}, what is the probability of getting
+Given a normal distribution with mean \texttt{47} and standard deviation \texttt{7}, what is the probability of getting
 
 \begin{itemize}
 \tightlist
 \item
-  a score of \texttt{50} or less.
+  a score of \texttt{42} or less.
 \item
-  a score between \texttt{52} and \texttt{58}.
+  a score between \texttt{44} and \texttt{50}.
 \item
   a score of \texttt{mu+1} or more.
 \end{itemize}
@@ -973,21 +1536,21 @@ Compute the lower and upper boundaries such that:
 \begin{itemize}
 \tightlist
 \item
-  the area (the probability) to the left of the lower boundary is \texttt{0.46}.
+  the area (the probability) to the left of the lower boundary is \texttt{0.06}.
 \item
-  the area (the probability) to the left of the upper boundary is \texttt{0.81}.
+  the area (the probability) to the left of the upper boundary is \texttt{0.84}.
 \end{itemize}
 
 \hypertarget{sec:FoundationsexercisesqnormPart2}{%
 \subsubsection{Part 2}\label{sec:FoundationsexercisesqnormPart2}}
 
-Given a normal distribution with mean \texttt{59.061} and standard deviation \texttt{0.673}. There exist two quantiles, the lower quantile q1 and the upper quantile q2, that are equidistant from the mean \texttt{59.061}, such that the area under the curve of the Normal probability between q1 and q2 is \texttt{85}\%. Find q1 and q2.
+Given a normal distribution with mean \texttt{58.959} and standard deviation \texttt{0.95}. There exist two quantiles, the lower quantile q1 and the upper quantile q2, that are equidistant from the mean \texttt{58.959}, such that the area under the curve of the Normal probability between q1 and q2 is \texttt{80}\%. Find q1 and q2.
 
 \hypertarget{sec:Foundationsexercisesqt}{%
 \subsection{\texorpdfstring{Practice using \texttt{qt}}{Practice using qt}}\label{sec:Foundationsexercisesqt}}
 
-Take an independent random sample of size \texttt{157} from a normal distribution
-with mean \texttt{170}, and standard deviation \texttt{37}. Next, we are going to pretend we don't know the population parameters (the mean and standard deviation). We compute the MLEs of the mean and standard deviation using the data and get the sample mean \texttt{171.138} and the sample standard deviation \texttt{35.223}.
+Take an independent random sample of size \texttt{143} from a normal distribution
+with mean \texttt{123}, and standard deviation \texttt{79}. Next, we are going to pretend we don't know the population parameters (the mean and standard deviation). We compute the MLEs of the mean and standard deviation using the data and get the sample mean \texttt{122.522} and the sample standard deviation \texttt{77.276}.
 
 \begin{itemize}
 \tightlist
@@ -1006,19 +1569,18 @@ with mean \texttt{170}, and standard deviation \texttt{37}. Next, we are going t
 \hypertarget{sec:FoundationsexercisesMLE1}{%
 \subsection{Maximum likelihood estimation 1}\label{sec:FoundationsexercisesMLE1}}
 
-Given the data point \texttt{16.655}.
-The function \texttt{dnorm} gives the likelihood given a data point (or multiple data points) and a value for the mean and the standard deviation (sd). Using \texttt{dnorm}, compute
+The function \texttt{dnorm} gives the likelihood given a data point (or multiple data) and a value for the mean and the standard deviation (sd). Using \texttt{dnorm}, compute
 
 \begin{itemize}
 \tightlist
 \item
-  the likelihood of the data point \texttt{16.655} assuming a mean of \texttt{12} and standard deviation 5.
+  the likelihood of the data point \texttt{18.414} assuming a mean of \texttt{12} and standard deviation 5.
 \item
-  the likelihood of the data point \texttt{16.655} assuming a mean of \texttt{11} and standard deviation 5.
+  the likelihood of the data point \texttt{18.414} assuming a mean of \texttt{11} and standard deviation 5.
 \item
-  the likelihood of the data point \texttt{16.655} assuming a mean of \texttt{10} and standard deviation 5.
+  the likelihood of the data point \texttt{18.414} assuming a mean of \texttt{10} and standard deviation 5.
 \item
-  the likelihood of the data point \texttt{16.655} assuming a mean of \texttt{9} and standard deviation 5.
+  the likelihood of the data point \texttt{18.414} assuming a mean of \texttt{9} and standard deviation 5.
 \end{itemize}
 
 \hypertarget{sec:FoundationsexercisesMLE2}{%
@@ -1033,7 +1595,7 @@ You are given \(10\) independent and identically distributed data points that ar
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 513 491 501 500 494 490 500 507 515 481
+##  [1] 517 504 485 489 503 485 497 480 494 489
 \end{verbatim}
 
 The function \texttt{dnorm} gives the likelihood given multiple data points and a value for the mean and the standard deviation. The log-likelihood can be computed by typing \texttt{dnorm(...,log=TRUE)}.
@@ -1103,11 +1665,11 @@ Even more compactly:
 \item
   Given the 10 data points above, calculate the maximum likelihood estimate (MLE) of the expectation.
 \item
-  The sum of the log-likelihoods of the data-points x, using as the mean the MLE from the sample, and standard deviation 5.
+  The sum of the log-likelihoods of the data x, using as the mean the MLE from the sample, and standard deviation 5.
 \item
-  What is the sum of the log-likelihood if the mean used to compute the log-likelihood is \texttt{497.2}?
+  What is the sum of the log-likelihood if the mean used to compute the log-likelihood is \texttt{492.3}?
 \item
-  Which value for the mean, the MLE or \texttt{497.2}, gives the higher log-likelihood?
+  Which value for the mean, the MLE or \texttt{492.3}, gives the higher log-likelihood?
 \end{itemize}
 
 \hypertarget{sec:Foundationsexercisesbivar}{%
@@ -1124,15 +1686,67 @@ Generate 50 data points from three random variables X, Y, and Z, where \(X\sim N
 \hypertarget{hypothetical-repeated-sampling-and-the-t-test}{%
 \chapter{Hypothetical repeated sampling and the t-test}\label{hypothetical-repeated-sampling-and-the-t-test}}
 
-This chapter introduces some of the foundational ideas behind hypothesis testing in the frequentist framework. The key idea if that of hypothetical repeated sampling. When we fit a model to a given data-set, we are assuming that this is one of potentially infinite numbers of exact repetitions of an experiment. We leverage some amazing properties of these exact repetitions in order to draw inferences from our particular data. The key idea to understand here is the central limit theorem, to which we turn next.
+This chapter introduces some of the foundational ideas behind hypothesis testing in the frequentist framework. The key idea is that of hypothetical repeated sampling. When we fit a model to a given data-set, we are assuming that this is one of potentially infinite numbers of exact repetitions of an experiment. We leverage some amazing properties of these exact repetitions in order to draw inferences from our particular data. The key idea to understand here is the central limit theorem, to which we will discuss below. Before we do that, it is useful to introduce some terminology relating to typical experiment designs in linguistics and psychology.
+
+\hypertarget{some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology}{%
+\section{Some terminology surrounding typical experiment designs in linguistics and psychology}\label{some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology}}
+
+An experiment typically involves taking a \emph{random sample} from some population. For example, we could take a sample of participants and record their reading times for two kinds of sentences, for example easy and difficult sentences (how easy and difficult is operationalized is not important at this point). Technically, we are supposed to randomly choose participants; in practice, this randomization rarely happens. Instead we take whatever participants we get, such as university graduates who happen to apply to participate in an experiment! So, random sampling is an assumption in all the discussions in this chapter, but in practice this assumption may or may not be perfectly met.
+
+One design decision that the researcher must take is whether to collect only one response from each participant in each condition, or whether we collect multiple measures from each participant. If we collect only data point from each participant, we will say that the data points are \emph{independent} of each other. When we collect multiple measurements from each participant, we will say that we have \emph{dependent} data; such multiple measurements are also called \emph{repeated measures}. With repeated measures, there will be some correlation between the data-points because the multiple measurements from a common source.
+
+In psycholinguistics, repeated measures experiments are the norm. Furthermore, it is common to use a so-called \emph{Latin Square} design. To understand this design, suppose we want to conduct an experiment with two conditions, a and b, and that we want each participant to see each condition multiple times (repeated measurements). The way such an experiment (with two conditions) is set up with a Latin Square design is that we would create multiple pairs of items, e.g., items 1a, 1b, 2a, 2b, etc. For example, we are investigating active vs.~passive sentences, item 1a could be the active clause \emph{The man threw the ball}, and 1b would thene the passive counterpart \emph{The ball was thrown by the man}. The two versions of the item are therefore minimal pairs---minimally different in that the sentence has the same words, but one is an active clause and the other a passive clause.
+
+Then, we would create two groups of items, G1 and G2. Group G1 would contain items 1a, 2b, 3a, 4b, etc; group G2 would contain items 1b, 2a, 3b, 4a, etc. Thus, if one had 16 items, each group would contain eight instance of each condition. Having set up these two groups, one would then randomly assign each participant to one of the two groups. In this way, from each participant, we would obtain eight repeated measures from each condition. One can (and should) of course randomize the order of presentation in each group, possibly randomizing afresh for each participant. The term Latin Square refers to the fact that the ordering of the conditions forms a square.
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+\endhead
+\textbar{} a \textbar{} b \textbar{}\tabularnewline
+\textbar{} b \textbar{} a \textbar{}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Each condition appears in each row exactly once.
+
+The Latin square generalizes beyond two conditions easily. Suppose we have four conditions; then, the Latin Square is:
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+\endhead
+\textbar{} a \textbar{} b \textbar{} c \textbar{} d \textbar{}\tabularnewline
+\textbar{} b \textbar{} c \textbar{} d \textbar{} a \textbar{}\tabularnewline
+\textbar{} c \textbar{} d \textbar{} a \textbar{} b \textbar{}\tabularnewline
+\textbar{} d \textbar{} a \textbar{} b \textbar{} d \textbar{}\tabularnewline
+\bottomrule
+\end{longtable}
+
+The Latin Square design is attractive for psycholinguistics and psychology because it has some optimality properties. Experiment design and the properties of different designs is a whole field in itself in statistics, but we won't get into these details.
+
+One consequence of the above repeated measurements design is that we have multiple measurements not just from participants but also from items! Thus, items can also be seen as producing dependent data. In other words, both participants and items are producing dependent data in this design. Later on, we will see that this has an effect on the type of data analysis one can do.
+
+With this very brief introduction to experiment design, we now turn to the idea of hypothetical repeated sampling, and the central limit theorem.
 
 \hypertarget{the-central-limit-theorem-using-simulation}{%
 \section{The central limit theorem using simulation}\label{the-central-limit-theorem-using-simulation}}
 
-Suppose we collect some data, which can be represented by a vector \(y\); this is a \emph{single sample}. Given data \(y\), and assuming for concreteness that the underlying likelihood is a \(Normal(\mu=500,\sigma=100)\), the sample mean and standard deviation, \(\bar{y}\) and \(s\) give us an estimate of the unknown parameters mean \(\mu\) and the standard deviation \(\sigma\) that are assumed to generate the data. Figure \ref{fig:normalsample} shows the distribution of a particular sample, where the number of data points is \(n=1000\). Note that in this example the parameters are specified by us, so they are not unknown; in a real data-collection situation, the sample mean and standard deviation are all we have as estimates of the parameters.
+Suppose we collect some data, which can be represented by a vector \(y\); this is a \emph{single sample}. Given data \(y\), and assuming for concreteness that the underlying likelihood is a \(Normal(\mu=500,\sigma=100)\), the sample mean and standard deviation, \(\bar{y}\) and \(s\) give us an estimate of the unknown parameters mean \(\mu\) and the standard deviation \(\sigma\) of the distribution from which we assume that our data come from. Figure \ref{fig:normalsample} shows the distribution of a particular sample, where the number of data points is \(n=1000\). Note that in this example the parameters are specified by us, so they are not unknown; in a real data-collection situation, the sample mean and standard deviation are all we have as estimates of the parameters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## sample size:}
+\NormalTok{n<-}\DecValTok{1000}
+\CommentTok{##  independent and identically distributed sample:}
+\NormalTok{y<-}\KeywordTok{rnorm}\NormalTok{(n,}\DataTypeTok{mean=}\DecValTok{500}\NormalTok{,}\DataTypeTok{sd=}\DecValTok{100}\NormalTok{)}
+\CommentTok{## histogram of data:}
+\KeywordTok{hist}\NormalTok{(y,}\DataTypeTok{freq=}\OtherTok{FALSE}\NormalTok{)}
+\CommentTok{## true value of mean:}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\DecValTok{500}\NormalTok{,}\DataTypeTok{lwd=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{figure}
-\includegraphics[width=0.75\linewidth]{Freq_CogSci_files/figure-latex/normalsample-1} \caption{A sample of data y, from the distribution  Normal(500,100).}\label{fig:normalsample}
+\includegraphics[width=0.75\linewidth]{Freq_CogSci_files/figure-latex/normalsample-1} \caption{A sample of data y of size n=100, from the distribution  Normal(500,100).}\label{fig:normalsample}
 \end{figure}
 
 Suppose now that you had not a single sample of size 1000 but many repeated samples. This isn't something one can normally do in real life; we often run a single experiment or, at most, repeat the same experiment once. However, one can simulate repeated sampling easily within R. Let us take 100 repeated samples like the one above, and save the samples in a matrix containing n=1000 rows and 100 columns, each column representing an experiment:
@@ -1164,7 +1778,7 @@ Now, if we compute the means \(\bar{y}_k\) of \emph{each} of the \(k=1,\dots,100
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 499.6
+## [1] 500.3
 \end{verbatim}
 
 \begin{Shaded}
@@ -1174,7 +1788,7 @@ Now, if we compute the means \(\bar{y}_k\) of \emph{each} of the \(k=1,\dots,100
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 3.053
+## [1] 3.46
 \end{verbatim}
 
 \begin{figure}
@@ -1209,7 +1823,6 @@ And the variance of \(\bar{Y}\) is
 \begin{split}
 Var(\bar{Y}) =& Var(\frac{1}{n}Y_1 + \dots + \frac{1}{n}
 Y_n)\\
-=& \frac{1}{n} [Var(Y_1 + \dots + Y_n)]\\
 =& \frac{1}{n^2} Var(Y_1 + \dots + Y_n)\\
 \end{split}
 \end{equation}
@@ -1231,6 +1844,8 @@ This derives the above result that the expectation (i.e., the mean) and variance
 \begin{equation}
 E[\bar{Y}] = \mu \quad Var(\bar{Y}) = \frac{\sigma^2}{n}
 \end{equation}
+
+The above means that we can estimate the expectation \(\bar{Y}\) and the variance of \(\bar{Y}\) from a \emph{single} sample!!
 
 The Central Limit Theorem, not proved here (for a proof, see p.~267 of \citet{millermiller}) can be summarized as follows.
 
@@ -1254,7 +1869,7 @@ In the above discussion, the underlying pdf we sampled from above was a normal d
 The Exponential distribution has a parameter \(\lambda\) (parameterized in \texttt{R} as a \texttt{rate}, \(1/\lambda\)); its mean is \(\lambda\) and its variance is \(1/\lambda^2\). The sampling distribution is normal, even though the underlying distribution is an Exponential.
 
 \begin{figure}
-\includegraphics[width=0.75\linewidth]{Freq_CogSci_files/figure-latex/sdsmexp-1} \caption{Sampling from an exponential.}\label{fig:sdsmexp}
+\includegraphics[width=0.85\linewidth]{Freq_CogSci_files/figure-latex/sdsmexp-1} \caption{Sampling from an exponential.}\label{fig:sdsmexp}
 \end{figure}
 
 A further example is samples from a Gamma distribution. Suppose we sample from a Gamma distribution with shape parameter chosen arbitrarily to be 1. The distribution of means is again going to be approximately normal.
@@ -1302,13 +1917,13 @@ This interval is called the \emph{confidence interval} (CI) and has the followin
 \CommentTok{## check how many CIs contain mu:}
 \NormalTok{CIs <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(lower }\OperatorTok{<}\StringTok{ }\NormalTok{mu }\OperatorTok{&}\StringTok{ }\NormalTok{upper }\OperatorTok{>}\StringTok{ }\NormalTok{mu, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
 \CommentTok{## approx. 95% of the CIs contain true mean:}
-\KeywordTok{round}\NormalTok{(}\KeywordTok{table}\NormalTok{(CIs)[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(}\KeywordTok{table}\NormalTok{(CIs)), }\DecValTok{2}\NormalTok{)}
+\CommentTok{## round(table(CIs)[2]/sum(table(CIs)),2)}
+\KeywordTok{mean}\NormalTok{(CIs)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##    1 
-## 0.94
+## [1] 0.945
 \end{verbatim}
 
 Figure \ref{fig:ciplot} visualizes the coverage properties of the confidence interval in 100 simulations; by coverage we mean here the proportion of cases where the true \(\mu\) is contained in the CI.
@@ -1317,8 +1932,9 @@ Figure \ref{fig:ciplot} visualizes the coverage properties of the confidence int
 \includegraphics[width=0.75\linewidth]{Freq_CogSci_files/figure-latex/ciplot-1} \textbackslash{}caption\{Illustration of the meaning of the 95\% confidence interval. The dark bars are CIs which do not contain the true mean.\}\label{fig:ciplot}
 \textbackslash{}end\{figure\}
 
-The confidence interval is widely misinterpreted in a Bayesian way, i.e., as representing the range of plausible value of the \(\mu\) parameter. This is the wrong interpretation because \(\mu\) is a point value by assumption, it doesn't have a PDF associated with it. By contrast, the Bayesian credible interval does have this interpretation.
-In practice, we find that in most modeling settings we have encountered, the frequentist and Bayesian credible interval have very similar widths, with the Bayesian interval being slightly wider depending on the prior specifications.
+The confidence interval is widely misinterpreted, i.e., as representing the range of plausible value of the \(\mu\) parameter. This is the wrong interpretation because \(\mu\) is a point value by assumption, it doesn't have a PDF associated with it. The frequentist CI is defined with reference to the sampling distribution of the mean under repeated sampling, not the probability distribution of \(\mu\).
+By contrast, the Bayesian credible interval does have this interpretation.
+In practice, we find that in most modeling settings we have encountered, the frequentist confidence interval and Bayesian credible interval have very similar widths, with the Bayesian interval being slightly wider depending on the prior specifications.
 
 Given the convoluted meaning of the CI, and the impossibility of interpreting a single CI, it is reasonable to ask: what good is a CI? One can treat the CI as a graphical summary of width of the sampling distribution of the mean---the wider the sampling distribution, the more the implied variability under repeated sampling. The confidence interval can therefore be used as a visual summary of how uncertain we can be about the estimate of the sample mean under hypothetical repeated sampling. See \citet{cumming2014new} for a useful perspective relating to using confidence intervals for inference.
 
@@ -1334,7 +1950,8 @@ Due to its simplicity, it is tempting to take only a cursory look at the t-test 
 \hypertarget{the-one-sample-t-test}{%
 \subsection{The one-sample t-test}\label{the-one-sample-t-test}}
 
-As in our running example, suppose we have a random sample \(y\) of size \(n\), and the data come from a \(N(\mu,\sigma)\) distribution, with unknown parameters \(\mu\) and \(\sigma\). We can estimate \(\mu\) from the sample mean \(\bar{y}\), which we will sometimes also write as \(\hat \mu\). We can also estimate \(\sigma\) from the sample standard deviation \(s\), which we can also write as \(\hat\sigma\). These estimates in turn allow us to estimate the sampling distribution of the mean under (hypothetical) repeated sampling:
+As in our running example, suppose we have a random sample \(y\) of size \(n\), and the data come from a \(N(\mu,\sigma)\) distribution, with unknown parameters \(\mu\) and \(\sigma\). An assumption of the t-test is that the data points are independent in the sense discussed at the beginning of this chapter.
+We can estimate \(\mu\) from the sample mean \(\bar{y}\), which we will sometimes also write as \(\hat \mu\). We can also estimate \(\sigma\) from the sample standard deviation \(s\), which we can also write as \(\hat\sigma\). These estimates in turn allow us to estimate the sampling distribution of the mean under (hypothetical) repeated sampling:
 
 \begin{equation}
 N(\hat\mu,\frac{\hat \sigma}{\sqrt{n}})
@@ -1350,7 +1967,7 @@ Assume as before that we take an independent random sample of size \(1000\) from
 \NormalTok{mu <-}\StringTok{ }\DecValTok{500}
 \NormalTok{sigma <-}\StringTok{ }\DecValTok{100}
 \CommentTok{## generate simulated data:}
-\NormalTok{y <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{500}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{100}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(n, }\DataTypeTok{mean =} \DecValTok{500}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{100}\NormalTok{)}
 \CommentTok{## compute summary statistics:}
 \NormalTok{y_bar <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(y)}
 \NormalTok{SE <-}\StringTok{ }\KeywordTok{sd}\NormalTok{(y)}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)}
@@ -1365,7 +1982,7 @@ H_0: \mu = 450
 
 This amounts to assuming that the true sampling distribution of sample means is (approximately) normally distributed and centered around 450, with the standard error estimated from the data.
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-35-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-45-1.pdf}
 
 The intuitive idea here is that
 - if the sample mean \(\bar{y}\) is ``near'' the hypothesized \(\mu\) (here, 450), the data are possibly consistent with the null hypothesis distribution.
@@ -1406,7 +2023,7 @@ For large \(n\), the PDF of the random variable \(T\) approaches \(N(0,1)\). Thi
 \begin{figure}
 \centering
 \includegraphics{Freq_CogSci_files/figure-latex/tnormal-1.pdf}
-\caption{\label{fig:tnormal}A visual comparison of the t-distribution (with degrees of freedom ranging from 1 to 50) with the standard normal distribution (N(0,1)).}
+\caption{\label{fig:tnormal}A visual comparison of the t-distribution (with degrees of freedom ranging from 1 to 50) with the standard normal distribution (N(0,1)). The dashed line represents the t-distribution, and the solid line the normal distribution.}
 \end{figure}
 
 Thus, given a sample size \(n\), we can define a t-distribution corresponding to the null hypothesis distribution. For large values of \(n\), we could even use \(N(0,1)\), although it is traditional in psychology and linguistics to always use the t-distribution no matter how large \(n\) is.
@@ -1441,7 +2058,7 @@ Intuitively, the t-value from the sample is large when we end up far in \emph{ei
 \begin{figure}
 \centering
 \includegraphics{Freq_CogSci_files/figure-latex/tails-1.pdf}
-\caption{\label{fig:tails}The rejection region in a t-distribution.}
+\caption{\label{fig:tails}The rejection region in a t-distribution. The rejection region is the x-axis under the gray-colored area.}
 \end{figure}
 
 The location of the vertical lines is determined by the so-called \emph{critical t-value} along the x-axis of the t-distribution. This is the value such that the area under the curve in the tails to the left or right of the tails is 0.025. As discussed in chapter 1, this area under the curve represents the probability of observing a value as extreme as the critical t-value, or some value that is more extreme. Notice that if we ask ourselves what the probability is of observing some particular t-value (a point value), the answer must necessarily be \(0\) (if you are unclear about why, re-read chapter 1). But we can ask the question: what is the absolute t-value, written \(|t|\), such that \(P(T>|t|)=0.025\)? That's the critical t-value.
@@ -1481,7 +2098,7 @@ Consider the observed t-value from our sample in our running example:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 15.49
+## [1] 15.76
 \end{verbatim}
 
 This observed t-value is huge and is telling you the distance of the sample mean from the null hypothesis mean \(\mu\) in standard error units.
@@ -1530,7 +2147,7 @@ In R, the built-in function \texttt{t.test} delivers the observed t-value. Given
 
 \begin{verbatim}
 ##     t 
-## 15.49
+## 15.76
 \end{verbatim}
 
 The default value for the null hypothesis mean \(\mu\) in this function is 0; so if one doesn't define a null hypothesis mean, the statistical test is done with reference to a null hypothesis that \(\mu=0\). That is why this t-value does not match our calculation above:
@@ -1548,7 +2165,7 @@ The default value for the null hypothesis mean \(\mu\) in this function is 0; so
 
 In the most common usage of the t-test, the null hypothesis mean will be \(0\), because usually one is comparing a difference in means between two conditions or two sets of conditions. So the above line of code will work out correctly in those cases; but if you ever have a different null hypothesis mean than \(0\), then you have to specify it in the \texttt{t.test} function.
 
-So, the t-test is used as if it furnishes a \emph{decision rule}: either reject the null hypothesis or fail to reject it. Whenever we do an experiment and carry out a t-test, we use the t-test to make a decision: reject or fail to reject the null hypothesis.
+So, the t-test is used to implement a \emph{decision}: either reject the null hypothesis or fail to reject it. Whenever we do an experiment and carry out a t-test, we use the t-test to make a decision: reject or fail to reject the null hypothesis.
 
 Recall that behind the t-test lies the assumption that the observed t-value is coming from a random variable, \(T\sim t(n-1)\). The particular t-value we observe from a particular data-set belongs to a distribution of t-values under hypothetical repeated sampling. Thus, implicit in the logic of the t-test---and indeed every frequentist statistical test---is the assumption that the experiment is in principle repeatable: the experiment can in principle be re-run as many times as we want, assuming we have the necessary resources and time.
 
@@ -1587,7 +2204,7 @@ As the table shows, we can make two kinds of mistakes:
   Type II error or \(\beta\): Accept the null when it's false.
 \end{itemize}
 
-In psychology and related areas, Type I error is fixed a priori at 0.05. This stipulated Type I error value is why the absolute critical t-value is kept at approximately \(2\); if, following recommendations from \citet{benjamin2018redefine}, we were to stipulate that the Type I error be 0.005, then the critical t-value would have had to be set at:
+In psychology and related areas, Type I error is usually fixed a priori at 0.05. This stipulated Type I error value is why the absolute critical t-value is kept at approximately \(2\); if, following recommendations from \citet{benjamin2018redefine}, we were to stipulate that the Type I error be 0.005, then the critical t-value would have had to be set at:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1601,7 +2218,7 @@ In psychology and related areas, Type I error is fixed a priori at 0.05. This st
 
 This suggested change in convention hasn't been taken up yet in cognitive science, but this could well change one day.
 
-Type II error, the probability of incorrectly accepting the null hypothesis when it is false with some particular value for the parameter \(\mu\), is conventionally recommended (e.g., by the American Psychological Association) to be kept at 0.20 or lower. This implies that the probability of correctly rejecting a null hypothesis for some particular true value of \(\mu\) is 1-Type II error. This probability, called statistical power, or just power, should then obviously be larger than 0.80. Again, there is nothing special about these stipulations; they are conventions that became the norm over time.
+Type II error, the probability of incorrectly accepting the null hypothesis when it is false with some particular value for the parameter \(\mu\), is conventionally recommended \citep{powerbookcohen} to be kept at 0.20 or lower. This implies that the probability of correctly rejecting a null hypothesis for some particular true value of \(\mu\) is 1-Type II error. This probability, called statistical power, or just power, should then obviously be larger than 0.80. Again, there is nothing special about these stipulations; they are conventions that became the norm over time.
 
 Next, we will consider the trade-off between Type I and II error. For simplicity, assume that the standard error is 1, and the null hypothesis is that \(\mu=0\). This means that the t-value is really the sample mean.
 
@@ -1613,16 +2230,16 @@ Consider the concrete situation where, in reality, the true value of \(\mu\) is 
 \caption{\label{fig:type12}A visualization of Type I and II error. The dark-shaded tails of the left-hand side distribution represent Type I error; and the light-colored shaded region of the right-hand side distribution represents Type II error. Power is the unshaded area under the curve in the right-hand side distribution.}
 \end{figure}
 
-To understand Figure \ref{fig:type12}, one has to consider two distributions side by side. First, consider the null hypothesis distribution, centered at 0. Under the null hypothesis distribution, the rejection region lies below the dark colored tails of the distributions. The area under the curve in these dark-colored tails is the Type I error (conventionally set at 0.05) that we decide on before we even conduct the experiment and collect the data. Because the Type I error is set at 0.05, and because the t-distribution is symmetric, the area under the curve in each tail is 0.025. The absolute critical t-value helps us demarcates the inner boundaries of the rejection regions through the vertical lines shown in the figure. These vertical lines play a crucial role in helping us understand Type II error and power. This becomes clear when we consider the distribution representing the alternative possible value of \(\mu\), the distribution centered around 2. In this second distribution, consider now the area under the curve between the vertical lines demarcating the rejection region under the null. This area under the curve is the probability of accepting the null hypothesis when the null hypothesis is false with some specific value (here, when \(\mu\) has value 2).
+To understand Figure \ref{fig:type12}, one has to consider two distributions side by side. First, consider the null hypothesis distribution, centered at 0. Under the null hypothesis distribution, the rejection region lies below the dark colored tails of the distributions. The area under the curve in these dark-colored tails is the Type I error (conventionally set at 0.05) that we decide on before we even conduct the experiment and collect the data. Because the Type I error is set at 0.05, and because the t-distribution is symmetric, the area under the curve in each tail is 0.025. The absolute critical t-value helps us demarcate the inner boundaries of the rejection regions through the vertical lines shown in the figure. These vertical lines play a crucial role in helping us understand Type II error and power. This becomes clear when we consider the distribution representing the alternative possible value of \(\mu\), the distribution centered around 2. In this second distribution, consider now the area under the curve between the vertical lines demarcating the rejection region under the null. This area under the curve is the probability of accepting the null hypothesis when the null hypothesis is false with some specific value (here, when \(\mu\) has value 2).
 
 Some interesting observations follow. Suppose that the true effect is in fact \(\mu=2\), as in the above illustration. Then,
 
 \begin{itemize}
 \tightlist
 \item
-  Simply decreasing Type I error to a smaller value like 0.005 will also increase Type II error, which means that power (1-Type II error) will fall.
+  Simply decreasing Type I error to a smaller value like 0.005 will increase Type II error, which means that power (1-Type II error) will fall.
 \item
-  Increasing sample size will squeeze the vertical lines closer to each other, reducing Type II error, and therefore increasing power. Decreasing sample size will have the opposite effect.
+  Increasing sample size will squeeze the vertical lines closer to each other because standard error will go down with increasing sample size. This will reduce Type II error, and therefore increase power. Decreasing sample size will have the opposite effect.
 \item
   If we design an experiment with a larger effect size, e.g., by setting up a stronger manipulation (concete examples will be discussed in this book later on), our Type II error will go down, and therefore power will go up. Figure \ref{fig:highpower} shows a graphical visualization of a situation where the true effect size is \(\mu=4\). Here, Type II error is much smaller compared to Figure \ref{fig:type12}, where \(\mu=2\).
 \end{itemize}
@@ -1642,7 +2259,7 @@ That's the theory anyway. In practice, researchers only rarely consider the powe
 \hypertarget{how-to-compute-power-for-the-one-sample-t-test}{%
 \subsection{How to compute power for the one-sample t-test}\label{how-to-compute-power-for-the-one-sample-t-test}}
 
-Power is a function of three variables:
+Power (which is 1-Type II error) is a function of three variables:
 
 \begin{itemize}
 \tightlist
@@ -1672,12 +2289,12 @@ Suppose that we have an expectation that an effect size is 15 ms \(\pm 5\) ms (t
   \DataTypeTok{strict =} \OtherTok{TRUE}\NormalTok{)}\OperatorTok{$}\NormalTok{power}
 
 \KeywordTok{plot}\NormalTok{(sds, meanval, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }\DataTypeTok{main =} \StringTok{"Power curve (n=10)}\CharTok{\textbackslash{}n}\StringTok{ using power.t.test"}\NormalTok{, }
-  \DataTypeTok{xlab =} \StringTok{"standard deviation"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"effect size"}\NormalTok{)}
+  \DataTypeTok{xlab =} \StringTok{"standard deviation"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"power"}\NormalTok{)}
 \KeywordTok{lines}\NormalTok{(sds, lower, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
 \KeywordTok{lines}\NormalTok{(sds, upper, }\DataTypeTok{lty =} \DecValTok{2}\NormalTok{)}
-\KeywordTok{text}\NormalTok{(}\DecValTok{200}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\StringTok{"10"}\NormalTok{)}
-\KeywordTok{text}\NormalTok{(}\DecValTok{200}\NormalTok{, }\FloatTok{0.054}\NormalTok{, }\StringTok{"15"}\NormalTok{)}
-\KeywordTok{text}\NormalTok{(}\DecValTok{200}\NormalTok{, }\FloatTok{0.056}\NormalTok{, }\StringTok{"20"}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\DecValTok{125}\NormalTok{, }\FloatTok{0.053}\NormalTok{, }\StringTok{"10"}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\DecValTok{150}\NormalTok{, }\FloatTok{0.054}\NormalTok{, }\StringTok{"15"}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\DecValTok{175}\NormalTok{, }\FloatTok{0.056}\NormalTok{, }\StringTok{"20"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1719,12 +2336,12 @@ Then, plot the power curves as a function of effect size and standard deviation,
 
 In the above example, simulation-based power calculation is overkill, and completely unnecessary because we have \texttt{power.t.test}. However, the technique shown above will be extended and will become our bread-and-butter method once we switch to power calculations for complicated linear mixed models. There, no closed form calculation can be done to compute power, at least not without oversimplifying the model; simulation will be the only practical way to calculate power.
 
-It is important to appreciate the fact that power is a \emph{function}; it isn't a single number. Because we can never be sure what the true effect size is, or what the true standard deviation is, we should always aim to report a power function, as a function of plausible values of the relevant parameters.
+It is important to appreciate the fact that power is a \emph{function}; it isn't a single number. Because we can never be sure what the true effect size is, or what the true standard deviation is, power functions (power as a function of plausible values for the relevant parameters) are much more useful than single numbers.
 
 \hypertarget{the-p-value}{%
 \subsection{The p-value}\label{the-p-value}}
 
-Continuing with our t-test example, the \texttt{t.test} function in R will not only print out a t-value as shown above, but also a probability known as a \emph{p-value}. This is the probability of obtaining the observed t-value that we did, or some value more extreme than that, conditional on the assumption that the null hypothesis is true.
+Continuing with our t-test example, the \texttt{t.test} function in R will not only print out a t-value as shown above, but also a probability known as a \emph{p-value}. This is the probability of obtaining the observed t-value that we obtained, or some value more extreme than that, conditional on the assumption that the null hypothesis is true.
 
 We can compute the p-value ``by hand''. This can be computed, as done earlier, simply by calculating the area under the curve that lies beyond the observed t-value. It is standard practice to take the tail probability on both sides of the t-distribution.
 
@@ -1736,7 +2353,7 @@ We can compute the p-value ``by hand''. This can be computed, as done earlier, s
 
 \begin{verbatim}
 ##     t 
-## 15.49
+## 15.76
 \end{verbatim}
 
 \begin{Shaded}
@@ -1747,75 +2364,22 @@ We can compute the p-value ``by hand''. This can be computed, as done earlier, s
 
 \begin{verbatim}
 ##         t 
-## 8.529e-08
+## 7.324e-08
 \end{verbatim}
 
 The area from both sides of the tail is taken because it is conventional to do a so-called \emph{two-sided t-test}: our null hypothesis is that \(\mu=450\), and our alternative hypothesis is two-sided: \(\mu\) is either less than 450 or \(\mu\) is larger than 450. When we reject the null hypothesis, we are accepting this alternative, that \(\mu\) could be some value other than 450. Notice that this alternative hypothesis is remarkably vague; we would reject the null hypothesis regardless of whether the sample mean turns out to be 600 or -600, for example. The practical implication is that the p-value gives us the strength of the evidence against the null hypothesis; it doesn't give us evidence in favor of a specific alternative, such as saying that \(\mu\) is positive or negative in sign. In psychology and allied disciplines, whenever the p-value falls below \(0.05\), it is common practice to write something along the lines that ``there was reliable evidence for the predicted effect.'' This statement is technically incorrect; we only ever have evidence against the null. By looking at the sample mean and its sign, we are making a very big leap that we have evidence for the specific sample mean we happened to get. As we will see below, the sample mean can be wildly far from the true mean that produced the data.
 
-One need not have done a two-sided alternative; one could have defined the alternative to be one-sided. In that case, one would compute only one side of the area under the curve. This kind of one-sided test is not normally done, but one can imagine a situation where a one-sided test is justified (for example, when only one sign of the effect is possible, or if there is a strong theoretical reason to expect only one particular sign---positive or negative---on an effect). That said, in their scientific career, none of the authors of this book have ever had occasion to use a one-sided test.
+One need not have done a two-sided alternative; one could have defined the alternative to be one-sided. In that case, one would compute only one side of the area under the curve. This kind of one-sided test is not normally done, but one can imagine a situation where a one-sided test is justified (for example, when only one sign of the effect is possible, or if there is a strong theoretical reason to expect only one particular sign---positive or negative---on an effect). That said, in their scientific career, only one of the authors of this book has ever had occasion to use a one-sided test.
 
 The p-value is always interpreted with reference to the pre-defined Type I error. Conventionally, we reject the null if \(p<0.05\). This is because we set the Type I error at 0.05. Keep in mind that Type I error and the p-value are two distinct things.
 Type I error is the probability of your incorrectly rejecting the null under repeated sampling. This is not the same thing as your p-value. The latter will be obtained from a particular experiment, and will vary from experiment to experiment; it is a random variable. Type I error is a value we fix in advance.
-
-\hypertarget{the-distribution-of-the-p-value-under-the-null-hypothesis}{%
-\subsubsection{*The distribution of the p-value under the null hypothesis}\label{the-distribution-of-the-p-value-under-the-null-hypothesis}}
-
-We have been talking about a continuous random variable as a dependent measure, and have learnt about the standard two-sided t-test, with a point null hypothesis. When we do such a test, we usually use the p-value to decide whether to reject the null hypothesis or not.
-
-Sometimes, you will hear statisticians (e.g., Andrew Gelman on his blog) say that the null hypothesis significance test is a specific random number generator. What does that sentence mean? We explain this point here.
-
-It's worth briefly reflecting on the fact that the p-value is a random variable; call it \(Z\). The p-value is the cumulative distribution function (CDF) of the random variable \(T\), which itself is a transformation of the random variable \(\bar{Y}\):
-
-\(T=(\bar{X}-\mu)/(\sigma/\sqrt{n})\)
-
-This random variable \(T\) has some CDF \(F(T)\). It is possible to show that if a random variable \(Z=F(T)\), i.e., if \(Z\) is the
-CDF for the random variable \(T\), then \(Z \sim Uniform(0,1)\).
-
-This is an amazing fact. To get a grip on this, let's first think about the fact that when a random variable \(Z\) comes from a \(Uniform(0,1)\) distribution, then \(P(Z<z)=z\). Consider some examples:
-
-\begin{itemize}
-\tightlist
-\item
-  when \(z=0\), then \(P(Z<0)=0\);
-\item
-  when \(z=0.25\), then \(P(Z<0.25)=0.25\);
-\item
-  when \(z=0.5\), then \(P(Z<0.5)=0.5\);
-\item
-  when \(z=0.75\), then \(P(Z<0.75)=0.75\);
-\item
-  when \(z=1\), then \(P(Z<1)=1\).
-\end{itemize}
-
-Next, we will prove the above statement, that if a random variable \(Z=F(T)\), i.e., if \(Z\) is the
-CDF for a random variable \(T\), then \(Z \sim Uniform(0,1)\).
-The proof is actually quite astonishing and even has a name: it's called the \emph{probability integral transform}.
-
-Suppose that \(Z\) is the CDF of a random variable \(T\): \(Z=F(T)\). Then, it follows that \(P(Z\leq z)\) can be rewritten in terms of the CDF of T: \(P(F(T)\leq z)\). Now, if we apply the inverse of the CDF (\(F^{-1}\)) to both the left and right sides of the inequality, we get \(P(F^{-1}F(T)\leq F^{-1}(z))\).
-But \(F^{-1}F(T)\) gives us back \(T\); this holds because if we have a one-to-one onto function \(f(x)\), then applying the inverse \(f^{-1}\) to this function gives us back \(x\).
-
-The fact that \(F^{-1}F(T)\) gives us back \(T\) means that we can rewrite \(P(F^{-1}F(T)\leq F^{-1}(z))\) as \(P(T\leq F^{-1}(z) )\). But this probability is simply the CDF \(F(F^{-1} (z))\), which simplifies to \(z\). This shows that \(P(Z\leq z) = z\); i.e., that the p-value has a uniform distribution under the null hypothesis.
-
-The above proof is restated below compactly:
-
-\begin{equation}
-\begin{split}
-P(Z\leq z) =& P(F(T)\leq z)\\
-=& P(F^{-1}F(T)\leq F^{-1}(z))\\
-=& P(T\leq F^{-1}(z) ) \\
-=& F(F^{-1} (z))\\
-=& z\\
-\end{split}
-\end{equation}
-
-It is for this reason that statisticians like Andrew Gelman periodically point out that ``the null hypothesis significance test is a specific random number generator''. The practical implication of this observation is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are as or even more important.
 
 \hypertarget{type-m-and-s-error-in-the-face-of-low-power}{%
 \subsection{Type M and S error in the face of low power}\label{type-m-and-s-error-in-the-face-of-low-power}}
 
 Beyond Type I and II error, there are also two other kinds of error to be aware of. These are Type M and S error; both sources of error are closely related to statistical power.
 
-The terms Type M and S error were introduced by \citet{Gelman14}, but the ideas has been in existence for some time \citep[\citet{lane1978estimating}]{hedges1984estimation}. \citet{powerfailure} refer to Type M and S error as the ``winner's curse'' and ``the vibration of effects.'' In related work, \citet{ioannidis2008most} discusses refers to the vibration ratio in the context of epidemiology.
+The terms Type M and S error were introduced by \citet{Gelman14}, but the ideas have been in existence for some time \citep[\citet{lane1978estimating}]{hedges1984estimation}. \citet{powerfailure} refer to Type M and S error as the ``winner's curse'' and ``the vibration of effects.'' In related work, \citet{ioannidis2008most} refers to the vibration ratio in the context of epidemiology.
 
 Type S and M error can be illustrated with the following example.
 Suppose your true effect size is believed to be \(D=15\),
@@ -1826,11 +2390,11 @@ then we can compute (apart from statistical power) the following error rates, wh
 \item
   \textbf{Type S error}: the probability that the sign of the effect is incorrect, given that the result is statistically significant.
 \item
-  \textbf{Type M error}: the expectation of the ratio of the absolute magnitude of the effect to the hypothesized true effect size, given that result is significant.
+  \textbf{Type M error}: the expectation of the ratio of the absolute magnitude of the effect to the hypothesized true effect size, given that the result is significant.
   Gelman and Carlin also call this the exaggeration ratio, which is perhaps more descriptive than ``Type M error''.
 \end{itemize}
 
-Suppose that our particular study has standard error \(46\), and sample size \(37\). And suppose that our true \(\mu=15\), as stated above. Then, we can compute statistical power, Type S and M error through simulation in the following manner:
+Suppose that a particular study has standard error \(46\), and sample size \(37\). And suppose that the true \(\mu=15\), as iin the example discussed above. Then, we can compute statistical power, Type S and M error through simulation in the following manner:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1859,12 +2423,12 @@ Power can be computed by simply determining the proportion of times that the abs
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.0608
+## [1] 0.0589
 \end{verbatim}
 
 Power is quite low here (we deliberately chose an example with low power to illustrate Type S and M error).
 
-Next, we figure out which of the cases are statistically significant (which simulated values yield \(p<0.05\)). As a criterion, we use a t-value of 2 to declare \(p<0.05\); we could have done this more precisely by working out an exact critical t-value.
+Next, we figure out which of the samples are statistically significant (which simulated values yield \(p<0.05\)). As a criterion, we use a t-value of 2 to declare \(p<0.05\); we could have done this more precisely by working out an exact critical t-value.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1874,7 +2438,7 @@ Next, we figure out which of the cases are statistically significant (which simu
 \end{Highlighting}
 \end{Shaded}
 
-Type S error is the proportion of significant cases with the wrong sign (sign error), and Type M error is the ratio by the true effect (of \(\mu=15\)) is exaggerated in those simulations that happened to come out significant.
+Type S error is the proportion of significant cases with the wrong sign (sign error), and Type M error is the ratio by which the true effect (of \(\mu=15\)) is exaggerated in those simulations that happened to come out significant.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1884,7 +2448,7 @@ Type S error is the proportion of significant cases with the wrong sign (sign er
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1645
+## [1] 0.2088
 \end{verbatim}
 
 \begin{Shaded}
@@ -1895,10 +2459,10 @@ Type S error is the proportion of significant cases with the wrong sign (sign er
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 7.414
+## [1] 7.368
 \end{verbatim}
 
-In this scenario, when power is approximately 6\%, whenever we get a significant effect, the probability of obtaining the wrong sign is a whopping 16\% and the effect is likely to be 7.4144 times larger than its true magnitude. The practical implication is as follows.
+In this scenario, when power is approximately 6\%, whenever we get a significant effect, the probability of obtaining the wrong sign is a whopping 21\% and the effect is likely to be 7.3682 times larger than its true magnitude. The practical implication is as follows.
 
 When power is low, relying on the p-value (statistical significance) to declare an effect as being present will be misleading because the decision will be based on an overestimate of the effect (Type M error), and even the sign of the effect could be wrong. This isn't just a theoretical point; it has real-world consequences for theory development. For an example from psycholinguistics regarding this point, see \citet{VasishthMertzenJaegerGelman2018}.
 
@@ -1912,11 +2476,11 @@ Another useful way to visualize Type M and S error is through the so-called funn
 
 What is important to appreciate here is the fact that significant effects ``point to the truth'' just in case power is high; when power is low, either null results will frequently be found even if the null is false, and those results that turn out significant will be based on Type M error.
 
-In many fields, it is practically impossible to conduct a high-powered study. What should one do in this situation? When reporting results that are likely based on an underpowered study, the best approach ia to openly acknowledge the power limitation, to attempt to conduct a direct replication of the effect to establish robustness, and to attempt to synthesize the evidence from existing knowlege \citep{cumming2014new}.
+In many fields, it is practically impossible to conduct a high-powered study. What should one do in this situation? When reporting results that are likely based on an underpowered study, the best approach is to openly acknowledge the power limitation, to attempt to conduct a direct replication of the effect to establish robustness, and to attempt to synthesize the evidence from existing knowlege \citep{cumming2014new}.
 
-By direct replication, we mean that the study should be run multiple times with the same materials and design but new participants, to establish whether effect estimates in the original study and the replication study are consistent with each other. Direct replications stand in contrast to so-called conceptual replications, which are not exact repetitions of the original design, but involve some further or slightly different but related experimental manipulation. Conceptual replications are also a very useful tool for cross-validating the existence of an effect.
+By direct replication, we mean that the study should be run multiple times with the same materials and design but new participants, to establish whether effect estimates in the original study and the replication study are consistent with each other. Direct replications stand in contrast to so-called conceptual replications, which are not exact repetitions of the original design, but involve some further or slightly different but related experimental manipulations. Conceptual replications are also a very useful tool for cross-validating the existence of an effect.
 
-Direct replications will always differ from the original study in some way or another---the lab may differ, the protocols might differ slightly, the experimenter is different, etc. Such between-study variability is obviously unavoidable in direct-replication attempts, but they are still worthwhile for establishing the existence of an effect. To make the idea of establishing robustness through replication attempts, detailed examples of different kinds of replication attempts will be presented in this book's example data-sets.
+Direct replications will always differ from the original study in some way or another---the lab may differ, the protocols might differ slightly, the experimenter is different, etc. Such between-study variability is obviously unavoidable in direct-replication attempts, but they are still worthwhile for establishing the existence of an effect. To make more clear the idea of establishing robustness through replication attempts, detailed examples of different kinds of replication attempts of published studies will be presented in this book's example data-sets.
 
 \hypertarget{searching-for-significance}{%
 \subsection{Searching for significance}\label{searching-for-significance}}
@@ -1958,13 +2522,12 @@ Type I error rate is about 5\%, consistent with our expectations:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{round}\NormalTok{(}\KeywordTok{table}\NormalTok{(pvals }\OperatorTok{<}\StringTok{ }\FloatTok{0.05}\NormalTok{)[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\NormalTok{nsim, }\DecValTok{2}\NormalTok{)}
+\KeywordTok{round}\NormalTok{(}\KeywordTok{mean}\NormalTok{(pvals }\OperatorTok{<}\StringTok{ }\FloatTok{0.05}\NormalTok{), }\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## TRUE 
-## 0.05
+## [1] 0.05
 \end{verbatim}
 
 But the situation quickly deteriorates as soon as we adopt the strategy outlined above. Below, we will also track the distribution of the t-statistic.
@@ -1997,13 +2560,12 @@ Now, Type I error rate is much higher than 5\%:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{round}\NormalTok{(}\KeywordTok{table}\NormalTok{(pvals }\OperatorTok{<}\StringTok{ }\FloatTok{0.05}\NormalTok{)[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\NormalTok{nsim, }\DecValTok{2}\NormalTok{)}
+\KeywordTok{round}\NormalTok{(}\KeywordTok{mean}\NormalTok{(pvals }\OperatorTok{<}\StringTok{ }\FloatTok{0.05}\NormalTok{), }\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## TRUE 
-## 0.15
+## [1] 0.16
 \end{verbatim}
 
 Figure \ref{fig:stoppingrule} shows the distributions of the t-statistic in the standard case vs with the above stopping rule:
@@ -2021,7 +2583,7 @@ What is important to realize here is that the inflation in Type I error we obser
 
 In our running example above, we examined the case where we have a single vector of data \(y\). This led to the one-sample t-test.
 
-Next, we consider a case where we have two vectors of data. The data-set below is from \citet{johnson2011quantitative}. Shown below are F1 formant data (in Herz), productions of different vowels by male and female speakers of different languages.
+Next, we consider a case where we have two vectors of data. The data-set below is from \citet{johnson2011quantitative}. Shown below are F1 formant data (in Hertz) for different vowels produced by male and female speakers of different languages. (In a speech wave, different bands of energy centered around particular frequencies are called formants.)
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2053,14 +2615,14 @@ Next, we consider a case where we have two vectors of data. The data-set below i
 ## 19    357  300     u      Sele
 \end{verbatim}
 
-Notice that the male and female values can be seen as \emph{dependent} or \emph{paired}: each row belongs to the same vowel and language. Nevertheless, we can compare males' and females' F1 frequencies, completely ignoring this paired nature of the data. The t-test does not ``know'' whether these data are paired or not---it is the researcher's job to make sure that model assumptions are met.
+Notice that the male and female values can be seen as \emph{dependent} or \emph{paired}: each row belongs to the same vowel and language. Nevertheless, we can compare males' and females' F1 frequencies, completely ignoring this paired nature of the data. The t-test does not ``know'' whether these data are paired or not---it is the researcher's job to make sure that model assumptions are met. In this case, the assumption of the t-test is that the data are independent.
 
 Let's ignore the paired nature of the data for now, and treat the two vectors as independent vectors. Suppose that our null hypothesis is that there is no difference between the mean F1's for males (\(\mu_m\)) and females (\(\mu_f\)).
 Now, our null hypothesis is \(H_0: \mu_m = \mu_f\) or \(H_0: \mu_m - \mu_f = \delta = 0\).
 
-This kind of statistical test calls for a two-sample t-test. Note here that we are assuming that both the male and female F1 scores have equal variance.
+This kind of design calls for a two-sample t-test.
 
-The function call in R for a two-sample t-test is shown below:
+The function call in R for a two-sample t-test is shown below. Note here that we are assuming that both the male and female F1 scores have equal variance.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2188,7 +2750,7 @@ An alternative syntax for the paired t-test explicitly feeds the two paired vect
 
 Incidentally, notice that the p-value in the paired t-test is statistically significant, unlike the two-sample t-test above. The null hypothesis is the same in both tests, but the significance level leads to different conclusions.
 
-Which analysis is correct, the two-sample t-test or the paired t-test? It all depends on your assumptions about what the data represent. If you consider the data paired, for the reasons given above, then a paired test is called for. If the pairing (the same vowel and language in each row) is unlikely to create a dependency between the two data points in a row (here, domain knowledge is required), we can treat this as unpaired data.
+Which analysis is correct, the two-sample t-test or the paired t-test? It all depends on your assumptions about what the data represent. If you consider the data paired, for the reasons given above, then a paired test is called for. If there is no pairing (here, domain knowledge is required), we can treat this as unpaired data.
 
 Next, we look at some perhaps subtle points about the paired t-test.
 
@@ -2237,7 +2799,9 @@ The solution is to aggregate the data so that each subject (or item) has only \e
 This aggregation allows us to meet the independence assumption of the t-test, but it has a potentially huge drawback: it pretends we have one measurement from each subject for each condition.
 Later on we will learn how to analyze unaggregated data, but if we want to do a paired t-test, we have no choice but to aggregate the data in this way.
 
-A fully worked example will make this clear. We have repeated measures data on subject versus object relative clauses in English. The data are from a self-paced reading study reported in \citet{grodner}, their experiment 1. A theoretical prediction is that in English, object relatives are harder to read than subject relatives, in the relative clause verb region. We want to test this prediction.
+A fully worked example will make this clear. We have repeated measures data on subject versus object relative clauses in English. Subject relative clauses are sentences like \emph{The man who was standing near the doorway laughed}. Here, the phrase (called a relative clause) \emph{who was standing near the doorway} modifies the noun phrase \emph{man}; it is called a subject relative because the noun phrase \emph{man} is the subject of the relative clause. By contrast, object relative clauses are sentences like \emph{The man who was the woman was talking to near the doorway laughed}; here, the \emph{man} is the grammatical object object of the relative clause \emph{who was the woman was talking to near the doorway}.
+
+The data are from a self-paced reading study reported in \citet{grodner}, their experiment 1. A theoretical prediction is that in English, object relatives are harder to read than subject relatives, in the relative clause verb region. We want to test this prediction.
 
 First, load the data containing reading times from the region of interest (the relative clause verb):
 
@@ -2326,7 +2890,7 @@ It is important to stress once more that it is the researcher's responsibility t
 
 This t-test is incorrect for several reasons, but the most egregious error here is that the data are paired (each subject delivers data for both conditions), and that property of the data is being ignored.
 
-Another common mistake is to do a paired t-test on the data as provided. Again, the t.test function will happily return a meaningless result:
+Another common mistake is to do a paired t-test on the data without checking that the data are independent in the sense discussed above. Again, the t.test function will happily return a meaningless result:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2392,7 +2956,7 @@ Notice that the data are correlated: the longer the subject relative clause data
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-63-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-73-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2404,7 +2968,7 @@ Notice that the data are correlated: the longer the subject relative clause data
 ## [1] 0.5876
 \end{verbatim}
 
-Returning to the t-test, by aggregating the data the t-test's assumptions are met, and the degrees of freedom for this by-subjects analysis are now correct (\(42-1=41\)):
+Returning to the t-test, by aggregating the data the independence assumption of the t-test is met, and the degrees of freedom for this by-subjects analysis are now correct (\(42-1=41\)):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2448,13 +3012,42 @@ If the p-value from a two-sided null hypothesis test had been 0.09, what would b
 
 Given that Type I error is 0.01; what is the highest value possible for Type II error?
 
+\hypertarget{practice-with-the-paired-t-test}{%
+\subsection{Practice with the paired t-test}\label{practice-with-the-paired-t-test}}
+
+In a self-paced reading study, \citet{grodner} investigated subjects vs.~object relative clauses. They analyzed the reading times at the relative clause verb. However, a reviewer objects that the whole sentence's reading times (total readding times) should be used to evaluate the difference between the two conditions, because one cannot know where the difficulty might arise. It isn't clear whether one should use mean reading times over the entire sentence, or total reading times.
+Carry out a by-subjects paired t-test on (a) the critical relative clause verb, versus (b) mean reading time over all words in the two sentence types, and (c) total reading times over all words in the two sentence types. Compare the t-value across the three tests, and decide what the appropriate dependent variable might be (Note: there is no correct answer here).
+
+The data are loaded and pre-processed as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## load data:}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\NormalTok{gg05e1 <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/GrodnerGibson2005E1.csv"}\NormalTok{, }
+  \DataTypeTok{sep =} \StringTok{","}\NormalTok{, }\DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{gge1 <-}\StringTok{ }\NormalTok{gg05e1 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(item }\OperatorTok{!=}\StringTok{ }\DecValTok{0}\NormalTok{)}
+
+\NormalTok{gge1 <-}\StringTok{ }\NormalTok{gge1 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{word_positionnew =} \KeywordTok{ifelse}\NormalTok{(item }\OperatorTok{!=}\StringTok{ }
+\StringTok{  }\DecValTok{15} \OperatorTok{&}\StringTok{ }\NormalTok{word_position }\OperatorTok{>}\StringTok{ }\DecValTok{10}\NormalTok{, word_position }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, word_position))}
+\CommentTok{# there is a mistake in the coding of word}
+\CommentTok{# position, all items but 15 have regions 10 and}
+\CommentTok{# higher coded as words 11 and higher}
+
+\CommentTok{## get data from relative clause verb:}
+\NormalTok{gge1crit <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(gge1, (condition }\OperatorTok{==}\StringTok{ "objgap"} \OperatorTok{&}\StringTok{ }\NormalTok{word_position }\OperatorTok{==}\StringTok{ }
+\StringTok{  }\DecValTok{6}\NormalTok{) }\OperatorTok{|}\StringTok{ }\NormalTok{(condition }\OperatorTok{==}\StringTok{ "subjgap"} \OperatorTok{&}\StringTok{ }\NormalTok{word_position }\OperatorTok{==}\StringTok{ }
+\StringTok{  }\DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{linear-models-and-linear-mixed-models}{%
 \chapter{Linear models and linear mixed models}\label{linear-models-and-linear-mixed-models}}
 
 \hypertarget{from-the-t-test-to-the-linear-mixed-model}{%
 \section{From the t-test to the linear (mixed) model}\label{from-the-t-test-to-the-linear-mixed-model}}
 
-We begin with the \citet{grodner} self-paced reading data we saw in the previous chapter. Load the data and compute the means by condition at the relative clause verb:
+We begin with the \citet{grodner} self-paced reading data we saw in the previous chapter. Load the data and compute the means for the raw reading times by condition:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2471,7 +3064,7 @@ We begin with the \citet{grodner} self-paced reading data we saw in the previous
 ##     471     369
 \end{verbatim}
 
-As predicted by theory, object relatives (labeled objgap here) are read slower than subject relatives (labeled subjgap).
+As predicted by theory \citep{grodner}, object relatives (labeled objgap here) are read slower than subject relatives (labeled subjgap).
 
 As discussed in the previous chapter, a paired t-test can be done to evaluate whether we have evidence against the null hypothesis that object relatives and subject relatives have identical reading times. However, we have to aggregate the data by subjects and by items first.
 
@@ -2515,6 +3108,17 @@ Interestingly, exactly the same t-values can be obtained by running the followin
 ## Loading required package: Matrix
 \end{verbatim}
 
+\begin{verbatim}
+## 
+## Attaching package: 'lme4'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:SIN':
+## 
+##     sdcor2cov
+\end{verbatim}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{m0lmersubj <-}\StringTok{ }\KeywordTok{lmer}\NormalTok{(rawRT }\OperatorTok{~}\StringTok{ }\NormalTok{condition }\OperatorTok{+}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{|}\StringTok{ }\NormalTok{subject), }
@@ -2554,12 +3158,22 @@ we can rewrite our best guess about how the object and subject relative clause r
 \begin{itemize}
 \tightlist
 \item
-  Object relative: \(Normal(471 - 102 \times 0,\hat\sigma)\)
+  Object relative: \(Normal(471,\hat\sigma)\)
 \item
-  Subject relative: \(Normal(471-102 \times 1,\hat\sigma)\)
+  Subject relative: \(Normal(369,\hat\sigma)\)
 \end{itemize}
 
-Note that the two distributions for object and subject relative are assumed to be independent. This assumed independence is expressed by the fact that we define two separate Normal distributions, one for object relatives and the other for subject relatives. We saw earlier that this independence assumption of independence does not hold in our data, because we have one data point for each RC type from the same subject. However, for now we will ignore this detail; we will fix this shortcoming later.
+This can also be rewritten with respect to the object relative mean and the difference between the two conditions (the reasons for this will become clear presently):
+
+\begin{itemize}
+\tightlist
+\item
+  Object relative: \(Normal(471-102\times 0,\hat\sigma)\)
+\item
+  Subject relative: \(Normal(471-102\times 1,\hat\sigma)\)
+\end{itemize}
+
+Note that the two distributions for object and subject relative clauses (RCs) are assumed to be independent. This assumed independence is expressed by the fact that we define two separate Normal distributions, one for object relatives and the other for subject relatives. We saw earlier that this assumption of independence does not hold in our data, because we have one data point for each RC type from the same subject. However, for now we will ignore this detail; we will fix this shortcoming later.
 
 The interesting point to notice here is that the mean for the object and subject relatives' distributions can be rewritten as a sum of two terms. A completely equivalent way to express the fact that object relatives are coming from a \(Normal(471,\hat\sigma)\) is to say that each object relative data-point can be described by the following equation:
 
@@ -2646,7 +3260,7 @@ The linear model function \texttt{lm()} prints out two coefficients, \(471\) and
 ## subjgap       1
 \end{verbatim}
 
-We will discuss coding in detail in a later chapter, but right now the simple 0,1 coding above---called treatment contrasts---is enough for our purposes.
+We will discuss contrast coding in detail in a later chapter, but right now the simple 0,1 coding above---called treatment contrasts---is enough for our purposes.
 
 Thus, what the linear model above gives us is two numbers: the mean object relative reading time (471), and the \emph{difference} between object and subject relative (-102). We can extract the two coefficients by typing:
 
@@ -2679,7 +3293,7 @@ Note that the meaning of the intercept and slope depends on the ordering of the 
 ## objgap       1
 \end{verbatim}
 
-Now, the intercept is the mean of the subject relatives, and the slope is the difference between object and subject relative reading time. Note that the sign of the t-value has changed---the sign depends on the contrast coding.
+Now, the intercept is the mean of the subject relatives, and the slope is the difference between object and subject relatives reading times. Note that the sign of the t-value has changed---the sign depends on the contrast coding.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2777,7 +3391,7 @@ When discussing linear models, we will make a distinction between the unknown tr
 We have established so far that the mathematical form of the model is:
 
 \begin{equation}
-rt = \beta_0 + \beta_1 condition + \varepsilon
+rawRT = \beta_0 + \beta_1 condition + \varepsilon
 \end{equation}
 
 We can change the contrast coding of the \texttt{condition} vector in the following way. First, recode the levels of the condition column as shown below.
@@ -2858,6 +3472,8 @@ One could write it in a single line as:
 rt = 420 + 51\times condition + \varepsilon
 \end{equation}
 
+The term \(\varepsilon\) is call the residuals; it is the amount by which the observed data deviate from the values predicted by the above model. For example, suppose that a data point for a subject relative condition is 400 ms. The model predicts a reading time of 420-51=369 ms. The residual for that data point would be 400-369= 31. Another example: suppose that a data point for an object relative condition is 200 ms. The model predicts the object relative to be 420+51=471. The residual for that data point would then be 200-471=-271. Thus, the residual is the amount of the discrepancy between the model's predicted reading time and the actually observed reading time.
+
 \hypertarget{checking-model-assumptions}{%
 \section{Checking model assumptions}\label{checking-model-assumptions}}
 
@@ -2874,70 +3490,18 @@ Here is how we can check whether this normality assumption is met:
 
 Compare the residuals to the quantiles of the standard normal distribution (\(Normal(0,1)\)):
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(car)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Loading required package: carData
-\end{verbatim}
-
-\begin{verbatim}
-## Registered S3 methods overwritten by 'car':
-##   method                          from
-##   influence.merMod                lme4
-##   cooks.distance.influence.merMod lme4
-##   dfbeta.influence.merMod         lme4
-##   dfbetas.influence.merMod        lme4
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Attaching package: 'car'
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:purrr':
-## 
-##     some
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:dplyr':
-## 
-##     recode
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{qqPlot}\NormalTok{(res.m1)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-80-1.pdf}
-
-\begin{verbatim}
-## [1] 37 33
-\end{verbatim}
-
 When the normality assumption is met, the residuals will align perfectly with the quantiles of the standard normal distribution, resulting in a straight diagonal line in the above plot. When the normality assumption is not met, the line will tend to curve away from the diagonal.
 
-In the above case, a log transform of the data improves the normality of residuals:
+In the above case, a log transform of the data improves the normality of residuals. We will discuss transformation in detail later in this book; for now, it is sufficient to note that for continuous data that consists of all-positive values (here, reading times), a log transform will often be the appropriate transform.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{m1log <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(rawRT) }\OperatorTok{~}\StringTok{ }\NormalTok{cond, bysubj)}
-\KeywordTok{qqPlot}\NormalTok{(}\KeywordTok{residuals}\NormalTok{(m1log))}
+\KeywordTok{qqnorm}\NormalTok{(}\KeywordTok{residuals}\NormalTok{(m1log))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-81-1.pdf}
-
-\begin{verbatim}
-## [1] 37 33
-\end{verbatim}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-92-1.pdf}
 
 The estimates of the parameters are now in the log scale:
 
@@ -2957,16 +3521,7 @@ The model does not change, only the scale does:
 \log rt = \beta_0 + \beta_1 condition  + \varepsilon 
 \end{equation}
 
-Now, the intercept and slope can be used to compute the reading time in the two conditions:
-
-\begin{itemize}
-\tightlist
-\item
-  Estimated mean object relative reading time: \(\hat\beta_0+\hat\beta_1=5.9488+0.0843=6.0331\).
-\item
-  Estimated mean subject relative reading time: \(\hat\beta_0-\hat\beta_1=5.9488-0.0843=5.8645\).
-\end{itemize}
-
+Now, the intercept and slope can be used to compute the reading time in the two conditions.
 Note that because \(exp(log(rt))=rt\), to get the mean estimates on the raw ms scale, we just need to exponentiate both sides of the equation:
 
 \begin{equation}
@@ -2985,12 +3540,10 @@ This approach gives us the following estimates on the ms scale:
 
 The difference in reading time is 417-352=65 ms (cf.~102 ms from the model using the raw scale). The larger estimate based on the raw scale is less realistic, and we will see later that the large difference between the two conditions is driven by a few extreme, influential values.
 
-In a later chapter, we will return to the issue of which transform to choose, and what the options are that are available for different situations.
-
 \hypertarget{from-the-paired-t-test-to-the-linear-mixed-model}{%
 \section{From the paired t-test to the linear mixed model}\label{from-the-paired-t-test-to-the-linear-mixed-model}}
 
-One interesting point to notice is that the observed t-value of the paired t-test and the t-test printed out by the linear model don't match:
+One important point to notice is that the observed t-value of the paired t-test and the t-test printed out by the linear model don't match:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3015,7 +3568,7 @@ One interesting point to notice is that the observed t-value of the paired t-tes
 ## conditionsubjgap   -102.3      44.02   -2.32
 \end{verbatim}
 
-This is because the linear model implements the unpaired (i.e., two sample) t-test:
+This is because the linear model is equivalent to the unpaired (i.e., two sample) t-test:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3120,13 +3673,13 @@ To make this discussion concrete, let's generate some simulated bivariate data t
 \end{Shaded}
 
 \begin{verbatim}
-##         [,1]    [,2]
-## [1,] -0.4241 -1.1746
-## [2,]  0.4285  0.1175
-## [3,] -1.1445 -1.6417
-## [4,]  2.1234  0.1617
-## [5,] -0.9182  0.3638
-## [6,]  0.6915  1.6569
+##         [,1]     [,2]
+## [1,] -0.9245 -0.03826
+## [2,]  0.3854 -0.97546
+## [3,]  0.9181  1.17117
+## [4,]  0.4399 -0.47545
+## [5,] -0.2953 -0.31862
+## [6,]  0.4695  0.38222
 \end{verbatim}
 
 \begin{Shaded}
@@ -3139,8 +3692,9 @@ To make this discussion concrete, let's generate some simulated bivariate data t
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -0.4241  0.4285 -1.1445  2.1234 -0.9182  0.6915
-##  [7] -0.3609  0.2910  0.9116  1.8084  0.4441 -0.2508
+##  [1] -0.92452  0.38543  0.91806  0.43991 -0.29531
+##  [6]  0.46948 -1.97175  0.38092  1.52845  1.40467
+## [11]  0.08878  1.17589
 \end{verbatim}
 
 \begin{Shaded}
@@ -3150,9 +3704,9 @@ To make this discussion concrete, let's generate some simulated bivariate data t
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] -1.17458  0.11751 -1.64174  0.16166  0.36377
-##  [6]  1.65688  1.12933 -0.26363  1.21378  1.22185
-## [11] -0.41870  0.03387
+##  [1] -0.03826 -0.97546  1.17117 -0.47545 -0.31862
+##  [6]  0.38222  0.09179 -1.07722  1.29612  1.53322
+## [11] -0.85049  1.66098
 \end{verbatim}
 
 To carry out the paired t-test,
@@ -3207,13 +3761,13 @@ The linear mixed model we present next will fit exactly the same model as in the
 
 Then, for condition 1, the dependent variable can be described by the equation:
 
-\(y_{i1} = \beta_0 + u0_i + \varepsilon_{i1}\)
+\(y_{i1} = \beta_0 + u_i + \varepsilon_{i1}\)
 
-Here, \(\beta_0\) is the mean reading time, and \(\varepsilon\) is the usual residual error term. The interesting new term is \(u0_i\). This is the adjustment to the mean reading time for subject \(i\). That is, if some subject is slower than average, \(u0_i\) will be a positive number; if a subject is faster than average, then that subject's adjustment \(u0_i\) will be negative in sign; and if a subject has exactly the same reading time as the mean for all subjects, then \(u0_i\) for that subject will be 0.
+Here, \(\beta_0\) is the mean reading time, and \(\varepsilon\) is the usual residual error term. The interesting new term is \(u_i\). This is the adjustment to the mean reading time for subject \(i\). That is, if some subject is slower than average, \(u_i\) will be a positive number; if a subject is faster than average, then that subject's adjustment \(u_i\) will be negative in sign; and if a subject has exactly the same reading time as the mean for all subjects, then \(u_i\) for that subject will be 0.
 
 Similarly, for condition 2, the dependent variable is described by the equation:
 
-\(y_{i2} = \beta_0 + \delta + u0_i + \varepsilon_{i2}\)
+\(y_{i2} = \beta_0 + \delta + u_i + \varepsilon_{i2}\)
 
 Here, \(\delta\) is the additional time taken to process condition 2 (thus, this is the treatment contrast coding we saw earlier in this chapter).
 
@@ -3273,7 +3827,7 @@ Let's check that this is true using our simulated data. In the code below, the t
 ## 
 ## Scaled residuals: 
 ##    Min     1Q Median     3Q    Max 
-## -1.226 -0.533  0.032  0.487  1.737 
+## -2.091 -0.413  0.217  0.627  0.969 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
@@ -3340,7 +3894,7 @@ We can visualize the different responses of subjects:
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-90-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-101-1.pdf}
 
 It's clear that different subjects have different effects of the relative clause manipulation: some slopes are positive sloping, some are flat, and some are negatively sloping. There is between-subject variability in the relative clause effect.
 
@@ -3369,7 +3923,7 @@ One can extract the intercept and slope estimates for each subject. For example,
 
 One can plot the individual lines for each subject, as well as the fit of a simple linear model m0 for all the data taken together; this will show how each subject deviates in intercept and slope from the model m0's intercept and slope.
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-93-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-104-1.pdf}
 
 To find out if there is an effect of relative clause type, we simply need to check whether the slopes of the individual subjects' fitted lines taken together are significantly different from zero. A one-sample t-test will achieve this:
 
@@ -3424,7 +3978,7 @@ The above test is \emph{exactly} the same as the paired t-test and the varying i
 ##   -0.12403    0.04414   -2.81021
 \end{verbatim}
 
-The above lmList model we just fit is called \emph{repeated measures regression}. We now look at how to model unaggregated data using the linear mixed model. Incidentally, this repeated measures regression model is now only of historical interest, and useful only for understanding the linear mixed model, which is the modern standard approach.
+The above lmList model we just fit is called \emph{repeated measures regression}. We now look at how to model unaggregated data using the linear mixed model. Incidentally, this repeated measures regression model is now largely of historical interest, and useful only for understanding the linear mixed model, which is the modern standard approach.
 
 We turn next to three main types of linear mixed model; other variants will be introduced in later chapters.
 
@@ -3463,7 +4017,7 @@ Fixed effects:
 so           0.06202    0.01475   4.205
 \end{verbatim}
 
-One thing to notice is that the coefficients (intercept and slope) of the fixed effects of the above model are identical to those in the linear model \texttt{m0} above. What is different between the linear model and the linear mixed model is the standard error. In the latter, the standard error is determined by more than one source of variance, as we explain below.
+One thing to notice in the present example is that the coefficients (intercept and slope) of the fixed effects of the above model are identical to those in the linear model \texttt{m0} above. What is different between the linear model and the linear mixed model is the standard error. In the latter, the standard error is determined by more than one source of variance, as we explain below.
 
 The intercept adjustments for each subject can be viewed by typing:
 
@@ -3492,7 +4046,7 @@ Here is another way to summarize the adjustments to the grand mean intercept by 
 ## $subject
 \end{verbatim}
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-98-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-109-1.pdf}
 
 \hypertarget{the-formal-statement-of-the-varying-intercepts-model}{%
 \subsection{The formal statement of the varying intercepts model}\label{the-formal-statement-of-the-varying-intercepts-model}}
@@ -3528,7 +4082,7 @@ The ordinary linear model m0 has one intercept \(\beta_0\) for all subjects, whe
 
 We can visualize the adjustments for each subject to the intercepts as shown below.
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-100-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-111-1.pdf}
 
 An important point is that in this model there are two variance components or sources of variance (cf.~the linear model, which had only one):
 
@@ -3547,7 +4101,7 @@ These two standard deviations determine the standard error of the \(\beta_1\) sl
 
 Unlike the figure associated with the \texttt{lmlist.fm1} model above, which also involves fitting separate models for each subject, the model \texttt{m0.lmer} assumes \emph{different intercepts} for each subject \emph{but the same slope}.
 
-We can choose to fit different intercepts as well as different slopes for each subject. To achieve this, assume now that each subject's slope is also adjusted by subject:
+We can choose to fit different intercepts as well as different slopes for each subject. To achieve this, assume now that each subject's slope is also adjusted:
 
 \begin{equation}
 y_{ij} = \beta_0 + u_{0i}+(\beta_1+u_{1i})\times so_{ij} + \varepsilon_{ij}
@@ -3580,7 +4134,7 @@ In particular, the model estimates the following standard deviations:
 \item
   \(\hat\sigma_{u0}=0.317\)
 \item
-  \(\hat\sigma_{u0}=0.110\)
+  \(\hat\sigma_{u1}=0.110\)
 \item
   \(\hat\sigma = 0.365\).
 \end{itemize}
@@ -3601,21 +4155,21 @@ so            0.0620     0.0221    2.81
 
 These fits for each subject are visualized below (the gray line shows the model with a single intercept and slope, i.e., our old model \texttt{m0}):
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-102-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-113-1.pdf}
 
 \hypertarget{comparing-lmlist-model-with-the-varying-intercepts-model}{%
 \subsubsection{Comparing lmList model with the varying intercepts model}\label{comparing-lmlist-model-with-the-varying-intercepts-model}}
 
 Compare this model with the \texttt{lmlist.fm1} model we fitted earlier:
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-103-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-114-1.pdf}
 
-What is striking is that each subject's estimated best fit line is ``smooothed out'' compared to the lmList fits. This aspect of the linear mixed model is called shrinkage; we return to this point presently.
+What is striking is that each subject's estimated best fit line is ``smooothed out'' compared to the lmList fits. This aspect of the linear mixed model is called shrinkage; we return to this point shortly.
 
 \hypertarget{visualizing-random-effects}{%
 \subsubsection{Visualizing random effects}\label{visualizing-random-effects}}
 
-As before, it is instructive to visualize the individual level adjustments to the intercept and slope:
+As before, it is instructive to visualize the by-subjects adjustments to the intercept and slope:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3627,7 +4181,7 @@ As before, it is instructive to visualize the individual level adjustments to th
 ## $subject
 \end{verbatim}
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-104-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-115-1.pdf}
 
 What this is showing is wide variability in the mean reading times between subjects, but very little variation in the slope between subjects.
 
@@ -3640,7 +4194,7 @@ Here is the full statement of the varying intercept and slopes model. Again, i i
 y_{ij} = \beta_0 + u_{0i}+(\beta_1+u_{1i})\times so_{ij} + \varepsilon_{ij}
 \end{equation}
 
-As mentioned before, there are now three variance components:
+There are now three variance components:
 
 \begin{itemize}
 \tightlist
@@ -3655,9 +4209,9 @@ As mentioned before, there are now three variance components:
 \hypertarget{crossed-random-effects-for-subjects-and-for-items}{%
 \subsubsection{Crossed random effects for subjects and for items}\label{crossed-random-effects-for-subjects-and-for-items}}
 
-Now, one interesting fact about the varying intercepts and slopes model is that it doesn't capture all the sources of variance yet. The items also contribute sources of variance: just like subjects, items may also have different intercepts and slopes.
+The varying intercepts and slopes model doesn't capture all the sources of variance yet. The items also contribute sources of variance: just like subjects, items may also vary in their reading times or in the extent to which the reading times are impacted by condition. I other words, they might have different intercepts and slopes.
 
-Notice that subjects and items are fully crossed: each subject sees each item once.
+Notice that in this design (as in many designs in psycholinguistics or linguistic research) each subject sees all the items. In such cases, we say that subjects and items are crossed.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3703,7 +4257,7 @@ Fixed effects:
 so            0.0620     0.0242    2.56
 \end{verbatim}
 
-The item intercept and slope adjustments can be visualized as well. Notice that there is a lot less item-level variation; this is often the case in planned experiments like this one, where the experimental items are carefully constructed to vary as little as possible.
+The item intercept and slope adjustments can be visualized as well. Notice that there is a lot less item-level variation; this is often the case in planned experiments in sentence processing, where the experimental items are carefully constructed to vary as little as possible.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3711,9 +4265,9 @@ The item intercept and slope adjustments can be visualized as well. Notice that 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-107-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-118-1.pdf}
 
-One thing missing in the above models is any assumption about the relationship between the intercept and slope adjustements by subject and by item. It is possible that the intercept and slope adjustments are correlated: e.g., there could be a theoretical prediction that says that the slower a subject's average reading time, the larger the difference between object and subject relative clause reading times. This kind of prediction can be tested by testing what the correlation is between the varying intercepts and slopes. We turn to this model next.
+In the above models, there is an assumption that there is no correlation between the intercept and slope adjustments by subject, and no correlation between the intercept and slope adjustments by item. It is possible that the intercept and slope adjustments are in fact correlated. We turn to this model next.
 
 \hypertarget{model-type-3-varying-intercepts-and-varying-slopes-with-correlation}{%
 \subsection{Model type 3: Varying intercepts and varying slopes, with correlation}\label{model-type-3-varying-intercepts-and-varying-slopes-with-correlation}}
@@ -3811,7 +4365,7 @@ where \(\varepsilon_{ij} \sim Normal(0,\sigma)\) and
 \hypertarget{visualizing-the-random-effects}{%
 \subsubsection{Visualizing the random effects}\label{visualizing-the-random-effects}}
 
-One can visualize the correlation between intercepts and slopes by subjects. The positive correlation of 0.58 between subject intercept and slope adjustments implies that slower subjects show larger effects. However, the dotplot below doesn't show a convincing pattern:
+One can visualize the correlation between intercepts and slopes by subjects. The positive correlation of 0.58 between subject intercept and slope adjustments implies that slower subjects show larger effects. However, the dotplot below doesn't show a convincing indication that such a correlation exists:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3819,7 +4373,7 @@ One can visualize the correlation between intercepts and slopes by subjects. The
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-109-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-120-1.pdf}
 
 The correlation pattern is easier to see if we plot the slope adjustments against the intercept adjustments.
 
@@ -3830,7 +4384,7 @@ The correlation pattern is easier to see if we plot the slope adjustments agains
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-110-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-121-1.pdf}
 
 When we talk about hypothesis testing, we will look at what inferences we can draw from this correlation.
 
@@ -3842,13 +4396,13 @@ The dotplot showing the item-level effects shows a perfect correlation between i
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-111-1.pdf}
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-122-1.pdf}
 
 \hypertarget{shrinkage-in-linear-mixed-models}{%
 \section{Shrinkage in linear mixed models}\label{shrinkage-in-linear-mixed-models}}
 
-The estimate of the effect by participant is smaller than when we fit a separate linear model to the subject's data.
-This is called shrinkage in linear mixed models: the individual level estimates are shrunk towards the mean slope.
+The estimate of the effect for each participant computed from a linear mixed model is ``pushed'' towards the grand mean effect compared to when we fit a separate linear model to each subject's data.
+This is called ``shrinkage'' in linear mixed models. We say that the individual-level estimates are shrunk towards the mean slope.
 The less data we have from a given subject, the greater the shrinkage.
 
 \begin{figure}
@@ -3923,11 +4477,11 @@ Now subject 37's estimates are going to be pretty wild, because they are based o
 Now fit the hierarchical model and examine subject 37's estimates on undeleted vs deleted data:
 
 \begin{figure}
-\includegraphics[width=0.75\linewidth]{Freq_CogSci_files/figure-latex/shrinkage2-1} \caption{The figures show linear model fits (the grand mean estimates) for subject 37. When using lmList, deleting data leads to very different estimates; but using lmer, deleting half the data from this subject hardly affects the individual subject's estimates.}\label{fig:shrinkage2}
+\includegraphics[width=0.75\linewidth]{Freq_CogSci_files/figure-latex/shrinkage2-1} \caption{The figure shows linear model fits (the grand mean estimates) for subject 37. When using lmList, deleting data leads to very different estimates; but using lmer, deleting half the data from this subject hardly affects the individual subject's estimates.}\label{fig:shrinkage2}
 \end{figure}
 
 What we see here is that the estimates from the hierarchical model are barely affected by the missingness, but the estimates from the lmList model are heavily affected.
-This means that linear mixed models will give you more robust estimates (think Type M error!) compared to no pooling models. This property of shrinkage is one reason why linear mixed models are so important in cognitive science.
+This means that linear mixed models will give you more robust estimates (think Type M error!) compared to models which fit data sepaarately for each subject. This property of shrinkage is one reason why linear mixed models are so important in cognitive science.
 
 \hypertarget{summary}{%
 \section{Summary}\label{summary}}
@@ -3962,9 +4516,9 @@ Using RT as a dependent variable, carry out the appropriate by-subjects t-test t
 \hypertarget{sec:LMExercisesPart2}{%
 \subsection{Fitting a linear mixed model}\label{sec:LMExercisesPart2}}
 
-Now, using the data-frame called \texttt{crit} above as the data-frame, fit a linear mixed model (called M0) with the column called Type coded as sum contrasts.
+Now, using the data-frame called \texttt{crit} above, fit a linear mixed model (called M0). Recode the column called Type as sum contrasts.
 
-Assume varying intercepts for subjects and varying intercepts for items (varying intercepts are sometimes called random intercepts). Write down the linear mixed models command, and write down the fixed-effects estimates (Intercept and slope) along with their standard errors. State whether we can reject the null hypothesis given the results of the t-value shown in the linear mixed model output; explain why.
+Assume varying intercepts for subjects and varying intercepts for items (varying intercepts are sometimes called random intercepts). Write down the linear mixed models command, and write down the fixed-effects estimates (intercept and slope) along with their standard errors. State whether we can reject the null hypothesis given the results of the t-value shown in the linear mixed model output; explain why.
 
 \hypertarget{sec:LMExercisesPart3}{%
 \subsection{t-test vs.~linear mixed model}\label{sec:LMExercisesPart3}}
@@ -3983,8 +4537,7 @@ The plot below shows the distribution of the residuals from model M0 plotted aga
 
 (You can ignore the numbers below the plot.)
 
-\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-123-1.pdf} 9038 10929
-726 2544
+\includegraphics{Freq_CogSci_files/figure-latex/unnamed-chunk-134-1.pdf}
 
 \hypertarget{sec:LMExercisesPart6}{%
 \subsection{Understanding contrast coding}\label{sec:LMExercisesPart6}}
@@ -3994,7 +4547,7 @@ Using only your estimates of the intercept and the slope in model M0's fixed eff
 \hypertarget{sec:LMExercisesPart7}{%
 \subsection{Understanding the fixed-effects output}\label{sec:LMExercisesPart7}}
 
-Suppose that the model M0's output for the fixed effects analysis were as follows. SO is a sum-coded contrast specification for the conditions labeled Type.
+Suppose that the model M0's output for the fixed effects analysis were as follows. SO is a sum-coded contrast specification for the conditions in the column labeled Type.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4327,7 +4880,7 @@ Dividing both sides of the equation by 2, we get the null hypothesis that \(\bet
 
 Incidentally, if we had rescaled the contrast coding to be not \(\pm 1\) but \(\pm 1/2\), the parameter \(\beta_1\) would represent exactly the difference between the two means, and null hypothesis in equation \eqref{eq:nullhypsumcontrast} would have come out to be \(\beta_1= 0\). This is why it is sometimes better to recode the contrasts as \(\pm 1/2\) rather than \(\pm 1\). See \citet{SchadEtAlcontrasts} for details; we will discuss this in the contrast coding chapter as well.
 
-Let's load the data, set up the contrast coding, and fit the null versus the alternative models. We will fit varying intercept and varying slopes for subject and item, without correlations for items. We don't attempt to fit the so-called ``maximal model'' here with respect to the items random effects because we would get a singularity in the variance covariance matrix.
+Let's load the data, set up the contrast coding, and fit the null versus the alternative models. We will fit varying intercept and varying slopes for subject and item, without correlations for items. We don't attempt to fit a model with by-items varying intercepts and slopes with a correlation because we would get a singularity in the variance covariance matrix.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4345,6 +4898,8 @@ Let's load the data, set up the contrast coding, and fit the null versus the alt
 \StringTok{  }\NormalTok{so }\OperatorTok{||}\StringTok{ }\NormalTok{item), gg05e1)}
 \end{Highlighting}
 \end{Shaded}
+
+Notice that we keep all random effects in the null model. We say that the null model is nested inside the full model.
 
 Next, we compare the two models' log likelihoods. There is a function in the \texttt{lme4} package that achieves that: the \texttt{anova} function:
 
@@ -4373,12 +4928,12 @@ You can confirm from the output that the \texttt{Chisq} value shown is minus two
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{round}\NormalTok{(}\KeywordTok{pchisq}\NormalTok{(}\FloatTok{5.95}\NormalTok{, }\DataTypeTok{df =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{), }\DecValTok{3}\NormalTok{)}
+\KeywordTok{round}\NormalTok{(}\KeywordTok{pchisq}\NormalTok{(}\FloatTok{6.15}\NormalTok{, }\DataTypeTok{df =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lower.tail =} \OtherTok{FALSE}\NormalTok{), }\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.015
+## [1] 0.013
 \end{verbatim}
 
 It is common in the psycholinguistics literature to use the t-value from the linear mixed model output to conduct the hypothesis test on the slope:
@@ -4395,7 +4950,9 @@ It is common in the psycholinguistics literature to use the t-value from the lin
 ## so           0.06202    0.02422   2.561
 \end{verbatim}
 
-The more general method for hypothesis testing is the likelihood ratio test shown above.
+The best method for hypothesis testing is the likelihood ratio test shown above. One can use the t-test output from the linear mixed model for hypothesis testing, but this should be done only when the data are balanced. If there is lack of balance (e.g., missing data for whatever reason), the likelihood ratio test is the best way to proceed. One reason for this is that when we talk about the evidence against the null hypothesis, the likelihood ratio test is the only reasonable way to talk about what evidence we have. See \citet{Royall} for more discussion of this point.
+
+\textbf{to-do: elaborate on the notion of what constitutes evidence against the null.}
 
 One can also use the likelihood ratio test to evaluate whether a variance component should be included or not. For example, is the correlation parameter justified for the subjects random effects? Recall that we had a correlation of 0.58. Is this statistically significant? One can test this in the following way:
 
@@ -4446,15 +5003,9 @@ Load the following two data-sets:
 \end{Highlighting}
 \end{Shaded}
 
-The data are taken from two oexperiments that investigate (inter alia) the effect of relative clause type on reading time in Chinese. The data are from \citet{gibsonwu} and \citet{VasishthetalPLoSOne2013} respectively. The second data-set is a direct replication attempt of the first.
+The data are taken from two experiments that investigate (inter alia) the effect of relative clause type on reading time in Chinese. The data are from \citet{gibsonwu} and \citet{VasishthetalPLoSOne2013} respectively. The second data-set is a direct replication attempt of the first.
 
 Chinese relative clauses are interesting theoretically because they are prenominal: the relative clause appears before the head noun. Figure \ref{fig:chineserc} shows an example.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(}\StringTok{"figures/chineserc.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{figure}
 \includegraphics[width=24.78in]{figures/chineserc} \caption{\label{fig:chineserc} An example of subjects vs. object relative clauses in Chinese.}\label{fig:chinesercfig}
@@ -4464,7 +5015,7 @@ The consequence of Chinese relative clauses being prenominal is that the distanc
 
 The data provided are for the critical region (the head noun). The experiment method is self-paced reading, so we have reading times in milliseconds.
 
-The research question is whether the difference in reading times between object and subject relative clauses is negative. For both data-sets, investigate this question by (a) fitting a paired t-test (by-subjects and by items), (b) fitting the most complex linear mixed model you can to the data and then interpreting the t-value, and (c) the likelihood ratio test. What can we conclude about the research question?
+The research hypothesis is whether the difference in reading times between object and subject relative clauses is negative. For both data-sets, investigate this question by (a) fitting a paired t-test (by-subjects and by items), (b) fitting the most complex linear mixed model you can to the data and then interpreting the t-value, and (c) the likelihood ratio test. What can we conclude about the research question?
 
 \hypertarget{sec:HypTestExerciseAgrmt}{%
 \subsection{Agreement attraction in comprehension}\label{sec:HypTestExerciseAgrmt}}
@@ -5268,10 +5819,19 @@ This time, instead of ignoring convergence problems, we can record the proportio
 \NormalTok{    \}}
 \NormalTok{  \}}
 \NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{## proportion of convergence failures:}
 \KeywordTok{rowMeans}\NormalTok{(failed)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## [1] 0.02 0.00 0.01
+\end{verbatim}
 
 Power can now be computed for each effect size:
 
@@ -5367,11 +5927,9 @@ Example: Compute power as a function of effect size and sample size. Note that t
 \NormalTok{    \}}
 \NormalTok{  \}}
   
-  \CommentTok{## proportion of convergence failures and power:}
-  \KeywordTok{paste}\NormalTok{(}\KeywordTok{print}\NormalTok{(}\StringTok{"Prop. of convergence failures:"}\NormalTok{), }
-    \KeywordTok{mean}\NormalTok{(failed), }\DataTypeTok{sep =} \StringTok{" "}\NormalTok{)}
-  \KeywordTok{paste}\NormalTok{(}\KeywordTok{print}\NormalTok{(}\StringTok{"Power:"}\NormalTok{), }\KeywordTok{mean}\NormalTok{(}\KeywordTok{abs}\NormalTok{(sotvals) }\OperatorTok{>}\StringTok{ }\DecValTok{2}\NormalTok{, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{), }
-    \DataTypeTok{sep =} \StringTok{" "}\NormalTok{)}
+  \CommentTok{## power:}
+  \KeywordTok{paste}\NormalTok{(}\StringTok{"Power:"}\NormalTok{, }\KeywordTok{round}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{abs}\NormalTok{(sotvals) }\OperatorTok{>}\StringTok{ }\DecValTok{2}\NormalTok{, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{), }
+    \DecValTok{2}\NormalTok{), }\DataTypeTok{sep =} \StringTok{" "}\NormalTok{)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -5385,9 +5943,7 @@ Example: Compute power as a function of effect size and sample size. Note that t
 \end{Highlighting}
 \end{Shaded}
 
-{[}1{]} ``Prop. of convergence failures:''
-{[}1{]} ``Power:''
-{[}1{]} ``Power: 0.0707070707070707''
+{[}1{]} ``Power: 0.07''
 
 \hypertarget{sec:Simulationexercises}{%
 \section{Exercises}\label{sec:Simulationexercises}}
@@ -5424,42 +5980,6 @@ Load the data-set shown below:
 \end{Shaded}
 
 Use simulation to determine how many subjects you would need to achieve power of 80\%, given 16 items, and an effect size of 0.02 on the log ms scale. Draw a power curve: on the x-axis show the number of subjects, and on the y-axis the estimated power. Now draw two further curves, one for an effect size of 0.05 and another for an effect size of 0.10. This gives you a power curve, taking the uncertainty in the effect size into account.
-
-\hypertarget{important-distributions}{%
-\chapter{Important distributions}\label{important-distributions}}
-
-These distributions are used quite frequently in Bayesian data analyses, especially in psychology and linguistics applications. The Binomial and Poisson are discrete distributions, the rest are continuous. Each distribution comes with a family of \texttt{d-p-q-r} functions in R which allow us to compute the PDF/PMF, the CDF, the inverse CDF, and to generate random data. For example, the normal distribution's PDF is \texttt{dnorm}; the CDF and the inverse CDF are \texttt{pnorm} and \texttt{qnorm} respectively; and random data can be generated using \texttt{rnorm}.
-
-The table below is adapted from \url{https://github.com/wzchen/probability_cheatsheet}, which is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
-
-to-do: check that the notation is consistent with the main text's.
-
-\small
-\begin{center}
-\renewcommand{\arraystretch}{3.7}
-\begin{tabular}{ccccc}
-\textbf{Distribution} & \textbf{PMF/PDF and Support} & \textbf{Expected Value}  & \textbf{Variance}\\
-\hline 
-\shortstack{Binomial \\ $Binomial(n, \theta)$} & \shortstack{$P(X=k) = \binom{n}{k}\theta^k (1-\theta)^{n-k}$  \\ $k \in \{0, 1, 2, \dots n\}$}& $n\theta$ & $n\theta(1-\theta)$ \\
-\hline
-\shortstack{Poisson \\ $Pois(\lambda)$} & \shortstack{$P(X=k) = \frac{e^{-\lambda}\lambda^k}{k!}$ \\ $k \in \{$0, 1, 2, \dots $\}$} & $\lambda$ & $\lambda$ \\
-\hline
-\shortstack{Uniform \\ $Unif(a, b)$} & \shortstack{$ f(x) = \frac{1}{b-a}$ \\$ x \in (a, b) $} & $\frac{a+b}{2}$ & $\frac{(b-a)^2}{12}$ \\
-\hline
-\shortstack{Normal \\ $Normal(\mu, \sigma)$} & \shortstack{$f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{(2 \sigma^2)}}$ \\ $x \in (-\infty, \infty)$} & $\mu =  \frac{\sum_{i=1}^n x_i}{n}$ & $\sigma^2 = \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n}$ \\
-\hline
-\shortstack{Log-Normal \\ $LogNormal(\mu,\sigma)$} & \shortstack{$\frac{1}{x\sigma \sqrt{2\pi}}e^{-(\log x - \mu)^2/(2\sigma^2)}$\\$x \in (0, \infty)$} & $\theta = e^{ \mu + \sigma^2/2}$ & $\theta^2 (e^{\sigma^2} - 1)$ \\
-\hline
-\shortstack{Beta \\ Beta($a, b$)} & \shortstack{$f(x) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}x^{a-1}(1-x)^{b-1}$\\$x \in (0, 1) $} & $\mu = \frac{a}{a + b}$  & $\frac{\mu(1-\mu)}{(a + b + 1)}$  \\
-\hline
-\shortstack{Exponential \\ $Exp(\lambda)$} & \shortstack{$f(x) = \lambda e^{-\lambda x}$\\$ x \in (0, \infty)$} & $\frac{1}{\lambda}$  & $\frac{1}{\lambda^2}$ \\
-\hline
-\shortstack{Gamma \\ $Gamma(a, \lambda)$} & \shortstack{$f(x) = \frac{1}{\Gamma(a)}(\lambda x)^ae^{-\lambda x}\frac{1}{x}$\\$ x \in (0, \infty)$} & $\frac{a}{\lambda}$  & $\frac{a}{\lambda^2}$ \\
-\hline
-\shortstack{Student-$t$ \\ $t(n)$ \\ Cauchy is $t(1)$} & \shortstack{$\frac{\Gamma((n+1)/2)}{\sqrt{n\pi} \Gamma(n/2)} (1+x^2/n)^{-(n+1)/2}$\\$x \in (-\infty, \infty)$} & $0$ if $n>1$ & $\frac{n}{n-2}$ if $n>2$ \\
-\hline
-\end{tabular}
-\end{center}
 
 \bibliography{FreqBook.bib}
 
