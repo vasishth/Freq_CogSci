@@ -57,7 +57,7 @@ The data analysis approach that we hope to teach through this book (once this bo
 
 ## Prerequisites 
 
-This book assumes high school arithmetic and algebra. We also expect that the reader already knows basic constructs in the programming language R [@R-base], such as writing for-loops. For newcomers to R, we will eventually provide a quick introduction in the appendix that covers all the constructs used in the book (this has not yet been done). For those lacking background in R, there are many good online resources on R that they can consult as needed. Examples are: [R for data science](https://r4ds.had.co.nz/), and [Efficient R programming](https://csgillespie.github.io/efficientR/). We also assume that the reader has done some data analysis previously, either in linguistics or psychology. This should not be the first statistics-related book they read. The reader should have encountered concepts like parameters and parameter estimation.
+This book assumes high school arithmetic and algebra. Elementary concepts of probability theory are assumed; the sum and the  product rules, and the fact that  the probabilities of all possible events must sum to 1, are the extent of the knowledge assumed.  We also expect that the reader already knows basic constructs in the programming language R [@R-base], such as writing for-loops. For newcomers to R, we will eventually provide a quick introduction in the appendix that covers all the constructs used in the book (this has not yet been done). For those lacking background in R, there are many good online resources on R that they can consult as needed. Examples are: [R for data science](https://r4ds.had.co.nz/), and [Efficient R programming](https://csgillespie.github.io/efficientR/). We also assume that the reader has done some data analysis previously, either in linguistics or psychology. This should not be the first statistics-related book they read. The reader should have encountered concepts like parameters and parameter estimation.
 
 
 ```{block2, type='rmdnote'}
@@ -72,7 +72,7 @@ to-do: add a Mackay type chapter ordering for different scenarios.
 
 ## Online materials
 
-The entire book, including all data and source code, is available online from [https://github.com/vasishth/Fre    q\_CogSci](https://github.com/vasishth/Freq_CogSci). Solutions to the exercises will be provided (to-do).
+The entire book, including all data and source code, is available online from [https://github.com/vasishth/Freq\_CogSci](https://github.com/vasishth/Freq_CogSci). Solutions to the exercises will be provided (to-do).
 
 ## Software needed
 
