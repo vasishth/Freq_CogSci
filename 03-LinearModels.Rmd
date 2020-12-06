@@ -83,7 +83,7 @@ obs.t= \frac{\bar{x}}{s/\sqrt{n}}
 Solving for $s$:
 
 \begin{equation}
- s = \bar{x} \times \sqrt{n}/obs.t = -103 \times \sqrt{42}/-3.109  =  213
+ s = \bar{x} \times \sqrt{n}/obs.t = -102 \times \sqrt{42}/-3.109  =  213
 \end{equation}
 
 So, our model for the relative clause data consists of two equations:
@@ -319,7 +319,17 @@ This approach gives us the following estimates on the ms scale:
 - Estimated mean object relative reading time: $exp(\hat\beta_0+\hat\beta_1)=exp(`r round(coef(m1log)[1],4)`+`r round(coef(m1log)[2],4)`)=`r round(exp(round(coef(m1log)[1],4)+round(coef(m1log)[2],4)))`$.
 - Estimated mean subject relative reading time: $exp(\hat\beta_0-\hat\beta_1)=exp(`r round(coef(m1log)[1],4)`-`r round(coef(m1log)[2],4)`=`r round(exp(round(coef(m1log)[1],4)-round(coef(m1log)[2],4)))`$.
 
-The difference in reading time is 417-352=65 ms (cf. 102 ms from the model using the raw scale). The larger estimate based on the  raw scale is less realistic, and we will see later that the large difference between the two conditions is driven by a few extreme, influential values.
+The difference in reading time is 417-352=65 ms. If we had fit the model to raw reading times, the difference would have been:
+
+```{r}
+m1raw<-lm(rawRT~cond,bysubj)
+```
+
+- Estimated mean object relative reading time: $\hat\beta_0+\hat\beta_1=`r round(coef(m1raw)[1],2)`+`r round(coef(m1raw)[2],2)`=`r round(coef(m1raw)[1],2)+round(coef(m1raw)[2],2)`$.
+- Estimated mean subject relative reading time: $\hat\beta_0-\hat\beta_1=`r round(coef(m1raw)[1],2)`-`r round(coef(m1raw)[2],2)`=`r round(coef(m1raw)[1],2)-round(coef(m1raw)[2],2)`$.
+
+The difference in the means on the raw scale is 102 ms.
+The larger estimate based on the  raw scale is less realistic, and we will see later that the large difference between the two conditions is driven by a few extreme, influential values.
 
 
 ## From the paired t-test to the linear  mixed  model
