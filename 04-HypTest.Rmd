@@ -226,7 +226,7 @@ Note that in the likelihood test above, we are comparing one nested model agains
 
 ## A real-life example: The English relative  clause data
 
-The likelihood ratio test is also the way that hypothesis testing is done with the linear mixed model. Here is how it works. Let's look again at the @grodner English relative clause data. The null hypothesis here refers to the slope parameter. When we have the sum contrast coding, the intercept $\beta_0$ refers to the grand mean, and the slope $\beta_1$ is the amount by which subject and object relative clause mean reading times deviate from the grand mean.  Testing the null hypothesis that $\beta_0$ is 0 amounts to testing whether there is any difference in means between the two relative clause types. This becomes clear if we consider the following. 
+The likelihood ratio test is also the way that hypothesis testing is done with the linear mixed model. Here is how it works. Let's look again at the @grodner English relative clause data. The null hypothesis here refers to the slope parameter. When we have the sum contrast coding, the intercept $\beta_0$ refers to the grand mean, and the slope $\beta_1$ is the amount by which subject and object relative clause mean reading times deviate from the grand mean.  Testing the null hypothesis that $\beta_1$ is 0 amounts to testing whether there is any difference in means between the two relative clause types. This becomes clear if we consider the following. 
 
 Let object relatives be coded as $+1$ and subject relatives as $-1$. Then, the mean reading time $\mu_{or}$ for object relatives in the linear mixed model is: 
 
