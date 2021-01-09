@@ -1,12 +1,20 @@
 # Hypothetical repeated sampling and the t-test
 
-This chapter introduces some of the foundational ideas behind hypothesis testing in the frequentist framework. The key idea is that of hypothetical repeated sampling. When we fit a model to a given data-set, we are assuming that this is one of  potentially infinite numbers of exact repetitions of an experiment. We leverage some amazing  properties of these exact repetitions in order to draw inferences from our particular data. The key idea to understand here is the central limit theorem, to which we will discuss below. Before we do that, it is useful to introduce some terminology relating to typical experiment designs in linguistics and psychology.
+This chapter introduces some of the foundational ideas behind hypothesis testing in the frequentist framework. The key idea is that of hypothetical repeated sampling. When we fit a model to a given data-set, we are assuming that this is one of  potentially infinite numbers of exact repetitions of an experiment. We will leverage some amazing  properties of these exact repetitions in order to draw inferences from our particular data. The key idea to understand here is the central limit theorem, which we will discuss below. Before we do that, it is useful to introduce some terminology relating to typical experiment designs in linguistics and psychology.
 
 ## Some terminology surrounding typical experiment designs in linguistics and psychology
 
-An experiment typically involves taking a *random sample* from some population. For example, we could take a sample of participants and record their reading times for two kinds of sentences, for example easy and difficult sentences (how easy and difficult is operationalized is not important at this point). Technically, we are supposed to randomly choose participants; in practice, this randomization rarely happens. Instead we take whatever participants we get,  such as university graduates who happen to apply to participate in an experiment! So, random sampling is an assumption in all the discussions in this chapter, but in practice this assumption may or may not be perfectly met.
+An experiment typically involves taking a *random sample* from some population. For example, we could take a sample of participants and record their reading times for two types of sentences, for example easy and difficult sentences. How one operationalizes easy and difficult is not important at this point. However, to make the  discussion concrete, consider this well-known example from psycholinguistics. We could be comparing reading times in active vs. passive sentences:
 
-One design decision that the researcher must take is whether to collect only one response from each participant in each condition, or whether we collect multiple measures from each participant. If we collect only data point from each participant, we will say that the data points are *independent* of each other. When we collect multiple measurements from each participant, we will say that we have *dependent* data; such multiple measurements are also called *repeated measures*. With repeated measures, there will be some correlation between the data-points because the multiple measurements from a common source.
+Active sentence: The man threw the ball.
+
+Passive sentence: The ball was thrown by the man.
+
+One claim in the literature is that, due to their simpler structure, active sentences are easier to process than passive sentences. So this is an example of a simpler vs. complex sentence. If we want to investigate whether actives are easier to process than passives, we can, as an example, compare the total reading times for each sentence type (there are some problems that arise here because the sentences don't have the same length, so the comparison is not really fair; these issues we will discuss later). 
+
+Technically, we are supposed to randomly choose participants; in practice, this randomization rarely happens. Instead we take whatever participants we get,  such as university students who happen to apply to participate in an experiment! So, random sampling is an assumption in all the discussions in this chapter, but in practice this assumption may or may not be perfectly met.
+
+One design decision that the researcher must take is whether to collect only one response from each participant in each condition, or whether we collect multiple measures from each participant. If we collect only one data point from each participant, we will say that the data points are *independent* of each other. When we collect multiple measurements from each participant, we will say that we have *dependent* data; such multiple measurements are also called *repeated measures*. With repeated measures, there will be some correlation between the data-points because the multiple measurements from a common source.
 
 In psycholinguistics, repeated measures experiments are the norm. Furthermore, it is common to use a so-called *Latin Square* design. To understand this design, suppose we want to conduct an experiment with two conditions, a and b, and that we want each participant to see each condition multiple times (repeated measurements). The way such an experiment (with two conditions) is set up with a Latin Square design is that we would create multiple pairs of items, e.g., items 1a, 1b, 2a, 2b, etc. For example, we are investigating active vs. passive sentences, item 1a could be the active clause *The man threw the ball*, and 1b would thene the passive counterpart *The ball was thrown by the man*. The two versions of the item are therefore minimal pairs---minimally different in that the sentence has the same words, but one is an active clause and the other a passive clause.
 
@@ -28,7 +36,20 @@ The Latin square generalizes beyond two conditions easily. Suppose we have four 
 | d | a | b | d |
 -----------------
 
+Similarly if you have eight conditions, the Latin Square table would look like this. 
 
+---------------------------------
+| a | b | c | d | e | f | g | h |
+| b | c | d | e | f | g | h | a |
+| c | d | e | f | g | h | a | b |
+| d | e | f | g | h | a | b | c |
+| e | f | g | h | a | b | c | d |
+| f | g | h | a | b | c | d | e |
+| g | h | a | b | c | d | e | f |
+| h | a | b | c | d | e | f | g |
+--------------------------------
+
+As an aside, it is rarely a good idea to design such complex experiments! The more conditions you have in an experiment, the more decisions you will have to make about how to analyze the data, and the harder the interpretation of the data. Later in this course, we will demonstrate the price one has to pay for setting up overly complex designs. We mention this point here because it is a common beginner error to want to have as many conditions as possible in a single experiment. In fact, a student of ours once proposed a 180 condition design! 
 
 The Latin Square design is attractive for psycholinguistics and psychology because it has some optimality properties. Experiment design and the properties of different designs is a whole field in itself in statistics, but we won't get into these details.  
 
@@ -40,7 +61,7 @@ With this very brief introduction to experiment design, we now turn to the idea 
 
 Suppose we collect some data, which can be represented by a vector $y$; this is a *single sample*. Given data $y$, and assuming for concreteness that the underlying likelihood is a $Normal(\mu=500,\sigma=100)$, the sample mean and standard deviation, $\bar{y}$ and $s$  give us an estimate of the unknown parameters mean $\mu$ and the standard deviation $\sigma$ of the distribution from which we assume that our data come from. Figure \@ref(fig:normalsample) shows the distribution of a particular sample, where the number of data points is $n=1000$. Note that in this example the parameters are specified by us, so they are not unknown; in a real data-collection situation, the sample mean and standard deviation are all we have as estimates of the parameters.
 
-```{r normalsample,out.width='75%', fig.show = "hold", fig.cap = "A sample of data y of size n=100, from the distribution  Normal(500,100).", tidy = FALSE}
+```{r normalsample,out.width='75%', fig.show = "hold", fig.cap = "A sample of data y of size n=100, from the distribution  Normal(500,100). The vertical line shows the true mean of the distribution we are sampling from.", tidy = FALSE}
 ## sample size:
 n<-1000
 ##  independent and identically distributed sample:
@@ -88,7 +109,8 @@ lines(density(y_matrix[,i]),lty=2)
 }
 
 hist(y_means,freq=FALSE,main="Sampling distribution of means",
-     xlab="means under repeated sampling")
+     xlab="means under repeated sampling",
+     ylim=c(0,0.15))
 abline(v=mean(y_means),lty=2)
 lines(seq(9,11,by=0.01),
       dnorm(seq(9,11,by=0.01),mean(y_means),sd(y_means)))
@@ -101,7 +123,7 @@ lines(seq(490,510,by=0.01),
             mean(y_means),sd(y_means)))
 ```
 
-The sampling distribution of means has a  normal distribution provided two conditions are met: (a) the sample size should be large enough, and (b)  $\mu$ and $\sigma$ are defined for the probability density or mass function that generated the data. This fact is called the **central limit theorem** (CLT). The significance of the CLT for us as researchers is that from the summary statistics computed from a *single* sample, we can obtain an estimate of this distribution of means: $Normal(\bar{y},s/\sqrt{n})$.  
+The sampling distribution of means has a  normal distribution provided two conditions are met: (a) the sample size should be ``large enough'', and (b)  $\mu$ and $\sigma$ are defined for the probability density or mass function that generated the data. This fact is called the **central limit theorem** (CLT). The significance of the CLT for us as researchers is that from the summary statistics computed from a *single* sample, we can obtain an estimate of this distribution of means: $Normal(\bar{y},s/\sqrt{n})$.  
 
 
 
@@ -157,7 +179,7 @@ E[\bar{Y}] = \mu \quad Var(\bar{Y}) = \frac{\sigma^2}{n}
 
 The above means that we can estimate the expectation $\bar{Y}$ and the variance  of $\bar{Y}$ from a *single* sample!!
 
-The Central Limit Theorem, not proved here (for a proof, see p. 267 of @millermiller) can be summarized as follows.
+The Central Limit Theorem, not proved here (for a proof, see p. 267 of @millermiller) can be  summarized as follows.
 
 **Central Limit Theorem**
 
@@ -167,15 +189,15 @@ Let $f(Y)$ be the pdf of a random variable $Y$, and assume that the pdf has mean
 \bar{Y} \sim Normal(\mu,\sigma^2/n) \quad  E[Y]=\mu,Var(Y)=\sigma^2 \quad \hbox{ when n is large}
 \end{equation}
 
-For us, the practical implication of this result is huge. From a *single* sample $y_1,\dots, y_n$, we can derive the distribution of *hypothetical* sample means under repeated sampling. That is, it becomes possible to say something about what the plausible and implausible values of the sample mean are under repeated sampling. This is the basis for all hypothesis testing and statistical inference in the frequentist framework that we will look at in this book.
+For us, the practical implication of this result is huge. From a *single* sample of $n$ independent data points $y_1,\dots, y_n$, we can derive the distribution of *hypothetical* sample means under repeated sampling. That is, it becomes possible to say something about what the plausible and implausible values of the sample mean are under repeated sampling. This is the basis for all hypothesis testing and statistical inference in the frequentist framework that we will look at in this book.
 
-Sometimes the central limit theorem is misunderstood to imply that the distribution that is assumed to generate the data is always going to be normal. It is important to understand that there are two distributions we are talking about here. First, there is the distribution that the data were generated from; this need not be normal. For example, you could get data from a Normal, Exponential, Gamma, or other distribution. Second, there is the sampling distribution of the *sample mean* under repeated sampling. It is the sampling distribution that the central limit theorem is about, not the distribution that generated the data.
+Sometimes the central limit theorem is misunderstood to imply that the pdf $f(Y)$ that is assumed to generate the data is always going to be normal. It is important to understand that there are two pdfs we are talking about here. First, there is the pdf that the data were generated from; this need not be normal. For example, you could get data from a Normal, Exponential, Gamma, or other distribution. Second, there is the sampling distribution of the *sample mean* under repeated sampling. It is the sampling distribution that the central limit theorem is about, not the distribution that generated the data.
 
 ## Three examples of the sampling distribution
 
-In the above discussion, the underlying pdf we sampled from above was a normal distribution. However, it need not be. Consider two examples: the underlying pdf is an Exponential or a Gamma distribution. 
+In the above discussion, the underlying pdf we sampled from above was a normal distribution. However, it need not be. Consider two examples first: the underlying pdf is an Exponential or a Gamma distribution. 
 
-The Exponential distribution has a parameter $\lambda$ (parameterized in `R` as a `rate`, $1/\lambda$); its mean is $\lambda$ and its variance is $1/\lambda^2$. The sampling distribution is normal, even though the underlying distribution is an Exponential.
+The Exponential distribution has a parameter $\lambda$ (parameterized in `R` as a `rate`, $1/\lambda$); its mean is $\lambda$ and its variance is $1/\lambda^2$. The sampling distribution is normal, even though the underlying distribution is an Exponential; see Figure \@ref(fig:sdsmexp).
 
 ```{r sdsmexp,echo=FALSE,out.width='85%', fig.show = "hold", fig.cap = "Sampling from an exponential.", tidy = FALSE}
 ## Sampling from an Exponential:
@@ -199,13 +221,14 @@ lines(density(y_matrix[,i]),lty=2)
 ## compute means from each replication:
 y_means<-colMeans(y_matrix)
 hist(y_means,freq=FALSE,main="Sampling distribution of means \n (Data sampled \n from Exponential)",
-     xlab="means under repeated sampling")
+     xlab="means under repeated sampling",
+     ylim=c(0,0.15))
 abline(v=mean(y_means),lty=2)
 lines(seq(9,11,by=0.01),
       dnorm(seq(9,11,by=0.01),mean(y_means),sd(y_means)))
 ```
 
-A further example is samples from a Gamma distribution. Suppose we sample from a Gamma distribution with shape parameter chosen arbitrarily to be 1. The distribution of means is again going to be approximately normal.
+A further example is samples from a Gamma distribution. Suppose we sample from a Gamma distribution with shape parameter chosen arbitrarily to be 1. The distribution of means is again going to be approximately normal; see Figure \@ref(fig:sdsmgamma).
 
 
 ```{r sdsmgamma,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "Sampling from a Gamma distribution.", tidy = FALSE}
@@ -264,7 +287,7 @@ lines(seq(.9,1.1,by=0.01),
       dnorm(seq(.9,1.1,by=0.01),mean(y_means),sd(y_means)))
 ```
 
-As the figure illustrates, when the mean and variance for the likelihood are undefined, the central limit theorem doesn't hold. In the rest of this book, we will always assume that the data are coming from a distribution that has a mean and variance defined for it.
+As the Figure \@(fig:sdsmcauchy) illustrates, when the mean and variance for the likelihood are undefined, the central limit theorem doesn't hold. In the rest of this book, we will always assume that the data are coming from a distribution that has a mean and variance defined for it.
 
 ## The confidence interval, and what it's good for
 
@@ -277,7 +300,7 @@ Once we have sample of data $y$, and once the sample mean $\bar{y}$ and the $SE 
 Because the sampling distribution of means is normally distributed, and because 95% of the area under the curve is covered by two times the standard deviation of the normal distribution,  
 the upper and lower bounds of the interval defined by the interval $\bar{y} \pm 2 SE$ covers approximately 95\% of the area under the curve in the sampling distribution. 
 
-This interval is called the *confidence interval* (CI) and has the following meaning: If you take samples repeatedly and compute the CI each time, 95\% of those CIs will contain the true population mean $\mu$. One can simulate this situation. This time we will do 1000 repeated experiments instead of 100.
+This interval is usually computed after estimating the sample mean and  standard error from a data-set, and is called the *confidence interval* (CI). It has the following meaning: If you take samples repeatedly and compute the CI each time, 95\% of those CIs will contain the true population mean $\mu$. To understand this point, one can simulate this situation. This time we will do 1000 repeated experiments instead of 100. 
 
 ```{r}
 mu<-500
@@ -295,13 +318,12 @@ for(i in 1:nsim){
 ## check how many CIs contain mu:
 CIs<-ifelse(lower<mu & upper>mu,1,0)
 ## approx. 95% of the CIs contain true mean:
-#round(table(CIs)[2]/sum(table(CIs)),2)
-mean(CIs)
+round(mean(CIs),2)
 ```
 
 Figure \@ref(fig:ciplot) visualizes the coverage properties of the confidence interval in 100 simulations; by coverage we mean here the proportion of cases where the true $\mu$ is contained in the CI.
 
-```{r ciplot,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "Illustration of the meaning of the 95% confidence interval. The dark bars are CIs which do not contain the true mean.", tidy = FALSE}
+```{r ciplot,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "Illustration of the meaning of a  95 percent confidence interval (CI). The thicker bars represent the CIs which do not contain the true mean.", tidy = FALSE}
 ## define function for SE
 se <- function(x)
       {
@@ -353,11 +375,11 @@ arrows(x0,y0=cis[,1],
        x1,y1=cis[,2],length=0,lwd=cis[,3])
 ```
 
-The confidence interval is widely misinterpreted, i.e., as representing the range of plausible value of the $\mu$ parameter. This is the wrong interpretation because $\mu$ is a point value by assumption, it doesn't have a PDF associated with it. The frequentist CI is defined with reference to the sampling distribution of the mean under repeated sampling, not the probability distribution of $\mu$.
+The confidence interval is widely misinterpreted, i.e., as representing the range of plausible value of the $\mu$ parameter. This is the wrong interpretation because $\mu$ is a point value by assumption, it doesn't have a pdf associated with it. The frequentist CI is defined with reference to the sampling distribution of the mean under repeated sampling, not the probability distribution of $\mu$.
 By contrast, the Bayesian credible interval does have this interpretation. 
-In practice, we find that in most modeling settings we have encountered, the frequentist confidence interval and Bayesian credible interval have very similar widths, with the Bayesian interval being slightly wider depending on the prior specifications. 
+In most modeling settings we have encountered in our work, the frequentist confidence interval and Bayesian credible interval have very similar widths, with the Bayesian interval being slightly wider depending on the prior specifications. 
 
-Given the convoluted meaning of the CI, and the impossibility of interpreting a single CI, it is reasonable to ask: what good is a CI? One can treat the CI as a graphical summary of width of the sampling distribution of the mean---the wider the sampling distribution, the more the implied variability under repeated sampling. The confidence interval can therefore be used as a visual summary of how uncertain we can be about the estimate of the sample mean under hypothetical repeated sampling. See @cumming2014new for a useful perspective relating to using confidence intervals for inference.
+Given the convoluted meaning of the CI, and the impossibility of interpreting a single CI, it is reasonable to ask: what good is a CI? One can treat the CI as a summary that tells us the width of the sampling distribution of the mean---the wider the sampling distribution, the more the implied variability under repeated sampling. The confidence interval can therefore be used to assess how uncertain we can be about the estimate of the sample mean under hypothetical repeated sampling. See @cumming2014new for a useful perspective relating to using confidence intervals for inference. As discussed later in the book, we will use the CI to informally assess uncertainty.
 
 We turn next to the central ideas behind the hypothesis test. We begin with the humble one-sample t-test, which contains many subtleties and is well worth close study before we move on to the main topic of this book: linear mixed models.
 
@@ -376,7 +398,7 @@ We can estimate $\mu$ from the sample mean $\bar{y}$, which we will sometimes al
 N(\hat\mu,\frac{\hat \sigma}{\sqrt{n}})
 \end{equation}
 
-It is important to realize here that the above sampling distribution is only as realistic as the estimates of the mean and standard deviation parameters---if those are inaccurately estimated, then the sampling distribution is not realistic either.
+It is important to realize here that the above sampling distribution is only as realistic as the estimates of the mean and standard deviation parameters---if those happen to be inaccurately estimated, then the sampling distribution is not realistic either.
 
 Assume as before that we take an independent random sample of size $1000$ from a random variable $Y$ that is normally distributed, with mean 500 and standard deviation 100. As usual, begin by estimating the mean and SE:
 
@@ -410,12 +432,13 @@ text(x=y_bar,y=0.01,label="sample \n mean",col="red")
 ```
 
 The intuitive idea here is that 
-- if the sample mean $\bar{y}$ is "near" the hypothesized $\mu$ (here, 450), the data are possibly consistent with the null hypothesis distribution.
-- if the sample mean $\bar{y}$ is "far" from the hypothesized $\mu$, the data are inconsistent with the null hypothesis distribution.
 
-The terms "near" and "far" will be quantified by determining how many standard error units the sample mean is from the hypothesized mean. This way of thinking shifts the focus away from the sampling distribution above, towards the distance measured in standard error units.
+- if the sample mean $\bar{y}$ is "near" the hypothesized $\mu$ (here, 450), the data are possibly (but by no means necessarily) consistent with the null hypothesis distribution.
+- if the sample mean $\bar{y}$ is "far" from the hypothesized $\mu$, the data are inconsistent with the null hypothesis distribution.  
 
-The distance between the sample mean and the hypothesized mean can be written in SE units. We will say that the sample mean is $t$ standard errors away from the hypothesized mean:
+The terms "near" and "far" will be quantified by determining how many standard error units the sample mean is from the hypothesized mean. This way of thinking shifts the focus away from the sampling distribution above, towards the distance measured in standard error units from the null hypothesis mean.
+
+The distance between the sample mean and the hypothesized mean can be written in SE units as follows. We will say that the sample mean is $t$ standard errors away from the hypothesized mean:
 
 \begin{equation}
 t \times SE = \bar{x} - \mu 
@@ -435,15 +458,15 @@ Notice that the t-value is a random variable: it is a transformation of $\bar{X}
 T  = \frac{\bar{X} - \mu}{SE}
 \end{equation}
 
-This random variable has a PDF associated with it, the  t-distribution, which is defined in terms of the sample size $n$; the pdf is written $t(n-1)$. Under repeated sampling, the t-distribution is generated from this random variable $T$. 
+This random variable has a pdf associated with it, the  t-distribution, which is defined in terms of the sample size $n$; the pdf is written $t(n-1)$. Under repeated sampling, the t-distribution is generated from this random variable $T$. 
 
-We will compactly express the statement that "the observed t-value is assumed to be generated under repeated sampling from a t-distribution with  n-1 degrees of freedom" as:  
+We will compactly express the statement that "the observed t-value is assumed to be generated (under repeated sampling) from a t-distribution with  n-1 degrees of freedom" as:  
 
 \begin{equation}
 T \sim t(n-1)
 \end{equation}
 
-For large $n$, the PDF of the random variable $T$ approaches $N(0,1)$. This is illustrated in Figure  \@ref(fig:tnormal); notice that the t-distribution has fatter tails than the normal for small $n$, say $n<20$, but for larger n, the t-distribution and the normal are essentially identical. Incidentally,  when n=2, the t-distribution $t(1)$ is the Cauchy distribution we saw earlier; this distribution is characterized by fat tails, and has no mean or variance defined for it.
+For large $n$, the pdf of the random variable $T$ approaches $N(0,1)$. This is illustrated in Figure  \@ref(fig:tnormal); notice that the t-distribution has fatter tails than the normal for small $n$, say $n<20$, but for larger n, the t-distribution and the normal become increasingly similar in shape. Incidentally,  when n=2, the t-distribution $t(1)$ is the Cauchy distribution we saw earlier; this distribution is characterized by fat tails, and has no mean or variance defined for it.
 
 
 ```{r tnormal,echo=FALSE,fig.cap="A visual comparison of the t-distribution (with degrees of freedom ranging from 1 to 50) with the standard normal distribution (N(0,1)). The dashed line represents the t-distribution, and the solid line the normal distribution."}
@@ -474,7 +497,7 @@ t=\frac{\bar{y}-\mu}{s/\sqrt{n}}
 \end{equation}
 
 - Reject null hypothesis if the observed t-value is "large" (to be made more precise next).
-- Fail to reject the null hypothesis, or (under some conditions) even go so far as to accept the null hypothesis, if the observed t-value is "small".
+- Fail to reject the null hypothesis, or (under some conditions, to be made clear later) even go so far as to accept the null hypothesis, if the observed t-value is "small".
 
 What constitutes a large or small observed t-value?
 Intuitively, the t-value from the sample is large when we end up far in *either* tail of the distribution. The two tails of the t-distribution will be referred to as the *rejection region*. The word *region* here refers to the real number line along the x-axis, under the tails of the distribution. The rejection region will go off to infinity on the outer sides, and is demarcated by a vertical line on the inner side of each tail. This is shown in Figure \@ref(fig:tails). It goes off to infinity because the support---the range of possible values---of the random variable that the t-distribution belongs to stretches from minus infinity to plus infinity. 
@@ -506,7 +529,7 @@ text(x=2.4,y=0.01,label="sample mean",col="black")
 
 ```
 
-The location of the vertical lines is determined by the so-called *critical t-value* along the x-axis of the t-distribution.  This is the value such that the area under the curve in the tails to the left or right of the tails is 0.025. As discussed in chapter 1, this area under the curve represents the probability of observing a value as extreme as the critical t-value, or some value that is more extreme. Notice that if we ask ourselves what the probability is of observing some particular t-value (a point value), the answer must necessarily be $0$ (if you are unclear about why, re-read chapter 1). But we can ask the question: what is the absolute t-value, written $|t|$, such that $P(T>|t|)=0.025$?  That's the critical t-value.
+The location of the vertical lines is determined by the so-called *critical t-value* along the x-axis of the t-distribution.  This is the value such that the area under the curve in the tails to the left or right of the tails is 0.025. As discussed in chapter 1, this area under the curve represents the probability of observing a value as extreme as the critical t-value, or some value that is more extreme. Notice that if we ask ourselves what the probability is of observing some particular t-value (a point value), the answer must necessarily be $0$ (if you are unclear about why, re-read chapter 1). But we can ask the question: what is the absolute t-value, written $|t|$, such that $P(T>|t|)=0.025$?  That's the critical t-value. We call it the critical t-value because it demarcates the rejection region shown in Figure \@ref(fig:tails): we are adopting the convention that any observed t-value larger than this critical t-value allows us to reject the null hypothesis.
 
 For a given sample size $n$, we can identify the rejection region by using the `qt` function, whose usage is analogous to the `qnorm` function, discussed in chapter 1.
 
@@ -530,7 +553,7 @@ This observed t-value is huge and is  telling you the distance of the sample mea
 t=\frac{\bar{y}-\mu_0}{s/\sqrt{n}} \hbox{ or } t\frac{s}{\sqrt{n}}=\bar{y}-\mu_0
 \end{equation}
 
-For large sample sizes, if the absolute t-value $|t|$ is greater than  $2$ (approximately), we will reject the null hypothesis. The choice of $2$ is purely conventional and comes from standard practice in psychology and related disciplines (as we will see in this book, standard practice is sometimes not a good-enough reason to decide on such things!).  
+For large sample sizes, if the absolute t-value $|t|$ is greater than  $2$, we will reject the null hypothesis. The choice of $2$ is purely conventional and comes from standard practice in psychology and related disciplines (as we will see in this book, standard practice is sometimes not a good-enough reason to decide on such things!).  
 
 For a smaller sample size $n$, you can compute the exact critical t-value:
 
@@ -562,9 +585,23 @@ t.test(y)$statistic
 
 In the most common usage of the t-test, the null hypothesis mean will be $0$, because usually one is comparing a difference in means between two conditions or two sets of conditions. So the above line of code will work out correctly in those cases; but if you ever have a different null hypothesis mean than $0$, then you   have to specify it in  the `t.test` function.
 
-So, the t-test is used to implement a *decision*: either reject the null hypothesis or fail to reject it. Whenever we do an experiment and carry out a t-test, we use the  t-test to make a decision: reject or fail to reject the null hypothesis. 
+So, the way that the t-test is used in psychology and relate areas is to implement a *decision*: either reject the null hypothesis or fail to reject it. Whenever we do an experiment and carry out a t-test, we use the  t-test to make this binary decision: reject or fail to reject the null hypothesis. 
 
 Recall that behind the t-test lies the  assumption  that the observed t-value  is coming from a random variable, $T\sim t(n-1)$. The particular t-value we observe from a particular data-set belongs to a distribution of t-values under hypothetical repeated sampling. Thus, implicit in the logic of the t-test---and indeed every frequentist statistical test---is the assumption that the experiment is in principle repeatable: the experiment can in principle be re-run as many times as we want, assuming we have the necessary resources and time. 
+
+A quick simulation of t-values under repeated sampling makes this clear. Suppose that our null hypothesis mean is 450, and our sample size  $n=1000$. Assume that the data come from $Normal(\mu=450,\sigma=100)$. Let's do 1000 simulations, compute the sample mean each time, and then store the observed t-value. The t-distribution that results is shown in Figure \@(fig:simt).
+
+```{r simt}
+n<-1000
+nsim<-10000
+tvals<-rep(NA,nsim)
+for(i in 1:nsim){
+y<-rnorm(n,mean=450,sd=100)
+SE<-sd(y)/sqrt(n)
+tvals[i]<-(mean(y)-450)/SE
+}
+plot(density(tvals),main="Simulated t-distribution",xlab="t-values under repeated sampling")
+```
 
 This implicit idea of the experiment's repeatability leads to an important aspect of the t-test: its long-run properties. In other words, its ability (at least in theory) to lead the researchers to the correct decision in the long run, i.e., under (hypothetical) repeated sampling. We turn to this issue next.
 
@@ -1318,10 +1355,10 @@ Given that Type I error is 0.01; what is the highest value possible for Type II 
 
 ### Practice with the paired t-test     
 
-In a self-paced reading study, @grodner investigated subjects vs. object relative clauses. They analyzed the reading times  at the relative clause verb. However, a reviewer objects that the whole sentence's reading times (total readding times) should be used to evaluate the difference between the two conditions, because one cannot know where the difficulty might arise. It isn't clear whether one should use mean reading times over the entire sentence, or total reading times. 
+In a self-paced reading study, @grodner investigated subjects vs. object relative clauses. They analyzed the reading times  at the relative clause verb. However, a reviewer objects that the whole sentence's reading times (total reading times) should be used to evaluate the difference between the two conditions, because one cannot know where the difficulty might arise. It isn't clear whether one should use mean reading times over the entire sentence, or total reading times (summing up all the reading times over the entire sentence). 
 Carry out a by-subjects paired t-test on (a) the critical relative clause verb, versus (b) mean reading time over all words in the two sentence types, and (c) total reading times over all words in the two sentence types. Compare the t-value across the three tests, and decide what the appropriate dependent variable might be (Note: there is no correct answer here).
 
-The data are loaded and pre-processed as follows:
+The data are loaded and pre-processed as follows. The code below gives you the reading times for the critical verb. You will have to work out how to obtain mean or total reading times for the whole sentence in each condition.
 
 ```{r}
 ## load data:
