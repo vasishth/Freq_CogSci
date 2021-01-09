@@ -8,7 +8,7 @@ In linguistics and psychology, typical data-sets involve either *discrete* depen
 
 Whenever we fit a model using one of these types of dependent measures, we make some assumptions about how these measurements were generated. In particular, we usually assume that our observed measurements are coming from a particular *distribution*. The normal distribution is an example that may be familiar to the reader.  
 
-In this chapter, we will learn how to make explicit the assumptions about the distribution associated with out data; we will also learn to visualize distributions. In order to do this, we need to understand the concept of a random variable, and some very basic notions of probability theory. As will become apparent in this chapter, it is extremely useful to be able to think about data in terms of the underlying random variable producing the data. We consider the two cases, discrete and continuous, separately.
+In this chapter, we will learn how to make explicit the assumptions about the distribution associated with our data; we will also learn to visualize distributions. In order to do this, we need to understand the concept of a random variable, which presupposes some basic knowledge of probability theory (such as the sum and product rules). As will become apparent in this chapter, it is extremely useful to be able to think about data in terms of the underlying random variable producing the data. We consider the two cases, discrete and continuous, separately.
 
 We will explain the terms *random variable* and *distribution* below through examples. But it is useful to define the notion of random variable formally.
 
@@ -20,7 +20,7 @@ Y : S \rightarrow \mathbb{R}
 
 The random variable associates to each outcome $\omega$ in the sample space $S$ ($\omega \in S$) exactly one number $Y(\omega) = y$. $S_Y$ will represent a set that contains all the $y$'s (all the possible values of $Y$, which we call the support of $Y$). We can compactly write: $y \in S_Y$. 
 
-Every random variable $Y$ has associated with it a probability mass (distribution)  function (PMF, PDF). The term PMF is used for discrete distributions, and PDF for continuous distributions. One distinction between the PMF and PDF is crucial: the PMF maps every element of $S_Y$ to a value between 0 and 1, whereas the PDF maps a range of values $r\in S_Y$ to a value between 0 and 1. For both PMFs and PDFs, we will express this as follows:
+Every random variable $Y$ has associated with it a probability mass (density)  function (PMF, PDF). The term PMF is used for discrete distributions, and PDF for continuous distributions. One distinction between the PMF and PDF is crucial: the PMF maps every element of $S_Y$ to a value between 0 and 1, whereas the PDF maps a range of values $r\in S_Y$ to a value between 0 and 1 (examples are coming up). For both PMFs and PDFs, we will express this as follows:
 
 \begin{equation}
 p_Y : S_Y \rightarrow [0, 1] 
@@ -107,13 +107,13 @@ What good is a probability mass function? We consider this question next. A lot 
 
 #### Compute the probability of a particular outcome (discrete case only)
 
-The Binomial distribution shown in Figure \@ref(fig:binomplot) already displays the probability of each possible outcome under a different value for $\theta$. In `R`, there is a built-in function that allows us to calculate the probability of $k$ successes out of $n$, given a particular value of $k$ (this number constitutes our data), the number of trials $n$, and given a particular value of $\theta$; this is the ```dbinom``` function. For example, the probability of 5 successes out of 10 when $\theta$ is 0.5 is:
+The Binomial distribution shown in Figure \@ref(fig:binomplot) already displays the probability of each possible outcome under a different value for $\theta$. In `R`, there is a built-in function that allows us to calculate $P(Y=k)$, the probability in the random variable $Y$ of $k$ successes out of $n$, given a particular value of $k$ (this number constitutes our data), the number of trials $n$, and given a particular value of $\theta$; this is the ```dbinom``` function. For example, the probability of 5 successes out of 10 when $\theta$ is $0.5$ is:
 
 ```{r dnormexample1,echo=TRUE}
 (prob<-dbinom(5,size=10,prob=0.5))
 ```
 
-We write this probability as $P(k=5|n=10,\theta=0.5)=```r round(prob,3)```$.
+To be completely explicit, we can write this probability as $P(k=5|n=10,\theta=0.5)=`r round(prob,3)`$; when $n$ and $\theta$ are clear from context, we can also write simply $P(k=5)$.
 
 The probabilities of success when $\theta$ is 0.1 or 0.7 can be computed by replacing 0.5 above by each of these probabilities:
 
@@ -132,7 +132,7 @@ The above command prints out the probability of 5 successes out of 10, when $\th
 
 #### Compute the cumulative probability of k or less (more) than k successes 
 
-Instead of the probability of obtaining a given number of successes we could be interested in knowing the cumulative probability of obtaining 1 or less, or 2 or less successes. Formally, we will write this cumulative probability as $F(2)$, and more generally, as $F(k)$, for a particular value of $k$.
+Instead of the probability of obtaining a given number of successes we could be interested in knowing the cumulative probability of obtaining 1 or less, or 2 or less successes. Formally, we will write this cumulative probability as $F(2)$, and more generally, as $F(k)$, for a particular value of $k$. Thus, $F(k)=P(Y\leq k)$.
 
 We can compute this cumulative probability with the ```dbinom``` function, through a simple summation procedure:
 
@@ -284,7 +284,7 @@ As in the discrete example, the PDF, CDF, and inverse of the CDF allow us to ask
 * **What is the probability of observing values between some range $a$ and $b$ from a Normal distribution with mean $\mu$ and standard deviation $\sigma$**? We can compute the probability of the random variable lying between 1 and minus infinity:
 
 ```{r pnormexample}
-pnorm(1,mean=0,sd=1)-pnorm(-Inf,mean=0,sd=1)
+pnorm(1,mean=0,sd=1)
 ```
 
 ```{r echo=FALSE}
@@ -685,7 +685,7 @@ Given these two matrices, one can reassemble the variance-covariance matrix:
 sd_diag%*%corrmatrix%*%sd_diag                   
 ```
 
-There is a built-in convenience function, `sdcor3cov` in the `SIN` package that does this calculation, taking the vector of standard deviatio ns (not the diagonal matrix) and the correlation matrix to yield the variance-covariance matrix:
+There is a built-in convenience function, `sdcor2cov` in the `SIN` package that does this calculation, taking the vector of standard deviations (not the diagonal matrix) and the correlation matrix to yield the variance-covariance matrix:
 
 ```{r}
 SIN::sdcor2cov(stddev=sds,corr=corrmatrix)
