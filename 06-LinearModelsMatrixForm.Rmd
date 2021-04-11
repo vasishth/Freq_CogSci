@@ -1,0 +1,595 @@
+# Linear models in matrix form {#ch:matrix} 
+
+So far, we have been studying linear models and linear mixed models rather informally. This approach is good enough for a first-pass at linear modeling. However, in order to fully understand the underlying machinery of linear models, the matrix formulation of the linear model is extremely important and useful. There is a price to be paid, however: one has to reactivate one's knowledge of matrix algebra, or one has to put in some work into reviewing elementary matrix theory. Fortunately, reviewing these concepts is not too difficult. We begin this chapter with a quick review of some basic concepts in matrix algebra, and then apply them to linear modeling.
+
+## A quick review of some basic concepts in matrix algebra
+
+A rectangular array of numbers (real numbers in our case), with $n$ rows and $m$ columns is a matrix. The main application for us will be in solving systems of linear equations in statistics. 
+
+An example of a $2\times 2$ matrix:
+
+```{r}
+## a 2x2 matrix:
+(m1<-matrix(1:4,2,2))
+```
+
+An important operation on matrices is the transpose: the rows become columns and the columns rows. R has a function ```t()``` that transposes a matrix:
+
+```{r}
+## transpose of a matrix:
+t(m1)
+```
+
+### Matrix addition, subtraction, and multiplication
+
+Matrix addition and subtraction are easy, they are cell-wise operations. An example shows how this works:
+
+```{r}
+m1+m1
+m1-m1
+```
+
+Matrix multiplication is defined as follows. Think of this simple situation first, where you have a vector of values:
+
+```{r}
+(m2<-rnorm(5))
+## this is a vector:
+str(m2)
+```
+
+If you want to find out the sum of the squares of these values ($\overset{n}{\underset{i=1}\sum} x_i ^2$), then you can multiply each value $x_i$ in m2 with itself, and sum up the result. This is called a **dot product** of two vectors (here, $m2$ repeated twice):
+
+$x_1 \cdot x_1+x_2 \cdot x_2+x_3 \cdot x_3+x_4 \cdot x_4+x_5 \cdot x_5$
+
+Using R:
+
+```{r}
+(sum(m2*m2))
+```
+
+An important observation is that if two vectors are orthogonal, i.e., at 90 degrees to one another, then their dot product is 0:
+
+
+```{r}
+v1<-c(0,1)
+v2<-c(1,0)
+sum(v1*v2)
+```
+
+Matrix multiplication does exactly the above operation (for arbitrarily large matrices). In R, matrix multiplication is carried out using a special operator (the * operator we are used to using for multiplication is used only for ordinary scalar multiplication). Notice that we have first converted the vector with $5$ cells into a $5\times 1$ matrix:
+
+```{r}
+t(matrix(m2))
+matrix(m2)
+t(matrix(m2))%*%matrix(m2)
+```
+
+Note that two matrices can only be multiplied if they are **conformable**: the number of columns of the first matrix has to be the same as the number of rows of the second matrix. So, if you have an $1\times 5$ matrix, you can multiply it with an $5\times 1$ matrix, and the end result of the multiplication will be an $1\times 1$ matrix (i.e., a scalar value). In the above example, the vector m2, converted to a matrix, is $5\times 1$ in dimensions; you cannot multiply a $5\times 1$  with a $5\times 1$  matrix, hence the transform of m2 to a $1\times 5$ matrix.
+
+More generally, if you have an $n\times m$ matrix and multiply it with an $m\times p$ matrix, you will get a $n\times p$ matrix, and the operations we have to do is the dot product operation, repeatedly applied to each row and each column of the two matrices. For example:
+
+```{r}
+X1<-matrix(rnorm(4),ncol=2)
+X2<-matrix(rnorm(4),ncol=2)
+## matrix multiplication:
+X1%*%X2
+## is a series of dot products of vectors:
+sum(X1[1,] * X2[,1])
+sum(X1[1,] * X2[,2])
+sum(X1[2,] * X2[,1])
+sum(X1[2,] * X2[,2])
+```
+
+Scalar matrix multiplication is easy. Multiplying a matrix M with a scalar value just amounts to multiplying the scalar with each cell of the matrix:
+
+```{r}
+5*m2
+```
+### Diagonal matrix and identity matrix
+
+A diagonal matrix is a square matrix that has zeros in its off-diagonals:
+
+```{r}
+diag(c(1,2,4))
+```
+
+An identity matrix is a diagonal matrix with 1's along its diagonal:
+
+```{r}
+diag(rep(1,3))
+```
+
+For a $3\times 3$ identity matrix, we can write $I_3$, and for an nxn identity matrix, $I_n$.
+
+Multiplying an identity matrix with any (conformable) matrix gives that matrix back:
+
+```{r}
+(I<-diag(c(1,1)))
+
+(m3<-matrix(c(6,7,8,9),2,2))
+(I%*%m3)
+
+
+## the matrix does not have to be square:
+(m4<-matrix(c(2,3,6,7,8,9),2,3))
+(I%*%m4)
+```
+
+
+### Powers of matrices 
+
+If A is a square $n\times n$ matrix, then we write $AA$ as $A^2$, and so on. If A is diagonal, then $AA$ is just the diagonal matrix with the diagonal elements of A squared:
+
+```{r}
+m<-diag(c(1,2,3))
+m%*%m
+```
+
+
+For all positive integers #m#, $I_n^m = I_n$.
+
+
+### Inverse of a matrix
+
+If $A,B$ are square matrices, of order $n\times n$, and the following relation is satisfied:
+
+\begin{equation}
+AB = BA= I_n
+\end{equation}
+
+then, $B$ is the inverse (it is unique) of $A$. We write $B=A^{-1}$.  The inverse is analogous to division and allows us to solve matrix equations: AB=C can be solved by post-multiplying both sides by $B^{-1}$ to get  $ABB^{-1}=AI=A=CB^{-1}$.
+
+How to find the inverse? Consider a 2x2 matrix A, and consider the equation:
+
+\begin{equation}
+\begin{pmatrix}
+a_{11} & a_{12}\\
+a_{21} & a_{22}\\
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\
+x_2 
+\end{pmatrix}
+= 
+\begin{pmatrix}
+d_1 \\
+d_2 
+\end{pmatrix}
+\end{equation}
+
+We can write this in compact matrix form: Ax=d.
+If we multiply A and x, we get a system of linear equations:
+
+\begin{equation}
+a_{11} x_1 + a_{12} x_2 = d_1
+\end{equation}
+
+\begin{equation}
+a_{21} x_1 + a_{22} x_2 = d_2
+\end{equation}
+
+If we solve these equations, we get (exercise: prove this):
+
+\begin{equation}
+x_1 = \frac{a_{22}d_1 - a_{12}d_2}{a_{11}a_{22}-a_{21}a_{12}}
+\end{equation}
+
+\begin{equation}
+x_2 = \frac{-a_{21}d_1+a_{11}d_2}{a_{11}a_{22} - a_{21}a_{12}}
+\end{equation}
+
+We can now express the solution in matrix form (verify that this is equivalent to the above two equations for $x_1$ and $x_2$):
+
+\begin{equation}
+x=
+\begin{pmatrix}
+x_1 \\
+x_2 
+\end{pmatrix}
+=
+\frac{1}{a_{11}a_{22}-a_{21}a_{12}}
+\begin{pmatrix}
+a_{22}d_1 - a_{12}d_2\\
+-a_{21}d_1+a_{11}d_2
+\end{pmatrix}
+= C d
+\end{equation}
+
+where
+
+\begin{equation}
+C= \frac{1}{det A} 
+\begin{pmatrix}
+a_{22} - a_{12}\\
+-a_{21} + a_{11}
+\end{pmatrix}
+\quad detA = a_{11}a_{22}-a_{21}a_{12}
+\end{equation}
+
+Now, if we pre-multiply $Ax=d$ by $A^{-1}$, we get
+
+\begin{equation}
+A^{-1} A x = Ix=x= A^{-1} d
+\end{equation}
+
+So, because $x= A^{-1} d$ and $x=Cd$,  it must be the case that  
+$A^{-1}=C$.
+
+Pre-multiplying a matrix like $A$ above by its inverse $A^{-1}$ gives an identity matrix (the R function ```solve``` computes the inverse of a matrix):
+
+```{r}
+(m5<-matrix(c(2,3,4,5),2,2))
+(round(solve(m5)%*%m5))
+```
+
+So: 
+
+$\begin{pmatrix}
+a & b \\
+c & d\\
+\end{pmatrix}^{-1}
+= \frac{1}{det} 
+\begin{pmatrix}
+d & -b \\
+-c & a\\
+\end{pmatrix}$
+
+Here, det is called the determinant of the matrix.
+Note that $det(m)$ is going to be the same as 
+$det(m^{-1})$. The determinant of a square matrix can be computed in R with the function ```det()```:
+
+```{r}
+det(m5)
+```
+
+To summarize, the determinant is a value associated with a square ($n\times n$) matrix. 
+- If the determinant is non-zero, the system of linear equations expressed by the matrix has a unique solution. 
+- If the determinant is zero, there are no solutions or many solutions.
+- We can invert a matrix only if its determinant is non-zero. (Inversion of matrices turns up a lot).
+
+If a matrix is not invertible, we say that it is **singular**; when a matrix is singular, its determinant is going to be 0.
+
+A useful fact to know about non-singular matrices is the following relationship. If A and B are non-singular matrices then $(AB)^{-1} = B^{-1}A^{-1}$.
+
+An important concept in matrices is linear independence. Consider a $3\times 3$ matrix.
+The rows $r_1, r_2, r_3$ are linearly **dependent** if 
+$\alpha, \beta, \gamma$, not all zero, exist such that 
+$\alpha r_1+ \beta r_2+ \gamma r_3 = (0,0,0)$.
+
+If the rows or columns of a matrix A are linearly dependent, then det(A)=0 (the matrix is singular, not invertible).
+
+Linear independence leads us to the concept of the rank of a matrix.
+The column rank of a matrix is the maximum number of linearly independent columns in the matrix. The row rank is the maximum number of linearly independent rows. Column rank is always equal to row rank, so we can just call it rank.
+
+The above is the minimum vocabulary we need to understand the linear model in its matrix form. 
+
+## Basic linear modeling theory
+
+Consider a deterministic function $\phi(\mathbf{x},\beta)$ which takes as input some variable values $x$ and some fixed values $\beta$.  A simple example would be some variable $x$ determining the value of another variable $y$ by multiplying $x$ with $\beta$.
+
+\begin{equation}
+y = \beta x
+\end{equation}
+
+Another example with two fixed values $\beta_0$ and $\beta_1$ determining $y$ is:
+
+\begin{equation}
+y = \beta_0 + \beta_1 x
+\end{equation}
+
+We can rewrite the above equation in matrix form as follows.
+
+
+\begin{equation}
+\begin{split}
+y=& \beta_0 + \beta_1 x\\
+=& \beta_0\times 1 + \beta_1 x\\
+=& \begin{pmatrix}
+1 & x\\
+\end{pmatrix}
+\begin{pmatrix}
+\beta_0 \\
+\beta_1 \\
+\end{pmatrix}
+\end{split}
+\end{equation}
+
+
+Because $y$ is a function of $x$ and the $2\times 1$ matrix $\beta=[\beta_0 
+\beta_1]^T$, the most general way to write the above function is as we did above:
+
+\begin{equation}
+y = \phi(x,\beta)
+\end{equation}
+
+
+In a statistical model, we don't expect an equation like $y=\phi(x,\beta)$ to fit all the points exactly. For example, we could come up with an 
+equation that, given a word's frequency, gives a prediction regarding that word's reaction time:
+
+\begin{equation}
+\hbox{predicted reaction time} = \beta_0 + \beta_1 \hbox{frequency}
+\end{equation}
+
+Given any single value of the frequency of a word, we will not get a perfectly correct prediction of the reaction time for that word. As a concrete example, see this data-set from the ```languageR``` library, which allows us to visualize the effect of (log) word frequency on (log) reaction times:
+
+```{r}
+library(languageR)
+data("lexdec")
+m<-lm(RT~Frequency,lexdec)
+summary(m)
+plot(RT~Frequency,lexdec)
+abline(m)
+```
+
+Because the predicted values from the linear model don't exactly predict the observed vlues, we express the dependent variable $y$ as a non-deterministic function:
+
+\begin{equation}
+y=\phi(x,\beta,\epsilon)=\beta_0+\beta_1x+\epsilon
+\end{equation}
+
+Here, $\epsilon$ is an error random variable which is assumed to have some PDF (the normal distribution) associated with it. 
+It is assumed to have expectation (mean) 0, and some standard deviation (to be estimated from the data) $\sigma$.
+We can write this statement in compact form as $\epsilon \sim N(0,\sigma)$.
+
+The **general linear model** is a non-deterministic function like the one above:
+
+\begin{equation}
+Y=f(x)^T\beta +\epsilon 
+\end{equation}
+
+The matrix formulation will be written as below. $n$ refers to the number of data points (that is, $Y_1,\dots,Y_n$), and the index $j$ ranges from $1$ to $n$.
+
+\begin{equation}
+Y = X\beta + \epsilon \Leftrightarrow y_j = f(x_j)^T \beta + \epsilon_j, j=1,\dots,n
+\end{equation}
+
+To make this concrete, suppose we have three data points, i.e., $=3$. Then, the matrix formulation is
+
+\begin{equation}
+\begin{split}
+\begin{pmatrix}
+Y_1 \\
+Y_2\\
+Y_3 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & x_1 \\
+1 & x_2 \\
+1 & x_3 \\
+\end{pmatrix}
+\begin{pmatrix}
+\beta_0 \\
+\beta_1 \\
+\end{pmatrix}+ \epsilon\\
+Y =& X \beta + \epsilon \\
+\end{split}
+\end{equation}
+
+Here, $f(x_1)^T = (1~x_1)$, and is the first row of the matrix $X$, 
+$f(x_2)^T = (1~x_2)$ is the second row, and 
+$f(x_3)^T = (1~x_3)$ is the third row.
+
+Note that the expectation or mean of Y, written $E[Y]$, is $X\beta$.  $\beta$ is a $p\times 1$ matrix, and $X$, which is called the **design matrix** or **model matrix**, is $n\times p$.
+
+### Least squares estimation: Geometric argument
+
+The above excursion into the matrix formulation of the linear model gives us the ability to understand how the $\beta$ parameters are estimated.
+
+When we have a deterministic model  $y=\phi(f(x)^T,\beta)=\beta_0+\beta_1x$, this implies a perfect fit to all data points. 
+This is like solving the equation $Ax=b$ in linear algebra: we solve for $\beta$ in $X\beta=y$ e.g., by pre-multiplying by $X^{-1}$: $X^{-1}X\beta=X^{-1}y$. For example, if we have:
+
+```{r}
+set.seed(4321)
+(X<-matrix(c(rep(1,2),rnorm(2)),nrow =2))
+(y<-matrix(rnorm(2),nrow=2))
+```
+
+We can solve for $\beta$ as follows:
+
+```{r}
+solve(X)%*%y
+```
+
+But when we have a non-deterministic model 
+$y=\phi(f(x)^T,\beta,\epsilon)$, there is no solution! Now, the best we can do in an equation like $Ax=b$ is to get $Ax$ to be as close an approximation as possible to $b$. In other words, we try to minimize $\mid b-Ax\mid$. 
+
+The goal is to estimate $\beta$; we want to find a value of $\beta$ such that the observed Y is as close to its expected value $X\beta$. 
+In order to be able to identify $\beta$ from $X\beta$, the linear transformation $\beta \rightarrow X\beta$ should be one-to-one, so that every possible value of $\beta$ gives a different $X\beta$. This in turn requires that X be of full rank $p$. So, if a design matrix X is $n\times p$, then it is necessary that $n\geq p$. There must be at least as many observations as parameters. If this is not true, then the model is said to be **over-parameterized**.
+
+Assuming that X is of full rank, and that $n>p$, 
+Y can be considered a point in n-dimensional space and the set of candidate $X\beta$ is a $p$-dimensional subspace of this space; see Figure~\ref{fig:leastsquares}. There will be one point in this subspace which is closest to Y in terms of Euclidean distance. The unique $\beta$ that corresponds to this point is the **least squares estimator** of $\beta$; we will call this estimator $\hat \beta$.
+
+
+```{r}
+knitr::include_graphics("figures/leastsq.pdf")
+```
+
+Notice that $\epsilon=(Y - X\hat\beta)$ and $X\beta$ are perpendicular to each other. Because the dot product of two perpendicular (orthogonal) vectors is 0, we get the result:
+
+\begin{equation}
+(Y- X\hat\beta)^T X \beta = 0 \Leftrightarrow (Y- X\hat\beta)^T X = 0 
+\end{equation}
+
+Multiplying out the terms, we proceed as follows. One result that we use here is that $(AB)^T = B^T A^T$.
+
+\begin{equation}
+\begin{split}
+~& (Y- X\hat\beta)^T X = 0  \\
+~& (Y^T- \hat\beta^T X^T)X = 0\\
+\Leftrightarrow& Y^T X - \hat\beta^TX^T X = 0 \quad  \\
+\Leftrightarrow& Y^T X = \hat\beta^TX^T X \\
+\Leftrightarrow& (Y^T X)^T = (\hat\beta^TX^T X)^T \\
+\Leftrightarrow& X^T Y = X^TX\hat\beta\\
+\end{split}
+\end{equation}
+
+This gives us the important result:
+
+\begin{equation}
+\hat\beta = (X^TX)^{-1}X^T Y
+\end{equation}
+
+X is of full rank, therefore $X^TX$ is invertible.
+
+Let's look at a concrete example:
+
+```{r}
+(X<-matrix(c(rep(1,8),rep(c(-1,1),each=4),
+            rep(c(-1,1),each=2,2)),ncol=3))
+library(Matrix)
+## full rank:
+rankMatrix(X)
+## det non-zero, hence invertible:
+det(t(X)%*%X)
+```
+
+Notice that the inverted matrix is also symmetric. We will use this fact soon.
+
+The matrix $V=X^T X$ is a symmetric matrix, which means that $V^T=V$. 
+
+### The expectation and variance of the parameters beta
+
+Our model now is:
+
+\begin{equation}
+Y = X\beta + \epsilon
+\end{equation}
+
+Let  $\epsilon\sim N(0,\sigma)$. In other words, we are assuming that each value generated by the random variable $\epsilon$ is independent and it has the same distribution, i.e., it is identically distributed. This is sometimes shortened to the iid assumption. So we should technically be writing:
+
+\begin{equation}
+Y = X\beta + \epsilon \quad  \epsilon\sim N(0,\sigma)
+\end{equation}
+
+and add that $Y$ are independent and identically distributed.
+
+Some consequences of the above statements:
+
+- $E[\epsilon]=0$
+- $Var(\epsilon)=\sigma^2 I_n$
+- $E[Y]=X\beta=\mu$
+- $Var(Y)=\sigma^2 I_n$
+
+We can now derive the expectation and variance of the estimators $\hat\beta$. We need a fact about variances: when we want to know $Var(a\times B)$, where a is a constant and B is a random variable, this variance is $a^2 Var(B)$. In the matrix setting, Var(AB), where A is a conformable matrix consisting of some constant values, is $A Var(B)A^T$.
+
+\begin{equation}
+E[\hat\beta] = E[(X^TX)^{-1}X^T Y] = (X^TX)^{-1}X^T X\beta = \beta
+\end{equation}
+
+
+
+Notice that the above shows that $\hat\beta$ is an unbiased estimator of $\beta$. Of course, this doesn't mean that every time you compute an estimate of $\beta$, you are guaranteed to get an accurate estimate of the true $\beta$! Think about Type M error.
+
+Next, we compute the variance:
+
+\begin{equation}
+Var(\hat\beta) = Var([(X^TX)^{-1}X^T] Y)
+\end{equation}
+
+Expanding the right hand side out:
+
+\begin{equation}
+Var([(X^TX)^{-1}X^T] Y) = [(X^TX)^{-1}X^T] Var(Y)  [(X^TX)^{-1}X^T]^{T}
+\end{equation}
+
+Replacing Var(Y) with its variance $\sigma^2 I$, and unpacking the transpose on the right-most expression $[(X^TX)^{-1}X^T]^{T}$:
+
+\begin{equation}
+Var(\hat\beta)= [(X^TX)^{-1}X^T] \sigma^2 I  X[(X^TX)^{-1}]^{T} 
+\end{equation}
+
+Since  $\sigma^2$ is a scalar we can move it to the left, and any matrix multiplied by I is the matrix itself, so we ignore I, getting:
+
+\begin{equation}
+Var(\hat\beta)= \sigma^2 [(X^TX)^{-1}X^T X[(X^TX)^{-1}]^{T} 
+\end{equation}
+
+Since $(X^TX)^{-1}X^T X = I$, we can simplify to
+
+\begin{equation}
+Var(\hat\beta)= \sigma^2 [(X^TX)^{-1}]^{T} 
+\end{equation}
+
+Now, $(X^TX)^{-1}$ is symmetric, so 
+$[(X^TX)^{-1}]^T=(X^TX)^{-1}$. This gives us:
+
+\begin{equation}
+Var(\hat\beta)= \sigma^2 (X^TX)^{-1} 
+\end{equation}
+
+Let's make this concrete using the ```lexdec``` data-set as an example:
+
+```{r}
+y<-lexdec$RT
+x<-lexdec$Frequency
+m0<-lm(y~x)
+
+## design matrix:
+X<-model.matrix(m0)
+head(X,n=4)
+## (X^TX)^{-1}
+invXTX<-solve(t(X)%*%X)
+## estimate of beta:
+(hat_beta<-invXTX%*%t(X)%*%y)
+
+## estimated variance (se^2) of the estimate of beta:
+(hat_sigma<-summary(m0)$sigma)
+(hat_var<-hat_sigma^2*invXTX)
+```
+
+What we have here is a bivariate normal distribution as an estimate of the $\beta$ parameters:
+
+\begin{equation}
+\begin{pmatrix}
+\hat\beta_0\\
+\hat\beta_1\\
+\end{pmatrix}
+\sim 
+N(\begin{pmatrix}
+6.58878\\
+-0.04287\\
+\end{pmatrix},
+\begin{pmatrix}
+ 0.000497 & -0.0000976\\
+-0.0000976 & 2.054e-05\\
+\end{pmatrix})
+\end{equation}
+
+The variance of a bivariate distribution has the variances along the diagonal, and the covariance between $\hat\beta_0$ and 
+$\hat\beta_1$ on the off-diagonals. Covariance is defined as:
+
+\begin{equation}
+Cov(\hat\beta_0,\hat\beta_1)=\hat\rho \hat\sigma_{\hat\beta_0}\hat\sigma_{\hat\beta_1}
+\end{equation}
+
+where $\hat\rho$ is the estimated correlation between $\beta_0$ and $\beta_1$.
+
+So $\hat\beta_0 \sim N(6.588778,0.022296)$ and $\hat\beta_1 \sim N(-0.042872,0.0045325)$, and $Cov(\hat\beta_0,\hat\beta_1)=-9.76\times 10^{-05}$. So the correlation between the $\hat\beta$ is 
+
+```{r}
+## hat rho:
+hat_var[1,2]/(sqrt(hat_var[1,1])*sqrt(hat_var[2,2]))
+```
+
+Notice what happens to this correlation when we center the predictor:
+
+```{r}
+x_c<-scale(x,scale=FALSE)
+m<-lm(y~x_c)
+## design matrix:
+X<-model.matrix(m)
+## (X^TX)^{-1}
+invXTX<-solve(t(X)%*%X)
+## estimate of beta:
+(hat_beta<-invXTX%*%t(X)%*%y)
+
+## estimated variance (se^2) of the estimate of beta:
+(hat_sigma<-summary(m0)$sigma)
+(hat_var<-hat_sigma^2*invXTX)
+## xorrelation:
+hat_var[1,2]/(sqrt(hat_var[1,1])*sqrt(hat_var[2,2]))
+```
+
+The correlation now is effectively zero. This is one of the consequences of centering your predictor: the intercept-slope sampling distributions become independent.
+

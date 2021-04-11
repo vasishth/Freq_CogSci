@@ -1,0 +1,729 @@
+# Contrast coding {#ch:contr}
+
+Whenever one uses a categorical factor as a predictor in a linear (mixed) model---for example when testing the difference in a dependent variable between two or three experimental conditions---then it is necessary to code the discrete factor levels into numeric predictor variables. This coding is termed *contrast coding*. For example, in the linear modeling chapter, we coded two experimental conditions as $-1$ and $+1$, i.e., implementing a sum contrast. Those *contrasts* are the numbers that we give to numeric predictor variables to encode specific hypotheses about differences between factor levels and to create predictor terms to test these hypotheses in linear models, including Bayesian linear (mixed) models.
+
+This chapter will introduce contrast coding. The descriptions are in large parts taken from @schad2020capitalize (which is published under a CC-BY license) and adapted for the current chapter. 
+
+Consider a situation where we want to test differences in a dependent variable between three factor levels. An example could be differences in response times between three levels of word class (noun, verb, adjective). We might be interested in whether word class influences response times. In frequentist statistics, one way to approach this question would be to run an ANOVA and compute an omnibus F-test for whether word class explains response times. However, if based on such omnibus approaches we find support for an influence of word class on response times, it remains unclear where this effect actually comes from, i.e., whether it originated from the nouns, verbs, or adjectives. However, scientists typically have a priori expectations about which groups differ from each other. In this chapter, we will show how to test specific hypotheses directly, which gives a lot of control over the analyses. Specifically, we show how planned comparisons between specific conditions (groups) or clusters of conditions, are implemented as contrasts. This is a very effective way to align expectations with the statistical model.  
+
+## Basic concepts illustrated using a two-level factor
+
+We first consider the simplest case: suppose we want to compare the means of a dependent variable (DV) such as response times between two groups of subjects. R can be used to simulate data for such an example. Such simulated data is available in the R-package `bcogsci` (to install this package, see: https://github.com/bnicenboim/bcogsci) as the data set `df_contrasts1`. The simulations assumed longer response times in condition F1 ($\mu_1 = 0.8$ sec) than F2 ($\mu_2 = 0.4$ sec). The data from the $10$ simulated subjects are aggregated and summary statistics are computed for the two groups.
+
+```{r, echo=TRUE}
+library(bcogsci)
+data("df_contrasts1") 
+df_contrasts1
+str(df_contrasts1)
+```
+
+```{r, echo=FALSE}
+table1 <- df_contrasts1 %>% group_by(F) %>% # Table for main effect F
+   summarize(N=n(), M=mean(DV), SD=sd(DV), SE=round(SD/sqrt(N),1) )
+table1a <- as.data.frame(table1)
+names(table1a) <- c("Factor","N data","Est. means","Std. dev.","Std. errors")
+(GM <-  mean(table1$M)) # Grand Mean
+```
+
+```{r cTab1Means, results = "asis"}
+kbl(table1a, position="b", digits=1, 
+    caption="Summary statistics per condition for the simulated data.")
+```
+
+```{r cFig1Means, fig=TRUE, include=TRUE, echo=FALSE, cache=FALSE, fig.width=4, fig.height=3.6, fig.cap = "Means and standard errors of the simulated dependent variable (e.g., response times in seconds) in two conditions F1 and F2."}
+(plot1 <- qplot(x=F, y=M, group=1, data=table1, geom=c("point", "line")) + 
+	 geom_errorbar(aes(max=M+SE, min=M-SE), width=0) + 
+   #scale_y_continuous(breaks=c(250,275,300)) + 
+   scale_y_continuous(breaks=seq(0,1,.2)) + coord_cartesian(ylim=c(0,1)) + 
+   labs(y="Mean Response Time [sec]", x="Factor F") +
+   theme_bw())
+```
+
+The results, displayed in Figure\ \@ref(fig:cFig1Means) and shown in Table\ \@ref(tab:cTab1Means), show that the assumed true condition means are exactly realized with the simulated data. The numbers are exact because the used `mvrnorm()` function (see `df_contrasts1`) ensures that the data are generated so that the sample mean yields the true means for each level. In real data-sets, of course, the sample means will vary from experiment to experiment.
+
+A simple Bayesian linear model of `DV` on `F` using the function `brm` yields a straightforward estimate of the difference between the group means. We use rather vague priors. The estimates for the fixed effects are presented below:
+
+```{r fitmodel, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
+fit_F <- lm(DV ~ 1 + F,
+                 data = df_contrasts1) 
+```
+```{r, echo=TRUE}
+round(summary(fit_F)$coefficients,3)
+```
+
+Comparing the means for each condition with the coefficients (*Estimates*) reveals that (i) the intercept ($0.8$) is the mean for condition F1, $\hat\mu_1$; and (ii) the slope (`FF2`: $-0.4$) is the difference between the true means for the two groups, $\hat\mu_2 - \hat\mu_1$ [@Bolker2018]:
+
+\begin{equation}
+\begin{array}{lcl}
+\text{Intercept} = & \hat{\mu}_1 & = \text{estimated mean for F1} \\
+\text{Slope (FF2)} = & \hat{\mu}_2 - \hat{\mu}_1 & = \text{estim. mean for F2} - \text{estim. mean for F1} 
+\end{array}
+\label{def:beta}
+\end{equation}
+
+The new information is the standard error for the difference between the two groups, and the t- and p-values corresponding to the null hypothesis test of no difference.
+
+### Default contrast coding: Treatment contrasts {#treatmentcontrasts}
+
+How does the function `lm` arrive at these particular values for the intercept and slope? That is, why does the intercept assess the mean of condition `F1` and how do we know the slope measures the difference in means between `F2`$-$`F1`? This result is a consequence of the default contrast coding of the factor `F`. R assigns treatment contrasts to factors and orders their levels alphabetically. The first factor level (here: `F1`) is coded as $0$ and the second level (here: `F2`) is coded as $1$. This becomes clear when we inspect the current contrast attribute of the factor using the `contrasts` command:
+
+```{r, echo=TRUE}
+contrasts(df_contrasts1$F)
+```
+
+Why does this contrast coding yield these particular regression coefficients? Let's take a look at the regression equation.
+Let $\beta_0$ represent the intercept, and $\beta_1$ the slope. Then, the simple regression above expresses the belief that the expected response time $y$ is a linear function of the factor `F`. In a more general formulation, this is written as follows: $y$ is a linear function of some predictor $x$ with regression coefficients for the intercept, $\beta_0$, and for the factor, $\beta_1$:
+
+\begin{equation}
+y = \beta_0 + \beta_1x
+\label{eq:lm1}
+\end{equation}
+
+This equation is part of the likelihood in a statistical model.
+So, if $x = 0$ (condition `F1`), $y$ is $\beta_0 + \beta_1 \cdot 0 = \beta_0$; and if $x = 1$ (condition `F2`), $y$ is $\beta_0 + \beta_1 \cdot 1 = \beta_0 + \beta_1$.
+
+Expressing the above in terms of the estimated coefficients:
+
+\begin{equation}
+\begin{array}{lccll}
+\text{estim. value for F1} = & \hat{\mu}_1 = & \hat{\beta}_0 = & \text{Intercept} \\
+\text{estim. value for F2} = & \hat{\mu}_2 = & \hat{\beta}_0 + \hat{\beta}_1 = & \text{Intercept} + \text{Slope (FF2)}
+\end{array}
+\label{eq:predVal}
+\end{equation}
+
+It is useful to think of such unstandardized regression coefficients as difference scores; they express the increase in the dependent variable $y$ associated with a change in the independent variable $x$ of $1$ unit, such as going from $0$ to $1$ in this example. The difference between condition means is $0.4 - 0.8 = -0.4$, which is the estimated regression coefficient $\hat{\beta}_1$. The sign of the slope is negative because we have chosen to subtract the larger mean `F1` score from the smaller mean `F2` score.
+
+### Defining hypotheses {#inverseMatrix}
+
+The analysis of the regression equation demonstrates that in the treatment contrast the intercept assesses the average response in the baseline condition, whereas the slope estimates the difference between condition means. However, these are just verbal descriptions of what each coefficient assesses. Is it also possible to formally write down what each coefficient assesses? Moreover, is it possible to relate this to formal null hypotheses that are encoded in each of these two coefficients? The relation to null hypothesis tests is directly possible in frequentist statistics. 
+
+From the perspective of parameter estimation and formal hypothesis tests, the slope represents the main test of interest, so we consider this first. The treatment contrast specifies that the slope $\beta_1$ estimates the difference in means between the two levels of the factor F. This can formally be written as:
+
+\begin{equation}
+\beta_1 = \mu_{F2} - \mu_{F1}
+\end{equation}
+
+or equivalently:
+
+\begin{equation}
+\beta_1 = - 1 \cdot \mu_{F1} + 1 \cdot \mu_{F2}
+\end{equation}
+
+This can express the null hypothesis that the difference in means between the two levels of the factor F is $0$; formally, the null hypothesis $H_0$ is that $H_0: \; \beta_1 = 0$:
+
+\begin{equation} \label{eq:f2minusf1}
+H_0: \beta_1 = \mu_{F2} - \mu_{F1} = 0
+\end{equation}
+
+or equivalently:
+
+\begin{equation}
+H_0: \beta_1 = - 1 \cdot \mu_{F1} + 1 \cdot \mu_{F2} = 0
+\end{equation}
+
+The $\pm 1$ weights in the parameter estimation and null hypothesis statements directly express which means are compared by the treatment contrast.
+
+The intercept in the treatment contrast estimates a quantity and expresses a null hypothesis that is usually of little interest: it estimates the mean in condition F1, and can be used to test whether this mean of F1 is $0$.
+Formally, the parameter $\beta_0$ estimates the following quantity:
+
+\begin{equation}
+\beta_0 = \mu_{F1}
+\end{equation}
+
+\noindent
+or equivalently:
+
+\begin{equation}
+\beta_0 = 1 \cdot \mu_{F1} + 0 \cdot \mu_{F2} .
+\end{equation}
+
+This can also be written as a formal null hypothesis, which is $H_0: \; \beta_0 = 0$:
+
+\begin{equation}
+H_0: \beta_0 = \mu_{F1} = 0
+\end{equation}
+
+\noindent
+or equivalently:
+
+\begin{equation} \label{eq:trmtcontrfirstmention}
+H_0: \beta_0 = 1 \cdot \mu_{F1} + 0 \cdot \mu_{F2} = 0 .
+\end{equation}
+
+\noindent
+The fact that the intercept term formally tests the null hypothesis that the mean of condition `F1` is zero is in line with our previous derivation (see equation \@ref(def:beta)).
+
+In R, factor levels are ordered alphabetically and by default the first level is used as the baseline in treatment contrasts. Obviously, this default mapping will only be correct for a given data-set if the levels' alphabetical ordering matches the desired contrast coding. When it does not, it is possible to re-order the levels. Here is one way of re-ordering the levels in R:
+
+```{r, echo=TRUE}
+df_contrasts1$Fb <- factor(df_contrasts1$F,  levels = c("F2","F1"))
+contrasts(df_contrasts1$Fb)
+```
+
+\noindent
+This re-ordering did not change any data associated with the factor, only one of its attributes. With this new contrast attribute a simple linear model yields the following result.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
+fit_Fb <- lm(DV ~ 1 + Fb,
+                 data = df_contrasts1) 
+```
+```{r, echo=TRUE}
+round(summary(fit_Fb)$coefficients,3)
+```
+
+The model now estimates different quantities. The intercept now codes the mean of condition `F2`, and the slope measures the difference in means between `F1` minus `F2`. This represents an alternative coding of the treatment contrast.
+
+### Sum contrasts {#effectcoding}
+
+Treatment contrasts are only one of many options. It is also possible to use sum contrasts, which code one of the conditions as $-1$ and the other as $+1$, effectively `centering' the effects at the grand mean (GM, i.e., the mean of the two group means). Here, we rescale the contrast to values of $-0.5$ and $+0.5$, which makes the estimated treatment effect the same as for treatment coding and easier to interpret.
+
+To use this contrast in a linear regression, use the `contrasts` function:
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
+(contrasts(df_contrasts1$F) <- c(-0.5,+0.5))
+fit_mSum <- lm(DV ~ 1 + F,
+                 data = df_contrasts1)
+```
+```{r, echo=TRUE}
+round(summary(fit_mSum)$coefficients,3)
+```
+
+Here, the slope (`F1`) again codes the difference of the groups associated with the first and second factor levels. It has the same value as in the treatment contrast.
+However, the intercept now represents the estimate of the average of condition means for F1 and F2, that is, the GM. This differs from the treatment contrast. For the scaled sum contrast:
+
+\begin{equation}
+\begin{array}{lcl}
+\text{Intercept} = & (\hat{\mu}_1 + \hat{\mu}_2)/2 & = \text{estimated mean of F1 and F2} \\
+\text{Slope (F1)} = & \hat{\mu}_2 - \hat{\mu}_1 & = \text{estim. mean for F2} - \text{estim. mean for F1} 
+\end{array}
+\label{def:beta2}
+\end{equation}
+
+Why does the intercept assess the GM and why does the slope test the group difference? This is the result of rescaling the sum contrast. The first factor level (`F1`) was coded as $-0.5$, and the second factor level (`F1`) as $+0.5$:
+
+```{r, echo=TRUE}
+contrasts(df_contrasts1$F)
+```
+
+Let's again look at the regression equation to better understand what computations are performed. Again, $\beta_0$ represents the intercept, $\beta_1$ represents the slope, and the predictor variable $x$ represents the factor `F`. The regression equation is written as:
+
+\begin{equation}
+y = \beta_0 + \beta_1x
+\label{eq:lm2}
+\end{equation}
+
+The group of `F1` subjects is then coded as $-0.5$, and the response time for the group of `F1` subjects is $\beta_0 + \beta_1 \cdot x_1 = 0.6 + (-0.4) \cdot (-0.5) = 0.8$. The `F2` group, to the contrary, is coded as $+0.5$. By implication, the mean of the `F2` group must be $\beta_0 + \beta_1 \cdot x_1 = 0.6 + (-0.4) \cdot 0.5 = 0.4$. 
+Expressed in terms of the estimated coefficients:
+
+\begin{equation}
+\begin{array}{lccll}
+\text{estim. value for F1} = & \hat{\mu}_1 = & \hat{\beta}_0 - 0.5 \cdot \hat{\beta}_1 = & \text{Intercept} - 0.5 \cdot \text{Slope (F1)}\\
+\text{estim. value for F2} = & \hat{\mu}_2 = & \hat{\beta}_0 + 0.5 \cdot \hat{\beta}_1 = & \text{Intercept} + 0.5 \cdot \text{Slope (F1)}
+\end{array}
+\label{eq:predVal2}
+\end{equation}
+
+The unstandardized regression coefficient is a difference score: Taking a step of one unit on the predictor variable $x$, e.g., from $-0.5$ to $+0.5$, reflects a step from condition F1 to F2, and changes the dependent variable from $0.8$ (for condition F1) to $0.4$ (condition F2), giving us a difference of $0.4 - 0.8 = -0.4$. This is again the estimated regression coefficient $\hat{\beta}_1$.
+Moreover, as mentioned above, the intercept now assesses the GM of conditions F1 and F2: it is in the middle between condition means for F1 and F2.
+
+So far we gave verbal statements about what is tested by the intercept and the slope in the case of the scaled sum contrast. It is possible to write these statements as formal parameter estimates and formal null hypotheses that are tested by each regression coefficient.
+In sum contrasts, the slope parameter $\beta_1$ assesses the following quantity:
+
+\begin{equation}
+\beta_1 = -1 \cdot \mu_{F1} + 1 \cdot \mu_{F2}
+\end{equation}
+
+\noindent
+This can be formulated into the null hypothesis that the difference in means between the two levels of factor F is 0; formally, the null hypothesis $H_0$ is that 
+
+\begin{equation}
+H_0: \beta_1 = -1 \cdot \mu_{F1} + 1 \cdot \mu_{F2} = 0
+\end{equation}
+
+\noindent
+This estimates the same quantity and tests the same null hypothesis as the slope in the treatment contrast.
+The intercept, however, now assess a different quantity and expresses a different hypothesis about the data: it estimates the average of the two conditions F1 and F2, and tests the null hypothesis that this average is 0:
+
+\begin{equation}
+\beta_0 = 1/2 \cdot \mu_{F1} + 1/2 \cdot \mu_{F2} = \frac{\mu_{F1} + \mu_{F2}}{2}
+\end{equation}
+
+And for the null hypothesis:
+
+\begin{equation}
+H_0: \beta_0 = 1/2 \cdot \mu_{F1} + 1/2 \cdot \mu_{F2} = \frac{\mu_{F1} + \mu_{F2}}{2} = 0
+\end{equation}
+
+\noindent
+In balanced data, i.e., in data-sets where there are no missing data points, the average of the two conditions F1 and F2 is the GM. In unbalanced data-sets, where there are missing values, this average is the weighted GM. 
+To illustrate this point, consider an example with fully balanced data and two equal group sizes of $5$ subjects for each group F1 and F2. Here, the GM is also the mean across all subjects. Next, consider a highly simplified unbalanced data-set, where in condition F1 two observations of the dependent variable are available with values of $2$ and $3$, and where in condition F2 only one observation of the dependent variables is available with a value of $4$. In this data-set, the mean across all subjects is $\frac{2 + 3 + 4}{3} = \frac{9}{3} = 3$. However, the (weighted) GM as assessed in the intercept in a model using sum contrasts for factor F would first compute the mean for each group separately (i.e., $\frac{2 + 3}{2} = 2.5$, and $4$), and then compute the mean across conditions $\frac{2.5 + 4}{2} = \frac{6.5}{2} = 3.25$. The GM of $3.25$ is different from the mean across subjects of $3$.
+
+To summarize, treatment contrasts and sum contrasts are two possible ways to parameterize the difference between two groups; they estimate different quantities and test different hypotheses (there are cases, however, where the estimates / hypotheses are equivalent). Treatment contrasts compare one or more means against a baseline condition, whereas sum contrasts allow us to determine whether we can reject the null hypothesis that a condition's mean is the same as the GM (which in the two-group case also implies a hypothesis test that the two group means are the same). One question that comes up here is how one knows or formally derives what quantities are estimated by a given set of contrasts, and what hypotheses it can be used to test. This question will be discussed in detail below for the general case of any arbitrary contrasts.
+
+### Cell means parameterization and posterior comparisons {#sec:cellMeans}
+
+One alternative option is to use the so-called cell means parameterization. In this approach, one does not estimate an intercept term, and then differences between factor levels. Instead, each degree of freedom in a design is used to simply estimate the mean of one of the factor levels. As a consequence, no comparisons between condition means are estimated, but simply the mean of each experimental condition is estimated. Cell means parameterization is specified by explicitly removing the intercept term (which is added automatically in R by default) by adding a $-1$ in the regression formula:
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
+fit_mCM <- lm(DV ~ -1 + F,
+                 data = df_contrasts1) 
+```
+```{r, echo=TRUE}
+round(summary(fit_mCM)$coefficients,3)
+```
+
+Now, the regression coefficients (see the column labeled 'Estimate') estimate the mean of the first factor level ($0.8$) and the mean of the second factor level ($0.4$). This cell means parameterization usually does not allow a test of the hypotheses of interest, as these hypotheses usually relate to differences between conditions rather than to whether each condition differs from zero. 
+
+## The hypothesis matrix illustrated with a three-level factor
+
+Consider an example with the three word classes nouns, verbs, and adjectives. We load simulated data from a lexical decision task with response times as dependent variable. The research question is: do response times differ as a function of the between-subject factor word class with three levels: nouns, verbs, and adjectives? We here make the ad-hoc assumption that nouns may have longer response times and that adjectives may have shorter response times. Here, we specify word class as a between-subject factor. In cognitive science experiments, word class will usually vary within subjects and between items. However, the within- or between-subjects status of an effect is independent of its contrast coding; we assume the manipulation to be between subjects for ease of exposition. The concepts presented here extend to repeated measures designs that are often analyzed using hierarchical Bayesian (linear mixed) models.
+
+The following R code loads and displays the simulated the data.
+
+```{r, echo=TRUE}
+data("df_contrasts2")
+head(df_contrasts2)
+```
+
+```{r, echo=FALSE}
+table.word <- df_contrasts2 %>% group_by(F) %>% 
+  summarise(N=length(DV), M=mean(DV), 
+            SD=sd(DV), SE=sd(DV)/sqrt(N))
+table.word1 <- as.data.frame(table.word)
+names(table.word1) <- c("Factor","N data",
+                        "Est. means","Std. dev.","Std. errors")
+```
+
+```{r cTab2Means, results = "asis"}
+kbl(table.word1, position="b", digits=1, 
+    caption="Summary statistics per condition for the simulated data.")
+```
+
+As shown in Table\ \@ref(tab:cTab2Means), the estimated means reflect our assumptions about the true means in the data simulation: Response times are longest for nouns and shortest for adjectives. 
+In the following sections, we use this data-set to illustrate [sum](#sumcontrasts). Furthermore, we will use an additional data set to illustrate [repeated](#repeatedcontrasts), [polynomial](#polynomialContrasts), and [custom](#customContrasts) contrasts. In practice, usually only one set of contrasts is selected when the expected pattern of means is formulated during the design of the experiment.
+
+### Sum contrasts {#sumcontrasts}
+
+For didactic purposes, the next sections describe sum contrasts. Suppose that the expectation is that nouns are responded to slower and verbs words are responded to faster than the GM response time. Then, the research question could be: Do nouns differ from the GM and do adjectives differ from the GM? And if so, are they above or below the GM? We want to estimate the following two quantities:
+
+\begin{equation}
+\beta_1 = \mu_1 - \frac{\mu_1+\mu_2+\mu_3}{3} = \mu_1 - GM
+\end{equation}
+
+\noindent
+and
+
+\begin{equation}
+\beta_2 = \mu_2 - \frac{\mu_1+\mu_2+\mu_3}{3} = \mu_2 - GM
+\end{equation}
+
+This translates into the following two hypotheses:
+
+\begin{equation}
+H_{0_1}: \mu_1 = \frac{\mu_1+\mu_2+\mu_3}{3} = GM
+\end{equation}
+
+\noindent
+and
+
+\begin{equation}
+H_{0_2}: \mu_2 = \frac{\mu_1+\mu_2+\mu_3}{3} = GM
+\end{equation}
+
+$H_{0_1}$ can also be written as:
+
+\begin{align} \label{h01}
+& \mu_1 =\frac{\mu_1+\mu_2+\mu_3}{3}\\
+\Leftrightarrow & \mu_1 - \frac{\mu_1+\mu_2+\mu_3}{3} = 0\\
+\Leftrightarrow & \frac{2}{3} \mu_1 - \frac{1}{3}\mu_2 - \frac{1}{3}\mu_3 = 0
+\end{align}
+
+\noindent
+This corresponds to estimating the quantity $\beta_1 = \frac{2}{3} \mu_1 - \frac{1}{3}\mu_2 - \frac{1}{3}\mu_3$.
+Here, the weights $2/3, -1/3, -1/3$ are informative about how to combine the condition means to estimate the linear model coefficient and to define the null hypothesis.
+
+$H_{0_2}$ is also rewritten as:
+
+\begin{align}\label{h02}
+&  \mu_2 = \frac{\mu_1+\mu_2+\mu_3}{3}\\
+\Leftrightarrow & \mu_2 - \frac{\mu_1+\mu_2+\mu_3}{3} = 0 \\
+\Leftrightarrow & -\frac{1}{3}\mu_1 + \frac{2}{3} \mu_2 - \frac{1}{3} \mu_3 = 0
+\end{align}
+
+\noindent
+This corresponds to estimating the quantity $\beta_2 = -\frac{1}{3}\mu_1 + \frac{2}{3} \mu_2 - \frac{1}{3} \mu_3$.
+Here, the weights are $-1/3, 2/3, -1/3$, and they again indicate how to combine the condition means for estimating the regression coefficient and for defining the null hypothesis.
+
+### The hypothesis matrix
+
+The weights of the condition means are not only useful to define parameter estimates and hypotheses. They also provide the starting step in a very powerful method which allows the researcher to generate the contrasts that are needed to test these hypotheses in a linear model. That is, what we did so far is to explain some kinds of different contrast codings that exist and what the hypotheses are that they test. That is, if a certain data-set is given and the goal is to estimate certain comparisons (and test certain hypotheses), then the procedure would be to check whether any of the contrasts that we encountered above happen to estimate these comparisons and test exactly the hypotheses of interest. Sometimes it suffices to use one of these existing contrasts. However, at other times, our research questions may not correspond exactly to any of the contrasts in the default set of standard contrasts provided in R. For these cases, or simply for more complex designs, it is very useful to know how contrast matrices are created. Indeed, a relatively simple procedure exists in which we write our comparisons or hypotheses formally, extract the weights of the condition means from the comparisons/hypotheses, and then automatically generate the correct contrast matrix that we need in order to estimate these comparisons or test these hypotheses in a linear model. Using this powerful method, it is not necessary to find a match to a contrast matrix provided by the family of functions in R starting with the prefix `contr`. Instead, it is possible to simply define the comparisons that one wants to estimate or the hypotheses that one wants to test, and to obtain the correct contrast matrix for these in an automatic procedure. Here, for pedagogical reasons, we show some examples of how to apply this procedure in cases where the comparisons/hypotheses *do* correspond to some of the existing contrasts.
+
+Defining a custom contrast matrix involves four steps:
+
+1. Write down the estimated comparisons or hypotheses
+2. Extract the weights and write them into what we will call a *hypothesis matrix*
+3. Apply the *generalized matrix inverse* to the hypothesis matrix to create the contrast matrix
+4. Assign the contrast matrix to the factor and run the linear (mixed) model
+
+Let us apply this four-step procedure to our example of the sum contrast. The first step, writing down the estimated parameters and hypotheses, is shown above. The second step involves writing down the weights that each comparison / hypothesis gives to condition means. The weights for the first comparison or null hypothesis are `wH01=c(+2/3, -1/3, -1/3)`, and the weights for the second comparison or null hypothesis are `wH02=c(-1/3, +2/3, -1/3)`.
+
+Before writing these into a hypothesis matrix, we also define the estimated quantity and the null hypothesis for the intercept term. The intercept parameter estimates the mean across all conditions:
+
+\begin{align}
+\beta_0 = \frac{\mu_1 + \mu_2 + \mu_3}{3} \\
+\beta_0 = \frac{1}{3} \mu_1 + \frac{1}{3}\mu_2 + \frac{1}{3}\mu_3
+\end{align}
+
+This corresponds to the null hypothesis that the mean across all conditions is zero:
+
+\begin{align}
+H_{0_0}: &\frac{\mu_1 + \mu_2 + \mu_3}{3} = 0 \\
+H_{0_0}: &\frac{1}{3} \mu_1 + \frac{1}{3}\mu_2 + \frac{1}{3}\mu_3 = 0
+\end{align}
+
+This estimate and null hypothesis has weights of $1/3$ for all condition means.
+The weights from all three model parameters / hypotheses that were defined are now combined and written into a matrix that we refer to as the *hypothesis matrix* (`Hc`):
+
+```{r, echo=TRUE}
+HcSum <- rbind(cH00=c(low= 1/3, med= 1/3, hi= 1/3), 
+               cH01=c(low=+2/3, med=-1/3, hi=-1/3), 
+               cH02=c(low=-1/3, med=+2/3, hi=-1/3))
+fractions(t(HcSum))
+```
+
+Each set of weights is first entered as a row into the matrix (command `rbind()`). This has mathematical reasons [see @schad2020capitalize]. However, we then switch rows and columns of the matrix for easier readability using the command `t()` (this transposes the matrix, i.e., switches rows and columns). The command `fractions()` turns the decimals into fractions to improve readability.
+
+Now that the condition weights have been written into the hypothesis matrix, the third step of the procedure is implemented: a matrix operation called the 'generalized matrix inverse'[^2a] is used to obtain the contrast matrix that is needed to test these hypotheses in a linear model.
+In R this next step is done using the function `ginv()` from the `MASS` package. Here, we  define a function `ginv2()` for nicer formatting of the output.[^2b]
+
+```{r, echo=TRUE}
+ginv2 <- function(x) # define a function to make the output nicer
+  fractions(provideDimnames(ginv(x),base=dimnames(x)[2:1]))
+```
+
+[^2a]: At this point, there is no need to understand in detail what this means. We refer the interested reader to @schad2020capitalize. For a quick overview, we recommend a vignette explaining the generalized inverse in the [matlib package](https://cran.r-project.org/web/packages/matlib/vignettes/ginv.html) [@friendly_matlib].
+
+[^2b]: The function \texttt{fractions()} from the \texttt{MASS} package is used to make the output more easily readable, and the function \texttt{provideDimnames()} is used to keep row and column names.
+
+Applying the generalized inverse to the hypothesis matrix results in the new matrix `XcSum`. This is the contrast matrix $X_c$ that estimates exactly those comparisons and tests exactly those hypotheses that were specified earlier:
+
+```{r, echo=TRUE}
+(XcSum <- ginv2(HcSum))
+```
+
+This contrast matrix corresponds exactly to the sum contrasts described above. In the case of the sum contrast, the contrast matrix looks very different from the hypothesis matrix. The contrast matrix in sum contrasts codes with $+1$ the condition that is to be compared to the GM. The condition that is never compared to the GM is coded as $-1$. Unless we know the relationship between the hypothesis matrix and the contrast matrix, the meaning of the coefficients is completely opaque.
+
+To verify this custom-made contrast matrix, it is compared to the sum contrast matrix as generated by the R function `contr.sum()` in the `stats` package. The resulting contrast matrix is identical to the result when adding the intercept term, a column of ones, to the contrast matrix:
+
+```{r, echo=TRUE}
+fractions(cbind(1,contr.sum(3)))
+```
+
+In order to estimate model parameters, step four in our procedure involves assigning sum contrasts to the factor `F` in our example data, and running a linear (mixed) model. This allows us to estimate the regression coefficients associated with each contrast. We compare these to the data shown above (Table\ \@ref(tab:cTab2Means)) to test whether the regression coefficients actually correspond to the differences of condition means, as intended. To define the contrast, it is necessary to remove the intercept term, as this is automatically added by the linear model function `lm()`.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
+contrasts(df_contrasts2$F) <- XcSum[,2:3]
+fit_Sum <- lm(DV ~ 1 + F,
+                 data = df_contrasts2) 
+```
+```{r, echo=TRUE}
+round(summary(fit_Sum)$coefficients,1)
+```
+
+The linear model regression coefficients show the GM response time of $450$ ms in the intercept. Remember that the first regression coefficient `FcH01` was designed to estimate in how far nouns are responded to slower than the GM. The regression coefficient `FcH01` ('Estimate') of $50$ reflects the difference between nouns ($500$ ms) and the GM of $450$ ms. The estimate of interest was in how response times for verbs differ from the GM. The fact that the second regression coefficient `FcH02` is close to $0$ indicates that response times for verbs ($450$ ms) are the same as the GM of $450$ ms. While the nouns are estimated to have $50$ ms longer reading times than the GM, the difference in reading times between verbs and GM is estimated to be $0$.
+
+We have now not only derived contrasts, parameter estimates, and hypotheses for the sum contrast, we have also used a powerful and highly general procedure that is used to generate contrasts for many kinds of different hypotheses and experimental designs. 
+
+### Generating contrasts: The `hypr` package
+
+To work with the 4-step procedure, i.e., to flexibly design contrasts to estimate specific comparisons, we have developed the R package `hypr` [@rabe2020hypr]. This package allows the user to specify comparisons as null hypotheses, and based on these null hypotheses, it automatically generates contrast matrices that allow the user to estimate these comparisons and test these hypotheses in linear models. It thus considerably simplifies the implementation of the 4-step procedure outlined above.
+
+To illustrate the functionality of the `hypr` package, we will use the two comparisons and associated null hypotheses that we had defined and analyzed in the previous section:
+
+\begin{equation}
+\beta_1 = \mu_1 - \frac{\mu_1+\mu_2+\mu_3}{3} = \mu_1 - GM
+\end{equation}
+
+\begin{equation}
+H_{0_1}: \mu_1 = \frac{\mu_1+\mu_2+\mu_3}{3} = GM
+\end{equation}
+
+\noindent
+and
+
+\begin{equation}
+\beta_2 = \mu_2 - \frac{\mu_1+\mu_2+\mu_3}{3} = \mu_2 - GM
+\end{equation}
+
+\begin{equation}
+H_{0_2}: \mu_2 = \frac{\mu_1+\mu_2+\mu_3}{3} = GM
+\end{equation}
+
+These null hypotheses are effectively comparisons between condition means or between bundles of condition means. That is, $\mu_1$ is compared to the GM and $\mu_2$ is compared to the grand mean. These two comparisons/hypotheses can be directly entered into R using the `hypr()` function from the `hypr` package. 
+To do so, we use some labels to indicate factor levels. E.g., `nouns`, `verbs`, and `adjectives` can represent factor levels $\mu_1$, $\mu_2$, and $\mu_3$. The first comparison/hypothesis specifies that $\mu_1 = \frac{\mu_1+\mu_2+\mu_3}{3}$. This can be written as a formula in R: `low ~ (low + medium + high)/3`. The second comparison/hypothesis is that $\mu_2 = \frac{\mu_1+\mu_2+\mu_3}{3}$, which can be written in R as `medium ~ (low + medium + high)/3`.
+
+```{r loadHypr}
+HcSum <- hypr(b1 = nouns ~ (nouns + verbs + adjectives)/3, 
+              b2 = verbs ~ (nouns + verbs + adjectives)/3, 
+              levels=c("nouns","verbs","adjectives"))
+HcSum
+```
+
+The results show that the null hypotheses or comparisons between condition means have been re-written into a form, where $0$ is coded on the left side of the equation, and the condition means together with associated weights are written on the right side of the equation. This presentation makes it easy to see the weights of the condition means to code a certain null hypothesis or comparison. The next part of the results shows the hypothesis matrix, which contains the weights from the condition means. Thus, `hypr` takes as input comparisons between condition means, which also define null hypotheses, and automatically extracts the corresponding weights and encodes them into the hypothesis matrix. `hypr` moreover applies the generalized matrix inverse to obtain the contrast matrix from the hypothesis matrix. Note that the different steps correspond exactly to the steps we had carried out manually in the preceeding section. `hypr` automatically performs these steps for us. We can now extract the contrast matrix by a simple function call:
+
+```{r}
+contr.hypothesis(HcSum)
+```
+
+We can assign this contrast to our factor as we did before, and again fit a linear model:
+
+```{r, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
+contrasts(df_contrasts2$F) <- contr.hypothesis(HcSum)
+fit_Sum2 <- lm(DV ~ 1 + F,
+                 data = df_contrasts2) 
+```
+```{r, echo=TRUE}
+round(summary(fit_Sum2)$coefficients,1)
+```
+
+In the `hypr`,  the focus lies on estimation of contrasts that code comparisons between condition means or groups of condition means. Thus, the null hypotheses that one specifies implicitly imply the estimation of a difference between condition means or bundles of condition means. The output of the `hypr()` function (see the first section of the results) makes this clear - these formulate the null hypotheses in a way that also illustrates the estimation of model parameters. I.e., the null hypothesis `H0.b1: 0 = 2/3*m1 - 1/3*m2 - 1/3*m3` corresponds to a parameter estimate of `b1 = 2/3*m1 - 1/3*m2 - 1/3*m3`. The resulting contrasts will then allow us to estimate the specified differences between condition means or bundles of condition means.
+
+## Further examples of contrasts illustrated with a factor with four levels {#sec:4levelFactor}
+
+In order to understand repeated difference and polynomial contrasts, it may be instructive to consider an experiment with one between-subject factor with four levels. 
+We load a corresponding data set, which contains simulated data about response times with a four-level between-subject factor.
+The sample sizes for each level and the means and standard errors are shown in Table\ \@ref(tab:cTab3Means), and the means and standard errors are also shown graphically in Figure \@ref(fig:helmertsimdatFig).
+
+```{r, echo=FALSE, message=FALSE}
+data("df_contrasts3") 
+table3 <- df_contrasts3 %>% group_by(F) %>% 
+   summarize(N=length(DV), M=mean(DV), SD=sd(DV), SE=SD/sqrt(N) )
+(GM <-  mean(table3$M)) # Grand Mean
+table3a <- as.data.frame(table3)
+names(table3a) <- c("Factor","N data","Est. means","Std. dev.","Std. errors")
+```
+
+```{r helmertsimdatFig, fig=TRUE, include=TRUE, echo=FALSE, cache=FALSE, fig.width=4.7, fig.height=3.4, fig.cap = "Means and error bars (showing standard errors) for a simulated data-set with one between-subjects factor with four levels."}
+(plot2 <- qplot(x=F, y=M, group=1, data=table3, geom=c("point", "line")) + 
+	 geom_errorbar(aes(max=M+SE, min=M-SE), width=0) + 
+   #scale_y_continuous(breaks=c(250,275,300)) + 
+   labs(y="Mean DV", x="Factor F") +
+   theme_bw())
+```
+
+```{r cTab3Means, results = "asis"}
+kbl(table3a, position="b", digits=1, 
+    caption="Summary statistics per condition for the simulated data.")
+```
+
+We assume that the four factor levels `F1` to `F4` reflect levels of word frequency, including the levels `low`, `medium-low`, `medium-high`, and `high` frequency words, and that the dependent variable reflects some response time.[^41]
+
+[^41]: Qualitatively, the simulated pattern of results is quite similar to the empirically observed values for word frequency effects on single fixation durations [@heister2012analysing].
+
+### Repeated contrasts {#repeatedcontrasts}
+
+A popular contrast psychologists and psycholinguists are interested in is the comparison between neighboring levels of a factor. This type of contrast is called repeated contrast. In our example, our research question might be whether the frequency level \texttt{low} leads to slower response times than frequency level \texttt{medium-low}, whether frequency level \texttt{medium-low} leads to slower response times than frequency level \texttt{medium-high}, and whether frequency level \texttt{medium-high} leads to slower response times than frequency level \texttt{high}.
+
+Repeated contrasts are used to implement these comparisons. Consider first how to derive the contrast matrix for repeated contrasts, starting out by specifying the hypotheses that are to be tested about the data. Importantly, this again applies the general strategy of how to translate (any) hypotheses about differences between groups or conditions into a set of contrasts, yielding a powerful tool of great value in many research settings. We follow the four-step procedure outlined above.
+
+The first step is to specify our comparisons or hypotheses, and to write them down in a way such that their weights can be extracted easily. For a four-level factor, the three hypotheses are:
+
+\begin{equation}
+H_{0_{2-1}}: -1 \cdot \mu_1 + 1 \cdot \mu_2 + 0 \cdot \mu_3 + 0 \cdot \mu_4 = 0
+\end{equation}
+
+\begin{equation}
+H_{0_{3-2}}: 0 \cdot \mu_1 - 1 \cdot \mu_2 + 1 \cdot \mu_3 + 0 \cdot \mu_4 = 0
+\end{equation}
+
+\begin{equation}
+H_{0_{4-3}}: 0 \cdot \mu_1 + 0 \cdot \mu_2 - 1 \cdot \mu_3 + 1 \cdot \mu_4 = 0
+\end{equation}
+
+Here, the $\mu_x$ are the mean response times in condition $x$. Each hypothesis gives weights to the different condition means. The first hypothesis ($H_{0_{2-1}}$) tests the difference between condition mean for `F2` ($\mu_2$) minus the condition mean for `F1` ($\mu_1$), but ignores condition means for `F3` and `F4` ($\mu_3$, $\mu_4$). $\mu_1$ has a weight of $-1$, $\mu_2$ has a weight of $+1$, and $\mu_3$ and $\mu_4$ have weights of $0$. As the second step, the vector of weights for the first hypothesis is extracted as `c2vs1 <- c(F1=-1,F2=+1,F3=0,F4=0)`. Next, the same thing is done for the other hypotheses - the weights for all hypotheses are extracted and coded into a _hypothesis matrix_ in R:
+
+```{r, echo=TRUE}
+t(HcRE <- rbind(c2vs1=c(F1=-1,F2=+1,F3= 0,F4= 0),
+                c3vs2=c(F1= 0,F2=-1,F3=+1,F4= 0),
+                c4vs3=c(F1= 0,F2= 0,F3=-1,F4=+1)))
+```
+
+Again, we show the transposed version of the hypothesis matrix (switching rows and columns), but now we leave out the hypothesis for the intercept (below, we discuss when this can be ignored).
+
+Next, the new contrast matrix `XcRE` is obtained. This is the contrast matrix $X_c$ that exactly tests the hypotheses written down above:
+
+```{r, echo=TRUE}
+(XcRE <- ginv2(HcRE))
+```
+
+In the case of the repeated contrast, the contrast matrix again looks very different from the hypothesis matrix. In this case, the contrast matrix looks a lot less intuitive than the hypothesis matrix, and if one did not know the associated hypothesis matrix, it seems unclear what the contrast matrix would actually test. To verify this custom-made contrast matrix, we compare it to the repeated contrast matrix as generated by the R function `contr.sdif()` in the \texttt{MASS} package [@R-MASS]. The resulting contrast matrix is identical to our result:
+
+```{r, echo=TRUE}
+fractions(contr.sdif(4))
+```
+
+Step four in the procedure is to apply repeated contrasts to the factor `F` in the example data, and to run a linear model. This allows us to estimate the regression coefficients associated with each contrast. These are compared to the data in Figure\ \@ref(fig:helmertsimdatFig) to test whether the regression coefficients actually correspond to the differences between successive condition means, as intended.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
+contrasts(df_contrasts3$F) <- XcRE
+fit_Rep <- lm(DV ~ 1 + F,
+                 data = df_contrasts3) 
+```
+```{r, echo=TRUE}
+round(summary(fit_Rep)$coefficients,1)
+```
+
+The results show that, as expected, the regression coefficients reflect the differences that were of interest: the regression coefficient ('Estimate') `Fc2vs1` has a value of $10$, which exactly corresponds to the difference between the condition mean for `F2` ($20$) minus the condition mean for `F1` ($10$), i.e., $20 - 10 = 10$. Likewise, the regression coefficient `Fc3vs2` has a value of $-10$, which corresponds to the difference between the condition mean for `F3` ($10$) minus the condition mean for `F2` ($20$), i.e., $10 - 20 = -10$. Finally, the regression coefficient `Fc4vs3` has a value of roughly $30$, which reflects the difference between condition `F4` ($40$) minus condition `F3` ($10$), i.e., $40 - 10 = 30$. Thus, the regression coefficients estimate differences between successive or neighboring condition means, and test the corresponding null hypotheses.
+
+Again, we can perform the same computations automatically using the `hypr` package. For reasons of brevity, we here only show the relevant `hypr` command: `hypr(b1=F1~F2, b2=F2~F3, b3=F3~F4)`, and leave it to the reader to investigate this more closely.
+
+<!--To sum up, formally writing down the hypotheses, extracting the weights into a hypothesis matrix, and applying the generalized matrix inverse operation yields a set of contrast coefficients that provide the desired estimates. This procedure is very general: it allows us to derive the contrast matrix corresponding to any set of linear hypotheses that one may want to test. The four-step procedure described above allows us to construct contrast matrices that are among the standard set of contrasts in R (repeated contrasts or sum contrasts, etc.), and also allows us to construct non-standard custom contrasts that are specifically tailored to the particular hypotheses one wants to test. The hypothesis matrix and the contrast matrix are linked by the generalized inverse; understanding this link is the key ingredient to understanding contrasts in diverse settings.-->
+
+### Contrasts in linear regression analysis: The design or model matrix
+
+We have now discussed how different contrasts are created from the hypothesis matrix. However, we have not treated in detail how exactly contrasts are used in a linear model. Here, we will see that the contrasts for a factor in a linear model are just the same thing as continuous numeric predictors (i.e., covariates) in a linear/multiple regression analysis. That is, contrasts are the way to encode discrete factor levels into numeric predictor variables to use in linear/multiple regression analysis, by encoding which differences between factor levels are tested.
+The contrast matrix $X_c$ that we have looked at so far has one entry (row) for each experimental condition. For use in a linear model, however, the contrast matrix is coded into a design or model matrix $X$, where each individual data point has one row. The design matrix $X$ can be extracted using the function `model.matrix()`:
+
+```{r, echo=TRUE}
+(contrasts(df_contrasts3$F) <- XcRE) # contrast matrix
+covars <- model.matrix(~ 1 + F, df_contrasts3) # design matrix
+(covars <- as.data.frame(covars))
+```
+
+For each of the $20$ subjects, four numbers are stored in this model matrix. They represent the three values of three predictor variables used to predict response times in the task. Indeed, this matrix is exactly the design matrix $X$ commonly used in multiple regression analysis, where each column represents one numeric predictor variable (covariate), and the first column codes the intercept term.
+
+To further illustrate this, the covariates are extracted from this design matrix and stored separately as numeric predictor variables in the data-frame:
+
+```{r, echo=TRUE}
+df_contrasts3[,c("Fc2vs1","Fc3vs2","Fc4vs3")] <- covars[,2:4]
+```
+
+They are now used as numeric predictor variables in a multiple regression analysis:
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
+fit_m3 <- lm(DV ~ 1 + Fc2vs1 + Fc3vs2 + Fc4vs3,
+                 data = df_contrasts3) 
+```
+```{r, echo=TRUE}
+round(summary(fit_m3)$coefficients,1)
+```
+
+The results show that the regression coefficients are the same as in the contrast-based analysis shown in the previous section. This demonstrates that contrasts serve to code discrete factor levels into a linear/multiple regression analysis by numerically encoding comparisons between specific condition means.
+
+### Polynomial contrasts {#polynomialContrasts}
+
+Polynomial contrasts are another option for analyzing factors. Suppose that we expect a linear trend across conditions, where the response increases by a constant magnitude with each successive factor level. This could be the expectation when four levels of a factor reflect decreasing levels of word frequency (i.e., four factor levels: high, medium-high, medium-low, and low word frequency), where one expects the lowest response for high frequency words, and successively higher responses for lower word frequencies. The effect for each individual level of a factor may not be strong enough for detecting it in the statistical model. Specifying a linear trend in a polynomial constrast allows us to pool the whole increase into a single coefficient for the linear trend, increasing statistical power to detect the increase. Such a specification constrains the estimate to one interpretable parameter, e.g., a linear increase across factor levels. The larger the number of factor levels, the more parsimonious are polynomial contrasts compared to contrast-based specifications as introduced in the previous sections. Going beyond a linear trend, one may also have expectations about quadratic trends. For example, one may expect an increase only among very low frequency words, but no difference between high and medium-high frequency words.
+
+```{r, echo=TRUE}
+Xpol <- contr.poly(4)
+(contrasts(df_contrasts3$F) <- Xpol)
+```
+```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
+fit_Pol <- lm(DV ~ 1 + F,
+                 data = df_contrasts3) 
+```
+```{r, echo=TRUE}
+round(summary(fit_Pol)$coefficients,1)
+```
+
+In this example, condition means increase across factor levels in a linear fashion, but there may also be quadratic and cubic trends.
+
+
+## What makes a good set of contrasts? {#nonOrthogonal}
+
+<!--Contrasts decompose ANOVA omnibus F tests into several component comparisons [@Baguley2012]. Orthogonal contrasts decompose the sum of squares of the F test into additive independent subcomponents, which allows for clarity in interpreting each effect.-->
+For a factor with $I$ levels one can make $I-1$ comparisons. For example, in a design with one factor with two levels, only one comparison is possible (between the two factor levels). More generally, if we have a factor with $I_1$ and another factor with $I_2$ levels, then the total number of conditions is $I_1\times I_2 = \nu$ (not $I_1 + I_2$!), which implies a maximum of $\nu-1$  contrasts.
+
+For example, in a design with one factor with three levels, A, B, and C, in principle one could make three comparisons (A vs. B, A vs. C, B vs. C).
+However, after defining an intercept, only two means can be compared. Therefore, for a factor with three levels, we define two comparisons within one statistical model. 
+F tests are nothing but combinations, or bundles of contrasts. F tests are less specific and they lack focus, but they are useful when the hypothesis in question is vague. However, a significant F test leaves unclear what effects the data actually show. Contrasts are very useful to test specific effects in the data.  
+
+One critical precondition for contrasts is that they implement different hypotheses that are not collinear, that is, that none of the contrasts can be generated from the other contrasts by linear combination. For example, the contrast `c1 = c(1,2,3)` can be generated from the contrast `c2 = c(3,4,5)` simply by computing `c2 - 2`. Therefore, contrasts c1 and c2 cannot be used simultaneously. That is, each contrast needs to encode some independent information about the data.
+
+There are (at least) two criteria to decide what a good contrast is. First, \textit{orthogonal contrasts} have advantages as they test mutually independent hypotheses about the data [see @dobson2011introduction, section 6.2.5, p. 91 for a detailed explanation of orthogonality]. Second, it is crucial that contrasts are defined in a way such that they answer the research questions. This second point is crucial. One way to accomplish this, is to use the hypothesis matrix to generate contrasts (e.g., via the `hypr` package), as this ensures that one uses contrasts that exactly estimate the comparisons of interest in a given study.
+
+### Centered contrasts
+
+Contrasts are often constrained to be centered, such that the individual contrast coefficients $c_i$ for different factor levels $i$ sum to $0$: $\sum_{i=1}^I c_i = 0$. This has advantages when testing interactions with other factors or covariates (we discuss interactions between factors in a separate chapter below).
+All contrasts discussed here are centered except for the treatment contrast, in which the contrast coefficients for each contrast do not sum to zero:
+
+```{r, echo=TRUE}
+colSums(contr.treatment(4))
+```
+
+Other contrasts, such as repeated contrasts, are centered and the contrast coefficients for each contrast sum to $0$:
+
+```{r, echo=TRUE}
+colSums(contr.sdif(4))
+```
+
+The contrast coefficients mentioned above appear in the contrast matrix. By contrast, the weights in the hypothesis matrix are always centered. This is also true for the treatment contrast. The reason is that they code hypotheses, which always relate to comparisons between conditions or bundles of conditions. 
+The only exception are the weights for the intercept, which are all the same and together always sum to $1$ in the hypothesis matrix. This is done to ensure that when applying the generalized matrix inverse, the intercept results in a constant term with values of $1$ in the contrast matrix.
+An important question concerns whether (or when) the intercept needs to be considered in the generalized matrix inversion, and whether (or when) it can be ignored. This question is closely related to the concept of orthogonal contrasts, a concept we turn to below.
+
+### Orthogonal contrasts
+
+Two centered contrasts $c_1$ and $c_2$ are orthogonal to each other if the following condition applies. Here, $i$ is the $i$-th cell of the vector representing the contrast.
+
+\begin{equation}
+\sum_{i=1}^I c_{1,i} \cdot c_{2,i} = 0
+\end{equation}
+
+Orthogonality can be determined easily in R by computing the correlation between two contrasts. Orthogonal contrasts have a correlation of $0$. Contrasts are therefore just a special case for the general case of predictors in regression models, where two numeric predictor variables are orthogonal if they are un-correlated. 
+
+For example, coding two factors in a $2 \times 2$ design (we return to this case in a section on designs with two factors below) using sum contrasts, these sum contrasts and their interaction are orthogonal to each other:
+
+```{r, echo=TRUE}
+(Xsum <- cbind(F1=c(1,1,-1,-1), F2=c(1,-1,1,-1), F1xF2=c(1,-1,-1,1)))
+cor(Xsum)
+```
+
+\noindent
+Notice that the correlations between the different contrasts (i.e., the off-diagonals) are exactly $0$. Sum contrasts coding one multi-level factor, however, are not orthogonal to each other:
+
+```{r, echo=TRUE}
+cor(contr.sum(4))
+```
+
+\noindent
+Here, the correlations between individual contrasts, which appear in the off-diagonals, deviate from $0$, indicating non-orthogonality. The same is also true for treatment and repeated contrasts:
+
+```{r, echo=TRUE}
+cor(contr.sdif(4))
+cor(contr.treatment(4))
+```
+
+Orthogonality of contrasts plays a critical role when computing the generalized inverse. In the inversion operation, orthogonal contrasts are converted independently from each other. That is, the presence or absence of another orthogonal contrast does not change the resulting weights. In fact, for orthogonal contrasts, applying the generalized matrix inverse to the hypothesis matrix simply produces a scaled version of the hypothesis matrix into the contrast matrix (for mathematical details, see @schad2020capitalize). 
+
+### The role of the intercept in non-centered contrasts
+
+A related question concerns whether the intercept needs to be considered when computing the generalized inverse for a contrast. It turns out that considering the intercept is necessary for contrasts that are not centered. This is the case for treatment contrasts which are not centered; e.g., the treatment contrast for two factor levels `c1vs0 = c(0,1)`: $\sum_i c_i = 0 + 1 = 1$. One can actually show that the formula to determine whether contrasts are centered (i.e., $\sum_i c_i = 0$) is the same formula as the formula to test whether a contrast is "orthogonal to the intercept". Remember that for the intercept, all contrast coefficients are equal to one: $c_{1,i} = 1$ (here, $c_{1,i}$ indicates the vector of contrast coefficients associated with the intercept). We enter these contrast coefficient values into the formula testing whether a contrast is orthogonal to the intercept (here, $c_{2,i}$ indicates the vector of contrast coefficients associated with some contrast for which we want to test whether it is "orthogonal to the intercept"): $\sum_i c_{1,i} \cdot c_{2,i} = \sum_i 1 \cdot c_{2,i} = \sum_i c_{2,i} = 0$. The resulting formula is: $\sum_i c_{2,i} = 0$, which is exactly the formula for whether a contrast is centered. Because of this analogy, treatment contrasts can be viewed to be `not orthogonal to the intercept'. This means that the intercept needs to be considered when computing the generalized inverse for treatment contrasts. As we have discussed above, when the intercept is included in the hypothesis matrix, the weights for this intercept term should sum to one, as this yields a column of ones for the intercept term in the contrast matrix.
+
+We can see that considering the intercept makes a difference for the treatment contrast. First, we define the comparisons involved in a treatment contrast, where two experimental conditions `m1` and `m2` are each compared to a baseline condition `m0` (`m0~m1` and `m0~m2`). In addition, we explicitly code the intercept term, which involves a comparison of the baseline to 0 (`m0~0`). We take a look at the resulting contrast matrix:
+
+```{r}
+hypr(int=m0~0, b1=m1~m0, b2=m2~m0)
+contr.treatment(c("m0","m1","m2"))
+```
+
+This shows a contrast matrix that we know from the treatment contrast. The intercept is coded as a column of 1s. And each of the comparisons is coded as a 1 in the condition which is compared to the baseline, and a 0 in other conditions. The point is here that this gives us the contrast matrix that is expected and known for the treatment contrast.
+
+However, we can also ignore the intercept in the specification of the hypotheses:
+
+```{r}
+hypr(b1=m1~m0, b2=m2~m0)
+```
+
+Interestingly, the resulting contrast matrix now looks very different from the contrast matrix that we know from the treatment contrast. Indeed, this contrast also estimates a reasonable set of quantities. It again estimates how strongly condition mean `m1` differs from the baseline and how `m2` differs from baseline. The intercept, however, now estimates the average dependent variable across all three conditions (i.e., the GM). This can be seen by explicitly adding a comparison of the average of all three conditions to 0:
+
+```{r}
+hypr(int=(m0+m1+m2)/3~0, b1=m1~m0, b2=m2~m0)
+```
+
+The resulting contrast matrix is now the same as when the intercept was ignored, which confirms that these both test the same hypotheses.
+
+
+## Summary
+
+To summarize, contrasts provide a way to tell the linear (mixed-effects) model how to code factors into numeric covariates. That is, they provide a way to define which comparisons between which condition means or bundles of condition means should be estimated in the Bayesian model. There are a number of default contrasts, like treatment contrasts, sum contrasts, repeated contrasts, or Helmert contrasts, that are known to test specific hypotheses about the data. A much more powerful procedure is to use the generalized matrix inverse, e.g., as implemented in the `hypr` package, to derive contrasts automatically after specifying the comparisons that a contrast should estimate. 
