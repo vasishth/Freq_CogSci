@@ -295,7 +295,7 @@ names(table.word1) <- c("Factor","N data",
                         "Est. means","Std. dev.","Std. errors")
 ```
 
-```{r cTab2Means, results = "asis"}
+```{r cTab2Means, echo=FALSE, results = "asis"}
 kbl(table.word1, position="b", digits=1, 
     caption="Summary statistics per condition for the simulated data.")
 ```
