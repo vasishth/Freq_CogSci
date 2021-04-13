@@ -1,5 +1,5 @@
 --- 
-title: "Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)"
+title: "Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction"
 author: "Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl"
 date: "`r Sys.Date()`"
 knit: "bookdown::render_book"
@@ -24,7 +24,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 opts_chunk$set(tidy.opts=list(width.cutoff=50),
-               tidy=TRUE)
+               tidy=FALSE)
 
 options(
   htmltools.dir.version = FALSE, formatR.indent = 2,
@@ -79,8 +79,8 @@ The entire book, including all data and source code, is available online from [h
 Before you start, please install
 
   - [R](https://cran.r-project.org/) (and [RStudio](https://www.rstudio.com/) or any other IDE)
-  - The R packages `MASS`, `dplyr`, `purrr`, `readr`, `extraDistr`, `ggplot2`, `bivariate`,`intoo`,`barsurf`, `SIN`:
-    - They can be installed in the usual way: `install.packages(c("MASS", "dplyr", "purrr", "readr", "extraDistr", "ggplot2","bivariate","intoo","barsurf","SIN"))`. 
+  - The R packages `MASS`, `dplyr`, `purrr`, `readr`, `extraDistr`, `ggplot2`, `bivariate`,`intoo`,`barsurf`, `SIN`, :`kableExtra`, `tidyverse`,`hypr`,`designr`:
+    - These can be installed in the usual way: `install.packages(c("MASS", "dplyr", "purrr", "readr", "extraDistr", "ggplot2","bivariate","intoo","barsurf","SIN","kableExtra","tidyverse","hypr","designr"))`. 
 
 In every R session, we'll need to set a seed (this ensures that the random numbers are always the same). 
 
@@ -97,6 +97,10 @@ library (intoo)
 library (barsurf)
 library (bivariate)
 library(SIN)
+library(kableExtra)
+library(tidyverse)
+library(hypr)
+library(designr)
 ```
 
 
