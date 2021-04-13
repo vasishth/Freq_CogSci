@@ -598,6 +598,8 @@ The correlation now is effectively zero. This is one of the consequences of cent
 We can compare two models, one nested inside another, as follows:
 
 ```{r}
+m1<-lm(y~x_c)
+m0<-lm(y~1)
 anova(m0,m1)
 ```
 
@@ -623,6 +625,7 @@ The square of this is:
 e^T e = (Y - X\hat \beta)^T (Y - X\hat \beta)
 \end{equation}
 
+
 Define the **deviance** as: 
 
 \begin{equation}
@@ -636,7 +639,8 @@ D =& \frac{1}{\sigma^2} (Y - X\hat \beta)^T (Y - X\hat \beta)\\
 
 Now, recall that $\hat \beta = (X^T X)^{-1} X^T Y$. Premultiplying both sides with $(X^T X)$, we get
 
-$$(X^T X)\hat \beta =  X^T Y$$
+
+$(X^T X)\hat \beta =  X^T Y$
 
 It follows that we can rewrite the last line in equation~\ref{eq:deviance} as follows: We can replace $(X^T X)\hat \beta$ with 
 $X^T Y$.
@@ -651,7 +655,7 @@ D =& \frac{1}{\sigma^2} (Y^T Y - Y^TX\hat \beta - \hat\beta^TX^T Y + \hat\beta^T
 
 Notice that $Y^TX\hat \beta$ is a scalar ($1\times 1$) and is identical to  $\beta^TX^T Y$ (check this), so we could write:
 
-$$D= \frac{1}{\sigma^2} (Y^T Y - \hat \beta^T X^T Y)$$
+$D= \frac{1}{\sigma^2} (Y^T Y - \hat \beta^T X^T Y)$
 
 Assume now that we have data of size n.
 Suppose we have a null hypothesis $H_0: \beta=\beta_0$ and an alternative hypothesis $H_1: \beta=\beta_{1}$. Let the null hypothesis have q parameters, and the alternative p, where $q<p<n$.
@@ -702,7 +706,8 @@ Total & n & $y^T y$ & \\
 \end{tabular}
 \end{center}
 \label{default}
-\end{table}%
+\end{table}
+
 
 ### The variance inflation factor: Checking for multicollinearity
 
@@ -751,6 +756,7 @@ vif(lm(RT~FreqSingular+FreqPlural,lexdec))
 ```
 
 If the predictors are uncorrelated, VIF will be near 1 in each case. Dobson et al mention that VIF of greater than 5 is cause for worry. 
+
 
 ### Checking model assumptions
 
@@ -828,42 +834,42 @@ plot(m)
 
 ### Generalized linear models
 
-\subsection{Introduction: Logistic regression}
+#### Introduction: Logistic regression
 
 We start with an example data-set that appears in the Dobson et al book: the Beetle dataset.
 
 This data-set shows the number of beetles killed when they were exposed to different doses of some toxic chemical. 
 
-<<>>=
-(beetle<-read.table("datacode/beetle.txt",header=TRUE))
-@
+```{r}
+(beetle<-read.table("data/beetle.txt",header=TRUE))
+```
 
 The research question is: does dose affect probability of killing insects? The first thing we probably want to do is calculate the proportions:
 
-<<>>=
+```{r}
 (beetle$propn.dead<-beetle$killed/beetle$number)
-@
+```
 
 It's also reasonable to just plot the relationship between dose and proportion of deaths.
 
-<<>>=
+```{r}
 with(beetle,plot(dose,propn.dead))
-@
+```
 
 Notice that the y-axis is by definition bounded between 0 and 1.
 
 We could easily fit a linear model to this data-set. We may want to center the predictor, for reasons discussed earlier:
 
-<<>>=
+```{r}
 fm<-lm(propn.dead~scale(dose,scale=FALSE),beetle)
 summary(fm)
-@
+```
 
-<<>>=
+```{r}
 with(beetle,plot(scale(dose,scale=FALSE),
                  propn.dead))
 abline(coef(fm))
-@
+```
 
 What's the interpretation of the coefficients?
 
@@ -906,71 +912,72 @@ So now we just solve for p, and get (check this):
 p = \frac{\exp( \beta_0 + \beta_1 \hbox{dose})}{1+\exp( \beta_0 + \beta_1 \hbox{dose})}
 \end{equation}
 
-We fit the model in R as follows. Note that as long as I am willing to avoid interpreting the intercept and just interpret the estimate of $\beta_1$, there is no need to center the predictor here:
+We fit the model in R as follows. Note that as long as we are willing to avoid interpreting the intercept and just interpret the estimate of $\beta_1$, there is no need to center the predictor here:
 
-<<>>=
+```{r}
 fm1<-glm(propn.dead~dose,
          binomial(logit),
          weights=number,
          data=beetle)
 summary(fm1)
-@
+```
 
 We can also plot the observed proportions and the fitted values together; the fit looks pretty good.
 
-<<propndeadplot,fig.width=6>>=
+```{r propndeadplot,fig.width=6}
 plot(propn.dead~dose,beetle)
 points(fm1$fitted~dose,beetle,pch=4)
-@
+```
 
 We can now compute the log odds of death for concentration 1.7552 (for example):
 
-<<>>=
+```{r}
 ## compute log odds of death for 
 ## concentration 1.7552:
 x<-as.matrix(c(1, 1.7552))
 #log odds:
 (log.odds<-t(x)%*%coef(fm1))
-@
+```
 
 We can also obtain the variance-covariance matrix of the fitted coefficients:
 
-<<>>=
+```{r}
 ### compute CI for log odds:
 ## Get vcov matrix:
 (vcovmat<-vcov(fm1))
 ## x^T VCOV x for dose 1.7552:
 (var.log.odds<-t(x)%*%vcovmat%*%x)
-@
+```
 
-And using a normal approximation, based on the asymptotic properties discussed in section~\ref{asymptotic}, we can compute the confidence interval for the %probability
-log odds
+And using a normal approximation, based on the asymptotic properties discussed in section~\ref{asymptotic}, we can compute the confidence interval for the log odds
 of death given dose 1.7552:
 
-<<>>=
+```{r}
 ##lower
 (lower<-log.odds-1.96*sqrt(var.log.odds))
 ##upper
 (upper<-log.odds+1.96*sqrt(var.log.odds))
-@
+```
 
 The lower and upper confidence interval bounds on the 
 probability scale can be computed by 
 using equation~\ref{problogisticregression}.
 
-<<>>=
-(mean_prob<-exp(log.odds)/(1+exp(log.odds)))
-(lower_prob<-exp(lower)/(1+exp(lower)))
-(upper_prob<-exp(upper)/(1+exp(upper)))
-@
 
-So for dose 1.7552, the probability of death is \Sexpr{round(mean_prob,2)},
-with 95\% confidence intervals \Sexpr{round(lower_prob,2)} and 
-\Sexpr{round(upper_prob,2)}.
+```{r}
+(meanprob<-exp(log.odds)/(1+exp(log.odds)))
+(lowerprob<-exp(lower)/(1+exp(lower)))
+(upperprob<-exp(upper)/(1+exp(upper)))
+```
+
+So for dose 1.7552, the probability of death is 0.36,
+with 95% confidence intervals 0.30 and 
+0.43.
+
 
 Note that one should not try to predict outside the range of the design matrix. For example, in the beetle data, the dose ranges from 1.69 to 1.88. We should not try to compute probabilities for dose 2.5, say, since we have no knowledge about whether the relationship remains unchanged beyond the upper bound of our design matrix.
 
-\subsection{Multiple logistic regression: Example from Hindi data}
+#### Multiple logistic regression: Example from Hindi data}
 
 In the Hindi data, we can compute skipping probability, the probability of skipping a word entirely (i.e., never fixating it). We first have to create a vector that has value 1 if the word has 0~ms total reading time, and 0 otherwise. 
 
@@ -988,239 +995,9 @@ glm(dead~dose,family=binomial(),beetle)
 
 Note that logistic regression assumes independence of each data point; this assumption is violated in the Hindi data.
 
-\subsection{Some theory for GLMs}
+#### Deviance
 
-We have considered linear models like 
-
-\begin{equation}
-E[Y_i] = \mu_i = x_i^T \beta \quad y_i \sim N(\mu_i,\sigma^2)
-\end{equation}
-
-GLMs allow us to stay within the linear modeling framework, even if the relationship between response and explanatory variable is not linear.
-
-There is a wider class of distributions beyond the two we have seen (normal, binomial), that are called the \textbf{exponential family of distributions}; the normal and binomial fall within this family.
-
-The likelihood function of the exponential family's distributions can be written in very general terms as follows:
-
-\begin{equation} \label{genform}
-f(y; \theta_i, \phi)= \exp\left[\frac{y\theta_i - b(\theta_i)}{\phi/w}+c(y,\phi)\right]
-\end{equation}
-
-\paragraph{Example: The normal distribution}
-
-Consider the normal distribution. We can write it in the general form of equation~\ref{genform}.
-
-\begin{equation}
-\begin{split}
-f(y) =& \frac{1}{\sigma\sqrt{2\pi}} \exp \left[-\frac{1}{2} \left(\frac{(y-\mu)}{\sigma}\right)^2 \right]\\
-=& \exp \left[ \log 1 - \log \sigma \sqrt{2\pi} - \frac{1}{2}\left(\frac{(y-\mu)}{\sigma}\right)^2\right]\\
-=& \exp \left[-\frac{1}{2}(\frac{y^2 + \mu^2 - 2y\mu}{\sigma^2}) - \log \sigma \sqrt{2\pi}\right] \\
-\end{split}
-\end{equation}
-
-A little bit of algebraic manipulation (exercise) will now give us:
-
-\begin{equation}
-\begin{split}
-=& \exp \left[\frac{y\mu}{\sigma^2} - \frac{\mu^2 }{2\sigma^2} - \frac{y^2}{2\sigma^2} + \frac{\log\sigma\sqrt{2\pi}}{2}\right]\\
-=& \exp \left[\frac{y\mu - \mu^2/2}{\sigma^2} + c(y,\phi) \right] \quad \hbox{ i.e., } c(y,\phi)=- \frac{y^2}{2\sigma^2} + \frac{\log\sigma\sqrt{2\pi}}{2}\\
-=& \exp \left[\frac{y\theta - b(\theta)}{\phi/w} + c(y,\phi) \right]\\
-  \end{split}
-\end{equation}
-
-Here, $\theta=\mu$, $\phi=\sigma^2$, $w=1$, and we have 
-$b(\theta)=\mu^2/2$, $c(y,\phi)=-\frac{y^2}{2\sigma^2} + \frac{\log \sigma \sqrt{2\pi}}{2}$.
-
-This general formulation gives us two useful results (not proved here, because that would take us too far afield; but I will try to add the full proof later if there is interest):
-
-\begin{enumerate}
-\item
-The first derivative of $b(\theta)=\frac{\mu^2}{2}$, is $b'(\theta)=\mu$. This is a general result for the exponential family: 
-
-$E[y]=b'(\theta)=\mu$
-
-\item
-The variance of Y is $Var(Y)=\frac{\phi}{w} b''(\theta)$. So, here, we'd get 
-
-$Var(Y)=\frac{\sigma^2}{1} 1=\sigma^2$
-\end{enumerate}
-
-\paragraph{Example 2: Binomial distribution}
-
-Let's look at another example of how we can write an exponential family distribution in this general form. Consider the binomial distribution, which we will start by writing as below. Here, n is the total number of trials, and y is the proportion of successes. For example, n=10, y=7/10, gives us 7 successes out of 10. This is just another way to parameterize the binomial distribution, although it is not one that you have seen before.
-
-\begin{equation}
-ny \sim Binomial\left(n,\frac{\exp(\theta)}{1+\exp(\theta)}\right) \quad \hbox{ i.e., } p = \frac{\exp(\theta)}{1+\exp(\theta)}
-\end{equation}
-
-\begin{equation}
-\begin{split}
-f(ny; \theta,\phi) =& {n \choose ny} p^{ny} (1-p)^{n-ny} \\
-=& \exp\left[\log {n \choose ny} + ny \log p + (n-ny)\log(1-p)\right]\\
-=& \exp\left[ny \log \frac{p}{1-p} + n \log (1-p)+c(y,\phi)\right] \quad \hbox{ i.e., } c(y,\phi) = \log {n \choose ny}\\
-\end{split}
-\end{equation}
-
-Since $p = \frac{\exp(\theta)}{1+\exp(\theta)}$, we can write 
-
-\begin{equation}
-n \log (1-p) = n \log \frac{1}{1+\exp(\theta)} = - n \log(1+\exp(\theta))
-\end{equation}
-
-Also, let $\theta=\log\frac{p}{1-p}$.
-
-Then, we can continue as follows:
-
-\begin{equation}
-\begin{split}
-f(ny; \theta,\phi) =& \exp\left[ny \log \frac{p}{1-p} + n \log (1-p)+c(y,\phi)\right] \quad \hbox{ i.e., } c(y,\phi) = \log {n \choose ny} \\
-=& \exp\left[ny\theta - n \log(1+\exp(\theta)) +  c(y,\phi)\right]\\
-=&  \exp\left[\frac{y\theta - b(\theta)}{\phi/n} + c(y,\phi)\right] \quad \hbox{ i.e., } b(\theta)=n\log(1+\exp(\theta))\\
-\end{split}
-\end{equation}
-
-%We can confirm that $E[Y]=b'(\theta)$ and $Var(Y) = \frac{\phi}{w} b''(\theta)$. Here, $w=n$ and $\phi=1$.
-
-%\begin{enumerate}
-%\item
-%$b(\theta)=\log(1+\exp(\theta))$, and $b'(\theta)= \frac{\exp(\theta)}{1+\exp(\theta)}=E[Y]$.
-%\item 
-%$Var(Y) = \frac{1}{n} \frac{\exp(\theta)}{1+\exp(\theta)} =  \frac{p}{n}$.
-%\end{enumerate}
-
-\subsection{The canonical link}
-
-For each data point $Y_i$ from a distribution that's a member of the exponential family, the general form of the likelihood function is:
-
-\begin{equation} \label{genform2}
-f(y; \theta_i, \phi)= \exp\left[\frac{y\theta_i - b(\theta_i)}{\phi/w}+c(y,\phi)\right]
-\end{equation}
-
-where $E[Y_i] = \mu_i = h(x_i^T \beta)$. Since we know that $E[Y_i] = b'(\theta_i)$, 
-
-we can write
-
-\begin{equation}
-E(Y_i)=\mu_i = h(x_i^T \beta) = b'(\theta)
-\end{equation}
-
-Now, if we want to get $x_i^T \beta$, we just take the inverse of the function $h(\cdot)$, call it $g(\cdot)$.
-This gives us something called the canonical link function:
-
-\begin{equation}
-x_i^T \beta =  h^{-1}(b'(\theta)) = \explain{g}{\hbox{canonical link}}b'(\theta)
-\end{equation}
-
-For different distributions in the exponential family, the canonical link functions are as follows:
-
-\begin{table}[!htbp]
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-Distribution & $h(x_i^T \beta)=\mu_i$ & $g(\mu_i)=\theta_i$\\
-\hline
-Binomial & $\frac{\exp[\theta_i]}{1+\exp[\theta_i]}$ & $\log \frac{y}{1-y}$ \\
-logit link & & \\
-\hline
-Normal & $\theta$ & $g=h$ \\
-identity & & \\
-\hline
-Poisson & $\exp[\theta]$ & $\log[\mu]$ \\
-log & & \\
-\hline
-Gamma & $-\frac{1}{\theta}$ & $-\frac{1}{\mu_i}$\\
-inverse & & \\
-\hline
-Cloglog & $1-\exp[-\exp[\theta_i]]$ & $\log(-\log(1-\mu_i))$\\
-cloglog & & \\
-\hline
-Probit & $\Phi(\theta)$ & 
-$\Phi^{-1}(\theta)$ (qnorm)\\
-probit & & \\
-\hline
-\end{tabular}
-\end{table}
-
-\medskip
-The big thing about the canonical link is that is expresses $\theta_i$ as a linear combination of the parameters: $x_i^T \beta$.  You can decide which link to use by plotting $g(\mu_i)$ against the predictor (in case we have only a single predictor x). 
-
-\subsection{Estimation of parameters}
-
-In linear models, we know how to get an estimate of the estimator(s) $\beta$:
-
-\begin{equation}
-\hat \beta = (X^T X)^{-1} X^T Y
-\end{equation}
-
-and the covariance matrix is $\sigma^2 (X^T X)^{-1}$.
-
-For reasons we won't get into in this course, in GLMs we use \textbf{iteratively reweighted least squares}.
-Here is how it works:
-
-\begin{enumerate}
-\item Specify an \textbf{initial vector of parameters}: $b^{(m)}= (\beta_0,\dots,\beta_p)^T$, where initially $m=1$:
-
-<<>>=
-## eta=xbeta:
-eta.i<- -60+35*beetle$dose
-@
-
-\item \textbf{Specify a weight matrix W} that depends on current parameter estimates:
-
-%Given (proof on p.\  83-84):
-If we define:
-
-\begin{equation}
-  w_{ii} =\frac{n_i \exp[\eta_i]}{(1+\exp[\eta_i])^2}
-\end{equation}
-
-we can compute W:
-
-<<>>=
-n.i <- beetle$number
-w.ii.fn<-function(n.i,eta.i){
-  (n.i*exp(eta.i))/(1+exp(eta.i))^2
-}
-w.iis<-w.ii.fn(n.i,eta.i)
-##weights matrix:
-W<-diag(as.vector(w.iis))
-@
-
-\item
-\textbf{Specify a vector z} that depends on the current parameter estimates and response values:
-
-\begin{equation}
-z_i = \eta_i + \frac{y_i - \mu_i}{\mu_i (1-\mu_i)} 
-\quad \mu_i = \frac{exp[\eta_i]}{1+exp[\eta_i]}
-\end{equation}
-
-<<>>=
-mu.i<-exp(eta.i)/(1+exp(eta.i))
-z.i<-eta.i + ((beetle$propn.dead-mu.i))/
-              (mu.i*(1-mu.i))
-@
-
-
-\item
-Compute new estimate of parameters: $b^{(m+1)}=(X^T W X)^{-1} X^T W z$:
-
-<<>>=
-##The design matrix:
-col1<-c(rep(1,8))
-X<-as.matrix(cbind(col1,beetle$dose))
-## update coefs:
-eta.i<-solve(t(X)%*%W%*%X)%*%
-               t(X)%*%W%*%z.i
-@
-
-Repeat with updated coefficients; stop at convergence. 
-\end{enumerate}
-
-If you implement this approach (exercise), you will find that it takes 7 iterations to get convergence. R can do it in four iterations because it uses a different approach. 
-
-\subsection{Deviance}
-
-We saw encountered deviance earlier (page~\pageref{deviance}) in connection with ANOVA. 
+We saw encountered deviance earlier in connection with ANOVA. 
 
 The deviance is more generally defined as
 
@@ -1232,7 +1009,7 @@ D = 2[\ell(b_{max}; y) - \ell(b; y)]
 where $\ell(b_{max}; y) $ is the log likelihood of the saturated model (the model with the maximal number of parameters that can be fit), and $\ell(b; y) $ is the log likelihood of the model with the parameters b.
 As we saw earlier, D has a chi-squared distribution.
 
-\paragraph{Deviance for the normal distribution} 
+##### Deviance for the normal distribution
 
 The deviance is
 
@@ -1240,7 +1017,7 @@ $D = \frac{1}{\sigma^2}\sum (y_i - \bar{y})^2$
 
 [See p.\ 80 onwards in the Dobson et al book for proofs and more detail.]
 
-\paragraph{Deviance for the binomial distribution} 
+##### Deviance for the binomial distribution 
 
 Deviance is defined as $D=\sum d_i$, where:
 
@@ -1254,28 +1031,26 @@ So that is what we will use for assessing model fit.
 We will also use deviance for hypothesis testing.
 The difference in deviance (residual deviance) between two models also has a $\chi^2$ distribution (this should remind you of ANOVA), with dfs being $p-q$, where $q$ is the number of parameters in the first model, and $p$ the number of parameters in the second.
 
-I discuss hypothesis testing first, then evaluating goodness of fit using deviance.
+We discuss hypothesis testing first, then evaluating goodness of fit using deviance.
 
-%Note that $\sum e_{D,i} = D$.
-
-\subsection{Hypothesis testing: Residual deviance}
+##### Hypothesis testing: Residual deviance
 
 Returning to our beetle data, let's say we fit our model:
 
-<<>>=
+```{r}
 glm1<-glm(propn.dead~dose,binomial(logit),
           weights=number,data=beetle)
-@
+```
 
 The summary output shows us the number of iterations that led to the parameter estimates:
 
-<<>>=
+```{r}
 summary(glm1)
-@
+```
 
-But we also see something called \textbf{Null deviance} and \textbf{Residual deviance}. These are used to evaluate quality of model fit. Recall that we can compute the fitted values and compare them to the observed values:
+But we also see something called **Null deviance** and **Residual deviance**. These are used to evaluate quality of model fit. Recall that we can compute the fitted values and compare them to the observed values:
 
-<<propndead2,fig.width=6>>=
+```{r propndead2,fig.width=6}
 # beta.hat is (-60.71745 ,   34.27033)
 (eta.hat<-  -60.71745 +   34.27033*beetle$dose)
 (mu.hat<-exp(eta.hat)/(1+exp(eta.hat)))
@@ -1283,11 +1058,11 @@ But we also see something called \textbf{Null deviance} and \textbf{Residual dev
 # compare mu.hat with observed proportions
 plot(mu.hat,beetle$propn.dead)
 abline(0,1)
-@
+```
 
 To evaluate whether dose has an effect, we will do something analogous to the model comparison methods we saw earlier. First, fit a model with only an intercept. Notice that the null deviance is 284 on 7 degrees of freedom.
 
-<<propndead3,fig.width=6>>=
+```{r propndead3,fig.width=6}
 null.glm<-glm(propn.dead~1,binomial(logit),
           weights=number,data=beetle)
 summary(null.glm)
@@ -1295,51 +1070,51 @@ summary(null.glm)
 plot(beetle$dose,beetle$propn.dead,xlab="log concentration",
     ylab="proportion dead",main="minimal model")
 points(beetle$dose,null.glm$fitted,pch=4)
-@
+```
 
-Add a term for dose. Now, the residual deviance is 11.2 on 6 dfs/
+Add a term for dose. Now, the residual deviance is 11.2 on 6 dfs:
 
-<<propndead4,fig.width=6>>=
+```{r propndead4,fig.width=6}
 dose.glm<-glm(propn.dead~dose,binomial(logit),
           weights=number,data=beetle)
 summary(dose.glm)
 plot(beetle$dose,beetle$propn.dead,xlab="log concentration",
     ylab="proportion dead",main="dose model")
 points(beetle$dose,dose.glm$fitted,pch=4)
-@
+```
 
 The change in deviance from the null model is 284.2-11.2=273 on 1 df. Since the critical $\chi_1^2 = 3.84$, we reject the null hypothesis that $\beta_1 = 0$.
 
 You can do the model comparison using the anova function. Note that no statistical test is calculated; you need to do that yourself.
 
-<<>>=
+```{r}
 anova(null.glm,dose.glm)
-@
+```
 
 Actually, you don't even need to define the null model; the anova function automatically compares the fitted model to the null model:
 
-<<>>=
+```{r}
 anova(dose.glm)
-@
+```
 
-\subsection{Assessing goodness of fit of a fitted model}
+##### Assessing goodness of fit of a fitted model
 
 The deviance for a given degrees of freedom $v$ should have a $\chi_v^2$ distribution for the model to be adequate. As an example, consider the null model above. The deviance is clearly much larger than the 95th percentile cutoff point of the chi-squared distribution with 7 dfs, so the model is not adequate.
 
-<<>>=
+```{r}
 deviance(null.glm)
 ## critical value:
 qchisq(0.95,df=7)
-@
+```
 
 Now consider the model with dose as predictor. The deviance is less than the 95th percentile, so the fit is adequate.
 
-<<>>=
+```{r}
 deviance(dose.glm)
 qchisq(0.95,df=6)
-@
+```
 
-\subsection{Residuals in GLMs}
+##### Residuals in GLMs
 
 In the binomial distribution, Deviance $D=\sum d_i$, where:
 
@@ -1356,14 +1131,14 @@ The $i$-th deviance residual is defined as:
 These can be used to check for model adequacy as discussed earlier in the context of linear models.
 One can just use the plot function inspect the residuals:
 
-<<residualsglm,fig.width=6>>=
+```{r residualsglm,fig.width=6}
 op<-par(mfrow=c(2,2),pty="s")
 plot(dose.glm)
-@
+```
 
 Alternatively, one can do this by hand:
 
-<<qqnormglm,fig.width=6>>=
+{r qqnormglm,fig.width=6}
 op<- par(mfrow=c(2,2),pty="s")
 plot(dose.glm$resid,
      xlab="index",ylab="residuals",main="Index plot")
@@ -1372,5 +1147,6 @@ hist(dose.glm$resid,xlab="Residuals",main="Histogram")
 plot(dose.glm$fit,dose.glm$resid,xlab="Fitted values",
      ylab="Residuals",
      main="Residuals versus fitted values")
-@
+```
+
 
