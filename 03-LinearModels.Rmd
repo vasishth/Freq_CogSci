@@ -363,7 +363,7 @@ To understand the connection between the paired t-test and the above command, it
 First, some background. If you have two random variables that have   correlation $\rho$, the variance of the difference between the two random variables is:
 
 \begin{equation}
-Var(X_1-X_2)=Var(X_1) + Var(X_2) - 2\times Cov(X_1, X2)
+Var(X_1-X_2)=Var(X_1) + Var(X_2) - 2\times Cov(X_1, X_2)
 \end{equation}
 
 $Cov(X_1, X2)$ is the covariance between the two  random variables and  is defined  as:
@@ -803,7 +803,7 @@ abline(a=ab[i,1],b=ab[i,2])
 abline(lm(logrt~so,gg05e1),lwd=3,col="gray")
 ```
 
-What is striking is that each subject's estimated best fit line is "smooothed out" compared to the lmList fits. This aspect of the linear mixed model is called shrinkage; we return to this point shortly.
+What is striking is that each subject's estimated best fit line is "smoothed out" compared to the lmList fits. This aspect of the linear mixed model is called shrinkage; we return to this point shortly.
 
 #### Visualizing random effects
 
@@ -997,7 +997,7 @@ This is called "shrinkage" in linear mixed models. We say that the individual-le
 The less data we have from a given subject, the greater the shrinkage.
 
 ```{r shrinkage,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "The figures show linear model fits (the grand mean estimates) for three subjects; shown are the simple linear model fit on all the data (gray line), the lmList model fit to the individual subject's data (black line), and the linear mixed model fit (the broken line). In all three subjects' models, the linear mixed model estimates are shrunk towards the grand mean (gray line) estimates.", tidy = FALSE}
-op<-par(mfrow=c(3,1),pty="s")
+op<-par(mfrow=c(1,3),pty="s")
 coefs<-coef(lmlist.fm1)
 intercepts<-coefs[1]
 colnames(intercepts)<-"intercept"
@@ -1073,6 +1073,7 @@ Now, we randomly delete half the data:
 ```{r}
 gg05e1$deletedRT<-gg05e1$rawRT
 gg05e1[which(gg05e1$subject==37),]$deletedRT<-
+  
   ifelse(rand,NA,
          gg05e1[which(gg05e1$subject==37),]$rawRT)
 ```
