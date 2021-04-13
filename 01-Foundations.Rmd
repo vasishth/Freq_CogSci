@@ -481,7 +481,7 @@ Similarly, the marginal distribution $p_X$ is defined as:
 p_{X}(x)=\sum_{y\in S_{Y}}p_{X,Y}(x,y).\label{eq-marginal-pmf2}
 \end{equation}	
 
-$p_Y$ is easily computed, by summing up the rows; and $p_X$ by summing up the columns. You can see why this is called the marginal distribution; the result appears in the margins of the table.
+$p_Y$ is easily computed, by summing up the values in each row; and $p_X$ by summing up the values in each column. You can see why this is called the marginal distribution; the result appears in the margins of the table.
 
 ```{r}
 #P(Y)
@@ -848,7 +848,7 @@ Y : S \rightarrow \mathbb{R}
 
 The random variable associates to each outcome $\omega \in S$ exactly one number $Y(\omega) = y$. $S_Y$ is all the $y$'s (all the possible values of $Y$, the support of $Y$). I.e., $y \in S_Y$. 
 
-Every random variable $Y$ has associated with it a probability mass (distribution)  function (PMF, PDF). I.e., PMF is used for discrete distributions and PDF for continuous distributions. The PMF maps every element of $S_Y$ to a value between 0 and 1. The PDF maps a range of values in the support of $Y$ to a value between 0 and 1 (e.g., P(a \leq Y\leq b) \rightarrow [0, 1]).
+Every random variable $Y$ has associated with it a probability mass (distribution)  function (PMF, PDF). I.e., PMF is used for discrete distributions and PDF for continuous distributions. The PMF maps every element of $S_Y$ to a value between 0 and 1. The PDF maps a range of values in the support of $Y$ to a value between 0 and 1 (e.g., $P(a \leq Y\leq b) \rightarrow [0, 1]$).
 
 \begin{equation}
 p_Y : S_Y \rightarrow [0, 1] 
@@ -928,7 +928,7 @@ f(x,y)\geq 0\mbox{ for all }(x,y)\in S_{X,Y},
 \end{equation}
 and
 \begin{equation}
-\iintop_{S_{X,Y}}f(x,y)\,\mathrm{d} x\,\mathrm{d} y=1.
+\int \int_{S_{X,Y}}f(x,y)\,\mathrm{d} x\,\mathrm{d} y=1.
 \end{equation}
 	
 where $S_{X,Y}$ is the joint support of the two random variables.
@@ -1061,32 +1061,6 @@ q2<-round(qnorm(tailprob,mean=mu,sd=sigma,lower.tail=FALSE),digits=3)
 ```
 
 Given a normal distribution with mean ```r mu``` and standard deviation ```r sigma```. There exist two quantiles, the lower quantile q1 and the upper quantile q2, that are equidistant from the mean ```r mu```, such that the area under the curve of the Normal probability between q1 and q2  is ```r prob*100```%. Find q1 and q2. 
-
-
-
-### Practice using ```qt``` {#sec:Foundationsexercisesqt}
-
-```{r echo=FALSE}
-n<-round(runif(1,min=140,max=170))
-mu<-round(runif(1,min=120,max=180),0)
-sigma<-round(runif(1,min=30,max=80),0)
-x<-rnorm(n,mean=mu,sd=sigma)
-sample.sd<-round(sd(x),3)
-sample.mean<-round(mean(x),digits=3)
-estimated.se<- round(sample.sd/sqrt(n),3)
-crit.t<-abs(round(qt(0.025,df=n-1),3))
-lower<-round(sample.mean-crit.t*estimated.se,digits=3)
-upper<-round(sample.mean+crit.t*estimated.se,digits=3)
-```
-
-Take an independent random sample of size ```r n``` from a normal distribution
-with mean ```r mu```, and standard deviation ```r sigma```. Next, we are going to pretend we don't know the population parameters (the mean and standard deviation). We compute the MLEs of the mean and standard deviation using the data and get the sample mean ```r sample.mean``` and the sample standard deviation ```r sample.sd```. 
-
-- Compute the estimated standard error using the sample standard deviation provided above. 
-- What are your degrees of freedom for the relevant t-distribution?
-- Calculate the **absolute** critical t-value for a 95\% confidence interval using the relevant degrees of freedom you just wrote above.
-- Next, compute the lower bound of the 95\% confidence interval using the estimated standard error and the critical t-value.
-- Finally, compute the upper bound of the 95\% confidence interval using the estimated standard error and the critical t-value.
 
 ### Maximum likelihood estimation 1 {#sec:FoundationsexercisesMLE1}
 
