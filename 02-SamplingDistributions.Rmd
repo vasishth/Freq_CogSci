@@ -212,7 +212,7 @@ op<-par(mfrow=c(1,2),pty="s")
 for(i in 1:k){
   if(i==1){
 plot(density(y_matrix[,i]),main="Samples from an Exponential",
-     xlab="")
+     xlab="",ylim=c(0,0.15))
   } else {
 lines(density(y_matrix[,i]),lty=2)
   }
@@ -222,7 +222,7 @@ lines(density(y_matrix[,i]),lty=2)
 y_means<-colMeans(y_matrix)
 hist(y_means,freq=FALSE,main="Sampling distribution of means \n (Data sampled \n from Exponential)",
      xlab="means under repeated sampling",
-     ylim=c(0,0.15))
+     ylim=c(0,2))
 abline(v=mean(y_means),lty=2)
 lines(seq(9,11,by=0.01),
       dnorm(seq(9,11,by=0.01),mean(y_means),sd(y_means)))
@@ -553,7 +553,7 @@ This observed t-value is huge and is  telling you the distance of the sample mea
 t=\frac{\bar{y}-\mu_0}{s/\sqrt{n}} \hbox{ or } t\frac{s}{\sqrt{n}}=\bar{y}-\mu_0
 \end{equation}
 
-For large sample sizes, if the absolute t-value $|t|$ is greater than  $2$, we will reject the null hypothesis. The choice of $2$ is purely conventional and comes from standard practice in psychology and related disciplines (as we will see in this book, standard practice is sometimes not a good-enough reason to decide on such things!).  
+For large sample sizes, if the absolute t-value $|t|$ is greater than  $2$, we will reject the null hypothesis. 
 
 For a smaller sample size $n$, you can compute the exact critical t-value:
 
@@ -589,9 +589,9 @@ So, the way that the t-test is used in psychology and relate areas is to impleme
 
 Recall that behind the t-test lies the  assumption  that the observed t-value  is coming from a random variable, $T\sim t(n-1)$. The particular t-value we observe from a particular data-set belongs to a distribution of t-values under hypothetical repeated sampling. Thus, implicit in the logic of the t-test---and indeed every frequentist statistical test---is the assumption that the experiment is in principle repeatable: the experiment can in principle be re-run as many times as we want, assuming we have the necessary resources and time. 
 
-A quick simulation of t-values under repeated sampling makes this clear. Suppose that our null hypothesis mean is 450, and our sample size  $n=1000$. Assume that the data come from $Normal(\mu=450,\sigma=100)$. Let's do 1000 simulations, compute the sample mean each time, and then store the observed t-value. The t-distribution that results is shown in Figure \@(fig:simt).
+A quick simulation of t-values under repeated sampling makes this clear. Suppose that our null hypothesis mean is 450, and our sample size  $n=1000$. Assume that the data come from $Normal(\mu=450,\sigma=100)$. Let's do 10000 simulations, compute the sample mean each time, and then store the observed t-value. The t-distribution that results is shown in Figure \@ref(fig:simt).
 
-```{r simt}
+```{r simt,fig.cap="The distribution of t-values under repeated sampling."}
 n<-1000
 nsim<-10000
 tvals<-rep(NA,nsim)
@@ -603,17 +603,18 @@ tvals[i]<-(mean(y)-450)/SE
 plot(density(tvals),main="Simulated t-distribution",xlab="t-values under repeated sampling")
 ```
 
-This implicit idea of the experiment's repeatability leads to an important aspect of the t-test: its long-run properties. In other words, its ability (at least in theory) to lead the researchers to the correct decision in the long run, i.e., under (hypothetical) repeated sampling. We turn to this issue next.
+This implicit idea of the experiment's repeatability leads to an important aspect of the t-test: the proportion of times we would reject the null hypothesis under repeated sampling, given that the null is in fact true or false. In other words, we will now study the t-test's ability (at least in theory) to lead the researchers to the correct decision under (hypothetical) repeated sampling. We turn to this issue next.
 
 ### Type I, II error, and power
 
 When we do a hypothesis test using the t-test, the observed t-value will either fall in the rejection region, leading  us to reject the null hypothesis,
 or it will land in the non-rejection region, leading us to fail to reject the null. That is a single, one-time event. 
 
-However, the null hypothesis can be either true or not true;  we don't know which of those two possibilities is the reality.
-When we say that the  null could be true, we mean  that the parameter $\mu$ actually does have the  hypothesized value $\mu_0$; when we say that the null could be false, we mean that the parameter $\mu$ has some *specific* value $\mu_{alt}$ other than $\mu_0$.
-We can represent these two alternative possible realities in a tabular form, as shown below. The two columns show the two possible worlds, one in which the null is true, and the other in  which it is false. The two rows show the two possible decisions we can take based on the observed t-value: reject the null or fail to reject it.
+So suppose  we have made our decision based on the observed t-value. Now, the null hypothesis can be either true or not true;  we don't know which of those two possibilities is the reality.
+When we decide (based on  the observed t-value) that the  null  is true, we are asserting  that the parameter $\mu$ actually does have the  hypothesized value $\mu_0$; when we decide that the null is false, we are asserting that the parameter $\mu$ has some *specific* value $\mu_{alt}$ other than $\mu_0$.
+We can represent these two alternative possible realities in a tabular form, as shown in Table \@ref(tab:type12). The two columns show the two possible worlds, one in which the null is true, and the other in  which it is false. The two rows show the two possible decisions we can take based on the observed t-value: reject the null or fail to reject it.
 
+\begin{table}
 \begin{tabular}{ccc}
         & \textbf{Possible world 1}      & \textbf{Possible world 2} \\  
 \hline
@@ -626,6 +627,8 @@ Decision: `reject': & $\alpha$ & $1~-~\beta$ \\
 Decision: `fail to reject': & $1 - \alpha$ & $\beta$ \\                                    &                                 & Type II error\\
 \hline
 \end{tabular}
+\caption{The possible realities (null is true or null is false) and the possible decisions (accept or reject null) we can take based on our observed t-value.} \label{tab:type12}
+\end{table}
 
 As the table shows, we can make two kinds of mistakes:
 
@@ -642,7 +645,7 @@ This suggested change in convention hasn't been taken up yet in cognitive scienc
 
 Type II error, the probability of incorrectly accepting the null hypothesis when it is false with some particular value for the parameter $\mu$, is conventionally recommended [@powerbookcohen] to be kept at 0.20 or lower. This implies that the probability of correctly  rejecting a null hypothesis for some particular true value of $\mu$ is 1-Type II error. This probability, called statistical power, or just power, should then obviously be larger than 0.80. Again, there is nothing special about these stipulations; they are conventions that became the norm over time. 
 
-Next, we will consider the trade-off between Type I and II error. For simplicity, assume that the standard error is 1, and the null hypothesis is that $\mu=0$. This means that the t-value is really the sample mean.
+Next, we will consider the trade-off between Type I and II error. For simplicity, assume that the standard error is 1, and the null hypothesis is that $\mu=0$. This means that the observed t-value is really the sample mean.
 
 Consider the concrete situation where, in reality, the true value of $\mu$ is $2$. As mentioned above, the null hypothesis $H_0$ is that $\mu=0$. Now the $H_0$ is false because $\mu=2$ and not $0$. Type I  and II  error can be visualized graphically as shown in  Figure \@ref(fig:type12). 
 
@@ -810,8 +813,10 @@ upper<-power.t.test(delta=15+5,sd=sds,n=10,strict =TRUE)$power
 meanval<-power.t.test(delta=15,sd=sds,n=10,strict =TRUE)$power
 
 plot(sds,meanval,type="l",
-     main="Power curve (n=10)\n using power.t.test",
-     xlab="standard deviation",ylab="power")
+     main="Power curve (n=10)\n 
+     using power.t.test",
+     xlab="standard deviation",
+     ylab="power")
 lines(sds,lower,lty=2)
 lines(sds,upper,lty=2)
 text(125,0.053,"10")
@@ -866,7 +871,8 @@ for(s in 1:length(sds)){
 }
 plot(sds,lowess(power_upperval)$y,type="l",lty=2,
      xlab="standard deviation",ylab="power",
-     main="Power curve (n=10) \n using simulation",)
+     main="Power curve (n=10) \n using simulation",ylim=c(min(power_lowerval),
+                                                          max(power_upperval)))
 lines(sds,lowess(power_lowerval)$y,lty=2)
 lines(sds,lowess(power_meanval)$y,lty=1)
 
@@ -888,14 +894,13 @@ We can compute the p-value "by hand". This can be computed, as done earlier, sim
 2*pt(abs(t_value),df=n-1,lower.tail=FALSE)
 ```
 
-The area from both sides of the tail is taken because it is conventional to do a so-called *two-sided t-test*: our null hypothesis is that $\mu=450$, and our alternative hypothesis is two-sided: $\mu$ is either less than 450 or $\mu$ is larger than 450. When we reject the null hypothesis, we are accepting this alternative, that  $\mu$ could be some value other than 450. Notice that this alternative hypothesis is remarkably vague; we would reject the null hypothesis regardless of whether the sample mean turns out to be 600 or -600, for example. The  practical implication is that the p-value gives us  the  strength of the evidence against the null hypothesis; it doesn't give us  evidence in favor of  a specific alternative, such  as saying that $\mu$ is positive or negative in sign. In psychology and allied disciplines, whenever the p-value falls below $0.05$, it is common practice to write something along the lines that "there was reliable evidence for the predicted effect." This statement  is  technically incorrect; we only ever have evidence against the null. By looking at the sample mean and its sign, we are making a very big leap that we  have evidence for the specific sample mean we happened to get. As we will see below, the sample mean can be wildly far from the true mean that produced the data. 
+The area from both sides of the tail is taken because it is conventional to do a so-called *two-sided t-test*: our null hypothesis is that $\mu=450$, and our alternative hypothesis is two-sided: $\mu$ is either less than 450 or $\mu$ is larger than 450. When we reject the null hypothesis, we are accepting this alternative, that  $\mu$ could be some value other than 450. Notice that this alternative hypothesis is remarkably vague; we would reject the null hypothesis regardless of whether the sample mean turns out to be 600 or -600, for example. The  practical implication is that the p-value gives us  the  strength of the evidence against the null hypothesis; it doesn't give us  evidence in favor of  a specific alternative, such  as saying that $\mu$ is positive or negative in sign. In psychology and allied disciplines, whenever the p-value falls below $0.05$, it is common practice to write something along the lines that "there was reliable evidence for the predicted effect." This statement  is incorrect! We only ever have evidence against the null. By looking at the sample mean and its sign, we are making a very big leap that we  have evidence for the specific sample mean we happened to get. As we will see below, the sample mean can be wildly far from the true mean that produced the data. 
 
-One need not have done a two-sided alternative; one could have defined the alternative to be one-sided. In that case, one would compute only one side of the area under the curve. This kind of one-sided test is not normally done, but one can imagine a situation where a one-sided test is justified (for example, when only one sign of the effect is possible, or if there is a strong theoretical reason to expect only one particular sign---positive or negative---on an effect). That said, in their scientific career, only one of the authors of this book has ever had occasion to use a one-sided test.
+One need not have a two-sided alternative; one could have defined the alternative to be one-sided (for example, that $mu>450$). In that case, one would compute only one side of the area under the curve. This kind of one-sided test is not normally done, but one can imagine a situation where a one-sided test is justified (for example, when only one sign of the effect is possible, or if there is a strong theoretical reason to expect only one particular sign---positive or negative---on an effect). That said, in their scientific career, only one of the authors of this book has ever had occasion to use a one-sided test. In this book, we will not use one-sided t-tests.
 
 The p-value is always interpreted with reference to the pre-defined Type I error. Conventionally, we reject the null if $p<0.05$. This is because we set the Type I error at 0.05. Keep in mind that Type I error and the p-value are two distinct things. 
 Type I error is the probability of your incorrectly rejecting the null under repeated sampling. This is not the same thing as your p-value. The latter will be obtained from a particular experiment, and will vary from experiment to experiment; it is a random variable. Type I error is a value we fix in advance.
 
-<!--
 #### *The distribution of the p-value under the null hypothesis
 
 We have been talking about a continuous random variable as a dependent measure, and have learnt about the standard two-sided t-test, with a point null hypothesis. When we do such a test, we usually use the p-value to decide whether to reject the null hypothesis or not.
@@ -921,7 +926,7 @@ The distribution of the p-value is uniform---every value between 0 and 1 is equa
 
 We will now formally derive the above fact, that the distribution of the p-value is uniform under the null hypothesis. 
 
-It's worth briefly reflecting on the fact that the p-value is a random variable; call it $Z$. The p-value is the cumulative distribution function (CDF) of the random variable $T$, which itself is a transformation of the random variable $\bar{Y}$: 
+Consider the fact that the p-value is a random variable; call it $Z$. The p-value is the cumulative distribution function (CDF) of the random variable $T$, which itself is a transformation of the random variable $\bar{Y}$: 
 
 $T=(\bar{X}-\mu)/(\sigma/\sqrt{n})$
 
@@ -957,15 +962,14 @@ P(Z\leq z) =& P(F(T)\leq z)\\
 \end{split}
 \end{equation}
 
-It is for this reason that statisticians like Andrew Gelman periodically point out that "the null hypothesis significance test is a specific random number generator". The practical implication of this criticism of p-values is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are as or even more important.
+It is for this reason that statisticians like Andrew Gelman periodically point out that "the null hypothesis significance test is a specific random number generator". The practical implication of this criticism of p-values is that when we do a single experiment and obtain a p-value under the assumption that the null is true, if the null were in fact true, then we are just using a random number generator to make a decision that the effect is present or absent. A broader implication is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are as or even more important.
 
--->
 
 ### Type M and S error in the face of low power
 
 Beyond Type I and II error, there are also two other kinds of error to be aware of. These are Type M and S error; both sources of error are closely related to statistical power.
 
-The terms Type M and S error were introduced by @Gelman14, but the ideas have been in existence for some time [@hedges1984estimation,@lane1978estimating]. @powerfailure refer to Type M and S error as the "winner's curse" and "the vibration of effects." In related work, @ioannidis2008most refers to the vibration ratio in the context of epidemiology.
+The terms Type M and S error were introduced by @Gelman14, but the ideas have been in existence for some time [@hedges1984estimation],[@lane1978estimating]. @powerfailure refer to Type M and S error as the "winner's curse" and "the vibration of effects." In related work, @ioannidis2008most refers to the vibration ratio in the context of epidemiology.
 
 Type S and M error can be illustrated with the following example.
 Suppose your true effect size is believed to be $D=15$, 
@@ -975,7 +979,7 @@ then we can compute (apart from statistical power) the following error rates, wh
 - **Type M error**: the expectation of the ratio of the absolute magnitude of the effect to the hypothesized true effect size, given that the result is significant. 
 Gelman and Carlin also call this the exaggeration ratio, which is perhaps more descriptive than "Type M error".
 
-Suppose that a particular study has standard error $46$, and sample size $37$. And suppose that the true $\mu=15$, as iin the example discussed above. Then, we can compute statistical power, Type S and M error through simulation in the following manner:
+Suppose that a particular study has standard error $46$, and sample size $37$. And suppose that the true $\mu=15$, as in the example discussed above. Then, we can compute statistical power, Type S and M error through simulation in the following manner:
 
 ```{r}
 ## probable effect size, derived from past studies:
@@ -1001,7 +1005,7 @@ Power can be computed by simply determining the proportion of times that the abs
 
 Power is quite low here (we deliberately chose an example with  low power to illustrate Type S and M error). 
 
-Next, we figure out which of the samples are statistically significant (which simulated values yield $p<0.05$). As a criterion, we use a t-value of 2 to declare $p<0.05$; we could have done this more precisely by working out an exact critical t-value.
+Next, we figure out which of the samples are statistically significant (which simulated values yield $p<0.05$). As a criterion, we use a t-value of 2 to declare that we reject the null; we could have done this more precisely by working out an exact critical t-value.
 
 ```{r}
 ## which results in drep are significant at alpha=0.05?
@@ -1133,7 +1137,9 @@ plot(density(tstat_standard),main="",xlab="t-value")
 lines(density(tstat),lty=2)
 ```
 
-What is important to realize here is that the inflation in Type I error we observed above was due to the fact that the t-distribution is no longer a t-distribution:  we have bumps in the tails when we use the flexible stopping rule, and these raise our Type I error. This demonstrates why one should fix one's sample size in advance, based on a power analysis. One should not deploy a stopping rule like the one above; if we used such a stopping rule, we are much more likely to incorrectly declare a result as statistically significant. There can be compelling reasons to adopt the peek-and-run strategy; e.g., if one wants to avoid exposing patients to a treatment that might turn out to be harmful. In such situations, one can run an adaptive experimental trial by correcting for Type I error inflation [@pocock2013clinical]. In this book, we will aim to develop a workflow whereby the sample size is fixed through power analysis, in advance of running an experiment.
+What is important to realize here is that the inflation in Type I error we observed above was due to the fact that the t-distribution is no longer a t-distribution:  we have bumps in the tails when we use the flexible stopping rule, and these raise our Type I error. This demonstrates why one should fix one's sample size in advance, based on a power analysis. One should not deploy a stopping rule like the one above; if we used such a stopping rule, we are much more likely to incorrectly declare a result as statistically significant than our intended Type I error rate of 0.05. 
+
+There can be compelling reasons to adopt the peek-and-run strategy; e.g., if one wants to avoid exposing patients to a treatment that might turn out to be harmful. In such situations, one can run an adaptive experimental trial by correcting for Type I error inflation [@pocock2013clinical]. In this book, we will aim to develop a workflow whereby the sample size is fixed through power analysis, in advance of running an experiment.
 
 ## The two-sample t-test vs. the paired t-test
 
@@ -1335,6 +1341,28 @@ The paired t-test illustrated above is actually not the best way to analyze this
 
 ## Exercises {#sec:SamplingDistrnexercises}
 
+### Practice using ```qt``` {#sec:SamplingDistrnexercisesqt}
+
+```{r echo=FALSE}
+n<-142
+mu<-123 
+sigma<-70
+sample.sd<-50.885
+sample.mean<-145.242
+estimated.se<- round(sample.sd/sqrt(n),3)
+crit.t<-abs(round(qt(0.025,df=n-1),3))
+lower<-round(sample.mean-crit.t*estimated.se,digits=3)
+upper<-round(sample.mean+crit.t*estimated.se,digits=3)
+```
+
+Take an independent random sample of size ```r n``` from a normal distribution
+with mean ```r mu```, and standard deviation ```r sigma```. Next, we are going to pretend we don't know the population parameters (the mean and standard deviation). We compute the MLEs of the mean and standard deviation using the data and get the sample mean ```r sample.mean``` and the sample standard deviation ```r sample.sd```. 
+
+- Compute the estimated standard error using the sample standard deviation provided above. 
+- What are your degrees of freedom for the relevant t-distribution?
+- Calculate the **absolute** critical t-value for a 95\% confidence interval using the relevant degrees of freedom you just wrote above.
+- Next, compute the lower bound of the 95\% confidence interval using the estimated standard error and the critical t-value.
+- Finally, compute the upper bound of the 95\% confidence interval using the estimated standard error and the critical t-value.
 
 ### Computing the p-value {#sec:SamplingDistrnexercisesPart1}
 
