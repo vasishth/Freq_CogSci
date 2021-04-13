@@ -15,6 +15,7 @@ library(papaja)
 library(afex)
 library(MASS)
 library(hypr)
+library(bcogsci)
 ```
 
 # Contrast coding for designs with two predictor variables {#ch:coding2x2}
@@ -53,16 +54,9 @@ kbl(table4a, digits=1, booktabs = T, position="h",vline = "", # format="latex",
 
 Let's compare the traditional ANOVA with multiple regression for analyzing these data.
 
-\Begin{extra}
-<div class="extra">
-
-```{theorem}
-**ANOVA versus multiple regression**
-```
-
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
 # ANOVA: B_A(2) times B_B(2)
-aov_car(DV ~ A*B + Error(id), data=df_contrasts4)
+fit_AB_aov<-aov_car(DV ~ A*B + Error(id), data=df_contrasts4)
 
 # MR: B_A(2) times B_B(2)
 fit_AB_mr <- lm(DV ~ 1 + A*B, data=df_contrasts4)
@@ -90,13 +84,8 @@ row.names(tab17) <- NULL
 kbl(tab17, booktabs = T, position="h", vline = "", caption="Estimated regression model.") # format="latex", 
 ```
 
-The results from the two analyses, shown in the R output and in Table <!--\@ref(tab:table16) and--> \@ref(tab:table17), are very different. 
+The results from the two analyses, shown in the R output and in Table \@ref(tab:table17), are very different. 
 How do we see these are different? Notice that it is possible to compute F-values from t-values from the fact that $F(1,df) = t(df)^2$ [@snedecor1967statistical] (where $df$ indicates degrees of freedom). When applying this to the above multiple regression model, the F-value for factor $A$ (i.e., $AA2$) is $0.00^2 = 0$. This is obviously not the same as in the ANOVA, where the F-value for factor $A$ is $5$. Likewise, in the multiple regression factor $B$ (i.e., $BB2$) has an F-value of $1.58^2 = 2.5$, which also does not correspond to the F-value for factor $B$ in the ANOVA of $20$. Interestingly, however, the F-value for the interaction is identical in both models, as $2.24^2 = 5$.
-
-\End{extra}
-</div>
-
-
 
 The reason that the results from the ANOVA and the results from the multiple regression are different is that one needs sum contrasts in the linear model to get the conventional tests from an ANOVA model. (This is true for factors with two levels, but does not generalize to factors with more levels.)
 
@@ -108,14 +97,12 @@ contrasts(df_contrasts4$B) <- contr.sum(2)
 fit_AB_mr.sum <- lm(DV ~ 1 + A*B, data=df_contrasts4)
 ```
 
+
 ```{r table18, echo=FALSE, results="asis"}
 tab18 <- data.frame(round(coef(summary(fit_AB_mr.sum)),3))
 names(tab18) <- c("Estimate","Std. Error","t","p")
 tab18 <- cbind(Predictor=row.names(tab18),tab18)
 row.names(tab18) <- NULL
-#apa_table(tab18, placement="!htbp", caption="Regression analysis with sum contrasts.")
-#apa_table(apa_print(fit_AB_mr.sum, digits=0, est_name="Estimate")$table, placement="h",
-#    caption="Regression analysis with sum contrasts.")
 kbl(tab18, booktabs = T, position = "h", vline = "", caption="Regression analysis with sum contrasts.") # format="latex", 
 ```
 
@@ -129,6 +116,7 @@ ginv2 <- function(x) # define a function to make the output nicer
 ```
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
+data("df_contrasts3")
 t(fractions(HcInt <- rbind(A  =c(F1=1/4,F2= 1/4,F3=-1/4,F4=-1/4),
                            B  =c(F1=1/4,F2=-1/4,F3= 1/4,F4=-1/4),
                            AxB=c(F1=1/4,F2=-1/4,F3=-1/4,F4= 1/4))))
@@ -157,11 +145,15 @@ contrasts(df_contrasts3$F) <- contr.hypothesis(hAxB)
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_F4hypr <- lm(DV ~ 1 + F,
                  data = df_contrasts3)
-                 )) 
 ```
 ```{r, echo=TRUE}
 round(summary(fit_F4hypr)$coefficients)
 ```
+
+
+
+
+
 
 The results show that the estimates have half the size as compared to the sum contrasts - this is the result of the scaling that we applied. I.e., the main effects now directly estimate the difference between averages. However, both contrasts provide the exact same hypothesis tests. Thus, the hypr package can be used to code hypotheses in a 2 x 2 design.
 
@@ -177,6 +169,9 @@ t(fractions(HcNes <- rbind(B   =c(F1= 1/2,F2=-1/2,F3= 1/2,F4=-1/2),
 (XcNes <- ginv2(HcNes))
 contrasts(df_contrasts3$F) <- XcNes
 ```
+
+
+
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_Nest <- lm(DV ~ 1 + F,
                  data = df_contrasts3) 
@@ -184,6 +179,8 @@ fit_Nest <- lm(DV ~ 1 + F,
 ```{r, echo=TRUE}
 round(summary(fit_Nest)$coefficients)
 ```
+
+
 
 Regression coefficients estimate the GM, the difference for the main effect of word frequency ($A$) and the two differences (for $B$; i.e., simple main effects) within levels of word frequency ($A$).
 
@@ -201,6 +198,9 @@ fit_Nest2 <- lm(DV ~ 1 + B / A,
 round(summary(fit_Nest2)$coefficients)
 ```
 
+
+xxx
+
 Note that in cases such as these, where $A_{B1}$ vs. $A_{B2}$ are nested within levels of $B$, it is necessary to include the effect of $B$ (part of speech) in the model, even if one is only interested in the effect of $A$ (word frequency) within levels of $B$ (part of speech). Leaving out factor $B$ in this case can lead to biases in parameter estimation in the case the data are not fully balanced.
 
 Again, we show how nested contrasts can be easily implemented using `hypr`:
@@ -212,6 +212,8 @@ hNest <- hypr(B    = (F1+F3)/2~(F2+F4)/2,
 hNest
 contrasts(df_contrasts3$F) <- contr.hypothesis(hNest)
 ```
+
+
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_NestHypr <- lm(DV ~ 1 + F,
                  data = df_contrasts3) 
@@ -230,12 +232,15 @@ hNest2
 contrasts(df_contrasts3$F) <- contr.hypothesis(hNest2)
 ```
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
-fit_Nest2Hypr <- m(DV ~ 1 + F,
-                 dalta = df_contrasts3) 
+fit_Nest2Hypr <- lm(DV ~ 1 + F,
+                 data = df_contrasts3) 
 ```
 ```{r, echo=TRUE}
 round(summary(fit_Nest2Hypr)$coefficients)
 ```
+
+xxx
+
 
 Regression coefficients estimate the GM, the difference for the main effect of word frequency ($A$) and the two part of speech effects (for $B$; i.e., simple main effects) within levels of word frequency ($A$).
 
@@ -477,4 +482,5 @@ The results from this analysis show that the estimates for the two main effects 
 ## Summary
 
 To summarize, we have seen interesting results for contrasts in the context of $2 \times 2$ designs, where depending on the contrast coding, the factors estimated nested effects (treatment contrasts) or main effects (sum contrasts). We also saw that it is possible to code contrasts for a $2 \times 2$ design, by creating one large factor comprising all design cells, and by specifying all effects of interest in one large contrast matrix. In designs with one factor and one covariate it is possible to control group differences for differences in the covariate (ANCOVA), or to test whether regression slopes are parallel in different experimental conditions. Finally, contrast coding in generalized linear models works the same way as in the standard linear model.
+
 
