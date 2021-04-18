@@ -24,6 +24,7 @@ We can compute the joint likelihood under a null hypothesis that $\mu=0$:
 
 ```{r}
 likNULL<-prod(dnorm(y,mean=0,sd=1))
+likNULL
 ```
 
 On the log scale, we would need to add the log likelihoods of each data point:
@@ -40,10 +41,9 @@ loglikALT<-sum(dnorm(y,mean=mean(y),sd=1,log=TRUE))
 loglikALT
 ```
 
-Essentially, the likelihood ratio test compares the ratio of likelihoods of the two models; on the log scale, the difference in log likelihood is taken. 
-The likelihood ratio test then chooses the model with the higher log likelihood, provided that the higher likelihood is high enough (we will just make this more precise).  
+Essentially, the likelihood ratio test compares the ratio of likelihoods of the two models; on the log scale, the difference in log likelihood is taken. This is because a ratio on the log scale becomes a difference. The likelihood ratio test then chooses the model with the higher log likelihood, provided that the higher likelihood is high enough (we will just make this more precise).  
 
-One can specify the test in general terms as follows. Suppose that the likelihood is with respect to some parameter $\theta$. We can evaluate the likelihood at  $\mu_0$, the null hypothesis value of the parameter, and evaluate the likelihood using the maximum likelihood estimate $\hat\theta$ of the parameter. The likelihood ratio can then be written as follows:
+One can specify the test in general terms as follows. Suppose that the likelihood is with respect to some parameter $\theta$. We can evaluate the likelihood at  $\mu_0$, the null hypothesis value of the parameter, and evaluate the likelihood using the maximum likelihood estimate $\hat\theta$ of the parameter, as we did above. The likelihood ratio can then be written as follows:
 
 \begin{equation}
 \Lambda = \frac{max_{\theta\in \omega_0}(lik(\theta))}{max_{\theta\in \omega_1)}(lik(\theta))}
@@ -54,20 +54,20 @@ where, $\omega_0=\{\mu_0\}$ and $\omega_1=\{\forall \mu \mid \mu\neq \mu_0\}$. T
 Now, assuming that the data are coming from a normal distribution, the numerator of the likelihood ratio statistic is:
 
 \begin{equation}
-\frac{1}{(\sigma\sqrt{2\pi})^n} 
+lik(\theta=\mu_0) = \frac{1}{(\sigma\sqrt{2\pi})^n} 
            exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)
 \end{equation}
 
 For the denominator, the MLE $\bar{X}$ is taken as $\mu$:
 
 \begin{equation}
-\frac{1}{(\sigma\sqrt{2\pi})^n} exp \left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2 \right)
+lik(\theta=\bar{X}) =\frac{1}{(\sigma\sqrt{2\pi})^n} exp \left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2 \right)
 \end{equation}
 
 The likelihood ratio statistic is then:
 
 \begin{equation}
-\Lambda = 
+\Lambda = \frac{lik(\theta=\mu_0)}{lik(\theta=\bar{X})}=
 \frac{\frac{1}{(\sigma\sqrt{2\pi})^n} 
            exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)}{\frac{1}{(\sigma\sqrt{2\pi})^n} 
            exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2  \right)}
@@ -125,48 +125,50 @@ n(\bar{X} - \mu_0)^2
 Rewriting in this way gives us:
 
 \begin{equation}
-\ell = -\frac{1}{2\sigma^2}   n(\bar{X} - \mu_0)^2 
+\log \Lambda = -\frac{1}{2\sigma^2}   n(\bar{X} - \mu_0)^2 
 \end{equation}
 
 Rearranging terms:
 
 \begin{equation}
--2 \ell =    \frac{n(\bar{X} - \mu_0)^2 }{\sigma^2}
+-2 \log \Lambda =    \frac{n(\bar{X} - \mu_0)^2 }{\sigma^2}
 \end{equation}
 
 
 Or even more transparently:
 
 \begin{equation}
--2 \ell =    \frac{(\bar{X} - \mu_0)^2 }{\frac{\sigma^2}{n}}
+-2 \log \Lambda =    \frac{(\bar{X} - \mu_0)^2 }{\frac{\sigma^2}{n}}
 \end{equation}
 
 This should remind you of the t-test! Basically, just like in the t-test, what this is saying is that we reject the null when $\mid \bar{X} - \mu_0\mid$, or negative two  times the difference in log likelihood, is large!
 
-Now we will  define what it means for $-2\ell$ to be large. We will define the *likelihood ratio test statistic* as follows. Here, $Lik(\theta)$ refers to the likelihood given some value  $\theta$ for the parameter, and 
+Now we will  define what it means for $-2\log \Lambda$ to be large. There is a theorem in statistics that states that for large $n$, the distribution of $-2\log \Lambda$ approaches the chi-squared distribution, with degrees of freedom corresponding to the difference in the number of parameters between the two models being compared.
+
+We will define the *likelihood ratio test statistic*, call it $LRT$, as follows. Here, $Lik(\theta)$ refers to the likelihood given some value  $\theta$ for the parameter, and 
 $logLik(\theta)$  refers to the log likelihood. 
 
 \begin{equation}
 \begin{split}
-\Lambda =& -2\times (Lik(\theta_0)/Lik(\theta_1)) \\
-\log \Lambda=& -2\times \{logLik(\theta_0)-logLik(\theta_1)\}\\
+LRT =& -2\times (Lik(\theta_0)/Lik(\theta_1)) \\
+\log LRT =& -2\times \{logLik(\theta_0)-logLik(\theta_1)\}\\
 \end{split}
 \end{equation}
 
-where $\theta_1$ and $\theta_0$ are the estimates of $\theta$ under the alternative and null hypotheses, respectively. The likelihood ratio test rejects $H_0$ if $\log \Lambda$ is sufficiently large. As the sample size approaches infinity, $\log \Lambda$ approaches the chi-squared  distribution:
+where $\theta_1$ and $\theta_0$ are the estimates of $\theta$ under the alternative and null hypotheses, respectively. The likelihood ratio test rejects $H_0$ if $\log LRT$ is sufficiently large. As the sample size approaches infinity, $\log LRT$ approaches the chi-squared  distribution:
 
 \begin{equation}
-\log \Lambda \rightarrow \chi_r^2  \hbox{ as }  n \rightarrow \infty
+\log LRT \rightarrow \chi_r^2  \hbox{ as }  n \rightarrow \infty
 \end{equation}
 
-where $r$ is called the degrees of freedom and is the difference in the number of parameters under the null and alternative hypotheses.
+Here, $r$ is called the degrees of freedom and is the difference in the number of parameters under the null and alternative hypotheses.
 
 The above result is called *Wilks' theorem*. The proof of Wilks' theorem is fairly involved but you can find it  in Lehmann's textbook *Testing Statistical Hypotheses*.
 
 Note that sometimes you will see the form:
 
 \begin{equation}
- \log \Lambda = 2 \{\ell(\theta_1) - \ell(\theta_0)\}
+ \log LRT = 2 \{logLik(\theta_1) - logLik(\theta_0)\}
 \end{equation}
 
 It should be clear that both statements are saying the same thing; in the second case, we are just subtracting the null hypothesis log likelihood from the alternative hypothesis log likelihood, so the negative sign disappears.
@@ -176,7 +178,7 @@ That's the theory. Let's see how the likelihood ratio test works for (a)  simula
 ## A practical example using simulated data
 
 A practical example will make the usage of this test clear.
-Let's just simulate a linear model:
+Let's just simulate data from a linear model:
 
 ```{r}
 x<-1:10
@@ -200,16 +202,16 @@ m1<-lm(y~x)
 The difference in log likelihood, multiplied with -2, is:
 
 ```{r}
-LogLambda<- -2*(logLik(m0)-logLik(m1))
+LogLRT<- -2*(logLik(m0)-logLik(m1))
 ## observed value:
-LogLambda[1]
+LogLRT[1]
 ```
 
-The difference in the number of parameters in the two models is one, so $-2\log\Lambda$ has the distribution $\chi_1^2$. Is the observed value of $-2\log\Lambda$  unexpected under this distribution? We can calculate the probability of obtaining the likelihood ratio statistic we observed above, or a  value more extreme, given the $\chi_1^2$ distribution. 
+The difference in the number of parameters in the two models is one, so $\log LRT$ has the distribution $\chi_1^2$. Is the observed value  $`r  round(LogLRT[1],2)`$  unexpected under this distribution? We can calculate the probability of obtaining the likelihood ratio statistic we observed above, or a  value more extreme, given the $\chi_1^2$ distribution. 
 
 
 ```{r}
-pchisq(LogLambda[1],df=1,lower.tail=FALSE)
+pchisq(LogLRT[1],df=1,lower.tail=FALSE)
 ```
 
 Just like the critical  t-value in the t-test, the critical chi-squared value here is:
@@ -296,9 +298,7 @@ It is common in the psycholinguistics literature to use the t-value from the lin
 summary(m1)$coefficients
 ```
 
-The best method for hypothesis testing is the likelihood ratio test shown above. One can use the t-test output from the linear mixed model for hypothesis testing, but this should be done only when the data are balanced. If there is lack of balance (e.g., missing data for whatever reason), the likelihood ratio test is the best way to proceed. One reason for this is that when we talk about the evidence against the null hypothesis, the likelihood ratio test is the only reasonable way to talk about what evidence we have. See @Royall for more discussion of this point.
-
-**to-do: elaborate on the notion of what constitutes evidence against the null.**
+The most general method for hypothesis testing is the likelihood ratio test shown above. One can use the t-test output from the linear mixed model for hypothesis testing, but this should be done only when the data are balanced. If there is lack of balance (e.g., missing data for whatever reason), the likelihood ratio test is the best way to proceed. In any case, when we talk about the evidence against the null hypothesis, the likelihood ratio test is the only reasonable way to talk about what evidence we have. See @Royall for more discussion of this point. The essence of Royall's point is that the most reasonable way to talk about the evidence in favor of a particular model is with reference to, i.e., relative to, a baseline model. 
 
 One can also use the likelihood ratio test to evaluate whether a variance component should be included or not. For example, is the correlation parameter justified for the subjects random effects? Recall that we had a correlation of 0.58. Is this statistically significant? One can test this in the following way:
 
@@ -310,6 +310,8 @@ anova(m1,m1NoCorr)
 
 The test indicates that we can reject the null hypothesis that the correlation parameter is 0.  We will return to this parameter in the chapter on simulation.
 
+A final point: the likelihood ratio has essentially the same logic as the t-test, and that includes the fact that the focus is on the rejection of the null. The null cannot be accepted in the face of a null result, unless there is a good case to be made that power is sufficiently high (we will investigate this point later, in the simulation chapter). Also, since the likelihood ratio depends on defining the alternative model using the maximum likelihood estimate (the sample mean), it suffers from exactly the same problem as the t-test (Type M errors in the face of low power). We will also investigate this point in the simulation chapter. 
+
 ## Exercises {#sec:HypTestExercises}
 
 ### Chinese relative clauses {#sec:HypTestExercisesChinese}
@@ -317,19 +319,33 @@ The test indicates that we can reject the null hypothesis that the correlation p
 Load the following two data-sets:
 
 ```{r}
-gibsonwu<-read.table("data/gibsonwucrit.txt",header=TRUE)
-gibsonwu2<-read.table("data/gibsonwu2012datarepeat.txt",header=TRUE)
+gibsonwu<-read.table("data/gibsonwucrit.txt",
+                     header=TRUE)
+gibsonwu2<-read.table("data/gibsonwu2012datarepeat.txt",
+                      header=TRUE)
 ```
 
 The data are taken from two experiments that investigate (inter alia) the effect of relative clause type on reading time in Chinese. The data are from @gibsonwu and @VasishthetalPLoSOne2013 respectively. The second data-set is a direct replication attempt of the first.
 
-Chinese relative clauses are interesting theoretically because they are prenominal: the relative clause appears before the head noun. Figure \ref{fig:chineserc} shows an example.
+Chinese relative clauses are interesting theoretically because they are prenominal: the relative clause appears before the head noun.
 
-```{r chinesercfig,echo=FALSE,angle=-90,fig.height=2,fig.width=3,dev='pdf',fig.cap="\\label{fig:chineserc} An example of subjects vs. object relative clauses in Chinese."}
-knitr::include_graphics("figures/chineserc.png")
-```
+<!--
+\begin{exe}
+\ex  \label{ex:chineseRCs}
+\begin{xlist}
+\item Subject relative
+\gll [GAP$_i$ yaoqing fuhao de] guanyuan$_i$ xinhuaibugui \\
+GAP invite tycoon DE official {have bad intentions}\\
+\glt `The official who invited the tycoon has bad intentions.’
+\item Object relative 
+\gll [fuhao yaoqing GAP$_i$ de] guanyuan$_i$ xinhuaibugui \\
+tycoon invite GAP DE official { have bad intentions}\\
+\glt `The official who the tycoon invited has bad intentions.’
+\end{xlist}
+\end{exe}
+-->
 
-The consequence of Chinese relative clauses being prenominal  is that the distance between the gap in relative clause and the head noun is larger in subject relatives than object relatives (see Figure \ref{fig:chineserc}). @hsiao03 have claimed that the larger distance in subject relatives leads to longer reading time at the head noun. Under this view, the prediction is that subject relatives are harder to process than object relatives. If this is true, this is interesting because in most other languages that have been studied, subject relatives are easier to process than object relatives; so Chinese will be a very unusual exception cross-linguistically.
+As iscussed in @gibsonwu, the consequence of Chinese relative clauses being prenominal  is that the distance between the gap in relative clause and the head noun is larger in subject relatives than object relatives. @hsiao03 were the first to suggest that the larger distance in subject relatives leads to longer reading time at the head noun. Under this view, the prediction is that subject relatives are harder to process than object relatives. If this is true, this is interesting because in most other languages that have been studied, subject relatives are easier to process than object relatives; so Chinese will be a very unusual exception cross-linguistically.
 
 The data provided are for the critical region (the head noun). The experiment method is self-paced reading, so we have reading times in milliseconds. 
 
@@ -345,10 +361,10 @@ datE1<-read.table("data/dillonE1.txt",header=TRUE)
 
 The data are taken from an experiment that investigate (inter alia) the effect of number similarity between a noun and the auxiliary verb in sentences like the following. There are two levels to a factor called Int(erference): low and high. 
 
-- low: The key to the cabinet *are* on the table
-- high: The key to the *cabinets* *are* on the table
+(a) low: The key to the cabinet *are* on the table
+(b) high: The key to the *cabinets* *are* on the table
 
-Here, in the condition marked *high*, the auxiliary verb *are* is predicted to be read faster than in the condition marked *low*, because the plural marking on the noun *cabinets* leads the reader to think that the sentence is grammatical. (Note that both sentences are ungrammatical.) This phenomenon, where the high condition is read faster than the low condition, is called **agreement attraction**.
+Here, in (b), the auxiliary verb *are* is predicted to be read faster than in (a), because the plural marking on the noun *cabinets* leads the reader to think that the sentence is grammatical. (Note that both sentences are ungrammatical.) This phenomenon, where the high condition is read faster than the low condition, is called **agreement attraction**.
 
 The data provided are for the critical region (the auxiliary verb *are*). The experiment method is eyetracking; we have total reading times in milliseconds. 
 
@@ -363,8 +379,10 @@ The research  question is whether the difference in reading times between high a
 Load the following data-sets:
 
 ```{r}
-english<-read.table("data/embeddingenglish.txt",header=TRUE)
-dutch<-read.table("data/embeddingdutch.txt",header=TRUE)
+english<-read.table("data/embeddingenglish.txt",
+                    header=TRUE)
+dutch<-read.table("data/embeddingdutch.txt",
+                  header=TRUE)
 ```
 
 In an offline accuracy rating study on English double center-embedding constructions, @gibsonthomas99 found that grammatical constructions (e.g., example a below) were no less acceptable than ungrammatical constructions (e.g., example b) where a middle verb phrase (e.g., was cleaning every week) was missing.
