@@ -1,0 +1,1066 @@
+# Linear modeling theory {#ch:LMtheory} 
+
+So far, we have been studying linear models and linear mixed models rather informally. This approach is good enough for a first-pass at linear modeling. However, in order to fully understand the underlying machinery of linear models, the matrix formulation of the linear model is extremely important and useful. There is a price to be paid, however: one has to reactivate one's knowledge of matrix algebra, or one has to put in some work into reviewing elementary matrix theory. Fortunately, reviewing these concepts is not too difficult. We begin this chapter with a quick review of some basic concepts in matrix algebra, and then apply them to linear modeling. One very useful set of online lectures on the basic ideas behind linear algebra is the short set of videos by 3Blue1Brown: https://youtu.be/kjBOesZCoqc. You should look at these videos before reading the next section, if you have never encountered the basic concepts behind matrix algebra.
+
+## A quick review of some basic concepts in matrix algebra
+
+A rectangular array of numbers (real numbers in our case), with $n$ rows and $m$ columns, is a matrix. The main application for us will be in solving systems of linear equations in statistics. 
+
+An example of a $2\times 2$ matrix:
+
+```{r}
+## a 2x2 matrix:
+(m1<-matrix(1:4,2,2))
+```
+
+An important operation on matrices is the transpose: the rows become columns and the columns rows. If $X$ is  matrix, $X^T$ is its transpose. R has a function ```t()``` that transposes a matrix: 
+
+```{r}
+## transpose of a matrix:
+t(m1)
+```
+
+### Matrix addition, subtraction, and multiplication
+
+Matrix addition and subtraction are easy, they are cell-wise operations. An example shows how this works:
+
+```{r}
+m1+m1
+m1-m1
+```
+
+Matrix multiplication is defined as follows. Think of this simple situation first, where you have a vector of values:
+
+```{r}
+(m2<-rnorm(5))
+## this is a vector:
+str(m2)
+```
+
+If you want to find out the sum of the squares of these values ($\overset{n}{\underset{i=1}\sum} x_i ^2$), then you can multiply each value $x_i$ in m2 with itself, and sum up the result. This is called a **dot product** of two vectors (here, $m2$ repeated twice):
+
+$x_1 \cdot x_1+x_2 \cdot x_2+x_3 \cdot x_3+x_4 \cdot x_4+x_5 \cdot x_5$
+
+Using R:
+
+```{r}
+(sum(m2*m2))
+```
+
+An important observation we will need later is that if two vectors are orthogonal, i.e., at 90 degrees to one another, then their dot product is 0. A simple example is two vectors on the cartesian plane that go along the x and y axes:
+
+```{r}
+v1<-c(0,1)
+v2<-c(1,0)
+sum(v1*v2)
+```
+
+Matrix multiplication does exactly the above dot product operation (for arbitrarily large matrices). In R, matrix multiplication is carried out using a special operator (the * operator we are used to using for multiplication is used only for ordinary scalar multiplication). Notice that we have first converted the vector with $5$ cells into a $5\times 1$ matrix:
+
+```{r}
+t(matrix(m2))
+matrix(m2)
+t(matrix(m2))%*%matrix(m2)
+```
+
+Note that two matrices can only be multiplied if they are **conformable**: the number of columns of the first matrix has to be the same as the number of rows of the second matrix. So, if you have an $1\times 5$ matrix, you can multiply it with an $5\times 1$ matrix, and the end result of the multiplication will be an $1\times 1$ matrix (i.e., a scalar value). In the above example, the vector m2, converted to a matrix, is $5\times 1$ in dimensions; you cannot multiply a $5\times 1$  with a $5\times 1$  matrix, but the transform of m2 to a $1\times 5$ matrix can be multiplied with the $5\times 1$ matrix.
+
+More generally, if you have an $n\times m$ matrix and multiply it with an $m\times p$ matrix, you will get a $n\times p$ matrix, and the operations we have to do is the dot product operation, repeatedly applied to each row of the first matrix and each column of the second matrix. For example:
+
+```{r}
+X1<-matrix(rnorm(4),ncol=2)
+X2<-matrix(rnorm(4),ncol=2)
+## matrix multiplication:
+X1%*%X2
+## is a series of dot products of vectors:
+sum(X1[1,] * X2[,1])
+sum(X1[1,] * X2[,2])
+sum(X1[2,] * X2[,1])
+sum(X1[2,] * X2[,2])
+```
+
+Scalar matrix multiplication is easy. Multiplying a matrix M with a scalar value just amounts to multiplying the scalar with each cell of the matrix. The order of multiplication doesn't matter:
+
+```{r}
+5*m2
+m2*5
+```
+### Diagonal matrix and identity matrix
+
+A diagonal matrix is a square matrix that has zeros in its off-diagonals:
+
+```{r}
+diag(c(1,2,4))
+```
+
+An identity matrix is a diagonal matrix with 1's along its diagonal:
+
+```{r}
+diag(rep(1,3))
+```
+
+For a $3\times 3$ identity matrix, we can write $I_3$, and for an nxn identity matrix, $I_n$.
+
+Multiplying an identity matrix with any (conformable) matrix gives that matrix back:
+
+```{r}
+(I<-diag(c(1,1)))
+
+(m3<-matrix(c(6,7,8,9),2,2))
+(I%*%m3)
+
+
+## the matrix does not have to be square:
+(m4<-matrix(c(2,3,6,7,8,9),2,3))
+(I%*%m4)
+```
+
+
+### Powers of matrices 
+
+If A is a square $n\times n$ matrix, then we write $AA$ as $A^2$, and so on. If A is diagonal, then $AA$ is just the diagonal matrix with the diagonal elements of A squared:
+
+```{r}
+m<-diag(c(1,2,3))
+m%*%m
+```
+
+
+For all positive integers $m$, $I_n^m = I_n$.
+
+
+### Inverse of a matrix
+
+If $A,B$ are square matrices, of order $n\times n$, and the following relation is satisfied:
+
+\begin{equation}
+AB = BA= I_n
+\end{equation}
+
+then, $B$ is the inverse (it is unique) of $A$. We write $B=A^{-1}$.  The inverse is analogous to division and allows us to solve matrix equations: AB=C can be solved by post-multiplying both sides by $B^{-1}$ to get  $ABB^{-1}=AI=A=CB^{-1}$.
+
+Pre-multiplying a matrix like $A$ above by its inverse $A^{-1}$ gives an identity matrix (the R function ```solve``` computes the inverse of a matrix):
+
+```{r}
+(m5<-matrix(c(2,3,4,5),2,2))
+(round(solve(m5)%*%m5))
+```
+
+If a matrix is not invertible, we say that it is **singular**.
+
+A useful fact to know about non-singular matrices is the following relationship. If A and B are non-singular matrices then $(AB)^{-1} = B^{-1}A^{-1}$.
+
+### Linear independence, and rank
+
+An important concept in matrices is linear independence. Consider a $3\times 3$ matrix.
+The rows $r_1, r_2, r_3$ are linearly **dependent** if 
+$\alpha, \beta, \gamma$, not all zero, exist such that 
+$\alpha r_1+ \beta r_2+ \gamma r_3 = (0,0,0)$.
+
+If the rows or columns of a matrix A are linearly dependent, then the matrix is singular, i.e., it is not invertible.
+
+Linear independence leads us to the concept of the rank of a matrix.
+The column rank of a matrix is the maximum number of linearly independent columns in the matrix. The row rank is the maximum number of linearly independent rows. Column rank is always equal to row rank, so we can just call it rank.
+
+The above is the minimum vocabulary we need to understand the linear model in its matrix form. Let us now turn to the matrix formulation of the linear model.
+
+## The essentials of linear modeling theory
+
+Consider a deterministic function $\phi(\mathbf{x},\beta)$ which takes as input some variable values $x$ and some fixed values $\beta$.  A simple example would be some variable $x$ determining the value of another variable $y$ by multiplying $x$ with $\beta$.
+
+\begin{equation}
+y = \beta x
+\end{equation}
+
+Another example with two fixed values $\beta_0$ and $\beta_1$ determining $y$ is:
+
+\begin{equation}
+y = \beta_0 + \beta_1 x
+\end{equation}
+
+We can rewrite the above equation in matrix form as follows.
+
+
+\begin{equation}
+\begin{split}
+y=& \beta_0 + \beta_1 x\\
+=& \beta_0\times 1 + \beta_1 x\\
+=& \begin{pmatrix}
+1 & x\\
+\end{pmatrix}
+\begin{pmatrix}
+\beta_0 \\
+\beta_1 \\
+\end{pmatrix}
+\end{split}
+\end{equation}
+
+
+Because $y$ is a function of $x$ and the $2\times 1$ matrix $\beta=[\beta_0 
+\beta_1]^T$, the most general way to write the above function is as we did above:
+
+\begin{equation}
+y = \phi(x,\beta)
+\end{equation}
+
+
+In a statistical model, we don't expect an equation like $y=\phi(x,\beta)$ to fit all the points exactly. For example, we could come up with an 
+equation that, given a word's frequency, gives a prediction regarding that word's reaction time:
+
+\begin{equation}
+\hbox{predicted reaction time} = \beta_0 + \beta_1 \hbox{frequency}
+\end{equation}
+
+Given any single value of the frequency of a word, we will not get a perfectly correct prediction of the reaction time for that word. As a concrete example, see this data-set from the ```languageR``` library, which allows us to visualize the effect of (log) word frequency on (log) reaction times. This model is technically incorrect, because we have repeated measures; a linear mixed model would be more appropriate. But a simple linear model is sufficient to make the point here:  
+
+```{r message=FALSE}
+library(languageR)
+```
+
+```{r}
+data("lexdec")
+m<-lm(RT~Frequency,lexdec)
+summary(m)$coefficients
+plot(RT~Frequency,lexdec)
+abline(m)
+```
+
+Because the predicted values from the linear model don't exactly predict the observed vlues, we express the dependent variable $y$ as a non-deterministic function:
+
+\begin{equation}
+y=\phi(x,\beta,\epsilon)=\beta_0+\beta_1x+\epsilon
+\end{equation}
+
+Here, $\epsilon$ is an error random variable which is assumed to have some PDF (the normal distribution) associated with it. 
+It is assumed to have expectation (mean) 0, and some standard deviation (to be estimated from the data) $\sigma$.
+We can write this statement in compact form as $\epsilon \sim N(0,\sigma)$.
+
+The **general linear model** is a non-deterministic function like the one above:
+
+\begin{equation}
+Y=f(x)^T\beta +\epsilon 
+\end{equation}
+
+The matrix formulation will be written as below. $n$ refers to the number of data points (that is, $Y_1,\dots,Y_n$), and the index $j$ ranges from $1$ to $n$.
+
+\begin{equation}
+Y = X\beta + \epsilon \Leftrightarrow y_j = f(x_j)^T \beta + \epsilon_j, j=1,\dots,n
+\end{equation}
+
+To make this concrete, suppose we have three data points, i.e., $=3$. Then, the matrix formulation is
+
+\begin{equation}
+\begin{split}
+\begin{pmatrix}
+Y_1 \\
+Y_2\\
+Y_3 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & x_1 \\
+1 & x_2 \\
+1 & x_3 \\
+\end{pmatrix}
+\begin{pmatrix}
+\beta_0 \\
+\beta_1 \\
+\end{pmatrix}+ 
+\begin{pmatrix}
+\epsilon_1 \\
+\epsilon_2 \\
+\epsilon_3 \\
+\end{pmatrix}\\
+\end{split}
+\end{equation}
+
+We can write this in compact form as follows:
+
+\begin{equation}
+Y = X \beta + \epsilon
+\end{equation}
+
+Y is a  $3\times 1$ matrix, X is a $3\times 2$ matrix, $\beta$ $2\times 1$, and $\epsilon$  $3\times 1$. 
+
+Here, $f(x_1)^T = (1~x_1)$, and is the first row of the matrix $X$, 
+$f(x_2)^T = (1~x_2)$ is the second row, and 
+$f(x_3)^T = (1~x_3)$ is the third row.
+
+Note that the expectation or mean of Y, written $E[Y]$, is $X\beta$. In a data-set with $n$ data points, when there are $p$ parameters,  $\beta$ is a $p\times 1$ matrix, and $X$, which is called the **design matrix** or **model matrix**, is $n\times p$.
+
+### Least squares estimation: Geometric argument
+
+The above excursion into the matrix formulation of the linear model gives us the ability to understand how the $\beta$ parameters are estimated.
+
+When we have a deterministic model  $y=\phi(f(x)^T,\beta)=\beta_0+\beta_1x$, this implies a perfect fit to all data points. 
+This is like solving the equation $Ax=b$ in linear algebra: we solve for $\beta$ in $X\beta=y$ e.g., by pre-multiplying by $X^{-1}$: $X^{-1}X\beta=X^{-1}y$. For example, if we have:
+
+```{r}
+(X<-matrix(c(1,2,2,2,2,4,6,8,3,6,8,10),nrow =3,byrow=TRUE))
+(y<-matrix(c(1,5,6)))
+```
+
+We can solve for $x$ as follows (ginv is a function that computed a so-called generalized inverse for non-square matrices):
+
+```{r}
+library(MASS)
+## Solve for x in Ax=y:
+x<-ginv(X)%*%y
+## confirm:
+X%*%x
+```
+
+But when we have a non-deterministic model 
+$y=\phi(f(x)^T,\beta,\epsilon)$, there is no solution! Now, the best we can do in an equation like $Ax=b$ is to get $Ax$ to be as close an approximation as possible to $b$. In other words, we try to minimize $\mid b-Ax\mid$. 
+
+The goal is to estimate $\beta$; we want to find a value of $\beta$ such that the observed Y is as close to its expected value $X\beta$. 
+In order to be able to identify $\beta$ from $X\beta$, the linear transformation $\beta \rightarrow X\beta$ should be one-to-one, so that every possible value of $\beta$ gives a different $X\beta$. This in turn requires that X be of full rank $p$. So, if a design matrix X is $n\times p$, then it is necessary that $n\geq p$. There must be at least as many observations as parameters. If this is not true, then the model is said to be **over-parameterized**.
+
+Assuming that X is of full rank, and that $n>p$, 
+Y can be considered a point in n-dimensional space and the set of candidate $X\beta$ is a $p$-dimensional subspace of this space; see Figure~\ref{fig:leastsquares}. There will be one point in this subspace which is closest to Y in terms of Euclidean distance. The unique $\beta$ that corresponds to this point is the **least squares estimator** of $\beta$; we will call this estimator $\hat \beta$.
+
+
+```{r}
+knitr::include_graphics("figures/leastsq.pdf")
+```
+
+Notice that $\epsilon=(Y - X\hat\beta)$ and $X\beta$ are perpendicular to each other. Because the dot product of two perpendicular (orthogonal) vectors is 0, we get the result:
+
+\begin{equation}
+(Y- X\hat\beta)^T X \beta = 0 \Leftrightarrow (Y- X\hat\beta)^T X = 0 
+\end{equation}
+
+Multiplying out the terms, we proceed as follows. One result that we use here is that $(AB)^T = B^T A^T$.
+
+\begin{equation}
+\begin{split}
+~& (Y- X\hat\beta)^T X = 0  \\
+~& (Y^T- \hat\beta^T X^T)X = 0\\
+\Leftrightarrow& Y^T X - \hat\beta^TX^T X = 0 \quad  \\
+\Leftrightarrow& Y^T X = \hat\beta^TX^T X \\
+\Leftrightarrow& (Y^T X)^T = (\hat\beta^TX^T X)^T \\
+\Leftrightarrow& X^T Y = X^TX\hat\beta\\
+\end{split}
+\end{equation}
+
+This gives us the important result:
+
+\begin{equation}
+\hat\beta = (X^TX)^{-1}X^T Y
+\end{equation}
+
+X is of full rank, therefore $X^TX$ is invertible. One crucial detail, whose significance will only become clear in the chapter on contrast coding, is that the matrix $(X^TX)^{-1}X^T$---the generalized matrix inverse---is closely related to the design matrix, which in turn determines what comparisons are implied by the $\beta$ parameters.
+
+Let's look at a concrete example:
+
+```{r}
+(X<-matrix(c(rep(1,8),rep(c(-1,1),each=4),
+            rep(c(-1,1),each=2,2)),ncol=3))
+library(Matrix)
+## full rank:
+rankMatrix(X)
+```
+
+Notice that the inverted matrix is also symmetric. We will use this fact soon.
+
+The matrix $V=X^T X$ is a symmetric matrix, which means that $V^T=V$. 
+
+### The expectation and variance of the parameters beta
+
+Our model now is:
+
+\begin{equation}
+Y = X\beta + \epsilon
+\end{equation}
+
+Let  $\epsilon\sim N(0,\sigma)$. In other words, we are assuming that each value generated by the random variable $\epsilon$ is independent and it has the same distribution, i.e., it is identically distributed. This is sometimes shortened to the iid assumption. So we should technically be writing:
+
+\begin{equation}
+Y = X\beta + \epsilon \quad  \epsilon\sim N(0,\sigma)
+\end{equation}
+
+and add that $Y$ are independent and identically distributed.
+
+Some consequences of the above statements:
+
+- $E[\epsilon]=0$
+- $Var(\epsilon)=\sigma^2 I_n$
+- $E[Y]=X\beta=\mu$
+- $Var(Y)=\sigma^2 I_n$
+
+We can now derive the expectation and variance of the estimators $\hat\beta$. We need a fact about variances: when we want to know $Var(a\times B)$, where a is a constant and B is a random variable, this variance is $a^2 Var(B)$. In the matrix setting, Var(AB), where A is a conformable matrix consisting of some constant values, is $A Var(B)A^T$.
+
+\begin{equation}
+E[\hat\beta] = E[(X^TX)^{-1}X^T Y] = (X^TX)^{-1}X^T X\beta = \beta
+\end{equation}
+
+Notice that the above shows that $\hat\beta$ is a so-called "unbiased estimator" of $\beta$. The word unbiased doesn't mean that every time you compute an estimate of $\beta$, you are guaranteed to get an accurate estimate of the true $\beta$! Think about Type M error. 
+
+Next, we compute the variance:
+
+\begin{equation}
+Var(\hat\beta) = Var([(X^TX)^{-1}X^T] Y)
+\end{equation}
+
+Expanding the right hand side out:
+
+\begin{equation}
+Var([(X^TX)^{-1}X^T] Y) = [(X^TX)^{-1}X^T] Var(Y)  [(X^TX)^{-1}X^T]^{T}
+\end{equation}
+
+Replacing Var(Y) with its variance written in matrix form $\sigma^2 I$, and unpacking the transpose on the right-most expression $[(X^TX)^{-1}X^T]^{T}$:
+
+\begin{equation}
+Var(\hat\beta)= [(X^TX)^{-1}X^T] \sigma^2 I  X[(X^TX)^{-1}]^{T} 
+\end{equation}
+
+Since  $\sigma^2$ is a scalar we can move it to the left, and any matrix multiplied by I is the matrix itself, so we ignore I, getting:
+
+\begin{equation}
+Var(\hat\beta)= \sigma^2 [(X^TX)^{-1}X^T X[(X^TX)^{-1}]^{T} 
+\end{equation}
+
+Since $(X^TX)^{-1}X^T X = I$, we can simplify to
+
+\begin{equation}
+Var(\hat\beta)= \sigma^2 [(X^TX)^{-1}]^{T} 
+\end{equation}
+
+Now, $(X^TX)^{-1}$ is symmetric, so 
+$[(X^TX)^{-1}]^T=(X^TX)^{-1}$. This gives us:
+
+\begin{equation}
+Var(\hat\beta)= \sigma^2 (X^TX)^{-1} 
+\end{equation}
+
+Let's make this concrete using the ```lexdec``` data-set as an example:
+
+```{r}
+y<-lexdec$RT
+x<-lexdec$Frequency
+m0<-lm(y~x)
+
+## design matrix:
+X<-model.matrix(m0)
+head(X,n=4)
+## (X^TX)^{-1}
+invXTX<-solve(t(X)%*%X)
+## estimate of beta:
+(hat_beta<-invXTX%*%t(X)%*%y)
+
+## estimated variance (se^2) of the estimate of beta:
+(hat_sigma<-summary(m0)$sigma)
+(hat_var<-hat_sigma^2*invXTX)
+```
+
+What we have here is a bivariate normal distribution as an estimate of the $\beta$ parameters:
+
+\begin{equation}
+\begin{pmatrix}
+\hat\beta_0\\
+\hat\beta_1\\
+\end{pmatrix}
+\sim 
+N(\begin{pmatrix}
+6.58878\\
+-0.04287\\
+\end{pmatrix},
+\begin{pmatrix}
+ 0.000497 & -0.0000976\\
+-0.0000976 & 2.054e-05\\
+\end{pmatrix})
+\end{equation}
+
+The variance of a bivariate distribution has the variances along the diagonal, and the covariance between $\hat\beta_0$ and 
+$\hat\beta_1$ on the off-diagonals. Covariance is defined as:
+
+\begin{equation}
+Cov(\hat\beta_0,\hat\beta_1)=\hat\rho \hat\sigma_{\hat\beta_0}\hat\sigma_{\hat\beta_1}
+\end{equation}
+
+where $\hat\rho$ is the estimated correlation between $\beta_0$ and $\beta_1$.
+
+So $\hat\beta_0 \sim N(6.588778,0.022296)$ and $\hat\beta_1 \sim N(-0.042872,0.0045325)$, and $Cov(\hat\beta_0,\hat\beta_1)=-9.76\times 10^{-05}$. So the correlation between the $\hat\beta$ is 
+
+```{r}
+## hat rho:
+hat_var[1,2]/(sqrt(hat_var[1,1])*sqrt(hat_var[2,2]))
+```
+
+Notice what happens to this correlation when we center the predictor:
+
+```{r}
+x_c<-scale(x,scale=FALSE)
+m<-lm(y~x_c)
+## design matrix:
+X<-model.matrix(m)
+## (X^TX)^{-1}
+invXTX<-solve(t(X)%*%X)
+## estimate of beta:
+(hat_beta<-invXTX%*%t(X)%*%y)
+
+## estimated variance (se^2) of the estimate of beta:
+(hat_sigma<-summary(m0)$sigma)
+(hat_var<-hat_sigma^2*invXTX)
+## correlation:
+round(hatcvar[1,2]/(sqrt(hat_var[1,1])*sqrt(hat_var[2,2])),4)
+```
+
+The correlation now is (effectively) zero. This is one of the consequences of centering your predictor: the intercept-slope sampling distributions become independent. The relevance of this fact will be discussed in the chapters on contrast coding.
+
+### Hypothesis testing using Analysis of variance (ANOVA)
+
+We can compare two models, one nested inside another, as follows:
+
+```{r}
+m1<-lm(y~x_c)
+m0<-lm(y~1)
+anova(m0,m1)
+```
+
+The F-score you get here is actually the square of the t-value you get in the linear model summary:
+
+```{r}
+sqrt(anova(m0,m1)$F[2])
+summary(m1)$coefficients[2,3]
+```
+
+This is because $t^2 = F$. The proof is discussed on page 9 of the Dobson and Barnett book, but we also briefly alluded to this in the likelihood ratio test chapter.
+
+The ANOVA works as follows. We will use the matrix formulation throughout.  First define the residual as:
+
+\begin{equation}
+e = Y - X\hat\beta
+\end{equation}
+
+The square of this is: 
+
+\begin{equation}
+e^T e = (Y - X\hat \beta)^T (Y - X\hat \beta)
+\end{equation}
+
+
+Define the **deviance** as: 
+
+\begin{equation}
+\begin{split} \label{eq:deviance}
+D =& \frac{1}{\sigma^2} (Y - X\hat \beta)^T (Y - X\hat \beta)\\
+=& \frac{1}{\sigma^2}  (Y^T - \hat \beta^TX^T)(Y - X\hat \beta)\\
+=& \frac{1}{\sigma^2} (Y^T Y - Y^TX\hat \beta - \hat\beta^TX^T Y + \hat\beta^TX^T  X\hat \beta)\\
+%=& \frac{1}{\sigma^2} (Y^T Y - \hat\beta^TX^T Y)\\
+\end{split}
+\end{equation}
+
+Now, recall that $\hat \beta = (X^T X)^{-1} X^T Y$. Premultiplying both sides with $(X^T X)$, we get
+
+
+$(X^T X)\hat \beta =  X^T Y$
+
+It follows that we can rewrite the last line in equation \ref{eq:deviance} as follows: We can replace $(X^T X)\hat \beta$ with 
+$X^T Y$.
+
+\begin{equation}
+\begin{split}
+D =& \frac{1}{\sigma^2} (Y^T Y - Y^TX\hat \beta - \hat\beta^TX^T Y + \hat\beta^T \underline{X^T  X\hat \beta})\\
+=& \frac{1}{\sigma^2} (Y^T Y - Y^TX\hat \beta - \hat\beta^TX^T Y + \hat\beta^T \underline{X^T Y})\\
+=& \frac{1}{\sigma^2} (Y^T Y - Y^TX\hat \beta) \\
+\end{split}
+\end{equation}
+
+Notice that $Y^TX\hat \beta$ is a scalar ($1\times 1$) and is identical to  $\beta^TX^T Y$ (check this), so we could write:
+
+$D= \frac{1}{\sigma^2} (Y^T Y - \hat \beta^T X^T Y)$
+
+Assume now that we have data of size n.
+Suppose we have a null hypothesis $H_0: \beta=\beta_0$ and an alternative hypothesis $H_1: \beta=\beta_{1}$. Let the null hypothesis have q parameters, and the alternative p, where $q<p<n$.
+Let $X_0$ be the design matrix for $H_0$, and $X_1$ the design matrix for $H_1$.
+Compute the deviances $D_0$ and $D_1$ for each hypothesis, and compute $\Delta D$:
+
+\begin{equation}
+\begin{split}
+\Delta D =& D_0 - D_1 = \frac{1}{\sigma^2} [(Y^TY - \hat \beta_0 X_0^T Y) -  (Y^TY - \hat \beta_1 X_1^T Y)]\\
+=& \frac{1}{\sigma^2} [\hat \beta_1 X_1^T Y - \hat \beta_0 X_0^T Y]\\
+\end{split}
+\end{equation}
+
+It turns out that the F-statistic has the following distribution (called the F-distribution, defined in terms of two numerical parameters) if the null hypothesis is true:
+
+\begin{equation}
+F=\frac{\Delta D/(p-q)}{D_1/(n-p)} \sim F(p-q,n-p)
+\end{equation}
+
+So, an observed F value that lies in the tail of the F-distribution is inconsistent with the null hypothesis and allows us to reject it.
+
+The observed F-statistic is:
+
+\begin{equation}
+\begin{split}
+F=&\frac{\Delta D/(p-q)}{D_1/(n-p)} \\
+=& \frac{\hat \beta_1 X_1^T Y - \hat \beta_0^T X_0^T Y}{p-q} /
+\frac{Y^T Y - \hat \beta_1^T X_1^TY}{n-p}\\
+\end{split}
+\end{equation}
+
+Traditionally, the way the F-test is summarized is shown in Table \ref{tab:anovasummary}.
+
+\begin{table}[!htbp]
+\caption{The standard way to summarize an ANOVA analysis.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Source of variance & df & Sum of squares & Mean square\\
+\hline
+Model with $\beta_0$ & q & $\beta_0^T X_0^T Y$ & \\
+Improvement due to & p-q & $\hat \beta_1 X_1^T Y - \hat \beta_0^T X_0^T Y$ & $\frac{\hat \beta_1 X_1^T Y - \hat \beta_0^T X_0^T Y}{p-q}$\\
+$\beta_1$ & & & \\
+Residual & n-p & $Y^T Y - \hat \beta_1^T X_1^TY$  & $\frac{Y^T Y - \hat \beta_1^T X_1^TY}{n-p}$\\
+\hline
+Total & n & $y^T y$ & \\
+\hline
+\end{tabular}
+\end{center}
+\label{tab:anovasummary}
+\end{table}
+
+
+### The variance inflation factor: Checking for multicollinearity
+
+The linear modeling framework is very flexible, and allows us to add multiple predictors at the same time. For example, in the lexical decision data set, we could look at the effect of Frequency and FamilySize:
+
+```{r}
+m<-lm(RT~Frequency+FamilySize,lexdec)
+summary(m)
+```
+
+An  important issue here is **multicollinearity**. This occurs when multiple predictors are highly correlated. The consequence of this is that $X^T X$ can be nearly singular and the estimation equation 
+
+\begin{equation}
+X^TX \beta = X^T Y 
+\end{equation}
+
+is ill-conditioned: small changes in the data can cause large changes in $\beta$ (signs will flip for example). Also, some of the elements of $\sigma^2 (X^TX)^{-1}$ will be large--standard errors and covariances can be large.
+
+We can check for multicollinearity using the Variance Inflation Factor, VIF. 
+
+Suppose you have fitted a model with several predictors.
+The definition of $VIF_j$ for a predictor j is:
+
+\begin{equation}
+VIF_j = \frac{1}{1-R_j^2}
+\end{equation}
+
+where $R_j^2$ is called the coefficient of determination for predictor j. 
+It is obtained by regressing the j-th explanatory variable against all the 
+other explanatory variables.
+If a predictor j is uncorrelated with all other predictors, then $VIF_j=1$, and 
+if it is highly correlated with (some of) other predictors, the VIF will be high.
+
+Here is a practical example. 
+Consider frequency and family size in the lexdec data:
+
+```{r}
+library(car)
+vif(lm(RT~Frequency+FamilySize,lexdec))
+```
+
+Here is a somewhat worse situation:
+
+```{r}
+vif(lm(RT~FreqSingular+FreqPlural,lexdec))
+```
+
+If the predictors are uncorrelated, VIF will be near 1 in each case. Dobson et al mention that VIF of greater than 5 is cause for worry. 
+
+
+### Checking model assumptions
+
+In practical terms, the first thing you need to check is whether
+the residuals are normally distributed. This can be done by plotting the residuals against the quantiles of the normal distribution:
+
+```{r}
+library(car)
+qqPlot(residuals(m))
+```
+
+When the goal of the linear modeling is null hypothesis testing, this assumption is important.  One other  consequence of a violation of normality in linguistics is that it can reduce statistical power. We can test this latter point with a simulation. Let's simulate data with non-normal residuals:
+
+```{r}
+op<-par(mfrow=c(1,2),pty="s")
+x<-1:100
+## non-normal residuals:
+e<-rlnorm(100,mean=0,sd=1)
+res<-e-mean(e)
+y1<- 10 + 2*x+res
+qqPlot(residuals(lm(y1~x)))
+y2<- 10 + 2*x+rnorm(100,sd=10)
+qqPlot(residuals(lm(y2~x)))
+```
+
+We know that $H_0:\beta_1=0$ is false: it's 0.01. So here is an example of how often the statistical test fails to detect this significant effect compared to the case when the residual is normal.
+
+```{r}
+nsim<-1000
+n<-100
+x<-1:n
+store_y1_results<-rep(NA,nsim)
+store_y2_results<-rep(NA,nsim)
+for(i in 1:nsim){
+  e<-rlnorm(100,mean=0,sd=1)
+  res<-e-mean(e)
+  y1<- 10 + 0.01*x + res
+  m1<-lm(y1~x)
+  store_y1_results[i]<-summary(m1)$coefficients[2,4]
+  y2<- 10 + 0.01*x + rnorm(n,mean=0,sd=1)
+  m2<-lm(y2~x)
+  store_y2_results[i]<-summary(m2)$coefficients[2,4]
+}
+
+## power
+y1_results<-table(store_y1_results<0.05)
+y1_results[2]/sum(y1_results)
+
+y2_results<-table(store_y2_results<0.05)
+y2_results[2]/sum(y2_results)
+```
+
+The above simulation is just a crude demonstration and can be improved on considerably to reflect reality (exercise).
+
+How to test for normality of residuals?
+Komogorov-Smirnov and Shapiro-Wilk are formal tests of normality and are only useful for large samples; they not very powerful and not much better than diagnostic plots. 
+
+Apart from normality, we should also check the independence assumption (the errors are assumed to be independent). Index-plots plot residuals against observation number; note that they are not useful for small samples. An alternative is to compute the correlation between $e_i, e_{i+1}$ pairs of residuals. The auto-correlation function is not normally used in linear modeling (it's used more in time-series analyses), but can be used to check for this correlation:
+
+```{r}
+acf(residuals(m))
+```
+
+In our model (which is the multiple regression we did in connection with the collinearity issue), we have a serious violation of independence.
+
+Finally, we should check for homoscedasticity (equality of variance). 
+For checking this, plot residuals against fitted values. Fan out suggests violation. A quadratic trend in a plot of residuals against predictor x could suggest that a quadratic predictor term is needed; note that $X^T e = 0$, so we will never have a perfect straight line in such a plot.
+
+R also provides a diagnostics plot, which is generated using the model fit:
+
+```{r}
+op<-par(mfrow=c(2,2),pty="s")
+plot(m)
+```
+
+### Generalized linear models
+
+#### Introduction: Logistic regression
+
+We start with an example data-set that appears in the Dobson et al book: the Beetle dataset.
+
+This data-set shows the number of beetles killed when they were exposed to different doses of some toxic chemical. 
+
+```{r}
+(beetle<-read.table("data/beetle.txt",header=TRUE))
+```
+
+The research question is: does dose affect probability of killing insects? The first thing we probably want to do is calculate the proportions:
+
+```{r}
+(beetle$propn.dead<-beetle$killed/beetle$number)
+```
+
+It's also reasonable to just plot the relationship between dose and proportion of deaths.
+
+```{r}
+with(beetle,plot(dose,propn.dead))
+```
+
+Notice that the y-axis is by definition bounded between 0 and 1.
+
+We could easily fit a linear model to this data-set. We may want to center the predictor, for reasons discussed earlier:
+
+```{r}
+fm<-lm(propn.dead~scale(dose,scale=FALSE),beetle)
+summary(fm)
+```
+
+```{r}
+with(beetle,plot(scale(dose,scale=FALSE),
+                 propn.dead))
+abline(coef(fm))
+```
+
+What's the interpretation of the coefficients?
+
+Clearly the linear model is failing us here. This is the motivation for the generalized linear model. 
+
+Instead of using the linear model, we model log odds instead of proportions as a function of dose.  Odds are defined as:
+
+\begin{equation}
+\frac{p}{1-p}
+\end{equation}
+
+and taking the $\log$ will give us log odds.
+
+We are going to model log odds (instead of probability) as a linear function of dose.
+
+\begin{equation}
+\log \frac{p}{1-p} = \beta_0 + \beta_1 \hbox{dose}
+\end{equation}
+
+The model above is called the logistic regression model. 
+
+Once we have estimated the $\beta$ parameters,  
+we can move back from the log odds space to probability space using simple algebra.
+
+Given a model like
+
+\begin{equation}
+\log \frac{p}{1-p} = \beta_0 + \beta_1 \hbox{dose}
+\end{equation}
+
+If we exponentiate each side, we get:
+
+\begin{equation}
+\exp \log \frac{p}{1-p} = \frac{p}{1-p} = \exp( \beta_0 + \beta_1 \hbox{dose})
+\end{equation}
+
+So now we just solve for p, and get (check this):
+
+\begin{equation} \label{problogisticregression}
+p = \frac{\exp( \beta_0 + \beta_1 \hbox{dose})}{1+\exp( \beta_0 + \beta_1 \hbox{dose})}
+\end{equation}
+
+We fit the model in R as follows. Note that as long as we are willing to avoid interpreting the intercept and just interpret the estimate of $\beta_1$, there is no need to center the predictor here:
+
+```{r}
+fm1<-glm(propn.dead~dose,
+         binomial(logit),
+         weights=number,
+         data=beetle)
+summary(fm1)
+```
+
+We can also plot the observed proportions and the fitted values together; the fit looks pretty good.
+
+```{r propndeadplot,fig.width=6}
+plot(propn.dead~dose,beetle)
+points(fm1$fitted~dose,beetle,pch=4)
+```
+
+We can now compute the log odds of death for concentration 1.7552 (for example):
+
+```{r}
+## compute log odds of death for 
+## concentration 1.7552:
+x<-as.matrix(c(1, 1.7552))
+#log odds:
+(log.odds<-t(x)%*%coef(fm1))
+```
+
+We can also obtain the variance-covariance matrix of the fitted coefficients:
+
+```{r}
+### compute CI for log odds:
+## Get vcov matrix:
+(vcovmat<-vcov(fm1))
+## x^T VCOV x for dose 1.7552:
+(var.log.odds<-t(x)%*%vcovmat%*%x)
+```
+
+And using a normal approximation, based on the asymptotic properties discussed in section~\ref{asymptotic}, we can compute the confidence interval for the log odds
+of death given dose 1.7552:
+
+```{r}
+##lower
+(lower<-log.odds-1.96*sqrt(var.log.odds))
+##upper
+(upper<-log.odds+1.96*sqrt(var.log.odds))
+```
+
+The lower and upper confidence interval bounds on the 
+probability scale can be computed by 
+using equation~\ref{problogisticregression}.
+
+
+```{r}
+(meanprob<-exp(log.odds)/(1+exp(log.odds)))
+(lowerprob<-exp(lower)/(1+exp(lower)))
+(upperprob<-exp(upper)/(1+exp(upper)))
+```
+
+So for dose 1.7552, the probability of death is 0.36,
+with 95% confidence intervals 0.30 and 
+0.43.
+
+
+Note that one should not try to predict outside the range of the design matrix. For example, in the beetle data, the dose ranges from 1.69 to 1.88. We should not try to compute probabilities for dose 2.5, say, since we have no knowledge about whether the relationship remains unchanged beyond the upper bound of our design matrix.
+
+#### Multiple logistic regression: Example from Hindi data}
+
+In the Hindi data, we can compute skipping probability, the probability of skipping a word entirely (i.e., never fixating it). We first have to create a vector that has value 1 if the word has 0~ms total reading time, and 0 otherwise. 
+
+\begin{verbatim}
+skip<-ifelse(hindi10$TFT==0,1,0)
+hindi10$skip<-skip
+fm_skip<-glm(skip ~ word_complex+SC,family=binomial(),hindi10)
+\end{verbatim}
+
+The above example also illustrates the second way to set up the data for logistic (multiple) regression: the dependent variable can simply be a 1,0 value instead of proportions. So, in the beetle data, you could recode the data to have 1s and 0s instead of proportions. Assuming that you have recoded the column for status (dead or alive after exposure), the glm function call would be:
+
+\begin{verbatim}
+glm(dead~dose,family=binomial(),beetle)
+\end{verbatim}
+
+Note that logistic regression assumes independence of each data point; this assumption is violated in the Hindi data.
+
+#### Deviance
+
+We saw encountered deviance earlier in connection with ANOVA. 
+
+The deviance is more generally defined as
+
+\begin{equation}
+D = 2[\ell(b_{max}; y) - \ell(b; y)]
+\end{equation}
+
+\noindent
+where $\ell(b_{max}; y) $ is the log likelihood of the saturated model (the model with the maximal number of parameters that can be fit), and $\ell(b; y) $ is the log likelihood of the model with the parameters b.
+As we saw earlier, D has a chi-squared distribution.
+
+##### Deviance for the normal distribution
+
+The deviance is
+
+$D = \frac{1}{\sigma^2}\sum (y_i - \bar{y})^2$
+
+[See p.\ 80 onwards in the Dobson et al book for proofs and more detail.]
+
+##### Deviance for the binomial distribution 
+
+Deviance is defined as $D=\sum d_i$, where:
+
+\begin{equation}
+d_i = -2 \times n_i [ y_i \log(\frac{\hat{\mu}_i}{y_i}) + (1-y_i) \log (\frac{1-\hat{\mu}_i}{1-y_i}) ]  
+\end{equation}
+
+The basic idea here is that if the model fit is good, Deviance will have a $\chi^2$ distribution with $N-p$ degrees of freedom.
+So that is what we will use for assessing model fit.
+
+We will also use deviance for hypothesis testing.
+The difference in deviance (residual deviance) between two models also has a $\chi^2$ distribution (this should remind you of ANOVA), with dfs being $p-q$, where $q$ is the number of parameters in the first model, and $p$ the number of parameters in the second.
+
+We discuss hypothesis testing first, then evaluating goodness of fit using deviance.
+
+##### Hypothesis testing: Residual deviance
+
+Returning to our beetle data, let's say we fit our model:
+
+```{r}
+glm1<-glm(propn.dead~dose,binomial(logit),
+          weights=number,data=beetle)
+```
+
+The summary output shows us the number of iterations that led to the parameter estimates:
+
+```{r}
+summary(glm1)
+```
+
+But we also see something called **Null deviance** and **Residual deviance**. These are used to evaluate quality of model fit. Recall that we can compute the fitted values and compare them to the observed values:
+
+```{r propndead2,fig.width=6}
+# beta.hat is (-60.71745 ,   34.27033)
+(eta.hat<-  -60.71745 +   34.27033*beetle$dose)
+(mu.hat<-exp(eta.hat)/(1+exp(eta.hat)))
+
+# compare mu.hat with observed proportions
+plot(mu.hat,beetle$propn.dead)
+abline(0,1)
+```
+
+To evaluate whether dose has an effect, we will do something analogous to the model comparison methods we saw earlier. First, fit a model with only an intercept. Notice that the null deviance is 284 on 7 degrees of freedom.
+
+```{r propndead3,fig.width=6}
+null.glm<-glm(propn.dead~1,binomial(logit),
+          weights=number,data=beetle)
+summary(null.glm)
+
+plot(beetle$dose,beetle$propn.dead,xlab="log concentration",
+    ylab="proportion dead",main="minimal model")
+points(beetle$dose,null.glm$fitted,pch=4)
+```
+
+Add a term for dose. Now, the residual deviance is 11.2 on 6 dfs:
+
+```{r propndead4,fig.width=6}
+dose.glm<-glm(propn.dead~dose,binomial(logit),
+          weights=number,data=beetle)
+summary(dose.glm)
+plot(beetle$dose,beetle$propn.dead,xlab="log concentration",
+    ylab="proportion dead",main="dose model")
+points(beetle$dose,dose.glm$fitted,pch=4)
+```
+
+The change in deviance from the null model is 284.2-11.2=273 on 1 df. Since the critical $\chi_1^2 = 3.84$, we reject the null hypothesis that $\beta_1 = 0$.
+
+You can do the model comparison using the anova function. Note that no statistical test is calculated; you need to do that yourself.
+
+```{r}
+anova(null.glm,dose.glm)
+```
+
+Actually, you don't even need to define the null model; the anova function automatically compares the fitted model to the null model:
+
+```{r}
+anova(dose.glm)
+```
+
+##### Assessing goodness of fit of a fitted model
+
+The deviance for a given degrees of freedom $v$ should have a $\chi_v^2$ distribution for the model to be adequate. As an example, consider the null model above. The deviance is clearly much larger than the 95th percentile cutoff point of the chi-squared distribution with 7 dfs, so the model is not adequate.
+
+```{r}
+deviance(null.glm)
+## critical value:
+qchisq(0.95,df=7)
+```
+
+Now consider the model with dose as predictor. The deviance is less than the 95th percentile, so the fit is adequate.
+
+```{r}
+deviance(dose.glm)
+qchisq(0.95,df=6)
+```
+
+##### Residuals in GLMs
+
+In the binomial distribution, Deviance $D=\sum d_i$, where:
+
+\begin{equation}
+d_i = -2 \times n_i [ y_i \log(\frac{\hat{\mu}_i}{y_i}) + (1-y_i) \log (\frac{1-\hat{\mu}_i}{1-y_i}) ]  
+\end{equation}
+
+The $i$-th deviance residual is defined as:
+
+\begin{equation}
+  e_{D,i}= sgn(y_i-\hat{\mu}_i) \times \sqrt{d_i}
+\end{equation}
+
+These can be used to check for model adequacy as discussed earlier in the context of linear models.
+One can just use the plot function inspect the residuals:
+
+```{r residualsglm,fig.width=6}
+op<-par(mfrow=c(2,2),pty="s")
+plot(dose.glm)
+```
+
+Alternatively, one can do this by hand:
+
+{r qqnormglm,fig.width=6}
+op<- par(mfrow=c(2,2),pty="s")
+plot(dose.glm$resid,
+     xlab="index",ylab="residuals",main="Index plot")
+qqnorm(dose.glm$resid,main="QQ-plot")
+hist(dose.glm$resid,xlab="Residuals",main="Histogram")
+plot(dose.glm$fit,dose.glm$resid,xlab="Fitted values",
+     ylab="Residuals",
+     main="Residuals versus fitted values")
+```
+
+
