@@ -317,10 +317,10 @@ The goal is to estimate $\beta$; we want to find a value of $\beta$ such that th
 In order to be able to identify $\beta$ from $X\beta$, the linear transformation $\beta \rightarrow X\beta$ should be one-to-one, so that every possible value of $\beta$ gives a different $X\beta$. This in turn requires that X be of full rank $p$. So, if a design matrix X is $n\times p$, then it is necessary that $n\geq p$. There must be at least as many observations as parameters. If this is not true, then the model is said to be **over-parameterized**.
 
 Assuming that X is of full rank, and that $n>p$, 
-Y can be considered a point in n-dimensional space and the set of candidate $X\beta$ is a $p$-dimensional subspace of this space; see Figure~\ref{fig:leastsquares}. There will be one point in this subspace which is closest to Y in terms of Euclidean distance. The unique $\beta$ that corresponds to this point is the **least squares estimator** of $\beta$; we will call this estimator $\hat \beta$.
+Y can be considered a point in n-dimensional space and the set of candidate $X\beta$ is a $p$-dimensional subspace of this space; see Figure \@ref(fig:leatsquares). There will be one point in this subspace which is closest to Y in terms of Euclidean distance. The unique $\beta$ that corresponds to this point is the **least squares estimator** of $\beta$; we will call this estimator $\hat \beta$.
 
 
-```{r}
+```{r leastsquares,echo=FALSE,fig.cap="Geometric visualization of the distance minimization procedure for estimating the parameters in a linear model."}
 knitr::include_graphics("figures/leastsq.pdf")
 ```
 
@@ -503,7 +503,7 @@ invXTX<-solve(t(X)%*%X)
 (hat_sigma<-summary(m0)$sigma)
 (hat_var<-hat_sigma^2*invXTX)
 ## correlation:
-round(hatcvar[1,2]/(sqrt(hat_var[1,1])*sqrt(hat_var[2,2])),4)
+round(hat_var[1,2]/(sqrt(hat_var[1,1])*sqrt(hat_var[2,2])),4)
 ```
 
 The correlation now is (effectively) zero. This is one of the consequences of centering your predictor: the intercept-slope sampling distributions become independent. The relevance of this fact will be discussed in the chapters on contrast coding.
@@ -623,7 +623,9 @@ Total & n & $y^T y$ & \\
 \end{table}
 
 
-### The variance inflation factor: Checking for multicollinearity
+### Some further important topics in linear modeling
+
+#### The variance inflation factor: Checking for multicollinearity
 
 The linear modeling framework is very flexible, and allows us to add multiple predictors at the same time. For example, in the lexical decision data set, we could look at the effect of Frequency and FamilySize:
 
@@ -660,84 +662,52 @@ Consider frequency and family size in the lexdec data:
 
 ```{r}
 library(car)
-vif(lm(RT~Frequency+FamilySize,lexdec))
+m<-lm(RT~Frequency+FamilySize,lexdec)
+vif(m)
 ```
 
 Here is a somewhat worse situation:
 
 ```{r}
-vif(lm(RT~FreqSingular+FreqPlural,lexdec))
+m<-lm(RT~FreqSingular+FreqPlural,lexdec)
+vif(m)
 ```
 
 If the predictors are uncorrelated, VIF will be near 1 in each case. Dobson et al mention that VIF of greater than 5 is cause for worry. 
 
 
-### Checking model assumptions
+#### Checking model assumptions
 
-In practical terms, the first thing you need to check is whether
-the residuals are normally distributed. This can be done by plotting the residuals against the quantiles of the normal distribution:
+In practical terms, when doing hypothesis testing with the linear model, the first thing you need to check is whether
+the residuals are normally distributed. This is because the normality assumption is a crucial part of the assumptions in the hypothesis test (if the goal is only estimation of the parameters, the normality assumption is less important; however, there are subtleties even in this case, which we will discuss in the simulation chapter).
+One common way to check for (approximate) normality is to plot the residuals against the quantiles of the normal distribution:
 
 ```{r}
 library(car)
 qqPlot(residuals(m))
 ```
 
-When the goal of the linear modeling is null hypothesis testing, this assumption is important.  One other  consequence of a violation of normality in linguistics is that it can reduce statistical power. We can test this latter point with a simulation. Let's simulate data with non-normal residuals:
-
-```{r}
-op<-par(mfrow=c(1,2),pty="s")
-x<-1:100
-## non-normal residuals:
-e<-rlnorm(100,mean=0,sd=1)
-res<-e-mean(e)
-y1<- 10 + 2*x+res
-qqPlot(residuals(lm(y1~x)))
-y2<- 10 + 2*x+rnorm(100,sd=10)
-qqPlot(residuals(lm(y2~x)))
-```
-
-We know that $H_0:\beta_1=0$ is false: it's 0.01. So here is an example of how often the statistical test fails to detect this significant effect compared to the case when the residual is normal.
-
-```{r}
-nsim<-1000
-n<-100
-x<-1:n
-store_y1_results<-rep(NA,nsim)
-store_y2_results<-rep(NA,nsim)
-for(i in 1:nsim){
-  e<-rlnorm(100,mean=0,sd=1)
-  res<-e-mean(e)
-  y1<- 10 + 0.01*x + res
-  m1<-lm(y1~x)
-  store_y1_results[i]<-summary(m1)$coefficients[2,4]
-  y2<- 10 + 0.01*x + rnorm(n,mean=0,sd=1)
-  m2<-lm(y2~x)
-  store_y2_results[i]<-summary(m2)$coefficients[2,4]
-}
-
-## power
-y1_results<-table(store_y1_results<0.05)
-y1_results[2]/sum(y1_results)
-
-y2_results<-table(store_y2_results<0.05)
-y2_results[2]/sum(y2_results)
-```
-
-The above simulation is just a crude demonstration and can be improved on considerably to reflect reality (exercise).
-
 How to test for normality of residuals?
-Komogorov-Smirnov and Shapiro-Wilk are formal tests of normality and are only useful for large samples; they not very powerful and not much better than diagnostic plots. 
+Kolmogorov-Smirnov and Shapiro-Wilk are formal tests of normality and are only useful for large samples; they not very powerful and not much better than diagnostic plots like the qq-plot shown above. 
 
-Apart from normality, we should also check the independence assumption (the errors are assumed to be independent). Index-plots plot residuals against observation number; note that they are not useful for small samples. An alternative is to compute the correlation between $e_i, e_{i+1}$ pairs of residuals. The auto-correlation function is not normally used in linear modeling (it's used more in time-series analyses), but can be used to check for this correlation:
+Apart from normality, we should also check the independence assumption (the errors are assumed to be independent). Index-plots display residuals against observation number; note that they are not useful for small samples. An alternative is to compute the correlation between $e_i, e_{i+1}$ pairs of residuals. The auto-correlation function is not normally used in linear modeling (it's used more in time-series analyses), but can be used to check for this correlation:
 
 ```{r}
 acf(residuals(m))
 ```
 
-In our model (which is the multiple regression we did in connection with the collinearity issue), we have a serious violation of independence.
+In our model (which is the multiple regression we did in connection with the collinearity issue), we have a serious violation of independence. This is because in this model we are not taking  into account the fact that we have repeated measures. The repeated measures create a dependency in the residuals, violating the independence assumption. This problem can be largely solved by fitting a linear mixed model:
+
+```{r}
+library(lme4)
+m<-lmer(RT~FreqSingular+FreqPlural+(1|Subject),lexdec)
+acf(residuals(m))
+```
+
+The linear mixed model is taking the repeated measurements property into account.
 
 Finally, we should check for homoscedasticity (equality of variance). 
-For checking this, plot residuals against fitted values. Fan out suggests violation. A quadratic trend in a plot of residuals against predictor x could suggest that a quadratic predictor term is needed; note that $X^T e = 0$, so we will never have a perfect straight line in such a plot.
+For checking this, plot residuals against fitted values. A fanning-out suggests violation. A quadratic trend in a plot of residuals against predictor x could suggest that a quadratic predictor term is needed; note that we will never have a perfect straight line in such a plot.
 
 R also provides a diagnostics plot, which is generated using the model fit:
 
@@ -746,13 +716,15 @@ op<-par(mfrow=c(2,2),pty="s")
 plot(m)
 ```
 
+In linear mixed models, there is a package called `influence.ME` [@influenceme] that allows one to check model assumptions.
+
 ### Generalized linear models
 
 #### Introduction: Logistic regression
 
-We start with an example data-set that appears in the Dobson et al book: the Beetle dataset.
+We start with an example data-set that appears in the Dobson et al book: the Beetle data-set. Although not a linguistic or psychological data-set, it is a good entry point into generalized linear models. Later we will apply the theory to psycholinguistic data.
 
-This data-set shows the number of beetles killed when they were exposed to different doses of some toxic chemical. 
+The Beetle data-set shows the number of beetles killed when they were exposed to different doses of some toxic chemical. 
 
 ```{r}
 (beetle<-read.table("data/beetle.txt",header=TRUE))
@@ -776,8 +748,10 @@ We could easily fit a linear model to this data-set. We may want to center the p
 
 ```{r}
 fm<-lm(propn.dead~scale(dose,scale=FALSE),beetle)
-summary(fm)
+summary(fm)$coefficients
 ```
+
+Next, add the best-fit (linear model) line to the plot:
 
 ```{r}
 with(beetle,plot(scale(dose,scale=FALSE),
@@ -785,11 +759,9 @@ with(beetle,plot(scale(dose,scale=FALSE),
 abline(coef(fm))
 ```
 
-What's the interpretation of the coefficients?
+What's the interpretation of the coefficients? Since the predictor is centered, the intercept represents the mean proportion of beetles killed (0.62), and the slope represents the increase in the proportion of beetles killed when the dose is increased by one unit, from an initial dose of 0. The proportion of beetles killed with one unit increase in dose is larger than 1, which is obviously impossible for a proportion. It is because of problems like these that a simple linear model does not suffice for such data.
 
-Clearly the linear model is failing us here. This is the motivation for the generalized linear model. 
-
-Instead of using the linear model, we model log odds instead of proportions as a function of dose.  Odds are defined as:
+Instead of using the linear model, we model log odds instead of proportions as a function of dose.  Odds are defined as the ratio of the probability of success and the probability of failure (here, success is operationalized as the beetles being killed):
 
 \begin{equation}
 \frac{p}{1-p}
@@ -806,7 +778,7 @@ We are going to model log odds (instead of probability) as a linear function of 
 The model above is called the logistic regression model. 
 
 Once we have estimated the $\beta$ parameters,  
-we can move back from the log odds space to probability space using simple algebra.
+we can move back from log odds space to probability space using simple algebra.
 
 Given a model like
 
@@ -830,11 +802,13 @@ We fit the model in R as follows. Note that as long as we are willing to avoid i
 
 ```{r}
 fm1<-glm(propn.dead~dose,
-         binomial(logit),
+         family=binomial(logit),
          weights=number,
          data=beetle)
 summary(fm1)
 ```
+
+In the glm function call, `binomial(logit)` can be written simply as `binomial()`, as the logit link is the default. Other possible links are probit, cauchit, log, and cloglog---see the documentation in R for `family` for details.
 
 We can also plot the observed proportions and the fitted values together; the fit looks pretty good.
 
@@ -853,7 +827,7 @@ x<-as.matrix(c(1, 1.7552))
 (log.odds<-t(x)%*%coef(fm1))
 ```
 
-We can also obtain the variance-covariance matrix of the fitted coefficients:
+We can also obtain the variance-covariance matrix of the fitted coefficients, and use it to compute the variance-covariance matrix for the does 1.7552:
 
 ```{r}
 ### compute CI for log odds:
@@ -863,7 +837,7 @@ We can also obtain the variance-covariance matrix of the fitted coefficients:
 (var.log.odds<-t(x)%*%vcovmat%*%x)
 ```
 
-And using a normal approximation, based on the asymptotic properties discussed in section~\ref{asymptotic}, we can compute the confidence interval for the log odds
+Assuming that the log odds have a distribution that is approximately normal, we can compute the confidence interval for the log odds
 of death given dose 1.7552:
 
 ```{r}
@@ -875,7 +849,7 @@ of death given dose 1.7552:
 
 The lower and upper confidence interval bounds on the 
 probability scale can be computed by 
-using equation~\ref{problogisticregression}.
+using equation \ref{problogisticregression}.
 
 
 ```{r}
@@ -893,21 +867,25 @@ Note that one should not try to predict outside the range of the design matrix. 
 
 #### Multiple logistic regression: Example from Hindi data}
 
-In the Hindi data, we can compute skipping probability, the probability of skipping a word entirely (i.e., never fixating it). We first have to create a vector that has value 1 if the word has 0~ms total reading time, and 0 otherwise. 
+We have eyetracking data from 10 participants reading Hindi sentences. We can compute skipping probability, the probability of skipping a word entirely (i.e., never fixating it). We first have to create a vector that has value 1 if the word has 0~ms total reading time, and 0 otherwise. 
 
-\begin{verbatim}
+```{r}
+hindi10<-read.table("data/hindi10.txt",header=TRUE)
 skip<-ifelse(hindi10$TFT==0,1,0)
 hindi10$skip<-skip
+## display relevant columns:
+head(hindi10[,c(1,2,3,24,33,34)])
 fm_skip<-glm(skip ~ word_complex+SC,family=binomial(),hindi10)
-\end{verbatim}
+summary(fm_skip)
+```
 
-The above example also illustrates the second way to set up the data for logistic (multiple) regression: the dependent variable can simply be a 1,0 value instead of proportions. So, in the beetle data, you could recode the data to have 1s and 0s instead of proportions. Assuming that you have recoded the column for status (dead or alive after exposure), the glm function call would be:
+The above example also illustrates the second way to set up the data for logistic (multiple) regression: the dependent variable can simply be a 1,0 value instead of proportions. So, in the beetle data, you could recode the data to have 1s and 0s instead of proportions. Assuming that you have recoded the column for status (dead or alive after exposure), the glm function call for the Beetle data-set would be:
 
 \begin{verbatim}
 glm(dead~dose,family=binomial(),beetle)
 \end{verbatim}
 
-Note that logistic regression assumes independence of each data point; this assumption is violated in the Hindi data.
+Note that logistic regression assumes independence of each data point; this assumption is violated in the Hindi data, because it has repeated measures data.
 
 #### Deviance
 
@@ -916,34 +894,32 @@ We saw encountered deviance earlier in connection with ANOVA.
 The deviance is more generally defined as
 
 \begin{equation}
-D = 2[\ell(b_{max}; y) - \ell(b; y)]
+D = 2[logLik(\bar{x}; y) - logLik(mu_0; y)]
 \end{equation}
 
 \noindent
-where $\ell(b_{max}; y) $ is the log likelihood of the saturated model (the model with the maximal number of parameters that can be fit), and $\ell(b; y) $ is the log likelihood of the model with the parameters b.
+where $logLik(\bar{x}; y)$ is the log likelihood of the saturated model (the model with the maximal number of parameters that can be fit), and $logLik(mu_0; y)$ is the log likelihood of the model with parameter of interest having the null hypothesis value $\mu_0$.
 As we saw earlier, D has a chi-squared distribution.
 
-##### Deviance for the normal distribution
+The deviance for the normal distribution is
 
-The deviance is
-
-$D = \frac{1}{\sigma^2}\sum (y_i - \bar{y})^2$
+\begin{equation}
+D = \frac{1}{\sigma^2}\sum (y_i - \bar{y})^2
+\end{equation}
 
 [See p.\ 80 onwards in the Dobson et al book for proofs and more detail.]
 
-##### Deviance for the binomial distribution 
-
-Deviance is defined as $D=\sum d_i$, where:
+Deviance for the binomial distribution is defined as $D=\sum d_i$, where:
 
 \begin{equation}
-d_i = -2 \times n_i [ y_i \log(\frac{\hat{\mu}_i}{y_i}) + (1-y_i) \log (\frac{1-\hat{\mu}_i}{1-y_i}) ]  
+d_i = -2 \times n_i [ y_i \log\left(\frac{\hat{\mu}_i}{y_i}\right) + (1-y_i) \log \left(\frac{1-\hat{\mu}_i}{1-y_i}\right) ]  
 \end{equation}
 
-The basic idea here is that if the model fit is good, Deviance will have a $\chi^2$ distribution with $N-p$ degrees of freedom.
+The basic idea here is that if the model fit is good, Deviance will have a $\chi^2$ distribution with $N-p$ degrees of freedom, where $N$ is the number of data-points, and $p$ the number of parameters.
 So that is what we will use for assessing model fit.
 
 We will also use deviance for hypothesis testing.
-The difference in deviance (residual deviance) between two models also has a $\chi^2$ distribution (this should remind you of ANOVA), with dfs being $p-q$, where $q$ is the number of parameters in the first model, and $p$ the number of parameters in the second.
+The difference in deviance (confusingly called residual deviance) between two models also has a $\chi^2$ distribution (this should remind you of ANOVA), with dfs being $p-q$, where $q$ is the number of parameters in the nukk model, and $p$ the number of parameters in the full model.
 
 We discuss hypothesis testing first, then evaluating goodness of fit using deviance.
 
@@ -955,6 +931,8 @@ Returning to our beetle data, let's say we fit our model:
 glm1<-glm(propn.dead~dose,binomial(logit),
           weights=number,data=beetle)
 ```
+
+
 
 The summary output shows us the number of iterations that led to the parameter estimates:
 
