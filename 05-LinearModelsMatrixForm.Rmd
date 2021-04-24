@@ -247,7 +247,7 @@ The matrix formulation will be written as below. $n$ refers to the number of dat
 Y = X\beta + \epsilon \Leftrightarrow y_j = f(x_j)^T \beta + \epsilon_j, j=1,\dots,n
 \end{equation}
 
-To make this concrete, suppose we have three data points, i.e., $=3$. Then, the matrix formulation is
+To make this concrete, suppose we have three data points, i.e., $n=3$. Then, the matrix formulation is
 
 \begin{equation}
 \begin{split}
@@ -480,7 +480,12 @@ Cov(\hat\beta_0,\hat\beta_1)=\hat\rho \hat\sigma_{\hat\beta_0}\hat\sigma_{\hat\b
 
 where $\hat\rho$ is the estimated correlation between $\beta_0$ and $\beta_1$.
 
-So $\hat\beta_0 \sim N(6.588778,0.022296)$ and $\hat\beta_1 \sim N(-0.042872,0.0045325)$, and $Cov(\hat\beta_0,\hat\beta_1)=-9.76\times 10^{-05}$. So the correlation between the $\hat\beta$ is 
+So 
+
+- $\hat\beta_0 \sim N(6.588778,0.022296)$
+- $\hat\beta_1 \sim N(-0.042872,0.0045325)$, and - $Cov(\hat\beta_0,\hat\beta_1)=-9.76\times 10^{-05}$. 
+
+So the correlation between the $\hat\beta$ is 
 
 ```{r}
 ## hat rho:
@@ -610,12 +615,12 @@ Traditionally, the way the F-test is summarized is shown in Table \ref{tab:anova
 \hline
 Source of variance & df & Sum of squares & Mean square\\
 \hline
-Model with $\beta_0$ & q & $\beta_0^T X_0^T Y$ & \\
+Model with $\beta_0$ & q & $\hat\beta_0^T X_0^T Y$ & \\
 Improvement due to & p-q & $\hat \beta_1 X_1^T Y - \hat \beta_0^T X_0^T Y$ & $\frac{\hat \beta_1 X_1^T Y - \hat \beta_0^T X_0^T Y}{p-q}$\\
 $\beta_1$ & & & \\
 Residual & n-p & $Y^T Y - \hat \beta_1^T X_1^TY$  & $\frac{Y^T Y - \hat \beta_1^T X_1^TY}{n-p}$\\
 \hline
-Total & n & $y^T y$ & \\
+Total & n & $Y^T Y$ & \\
 \hline
 \end{tabular}
 \end{center}
@@ -1030,7 +1035,7 @@ plot(dose.glm)
 
 Alternatively, one can do this by hand:
 
-{r qqnormglm,fig.width=6}
+```{r qqnormglm,fig.width=6}
 op<- par(mfrow=c(2,2),pty="s")
 plot(dose.glm$resid,
      xlab="index",ylab="residuals",main="Index plot")
@@ -1041,4 +1046,177 @@ plot(dose.glm$fit,dose.glm$resid,xlab="Fitted values",
      main="Residuals versus fitted values")
 ```
 
+## Exercises {#sec:LMExercises}
 
+### Estimating the parameters in a linear model {#sec:LMparamest}
+
+The data consist of a repeated measures experiment comparing two conditions which are labeled Type 1 and Type 2. The column Sub refers to subject id, and the column ID refers to item id. RT refers to reading time in seconds (we have converted it below to milliseconds); NA is missing data. You can ignore the other columns. This is a standard Latin square design.
+
+
+```{r q1setup,echo=TRUE}
+## load data:
+dat<-read.csv("data/Type1Type2_data.csv",header=TRUE)
+## convert RT to milliseconds:
+dat$RT<-dat$RT*1000
+## choose critical region:
+word_n<-4
+## subset critical data:
+crit<-subset(dat,Position==word_n)
+```
+
+Using 0,1 contrast coding (treatment contrast coding), fit a simple linear model (**not** a linear mixed model!) to RT, with Type as a predictor. This model is incorrect for the data but we ignore this detail for now. Notice that there is missing data in this data-set; you have to deal with that complication somehow.
+
+```{r echo=FALSE,eval=FALSE}
+crit$Type<-factor(crit$Type)
+contrasts(crit$Type)
+## failed attempt:
+m1<-lm(RT~Type,crit)
+X<-model.matrix(m1)
+dim(X)
+sigmahat<-summary(m1)$sigma
+vcovmat<-sigmahat*solve(t(X)%*%X)
+y<-as.matrix(crit$RT)
+## will not work because of missing data 
+hatbeta<-solve(t(X)%*%X)%*%t(X)%*%y
+
+## second attempt:
+## remove missing data:
+crit<-subset(crit,RT!="NA")
+m2<-lm(RT~Type,crit)
+summary(m2)
+X<-model.matrix(m2)
+dim(X)
+sigmahat<-summary(m2)$sigma
+vcovmat<-sigmahat*solve(t(X)%*%X)
+covariance<-vcovmat[1,2]
+y<-as.matrix(crit$RT)
+## will work because we removed the missing data 
+hatbeta<-solve(t(X)%*%X)%*%t(X)%*%y
+hatrho1 <- covariance/(sqrt(vcovmat[1,1])*sqrt(vcovmat[2,2]))
+```
+
+- Extract the model/design matrix X from the fitted model.
+- Extract sigma estimate $\hat\sigma$.
+- Compute $\hat\sigma  (X^TX)^{-1}$.
+- Use the X matrix and the $y$ vector to estimate the $\hat\beta$ vector.
+- Compute the variance covariance matrix of $\hat\beta$.
+- Display the bivariate distribution of the sampling distribution of the intercept $\hat \beta_0$  and slope $\hat\beta_1$.
+- What is the correlation between $\hat \beta_0$ and $\hat\beta_1$?
+
+
+Next, using $\pm 1$ contrast coding (sum contrast coding), fit a simple linear model (**not** a linear mixed model!) to RT, with Type as a predictor. This model is incorrect for the data but we ignore this detail for now.
+
+```{r echo=FALSE,eval=FALSE}
+## set up sum contrast coding:
+contrasts(crit$Type)<-contr.sum(2)
+m3<-lm(RT~Type,crit)
+summary(m3)
+X<-model.matrix(m3)
+dim(X)
+sigmahat<-summary(m3)$sigma
+vcovmat<-sigmahat*solve(t(X)%*%X)
+covariance<-vcovmat[1,2]
+y<-as.matrix(crit$RT)
+hatbeta<-solve(t(X)%*%X)%*%t(X)%*%y
+hatrho2 <- covariance/(sqrt(vcovmat[1,1])*sqrt(vcovmat[2,2]))
+```
+
+- Extract the model/design matrix X from the fitted model.
+- Extract sigma estimate $\hat\sigma$.
+- Compute $\hat\sigma  (X^TX)^{-1}$.
+- Use the X matrix and the y vector to estimate the $\hat\beta$ vector.
+- Compute the variance covariance matrix of $\hat\beta$.
+- Display the bivariate distribution of the sampling distribution of the intercept $\hat \beta_0$  and slope $\hat\beta_1$ as on slide 33 of the matrix formulation lecture.
+- What is the correlation between $\hat \beta_0$ and $\hat\beta_1$?
+- Use the likelihood ratio test (use the anova() function in R), find out if we can reject the null hypothesis that Type 1 and 2 have no difference in reading time. Is the result of the likelihood ratio test any different from that in Question 1?
+- Speculate on why there a difference between the correlations of the $\hat\beta_0$ and $\hat\beta_1$ in the treatment vs. sum contrast coding you carried out above. 
+
+### Using ANOVA to carry out hypothesis testing  {#sec:LMManova}
+
+Using the above data, with the sum contrast coding you defined above, carry out a null hypothesis significance test using the anova() function with an appropriate linear mixed model. What null hypothesis are you testing here, and what is your conclusion?
+
+### Computing ANOVA by hand {#sec:anovabyhand}
+
+In this chapter, we saw how the ANOVA is computed in R:
+
+```{r eval=FALSE}
+m1<-lm(y~x_c)
+m0<-lm(y~1)
+anova(m0,m1)
+```
+
+We also saw how an ANOVA is standardly summarized using matrix notation:
+
+\begin{table}[!htbp]
+\caption{The standard way to summarize an ANOVA analysis.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Source of variance & df & Sum of squares & Mean square\\
+\hline
+Model with $\beta_0$ & q & $\hat\beta_0^T X_0^T Y$ & \\
+Improvement due to & p-q & $\hat \beta_1 X_1^T Y - \hat \beta_0^T X_0^T Y$ & $\frac{\hat \beta_1 X_1^T Y - \hat \beta_0^T X_0^T Y}{p-q}$\\
+$\beta_1$ & & & \\
+Residual & n-p & $Y^T Y - \hat \beta_1^T X_1^TY$  & $\frac{Y^T Y - \hat \beta_1^T X_1^TY}{n-p}$\\
+\hline
+Total & n & $Y^T Y$ & \\
+\hline
+\end{tabular}
+\end{center}
+\label{tab:anovasummary}
+\end{table}
+
+Reproduce this table for the analysis shown above as R code, and show that the results of `anova()` function (the F-value) above are identical to those produced through this table.
+
+```{r echo=FALSE,eval=FALSE}
+n<-length(y)
+p<-3 
+q<-2
+beta0<-coef(m0)
+X0<-model.matrix(m0)
+Y<-y
+beta1<-coef(m1)
+X1<-model.matrix(m1)
+beta0%*%t(X0)%*%Y
+beta1%*%t(X1)%*%Y-beta0%*%t(X0)%*%Y
+t(Y)%*%Y - beta1%*%t(X1)%*%Y
+## sum of squares
+(t(Y)%*%Y - beta0%*%t(X0)%*%Y)/(p-q)
+(t(Y)%*%Y - beta1%*%t(X1)%*%Y)/(n-p)
+(beta1%*%t(X1)%*%Y-beta0%*%t(X0)%*%Y)/(p-q)
+## F-value: (F(p-q,n-p)=F(1,1656))
+((beta1%*%t(X1)%*%Y-beta0%*%t(X0)%*%Y)/(p-q))/((t(Y)%*%Y - beta1%*%t(X1)%*%Y)/(n-p))
+```
+
+
+### Generalized linear (mixed) model {#sec:GLMM}
+
+In the chapter, we saw the following code in connection with the logistic regression model. This is Hindi eyetracking data excerpted from @HusainVasishthNarayanan2015. The code below evaluates the effect of various predictors of sentence processing difficulty, such as word complexity and storage cost (SC), on skipping probability. 
+
+```{r}
+hindi10<-read.table("data/hindi10.txt",header=TRUE)
+skip<-ifelse(hindi10$TFT==0,1,0)
+hindi10$skip<-skip
+## display relevant columns:
+head(hindi10[,c(1,2,3,24,33,34)])
+#fm_skip<-glm(skip ~ word_complex+SC,family=binomial(),hindi10)
+```
+
+Fit a linear mixed model using the function `glmer` and the link function `family=binomial()`, with varying intercepts for subject and item, as well as varying slopes if possible, with centered word complexity and storage cost as predictors, and skipping probability (represented as 0,1 values) as dependent measure. Using the anova function, find out whether there is evidence for (a) word complexity, and (b) storage cost affecting skipping probability. Display the effects of these two variables on skipping probability on the probability scale by back-transforming the mean and 95% confidence interval of each effect from the log odds scale to the probability scale. 
+
+```{r eval=FALSE,echo=FALSE}
+library(lme4)
+fm_skip<-glmer(skip ~ scale(word_complex,scale=FALSE)+scale(SC,scale=FALSE)+(1|subj)+(1|item),family=binomial(),hindi10)
+summary(fm_skip)
+fm_skip0WC<-glmer(skip ~ scale(SC,scale=FALSE)+(1|subj)+(1|item),family=binomial(),hindi10)
+anova(fm_skip,fm_skip0WC)
+fm_skip0SC<-glmer(skip ~ scale(word_complex,scale=FALSE)+(1|subj)+(1|item),family=binomial(),hindi10)
+anova(fm_skip,fm_skip0SC)
+alpha<-summary(fm_skip)$coefficients[1,1]
+betawc<-summary(fm_skip)$coefficients[2,1]
+betasc<-summary(fm_skip)$coefficients[3,1]
+muhatwc<-alpha+betawc
+muhatsc<-alpha+betasc
+exp(muhatwc)/(1+exp(muhatwc))
+exp(muhatsc)/(1+exp(muhatsc))
+```
