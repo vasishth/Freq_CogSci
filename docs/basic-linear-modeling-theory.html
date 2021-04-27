@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6.2 Basic linear modeling theory | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)</title>
+  <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6.2 Basic linear modeling theory | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
+  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="github-repo" content="rstudio/bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6.2 Basic linear modeling theory | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)" />
+  
+  <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+
+<meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
+
+
+<meta name="date" content="2021-04-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Linear Mixed Models in Linguistics and Psychology</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="0.2" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.2</b> How to read this book</a></li>
+<li class="chapter" data-level="0.3" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.3</b> Online materials</a></li>
+<li class="chapter" data-level="0.4" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.4</b> Software needed</a></li>
+<li class="chapter" data-level="0.5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="part"><span><b>I Foundational ideas</b></span></li>
+<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.1.1</b> The mean and variance of the Binomial distribution</a></li>
+<li class="chapter" data-level="1.1.2" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.1.2</b> What information does a probability distribution provide?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
+<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.1</b> The t-distribution</a></li>
+<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-gamma-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The Gamma distribution</a></li>
+<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-exponential-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Exponential distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.1</b> Example 1: Discrete bivariate distributions</a></li>
+<li class="chapter" data-level="1.4.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.2</b> Example 2: Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.4.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.4.3</b> Generate simulated bivariate (multivariate) data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html#the-importance-of-the-mle"><i class="fa fa-check"></i><b>1.5.1</b> The importance of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><a href="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Summary of useful R functions relating to univariate distributions</a></li>
+<li class="chapter" data-level="1.7" data-path="summary-of-random-variable-theory.html"><a href="summary-of-random-variable-theory.html"><i class="fa fa-check"></i><b>1.7</b> Summary of random variable theory</a></li>
+<li class="chapter" data-level="1.8" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.8</b> Further reading</a></li>
+<li class="chapter" data-level="1.9" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="1.9.1" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisespnorm"><i class="fa fa-check"></i><b>1.9.1</b> Practice using the <code>pnorm</code> function</a></li>
+<li class="chapter" data-level="1.9.2" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqnorm"><i class="fa fa-check"></i><b>1.9.2</b> Practice using the <code>qnorm</code> function</a></li>
+<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.3</b> Maximum likelihood estimation 1</a></li>
+<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 2</a></li>
+<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.5</b> Generating bivariate data</a></li>
+<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating multivariate data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><a href="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><i class="fa fa-check"></i><b>2.1</b> Some terminology surrounding typical experiment designs in linguistics and psychology</a></li>
+<li class="chapter" data-level="2.2" data-path="the-central-limit-theorem-using-simulation.html"><a href="the-central-limit-theorem-using-simulation.html"><i class="fa fa-check"></i><b>2.2</b> The central limit theorem using simulation</a></li>
+<li class="chapter" data-level="2.3" data-path="three-examples-of-the-sampling-distribution.html"><a href="three-examples-of-the-sampling-distribution.html"><i class="fa fa-check"></i><b>2.3</b> Three examples of the sampling distribution</a></li>
+<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a></li>
+<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.1</b> The one-sample t-test</a></li>
+<li class="chapter" data-level="2.5.2" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-i-ii-error-and-power"><i class="fa fa-check"></i><b>2.5.2</b> Type I, II error, and power</a></li>
+<li class="chapter" data-level="2.5.3" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#how-to-compute-power-for-the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.3</b> How to compute power for the one-sample t-test</a></li>
+<li class="chapter" data-level="2.5.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-p-value"><i class="fa fa-check"></i><b>2.5.4</b> The p-value</a></li>
+<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.5</b> Type M and S error in the face of low power</a></li>
+<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.6</b> Searching for significance</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.6.1</b> Common mistakes involving the t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesqt"><i class="fa fa-check"></i><b>2.7.1</b> Practice using <code>qt</code></a></li>
+<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.2</b> Computing the p-value</a></li>
+<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.3</b> Computing the t-value</a></li>
+<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.4</b> Type I and II error</a></li>
+<li class="chapter" data-level="2.7.5" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.5</b> Practice with the paired t-test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="from-the-t-test-to-the-linear-mixed-model.html"><a href="from-the-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.1</b> From the t-test to the linear (mixed) model</a></li>
+<li class="chapter" data-level="3.2" data-path="sum-coding.html"><a href="sum-coding.html"><i class="fa fa-check"></i><b>3.2</b> Sum coding</a></li>
+<li class="chapter" data-level="3.3" data-path="checking-model-assumptions.html"><a href="checking-model-assumptions.html"><i class="fa fa-check"></i><b>3.3</b> Checking model assumptions</a></li>
+<li class="chapter" data-level="3.4" data-path="from-the-paired-t-test-to-the-linear-mixed-model.html"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.4</b> From the paired t-test to the linear mixed model</a></li>
+<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
+<li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
+<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
+<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
+<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
+<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
+<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
+<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
+<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="the-likelihood-ratio-test-the-theory.html"><a href="the-likelihood-ratio-test-the-theory.html"><i class="fa fa-check"></i><b>4.1</b> The likelihood ratio test: The theory</a></li>
+<li class="chapter" data-level="4.2" data-path="a-practical-example-using-simulated-data.html"><a href="a-practical-example-using-simulated-data.html"><i class="fa fa-check"></i><b>4.2</b> A practical example using simulated data</a></li>
+<li class="chapter" data-level="4.3" data-path="null-hypothesis-model.html"><a href="null-hypothesis-model.html"><i class="fa fa-check"></i><b>4.3</b> null hypothesis model:</a></li>
+<li class="chapter" data-level="4.4" data-path="alternative-hypothesis-model.html"><a href="alternative-hypothesis-model.html"><i class="fa fa-check"></i><b>4.4</b> alternative hypothesis model:</a></li>
+<li class="chapter" data-level="4.5" data-path="observed-value.html"><a href="observed-value.html"><i class="fa fa-check"></i><b>4.5</b> observed value:</a></li>
+<li class="chapter" data-level="4.6" data-path="critical-value.html"><a href="critical-value.html"><i class="fa fa-check"></i><b>4.6</b> critical value:</a></li>
+<li class="chapter" data-level="4.7" data-path="a-real-life-example-the-english-relative-clause-data.html"><a href="a-real-life-example-the-english-relative-clause-data.html"><i class="fa fa-check"></i><b>4.7</b> A real-life example: The English relative clause data</a></li>
+<li class="chapter" data-level="4.8" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html"><i class="fa fa-check"></i><b>4.8</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExercisesChinese"><i class="fa fa-check"></i><b>4.8.1</b> Chinese relative clauses</a></li>
+<li class="chapter" data-level="4.8.2" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseAgrmt"><i class="fa fa-check"></i><b>4.8.2</b> Agreement attraction in comprehension</a></li>
+<li class="chapter" data-level="4.8.3" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseGramCE"><i class="fa fa-check"></i><b>4.8.3</b> The grammaticality illusion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>5</b> Using simulation to understand your model</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>5.1</b> A reminder: The maximal linear mixed model</a></li>
+<li class="chapter" data-level="5.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>5.2</b> Obtain estimates from a previous study</a></li>
+<li class="chapter" data-level="5.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>5.3</b> Decide on a range of plausible values of the effect size</a></li>
+<li class="chapter" data-level="5.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>5.4</b> Extract parameter estimates</a></li>
+<li class="chapter" data-level="5.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>5.5</b> Define a function for generating data</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>5.5.1</b> Generate a Latin-square design</a></li>
+<li class="chapter" data-level="5.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>5.5.2</b> Generate data row-by-row</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>5.6</b> Repeated generation of data to compute power</a></li>
+<li class="chapter" data-level="5.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>5.7</b> What you can now do</a></li>
+<li class="chapter" data-level="5.8" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>5.8</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>5.8.1</b> Drawing a power curve given a range of effect sizes</a></li>
+<li class="chapter" data-level="5.8.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>5.8.2</b> Power and log-transformation</a></li>
+<li class="chapter" data-level="5.8.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>5.8.3</b> Evaluating models by generating simulated data</a></li>
+<li class="chapter" data-level="5.8.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>5.8.4</b> Using simulation to check parameter recovery</a></li>
+<li class="chapter" data-level="5.8.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>5.8.5</b> Sample size calculations using simulation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ch-matrix.html"><a href="ch-matrix.html"><i class="fa fa-check"></i><b>6</b> Linear models in matrix form</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>6.1</b> A quick review of some basic concepts in matrix algebra</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#matrix-addition-subtraction-and-multiplication"><i class="fa fa-check"></i><b>6.1.1</b> Matrix addition, subtraction, and multiplication</a></li>
+<li class="chapter" data-level="6.1.2" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#diagonal-matrix-and-identity-matrix"><i class="fa fa-check"></i><b>6.1.2</b> Diagonal matrix and identity matrix</a></li>
+<li class="chapter" data-level="6.1.3" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#powers-of-matrices"><i class="fa fa-check"></i><b>6.1.3</b> Powers of matrices</a></li>
+<li class="chapter" data-level="6.1.4" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#inverse-of-a-matrix"><i class="fa fa-check"></i><b>6.1.4</b> Inverse of a matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="basic-linear-modeling-theory.html"><a href="basic-linear-modeling-theory.html"><i class="fa fa-check"></i><b>6.2</b> Basic linear modeling theory</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="basic-linear-modeling-theory.html"><a href="basic-linear-modeling-theory.html#least-squares-estimation-geometric-argument"><i class="fa fa-check"></i><b>6.2.1</b> Least squares estimation: Geometric argument</a></li>
+<li class="chapter" data-level="6.2.2" data-path="basic-linear-modeling-theory.html"><a href="basic-linear-modeling-theory.html#the-expectation-and-variance-of-the-parameters-beta"><i class="fa fa-check"></i><b>6.2.2</b> The expectation and variance of the parameters beta</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basic-linear-modeling-theory" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Basic linear modeling theory</h2>
+<p>Consider a deterministic function <span class="math inline">\(\phi(\mathbf{x},\beta)\)</span> which takes as input some variable values <span class="math inline">\(x\)</span> and some fixed values <span class="math inline">\(\beta\)</span>. A simple example would be some variable <span class="math inline">\(x\)</span> determining the value of another variable <span class="math inline">\(y\)</span> by multiplying <span class="math inline">\(x\)</span> with <span class="math inline">\(\beta\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+y = \beta x
+\end{equation}\]</span></p>
+<p>Another example with two fixed values <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> determining <span class="math inline">\(y\)</span> is:</p>
+<p><span class="math display">\[\begin{equation}
+y = \beta_0 + \beta_1 x
+\end{equation}\]</span></p>
+<p>We can rewrite the above equation in matrix form as follows.</p>
+<p><span class="math display">\[\begin{equation}
+\begin{split}
+y=&amp; \beta_0 + \beta_1 x\\
+=&amp; \beta_0\times 1 + \beta_1 x\\
+=&amp; \begin{pmatrix}
+1 &amp; x\\
+\end{pmatrix}
+\begin{pmatrix}
+\beta_0 \\
+\beta_1 \\
+\end{pmatrix}
+\end{split}
+\end{equation}\]</span></p>
+<p>Because <span class="math inline">\(y\)</span> is a function of <span class="math inline">\(x\)</span> and the <span class="math inline">\(2\times 1\)</span> matrix <span class="math inline">\(\beta=[\beta_0 \beta_1]^T\)</span>, the most general way to write the above function is as we did above:</p>
+<p><span class="math display">\[\begin{equation}
+y = \phi(x,\beta)
+\end{equation}\]</span></p>
+<p>In a statistical model, we don’t expect an equation like <span class="math inline">\(y=\phi(x,\beta)\)</span> to fit all the points exactly. For example, we could come up with an
+equation that, given a word’s frequency, gives a prediction regarding that word’s reaction time:</p>
+<p><span class="math display">\[\begin{equation}
+\hbox{predicted reaction time} = \beta_0 + \beta_1 \hbox{frequency}
+\end{equation}\]</span></p>
+<p>Given any single value of the frequency of a word, we will not get a perfectly correct prediction of the reaction time for that word. As a concrete example, see this data-set from the <code>languageR</code> library, which allows us to visualize the effect of (log) word frequency on (log) reaction times:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="basic-linear-modeling-theory.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(languageR)</span>
+<span id="cb57-2"><a href="basic-linear-modeling-theory.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;lexdec&quot;</span>)</span>
+<span id="cb57-3"><a href="basic-linear-modeling-theory.html#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(lexdec)</span></code></pre></div>
+<pre><code>##   Subject     RT Trial Sex NativeLanguage Correct PrevType
+## 1      A1 6.3404    23   F        English correct     word
+## 2      A1 6.3081    27   F        English correct  nonword
+## 3      A1 6.3491    29   F        English correct  nonword
+## 4      A1 6.1862    30   F        English correct     word
+## 5      A1 6.0259    32   F        English correct  nonword
+## 6      A1 6.1800    33   F        English correct     word
+##   PrevCorrect       Word Frequency FamilySize SynsetCount Length
+## 1     correct        owl    4.8598    1.38629     0.69315      3
+## 2     correct       mole    4.6052    1.09861     1.94591      4
+## 3     correct     cherry    4.9972    0.69315     1.60944      6
+## 4     correct       pear    4.7274    0.00000     1.09861      4
+## 5     correct        dog    7.6676    3.13549     2.07944      3
+## 6     correct blackberry    4.0604    0.69315     1.38629     10
+##    Class FreqSingular FreqPlural DerivEntropy Complex    rInfl
+## 1 animal           54         74       0.7912 simplex -0.31015
+## 2 animal           69         30       0.6968 simplex  0.81451
+## 3  plant           83         49       0.4754 simplex  0.51879
+## 4  plant           44         68       0.0000 simplex -0.42744
+## 5 animal         1233        828       1.2129 simplex  0.39780
+## 6  plant           26         31       0.3492 complex -0.16990
+##   meanRT SubjFreq meanSize meanWeight    BNCw     BNCc     BNCd
+## 1 6.3582     3.12   3.4758     3.1806 12.0571  0.00000   6.1756
+## 2 6.4150     2.40   2.9999     2.6112  5.7388  4.06225   2.8503
+## 3 6.3426     3.88   1.6278     1.2081  5.7165  3.24980  12.5887
+## 4 6.3353     4.52   1.9908     1.6114  2.0504  1.46241   7.3632
+## 5 6.2956     6.04   4.6429     4.5167 74.8385 50.85939 241.5610
+## 6 6.3959     3.28   1.5831     1.1365  1.2703  0.16249   1.1876
+##   BNCcRatio BNCdRatio
+## 1   0.00000   0.51220
+## 2   0.70786   0.49667
+## 3   0.56849   2.20217
+## 4   0.71324   3.59117
+## 5   0.67959   3.22777
+## 6   0.12791   0.93488</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="basic-linear-modeling-theory.html#cb59-1" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="fu">lm</span>(RT<span class="sc">~</span>Frequency,lexdec)</span>
+<span id="cb59-2"><a href="basic-linear-modeling-theory.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = RT ~ Frequency, data = lexdec)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.5541 -0.1615 -0.0349  0.1170  1.0877 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)  6.58878    0.02230  295.51   &lt;2e-16
+## Frequency   -0.04287    0.00453   -9.46   &lt;2e-16
+## 
+## Residual standard error: 0.235 on 1657 degrees of freedom
+## Multiple R-squared:  0.0512,	Adjusted R-squared:  0.0507 
+## F-statistic: 89.5 on 1 and 1657 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="basic-linear-modeling-theory.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(RT<span class="sc">~</span>Frequency,lexdec)</span>
+<span id="cb61-2"><a href="basic-linear-modeling-theory.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(m)</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-16-1.svg" width="672" /></p>
+<p>Because the predicted values from the linear model don’t exactly predict the observed vlues, we express the dependent variable <span class="math inline">\(y\)</span> as a non-deterministic function:</p>
+<p><span class="math display">\[\begin{equation}
+y=\phi(x,\beta,\epsilon)=\beta_0+\beta_1x+\epsilon
+\end{equation}\]</span></p>
+<p>Here, <span class="math inline">\(\epsilon\)</span> is an error random variable which is assumed to have some PDF (the normal distribution) associated with it.
+It is assumed to have expectation (mean) 0, and some standard deviation (to be estimated from the data) <span class="math inline">\(\sigma\)</span>.
+We can write this statement in compact form as <span class="math inline">\(\epsilon \sim N(0,\sigma)\)</span>.</p>
+<p>The <strong>general linear model</strong> is a non-deterministic function like the one above:</p>
+<p><span class="math display">\[\begin{equation}
+Y=f(x)^T\beta +\epsilon 
+\end{equation}\]</span></p>
+<p>The matrix formulation will be written as below. <span class="math inline">\(n\)</span> refers to the number of data points (that is, <span class="math inline">\(Y_1,\dots,Y_n\)</span>), and the index <span class="math inline">\(j\)</span> ranges from <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+Y = X\beta + \epsilon \Leftrightarrow y_j = f(x_j)^T \beta + \epsilon_j, j=1,\dots,n
+\end{equation}\]</span></p>
+<p>To make this concrete, suppose we have three data points, i.e., <span class="math inline">\(=3\)</span>. Then, the matrix formulation is</p>
+<p><span class="math display">\[\begin{equation}
+\begin{split}
+\begin{pmatrix}
+Y_1 \\
+Y_2\\
+Y_3 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 &amp; x_1 \\
+1 &amp; x_2 \\
+1 &amp; x_3 \\
+\end{pmatrix}
+\begin{pmatrix}
+\beta_0 \\
+\beta_1 \\
+\end{pmatrix}+ \epsilon\\
+Y =&amp; X \beta + \epsilon \\
+\end{split}
+\end{equation}\]</span></p>
+<p>Here, <span class="math inline">\(f(x_1)^T = (1~x_1)\)</span>, and is the first row of the matrix <span class="math inline">\(X\)</span>,
+<span class="math inline">\(f(x_2)^T = (1~x_2)\)</span> is the second row, and
+<span class="math inline">\(f(x_3)^T = (1~x_3)\)</span> is the third row.</p>
+<p>Note that the expectation or mean of Y, written <span class="math inline">\(E[Y]\)</span>, is <span class="math inline">\(X\beta\)</span>. <span class="math inline">\(\beta\)</span> is a <span class="math inline">\(p\times 1\)</span> matrix, and <span class="math inline">\(X\)</span>, which is called the <strong>design matrix</strong> or <strong>model matrix</strong>, is <span class="math inline">\(n\times p\)</span>.</p>
+<div id="least-squares-estimation-geometric-argument" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Least squares estimation: Geometric argument</h3>
+<p>The above excursion into the matrix formulation of the linear model gives us the ability to understand how the <span class="math inline">\(\beta\)</span> parameters are estimated.</p>
+<p>When we have a deterministic model <span class="math inline">\(y=\phi(f(x)^T,\beta)=\beta_0+\beta_1x\)</span>, this implies a perfect fit to all data points.
+This is like solving the equation <span class="math inline">\(Ax=b\)</span> in linear algebra: we solve for <span class="math inline">\(\beta\)</span> in <span class="math inline">\(X\beta=y\)</span> e.g., by pre-multiplying by <span class="math inline">\(X^{-1}\)</span>: <span class="math inline">\(X^{-1}X\beta=X^{-1}y\)</span>. For example, if we have:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="basic-linear-modeling-theory.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4321</span>)</span>
+<span id="cb62-2"><a href="basic-linear-modeling-theory.html#cb62-2" aria-hidden="true" tabindex="-1"></a>(X<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="fu">rnorm</span>(<span class="dv">2</span>)),<span class="at">nrow =</span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##      [,1]     [,2]
+## [1,]    1 -0.42676
+## [2,]    1 -0.22361</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="basic-linear-modeling-theory.html#cb64-1" aria-hidden="true" tabindex="-1"></a>(y<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">2</span>),<span class="at">nrow=</span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##         [,1]
+## [1,] 0.71761
+## [2,] 0.84145</code></pre>
+<p>We can solve for <span class="math inline">\(\beta\)</span> as follows:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="basic-linear-modeling-theory.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(X)<span class="sc">%*%</span>y</span></code></pre></div>
+<pre><code>##         [,1]
+## [1,] 0.97776
+## [2,] 0.60961</code></pre>
+<p>But when we have a non-deterministic model
+<span class="math inline">\(y=\phi(f(x)^T,\beta,\epsilon)\)</span>, there is no solution! Now, the best we can do in an equation like <span class="math inline">\(Ax=b\)</span> is to get <span class="math inline">\(Ax\)</span> to be as close an approximation as possible to <span class="math inline">\(b\)</span>. In other words, we try to minimize <span class="math inline">\(\mid b-Ax\mid\)</span>.</p>
+<p>The goal is to estimate <span class="math inline">\(\beta\)</span>; we want to find a value of <span class="math inline">\(\beta\)</span> such that the observed Y is as close to its expected value <span class="math inline">\(X\beta\)</span>.
+In order to be able to identify <span class="math inline">\(\beta\)</span> from <span class="math inline">\(X\beta\)</span>, the linear transformation <span class="math inline">\(\beta \rightarrow X\beta\)</span> should be one-to-one, so that every possible value of <span class="math inline">\(\beta\)</span> gives a different <span class="math inline">\(X\beta\)</span>. This in turn requires that X be of full rank <span class="math inline">\(p\)</span>. So, if a design matrix X is <span class="math inline">\(n\times p\)</span>, then it is necessary that <span class="math inline">\(n\geq p\)</span>. There must be at least as many observations as parameters. If this is not true, then the model is said to be <strong>over-parameterized</strong>.</p>
+<p>Assuming that X is of full rank, and that <span class="math inline">\(n&gt;p\)</span>,
+Y can be considered a point in n-dimensional space and the set of candidate <span class="math inline">\(X\beta\)</span> is a <span class="math inline">\(p\)</span>-dimensional subspace of this space; see Figure~. There will be one point in this subspace which is closest to Y in terms of Euclidean distance. The unique <span class="math inline">\(\beta\)</span> that corresponds to this point is the <strong>least squares estimator</strong> of <span class="math inline">\(\beta\)</span>; we will call this estimator <span class="math inline">\(\hat \beta\)</span>.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="basic-linear-modeling-theory.html#cb68-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;figures/leastsq.pdf&quot;</span>)</span></code></pre></div>
+<p><embed src="figures/leastsq.pdf" /><!-- --></p>
+<p>Notice that <span class="math inline">\(\epsilon=(Y - X\hat\beta)\)</span> and <span class="math inline">\(X\beta\)</span> are perpendicular to each other. Because the dot product of two perpendicular (orthogonal) vectors is 0, we get the result:</p>
+<p><span class="math display">\[\begin{equation}
+(Y- X\hat\beta)^T X \beta = 0 \Leftrightarrow (Y- X\hat\beta)^T X = 0 
+\end{equation}\]</span></p>
+<p>Multiplying out the terms, we proceed as follows. One result that we use here is that <span class="math inline">\((AB)^T = B^T A^T\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+\begin{split}
+~&amp; (Y- X\hat\beta)^T X = 0  \\
+~&amp; (Y^T- \hat\beta^T X^T)X = 0\\
+\Leftrightarrow&amp; Y^T X - \hat\beta^TX^T X = 0 \quad  \\
+\Leftrightarrow&amp; Y^T X = \hat\beta^TX^T X \\
+\Leftrightarrow&amp; (Y^T X)^T = (\hat\beta^TX^T X)^T \\
+\Leftrightarrow&amp; X^T Y = X^TX\hat\beta\\
+\end{split}
+\end{equation}\]</span></p>
+<p>This gives us the important result:</p>
+<p><span class="math display">\[\begin{equation}
+\hat\beta = (X^TX)^{-1}X^T Y
+\end{equation}\]</span></p>
+<p>X is of full rank, therefore <span class="math inline">\(X^TX\)</span> is invertible.</p>
+<p>Let’s look at a concrete example:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="basic-linear-modeling-theory.html#cb69-1" aria-hidden="true" tabindex="-1"></a>(X<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">8</span>),<span class="fu">rep</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>),<span class="at">each=</span><span class="dv">4</span>),</span>
+<span id="cb69-2"><a href="basic-linear-modeling-theory.html#cb69-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>),<span class="at">each=</span><span class="dv">2</span>,<span class="dv">2</span>)),<span class="at">ncol=</span><span class="dv">3</span>))</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1   -1   -1
+## [2,]    1   -1   -1
+## [3,]    1   -1    1
+## [4,]    1   -1    1
+## [5,]    1    1   -1
+## [6,]    1    1   -1
+## [7,]    1    1    1
+## [8,]    1    1    1</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="basic-linear-modeling-theory.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Matrix)</span>
+<span id="cb71-2"><a href="basic-linear-modeling-theory.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="do">## full rank:</span></span>
+<span id="cb71-3"><a href="basic-linear-modeling-theory.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rankMatrix</span>(X)</span></code></pre></div>
+<pre><code>## [1] 3
+## attr(,&quot;method&quot;)
+## [1] &quot;tolNorm2&quot;
+## attr(,&quot;useGrad&quot;)
+## [1] FALSE
+## attr(,&quot;tol&quot;)
+## [1] 1.7764e-15</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="basic-linear-modeling-theory.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="do">## det non-zero, hence invertible:</span></span>
+<span id="cb73-2"><a href="basic-linear-modeling-theory.html#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X)</span></code></pre></div>
+<pre><code>## [1] 512</code></pre>
+<p>Notice that the inverted matrix is also symmetric. We will use this fact soon.</p>
+<p>The matrix <span class="math inline">\(V=X^T X\)</span> is a symmetric matrix, which means that <span class="math inline">\(V^T=V\)</span>.</p>
+</div>
+<div id="the-expectation-and-variance-of-the-parameters-beta" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> The expectation and variance of the parameters beta</h3>
+<p>Our model now is:</p>
+<p><span class="math display">\[\begin{equation}
+Y = X\beta + \epsilon
+\end{equation}\]</span></p>
+<p>Let <span class="math inline">\(\epsilon\sim N(0,\sigma)\)</span>. In other words, we are assuming that each value generated by the random variable <span class="math inline">\(\epsilon\)</span> is independent and it has the same distribution, i.e., it is identically distributed. This is sometimes shortened to the iid assumption. So we should technically be writing:</p>
+<p><span class="math display">\[\begin{equation}
+Y = X\beta + \epsilon \quad  \epsilon\sim N(0,\sigma)
+\end{equation}\]</span></p>
+<p>and add that <span class="math inline">\(Y\)</span> are independent and identically distributed.</p>
+<p>Some consequences of the above statements:</p>
+<ul>
+<li><span class="math inline">\(E[\epsilon]=0\)</span></li>
+<li><span class="math inline">\(Var(\epsilon)=\sigma^2 I_n\)</span></li>
+<li><span class="math inline">\(E[Y]=X\beta=\mu\)</span></li>
+<li><span class="math inline">\(Var(Y)=\sigma^2 I_n\)</span></li>
+</ul>
+<p>We can now derive the expectation and variance of the estimators <span class="math inline">\(\hat\beta\)</span>. We need a fact about variances: when we want to know <span class="math inline">\(Var(a\times B)\)</span>, where a is a constant and B is a random variable, this variance is <span class="math inline">\(a^2 Var(B)\)</span>. In the matrix setting, Var(AB), where A is a conformable matrix consisting of some constant values, is <span class="math inline">\(A Var(B)A^T\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+E[\hat\beta] = E[(X^TX)^{-1}X^T Y] = (X^TX)^{-1}X^T X\beta = \beta
+\end{equation}\]</span></p>
+<p>Notice that the above shows that <span class="math inline">\(\hat\beta\)</span> is an unbiased estimator of <span class="math inline">\(\beta\)</span>. Of course, this doesn’t mean that every time you compute an estimate of <span class="math inline">\(\beta\)</span>, you are guaranteed to get an accurate estimate of the true <span class="math inline">\(\beta\)</span>! Think about Type M error.</p>
+<p>Next, we compute the variance:</p>
+<p><span class="math display">\[\begin{equation}
+Var(\hat\beta) = Var([(X^TX)^{-1}X^T] Y)
+\end{equation}\]</span></p>
+<p>Expanding the right hand side out:</p>
+<p><span class="math display">\[\begin{equation}
+Var([(X^TX)^{-1}X^T] Y) = [(X^TX)^{-1}X^T] Var(Y)  [(X^TX)^{-1}X^T]^{T}
+\end{equation}\]</span></p>
+<p>Replacing Var(Y) with its variance <span class="math inline">\(\sigma^2 I\)</span>, and unpacking the transpose on the right-most expression <span class="math inline">\([(X^TX)^{-1}X^T]^{T}\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+Var(\hat\beta)= [(X^TX)^{-1}X^T] \sigma^2 I  X[(X^TX)^{-1}]^{T} 
+\end{equation}\]</span></p>
+<p>Since <span class="math inline">\(\sigma^2\)</span> is a scalar we can move it to the left, and any matrix multiplied by I is the matrix itself, so we ignore I, getting:</p>
+<p><span class="math display">\[\begin{equation}
+Var(\hat\beta)= \sigma^2 [(X^TX)^{-1}X^T X[(X^TX)^{-1}]^{T} 
+\end{equation}\]</span></p>
+<p>Since <span class="math inline">\((X^TX)^{-1}X^T X = I\)</span>, we can simplify to</p>
+<p><span class="math display">\[\begin{equation}
+Var(\hat\beta)= \sigma^2 [(X^TX)^{-1}]^{T} 
+\end{equation}\]</span></p>
+<p>Now, <span class="math inline">\((X^TX)^{-1}\)</span> is symmetric, so
+<span class="math inline">\([(X^TX)^{-1}]^T=(X^TX)^{-1}\)</span>. This gives us:</p>
+<p><span class="math display">\[\begin{equation}
+Var(\hat\beta)= \sigma^2 (X^TX)^{-1} 
+\end{equation}\]</span></p>
+<p>An example:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="basic-linear-modeling-theory.html#cb75-1" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span>lexdec<span class="sc">$</span>RT</span>
+<span id="cb75-2"><a href="basic-linear-modeling-theory.html#cb75-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>lexdec<span class="sc">$</span>Frequency</span>
+<span id="cb75-3"><a href="basic-linear-modeling-theory.html#cb75-3" aria-hidden="true" tabindex="-1"></a>m0<span class="ot">&lt;-</span><span class="fu">lm</span>(y<span class="sc">~</span>x)</span>
+<span id="cb75-4"><a href="basic-linear-modeling-theory.html#cb75-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-5"><a href="basic-linear-modeling-theory.html#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="do">## design matrix:</span></span>
+<span id="cb75-6"><a href="basic-linear-modeling-theory.html#cb75-6" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span><span class="fu">model.matrix</span>(m0)</span>
+<span id="cb75-7"><a href="basic-linear-modeling-theory.html#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X,<span class="at">n=</span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##   (Intercept)      x
+## 1           1 4.8598
+## 2           1 4.6052
+## 3           1 4.9972
+## 4           1 4.7274</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="basic-linear-modeling-theory.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="do">## (X^TX)^{-1}</span></span>
+<span id="cb77-2"><a href="basic-linear-modeling-theory.html#cb77-2" aria-hidden="true" tabindex="-1"></a>invXTX<span class="ot">&lt;-</span><span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X)</span>
+<span id="cb77-3"><a href="basic-linear-modeling-theory.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate of beta:</span></span>
+<span id="cb77-4"><a href="basic-linear-modeling-theory.html#cb77-4" aria-hidden="true" tabindex="-1"></a>(hat_beta<span class="ot">&lt;-</span>invXTX<span class="sc">%*%</span><span class="fu">t</span>(X)<span class="sc">%*%</span>y)</span></code></pre></div>
+<pre><code>##                  [,1]
+## (Intercept)  6.588778
+## x           -0.042872</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="basic-linear-modeling-theory.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="do">## estimated variance (se^2) of the estimate of beta:</span></span>
+<span id="cb79-2"><a href="basic-linear-modeling-theory.html#cb79-2" aria-hidden="true" tabindex="-1"></a>(hat_sigma<span class="ot">&lt;-</span><span class="fu">summary</span>(m0)<span class="sc">$</span>sigma)</span></code></pre></div>
+<pre><code>## [1] 0.23531</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="basic-linear-modeling-theory.html#cb81-1" aria-hidden="true" tabindex="-1"></a>(hat_var<span class="ot">&lt;-</span>hat_sigma<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>invXTX)</span></code></pre></div>
+<pre><code>##             (Intercept)           x
+## (Intercept)  4.9711e-04 -9.7605e-05
+## x           -9.7605e-05  2.0544e-05</code></pre>
+<p>What we have here is a bivariate normal distribution as an estimate of the <span class="math inline">\(\beta\)</span> parameters:</p>
+<p><span class="math display">\[\begin{equation}
+\begin{pmatrix}
+\hat\beta_0\\
+\hat\beta_1\\
+\end{pmatrix}
+\sim 
+N(\begin{pmatrix}
+```r hat_beta[1,1]```\\
+```r hat_beta[2,1]```\\
+\end{pmatrix},
+\begin{pmatrix}
+```r hat_var[1,1]``` &amp; ``-9.76049\times 10^{-5}``\\
+```r hat_var[2,1]``` &amp; ``2.05436\times 10^{-5}``\\
+\end{pmatrix})
+\end{equation}\]</span></p>
+<p>The variance of a bivariate distribution has the variances along the diagonal, and the covariance between <span class="math inline">\(\hat\beta_0\)</span> and
+<span class="math inline">\(\hat\beta_1\)</span> on the off-diagonals. Covariance is defined as:</p>
+<p><span class="math display">\[\begin{equation}
+Cov(\hat\beta_0,\hat\beta_1)=\hat\rho \hat\sigma_{\hat\beta_0}\hat\sigma_{\hat\beta_1}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\hat\rho\)</span> is the estimated correlation between <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
+<p>So <span class="math inline">\(\hat\beta_0 \sim N(``6.58878``,``0.0223``)\)</span> and <span class="math inline">\(\hat\beta_1 \sim N(``-0.04287``,``0.00453``)\)</span>, and <span class="math inline">\(Cov(\hat\beta_0,\hat\beta_1)=``-9.76049\times 10^{-5}``\)</span>. So the correlation between the <span class="math inline">\(\hat\beta\)</span> is</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="basic-linear-modeling-theory.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="do">## hat rho:</span></span>
+<span id="cb83-2"><a href="basic-linear-modeling-theory.html#cb83-2" aria-hidden="true" tabindex="-1"></a>hat_var[<span class="dv">1</span>,<span class="dv">2</span>]<span class="sc">/</span>(<span class="fu">sqrt</span>(hat_var[<span class="dv">1</span>,<span class="dv">1</span>])<span class="sc">*</span><span class="fu">sqrt</span>(hat_var[<span class="dv">2</span>,<span class="dv">2</span>]))</span></code></pre></div>
+<pre><code>## [1] -0.96585</code></pre>
+
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/06-LinearModelsMatrixForm.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Freq_CogSci.pdf", "Freq_CogSci.epub", "Freq_CogSci.mobi"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

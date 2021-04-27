@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.4 Bivariate and multivariate distributions | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)</title>
+  <title>1.4 Bivariate and multivariate distributions | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.4 Bivariate and multivariate distributions | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)" />
+  <meta property="og:title" content="1.4 Bivariate and multivariate distributions | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.4 Bivariate and multivariate distributions | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)" />
+  <meta name="twitter:title" content="1.4 Bivariate and multivariate distributions | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   
   <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2020-09-04" />
+<meta name="date" content="2021-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,8 @@
 
 
 
+<script src="libs/kePrint/kePrint.js"></script>
+<link href="libs/lightable/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -147,8 +149,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
 <li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.1</b> The t-distribution</a></li>
-<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#gamma-dsitribution"><i class="fa fa-check"></i><b>1.3.2</b> Gamma dsitribution</a></li>
-<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#exponential"><i class="fa fa-check"></i><b>1.3.3</b> Exponential</a></li>
+<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-gamma-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The Gamma distribution</a></li>
+<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-exponential-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Exponential distribution</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.1</b> Example 1: Discrete bivariate distributions</a></li>
@@ -164,11 +166,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.9" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a><ul>
 <li class="chapter" data-level="1.9.1" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisespnorm"><i class="fa fa-check"></i><b>1.9.1</b> Practice using the <code>pnorm</code> function</a></li>
 <li class="chapter" data-level="1.9.2" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqnorm"><i class="fa fa-check"></i><b>1.9.2</b> Practice using the <code>qnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqt"><i class="fa fa-check"></i><b>1.9.3</b> Practice using <code>qt</code></a></li>
-<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 1</a></li>
-<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.5</b> Maximum likelihood estimation 2</a></li>
-<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating bivariate data</a></li>
-<li class="chapter" data-level="1.9.7" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.7</b> Generating multivariate data</a></li>
+<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.3</b> Maximum likelihood estimation 1</a></li>
+<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 2</a></li>
+<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.5</b> Generating bivariate data</a></li>
+<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating multivariate data</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a><ul>
@@ -188,10 +189,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.6.1</b> Common mistakes involving the t-test</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.1</b> Computing the p-value</a></li>
-<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.2</b> Computing the t-value</a></li>
-<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.3</b> Type I and II error</a></li>
-<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.4</b> Practice with the paired t-test</a></li>
+<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesqt"><i class="fa fa-check"></i><b>2.7.1</b> Practice using <code>qt</code></a></li>
+<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.2</b> Computing the p-value</a></li>
+<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.3</b> Computing the t-value</a></li>
+<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.4</b> Type I and II error</a></li>
+<li class="chapter" data-level="2.7.5" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.5</b> Practice with the paired t-test</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a><ul>
@@ -207,15 +209,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
 <li class="chapter" data-level="3.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
-<li class="chapter" data-level="3.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
-<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
-<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
-<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
-<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
-<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
-<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
-<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
-<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
+<li class="chapter" data-level="3.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
+<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
+<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
+<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
+<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
+<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
+<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
+<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a><ul>
@@ -228,25 +230,90 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.3" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseGramCE"><i class="fa fa-check"></i><b>4.4.3</b> The grammaticality illusion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>5</b> Using simulation to understand your model</a><ul>
-<li class="chapter" data-level="5.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>5.1</b> A reminder: The maximal linear mixed model</a></li>
-<li class="chapter" data-level="5.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>5.2</b> Obtain estimates from a previous study</a></li>
-<li class="chapter" data-level="5.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>5.3</b> Decide on a range of plausible values of the effect size</a></li>
-<li class="chapter" data-level="5.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>5.4</b> Extract parameter estimates</a></li>
-<li class="chapter" data-level="5.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>5.5</b> Define a function for generating data</a><ul>
-<li class="chapter" data-level="5.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>5.5.1</b> Generate a Latin-square design</a></li>
-<li class="chapter" data-level="5.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>5.5.2</b> Generate data row-by-row</a></li>
+<li class="chapter" data-level="5" data-path="ch-LMtheory.html"><a href="ch-LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a><ul>
+<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#matrix-addition-subtraction-and-multiplication"><i class="fa fa-check"></i><b>5.1.1</b> Matrix addition, subtraction, and multiplication</a></li>
+<li class="chapter" data-level="5.1.2" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#diagonal-matrix-and-identity-matrix"><i class="fa fa-check"></i><b>5.1.2</b> Diagonal matrix and identity matrix</a></li>
+<li class="chapter" data-level="5.1.3" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#powers-of-matrices"><i class="fa fa-check"></i><b>5.1.3</b> Powers of matrices</a></li>
+<li class="chapter" data-level="5.1.4" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.1.4</b> Inverse of a matrix</a></li>
+<li class="chapter" data-level="5.1.5" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#linear-independence-and-rank"><i class="fa fa-check"></i><b>5.1.5</b> Linear independence, and rank</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>5.6</b> Repeated generation of data to compute power</a></li>
-<li class="chapter" data-level="5.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>5.7</b> What you can now do</a></li>
-<li class="chapter" data-level="5.8" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>5.8</b> Exercises</a><ul>
-<li class="chapter" data-level="5.8.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>5.8.1</b> Drawing a power curve given a range of effect sizes</a></li>
-<li class="chapter" data-level="5.8.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>5.8.2</b> Power and log-transformation</a></li>
-<li class="chapter" data-level="5.8.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>5.8.3</b> Evaluating models by generating simulated data</a></li>
-<li class="chapter" data-level="5.8.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>5.8.4</b> Using simulation to check parameter recovery</a></li>
-<li class="chapter" data-level="5.8.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>5.8.5</b> Sample size calculations using simulation</a></li>
+<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#least-squares-estimation-geometric-argument"><i class="fa fa-check"></i><b>5.2.1</b> Least squares estimation: Geometric argument</a></li>
+<li class="chapter" data-level="5.2.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#the-expectation-and-variance-of-the-parameters-beta"><i class="fa fa-check"></i><b>5.2.2</b> The expectation and variance of the parameters beta</a></li>
+<li class="chapter" data-level="5.2.3" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#hypothesis-testing-using-analysis-of-variance-anova"><i class="fa fa-check"></i><b>5.2.3</b> Hypothesis testing using Analysis of variance (ANOVA)</a></li>
+<li class="chapter" data-level="5.2.4" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#some-further-important-topics-in-linear-modeling"><i class="fa fa-check"></i><b>5.2.4</b> Some further important topics in linear modeling</a></li>
+<li class="chapter" data-level="5.2.5" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#generalized-linear-models"><i class="fa fa-check"></i><b>5.2.5</b> Generalized linear models</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html"><i class="fa fa-check"></i><b>5.3</b> Exercises</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMparamest"><i class="fa fa-check"></i><b>5.3.1</b> Estimating the parameters in a linear model</a></li>
+<li class="chapter" data-level="5.3.2" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMManova"><i class="fa fa-check"></i><b>5.3.2</b> Using ANOVA to carry out hypothesis testing</a></li>
+<li class="chapter" data-level="5.3.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:anovabyhand"><i class="fa fa-check"></i><b>5.3.3</b> Computing ANOVA by hand</a></li>
+<li class="chapter" data-level="5.3.4" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:GLMM"><i class="fa fa-check"></i><b>5.3.4</b> Generalized linear (mixed) model</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a><ul>
+<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
+<li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
+<li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
+<li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
+<li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
+<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a><ul>
+<li class="chapter" data-level="8.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>8.1</b> A reminder: The maximal linear mixed model</a></li>
+<li class="chapter" data-level="8.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>8.2</b> Obtain estimates from a previous study</a></li>
+<li class="chapter" data-level="8.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>8.3</b> Decide on a range of plausible values of the effect size</a></li>
+<li class="chapter" data-level="8.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>8.4</b> Extract parameter estimates</a></li>
+<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>8.5.1</b> Generate a Latin-square design</a></li>
+<li class="chapter" data-level="8.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>8.5.2</b> Generate data row-by-row</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>8.6</b> Repeated generation of data to compute power</a></li>
+<li class="chapter" data-level="8.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>8.7</b> What you can now do</a></li>
+<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a><ul>
+<li class="chapter" data-level="8.8.1" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-with-two-conditions"><i class="fa fa-check"></i><b>8.8.1</b> Simulating data with two conditions</a></li>
+<li class="chapter" data-level="8.8.2" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-in-factorial-designs"><i class="fa fa-check"></i><b>8.8.2</b> Simulating data in factorial designs</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a><ul>
+<li class="chapter" data-level="8.9.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>8.9.1</b> Drawing a power curve given a range of effect sizes</a></li>
+<li class="chapter" data-level="8.9.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>8.9.2</b> Power and log-transformation</a></li>
+<li class="chapter" data-level="8.9.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>8.9.3</b> Evaluating models by generating simulated data</a></li>
+<li class="chapter" data-level="8.9.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>8.9.4</b> Using simulation to check parameter recovery</a></li>
+<li class="chapter" data-level="8.9.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>8.9.5</b> Sample size calculations using simulation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch-multcomp.html"><a href="ch-multcomp.html"><i class="fa fa-check"></i><b>9</b> Understanding the multiple comparisons problem</a></li>
+<li class="chapter" data-level="10" data-path="ch-modelselection.html"><a href="ch-modelselection.html"><i class="fa fa-check"></i><b>10</b> Model selection</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -260,7 +327,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</a>
           </h1>
         </div>
 
@@ -275,29 +342,31 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-1-discrete-bivariate-distributions" class="section level3">
 <h3><span class="header-section-number">1.4.1</span> Example 1: Discrete bivariate distributions</h3>
 <p>Starting with the discrete case, consider the discrete bivariate distribution shown below. These are data from an experiment where, inter alia, in each trial a Likert acceptability rating and a response accuracy (to a yes-no question) were recorded (the data are from a study by <span class="citation">Laurinavichyute (<a href="#ref-AnnaLphd">2020</a>)</span>, used with permission here).</p>
-<p>Figure <a href="bivariate-and-multivariate-distributions.html#fig:bivardiscrete">1.5</a> shows the <em>joint probability mass function</em> of two random variables X and Y. The random variable X consists of 7 possible values (this is the 1-7 Likert response scale), and the random variable Y is response accuracy, with 0 representing incorrect responses, and 1 representing correct responses.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">agrmt &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/agrmt_discrete_binomial.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2">rating0 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">subset</span>(agrmt, accuracy <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">$</span>rating)</a>
-<a class="sourceLine" id="cb30-3" data-line-number="3">rating1 &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">subset</span>(agrmt, accuracy <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)<span class="op">$</span>rating)</a>
-<a class="sourceLine" id="cb30-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb30-5" data-line-number="5">ratingsbivar &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">rating0 =</span> rating0, <span class="dt">rating1 =</span> rating1)</a>
-<a class="sourceLine" id="cb30-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb30-7" data-line-number="7">ratingsbivar &lt;-<span class="st"> </span>ratingsbivar[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</a>
-<a class="sourceLine" id="cb30-8" data-line-number="8"><span class="kw">colnames</span>(ratingsbivar) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb30-9" data-line-number="9"><span class="kw">library</span>(MASS)</a>
-<a class="sourceLine" id="cb30-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb30-11" data-line-number="11"><span class="co">## function from bivariate package:</span></a>
-<a class="sourceLine" id="cb30-12" data-line-number="12">f &lt;-<span class="st"> </span><span class="kw">cbvpmf</span>(ratingsbivar)</a>
-<a class="sourceLine" id="cb30-13" data-line-number="13"><span class="kw">plot</span>(f, <span class="ot">TRUE</span>, <span class="dt">arrows =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>Figure <a href="bivariate-and-multivariate-distributions.html#fig:bivardiscrete">1.7</a> shows the <em>joint probability mass function</em> of two random variables X and Y. The random variable X consists of 7 possible values (this is the 1-7 Likert response scale), and the random variable Y is response accuracy, with 0 representing incorrect responses, and 1 representing correct responses.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">agrmt&lt;-<span class="kw">read.csv</span>(<span class="st">&quot;data/agrmt_discrete_binomial.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2">rating0&lt;-<span class="kw">table</span>(<span class="kw">subset</span>(agrmt,accuracy<span class="op">==</span><span class="dv">0</span>)<span class="op">$</span>rating)</a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">rating1&lt;-<span class="kw">table</span>(<span class="kw">subset</span>(agrmt,accuracy<span class="op">==</span><span class="dv">1</span>)<span class="op">$</span>rating)</a>
+<a class="sourceLine" id="cb35-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb35-5" data-line-number="5">ratingsbivar&lt;-<span class="kw">data.frame</span>(<span class="dt">rating0=</span>rating0,</a>
+<a class="sourceLine" id="cb35-6" data-line-number="6">                         <span class="dt">rating1=</span>rating1)</a>
+<a class="sourceLine" id="cb35-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb35-8" data-line-number="8">ratingsbivar&lt;-ratingsbivar[,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</a>
+<a class="sourceLine" id="cb35-9" data-line-number="9"><span class="kw">colnames</span>(ratingsbivar)&lt;-<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb35-10" data-line-number="10"><span class="kw">library</span> (MASS)</a>
+<a class="sourceLine" id="cb35-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb35-12" data-line-number="12"><span class="co">## function from bivariate package:</span></a>
+<a class="sourceLine" id="cb35-13" data-line-number="13">f &lt;-<span class="st"> </span><span class="kw">cbvpmf</span> (ratingsbivar)</a>
+<a class="sourceLine" id="cb35-14" data-line-number="14"><span class="kw">plot</span> (f, <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb35-15" data-line-number="15">       <span class="dt">arrows=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:bivardiscrete"></span>
 <img src="Freq_CogSci_files/figure-html/bivardiscrete-1.svg" alt="Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions." width="672" />
 <p class="caption">
-FIGURE 1.5: Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions.
+FIGURE 1.7: Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions.
 </p>
 </div>
 <p>One can also display the figure as a table.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">probs &lt;-<span class="st"> </span><span class="kw">attr</span>(f, <span class="st">&quot;p&quot;</span>)</a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw">t</span>(probs)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">probs&lt;-<span class="kw">attr</span>(f,<span class="st">&quot;p&quot;</span>)</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="kw">t</span>(probs)</a></code></pre></div>
 <pre><code>##      [,1]    [,2]    [,3]    [,4]    [,5]    [,6]
 ## 0 0.01792 0.02328 0.04004 0.04306 0.06331 0.04888
 ## 1 0.03119 0.05331 0.08566 0.09637 0.14688 0.15317
@@ -315,18 +384,18 @@ p_{Y}(y)=\sum_{x\in S_{X}}p_{X,Y}(x,y).\label{eq-marginal-pmf}
 <p><span class="math display">\[\begin{equation}
 p_{X}(x)=\sum_{y\in S_{Y}}p_{X,Y}(x,y).\label{eq-marginal-pmf2}
 \end{equation}\]</span></p>
-<p><span class="math inline">\(p_Y\)</span> is easily computed, by summing up the rows; and <span class="math inline">\(p_X\)</span> by summing up the columns. You can see why this is called the marginal distribution; the result appears in the margins of the table.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co"># P(Y)</span></a>
-<a class="sourceLine" id="cb33-2" data-line-number="2">(PY &lt;-<span class="st"> </span><span class="kw">rowSums</span>(<span class="kw">t</span>(probs)))</a></code></pre></div>
+<p><span class="math inline">\(p_Y\)</span> is easily computed, by summing up the values in each row; and <span class="math inline">\(p_X\)</span> by summing up the values in each column. You can see why this is called the marginal distribution; the result appears in the margins of the table.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="co">#P(Y)</span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">(PY&lt;-<span class="kw">rowSums</span>(<span class="kw">t</span>(probs)))</a></code></pre></div>
 <pre><code>##      0      1 
 ## 0.2914 0.7086</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">sum</span>(PY)  <span class="co">## sums to 1</span></a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">sum</span>(PY) <span class="co">## sums to 1</span></a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># P(X)</span></a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">(PX &lt;-<span class="st"> </span><span class="kw">colSums</span>(<span class="kw">t</span>(probs)))</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co">#P(X)</span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">(PX&lt;-<span class="kw">colSums</span>(<span class="kw">t</span>(probs)))</a></code></pre></div>
 <pre><code>## [1] 0.04912 0.07658 0.12570 0.13943 0.21020 0.20205
 ## [7] 0.19693</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">sum</span>(PX)  <span class="co">## sums to 1</span></a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">sum</span>(PX) <span class="co">## sums to 1</span></a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>The marginal probabilities sum to 1, as they should. The table below shows the marginal probabilities.</p>
 
@@ -334,12 +403,12 @@ p_{X}(x)=\sum_{y\in S_{Y}}p_{X,Y}(x,y).\label{eq-marginal-pmf2}
 <div class="figure"><span id="fig:marginalprobs"></span>
 <img src="Freq_CogSci_files/figure-html/marginalprobs-1.svg" alt="Marginal distributions of X and Y." width="672" />
 <p class="caption">
-FIGURE 1.6: Marginal distributions of X and Y.
+FIGURE 1.8: Marginal distributions of X and Y.
 </p>
 </div>
 <p>For computing conditional distributions, recall that the conditional distribution of a random variable <span class="math inline">\(X\)</span> given that <span class="math inline">\(Y=y\)</span>, where <span class="math inline">\(y\)</span> is some specific (fixed) value, is:</p>
 <p><span class="math display">\[\begin{equation}
-p_{X\mid Y} (x\mid y) = \frac{p_{X,Y}(x,y)}{p_Y(y)}	\quad \hbox{provided } p_Y(y)=P(Y=y)&gt;0
+p_{X\mid Y} (x\mid y) = \frac{p_{X,Y}(x,y)}{p_Y(y)} \quad \hbox{provided } p_Y(y)=P(Y=y)&gt;0
 \end{equation}\]</span></p>
 <p>As an example, let’s consider how <span class="math inline">\(p_{X\mid Y}\)</span> would be computed.
 The possible values of <span class="math inline">\(y\)</span> are <span class="math inline">\(0,1\)</span>, and so we have to find the conditional distribution (defined above) for each of these values. I.e., we have to find <span class="math inline">\(p_{X\mid Y}(x\mid y=0)\)</span>, and <span class="math inline">\(p_{X\mid Y}(x\mid y=1)\)</span>.</p>
@@ -347,9 +416,9 @@ The possible values of <span class="math inline">\(y\)</span> are <span class="m
 <p><span class="math display">\[\begin{equation}
 \begin{split}
 p_{X\mid Y} (1\mid 0) =&amp; \frac{p_{X,Y}(1,0)}{p_Y(0)}\\
-	=&amp;  \frac{0.018}{0.291}\\
-	=&amp; 0.0619
-\end{split}	
+    =&amp;  \frac{0.018}{0.291}\\
+    =&amp; 0.0619
+\end{split} 
 \end{equation}\]</span></p>
 <p>This conditional probability value will occupy the cell X=1, Y=0 in the table below summarizing the conditional probability distribution <span class="math inline">\(p_{X|Y}\)</span>. In this way, one can fill in the entire table, which will then represent the conditional distributions <span class="math inline">\(p_{X|Y=0}\)</span> and <span class="math inline">\(p_{X|Y=1}\)</span>. The reader may want to take a few minutes to complete the table.</p>
 
@@ -383,7 +452,8 @@ p_{X\mid Y} (1\mid 0) =&amp; \frac{p_{X,Y}(1,0)}{p_Y(0)}\\
 \Sigma
 \right)
 \end{equation}\]</span></p>
-<p>The joint PDF is written with reference to the two variables <span class="math inline">\(f_{X,Y}(x,y)\)</span>. It has the property that the area under the curve sums to 1. Formally, we would write this as a double integral: we are summing up the area under the curve for both dimensions X and Y (hence two integrals).</p>
+<p>The subscript on <span class="math inline">\(\mathcal{N}_2\)</span> refers to the number of dimensions; if we had a multivariate distribution with three random variables, say X, Y, Z, the distribution would be <span class="math inline">\(\mathcal{N}_3\)</span>, and so on. The variance-covariance matrix for the three-dimensional distribution would be a <span class="math inline">\(3\times 3\)</span> matrix, not a <span class="math inline">\(2\times 2\)</span> matrix as above, and would contain three correlations (<span class="math inline">\(\rho_{X,Y},\rho_{X,Z},\rho_{Y,Z}\)</span>).</p>
+<p>Returning to the bivariate example, the joint PDF is written with reference to the two variables <span class="math inline">\(f_{X,Y}(x,y)\)</span>. It has the property that the area under the curve sums to 1. Formally, we would write this as a double integral: we are summing up the area under the curve for both dimensions X and Y. The integral symbol (<span class="math inline">\(\int\)</span>) is just the continuous equivalent of the discrete summation symbol (<span class="math inline">\(\sum\)</span>).</p>
 <p><span class="math display">\[\begin{equation}
 \iint_{S_{X,Y}} f_{X,Y}(x,y)\, dx dy = 1
 \end{equation}\]</span></p>
@@ -396,23 +466,23 @@ F_{X,Y}(u,v) =&amp; P(X&lt;u,Y&lt;v)\\
 \end{split}
 \end{equation}\]</span></p>
 <p>As an aside, notice that the support for the normal distribution ranges from minus infinity to plus infinity. There can however be other PDFs with a more limited support; an example would be a normal distribution whose pdf <span class="math inline">\(f(x)\)</span> is such that the lower bound is truncated at, say, 0. In such a case, the area under the range <span class="math inline">\(\int_{-\infty}^0 f(x) \, dx\)</span> will be 0 because the range lies outside the support of the truncated normal distribution.</p>
-<p>A visualization will help. The figures below show a bivariate distribution with correlation zero (Figure <a href="bivariate-and-multivariate-distributions.html#fig:zerocor">1.7</a>), a positive (Figure <a href="bivariate-and-multivariate-distributions.html#fig:poscor">1.8</a>) and a negative correlation (Figure <a href="bivariate-and-multivariate-distributions.html#fig:negcor">1.9</a>).</p>
+<p>A visualization will help. The figures below show a bivariate distribution with correlation zero (Figure <a href="bivariate-and-multivariate-distributions.html#fig:zerocor">1.9</a>), a positive (Figure <a href="bivariate-and-multivariate-distributions.html#fig:poscor">1.10</a>) and a negative correlation (Figure <a href="bivariate-and-multivariate-distributions.html#fig:negcor">1.11</a>).</p>
 <div class="figure"><span id="fig:zerocor"></span>
 <img src="Freq_CogSci_files/figure-html/zerocor-1.svg" alt="A bivariate Normal distribution with zero correlation. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot." width="672" />
 <p class="caption">
-FIGURE 1.7: A bivariate Normal distribution with zero correlation. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
+FIGURE 1.9: A bivariate Normal distribution with zero correlation. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
 </p>
 </div>
 <div class="figure"><span id="fig:poscor"></span>
 <img src="Freq_CogSci_files/figure-html/poscor-1.svg" alt="A bivariate Normal distribution with a positive  correlation of 0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot." width="672" />
 <p class="caption">
-FIGURE 1.8: A bivariate Normal distribution with a positive correlation of 0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
+FIGURE 1.10: A bivariate Normal distribution with a positive correlation of 0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
 </p>
 </div>
 <div class="figure"><span id="fig:negcor"></span>
 <img src="Freq_CogSci_files/figure-html/negcor-1.svg" alt="A bivariate Normal distribution with a negative  correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot." width="672" />
 <p class="caption">
-FIGURE 1.9: A bivariate Normal distribution with a negative correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
+FIGURE 1.11: A bivariate Normal distribution with a negative correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot.
 </p>
 </div>
 <p>In this book, we will make use of such multivariate distributions a lot, and it will soon become important to know how to generate simulated bivariate or multivariate data that is correlated. So let’s look at how to generate simulated data next.</p>
@@ -421,50 +491,52 @@ FIGURE 1.9: A bivariate Normal distribution with a negative correlation of -0.6.
 <h3><span class="header-section-number">1.4.3</span> Generate simulated bivariate (multivariate) data</h3>
 <p>Suppose we want to generate 100 correlated pairs of data, with correlation <span class="math inline">\(\rho=0.6\)</span>. The two random variables have mean 0, and standard deviations 5 and 10 respectively.</p>
 <p>Here is how we would generate such data. First, define a variance-covariance matrix; then, use the multivariate analog of the <code>rnorm</code> function, <code>mvrnorm</code>, to generate <span class="math inline">\(100\)</span> data points.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">library</span>(MASS)</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="co">## define a variance-covariance matrix:</span></a>
-<a class="sourceLine" id="cb41-3" data-line-number="3">Sigma &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">5</span><span class="op">^</span><span class="dv">2</span>, <span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.6</span>, <span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.6</span>, </a>
-<a class="sourceLine" id="cb41-4" data-line-number="4">  <span class="dv">10</span><span class="op">^</span><span class="dv">2</span>), <span class="dt">byrow =</span> <span class="ot">FALSE</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb41-5" data-line-number="5"><span class="co">## generate data:</span></a>
-<a class="sourceLine" id="cb41-6" data-line-number="6">u &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mu =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">Sigma =</span> Sigma)</a>
-<a class="sourceLine" id="cb41-7" data-line-number="7"><span class="kw">head</span>(u)</a></code></pre></div>
-<pre><code>##        [,1]    [,2]
-## [1,] -0.453   5.233
-## [2,]  4.222   6.372
-## [3,]  3.602  10.269
-## [4,] -6.151  -4.627
-## [5,] -3.412   6.823
-## [6,] -2.036 -18.415</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">library</span>(MASS)</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="co">## define a variance-covariance matrix:</span></a>
+<a class="sourceLine" id="cb46-3" data-line-number="3">Sigma&lt;-<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">5</span><span class="op">^</span><span class="dv">2</span>,<span class="dv">5</span><span class="op">*</span><span class="dv">10</span><span class="op">*</span>.<span class="dv">6</span>,<span class="dv">5</span><span class="op">*</span><span class="dv">10</span><span class="op">*</span>.<span class="dv">6</span>,<span class="dv">10</span><span class="op">^</span><span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb46-4" data-line-number="4">              <span class="dt">byrow=</span><span class="ot">FALSE</span>,<span class="dt">ncol=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb46-5" data-line-number="5"><span class="co">## generate data:</span></a>
+<a class="sourceLine" id="cb46-6" data-line-number="6">u&lt;-<span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb46-7" data-line-number="7">           <span class="dt">mu=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb46-8" data-line-number="8">           <span class="dt">Sigma=</span>Sigma)</a>
+<a class="sourceLine" id="cb46-9" data-line-number="9"><span class="kw">head</span>(u)</a></code></pre></div>
+<pre><code>##         [,1]    [,2]
+## [1,] 11.5225  19.530
+## [2,] -5.1793   3.682
+## [3,]  0.8948 -10.116
+## [4,]  6.2526   8.356
+## [5,] -6.7940  -5.466
+## [6,] -6.5897  -9.700</code></pre>
 <p>A plot confirms that the simulated data are positively correlated.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">plot</span>(u[, <span class="dv">1</span>], u[, <span class="dv">2</span>])</a></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-14-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">plot</span>(u[,<span class="dv">1</span>],u[,<span class="dv">2</span>])</a></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-13-1.svg" width="672" /></p>
 <p>As an exercise, try changing the correlation to <span class="math inline">\(0\)</span> or to <span class="math inline">\(-0.6\)</span>, and then plot the bivariate distribution that results.</p>
 <p>One final useful thing to notice about the variance-covariance matrix is that it can be decomposed into the component standard deviations and an underlying correlation matrix. For example, consider the matrix above:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">Sigma</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">Sigma</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   25   30
 ## [2,]   30  100</code></pre>
 <p>One can decompose the matrix as follows. The matrix can be seen as the product of a diagonal matrix of the standard deviations and the correlation matrix:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co">## sds:</span></a>
-<a class="sourceLine" id="cb46-2" data-line-number="2">(sds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="co">## sds:</span></a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">(sds&lt;-<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">10</span>))</a></code></pre></div>
 <pre><code>## [1]  5 10</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co">## diagonal matrix:</span></a>
-<a class="sourceLine" id="cb48-2" data-line-number="2">(sd_diag &lt;-<span class="st"> </span><span class="kw">diag</span>(sds))</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co">## diagonal matrix:</span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2">(sd_diag&lt;-<span class="kw">diag</span>(sds))</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    5    0
 ## [2,]    0   10</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co">## correlation matrix:</span></a>
-<a class="sourceLine" id="cb50-2" data-line-number="2">(corrmatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="dv">1</span>), <span class="dt">ncol =</span> <span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="co">## correlation matrix:</span></a>
+<a class="sourceLine" id="cb55-2" data-line-number="2">(corrmatrix&lt;-<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">0.6</span>,<span class="fl">0.6</span>,<span class="dv">1</span>),<span class="dt">ncol=</span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  1.0  0.6
 ## [2,]  0.6  1.0</code></pre>
 <p>Given these two matrices, one can reassemble the variance-covariance matrix:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">sd_diag <span class="op">%*%</span><span class="st"> </span>corrmatrix <span class="op">%*%</span><span class="st"> </span>sd_diag</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">sd_diag<span class="op">%*%</span>corrmatrix<span class="op">%*%</span>sd_diag                   </a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   25   30
 ## [2,]   30  100</code></pre>
-<p>There is a built-in convenience function, <code>sdcor3cov</code> in the <code>SIN</code> package that does this calculation, taking the vector of standard deviatio ns (not the diagonal matrix) and the correlation matrix to yield the variance-covariance matrix:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">SIN<span class="op">::</span><span class="kw">sdcor2cov</span>(<span class="dt">stddev =</span> sds, <span class="dt">corr =</span> corrmatrix)</a></code></pre></div>
+<p>There is a built-in convenience function, <code>sdcor2cov</code> in the <code>SIN</code> package that does this calculation, taking the vector of standard deviations (not the diagonal matrix) and the correlation matrix to yield the variance-covariance matrix:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">SIN<span class="op">::</span><span class="kw">sdcor2cov</span>(<span class="dt">stddev=</span>sds,<span class="dt">corr=</span>corrmatrix)</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   25   30
 ## [2,]   30  100</code></pre>

@@ -48,8 +48,9 @@
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text transform='translate(41.76,116.12) rotate(-90)' style='font-size: 12.00px; font-family: Arial;' textLength='30.03px' lengthAdjust='spacingAndGlyphs'>0.060</text></g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text transform='translate(41.76,75.48) rotate(-90)' style='font-size: 12.00px; font-family: Arial;' textLength='30.03px' lengthAdjust='spacingAndGlyphs'>0.062</text></g>
 <polyline points='59.04,286.56 473.76,286.56 473.76,59.04 59.04,59.04 59.04,286.56 ' style='stroke-width: 0.75;' clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)' />
-<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='200.17' y='26.03' style='font-size: 14.40px; font-weight: bold; font-family: Arial;' textLength='132.45px' lengthAdjust='spacingAndGlyphs'>Power curve (n=10)</text></g>
-<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='202.80' y='43.31' style='font-size: 14.40px; font-weight: bold; font-family: Arial;' textLength='127.21px' lengthAdjust='spacingAndGlyphs'> using power.t.test</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='200.17' y='17.39' style='font-size: 14.40px; font-weight: bold; font-family: Arial;' textLength='132.45px' lengthAdjust='spacingAndGlyphs'>Power curve (n=10)</text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='264.40' y='34.67' style='font-size: 14.40px; font-weight: bold; font-family: Arial;' textLength='4.00px' lengthAdjust='spacingAndGlyphs'> </text></g>
+<g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='194.79' y='51.95' style='font-size: 14.40px; font-weight: bold; font-family: Arial;' textLength='143.21px' lengthAdjust='spacingAndGlyphs'>     using power.t.test</text></g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text x='217.37' y='341.28' style='font-size: 12.00px; font-family: Arial;' textLength='98.07px' lengthAdjust='spacingAndGlyphs'>standard deviation</text></g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MzYwLjAwfDAuMDA=)'><text transform='translate(12.96,189.14) rotate(-90)' style='font-size: 12.00px; font-family: Arial;' textLength='32.68px' lengthAdjust='spacingAndGlyphs'>power</text></g>
 <defs>

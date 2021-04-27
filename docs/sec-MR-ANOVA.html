@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7.1 Contrast coding in a factorial 2 x 2 design | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
+  <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7.1 Contrast coding in a factorial 2 x 2 design | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
+  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="github-repo" content="rstudio/bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7.1 Contrast coding in a factorial 2 x 2 design | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
+  
+  <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+
+<meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
+
+
+<meta name="date" content="2021-04-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ch-coding2x2.html"/>
+<link rel="next" href="sec-contrast-covariate.html"/>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint/kePrint.js"></script>
+<link href="libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Linear Mixed Models in Linguistics and Psychology</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="0.2" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.2</b> How to read this book</a></li>
+<li class="chapter" data-level="0.3" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.3</b> Online materials</a></li>
+<li class="chapter" data-level="0.4" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.4</b> Software needed</a></li>
+<li class="chapter" data-level="0.5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="part"><span><b>I Foundational ideas</b></span></li>
+<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a><ul>
+<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.1.1</b> The mean and variance of the Binomial distribution</a></li>
+<li class="chapter" data-level="1.1.2" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.1.2</b> What information does a probability distribution provide?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
+<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.1</b> The t-distribution</a></li>
+<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-gamma-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The Gamma distribution</a></li>
+<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-exponential-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Exponential distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.1</b> Example 1: Discrete bivariate distributions</a></li>
+<li class="chapter" data-level="1.4.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.2</b> Example 2: Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.4.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.4.3</b> Generate simulated bivariate (multivariate) data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html#the-importance-of-the-mle"><i class="fa fa-check"></i><b>1.5.1</b> The importance of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><a href="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Summary of useful R functions relating to univariate distributions</a></li>
+<li class="chapter" data-level="1.7" data-path="summary-of-random-variable-theory.html"><a href="summary-of-random-variable-theory.html"><i class="fa fa-check"></i><b>1.7</b> Summary of random variable theory</a></li>
+<li class="chapter" data-level="1.8" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.8</b> Further reading</a></li>
+<li class="chapter" data-level="1.9" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisespnorm"><i class="fa fa-check"></i><b>1.9.1</b> Practice using the <code>pnorm</code> function</a></li>
+<li class="chapter" data-level="1.9.2" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqnorm"><i class="fa fa-check"></i><b>1.9.2</b> Practice using the <code>qnorm</code> function</a></li>
+<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.3</b> Maximum likelihood estimation 1</a></li>
+<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 2</a></li>
+<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.5</b> Generating bivariate data</a></li>
+<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating multivariate data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a><ul>
+<li class="chapter" data-level="2.1" data-path="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><a href="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><i class="fa fa-check"></i><b>2.1</b> Some terminology surrounding typical experiment designs in linguistics and psychology</a></li>
+<li class="chapter" data-level="2.2" data-path="the-central-limit-theorem-using-simulation.html"><a href="the-central-limit-theorem-using-simulation.html"><i class="fa fa-check"></i><b>2.2</b> The central limit theorem using simulation</a></li>
+<li class="chapter" data-level="2.3" data-path="three-examples-of-the-sampling-distribution.html"><a href="three-examples-of-the-sampling-distribution.html"><i class="fa fa-check"></i><b>2.3</b> Three examples of the sampling distribution</a></li>
+<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a></li>
+<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.1</b> The one-sample t-test</a></li>
+<li class="chapter" data-level="2.5.2" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-i-ii-error-and-power"><i class="fa fa-check"></i><b>2.5.2</b> Type I, II error, and power</a></li>
+<li class="chapter" data-level="2.5.3" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#how-to-compute-power-for-the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.3</b> How to compute power for the one-sample t-test</a></li>
+<li class="chapter" data-level="2.5.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-p-value"><i class="fa fa-check"></i><b>2.5.4</b> The p-value</a></li>
+<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.5</b> Type M and S error in the face of low power</a></li>
+<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.6</b> Searching for significance</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.6.1</b> Common mistakes involving the t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesqt"><i class="fa fa-check"></i><b>2.7.1</b> Practice using <code>qt</code></a></li>
+<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.2</b> Computing the p-value</a></li>
+<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.3</b> Computing the t-value</a></li>
+<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.4</b> Type I and II error</a></li>
+<li class="chapter" data-level="2.7.5" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.5</b> Practice with the paired t-test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a><ul>
+<li class="chapter" data-level="3.1" data-path="from-the-t-test-to-the-linear-mixed-model.html"><a href="from-the-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.1</b> From the t-test to the linear (mixed) model</a></li>
+<li class="chapter" data-level="3.2" data-path="sum-coding.html"><a href="sum-coding.html"><i class="fa fa-check"></i><b>3.2</b> Sum coding</a></li>
+<li class="chapter" data-level="3.3" data-path="checking-model-assumptions.html"><a href="checking-model-assumptions.html"><i class="fa fa-check"></i><b>3.3</b> Checking model assumptions</a></li>
+<li class="chapter" data-level="3.4" data-path="from-the-paired-t-test-to-the-linear-mixed-model.html"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.4</b> From the paired t-test to the linear mixed model</a></li>
+<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
+<li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
+<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
+<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
+<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
+<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
+<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
+<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
+<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a><ul>
+<li class="chapter" data-level="4.1" data-path="the-likelihood-ratio-test-the-theory.html"><a href="the-likelihood-ratio-test-the-theory.html"><i class="fa fa-check"></i><b>4.1</b> The likelihood ratio test: The theory</a></li>
+<li class="chapter" data-level="4.2" data-path="a-practical-example-using-simulated-data.html"><a href="a-practical-example-using-simulated-data.html"><i class="fa fa-check"></i><b>4.2</b> A practical example using simulated data</a></li>
+<li class="chapter" data-level="4.3" data-path="a-real-life-example-the-english-relative-clause-data.html"><a href="a-real-life-example-the-english-relative-clause-data.html"><i class="fa fa-check"></i><b>4.3</b> A real-life example: The English relative clause data</a></li>
+<li class="chapter" data-level="4.4" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html"><i class="fa fa-check"></i><b>4.4</b> Exercises</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExercisesChinese"><i class="fa fa-check"></i><b>4.4.1</b> Chinese relative clauses</a></li>
+<li class="chapter" data-level="4.4.2" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseAgrmt"><i class="fa fa-check"></i><b>4.4.2</b> Agreement attraction in comprehension</a></li>
+<li class="chapter" data-level="4.4.3" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseGramCE"><i class="fa fa-check"></i><b>4.4.3</b> The grammaticality illusion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ch-LMtheory.html"><a href="ch-LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a><ul>
+<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#matrix-addition-subtraction-and-multiplication"><i class="fa fa-check"></i><b>5.1.1</b> Matrix addition, subtraction, and multiplication</a></li>
+<li class="chapter" data-level="5.1.2" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#diagonal-matrix-and-identity-matrix"><i class="fa fa-check"></i><b>5.1.2</b> Diagonal matrix and identity matrix</a></li>
+<li class="chapter" data-level="5.1.3" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#powers-of-matrices"><i class="fa fa-check"></i><b>5.1.3</b> Powers of matrices</a></li>
+<li class="chapter" data-level="5.1.4" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.1.4</b> Inverse of a matrix</a></li>
+<li class="chapter" data-level="5.1.5" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#linear-independence-and-rank"><i class="fa fa-check"></i><b>5.1.5</b> Linear independence, and rank</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#least-squares-estimation-geometric-argument"><i class="fa fa-check"></i><b>5.2.1</b> Least squares estimation: Geometric argument</a></li>
+<li class="chapter" data-level="5.2.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#the-expectation-and-variance-of-the-parameters-beta"><i class="fa fa-check"></i><b>5.2.2</b> The expectation and variance of the parameters beta</a></li>
+<li class="chapter" data-level="5.2.3" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#hypothesis-testing-using-analysis-of-variance-anova"><i class="fa fa-check"></i><b>5.2.3</b> Hypothesis testing using Analysis of variance (ANOVA)</a></li>
+<li class="chapter" data-level="5.2.4" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#some-further-important-topics-in-linear-modeling"><i class="fa fa-check"></i><b>5.2.4</b> Some further important topics in linear modeling</a></li>
+<li class="chapter" data-level="5.2.5" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#generalized-linear-models"><i class="fa fa-check"></i><b>5.2.5</b> Generalized linear models</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html"><i class="fa fa-check"></i><b>5.3</b> Exercises</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMparamest"><i class="fa fa-check"></i><b>5.3.1</b> Estimating the parameters in a linear model</a></li>
+<li class="chapter" data-level="5.3.2" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMManova"><i class="fa fa-check"></i><b>5.3.2</b> Using ANOVA to carry out hypothesis testing</a></li>
+<li class="chapter" data-level="5.3.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:anovabyhand"><i class="fa fa-check"></i><b>5.3.3</b> Computing ANOVA by hand</a></li>
+<li class="chapter" data-level="5.3.4" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:GLMM"><i class="fa fa-check"></i><b>5.3.4</b> Generalized linear (mixed) model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a><ul>
+<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
+<li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
+<li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
+<li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
+<li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
+<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a><ul>
+<li class="chapter" data-level="8.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>8.1</b> A reminder: The maximal linear mixed model</a></li>
+<li class="chapter" data-level="8.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>8.2</b> Obtain estimates from a previous study</a></li>
+<li class="chapter" data-level="8.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>8.3</b> Decide on a range of plausible values of the effect size</a></li>
+<li class="chapter" data-level="8.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>8.4</b> Extract parameter estimates</a></li>
+<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>8.5.1</b> Generate a Latin-square design</a></li>
+<li class="chapter" data-level="8.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>8.5.2</b> Generate data row-by-row</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>8.6</b> Repeated generation of data to compute power</a></li>
+<li class="chapter" data-level="8.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>8.7</b> What you can now do</a></li>
+<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a><ul>
+<li class="chapter" data-level="8.8.1" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-with-two-conditions"><i class="fa fa-check"></i><b>8.8.1</b> Simulating data with two conditions</a></li>
+<li class="chapter" data-level="8.8.2" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-in-factorial-designs"><i class="fa fa-check"></i><b>8.8.2</b> Simulating data in factorial designs</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a><ul>
+<li class="chapter" data-level="8.9.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>8.9.1</b> Drawing a power curve given a range of effect sizes</a></li>
+<li class="chapter" data-level="8.9.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>8.9.2</b> Power and log-transformation</a></li>
+<li class="chapter" data-level="8.9.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>8.9.3</b> Evaluating models by generating simulated data</a></li>
+<li class="chapter" data-level="8.9.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>8.9.4</b> Using simulation to check parameter recovery</a></li>
+<li class="chapter" data-level="8.9.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>8.9.5</b> Sample size calculations using simulation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch-multcomp.html"><a href="ch-multcomp.html"><i class="fa fa-check"></i><b>9</b> Understanding the multiple comparisons problem</a></li>
+<li class="chapter" data-level="10" data-path="ch-modelselection.html"><a href="ch-modelselection.html"><i class="fa fa-check"></i><b>10</b> Model selection</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sec:MR:ANOVA" class="section level2">
+<h2><span class="header-section-number">7.1</span> Contrast coding in a factorial 2 x 2 design</h2>
+<p>In chapter <a href="ch-contr.html#ch:contr">6</a> in section <a href="sec-4levelFactor.html#sec:4levelFactor">6.3</a>, we have used a data set with one 4-level factor. Here, we assume that the exact same four means come from an <span class="math inline">\(A(2) \times B(2)\)</span> between-subject-factor design rather than an F(4) between-subject-factor design. We load the artificial, simulated data and show summary statistics in Table <a href="sec-MR-ANOVA.html#tab:cTab4Means">7.1</a> and in Figure <a href="sec-MR-ANOVA.html#fig:twobytwosimdatFig">7.1</a>. The means and standard deviations are exactly the same as in Figure <a href="sec-4levelFactor.html#fig:helmertsimdatFig">6.2</a> and in Table <a href="sec-4levelFactor.html#tab:cTab3Means">6.3</a>.</p>
+<div class="figure"><span id="fig:twobytwosimdatFig"></span>
+<img src="Freq_CogSci_files/figure-html/twobytwosimdatFig-1.svg" alt="Means and error bars (showing standard errors) for a simulated data-set with a two-by-two  between-subjects factorial design." width="480" />
+<p class="caption">
+FIGURE 7.1: Means and error bars (showing standard errors) for a simulated data-set with a two-by-two between-subjects factorial design.
+</p>
+</div>
+<table>
+<caption>
+<span id="tab:cTab4Means">TABLE 7.1: </span>Summary statistics per condition for the simulated data.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Factor A
+</th>
+<th style="text-align:left;">
+Factor B
+</th>
+<th style="text-align:right;">
+N data
+</th>
+<th style="text-align:right;">
+Means
+</th>
+<th style="text-align:right;">
+Std. dev.
+</th>
+<th style="text-align:right;">
+Std. errors
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A1
+</td>
+<td style="text-align:left;">
+B1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A1
+</td>
+<td style="text-align:left;">
+B2
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A2
+</td>
+<td style="text-align:left;">
+B1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A2
+</td>
+<td style="text-align:left;">
+B2
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+</tr>
+</tbody>
+</table>
+<div id="the-difference-between-an-anova-and-a-multiple-regression" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> The difference between an ANOVA and a multiple regression</h3>
+<p>Let’s compare the traditional ANOVA with multiple regression for analyzing these data.</p>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb604-1" data-line-number="1"><span class="co"># ANOVA: B_A(2) times B_B(2)</span></a>
+<a class="sourceLine" id="cb604-2" data-line-number="2">fit_AB_aov&lt;-<span class="kw">aov_car</span>(DV <span class="op">~</span><span class="st"> </span>A<span class="op">*</span>B <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(id), <span class="dt">data=</span>df_contrasts4)</a>
+<a class="sourceLine" id="cb604-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb604-4" data-line-number="4"><span class="co"># MR: B_A(2) times B_B(2)</span></a>
+<a class="sourceLine" id="cb604-5" data-line-number="5">fit_AB_mr &lt;-<span class="st"> </span><span class="kw">lm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A<span class="op">*</span>B, <span class="dt">data=</span>df_contrasts4)</a></code></pre></div>
+<p>The results from the two analyses, shown in the R output and in Table <a href="#tab:table17"><strong>??</strong></a>, are very different.
+How do we see these are different? Notice that it is possible to compute F-values from t-values from the fact that <span class="math inline">\(F(1,df) = t(df)^2\)</span> <span class="citation">(Snedecor and Cochran <a href="#ref-snedecor1967statistical">1967</a>)</span> (where <span class="math inline">\(df\)</span> indicates degrees of freedom). When applying this to the above multiple regression model, the F-value for factor <span class="math inline">\(A\)</span> (i.e., <span class="math inline">\(AA2\)</span>) is <span class="math inline">\(0.00^2 = 0\)</span>. This is obviously not the same as in the ANOVA, where the F-value for factor <span class="math inline">\(A\)</span> is <span class="math inline">\(5\)</span>. Likewise, in the multiple regression factor <span class="math inline">\(B\)</span> (i.e., <span class="math inline">\(BB2\)</span>) has an F-value of <span class="math inline">\(1.58^2 = 2.5\)</span>, which also does not correspond to the F-value for factor <span class="math inline">\(B\)</span> in the ANOVA of <span class="math inline">\(20\)</span>. Interestingly, however, the F-value for the interaction is identical in both models, as <span class="math inline">\(2.24^2 = 5\)</span>.</p>
+<p>The reason that the results from the ANOVA and the results from the multiple regression are different is that one needs sum contrasts in the linear model to get the conventional tests from an ANOVA model. (This is true for factors with two levels, but does not generalize to factors with more levels.)</p>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb605-1" data-line-number="1"><span class="co"># define sum contrasts:</span></a>
+<a class="sourceLine" id="cb605-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb605-3" data-line-number="3"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb605-4" data-line-number="4"><span class="co"># frequentist LM</span></a>
+<a class="sourceLine" id="cb605-5" data-line-number="5">fit_AB_mr.sum &lt;-<span class="st"> </span><span class="kw">lm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A<span class="op">*</span>B, <span class="dt">data=</span>df_contrasts4)</a></code></pre></div>
+<table>
+<caption>
+<span id="tab:table18">TABLE 7.2: </span>Regression analysis with sum contrasts.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Predictor
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+t
+</th>
+<th style="text-align:right;">
+p
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+2.236
+</td>
+<td style="text-align:right;">
+8.944
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A1
+</td>
+<td style="text-align:right;">
+-5
+</td>
+<td style="text-align:right;">
+2.236
+</td>
+<td style="text-align:right;">
+-2.236
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B1
+</td>
+<td style="text-align:right;">
+-10
+</td>
+<td style="text-align:right;">
+2.236
+</td>
+<td style="text-align:right;">
+-4.472
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A1:B1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2.236
+</td>
+<td style="text-align:right;">
+2.236
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+</tr>
+</tbody>
+</table>
+<p>When using sum contrasts, the results from the multiple regression models (see Table <a href="sec-MR-ANOVA.html#tab:table18">7.2</a>) are identical to the results from the ANOVA (see R output<!--Table  \@ref(tab:table16)-->). Factor <span class="math inline">\(A\)</span> now has <span class="math inline">\(t^2=-2.24^2 = 5\)</span>, factor <span class="math inline">\(B\)</span> has <span class="math inline">\(t^2=-4.47^2 = 20\)</span>, and the interaction has <span class="math inline">\(t^22.24^2 = 5\)</span>. All F-values are now the same as in the ANOVA model.</p>
+<p>Next, we reproduce the <span class="math inline">\(A(2) \times B(2)\)</span> - ANOVA with contrasts specified for the corresponding one-way <span class="math inline">\(F(4)\)</span> ANOVA, that is by treating the <span class="math inline">\(2 \times 2 = 4\)</span> condition means as four levels of a single factor F. In other words, we go back to the data frame simulated for the analysis of repeated contrasts (see chapter <a href="ch-contr.html#ch:contr">6</a>, section <a href="sec-4levelFactor.html#sec:4levelFactor">6.3</a>). We first define weights for condition means according to our hypotheses, invert this matrix, and use it as the contrast matrix for factor F in an LM. We define weights of <span class="math inline">\(1/4\)</span> and <span class="math inline">\(-1/4\)</span>. We do so because (a) we want to compare the mean of two conditions to the mean of two other conditions (e.g., factor A compares <span class="math inline">\(\frac{F1 + F2}{2}\)</span> to <span class="math inline">\(\frac{F3 + F4}{2}\)</span>). Moreover, (b) we want to use sum contrasts, where the regression coefficients assess half the difference between means. Together (a+b), this yields weights of <span class="math inline">\(1/2 \cdot 1/2 = 1/4\)</span>. The resulting contrast matrix contains contrast coefficients of <span class="math inline">\(+1\)</span> or <span class="math inline">\(-1\)</span>, showing that we successfully implemented sum contrasts. The results are identical to the previous models.</p>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb606-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;df_contrasts3&quot;</span>)</a>
+<a class="sourceLine" id="cb606-2" data-line-number="2"><span class="kw">t</span>(<span class="kw">fractions</span>(HcInt &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="dt">A  =</span><span class="kw">c</span>(<span class="dt">F1=</span><span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dt">F2=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dt">F3=</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dt">F4=</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb606-3" data-line-number="3">                           <span class="dt">B  =</span><span class="kw">c</span>(<span class="dt">F1=</span><span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dt">F2=</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dt">F3=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dt">F4=</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb606-4" data-line-number="4">                           <span class="dt">AxB=</span><span class="kw">c</span>(<span class="dt">F1=</span><span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dt">F2=</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dt">F3=</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dt">F4=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">4</span>))))</a></code></pre></div>
+<pre><code>##    A    B    AxB 
+## F1  1/4  1/4  1/4
+## F2  1/4 -1/4 -1/4
+## F3 -1/4  1/4 -1/4
+## F4 -1/4 -1/4  1/4</code></pre>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb608-1" data-line-number="1">(XcInt &lt;-<span class="st"> </span><span class="kw">ginv2</span>(HcInt))</a></code></pre></div>
+<pre><code>##    A  B  AxB
+## F1  1  1  1 
+## F2  1 -1 -1 
+## F3 -1  1 -1 
+## F4 -1 -1  1</code></pre>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb610-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span>XcInt</a></code></pre></div>
+<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb611-1" data-line-number="1">fit_F4.sum &lt;-<span class="st"> </span><span class="kw">lm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb611-2" data-line-number="2">                 <span class="dt">data =</span> df_contrasts3) </a></code></pre></div>
+<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb612-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">summary</span>(fit_F4.sum)<span class="op">$</span>coefficients)</a></code></pre></div>
+<pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)       20          2       9        0
+## FA                -5          2      -2        0
+## FB               -10          2      -4        0
+## FAxB               5          2       2        0</code></pre>
+<p>This shows that it is possible to specify the contrasts not only for each factor (e.g., here in the <span class="math inline">\(2 \times 2\)</span> design) separately. One can alternatively pool all experimental conditions (or design cells) into one large factor (here factor F with <span class="math inline">\(4\)</span> levels), and specify the contrasts for the main effects and for the interactions in the resulting one large contrast matrix simultaneously.</p>
+<p>In this approach, it can again be very useful to apply the <code>hypr</code> package to construct contrasts for a <span class="math inline">\(2 \times 2\)</span> design. The first hypothesis estimates the main effect A, i.e., it compares the average of <code>F1</code> and <code>F2</code> to the average of <code>F3</code> and <code>F4</code>. The second parameter estimates the main effect B, i.e., it compares the average of <code>F1</code> and <code>F3</code> to the average of <code>F2</code> and <code>F4</code>. Note that we code direct differences between the averages, i.e., we implement scaled sum contrasts instead of sum contrasts. This becomes clear below as the contrast matrix contains coefficients of <span class="math inline">\(+1/2\)</span> and <span class="math inline">\(-1/2\)</span> instead of <span class="math inline">\(+1\)</span> and <span class="math inline">\(-1\)</span>. The interaction term estimates the difference between differences, i.e., the difference between <code>F1 - F2</code> and <code>F3 - F4</code>.</p>
+<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb614-1" data-line-number="1">hAxB &lt;-<span class="st"> </span><span class="kw">hypr</span>(<span class="dt">A   =</span> (F1<span class="op">+</span>F2)<span class="op">/</span><span class="dv">2</span><span class="op">~</span>(F3<span class="op">+</span>F4)<span class="op">/</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb614-2" data-line-number="2">             <span class="dt">B   =</span> (F1<span class="op">+</span>F3)<span class="op">/</span><span class="dv">2</span><span class="op">~</span>(F2<span class="op">+</span>F4)<span class="op">/</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb614-3" data-line-number="3">             <span class="dt">AxB =</span> (F1<span class="op">-</span>F2)<span class="op">/</span><span class="dv">2</span><span class="op">~</span>(F3<span class="op">-</span>F4)<span class="op">/</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb614-4" data-line-number="4">hAxB</a></code></pre></div>
+<pre><code>## hypr object containing 3 null hypotheses:
+##   H0.A: 0 = 1/2*F1 + 1/2*F2 - 1/2*F3 - 1/2*F4
+##   H0.B: 0 = 1/2*F1 + 1/2*F3 - 1/2*F2 - 1/2*F4
+## H0.AxB: 0 = 1/2*F1 - 1/2*F2 - 1/2*F3 + 1/2*F4
+## 
+## Hypothesis matrix (transposed):
+##    A    B    AxB 
+## F1  1/2  1/2  1/2
+## F2  1/2 -1/2 -1/2
+## F3 -1/2  1/2 -1/2
+## F4 -1/2 -1/2  1/2
+## 
+## Contrast matrix:
+##    A    B    AxB 
+## F1  1/2  1/2  1/2
+## F2  1/2 -1/2 -1/2
+## F3 -1/2  1/2 -1/2
+## F4 -1/2 -1/2  1/2</code></pre>
+<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb616-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(hAxB)</a></code></pre></div>
+<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb617-1" data-line-number="1">fit_F4hypr &lt;-<span class="st"> </span><span class="kw">lm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb617-2" data-line-number="2">                 <span class="dt">data =</span> df_contrasts3)</a></code></pre></div>
+<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb618-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">summary</span>(fit_F4hypr)<span class="op">$</span>coefficients)</a></code></pre></div>
+<pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)       20          2       9        0
+## FA               -10          4      -2        0
+## FB               -20          4      -4        0
+## FAxB              10          4       2        0</code></pre>
+<p>The results show that the estimates have half the size as compared to the sum contrasts - this is the result of the scaling that we applied. I.e., the main effects now directly estimate the difference between averages. However, both contrasts provide the exact same hypothesis tests. Thus, the hypr package can be used to code hypotheses in a 2 x 2 design.</p>
+</div>
+<div id="nestedEffects" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> Nested effects</h3>
+<p>One can specify hypotheses that do not correspond directly to main effects and interaction of the traditional ANOVA. For example, in a <span class="math inline">\(2 \times 2\)</span> experimental design, where factor <span class="math inline">\(A\)</span> codes word frequency (low/high) and factor <span class="math inline">\(B\)</span> is part of speech (noun/verb), one can test the effect of word frequency within nouns and the effect of word frequency within verbs. Formally, <span class="math inline">\(A_{B1}\)</span> versus <span class="math inline">\(A_{B2}\)</span> are nested within levels of <span class="math inline">\(B\)</span>. Differently put, simple effects of factor <span class="math inline">\(A\)</span> are tested for each of the levels of factor <span class="math inline">\(B\)</span>.
+In this version, we test whether there is a main effect of part of speech (<span class="math inline">\(B\)</span>; as in traditional ANOVA). However, instead of also estimating the second main effect word frequency, <span class="math inline">\(A\)</span>, and the interaction, we estimate (1) whether the two levels of word frequency, <span class="math inline">\(A\)</span>, differ for the first level of <span class="math inline">\(B\)</span> (i.e., nouns) and (2) whether the two levels of word frequency, <span class="math inline">\(A\)</span>, differ for the second level of <span class="math inline">\(B\)</span> (i.e., verbs). In other words, we estimate whether there are differences for <span class="math inline">\(A\)</span> in each of the levels of <span class="math inline">\(B\)</span>. Often researchers have hypotheses about these differences, and not about the interaction.</p>
+<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb620-1" data-line-number="1"><span class="kw">t</span>(<span class="kw">fractions</span>(HcNes &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="dt">B   =</span><span class="kw">c</span>(<span class="dt">F1=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>,<span class="dt">F2=</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span>,<span class="dt">F3=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>,<span class="dt">F4=</span><span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb620-2" data-line-number="2">                           <span class="dt">B1xA=</span><span class="kw">c</span>(<span class="dt">F1=</span><span class="op">-</span><span class="dv">1</span>  ,<span class="dt">F2=</span> <span class="dv">0</span>  ,<span class="dt">F3=</span> <span class="dv">1</span>  ,<span class="dt">F4=</span> <span class="dv">0</span>  ),</a>
+<a class="sourceLine" id="cb620-3" data-line-number="3">                           <span class="dt">B2xA=</span><span class="kw">c</span>(<span class="dt">F1=</span> <span class="dv">0</span>  ,<span class="dt">F2=</span><span class="op">-</span><span class="dv">1</span>  ,<span class="dt">F3=</span> <span class="dv">0</span>  ,<span class="dt">F4=</span> <span class="dv">1</span> ))))</a></code></pre></div>
+<pre><code>##    B    B1xA B2xA
+## F1  1/2   -1    0
+## F2 -1/2    0   -1
+## F3  1/2    1    0
+## F4 -1/2    0    1</code></pre>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb622-1" data-line-number="1">(XcNes &lt;-<span class="st"> </span><span class="kw">ginv2</span>(HcNes))</a></code></pre></div>
+<pre><code>##    B    B1xA B2xA
+## F1  1/2 -1/2    0
+## F2 -1/2    0 -1/2
+## F3  1/2  1/2    0
+## F4 -1/2    0  1/2</code></pre>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb624-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span>XcNes</a></code></pre></div>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb625-1" data-line-number="1">fit_Nest &lt;-<span class="st"> </span><span class="kw">lm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb625-2" data-line-number="2">                 <span class="dt">data =</span> df_contrasts3) </a></code></pre></div>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb626-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">summary</span>(fit_Nest)<span class="op">$</span>coefficients)</a></code></pre></div>
+<pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)       20          2       9        0
+## FB               -20          4      -4        0
+## FB1xA              0          6       0        1
+## FB2xA             20          6       3        0</code></pre>
+<p>Regression coefficients estimate the GM, the difference for the main effect of word frequency (<span class="math inline">\(A\)</span>) and the two differences (for <span class="math inline">\(B\)</span>; i.e., simple main effects) within levels of word frequency (<span class="math inline">\(A\)</span>).</p>
+<p>These custom nested contrasts’ columns are scaled versions of the corresponding hypothesis matrix. This is the case because the columns are orthogonal. It illustrates the advantage of orthogonal contrasts for the interpretation of regression coefficients: the underlying hypotheses being tested are already clear from the contrast matrix.</p>
+<p>There is also a built-in R formula specification of nested designs. The order of factors in the formula from left to right specifies a top-down order of nesting within levels, i.e., here factor <span class="math inline">\(A\)</span> (word frequency) is nested within levels of the factor <span class="math inline">\(B\)</span> (part of speech). This yields the exact same result as our previous result based on custom nested contrasts:</p>
+<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb628-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>,<span class="op">+</span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb628-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">+</span><span class="fl">0.5</span>,<span class="op">-</span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb628-3" data-line-number="3">fit_Nest2 &lt;-<span class="st"> </span><span class="kw">lm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>B <span class="op">/</span><span class="st"> </span>A,</a>
+<a class="sourceLine" id="cb628-4" data-line-number="4">                 <span class="dt">data =</span> df_contrasts4) </a></code></pre></div>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb629-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">summary</span>(fit_Nest2)<span class="op">$</span>coefficients)</a></code></pre></div>
+<pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)       20          2       9        0
+## B1               -20          4      -4        0
+## BB1:A1             0          6       0        1
+## BB2:A1            20          6       3        0</code></pre>
+<p>xxx</p>
+<p>Note that in cases such as these, where <span class="math inline">\(A_{B1}\)</span> vs. <span class="math inline">\(A_{B2}\)</span> are nested within levels of <span class="math inline">\(B\)</span>, it is necessary to include the effect of <span class="math inline">\(B\)</span> (part of speech) in the model, even if one is only interested in the effect of <span class="math inline">\(A\)</span> (word frequency) within levels of <span class="math inline">\(B\)</span> (part of speech). Leaving out factor <span class="math inline">\(B\)</span> in this case can lead to biases in parameter estimation in the case the data are not fully balanced.</p>
+<p>Again, we show how nested contrasts can be easily implemented using <code>hypr</code>:</p>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb631-1" data-line-number="1">hNest &lt;-<span class="st"> </span><span class="kw">hypr</span>(<span class="dt">B    =</span> (F1<span class="op">+</span>F3)<span class="op">/</span><span class="dv">2</span><span class="op">~</span>(F2<span class="op">+</span>F4)<span class="op">/</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb631-2" data-line-number="2">              <span class="dt">B1xA =</span> F3<span class="op">~</span>F1,</a>
+<a class="sourceLine" id="cb631-3" data-line-number="3">              <span class="dt">B2xA =</span> F4<span class="op">~</span>F2)</a>
+<a class="sourceLine" id="cb631-4" data-line-number="4">hNest</a></code></pre></div>
+<pre><code>## hypr object containing 3 null hypotheses:
+##    H0.B: 0 = 1/2*F1 + 1/2*F3 - 1/2*F2 - 1/2*F4
+## H0.B1xA: 0 = F3 - F1
+## H0.B2xA: 0 = F4 - F2
+## 
+## Hypothesis matrix (transposed):
+##    B    B1xA B2xA
+## F1  1/2   -1    0
+## F2 -1/2    0   -1
+## F3  1/2    1    0
+## F4 -1/2    0    1
+## 
+## Contrast matrix:
+##    B    B1xA B2xA
+## F1  1/2 -1/2    0
+## F2 -1/2    0 -1/2
+## F3  1/2  1/2    0
+## F4 -1/2    0  1/2</code></pre>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb633-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(hNest)</a></code></pre></div>
+<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb634-1" data-line-number="1">fit_NestHypr &lt;-<span class="st"> </span><span class="kw">lm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb634-2" data-line-number="2">                 <span class="dt">data =</span> df_contrasts3) </a></code></pre></div>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb635-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">summary</span>(fit_NestHypr)<span class="op">$</span>coefficients)</a></code></pre></div>
+<pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)       20          2       9        0
+## FB               -20          4      -4        0
+## FB1xA              0          6       0        1
+## FB2xA             20          6       3        0</code></pre>
+<p>Of course, we can also ask the reverse question: Are there differences for part of speech (<span class="math inline">\(B\)</span>) in the levels of word frequency (<span class="math inline">\(A\)</span>; in addition to estimating the main effect of word frequency, <span class="math inline">\(A\)</span>)? That is, do nouns differ from verbs for low-frequency words (<span class="math inline">\(B_{A1}\)</span>) and do nouns differ from verbs for high-frequency words (<span class="math inline">\(B_{A2}\)</span>)?</p>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb637-1" data-line-number="1">hNest2 &lt;-<span class="st"> </span><span class="kw">hypr</span>(<span class="dt">A    =</span> (F1<span class="op">+</span>F2)<span class="op">/</span><span class="dv">2</span><span class="op">~</span>(F3<span class="op">+</span>F4)<span class="op">/</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb637-2" data-line-number="2">               <span class="dt">A1xB =</span> F2<span class="op">~</span>F1,</a>
+<a class="sourceLine" id="cb637-3" data-line-number="3">               <span class="dt">A2xB =</span> F4<span class="op">~</span>F3)</a>
+<a class="sourceLine" id="cb637-4" data-line-number="4">hNest2</a></code></pre></div>
+<pre><code>## hypr object containing 3 null hypotheses:
+##    H0.A: 0 = 1/2*F1 + 1/2*F2 - 1/2*F3 - 1/2*F4
+## H0.A1xB: 0 = F2 - F1
+## H0.A2xB: 0 = F4 - F3
+## 
+## Hypothesis matrix (transposed):
+##    A    A1xB A2xB
+## F1  1/2   -1    0
+## F2  1/2    1    0
+## F3 -1/2    0   -1
+## F4 -1/2    0    1
+## 
+## Contrast matrix:
+##    A    A1xB A2xB
+## F1  1/2 -1/2    0
+## F2  1/2  1/2    0
+## F3 -1/2    0 -1/2
+## F4 -1/2    0  1/2</code></pre>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb639-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts3<span class="op">$</span>F) &lt;-<span class="st"> </span><span class="kw">contr.hypothesis</span>(hNest2)</a></code></pre></div>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb640-1" data-line-number="1">fit_Nest2Hypr &lt;-<span class="st"> </span><span class="kw">lm</span>(DV <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>F,</a>
+<a class="sourceLine" id="cb640-2" data-line-number="2">                 <span class="dt">data =</span> df_contrasts3) </a></code></pre></div>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb641-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">summary</span>(fit_Nest2Hypr)<span class="op">$</span>coefficients)</a></code></pre></div>
+<pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)       20          2       9        0
+## FA               -10          4      -2        0
+## FA1xB             10          6       2        0
+## FA2xB             30          6       5        0</code></pre>
+<p>xxx</p>
+<p>Regression coefficients estimate the GM, the difference for the main effect of word frequency (<span class="math inline">\(A\)</span>) and the two part of speech effects (for <span class="math inline">\(B\)</span>; i.e., simple main effects) within levels of word frequency (<span class="math inline">\(A\)</span>).</p>
+</div>
+<div id="interactions-between-contrasts" class="section level3">
+<h3><span class="header-section-number">7.1.3</span> Interactions between contrasts</h3>
+<p>We have discussed above that in a <span class="math inline">\(2 \times 2\)</span> experimental design, the results from sum contrasts are equivalent to typical ANOVA results. In addition, we had also run the analysis with treatment contrasts. It was clear that the results for treatment contrasts (see Table <a href="#tab:table17"><strong>??</strong></a>) did not correspond to the results from the ANOVA. However, if the results for treatment contrasts do not correspond to the typical ANOVA results, what do they then test? That is, is it still possible to meaningfully interpret the results from the treatment contrasts in a simple <span class="math inline">\(2 \times 2\)</span> design?</p>
+<p>This leads us to a very important principle in interpreting results from contrasts: When interactions between contrasts are included in a model, then the results of one contrast actually depend on the specification of the other contrast(s) in the analysis! This may be counter-intuitive at first. However, it is very important and essential to keep in mind when interpreting results from contrasts. How does this work in detail?</p>
+<p>The general rule to remember is that the main effect of one contrast measures its effect at the location <span class="math inline">\(0\)</span> of the other contrast(s) in the analysis. What does that mean? Let us consider the example that we use two treatment contrasts in a <span class="math inline">\(2 \times 2\)</span> design (see results in Table <a href="#tab:table17"><strong>??</strong></a>). Let’s take a look at the main effect of factor A. How can we interpret what this measures or tests? This main effect actually tests the effect of factor A at the “location” where factor B is coded as <span class="math inline">\(0\)</span>. Factor B is coded as a treatment contrast, that is, it codes a zero at its baseline condition, which is B1. Thus, the main effect of factor A tests the effect of A nested within the baseline condition of B. We take a look at the data presented in Figure <a href="sec-MR-ANOVA.html#fig:twobytwosimdatFig">7.1</a>, what this nested effect should be. Figure <a href="sec-MR-ANOVA.html#fig:twobytwosimdatFig">7.1</a> shows that the effect of factor A nested in B1 is <span class="math inline">\(0\)</span>. If we now compare this to the results from the linear model, it is indeed clear that the main effect of factor A (see Table <a href="#tab:table17"><strong>??</strong></a>) is exactly estimated as <span class="math inline">\(0\)</span>. As expected, when factor B is coded as a treatment contrast, the main effect of factor A estimates the effect of A nested within the baseline level of factor B.</p>
+<p>Next, consider the main effect of factor B. According to the same logic, this main effect estimates the effect of factor B at the “location” where factor A is <span class="math inline">\(0\)</span>. Factor A is also coded as a treatment contrast, that is, it codes its baseline condition A1 as <span class="math inline">\(0\)</span>. The main effect of factor B estimates the effect of B nested within the baseline condition of A. Figure <a href="sec-MR-ANOVA.html#fig:twobytwosimdatFig">7.1</a> shows that this effect should be <span class="math inline">\(10\)</span>; this indeed corresponds to the main effect of B as estimated in the regression model for treatment contrasts (see Table <a href="#tab:table17"><strong>??</strong></a>, the <em>Estimate</em> for BB2). As we had seen before, the interaction term, however, does not differ between the treatment contrast and ANOVA (<span class="math inline">\(t^2 = 2.24^2 = F = 5.00\)</span>).</p>
+<p>How do we know what the “location” is, where a contrast applies? For the treatment contrasts discussed here, it is possible to reason this through because all contrasts are coded as <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>. However, how is it possible to derive the “location” in general? What we can do is to look at the hypotheses tested by the treatment contrasts (or the comparisons that are estimated) in the presence of an interaction between them by using the generalized matrix inverse. We go back to the default treatment contrasts. Then we extract the contrast matrix from the design matrix:</p>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb643-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">contr.treatment</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb643-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">contr.treatment</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb643-3" data-line-number="3">XcTr &lt;-<span class="st"> </span>df_contrasts4 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb643-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(A, B) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb643-5" data-line-number="5"><span class="st">  </span><span class="kw">summarise</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb643-6" data-line-number="6"><span class="st">  </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A<span class="op">*</span>B, .) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb643-7" data-line-number="7"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.matrix</span>()</a>
+<a class="sourceLine" id="cb643-8" data-line-number="8"><span class="kw">rownames</span>(XcTr) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A1_B1&quot;</span>,<span class="st">&quot;A1_B2&quot;</span>,<span class="st">&quot;A2_B1&quot;</span>,<span class="st">&quot;A2_B2&quot;</span>)</a>
+<a class="sourceLine" id="cb643-9" data-line-number="9">XcTr</a></code></pre></div>
+<pre><code>##       (Intercept) A2 B2 A2:B2
+## A1_B1           1  0  0     0
+## A1_B2           1  0  1     0
+## A2_B1           1  1  0     0
+## A2_B2           1  1  1     1</code></pre>
+<p>This shows the treatment contrast for factors <code>A</code> and <code>B</code>, and their interaction. We can now assign this contrast matrix to a <code>hypr</code> object. <code>hypr</code> automatically converts the contrast matrix into a hypothesis matrix, such that we can read from the hypothesis matrix which comparison are being estimated by the different contrasts.</p>
+<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb645-1" data-line-number="1">htr &lt;-<span class="st"> </span><span class="kw">hypr</span>() <span class="co"># initialize empty hypr object</span></a>
+<a class="sourceLine" id="cb645-2" data-line-number="2"><span class="kw">cmat</span>(htr) &lt;-<span class="st"> </span>XcTr <span class="co"># assign contrast matrix to hypr object</span></a>
+<a class="sourceLine" id="cb645-3" data-line-number="3">htr <span class="co"># look at the resulting hypothesis matrix</span></a></code></pre></div>
+<pre><code>## hypr object containing 4 null hypotheses:
+## H0.(Intercept): 0 = A1_B1
+##          H0.A2: 0 = -A1_B1 + A2_B1
+##          H0.B2: 0 = -A1_B1 + A1_B2
+##       H0.A2:B2: 0 = A1_B1 - A1_B2 - A2_B1 + A2_B2
+## 
+## Hypothesis matrix (transposed):
+##       (Intercept) A2 B2 A2:B2
+## A1_B1  1          -1 -1  1   
+## A1_B2  0           0  1 -1   
+## A2_B1  0           1  0 -1   
+## A2_B2  0           0  0  1   
+## 
+## Contrast matrix:
+##       (Intercept) A2 B2 A2:B2
+## A1_B1 1           0  0  0    
+## A1_B2 1           0  1  0    
+## A2_B1 1           1  0  0    
+## A2_B2 1           1  1  1</code></pre>
+<p>Note that the same result is obtained by applying the generalized inverse to the contrast matrix (this is what hypr does as well). An important fact is that when we apply the generalized inverse to the contrast matrix, we obtain the corresponding hypothesis matrix <span class="citation">(for details see Schad et al. <a href="#ref-schad2020capitalize">2020</a><a href="#ref-schad2020capitalize">b</a>)</span>.</p>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb647-1" data-line-number="1"><span class="kw">t</span>(<span class="kw">ginv2</span>(XcTr))</a></code></pre></div>
+<pre><code>##       (Intercept) A2 B2 A2:B2
+## A1_B1  1          -1 -1  1   
+## A1_B2  0           0  1 -1   
+## A2_B1  0           1  0 -1   
+## A2_B2  0           0  0  1</code></pre>
+<p>As discussed above, the main effect of factor <code>A</code> estimates its effect nested within the baseline level of factor <code>B</code>. Likewise, the main effect of factor <code>B</code> estimates its effect nested within the baseline level of factor <code>A</code>.</p>
+<p>How does this work for sum contrasts? They do not have a baseline condition that is coded as <span class="math inline">\(0\)</span>. In sum contrasts, however, the average of the contrast coefficients is <span class="math inline">\(0\)</span>. Therefore, main effects estimate the average effect across factor levels. This is what is typically also tested in standard ANOVA. Let’s look at the example shown in Table <a href="sec-MR-ANOVA.html#tab:table18">7.2</a>: given that factor B has a sum contrast, the main effect of factor A is tested as the average across levels of factor B. Figure <a href="sec-MR-ANOVA.html#fig:twobytwosimdatFig">7.1</a> shows that the effect of factor A in level B1 is <span class="math inline">\(10 - 10 = 0\)</span>, and in level B2 it is <span class="math inline">\(20 - 40 = -20\)</span>. The average effect across both levels is <span class="math inline">\((0 - 20)/2 = -10\)</span>. Due to the sum contrast coding, we have to divide this by 2, yielding an expected effect of <span class="math inline">\(-10 / 2 = -5\)</span>. This is exactly what the main effect of factor A measures (see Table <a href="sec-MR-ANOVA.html#tab:table18">7.2</a>, <em>Estimate</em> for A1).</p>
+<p>Similarly, factor B tests its effect at the location <span class="math inline">\(0\)</span> of factor A. Again, <span class="math inline">\(0\)</span> is exactly the mean of the contrast coefficients from factor A, which is coded as a sum contrast. Therefore, factor B tests the effect of B averaged across factor levels of A. For factor level A1, factor B has an effect of <span class="math inline">\(10 - 20 = -10\)</span>. For factor level A2, factor B has an effect of <span class="math inline">\(10 - 40 = -30\)</span>. The average effect is <span class="math inline">\((-10 - 30)/2 = -20\)</span>, which again needs to be divided by <span class="math inline">\(2\)</span> due to the sum contrast. This yields exactly the estimate of <span class="math inline">\(-10\)</span> that is also reported in Table <a href="sec-MR-ANOVA.html#tab:table18">7.2</a> (<em>Estimate</em> for B1).</p>
+<p>Again, we look at the hypothesis matrix for the main effects and the interaction:</p>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb649-1" data-line-number="1"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>A) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb649-2" data-line-number="2"><span class="kw">contrasts</span>(df_contrasts4<span class="op">$</span>B) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb649-3" data-line-number="3">XcSum &lt;-<span class="st"> </span>df_contrasts4 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb649-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(A, B) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb649-5" data-line-number="5"><span class="st">  </span><span class="kw">summarise</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb649-6" data-line-number="6"><span class="st">  </span><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>A<span class="op">*</span>B, .) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb649-7" data-line-number="7"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.matrix</span>()</a>
+<a class="sourceLine" id="cb649-8" data-line-number="8"><span class="kw">rownames</span>(XcSum) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A1_B1&quot;</span>,<span class="st">&quot;A1_B2&quot;</span>,<span class="st">&quot;A2_B1&quot;</span>,<span class="st">&quot;A2_B2&quot;</span>)</a>
+<a class="sourceLine" id="cb649-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb649-10" data-line-number="10">hsum &lt;-<span class="st"> </span><span class="kw">hypr</span>() <span class="co"># initialize empty hypr object</span></a>
+<a class="sourceLine" id="cb649-11" data-line-number="11"><span class="kw">cmat</span>(hsum) &lt;-<span class="st"> </span>XcSum <span class="co"># assign contrast matrix to hypr object</span></a>
+<a class="sourceLine" id="cb649-12" data-line-number="12">hsum <span class="co"># look at the resulting hypothesis matrix</span></a></code></pre></div>
+<pre><code>## hypr object containing 4 null hypotheses:
+## H0.(Intercept): 0 = 1/4*A1_B1 + 1/4*A1_B2 + 1/4*A2_B1 + 1/4*A2_B2
+##          H0.A1: 0 = 1/4*A1_B1 + 1/4*A1_B2 - 1/4*A2_B1 - 1/4*A2_B2
+##          H0.B1: 0 = 1/4*A1_B1 - 1/4*A1_B2 + 1/4*A2_B1 - 1/4*A2_B2
+##       H0.A1:B1: 0 = 1/4*A1_B1 - 1/4*A1_B2 - 1/4*A2_B1 + 1/4*A2_B2
+## 
+## Hypothesis matrix (transposed):
+##       (Intercept) A1   B1   A1:B1
+## A1_B1  1/4         1/4  1/4  1/4 
+## A1_B2  1/4         1/4 -1/4 -1/4 
+## A2_B1  1/4        -1/4  1/4 -1/4 
+## A2_B2  1/4        -1/4 -1/4  1/4 
+## 
+## Contrast matrix:
+##       (Intercept) A1 B1 A1:B1
+## A1_B1  1           1  1  1   
+## A1_B2  1           1 -1 -1   
+## A2_B1  1          -1  1 -1   
+## A2_B2  1          -1 -1  1</code></pre>
+<p>This shows that each of the main effects now does not compute nested comparisons any more, but that they rather test their effect averaged across conditions of the other factor. The averaging involves using weights of <span class="math inline">\(1/2\)</span>. Moreover, the regression coefficients in the sum contrast measure half the distance between conditions, leading to weights of <span class="math inline">\(1/2 \cdot 1/2 = 1/4\)</span>.</p>
+<p>The general rule to remember from these examples is that when interactions between contrasts are estimated, what a main effect of a factor estimates depends on the contrast coding of the other factors in the design! The main effect of a factor estimates the effect nested within the location zero of the other contrast(s) in an analysis. If another contrast is centered, and zero is the average of this other contrast’s coefficients, then the contrast of interest tests the average effect, averaged across the levels of the other factor. Importantly, this property holds only when the interaction between two contrasts is included into a model. If the interaction is omitted and only main effects are estimated, then there is no such “action at a distance”.</p>
+<p>This may be a very surprising result for interactions of contrasts. However, it is also essential to interpreting contrast coefficients involved in interactions. It is particularly relevant for the analysis of the default treatment contrast, where the main effects estimate nested effects rather than average effects.</p>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-schad2020capitalize">
+<p>Schad, Daniel J., Shravan Vasishth, Sven Hohenstein, and Reinhold Kliegl. 2020a. “How to Capitalize on a Priori Contrasts in Linear (Mixed) Models: A Tutorial.” <em>Journal of Memory and Language</em> 110.</p> 2020b. “How to Capitalize on a Priori Contrasts in Linear (Mixed) Models: A Tutorial.” <em>Journal of Memory and Language</em> 110. Elsevier: 104038.</p>
+</div>
+<div id="ref-snedecor1967statistical">
+<p>Snedecor, George W, and William G Cochran. 1967. <em>Statistical Methods</em>. Ames, Iowa: Iowa State University Press.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ch-coding2x2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sec-contrast-covariate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/07-coding2x2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Freq_CogSci.pdf", "Freq_CogSci.epub", "Freq_CogSci.mobi"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.1 From the t-test to the linear (mixed) model | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)</title>
+  <title>3.1 From the t-test to the linear (mixed) model | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.1 From the t-test to the linear (mixed) model | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)" />
+  <meta property="og:title" content="3.1 From the t-test to the linear (mixed) model | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.1 From the t-test to the linear (mixed) model | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)" />
+  <meta name="twitter:title" content="3.1 From the t-test to the linear (mixed) model | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   
   <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2020-09-04" />
+<meta name="date" content="2021-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,8 @@
 
 
 
+<script src="libs/kePrint/kePrint.js"></script>
+<link href="libs/lightable/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -147,8 +149,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
 <li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.1</b> The t-distribution</a></li>
-<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#gamma-dsitribution"><i class="fa fa-check"></i><b>1.3.2</b> Gamma dsitribution</a></li>
-<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#exponential"><i class="fa fa-check"></i><b>1.3.3</b> Exponential</a></li>
+<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-gamma-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The Gamma distribution</a></li>
+<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-exponential-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Exponential distribution</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.1</b> Example 1: Discrete bivariate distributions</a></li>
@@ -164,11 +166,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.9" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a><ul>
 <li class="chapter" data-level="1.9.1" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisespnorm"><i class="fa fa-check"></i><b>1.9.1</b> Practice using the <code>pnorm</code> function</a></li>
 <li class="chapter" data-level="1.9.2" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqnorm"><i class="fa fa-check"></i><b>1.9.2</b> Practice using the <code>qnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqt"><i class="fa fa-check"></i><b>1.9.3</b> Practice using <code>qt</code></a></li>
-<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 1</a></li>
-<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.5</b> Maximum likelihood estimation 2</a></li>
-<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating bivariate data</a></li>
-<li class="chapter" data-level="1.9.7" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.7</b> Generating multivariate data</a></li>
+<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.3</b> Maximum likelihood estimation 1</a></li>
+<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 2</a></li>
+<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.5</b> Generating bivariate data</a></li>
+<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating multivariate data</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a><ul>
@@ -188,10 +189,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.6.1</b> Common mistakes involving the t-test</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.1</b> Computing the p-value</a></li>
-<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.2</b> Computing the t-value</a></li>
-<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.3</b> Type I and II error</a></li>
-<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.4</b> Practice with the paired t-test</a></li>
+<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesqt"><i class="fa fa-check"></i><b>2.7.1</b> Practice using <code>qt</code></a></li>
+<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.2</b> Computing the p-value</a></li>
+<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.3</b> Computing the t-value</a></li>
+<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.4</b> Type I and II error</a></li>
+<li class="chapter" data-level="2.7.5" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.5</b> Practice with the paired t-test</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a><ul>
@@ -207,15 +209,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
 <li class="chapter" data-level="3.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
-<li class="chapter" data-level="3.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
-<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
-<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
-<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
-<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
-<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
-<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
-<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
-<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
+<li class="chapter" data-level="3.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
+<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
+<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
+<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
+<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
+<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
+<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
+<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a><ul>
@@ -228,25 +230,90 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.3" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseGramCE"><i class="fa fa-check"></i><b>4.4.3</b> The grammaticality illusion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>5</b> Using simulation to understand your model</a><ul>
-<li class="chapter" data-level="5.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>5.1</b> A reminder: The maximal linear mixed model</a></li>
-<li class="chapter" data-level="5.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>5.2</b> Obtain estimates from a previous study</a></li>
-<li class="chapter" data-level="5.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>5.3</b> Decide on a range of plausible values of the effect size</a></li>
-<li class="chapter" data-level="5.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>5.4</b> Extract parameter estimates</a></li>
-<li class="chapter" data-level="5.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>5.5</b> Define a function for generating data</a><ul>
-<li class="chapter" data-level="5.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>5.5.1</b> Generate a Latin-square design</a></li>
-<li class="chapter" data-level="5.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>5.5.2</b> Generate data row-by-row</a></li>
+<li class="chapter" data-level="5" data-path="ch-LMtheory.html"><a href="ch-LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a><ul>
+<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#matrix-addition-subtraction-and-multiplication"><i class="fa fa-check"></i><b>5.1.1</b> Matrix addition, subtraction, and multiplication</a></li>
+<li class="chapter" data-level="5.1.2" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#diagonal-matrix-and-identity-matrix"><i class="fa fa-check"></i><b>5.1.2</b> Diagonal matrix and identity matrix</a></li>
+<li class="chapter" data-level="5.1.3" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#powers-of-matrices"><i class="fa fa-check"></i><b>5.1.3</b> Powers of matrices</a></li>
+<li class="chapter" data-level="5.1.4" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.1.4</b> Inverse of a matrix</a></li>
+<li class="chapter" data-level="5.1.5" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#linear-independence-and-rank"><i class="fa fa-check"></i><b>5.1.5</b> Linear independence, and rank</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>5.6</b> Repeated generation of data to compute power</a></li>
-<li class="chapter" data-level="5.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>5.7</b> What you can now do</a></li>
-<li class="chapter" data-level="5.8" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>5.8</b> Exercises</a><ul>
-<li class="chapter" data-level="5.8.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>5.8.1</b> Drawing a power curve given a range of effect sizes</a></li>
-<li class="chapter" data-level="5.8.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>5.8.2</b> Power and log-transformation</a></li>
-<li class="chapter" data-level="5.8.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>5.8.3</b> Evaluating models by generating simulated data</a></li>
-<li class="chapter" data-level="5.8.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>5.8.4</b> Using simulation to check parameter recovery</a></li>
-<li class="chapter" data-level="5.8.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>5.8.5</b> Sample size calculations using simulation</a></li>
+<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#least-squares-estimation-geometric-argument"><i class="fa fa-check"></i><b>5.2.1</b> Least squares estimation: Geometric argument</a></li>
+<li class="chapter" data-level="5.2.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#the-expectation-and-variance-of-the-parameters-beta"><i class="fa fa-check"></i><b>5.2.2</b> The expectation and variance of the parameters beta</a></li>
+<li class="chapter" data-level="5.2.3" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#hypothesis-testing-using-analysis-of-variance-anova"><i class="fa fa-check"></i><b>5.2.3</b> Hypothesis testing using Analysis of variance (ANOVA)</a></li>
+<li class="chapter" data-level="5.2.4" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#some-further-important-topics-in-linear-modeling"><i class="fa fa-check"></i><b>5.2.4</b> Some further important topics in linear modeling</a></li>
+<li class="chapter" data-level="5.2.5" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#generalized-linear-models"><i class="fa fa-check"></i><b>5.2.5</b> Generalized linear models</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html"><i class="fa fa-check"></i><b>5.3</b> Exercises</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMparamest"><i class="fa fa-check"></i><b>5.3.1</b> Estimating the parameters in a linear model</a></li>
+<li class="chapter" data-level="5.3.2" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMManova"><i class="fa fa-check"></i><b>5.3.2</b> Using ANOVA to carry out hypothesis testing</a></li>
+<li class="chapter" data-level="5.3.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:anovabyhand"><i class="fa fa-check"></i><b>5.3.3</b> Computing ANOVA by hand</a></li>
+<li class="chapter" data-level="5.3.4" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:GLMM"><i class="fa fa-check"></i><b>5.3.4</b> Generalized linear (mixed) model</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a><ul>
+<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
+<li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
+<li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
+<li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
+<li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
+<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a><ul>
+<li class="chapter" data-level="8.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>8.1</b> A reminder: The maximal linear mixed model</a></li>
+<li class="chapter" data-level="8.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>8.2</b> Obtain estimates from a previous study</a></li>
+<li class="chapter" data-level="8.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>8.3</b> Decide on a range of plausible values of the effect size</a></li>
+<li class="chapter" data-level="8.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>8.4</b> Extract parameter estimates</a></li>
+<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>8.5.1</b> Generate a Latin-square design</a></li>
+<li class="chapter" data-level="8.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>8.5.2</b> Generate data row-by-row</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>8.6</b> Repeated generation of data to compute power</a></li>
+<li class="chapter" data-level="8.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>8.7</b> What you can now do</a></li>
+<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a><ul>
+<li class="chapter" data-level="8.8.1" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-with-two-conditions"><i class="fa fa-check"></i><b>8.8.1</b> Simulating data with two conditions</a></li>
+<li class="chapter" data-level="8.8.2" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-in-factorial-designs"><i class="fa fa-check"></i><b>8.8.2</b> Simulating data in factorial designs</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a><ul>
+<li class="chapter" data-level="8.9.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>8.9.1</b> Drawing a power curve given a range of effect sizes</a></li>
+<li class="chapter" data-level="8.9.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>8.9.2</b> Power and log-transformation</a></li>
+<li class="chapter" data-level="8.9.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>8.9.3</b> Evaluating models by generating simulated data</a></li>
+<li class="chapter" data-level="8.9.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>8.9.4</b> Using simulation to check parameter recovery</a></li>
+<li class="chapter" data-level="8.9.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>8.9.5</b> Sample size calculations using simulation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch-multcomp.html"><a href="ch-multcomp.html"><i class="fa fa-check"></i><b>9</b> Understanding the multiple comparisons problem</a></li>
+<li class="chapter" data-level="10" data-path="ch-modelselection.html"><a href="ch-modelselection.html"><i class="fa fa-check"></i><b>10</b> Model selection</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -260,7 +327,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</a>
           </h1>
         </div>
 
@@ -271,43 +338,51 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="from-the-t-test-to-the-linear-mixed-model" class="section level2">
 <h2><span class="header-section-number">3.1</span> From the t-test to the linear (mixed) model</h2>
 <p>We begin with the <span class="citation">Grodner and Gibson (<a href="#ref-grodner">2005</a>)</span> self-paced reading data we saw in the previous chapter. Load the data and compute the means for the raw reading times by condition:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1">gg05e1 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/grodnergibsonE1crit.txt&quot;</span>, </a>
-<a class="sourceLine" id="cb169-2" data-line-number="2">  <span class="dt">header =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb169-3" data-line-number="3">means &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">with</span>(gg05e1, <span class="kw">tapply</span>(rawRT, <span class="dt">IND =</span> condition, </a>
-<a class="sourceLine" id="cb169-4" data-line-number="4">  mean)))</a>
-<a class="sourceLine" id="cb169-5" data-line-number="5">means</a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1">gg05e1&lt;-<span class="kw">read.table</span>(<span class="st">&quot;data/grodnergibsonE1crit.txt&quot;</span>,</a>
+<a class="sourceLine" id="cb174-2" data-line-number="2">                   <span class="dt">header=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb174-3" data-line-number="3">means&lt;-<span class="kw">round</span>(<span class="kw">with</span>(gg05e1,<span class="kw">tapply</span>(rawRT,</a>
+<a class="sourceLine" id="cb174-4" data-line-number="4">                                <span class="dt">IND=</span>condition,</a>
+<a class="sourceLine" id="cb174-5" data-line-number="5">                            mean)))</a>
+<a class="sourceLine" id="cb174-6" data-line-number="6">means</a></code></pre></div>
 <pre><code>##  objgap subjgap 
 ##     471     369</code></pre>
 <p>As predicted by theory <span class="citation">(Grodner and Gibson <a href="#ref-grodner">2005</a>)</span>, object relatives (labeled objgap here) are read slower than subject relatives (labeled subjgap).</p>
 <p>As discussed in the previous chapter, a paired t-test can be done to evaluate whether we have evidence against the null hypothesis that object relatives and subject relatives have identical reading times. However, we have to aggregate the data by subjects and by items first.</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1">bysubj &lt;-<span class="st"> </span><span class="kw">aggregate</span>(rawRT <span class="op">~</span><span class="st"> </span>subject <span class="op">+</span><span class="st"> </span>condition, mean, </a>
-<a class="sourceLine" id="cb171-2" data-line-number="2">  <span class="dt">data =</span> gg05e1)</a>
-<a class="sourceLine" id="cb171-3" data-line-number="3">byitem &lt;-<span class="st"> </span><span class="kw">aggregate</span>(rawRT <span class="op">~</span><span class="st"> </span>item <span class="op">+</span><span class="st"> </span>condition, mean, </a>
-<a class="sourceLine" id="cb171-4" data-line-number="4">  <span class="dt">data =</span> gg05e1)</a>
-<a class="sourceLine" id="cb171-5" data-line-number="5"><span class="kw">t.test</span>(rawRT <span class="op">~</span><span class="st"> </span>condition, <span class="dt">paired =</span> <span class="ot">TRUE</span>, bysubj)<span class="op">$</span>statistic</a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1">bysubj&lt;-<span class="kw">aggregate</span>(rawRT<span class="op">~</span>subject<span class="op">+</span></a>
+<a class="sourceLine" id="cb176-2" data-line-number="2"><span class="st">                    </span>condition,</a>
+<a class="sourceLine" id="cb176-3" data-line-number="3">                  mean,<span class="dt">data=</span>gg05e1)</a>
+<a class="sourceLine" id="cb176-4" data-line-number="4">byitem&lt;-<span class="kw">aggregate</span>(rawRT<span class="op">~</span>item<span class="op">+</span></a>
+<a class="sourceLine" id="cb176-5" data-line-number="5"><span class="st">                    </span>condition,</a>
+<a class="sourceLine" id="cb176-6" data-line-number="6">                  mean,<span class="dt">data=</span>gg05e1)</a>
+<a class="sourceLine" id="cb176-7" data-line-number="7"><span class="kw">t.test</span>(rawRT<span class="op">~</span>condition,</a>
+<a class="sourceLine" id="cb176-8" data-line-number="8">       <span class="dt">paired=</span><span class="ot">TRUE</span>,bysubj)<span class="op">$</span>statistic</a></code></pre></div>
 <pre><code>##     t 
 ## 3.109</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="kw">t.test</span>(rawRT <span class="op">~</span><span class="st"> </span>condition, <span class="dt">paired =</span> <span class="ot">TRUE</span>, byitem)<span class="op">$</span>statistic</a></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="kw">t.test</span>(rawRT<span class="op">~</span>condition,</a>
+<a class="sourceLine" id="cb178-2" data-line-number="2">       <span class="dt">paired=</span><span class="ot">TRUE</span>,byitem)<span class="op">$</span>statistic</a></code></pre></div>
 <pre><code>##     t 
 ## 3.754</code></pre>
 <p>What these two t-tests show is that both by subjects and by items, there is strong evidence against the null hypothesis that the object and relatives have identical reading times.</p>
 <p>Interestingly, exactly the same t-values can be obtained by running the following commands, which implement a kind of linear model called the <em>linear mixed model</em>:</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">library</span>(lme4)</a></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1"><span class="kw">library</span>(lme4)</a></code></pre></div>
 <pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## 
+## Attaching package: &#39;Matrix&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
+## 
+##     expand, pack, unpack</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;lme4&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:SIN&#39;:
 ## 
 ##     sdcor2cov</code></pre>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1">m0lmersubj &lt;-<span class="st"> </span><span class="kw">lmer</span>(rawRT <span class="op">~</span><span class="st"> </span>condition <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>subject), </a>
-<a class="sourceLine" id="cb179-2" data-line-number="2">  bysubj)</a>
-<a class="sourceLine" id="cb179-3" data-line-number="3"><span class="kw">summary</span>(m0lmersubj)<span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1">m0lmersubj&lt;-<span class="kw">lmer</span>(rawRT<span class="op">~</span>condition<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>subject),bysubj)</a>
+<a class="sourceLine" id="cb186-2" data-line-number="2"><span class="kw">summary</span>(m0lmersubj)<span class="op">$</span>coefficients</a></code></pre></div>
 <pre><code>##                  Estimate Std. Error t value
 ## (Intercept)         471.4      31.13  15.143
 ## conditionsubjgap   -102.3      32.90  -3.109</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1">m0lmeritem &lt;-<span class="st"> </span><span class="kw">lmer</span>(rawRT <span class="op">~</span><span class="st"> </span>condition <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>item), </a>
-<a class="sourceLine" id="cb181-2" data-line-number="2">  byitem)</a>
-<a class="sourceLine" id="cb181-3" data-line-number="3"><span class="kw">summary</span>(m0lmeritem)<span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1">m0lmeritem&lt;-<span class="kw">lmer</span>(rawRT<span class="op">~</span>condition<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>item),byitem)</a>
+<a class="sourceLine" id="cb188-2" data-line-number="2"><span class="kw">summary</span>(m0lmeritem)<span class="op">$</span>coefficients</a></code></pre></div>
 <pre><code>##                  Estimate Std. Error t value
 ## (Intercept)         471.4      20.20  23.336
 ## conditionsubjgap   -102.3      27.25  -3.754</code></pre>
@@ -340,7 +415,7 @@ obs.t= \frac{\bar{x}}{s/\sqrt{n}}
 \end{equation}\]</span></p>
 <p>Solving for <span class="math inline">\(s\)</span>:</p>
 <p><span class="math display">\[\begin{equation}
- s = \bar{x} \times \sqrt{n}/obs.t = -103 \times \sqrt{42}/-3.109  =  213
+ s = \bar{x} \times \sqrt{n}/obs.t = -102 \times \sqrt{42}/-3.109  =  213
 \end{equation}\]</span></p>
 <p>So, our model for the relative clause data consists of two equations:</p>
 <p>Object relatives:</p>
@@ -362,42 +437,41 @@ y = 471 - 102\times 1 + \varepsilon \hbox{ where } \varepsilon \sim Normal(0,213
 \hbox{Mean SR RT} = 471 - 102\times 1 
 \end{equation}\]</span></p>
 <p>There is a function in R, the <code>lm()</code> function, which expresses the above statistical model, and prints out exactly the same numerical values that we used above:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">summary</span>(m0 &lt;-<span class="st"> </span><span class="kw">lm</span>(rawRT <span class="op">~</span><span class="st"> </span>condition, bysubj))<span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1"><span class="kw">summary</span>(m0&lt;-<span class="kw">lm</span>(rawRT<span class="op">~</span>condition,bysubj))<span class="op">$</span>coefficients</a></code></pre></div>
 <pre><code>##                  Estimate Std. Error t value  Pr(&gt;|t|)
 ## (Intercept)         471.4      31.13  15.143 1.795e-25
 ## conditionsubjgap   -102.3      44.02  -2.324 2.263e-02</code></pre>
 <p>The linear model function <code>lm()</code> prints out two coefficients, <span class="math inline">\(471\)</span> and <span class="math inline">\(-102\)</span>, that help express the mean reading times for object and subject relative data, using a simple coding scheme: object relatives are coded as 0, and subject relatives are coded as 1. This coding scheme is not visible to the user, but is represented internally in R. The user can see the coding for each condition level by typing:</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="co">## make sure that the condition column is of type</span></a>
-<a class="sourceLine" id="cb185-2" data-line-number="2"><span class="co">## factor:</span></a>
-<a class="sourceLine" id="cb185-3" data-line-number="3">bysubj<span class="op">$</span>condition &lt;-<span class="st"> </span><span class="kw">factor</span>(bysubj<span class="op">$</span>condition)</a>
-<a class="sourceLine" id="cb185-4" data-line-number="4"><span class="kw">contrasts</span>(bysubj<span class="op">$</span>condition)</a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="co">## make sure that the condition column is of type factor:</span></a>
+<a class="sourceLine" id="cb192-2" data-line-number="2">bysubj<span class="op">$</span>condition&lt;-<span class="kw">factor</span>(bysubj<span class="op">$</span>condition)</a>
+<a class="sourceLine" id="cb192-3" data-line-number="3"><span class="kw">contrasts</span>(bysubj<span class="op">$</span>condition)</a></code></pre></div>
 <pre><code>##         subjgap
 ## objgap        0
 ## subjgap       1</code></pre>
 <p>We will discuss contrast coding in detail in a later chapter, but right now the simple 0,1 coding above—called treatment contrasts—is enough for our purposes.</p>
 <p>Thus, what the linear model above gives us is two numbers: the mean object relative reading time (471), and the <em>difference</em> between object and subject relative (-102). We can extract the two coefficients by typing:</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">coef</span>(m0))</a></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">coef</span>(m0))</a></code></pre></div>
 <pre><code>##      (Intercept) conditionsubjgap 
 ##              471             -102</code></pre>
 <p>In the vocabulary of linear modeling, the first number is called the <em>intercept</em>, and the second one is called the <em>slope</em>.
 Note that the meaning of the intercept and slope depends on the ordering of the factor levels. We can make the sample mean of the subject relative represent the intercept:</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="co">## reverse the factor level ordering:</span></a>
-<a class="sourceLine" id="cb189-2" data-line-number="2">bysubj<span class="op">$</span>condition &lt;-<span class="st"> </span><span class="kw">factor</span>(bysubj<span class="op">$</span>condition, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;subjgap&quot;</span>, </a>
-<a class="sourceLine" id="cb189-3" data-line-number="3">  <span class="st">&quot;objgap&quot;</span>))</a>
-<a class="sourceLine" id="cb189-4" data-line-number="4"><span class="kw">contrasts</span>(bysubj<span class="op">$</span>condition)</a></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="co">## reverse the factor level ordering:</span></a>
+<a class="sourceLine" id="cb196-2" data-line-number="2">bysubj<span class="op">$</span>condition&lt;-<span class="kw">factor</span>(bysubj<span class="op">$</span>condition,</a>
+<a class="sourceLine" id="cb196-3" data-line-number="3">                         <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;subjgap&quot;</span>,<span class="st">&quot;objgap&quot;</span>))</a>
+<a class="sourceLine" id="cb196-4" data-line-number="4"><span class="kw">contrasts</span>(bysubj<span class="op">$</span>condition)</a></code></pre></div>
 <pre><code>##         objgap
 ## subjgap      0
 ## objgap       1</code></pre>
 <p>Now, the intercept is the mean of the subject relatives, and the slope is the difference between object and subject relatives reading times. Note that the sign of the t-value has changed—the sign depends on the contrast coding.</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1">m1a &lt;-<span class="st"> </span><span class="kw">lm</span>(rawRT <span class="op">~</span><span class="st"> </span>condition, bysubj)</a>
-<a class="sourceLine" id="cb191-2" data-line-number="2"><span class="kw">summary</span>(m1a)<span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1">m1a&lt;-<span class="kw">lm</span>(rawRT<span class="op">~</span>condition,bysubj)</a>
+<a class="sourceLine" id="cb198-2" data-line-number="2"><span class="kw">summary</span>(m1a)<span class="op">$</span>coefficients</a></code></pre></div>
 <pre><code>##                 Estimate Std. Error t value  Pr(&gt;|t|)
 ## (Intercept)        369.1      31.13  11.857 1.819e-19
 ## conditionobjgap    102.3      44.02   2.324 2.263e-02</code></pre>
 <p>Let’s switch back to the original factor level ordering:</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1">bysubj<span class="op">$</span>condition &lt;-<span class="st"> </span><span class="kw">factor</span>(bysubj<span class="op">$</span>condition, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;objgap&quot;</span>, </a>
-<a class="sourceLine" id="cb193-2" data-line-number="2">  <span class="st">&quot;subjgap&quot;</span>))</a>
-<a class="sourceLine" id="cb193-3" data-line-number="3"><span class="kw">contrasts</span>(bysubj<span class="op">$</span>condition)</a></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1">bysubj<span class="op">$</span>condition&lt;-<span class="kw">factor</span>(bysubj<span class="op">$</span>condition,</a>
+<a class="sourceLine" id="cb200-2" data-line-number="2">                         <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;objgap&quot;</span>,<span class="st">&quot;subjgap&quot;</span>))</a>
+<a class="sourceLine" id="cb200-3" data-line-number="3"><span class="kw">contrasts</span>(bysubj<span class="op">$</span>condition)</a></code></pre></div>
 <pre><code>##         subjgap
 ## objgap        0
 ## subjgap       1</code></pre>
@@ -422,9 +496,9 @@ obs.t = \frac{\beta_1 - 0}{SE}
 <p>The intercept also has a null hypothesis associated with it, namely that
 <span class="math inline">\(H_0: \beta_0 = 0\)</span>. However, this null hypothesis test is of absolutely no interest for us. This hypothesis test is reported by the lm() function only because the intercept is needed for technical reasons, to be discussed later.</p>
 <p>The <em>contrast coding</em> mentioned above determines the meaning of the <span class="math inline">\(\beta\)</span> parameters:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1">bysubj<span class="op">$</span>condition &lt;-<span class="st"> </span><span class="kw">factor</span>(bysubj<span class="op">$</span>condition, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;objgap&quot;</span>, </a>
-<a class="sourceLine" id="cb195-2" data-line-number="2">  <span class="st">&quot;subjgap&quot;</span>))</a>
-<a class="sourceLine" id="cb195-3" data-line-number="3"><span class="kw">contrasts</span>(bysubj<span class="op">$</span>condition)</a></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1">bysubj<span class="op">$</span>condition&lt;-<span class="kw">factor</span>(bysubj<span class="op">$</span>condition,</a>
+<a class="sourceLine" id="cb202-2" data-line-number="2">                         <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;objgap&quot;</span>,<span class="st">&quot;subjgap&quot;</span>))</a>
+<a class="sourceLine" id="cb202-3" data-line-number="3"><span class="kw">contrasts</span>(bysubj<span class="op">$</span>condition)</a></code></pre></div>
 <pre><code>##         subjgap
 ## objgap        0
 ## subjgap       1</code></pre>

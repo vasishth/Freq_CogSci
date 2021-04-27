@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.5 Hypothesis testing: The one sample t-test | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)</title>
+  <title>2.5 Hypothesis testing: The one sample t-test | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.5 Hypothesis testing: The one sample t-test | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)" />
+  <meta property="og:title" content="2.5 Hypothesis testing: The one sample t-test | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.5 Hypothesis testing: The one sample t-test | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)" />
+  <meta name="twitter:title" content="2.5 Hypothesis testing: The one sample t-test | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   
   <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2020-09-04" />
+<meta name="date" content="2021-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,8 @@
 
 
 
+<script src="libs/kePrint/kePrint.js"></script>
+<link href="libs/lightable/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -147,8 +149,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
 <li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.1</b> The t-distribution</a></li>
-<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#gamma-dsitribution"><i class="fa fa-check"></i><b>1.3.2</b> Gamma dsitribution</a></li>
-<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#exponential"><i class="fa fa-check"></i><b>1.3.3</b> Exponential</a></li>
+<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-gamma-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The Gamma distribution</a></li>
+<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-exponential-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Exponential distribution</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.1</b> Example 1: Discrete bivariate distributions</a></li>
@@ -164,11 +166,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.9" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a><ul>
 <li class="chapter" data-level="1.9.1" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisespnorm"><i class="fa fa-check"></i><b>1.9.1</b> Practice using the <code>pnorm</code> function</a></li>
 <li class="chapter" data-level="1.9.2" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqnorm"><i class="fa fa-check"></i><b>1.9.2</b> Practice using the <code>qnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqt"><i class="fa fa-check"></i><b>1.9.3</b> Practice using <code>qt</code></a></li>
-<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 1</a></li>
-<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.5</b> Maximum likelihood estimation 2</a></li>
-<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating bivariate data</a></li>
-<li class="chapter" data-level="1.9.7" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.7</b> Generating multivariate data</a></li>
+<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.3</b> Maximum likelihood estimation 1</a></li>
+<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 2</a></li>
+<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.5</b> Generating bivariate data</a></li>
+<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating multivariate data</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a><ul>
@@ -188,10 +189,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.6.1</b> Common mistakes involving the t-test</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.1</b> Computing the p-value</a></li>
-<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.2</b> Computing the t-value</a></li>
-<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.3</b> Type I and II error</a></li>
-<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.4</b> Practice with the paired t-test</a></li>
+<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesqt"><i class="fa fa-check"></i><b>2.7.1</b> Practice using <code>qt</code></a></li>
+<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.2</b> Computing the p-value</a></li>
+<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.3</b> Computing the t-value</a></li>
+<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.4</b> Type I and II error</a></li>
+<li class="chapter" data-level="2.7.5" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.5</b> Practice with the paired t-test</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a><ul>
@@ -207,15 +209,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
 <li class="chapter" data-level="3.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
-<li class="chapter" data-level="3.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
-<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
-<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
-<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
-<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
-<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
-<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
-<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
-<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises.html"><a href="sec-LMExercises.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
+<li class="chapter" data-level="3.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
+<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
+<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
+<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
+<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
+<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
+<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
+<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a><ul>
@@ -228,25 +230,90 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.3" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseGramCE"><i class="fa fa-check"></i><b>4.4.3</b> The grammaticality illusion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>5</b> Using simulation to understand your model</a><ul>
-<li class="chapter" data-level="5.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>5.1</b> A reminder: The maximal linear mixed model</a></li>
-<li class="chapter" data-level="5.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>5.2</b> Obtain estimates from a previous study</a></li>
-<li class="chapter" data-level="5.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>5.3</b> Decide on a range of plausible values of the effect size</a></li>
-<li class="chapter" data-level="5.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>5.4</b> Extract parameter estimates</a></li>
-<li class="chapter" data-level="5.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>5.5</b> Define a function for generating data</a><ul>
-<li class="chapter" data-level="5.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>5.5.1</b> Generate a Latin-square design</a></li>
-<li class="chapter" data-level="5.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>5.5.2</b> Generate data row-by-row</a></li>
+<li class="chapter" data-level="5" data-path="ch-LMtheory.html"><a href="ch-LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a><ul>
+<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#matrix-addition-subtraction-and-multiplication"><i class="fa fa-check"></i><b>5.1.1</b> Matrix addition, subtraction, and multiplication</a></li>
+<li class="chapter" data-level="5.1.2" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#diagonal-matrix-and-identity-matrix"><i class="fa fa-check"></i><b>5.1.2</b> Diagonal matrix and identity matrix</a></li>
+<li class="chapter" data-level="5.1.3" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#powers-of-matrices"><i class="fa fa-check"></i><b>5.1.3</b> Powers of matrices</a></li>
+<li class="chapter" data-level="5.1.4" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.1.4</b> Inverse of a matrix</a></li>
+<li class="chapter" data-level="5.1.5" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#linear-independence-and-rank"><i class="fa fa-check"></i><b>5.1.5</b> Linear independence, and rank</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>5.6</b> Repeated generation of data to compute power</a></li>
-<li class="chapter" data-level="5.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>5.7</b> What you can now do</a></li>
-<li class="chapter" data-level="5.8" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>5.8</b> Exercises</a><ul>
-<li class="chapter" data-level="5.8.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>5.8.1</b> Drawing a power curve given a range of effect sizes</a></li>
-<li class="chapter" data-level="5.8.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>5.8.2</b> Power and log-transformation</a></li>
-<li class="chapter" data-level="5.8.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>5.8.3</b> Evaluating models by generating simulated data</a></li>
-<li class="chapter" data-level="5.8.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>5.8.4</b> Using simulation to check parameter recovery</a></li>
-<li class="chapter" data-level="5.8.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>5.8.5</b> Sample size calculations using simulation</a></li>
+<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#least-squares-estimation-geometric-argument"><i class="fa fa-check"></i><b>5.2.1</b> Least squares estimation: Geometric argument</a></li>
+<li class="chapter" data-level="5.2.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#the-expectation-and-variance-of-the-parameters-beta"><i class="fa fa-check"></i><b>5.2.2</b> The expectation and variance of the parameters beta</a></li>
+<li class="chapter" data-level="5.2.3" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#hypothesis-testing-using-analysis-of-variance-anova"><i class="fa fa-check"></i><b>5.2.3</b> Hypothesis testing using Analysis of variance (ANOVA)</a></li>
+<li class="chapter" data-level="5.2.4" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#some-further-important-topics-in-linear-modeling"><i class="fa fa-check"></i><b>5.2.4</b> Some further important topics in linear modeling</a></li>
+<li class="chapter" data-level="5.2.5" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#generalized-linear-models"><i class="fa fa-check"></i><b>5.2.5</b> Generalized linear models</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html"><i class="fa fa-check"></i><b>5.3</b> Exercises</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMparamest"><i class="fa fa-check"></i><b>5.3.1</b> Estimating the parameters in a linear model</a></li>
+<li class="chapter" data-level="5.3.2" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMManova"><i class="fa fa-check"></i><b>5.3.2</b> Using ANOVA to carry out hypothesis testing</a></li>
+<li class="chapter" data-level="5.3.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:anovabyhand"><i class="fa fa-check"></i><b>5.3.3</b> Computing ANOVA by hand</a></li>
+<li class="chapter" data-level="5.3.4" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:GLMM"><i class="fa fa-check"></i><b>5.3.4</b> Generalized linear (mixed) model</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a><ul>
+<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
+<li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
+<li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
+<li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
+<li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
+<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a><ul>
+<li class="chapter" data-level="8.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>8.1</b> A reminder: The maximal linear mixed model</a></li>
+<li class="chapter" data-level="8.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>8.2</b> Obtain estimates from a previous study</a></li>
+<li class="chapter" data-level="8.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>8.3</b> Decide on a range of plausible values of the effect size</a></li>
+<li class="chapter" data-level="8.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>8.4</b> Extract parameter estimates</a></li>
+<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>8.5.1</b> Generate a Latin-square design</a></li>
+<li class="chapter" data-level="8.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>8.5.2</b> Generate data row-by-row</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>8.6</b> Repeated generation of data to compute power</a></li>
+<li class="chapter" data-level="8.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>8.7</b> What you can now do</a></li>
+<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a><ul>
+<li class="chapter" data-level="8.8.1" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-with-two-conditions"><i class="fa fa-check"></i><b>8.8.1</b> Simulating data with two conditions</a></li>
+<li class="chapter" data-level="8.8.2" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-in-factorial-designs"><i class="fa fa-check"></i><b>8.8.2</b> Simulating data in factorial designs</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a><ul>
+<li class="chapter" data-level="8.9.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>8.9.1</b> Drawing a power curve given a range of effect sizes</a></li>
+<li class="chapter" data-level="8.9.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>8.9.2</b> Power and log-transformation</a></li>
+<li class="chapter" data-level="8.9.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>8.9.3</b> Evaluating models by generating simulated data</a></li>
+<li class="chapter" data-level="8.9.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>8.9.4</b> Using simulation to check parameter recovery</a></li>
+<li class="chapter" data-level="8.9.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>8.9.5</b> Sample size calculations using simulation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch-multcomp.html"><a href="ch-multcomp.html"><i class="fa fa-check"></i><b>9</b> Understanding the multiple comparisons problem</a></li>
+<li class="chapter" data-level="10" data-path="ch-modelselection.html"><a href="ch-modelselection.html"><i class="fa fa-check"></i><b>10</b> Model selection</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -260,7 +327,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction (DRAFT)</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</a>
           </h1>
         </div>
 
@@ -279,27 +346,29 @@ We can estimate <span class="math inline">\(\mu\)</span> from the sample mean <s
 <p><span class="math display">\[\begin{equation}
 N(\hat\mu,\frac{\hat \sigma}{\sqrt{n}})
 \end{equation}\]</span></p>
-<p>It is important to realize here that the above sampling distribution is only as realistic as the estimates of the mean and standard deviation parameters—if those are inaccurately estimated, then the sampling distribution is not realistic either.</p>
+<p>It is important to realize here that the above sampling distribution is only as realistic as the estimates of the mean and standard deviation parameters—if those happen to be inaccurately estimated, then the sampling distribution is not realistic either.</p>
 <p>Assume as before that we take an independent random sample of size <span class="math inline">\(1000\)</span> from a random variable <span class="math inline">\(Y\)</span> that is normally distributed, with mean 500 and standard deviation 100. As usual, begin by estimating the mean and SE:</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb100-2" data-line-number="2">mu &lt;-<span class="st"> </span><span class="dv">500</span></a>
-<a class="sourceLine" id="cb100-3" data-line-number="3">sigma &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb100-4" data-line-number="4"><span class="co">## generate simulated data:</span></a>
-<a class="sourceLine" id="cb100-5" data-line-number="5">y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dt">mean =</span> <span class="dv">500</span>, <span class="dt">sd =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb100-6" data-line-number="6"><span class="co">## compute summary statistics:</span></a>
-<a class="sourceLine" id="cb100-7" data-line-number="7">y_bar &lt;-<span class="st"> </span><span class="kw">mean</span>(y)</a>
-<a class="sourceLine" id="cb100-8" data-line-number="8">SE &lt;-<span class="st"> </span><span class="kw">sd</span>(y)<span class="op">/</span><span class="kw">sqrt</span>(n)</a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">n&lt;-<span class="dv">1000</span></a>
+<a class="sourceLine" id="cb104-2" data-line-number="2">mu&lt;-<span class="dv">500</span></a>
+<a class="sourceLine" id="cb104-3" data-line-number="3">sigma&lt;-<span class="dv">100</span></a>
+<a class="sourceLine" id="cb104-4" data-line-number="4"><span class="co">## generate simulated data:</span></a>
+<a class="sourceLine" id="cb104-5" data-line-number="5">y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n,<span class="dt">mean=</span><span class="dv">500</span>,<span class="dt">sd=</span><span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb104-6" data-line-number="6"><span class="co">## compute summary statistics:</span></a>
+<a class="sourceLine" id="cb104-7" data-line-number="7">y_bar&lt;-<span class="kw">mean</span>(y)</a>
+<a class="sourceLine" id="cb104-8" data-line-number="8">SE&lt;-<span class="kw">sd</span>(y)<span class="op">/</span><span class="kw">sqrt</span>(n)</a></code></pre></div>
 <p>The null hypothesis significance testing (NHST) approach as practised in psychology and other areas is to set up a null hypothesis that <span class="math inline">\(\mu\)</span> has some fixed value. Just as an example, assume that our null hypothesis is:</p>
 <p><span class="math display">\[\begin{equation}
 H_0: \mu = 450
 \end{equation}\]</span></p>
 <p>This amounts to assuming that the true sampling distribution of sample means is (approximately) normally distributed and centered around 450, with the standard error estimated from the data.</p>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-45-1.svg" width="672" /></p>
-<p>The intuitive idea here is that
-- if the sample mean <span class="math inline">\(\bar{y}\)</span> is “near” the hypothesized <span class="math inline">\(\mu\)</span> (here, 450), the data are possibly consistent with the null hypothesis distribution.
-- if the sample mean <span class="math inline">\(\bar{y}\)</span> is “far” from the hypothesized <span class="math inline">\(\mu\)</span>, the data are inconsistent with the null hypothesis distribution.</p>
-<p>The terms “near” and “far” will be quantified by determining how many standard error units the sample mean is from the hypothesized mean. This way of thinking shifts the focus away from the sampling distribution above, towards the distance measured in standard error units.</p>
-<p>The distance between the sample mean and the hypothesized mean can be written in SE units. We will say that the sample mean is <span class="math inline">\(t\)</span> standard errors away from the hypothesized mean:</p>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-43-1.svg" width="672" /></p>
+<p>The intuitive idea here is that</p>
+<ul>
+<li>if the sample mean <span class="math inline">\(\bar{y}\)</span> is “near” the hypothesized <span class="math inline">\(\mu\)</span> (here, 450), the data are possibly (but by no means necessarily) consistent with the null hypothesis distribution.</li>
+<li>if the sample mean <span class="math inline">\(\bar{y}\)</span> is “far” from the hypothesized <span class="math inline">\(\mu\)</span>, the data are inconsistent with the null hypothesis distribution.</li>
+</ul>
+<p>The terms “near” and “far” will be quantified by determining how many standard error units the sample mean is from the hypothesized mean. This way of thinking shifts the focus away from the sampling distribution above, towards the distance measured in standard error units from the null hypothesis mean.</p>
+<p>The distance between the sample mean and the hypothesized mean can be written in SE units as follows. We will say that the sample mean is <span class="math inline">\(t\)</span> standard errors away from the hypothesized mean:</p>
 <p><span class="math display">\[\begin{equation}
 t \times SE = \bar{x} - \mu 
 \end{equation}\]</span></p>
@@ -312,12 +381,12 @@ t  = \frac{\bar{x} - \mu}{SE}
 <p><span class="math display">\[\begin{equation}
 T  = \frac{\bar{X} - \mu}{SE}
 \end{equation}\]</span></p>
-<p>This random variable has a PDF associated with it, the t-distribution, which is defined in terms of the sample size <span class="math inline">\(n\)</span>; the pdf is written <span class="math inline">\(t(n-1)\)</span>. Under repeated sampling, the t-distribution is generated from this random variable <span class="math inline">\(T\)</span>.</p>
-<p>We will compactly express the statement that “the observed t-value is assumed to be generated under repeated sampling from a t-distribution with n-1 degrees of freedom” as:</p>
+<p>This random variable has a pdf associated with it, the t-distribution, which is defined in terms of the sample size <span class="math inline">\(n\)</span>; the pdf is written <span class="math inline">\(t(n-1)\)</span>. Under repeated sampling, the t-distribution is generated from this random variable <span class="math inline">\(T\)</span>.</p>
+<p>We will compactly express the statement that “the observed t-value is assumed to be generated (under repeated sampling) from a t-distribution with n-1 degrees of freedom” as:</p>
 <p><span class="math display">\[\begin{equation}
 T \sim t(n-1)
 \end{equation}\]</span></p>
-<p>For large <span class="math inline">\(n\)</span>, the PDF of the random variable <span class="math inline">\(T\)</span> approaches <span class="math inline">\(N(0,1)\)</span>. This is illustrated in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:tnormal">2.7</a>; notice that the t-distribution has fatter tails than the normal for small <span class="math inline">\(n\)</span>, say <span class="math inline">\(n&lt;20\)</span>, but for larger n, the t-distribution and the normal are essentially identical. Incidentally, when n=2, the t-distribution <span class="math inline">\(t(1)\)</span> is the Cauchy distribution we saw earlier; this distribution is characterized by fat tails, and has no mean or variance defined for it.</p>
+<p>For large <span class="math inline">\(n\)</span>, the pdf of the random variable <span class="math inline">\(T\)</span> approaches <span class="math inline">\(N(0,1)\)</span>. This is illustrated in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:tnormal">2.7</a>; notice that the t-distribution has fatter tails than the normal for small <span class="math inline">\(n\)</span>, say <span class="math inline">\(n&lt;20\)</span>, but for larger n, the t-distribution and the normal become increasingly similar in shape. Incidentally, when n=2, the t-distribution <span class="math inline">\(t(1)\)</span> is the Cauchy distribution we saw earlier; this distribution is characterized by fat tails, and has no mean or variance defined for it.</p>
 <div class="figure"><span id="fig:tnormal"></span>
 <img src="Freq_CogSci_files/figure-html/tnormal-1.svg" alt="A visual comparison of the t-distribution (with degrees of freedom ranging from 1 to 50) with the standard normal distribution (N(0,1)). The dashed line represents the t-distribution, and the solid line the normal distribution." width="672" />
 <p class="caption">
@@ -336,7 +405,7 @@ t=\frac{\bar{y}-\mu}{s/\sqrt{n}}
 \end{equation}\]</span></p>
 <ul>
 <li>Reject null hypothesis if the observed t-value is “large” (to be made more precise next).</li>
-<li>Fail to reject the null hypothesis, or (under some conditions) even go so far as to accept the null hypothesis, if the observed t-value is “small”.</li>
+<li>Fail to reject the null hypothesis, or (under some conditions, to be made clear later) even go so far as to accept the null hypothesis, if the observed t-value is “small”.</li>
 </ul>
 <p>What constitutes a large or small observed t-value?
 Intuitively, the t-value from the sample is large when we end up far in <em>either</em> tail of the distribution. The two tails of the t-distribution will be referred to as the <em>rejection region</em>. The word <em>region</em> here refers to the real number line along the x-axis, under the tails of the distribution. The rejection region will go off to infinity on the outer sides, and is demarcated by a vertical line on the inner side of each tail. This is shown in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:tails">2.8</a>. It goes off to infinity because the support—the range of possible values—of the random variable that the t-distribution belongs to stretches from minus infinity to plus infinity.</p>
@@ -346,52 +415,68 @@ Intuitively, the t-value from the sample is large when we end up far in <em>eith
 FIGURE 2.8: The rejection region in a t-distribution. The rejection region is the x-axis under the gray-colored area.
 </p>
 </div>
-<p>The location of the vertical lines is determined by the so-called <em>critical t-value</em> along the x-axis of the t-distribution. This is the value such that the area under the curve in the tails to the left or right of the tails is 0.025. As discussed in chapter 1, this area under the curve represents the probability of observing a value as extreme as the critical t-value, or some value that is more extreme. Notice that if we ask ourselves what the probability is of observing some particular t-value (a point value), the answer must necessarily be <span class="math inline">\(0\)</span> (if you are unclear about why, re-read chapter 1). But we can ask the question: what is the absolute t-value, written <span class="math inline">\(|t|\)</span>, such that <span class="math inline">\(P(T&gt;|t|)=0.025\)</span>? That’s the critical t-value.</p>
+<p>The location of the vertical lines is determined by the so-called <em>critical t-value</em> along the x-axis of the t-distribution. This is the value such that the area under the curve in the tails to the left or right of the tails is 0.025. As discussed in chapter 1, this area under the curve represents the probability of observing a value as extreme as the critical t-value, or some value that is more extreme. Notice that if we ask ourselves what the probability is of observing some particular t-value (a point value), the answer must necessarily be <span class="math inline">\(0\)</span> (if you are unclear about why, re-read chapter 1). But we can ask the question: what is the absolute t-value, written <span class="math inline">\(|t|\)</span>, such that <span class="math inline">\(P(T&gt;|t|)=0.025\)</span>? That’s the critical t-value. We call it the critical t-value because it demarcates the rejection region shown in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:tails">2.8</a>: we are adopting the convention that any observed t-value larger than this critical t-value allows us to reject the null hypothesis.</p>
 <p>For a given sample size <span class="math inline">\(n\)</span>, we can identify the rejection region by using the <code>qt</code> function, whose usage is analogous to the <code>qnorm</code> function, discussed in chapter 1.</p>
 <p>Because the shape of the t-distribution depends on the degrees of freedom (n-1), the critical t-value beyond which we reject the null hypothesis will change depending on sample size. For large sample sizes, say <span class="math inline">\(n&gt;50\)</span>, the rejection point is about 2.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.025</span>, <span class="dt">df =</span> <span class="dv">15</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.025</span>,<span class="dt">df=</span><span class="dv">15</span>))</a></code></pre></div>
 <pre><code>## [1] 2.131</code></pre>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.025</span>, <span class="dt">df =</span> <span class="dv">50</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.025</span>,<span class="dt">df=</span><span class="dv">50</span>))</a></code></pre></div>
 <pre><code>## [1] 2.009</code></pre>
 <p>Consider the observed t-value from our sample in our running example:</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="co">## null hypothesis mean:</span></a>
-<a class="sourceLine" id="cb105-2" data-line-number="2">mu &lt;-<span class="st"> </span><span class="dv">450</span></a>
-<a class="sourceLine" id="cb105-3" data-line-number="3">(t_value &lt;-<span class="st"> </span>(y_bar <span class="op">-</span><span class="st"> </span>mu)<span class="op">/</span>SE)</a></code></pre></div>
-<pre><code>## [1] 15.76</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="co">## null hypothesis mean:</span></a>
+<a class="sourceLine" id="cb109-2" data-line-number="2">mu&lt;-<span class="dv">450</span></a>
+<a class="sourceLine" id="cb109-3" data-line-number="3">(t_value&lt;-(y_bar<span class="op">-</span>mu)<span class="op">/</span>SE)</a></code></pre></div>
+<pre><code>## [1] 16.82</code></pre>
 <p>This observed t-value is huge and is telling you the distance of the sample mean from the null hypothesis mean <span class="math inline">\(\mu\)</span> in standard error units.</p>
 <p><span class="math display">\[\begin{equation}
 t=\frac{\bar{y}-\mu_0}{s/\sqrt{n}} \hbox{ or } t\frac{s}{\sqrt{n}}=\bar{y}-\mu_0
 \end{equation}\]</span></p>
-<p>For large sample sizes, if the absolute t-value <span class="math inline">\(|t|\)</span> is greater than <span class="math inline">\(2\)</span> (approximately), we will reject the null hypothesis. The choice of <span class="math inline">\(2\)</span> is purely conventional and comes from standard practice in psychology and related disciplines (as we will see in this book, standard practice is sometimes not a good-enough reason to decide on such things!).</p>
+<p>For large sample sizes, if the absolute t-value <span class="math inline">\(|t|\)</span> is greater than <span class="math inline">\(2\)</span>, we will reject the null hypothesis.</p>
 <p>For a smaller sample size <span class="math inline">\(n\)</span>, you can compute the exact critical t-value:</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="kw">qt</span>(<span class="fl">0.025</span>, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="kw">qt</span>(<span class="fl">0.025</span>,<span class="dt">df=</span>n<span class="dv">-1</span>)</a></code></pre></div>
 <pre><code>## [1] -1.962</code></pre>
 <p>Why is this critical t-value negative in sign? That is because it is on the left-hand side of the t-distribution, which is symmetric.
 The corresponding value on the right-hand side is:</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="kw">qt</span>(<span class="fl">0.975</span>, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="kw">qt</span>(<span class="fl">0.975</span>,<span class="dt">df=</span>n<span class="dv">-1</span>)</a></code></pre></div>
 <pre><code>## [1] 1.962</code></pre>
 <p>These values are of course identical if we ignore the sign. This is why we always frame our discussion around the absolute t-value.</p>
 <p>In R, the built-in function <code>t.test</code> delivers the observed t-value. Given our running example, with the null hypothesis <span class="math inline">\(\mu=450\)</span>, R returns the following:</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="co">## observed t-value from t-test function:</span></a>
-<a class="sourceLine" id="cb111-2" data-line-number="2"><span class="kw">t.test</span>(y, <span class="dt">mu =</span> <span class="dv">450</span>)<span class="op">$</span>statistic</a></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="co">## observed t-value from t-test function:</span></a>
+<a class="sourceLine" id="cb115-2" data-line-number="2"><span class="kw">t.test</span>(y,<span class="dt">mu=</span><span class="dv">450</span>)<span class="op">$</span>statistic</a></code></pre></div>
 <pre><code>##     t 
-## 15.76</code></pre>
+## 16.82</code></pre>
 <p>The default value for the null hypothesis mean <span class="math inline">\(\mu\)</span> in this function is 0; so if one doesn’t define a null hypothesis mean, the statistical test is done with reference to a null hypothesis that <span class="math inline">\(\mu=0\)</span>. That is why this t-value does not match our calculation above:</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="kw">t.test</span>(y)<span class="op">$</span>statistic</a></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="kw">t.test</span>(y)<span class="op">$</span>statistic</a></code></pre></div>
 <pre><code>##     t 
-## 157.8</code></pre>
+## 157.5</code></pre>
 <p>In the most common usage of the t-test, the null hypothesis mean will be <span class="math inline">\(0\)</span>, because usually one is comparing a difference in means between two conditions or two sets of conditions. So the above line of code will work out correctly in those cases; but if you ever have a different null hypothesis mean than <span class="math inline">\(0\)</span>, then you have to specify it in the <code>t.test</code> function.</p>
-<p>So, the t-test is used to implement a <em>decision</em>: either reject the null hypothesis or fail to reject it. Whenever we do an experiment and carry out a t-test, we use the t-test to make a decision: reject or fail to reject the null hypothesis.</p>
+<p>So, the way that the t-test is used in psychology and relate areas is to implement a <em>decision</em>: either reject the null hypothesis or fail to reject it. Whenever we do an experiment and carry out a t-test, we use the t-test to make this binary decision: reject or fail to reject the null hypothesis.</p>
 <p>Recall that behind the t-test lies the assumption that the observed t-value is coming from a random variable, <span class="math inline">\(T\sim t(n-1)\)</span>. The particular t-value we observe from a particular data-set belongs to a distribution of t-values under hypothetical repeated sampling. Thus, implicit in the logic of the t-test—and indeed every frequentist statistical test—is the assumption that the experiment is in principle repeatable: the experiment can in principle be re-run as many times as we want, assuming we have the necessary resources and time.</p>
-<p>This implicit idea of the experiment’s repeatability leads to an important aspect of the t-test: its long-run properties. In other words, its ability (at least in theory) to lead the researchers to the correct decision in the long run, i.e., under (hypothetical) repeated sampling. We turn to this issue next.</p>
+<p>A quick simulation of t-values under repeated sampling makes this clear. Suppose that our null hypothesis mean is 450, and our sample size <span class="math inline">\(n=1000\)</span>. Assume that the data come from <span class="math inline">\(Normal(\mu=450,\sigma=100)\)</span>. Let’s do 10000 simulations, compute the sample mean each time, and then store the observed t-value. The t-distribution that results is shown in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:simt">2.9</a>.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">n&lt;-<span class="dv">1000</span></a>
+<a class="sourceLine" id="cb119-2" data-line-number="2">nsim&lt;-<span class="dv">10000</span></a>
+<a class="sourceLine" id="cb119-3" data-line-number="3">tvals&lt;-<span class="kw">rep</span>(<span class="ot">NA</span>,nsim)</a>
+<a class="sourceLine" id="cb119-4" data-line-number="4"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsim){</a>
+<a class="sourceLine" id="cb119-5" data-line-number="5">y&lt;-<span class="kw">rnorm</span>(n,<span class="dt">mean=</span><span class="dv">450</span>,<span class="dt">sd=</span><span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb119-6" data-line-number="6">SE&lt;-<span class="kw">sd</span>(y)<span class="op">/</span><span class="kw">sqrt</span>(n)</a>
+<a class="sourceLine" id="cb119-7" data-line-number="7">tvals[i]&lt;-(<span class="kw">mean</span>(y)<span class="op">-</span><span class="dv">450</span>)<span class="op">/</span>SE</a>
+<a class="sourceLine" id="cb119-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb119-9" data-line-number="9"><span class="kw">plot</span>(<span class="kw">density</span>(tvals),<span class="dt">main=</span><span class="st">&quot;Simulated t-distribution&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;t-values under repeated sampling&quot;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:simt"></span>
+<img src="Freq_CogSci_files/figure-html/simt-1.svg" alt="The distribution of t-values under repeated sampling." width="672" />
+<p class="caption">
+FIGURE 2.9: The distribution of t-values under repeated sampling.
+</p>
+</div>
+<p>This implicit idea of the experiment’s repeatability leads to an important aspect of the t-test: the proportion of times we would reject the null hypothesis under repeated sampling, given that the null is in fact true or false. In other words, we will now study the t-test’s ability (at least in theory) to lead the researchers to the correct decision under (hypothetical) repeated sampling. We turn to this issue next.</p>
 </div>
 <div id="type-i-ii-error-and-power" class="section level3">
 <h3><span class="header-section-number">2.5.2</span> Type I, II error, and power</h3>
 <p>When we do a hypothesis test using the t-test, the observed t-value will either fall in the rejection region, leading us to reject the null hypothesis,
 or it will land in the non-rejection region, leading us to fail to reject the null. That is a single, one-time event.</p>
-<p>However, the null hypothesis can be either true or not true; we don’t know which of those two possibilities is the reality.
-When we say that the null could be true, we mean that the parameter <span class="math inline">\(\mu\)</span> actually does have the hypothesized value <span class="math inline">\(\mu_0\)</span>; when we say that the null could be false, we mean that the parameter <span class="math inline">\(\mu\)</span> has some <em>specific</em> value <span class="math inline">\(\mu_{alt}\)</span> other than <span class="math inline">\(\mu_0\)</span>.
-We can represent these two alternative possible realities in a tabular form, as shown below. The two columns show the two possible worlds, one in which the null is true, and the other in which it is false. The two rows show the two possible decisions we can take based on the observed t-value: reject the null or fail to reject it.</p>
+<p>So suppose we have made our decision based on the observed t-value. Now, the null hypothesis can be either true or not true; we don’t know which of those two possibilities is the reality.
+When we decide (based on the observed t-value) that the null is true, we are asserting that the parameter <span class="math inline">\(\mu\)</span> actually does have the hypothesized value <span class="math inline">\(\mu_0\)</span>; when we decide that the null is false, we are asserting that the parameter <span class="math inline">\(\mu\)</span> has some <em>specific</em> value <span class="math inline">\(\mu_{alt}\)</span> other than <span class="math inline">\(\mu_0\)</span>.
+We can represent these two alternative possible realities in a tabular form, as shown in Table <a href="#tab:type12"><strong>??</strong></a>. The two columns show the two possible worlds, one in which the null is true, and the other in which it is false. The two rows show the two possible decisions we can take based on the observed t-value: reject the null or fail to reject it.</p>
 
 <p>As the table shows, we can make two kinds of mistakes:</p>
 <ul>
@@ -399,29 +484,29 @@ We can represent these two alternative possible realities in a tabular form, as 
 <li>Type II error or <span class="math inline">\(\beta\)</span>: Accept the null when it’s false.</li>
 </ul>
 <p>In psychology and related areas, Type I error is usually fixed a priori at 0.05. This stipulated Type I error value is why the absolute critical t-value is kept at approximately <span class="math inline">\(2\)</span>; if, following recommendations from <span class="citation">Benjamin et al. (<a href="#ref-benjamin2018redefine">2018</a>)</span>, we were to stipulate that the Type I error be 0.005, then the critical t-value would have had to be set at:</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.0025</span>, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="kw">abs</span>(<span class="kw">qt</span>(<span class="fl">0.0025</span>,<span class="dt">df=</span>n<span class="dv">-1</span>))</a></code></pre></div>
 <pre><code>## [1] 2.813</code></pre>
 <p>This suggested change in convention hasn’t been taken up yet in cognitive science, but this could well change one day.</p>
-<p>Type II error, the probability of incorrectly accepting the null hypothesis when it is false with some particular value for the parameter <span class="math inline">\(\mu\)</span>, is conventionally recommended <span class="citation">(<span class="citeproc-not-found" data-reference-id="powerbookcohen"><strong>???</strong></span>)</span> to be kept at 0.20 or lower. This implies that the probability of correctly rejecting a null hypothesis for some particular true value of <span class="math inline">\(\mu\)</span> is 1-Type II error. This probability, called statistical power, or just power, should then obviously be larger than 0.80. Again, there is nothing special about these stipulations; they are conventions that became the norm over time.</p>
-<p>Next, we will consider the trade-off between Type I and II error. For simplicity, assume that the standard error is 1, and the null hypothesis is that <span class="math inline">\(\mu=0\)</span>. This means that the t-value is really the sample mean.</p>
-<p>Consider the concrete situation where, in reality, the true value of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(2\)</span>. As mentioned above, the null hypothesis <span class="math inline">\(H_0\)</span> is that <span class="math inline">\(\mu=0\)</span>. Now the <span class="math inline">\(H_0\)</span> is false because <span class="math inline">\(\mu=2\)</span> and not <span class="math inline">\(0\)</span>. Type I and II error can be visualized graphically as shown in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:type12">2.9</a>.</p>
+<p>Type II error, the probability of incorrectly accepting the null hypothesis when it is false with some particular value for the parameter <span class="math inline">\(\mu\)</span>, is conventionally recommended <span class="citation">(Cohen <a href="#ref-powerbookcohen">1988</a>)</span> to be kept at 0.20 or lower. This implies that the probability of correctly rejecting a null hypothesis for some particular true value of <span class="math inline">\(\mu\)</span> is 1-Type II error. This probability, called statistical power, or just power, should then obviously be larger than 0.80. Again, there is nothing special about these stipulations; they are conventions that became the norm over time.</p>
+<p>Next, we will consider the trade-off between Type I and II error. For simplicity, assume that the standard error is 1, and the null hypothesis is that <span class="math inline">\(\mu=0\)</span>. This means that the observed t-value is really the sample mean.</p>
+<p>Consider the concrete situation where, in reality, the true value of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(2\)</span>. As mentioned above, the null hypothesis <span class="math inline">\(H_0\)</span> is that <span class="math inline">\(\mu=0\)</span>. Now the <span class="math inline">\(H_0\)</span> is false because <span class="math inline">\(\mu=2\)</span> and not <span class="math inline">\(0\)</span>. Type I and II error can be visualized graphically as shown in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:type12">2.10</a>.</p>
 <div class="figure"><span id="fig:type12"></span>
 <img src="Freq_CogSci_files/figure-html/type12-1.svg" alt="A visualization of Type I  and II error. The dark-shaded tails of the left-hand side distribution represent Type I error; and  the light-colored shaded region of the right-hand side distribution represents Type II error. Power is the unshaded area under the curve in  the right-hand side distribution." width="672" />
 <p class="caption">
-FIGURE 2.9: A visualization of Type I and II error. The dark-shaded tails of the left-hand side distribution represent Type I error; and the light-colored shaded region of the right-hand side distribution represents Type II error. Power is the unshaded area under the curve in the right-hand side distribution.
+FIGURE 2.10: A visualization of Type I and II error. The dark-shaded tails of the left-hand side distribution represent Type I error; and the light-colored shaded region of the right-hand side distribution represents Type II error. Power is the unshaded area under the curve in the right-hand side distribution.
 </p>
 </div>
-<p>To understand Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:type12">2.9</a>, one has to consider two distributions side by side. First, consider the null hypothesis distribution, centered at 0. Under the null hypothesis distribution, the rejection region lies below the dark colored tails of the distributions. The area under the curve in these dark-colored tails is the Type I error (conventionally set at 0.05) that we decide on before we even conduct the experiment and collect the data. Because the Type I error is set at 0.05, and because the t-distribution is symmetric, the area under the curve in each tail is 0.025. The absolute critical t-value helps us demarcate the inner boundaries of the rejection regions through the vertical lines shown in the figure. These vertical lines play a crucial role in helping us understand Type II error and power. This becomes clear when we consider the distribution representing the alternative possible value of <span class="math inline">\(\mu\)</span>, the distribution centered around 2. In this second distribution, consider now the area under the curve between the vertical lines demarcating the rejection region under the null. This area under the curve is the probability of accepting the null hypothesis when the null hypothesis is false with some specific value (here, when <span class="math inline">\(\mu\)</span> has value 2).</p>
+<p>To understand Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:type12">2.10</a>, one has to consider two distributions side by side. First, consider the null hypothesis distribution, centered at 0. Under the null hypothesis distribution, the rejection region lies below the dark colored tails of the distributions. The area under the curve in these dark-colored tails is the Type I error (conventionally set at 0.05) that we decide on before we even conduct the experiment and collect the data. Because the Type I error is set at 0.05, and because the t-distribution is symmetric, the area under the curve in each tail is 0.025. The absolute critical t-value helps us demarcate the inner boundaries of the rejection regions through the vertical lines shown in the figure. These vertical lines play a crucial role in helping us understand Type II error and power. This becomes clear when we consider the distribution representing the alternative possible value of <span class="math inline">\(\mu\)</span>, the distribution centered around 2. In this second distribution, consider now the area under the curve between the vertical lines demarcating the rejection region under the null. This area under the curve is the probability of accepting the null hypothesis when the null hypothesis is false with some specific value (here, when <span class="math inline">\(\mu\)</span> has value 2).</p>
 <p>Some interesting observations follow. Suppose that the true effect is in fact <span class="math inline">\(\mu=2\)</span>, as in the above illustration. Then,</p>
 <ul>
 <li>Simply decreasing Type I error to a smaller value like 0.005 will increase Type II error, which means that power (1-Type II error) will fall.</li>
 <li>Increasing sample size will squeeze the vertical lines closer to each other because standard error will go down with increasing sample size. This will reduce Type II error, and therefore increase power. Decreasing sample size will have the opposite effect.</li>
-<li>If we design an experiment with a larger effect size, e.g., by setting up a stronger manipulation (concete examples will be discussed in this book later on), our Type II error will go down, and therefore power will go up. Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:highpower">2.10</a> shows a graphical visualization of a situation where the true effect size is <span class="math inline">\(\mu=4\)</span>. Here, Type II error is much smaller compared to Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:type12">2.9</a>, where <span class="math inline">\(\mu=2\)</span>.</li>
+<li>If we design an experiment with a larger effect size, e.g., by setting up a stronger manipulation (concete examples will be discussed in this book later on), our Type II error will go down, and therefore power will go up. Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:highpower">2.11</a> shows a graphical visualization of a situation where the true effect size is <span class="math inline">\(\mu=4\)</span>. Here, Type II error is much smaller compared to Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:type12">2.10</a>, where <span class="math inline">\(\mu=2\)</span>.</li>
 </ul>
 <div class="figure"><span id="fig:highpower"></span>
 <img src="Freq_CogSci_files/figure-html/highpower-1.svg" alt="The change in Type II error if the true effect has mean 4." width="672" />
 <p class="caption">
-FIGURE 2.10: The change in Type II error if the true effect has mean 4.
+FIGURE 2.11: The change in Type II error if the true effect has mean 4.
 </p>
 </div>
 <p>In summary, when we plan out an experiment, we are also required to specify the Type I and II error associated with the design. Both sources of error are within our control, at least to some extent. The Type I error we decide to use will determine our critical t-value and therefore our decision criterion for rejecting, failing to reject, or even (under certain conditions, to be discussed below) accepting the null hypothesis.</p>
@@ -439,26 +524,26 @@ FIGURE 2.10: The change in Type II error if the true effect has mean 4.
 <p>There are two ways that one can compute power in connection with the t-test: either one can use the built-in R function, <code>power.t.test</code>, or one can use simulation.</p>
 <div id="power-calculation-using-the-power.t.test" class="section level4">
 <h4><span class="header-section-number">2.5.3.1</span> Power calculation using the power.t.test</h4>
-<p>Suppose that we have an expectation that an effect size is 15 ms <span class="math inline">\(\pm 5\)</span> ms (this could be based on the predictions of a theoretical model, or prior data); suppose also that prior experiments show standard deviations ranging from 100 to 300 ms. This is enough information to compute a power curve as a function of effect size and standard deviation. See Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:powercurve">2.11</a> and the associated code below.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">sds &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, <span class="dv">300</span>, <span class="dt">by =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb117-2" data-line-number="2">lower &lt;-<span class="st"> </span><span class="kw">power.t.test</span>(<span class="dt">delta =</span> <span class="dv">15</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span>, <span class="dt">sd =</span> sds, <span class="dt">n =</span> <span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb117-3" data-line-number="3">  <span class="dt">strict =</span> <span class="ot">TRUE</span>)<span class="op">$</span>power</a>
-<a class="sourceLine" id="cb117-4" data-line-number="4">upper &lt;-<span class="st"> </span><span class="kw">power.t.test</span>(<span class="dt">delta =</span> <span class="dv">15</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span>, <span class="dt">sd =</span> sds, <span class="dt">n =</span> <span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb117-5" data-line-number="5">  <span class="dt">strict =</span> <span class="ot">TRUE</span>)<span class="op">$</span>power</a>
-<a class="sourceLine" id="cb117-6" data-line-number="6">meanval &lt;-<span class="st"> </span><span class="kw">power.t.test</span>(<span class="dt">delta =</span> <span class="dv">15</span>, <span class="dt">sd =</span> sds, <span class="dt">n =</span> <span class="dv">10</span>, </a>
-<a class="sourceLine" id="cb117-7" data-line-number="7">  <span class="dt">strict =</span> <span class="ot">TRUE</span>)<span class="op">$</span>power</a>
-<a class="sourceLine" id="cb117-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb117-9" data-line-number="9"><span class="kw">plot</span>(sds, meanval, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Power curve (n=10)</span><span class="ch">\n</span><span class="st"> using power.t.test&quot;</span>, </a>
-<a class="sourceLine" id="cb117-10" data-line-number="10">  <span class="dt">xlab =</span> <span class="st">&quot;standard deviation&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;power&quot;</span>)</a>
-<a class="sourceLine" id="cb117-11" data-line-number="11"><span class="kw">lines</span>(sds, lower, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb117-12" data-line-number="12"><span class="kw">lines</span>(sds, upper, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb117-13" data-line-number="13"><span class="kw">text</span>(<span class="dv">125</span>, <span class="fl">0.053</span>, <span class="st">&quot;10&quot;</span>)</a>
-<a class="sourceLine" id="cb117-14" data-line-number="14"><span class="kw">text</span>(<span class="dv">150</span>, <span class="fl">0.054</span>, <span class="st">&quot;15&quot;</span>)</a>
-<a class="sourceLine" id="cb117-15" data-line-number="15"><span class="kw">text</span>(<span class="dv">175</span>, <span class="fl">0.056</span>, <span class="st">&quot;20&quot;</span>)</a></code></pre></div>
+<p>Suppose that we have an expectation that an effect size is 15 ms <span class="math inline">\(\pm 5\)</span> ms (this could be based on the predictions of a theoretical model, or prior data); suppose also that prior experiments show standard deviations ranging from 100 to 300 ms. This is enough information to compute a power curve as a function of effect size and standard deviation. See Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:powercurve">2.12</a> and the associated code below.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">sds&lt;-<span class="kw">seq</span>(<span class="dv">100</span>,<span class="dv">300</span>,<span class="dt">by=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb122-2" data-line-number="2">lower&lt;-<span class="kw">power.t.test</span>(<span class="dt">delta=</span><span class="dv">15-5</span>,<span class="dt">sd=</span>sds,<span class="dt">n=</span><span class="dv">10</span>,<span class="dt">strict =</span><span class="ot">TRUE</span>)<span class="op">$</span>power</a>
+<a class="sourceLine" id="cb122-3" data-line-number="3">upper&lt;-<span class="kw">power.t.test</span>(<span class="dt">delta=</span><span class="dv">15</span><span class="op">+</span><span class="dv">5</span>,<span class="dt">sd=</span>sds,<span class="dt">n=</span><span class="dv">10</span>,<span class="dt">strict =</span><span class="ot">TRUE</span>)<span class="op">$</span>power</a>
+<a class="sourceLine" id="cb122-4" data-line-number="4">meanval&lt;-<span class="kw">power.t.test</span>(<span class="dt">delta=</span><span class="dv">15</span>,<span class="dt">sd=</span>sds,<span class="dt">n=</span><span class="dv">10</span>,<span class="dt">strict =</span><span class="ot">TRUE</span>)<span class="op">$</span>power</a>
+<a class="sourceLine" id="cb122-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb122-6" data-line-number="6"><span class="kw">plot</span>(sds,meanval,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,</a>
+<a class="sourceLine" id="cb122-7" data-line-number="7">     <span class="dt">main=</span><span class="st">&quot;Power curve (n=10)</span><span class="ch">\n</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb122-8" data-line-number="8"><span class="st">     using power.t.test&quot;</span>,</a>
+<a class="sourceLine" id="cb122-9" data-line-number="9">     <span class="dt">xlab=</span><span class="st">&quot;standard deviation&quot;</span>,</a>
+<a class="sourceLine" id="cb122-10" data-line-number="10">     <span class="dt">ylab=</span><span class="st">&quot;power&quot;</span>)</a>
+<a class="sourceLine" id="cb122-11" data-line-number="11"><span class="kw">lines</span>(sds,lower,<span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb122-12" data-line-number="12"><span class="kw">lines</span>(sds,upper,<span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb122-13" data-line-number="13"><span class="kw">text</span>(<span class="dv">125</span>,<span class="fl">0.053</span>,<span class="st">&quot;10&quot;</span>)</a>
+<a class="sourceLine" id="cb122-14" data-line-number="14"><span class="kw">text</span>(<span class="dv">150</span>,<span class="fl">0.054</span>,<span class="st">&quot;15&quot;</span>)</a>
+<a class="sourceLine" id="cb122-15" data-line-number="15"><span class="kw">text</span>(<span class="dv">175</span>,<span class="fl">0.056</span>,<span class="st">&quot;20&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:powercurve"></span>
 <img src="Freq_CogSci_files/figure-html/powercurve-1.svg" alt="An illustration of a power curve for 10 participants, as a function of standard deviation, and three estimates of the effect: 15, 10, and 20." width="672" />
 <p class="caption">
-FIGURE 2.11: An illustration of a power curve for 10 participants, as a function of standard deviation, and three estimates of the effect: 15, 10, and 20.
+FIGURE 2.12: An illustration of a power curve for 10 participants, as a function of standard deviation, and three estimates of the effect: 15, 10, and 20.
 </p>
 </div>
 </div>
@@ -466,22 +551,23 @@ FIGURE 2.11: An illustration of a power curve for 10 participants, as a function
 <h4><span class="header-section-number">2.5.3.2</span> Power calculations using simulation</h4>
 <p>An analogous calculation as the one shown above using the <code>power.t.test</code> function can also be done using simulated data.
 First, generate simulated data repeatedly for each possible combination of parameter values (here, effect size and standard deviation), and compute the proportion of significant effects for each parameter combination. This can be done by defining a function that takes as input the number of simulations, sample size, effect size, and standard deviation:</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">compute_power &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">nsim =</span> <span class="dv">1000</span>, <span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">effect =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb118-2" data-line-number="2">  <span class="dt">stddev =</span> <span class="ot">NULL</span>) {</a>
-<a class="sourceLine" id="cb118-3" data-line-number="3">  temp_power &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nsim)</a>
-<a class="sourceLine" id="cb118-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsim) {</a>
-<a class="sourceLine" id="cb118-5" data-line-number="5">    y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dt">mean =</span> effect, <span class="dt">sd =</span> stddev)</a>
-<a class="sourceLine" id="cb118-6" data-line-number="6">    temp_power[i] &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">abs</span>(<span class="kw">t.test</span>(y)<span class="op">$</span>statistic) <span class="op">&gt;</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb118-7" data-line-number="7"><span class="st">      </span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb118-8" data-line-number="8">  }</a>
-<a class="sourceLine" id="cb118-9" data-line-number="9">  <span class="co">## return power calculation:</span></a>
-<a class="sourceLine" id="cb118-10" data-line-number="10">  <span class="kw">mean</span>(temp_power)</a>
-<a class="sourceLine" id="cb118-11" data-line-number="11">}</a></code></pre></div>
-<p>Then, plot the power curves as a function of effect size and standard deviation, exactly as in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:powercurve">2.11</a>. Power calculations using simulations are shown in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:powercurve2">2.12</a>. It is clear that simulation-based power estimation is going to be noisy; this is because each time we are generating simulated data and then carrying out a statistical test on it. This is no longer a closed-form mathematical calculation as done in <code>power.t.test</code> (this function simply implements a formula for power calculation specified for this simple case). Because the power estimates will be noisy, we show a smoothed lowess line for each effect size estimate.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">compute_power&lt;-<span class="cf">function</span>(<span class="dt">nsim=</span><span class="dv">1000</span>,<span class="dt">n=</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb123-2" data-line-number="2">                        <span class="dt">effect =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb123-3" data-line-number="3">                        <span class="dt">stddev=</span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb123-4" data-line-number="4">                        ){</a>
+<a class="sourceLine" id="cb123-5" data-line-number="5">  temp_power&lt;-<span class="kw">rep</span>(<span class="ot">NA</span>,nsim)</a>
+<a class="sourceLine" id="cb123-6" data-line-number="6">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsim){</a>
+<a class="sourceLine" id="cb123-7" data-line-number="7">   y&lt;-<span class="kw">rnorm</span>(n,<span class="dt">mean=</span>effect,<span class="dt">sd=</span>stddev)</a>
+<a class="sourceLine" id="cb123-8" data-line-number="8">   temp_power[i]&lt;-<span class="kw">ifelse</span>(<span class="kw">abs</span>(<span class="kw">t.test</span>(y)<span class="op">$</span>statistic)<span class="op">&gt;</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb123-9" data-line-number="9">  }</a>
+<a class="sourceLine" id="cb123-10" data-line-number="10">  <span class="co">## return power calculation:</span></a>
+<a class="sourceLine" id="cb123-11" data-line-number="11">  <span class="kw">mean</span>(temp_power)</a>
+<a class="sourceLine" id="cb123-12" data-line-number="12">}</a></code></pre></div>
+<p>Then, plot the power curves as a function of effect size and standard deviation, exactly as in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:powercurve">2.12</a>. Power calculations using simulations are shown in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:powercurve2">2.13</a>. It is clear that simulation-based power estimation is going to be noisy; this is because each time we are generating simulated data and then carrying out a statistical test on it. This is no longer a closed-form mathematical calculation as done in <code>power.t.test</code> (this function simply implements a formula for power calculation specified for this simple case). Because the power estimates will be noisy, we show a smoothed lowess line for each effect size estimate.</p>
 <div class="figure"><span id="fig:powercurve2"></span>
 <img src="Freq_CogSci_files/figure-html/powercurve2-1.svg" alt="An illustration of a power curve using simulation, for 10 participants, as a function of standard deviation, and three estimates of the effect: 15, 10, and 20. The power curves are lowess-smoothed." width="672" />
 <p class="caption">
-FIGURE 2.12: An illustration of a power curve using simulation, for 10 participants, as a function of standard deviation, and three estimates of the effect: 15, 10, and 20. The power curves are lowess-smoothed.
+FIGURE 2.13: An illustration of a power curve using simulation, for 10 participants, as a function of standard deviation, and three estimates of the effect: 15, 10, and 20. The power curves are lowess-smoothed.
 </p>
 </div>
 <p>In the above example, simulation-based power calculation is overkill, and completely unnecessary because we have <code>power.t.test</code>. However, the technique shown above will be extended and will become our bread-and-butter method once we switch to power calculations for complicated linear mixed models. There, no closed form calculation can be done to compute power, at least not without oversimplifying the model; simulation will be the only practical way to calculate power.</p>
@@ -492,78 +578,64 @@ FIGURE 2.12: An illustration of a power curve using simulation, for 10 participa
 <h3><span class="header-section-number">2.5.4</span> The p-value</h3>
 <p>Continuing with our t-test example, the <code>t.test</code> function in R will not only print out a t-value as shown above, but also a probability known as a <em>p-value</em>. This is the probability of obtaining the observed t-value that we obtained, or some value more extreme than that, conditional on the assumption that the null hypothesis is true.</p>
 <p>We can compute the p-value “by hand”. This can be computed, as done earlier, simply by calculating the area under the curve that lies beyond the observed t-value. It is standard practice to take the tail probability on both sides of the t-distribution.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">(t_value &lt;-<span class="st"> </span><span class="kw">t.test</span>(y, <span class="dt">mu =</span> <span class="dv">450</span>)<span class="op">$</span>statistic)</a></code></pre></div>
-<pre><code>##     t 
-## 15.76</code></pre>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">pt</span>(<span class="kw">abs</span>(t_value), <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1">(t_value&lt;-<span class="kw">t.test</span>(y,<span class="dt">mu=</span><span class="dv">450</span>)<span class="op">$</span>statistic)</a></code></pre></div>
 <pre><code>##         t 
-## 7.324e-08</code></pre>
-<p>The area from both sides of the tail is taken because it is conventional to do a so-called <em>two-sided t-test</em>: our null hypothesis is that <span class="math inline">\(\mu=450\)</span>, and our alternative hypothesis is two-sided: <span class="math inline">\(\mu\)</span> is either less than 450 or <span class="math inline">\(\mu\)</span> is larger than 450. When we reject the null hypothesis, we are accepting this alternative, that <span class="math inline">\(\mu\)</span> could be some value other than 450. Notice that this alternative hypothesis is remarkably vague; we would reject the null hypothesis regardless of whether the sample mean turns out to be 600 or -600, for example. The practical implication is that the p-value gives us the strength of the evidence against the null hypothesis; it doesn’t give us evidence in favor of a specific alternative, such as saying that <span class="math inline">\(\mu\)</span> is positive or negative in sign. In psychology and allied disciplines, whenever the p-value falls below <span class="math inline">\(0.05\)</span>, it is common practice to write something along the lines that “there was reliable evidence for the predicted effect.” This statement is technically incorrect; we only ever have evidence against the null. By looking at the sample mean and its sign, we are making a very big leap that we have evidence for the specific sample mean we happened to get. As we will see below, the sample mean can be wildly far from the true mean that produced the data.</p>
-<p>One need not have done a two-sided alternative; one could have defined the alternative to be one-sided. In that case, one would compute only one side of the area under the curve. This kind of one-sided test is not normally done, but one can imagine a situation where a one-sided test is justified (for example, when only one sign of the effect is possible, or if there is a strong theoretical reason to expect only one particular sign—positive or negative—on an effect). That said, in their scientific career, only one of the authors of this book has ever had occasion to use a one-sided test.</p>
+## -0.008827</code></pre>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="dv">2</span><span class="op">*</span><span class="kw">pt</span>(<span class="kw">abs</span>(t_value),<span class="dt">df=</span>n<span class="dv">-1</span>,<span class="dt">lower.tail=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>##      t 
+## 0.9931</code></pre>
+<p>The area from both sides of the tail is taken because it is conventional to do a so-called <em>two-sided t-test</em>: our null hypothesis is that <span class="math inline">\(\mu=450\)</span>, and our alternative hypothesis is two-sided: <span class="math inline">\(\mu\)</span> is either less than 450 or <span class="math inline">\(\mu\)</span> is larger than 450. When we reject the null hypothesis, we are accepting this alternative, that <span class="math inline">\(\mu\)</span> could be some value other than 450. Notice that this alternative hypothesis is remarkably vague; we would reject the null hypothesis regardless of whether the sample mean turns out to be 600 or -600, for example. The practical implication is that the p-value gives us the strength of the evidence against the null hypothesis; it doesn’t give us evidence in favor of a specific alternative, such as saying that <span class="math inline">\(\mu\)</span> is positive or negative in sign. In psychology and allied disciplines, whenever the p-value falls below <span class="math inline">\(0.05\)</span>, it is common practice to write something along the lines that “there was reliable evidence for the predicted effect.” This statement is incorrect! We only ever have evidence against the null. By looking at the sample mean and its sign, we are making a very big leap that we have evidence for the specific sample mean we happened to get. As we will see below, the sample mean can be wildly far from the true mean that produced the data.</p>
+<p>One need not have a two-sided alternative; one could have defined the alternative to be one-sided (for example, that <span class="math inline">\(mu&gt;450\)</span>). In that case, one would compute only one side of the area under the curve. This kind of one-sided test is not normally done, but one can imagine a situation where a one-sided test is justified (for example, when only one sign of the effect is possible, or if there is a strong theoretical reason to expect only one particular sign—positive or negative—on an effect). That said, in their scientific career, only one of the authors of this book has ever had occasion to use a one-sided test. In this book, we will not use one-sided t-tests.</p>
 <p>The p-value is always interpreted with reference to the pre-defined Type I error. Conventionally, we reject the null if <span class="math inline">\(p&lt;0.05\)</span>. This is because we set the Type I error at 0.05. Keep in mind that Type I error and the p-value are two distinct things.
 Type I error is the probability of your incorrectly rejecting the null under repeated sampling. This is not the same thing as your p-value. The latter will be obtained from a particular experiment, and will vary from experiment to experiment; it is a random variable. Type I error is a value we fix in advance.</p>
-<!--
-#### *The distribution of the p-value under the null hypothesis
-
-We have been talking about a continuous random variable as a dependent measure, and have learnt about the standard two-sided t-test, with a point null hypothesis. When we do such a test, we usually use the p-value to decide whether to reject the null hypothesis or not.
-
-Sometimes, you will hear  statisticians (e.g., Andrew Gelman on his blog) criticize p-values by saying that the null hypothesis significance test is a "specific random number generator". What does that sentence mean? We explain this point here because it is important for understanding the meaning of the p-value.
-
-Suppose that the null hypothesis is in fact true. We will now simulate the distribution of the p-value under repeated sampling:
-
-<div class="figure">
+<div id="the-distribution-of-the-p-value-under-the-null-hypothesis" class="section level4">
+<h4><span class="header-section-number">2.5.4.1</span> *The distribution of the p-value under the null hypothesis</h4>
+<p>We have been talking about a continuous random variable as a dependent measure, and have learnt about the standard two-sided t-test, with a point null hypothesis. When we do such a test, we usually use the p-value to decide whether to reject the null hypothesis or not.</p>
+<p>Sometimes, you will hear statisticians (e.g., Andrew Gelman on his blog) criticize p-values by saying that the null hypothesis significance test is a “specific random number generator”. What does that sentence mean? We explain this point here because it is important for understanding the meaning of the p-value.</p>
+<p>Suppose that the null hypothesis is in fact true. We will now simulate the distribution of the p-value under repeated sampling:</p>
+<div class="figure"><span id="fig:pvalnulltrue"></span>
 <img src="Freq_CogSci_files/figure-html/pvalnulltrue-1.svg" alt="The p-value has a uniform distribution when the null hypothesis is true; a demonstration using simulation." width="672" />
-<p class="caption">(\#fig:pvalnulltrue)The p-value has a uniform distribution when the null hypothesis is true; a demonstration using simulation.</p>
+<p class="caption">
+FIGURE 2.14: The p-value has a uniform distribution when the null hypothesis is true; a demonstration using simulation.
+</p>
 </div>
-
-The distribution of the p-value is uniform---every value between 0 and 1 is equally likely.
-
-We will now formally derive the above fact, that the distribution of the p-value is uniform under the null hypothesis. 
-
-It's worth briefly reflecting on the fact that the p-value is a random variable; call it $Z$. The p-value is the cumulative distribution function (CDF) of the random variable $T$, which itself is a transformation of the random variable $\bar{Y}$: 
-
-$T=(\bar{X}-\mu)/(\sigma/\sqrt{n})$
-
-This random variable $T$ has some CDF $F(T)$. It is possible to show that if a random variable $Z=F(T)$, i.e., if $Z$ is the 
-CDF for the random variable $T$, then $Z$ has a uniform distribution ranging from 0 to 1, $Z \sim Uniform(0,1)$.
-
-This is an amazing fact. To get a grip on this, let's first think about the fact that when a random variable $Z$ comes from a $Uniform(0,1)$ distribution, then $P(Z<z)=z$. Consider some examples:
-
-- when $z=0$, then $P(Z<0)=0$;
-- when $z=0.25$, then $P(Z<0.25)=0.25$; 
-- when $z=0.5$, then $P(Z<0.5)=0.5$; 
-- when $z=0.75$, then $P(Z<0.75)=0.75$; 
-- when $z=1$, then $P(Z<1)=1$. 
-
-Next, we will prove the above statement, that if a random variable $Z=F(T)$, i.e., if $Z$ is the 
-CDF for a random variable $T$, then $Z \sim Uniform(0,1)$.
-The proof is actually quite astonishing and even has a name:  it's called the *probability integral transform*.
-
-Suppose that $Z$ is the CDF of a random variable $T$: $Z=F(T)$. Then, it follows that $P(Z\leq z)$ can be rewritten in terms of the CDF of T: $P(F(T)\leq z)$. Now, if we apply the inverse of the CDF ($F^{-1}$) to both the left and right sides of the inequality, we get $P(F^{-1}F(T)\leq F^{-1}(z))$.
-But $F^{-1}F(T)$ gives us back $T$; this holds because if we have a one-to-one onto function $f(x)$, then applying the inverse $f^{-1}$ to this function gives us back $x$. 
-
-The fact that $F^{-1}F(T)$ gives us back $T$ means that we can rewrite $P(F^{-1}F(T)\leq F^{-1}(z))$ as $P(T\leq F^{-1}(z) )$. But this probability is simply the CDF $F(F^{-1} (z))$, which simplifies to $z$. This shows that $P(Z\leq z) = z$; i.e., that the p-value has a uniform distribution under the null hypothesis. 
-
-The above proof is restated below compactly:
-
-\begin{equation}
+<p>The distribution of the p-value is uniform—every value between 0 and 1 is equally likely.</p>
+<p>We will now formally derive the above fact, that the distribution of the p-value is uniform under the null hypothesis.</p>
+<p>Consider the fact that the p-value is a random variable; call it <span class="math inline">\(Z\)</span>. The p-value is the cumulative distribution function (CDF) of the random variable <span class="math inline">\(T\)</span>, which itself is a transformation of the random variable <span class="math inline">\(\bar{Y}\)</span>:</p>
+<p><span class="math inline">\(T=(\bar{X}-\mu)/(\sigma/\sqrt{n})\)</span></p>
+<p>This random variable <span class="math inline">\(T\)</span> has some CDF <span class="math inline">\(F(T)\)</span>. It is possible to show that if a random variable <span class="math inline">\(Z=F(T)\)</span>, i.e., if <span class="math inline">\(Z\)</span> is the
+CDF for the random variable <span class="math inline">\(T\)</span>, then <span class="math inline">\(Z\)</span> has a uniform distribution ranging from 0 to 1, <span class="math inline">\(Z \sim Uniform(0,1)\)</span>.</p>
+<p>This is an amazing fact. To get a grip on this, let’s first think about the fact that when a random variable <span class="math inline">\(Z\)</span> comes from a <span class="math inline">\(Uniform(0,1)\)</span> distribution, then <span class="math inline">\(P(Z&lt;z)=z\)</span>. Consider some examples:</p>
+<ul>
+<li>when <span class="math inline">\(z=0\)</span>, then <span class="math inline">\(P(Z&lt;0)=0\)</span>;</li>
+<li>when <span class="math inline">\(z=0.25\)</span>, then <span class="math inline">\(P(Z&lt;0.25)=0.25\)</span>;</li>
+<li>when <span class="math inline">\(z=0.5\)</span>, then <span class="math inline">\(P(Z&lt;0.5)=0.5\)</span>;</li>
+<li>when <span class="math inline">\(z=0.75\)</span>, then <span class="math inline">\(P(Z&lt;0.75)=0.75\)</span>;</li>
+<li>when <span class="math inline">\(z=1\)</span>, then <span class="math inline">\(P(Z&lt;1)=1\)</span>.</li>
+</ul>
+<p>Next, we will prove the above statement, that if a random variable <span class="math inline">\(Z=F(T)\)</span>, i.e., if <span class="math inline">\(Z\)</span> is the
+CDF for a random variable <span class="math inline">\(T\)</span>, then <span class="math inline">\(Z \sim Uniform(0,1)\)</span>.
+The proof is actually quite astonishing and even has a name: it’s called the <em>probability integral transform</em>.</p>
+<p>Suppose that <span class="math inline">\(Z\)</span> is the CDF of a random variable <span class="math inline">\(T\)</span>: <span class="math inline">\(Z=F(T)\)</span>. Then, it follows that <span class="math inline">\(P(Z\leq z)\)</span> can be rewritten in terms of the CDF of T: <span class="math inline">\(P(F(T)\leq z)\)</span>. Now, if we apply the inverse of the CDF (<span class="math inline">\(F^{-1}\)</span>) to both the left and right sides of the inequality, we get <span class="math inline">\(P(F^{-1}F(T)\leq F^{-1}(z))\)</span>.
+But <span class="math inline">\(F^{-1}F(T)\)</span> gives us back <span class="math inline">\(T\)</span>; this holds because if we have a one-to-one onto function <span class="math inline">\(f(x)\)</span>, then applying the inverse <span class="math inline">\(f^{-1}\)</span> to this function gives us back <span class="math inline">\(x\)</span>.</p>
+<p>The fact that <span class="math inline">\(F^{-1}F(T)\)</span> gives us back <span class="math inline">\(T\)</span> means that we can rewrite <span class="math inline">\(P(F^{-1}F(T)\leq F^{-1}(z))\)</span> as <span class="math inline">\(P(T\leq F^{-1}(z) )\)</span>. But this probability is simply the CDF <span class="math inline">\(F(F^{-1} (z))\)</span>, which simplifies to <span class="math inline">\(z\)</span>. This shows that <span class="math inline">\(P(Z\leq z) = z\)</span>; i.e., that the p-value has a uniform distribution under the null hypothesis.</p>
+<p>The above proof is restated below compactly:</p>
+<p><span class="math display">\[\begin{equation}
 \begin{split}
-P(Z\leq z) =& P(F(T)\leq z)\\
-=& P(F^{-1}F(T)\leq F^{-1}(z))\\
-=& P(T\leq F^{-1}(z) ) \\
-=& F(F^{-1} (z))\\
-=& z\\
+P(Z\leq z) =&amp; P(F(T)\leq z)\\
+=&amp; P(F^{-1}F(T)\leq F^{-1}(z))\\
+=&amp; P(T\leq F^{-1}(z) ) \\
+=&amp; F(F^{-1} (z))\\
+=&amp; z\\
 \end{split}
-\end{equation}
-
-It is for this reason that statisticians like Andrew Gelman periodically point out that "the null hypothesis significance test is a specific random number generator". The practical implication of this criticism of p-values is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are as or even more important.
-
--->
+\end{equation}\]</span></p>
+<p>It is for this reason that statisticians like Andrew Gelman periodically point out that “the null hypothesis significance test is a specific random number generator”. The practical implication of this criticism of p-values is that when we do a single experiment and obtain a p-value under the assumption that the null is true, if the null were in fact true, then we are just using a random number generator to make a decision that the effect is present or absent. A broader implication is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are as or even more important.</p>
+</div>
 </div>
 <div id="type-m-and-s-error-in-the-face-of-low-power" class="section level3">
 <h3><span class="header-section-number">2.5.5</span> Type M and S error in the face of low power</h3>
 <p>Beyond Type I and II error, there are also two other kinds of error to be aware of. These are Type M and S error; both sources of error are closely related to statistical power.</p>
-<p>The terms Type M and S error were introduced by <span class="citation">Gelman et al. (<a href="#ref-Gelman14">2014</a>)</span>, but the ideas have been in existence for some time <span class="citation">(Hedges <a href="#ref-hedges1984estimation">1984</a>,<span class="citation">@lane1978estimating</span>)</span>. <span class="citation">Button et al. (<a href="#ref-powerfailure">2013</a>)</span> refer to Type M and S error as the “winner’s curse” and “the vibration of effects.” In related work, <span class="citation">Ioannidis (<a href="#ref-ioannidis2008most">2008</a>)</span> refers to the vibration ratio in the context of epidemiology.</p>
+<p>The terms Type M and S error were introduced by <span class="citation">Gelman et al. (<a href="#ref-Gelman14">2014</a>)</span>, but the ideas have been in existence for some time <span class="citation">(Hedges <a href="#ref-hedges1984estimation">1984</a>)</span>,<span class="citation">(Lane and Dunlap <a href="#ref-lane1978estimating">1978</a>)</span>. <span class="citation">Button et al. (<a href="#ref-powerfailure">2013</a>)</span> refer to Type M and S error as the “winner’s curse” and “the vibration of effects.” In related work, <span class="citation">Ioannidis (<a href="#ref-ioannidis2008most">2008</a>)</span> refers to the vibration ratio in the context of epidemiology.</p>
 <p>Type S and M error can be illustrated with the following example.
 Suppose your true effect size is believed to be <span class="math inline">\(D=15\)</span>,
 then we can compute (apart from statistical power) the following error rates, which are defined as follows:</p>
@@ -572,42 +644,41 @@ then we can compute (apart from statistical power) the following error rates, wh
 <li><strong>Type M error</strong>: the expectation of the ratio of the absolute magnitude of the effect to the hypothesized true effect size, given that the result is significant.
 Gelman and Carlin also call this the exaggeration ratio, which is perhaps more descriptive than “Type M error”.</li>
 </ul>
-<p>Suppose that a particular study has standard error <span class="math inline">\(46\)</span>, and sample size <span class="math inline">\(37\)</span>. And suppose that the true <span class="math inline">\(\mu=15\)</span>, as iin the example discussed above. Then, we can compute statistical power, Type S and M error through simulation in the following manner:</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="co">## probable effect size, derived from past studies:</span></a>
-<a class="sourceLine" id="cb123-2" data-line-number="2">D &lt;-<span class="st"> </span><span class="dv">15</span></a>
-<a class="sourceLine" id="cb123-3" data-line-number="3"><span class="co">## SE from the study of interest:</span></a>
-<a class="sourceLine" id="cb123-4" data-line-number="4">se &lt;-<span class="st"> </span><span class="dv">46</span></a>
-<a class="sourceLine" id="cb123-5" data-line-number="5">stddev &lt;-<span class="st"> </span>se <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">37</span>)</a>
-<a class="sourceLine" id="cb123-6" data-line-number="6">nsim &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb123-7" data-line-number="7">drep &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nsim)</a>
-<a class="sourceLine" id="cb123-8" data-line-number="8"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsim) {</a>
-<a class="sourceLine" id="cb123-9" data-line-number="9">  samp &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">37</span>, <span class="dt">mean =</span> D, <span class="dt">sd =</span> stddev)</a>
-<a class="sourceLine" id="cb123-10" data-line-number="10">  drep[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(samp)</a>
-<a class="sourceLine" id="cb123-11" data-line-number="11">}</a></code></pre></div>
+<p>Suppose that a particular study has standard error <span class="math inline">\(46\)</span>, and sample size <span class="math inline">\(37\)</span>. And suppose that the true <span class="math inline">\(\mu=15\)</span>, as in the example discussed above. Then, we can compute statistical power, Type S and M error through simulation in the following manner:</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="co">## probable effect size, derived from past studies:</span></a>
+<a class="sourceLine" id="cb128-2" data-line-number="2">D&lt;-<span class="dv">15</span></a>
+<a class="sourceLine" id="cb128-3" data-line-number="3"><span class="co">## SE from the study of interest:</span></a>
+<a class="sourceLine" id="cb128-4" data-line-number="4">se&lt;-<span class="dv">46</span></a>
+<a class="sourceLine" id="cb128-5" data-line-number="5">stddev&lt;-se<span class="op">*</span><span class="kw">sqrt</span>(<span class="dv">37</span>)</a>
+<a class="sourceLine" id="cb128-6" data-line-number="6">nsim&lt;-<span class="dv">10000</span></a>
+<a class="sourceLine" id="cb128-7" data-line-number="7">drep&lt;-<span class="kw">rep</span>(<span class="ot">NA</span>,nsim)</a>
+<a class="sourceLine" id="cb128-8" data-line-number="8"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsim){</a>
+<a class="sourceLine" id="cb128-9" data-line-number="9">samp&lt;-<span class="kw">rnorm</span>(<span class="dv">37</span>,<span class="dt">mean=</span>D,<span class="dt">sd=</span>stddev)</a>
+<a class="sourceLine" id="cb128-10" data-line-number="10">drep[i]&lt;-<span class="kw">mean</span>(samp)</a>
+<a class="sourceLine" id="cb128-11" data-line-number="11">}</a></code></pre></div>
 <p>Power can be computed by simply determining the proportion of times that the absolute observed t-value is larger than 2:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="co">## power: the proportion of cases where we reject</span></a>
-<a class="sourceLine" id="cb124-2" data-line-number="2"><span class="co">## the null hypothesis correctly:</span></a>
-<a class="sourceLine" id="cb124-3" data-line-number="3">(pow &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">ifelse</span>(<span class="kw">abs</span>(drep<span class="op">/</span>se) <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="co">##power: the proportion of cases where </span></a>
+<a class="sourceLine" id="cb129-2" data-line-number="2"><span class="co">## we reject the null hypothesis correctly:</span></a>
+<a class="sourceLine" id="cb129-3" data-line-number="3">(pow&lt;-<span class="kw">mean</span>(<span class="kw">ifelse</span>(<span class="kw">abs</span>(drep<span class="op">/</span>se)<span class="op">&gt;</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>)))</a></code></pre></div>
 <pre><code>## [1] 0.0589</code></pre>
 <p>Power is quite low here (we deliberately chose an example with low power to illustrate Type S and M error).</p>
-<p>Next, we figure out which of the samples are statistically significant (which simulated values yield <span class="math inline">\(p&lt;0.05\)</span>). As a criterion, we use a t-value of 2 to declare <span class="math inline">\(p&lt;0.05\)</span>; we could have done this more precisely by working out an exact critical t-value.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="co">## which results in drep are significant at</span></a>
-<a class="sourceLine" id="cb126-2" data-line-number="2"><span class="co">## alpha=0.05?</span></a>
-<a class="sourceLine" id="cb126-3" data-line-number="3">signif &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="kw">abs</span>(drep<span class="op">/</span>se) <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
+<p>Next, we figure out which of the samples are statistically significant (which simulated values yield <span class="math inline">\(p&lt;0.05\)</span>). As a criterion, we use a t-value of 2 to declare that we reject the null; we could have done this more precisely by working out an exact critical t-value.</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="co">## which results in drep are significant at alpha=0.05?</span></a>
+<a class="sourceLine" id="cb131-2" data-line-number="2">signif&lt;-<span class="kw">which</span>(<span class="kw">abs</span>(drep<span class="op">/</span>se)<span class="op">&gt;</span><span class="dv">2</span>)</a></code></pre></div>
 <p>Type S error is the proportion of significant cases with the wrong sign (sign error), and Type M error is the ratio by which the true effect (of <span class="math inline">\(\mu=15\)</span>) is exaggerated in those simulations that happened to come out significant.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="co">## Type S error rate | signif:</span></a>
-<a class="sourceLine" id="cb127-2" data-line-number="2">(types_sig &lt;-<span class="st"> </span><span class="kw">mean</span>(drep[signif] <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>))</a></code></pre></div>
-<pre><code>## [1] 0.2088</code></pre>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="co">## Type M error rate | signif:</span></a>
-<a class="sourceLine" id="cb129-2" data-line-number="2">(typem_sig &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">abs</span>(drep[signif])<span class="op">/</span>D))</a></code></pre></div>
-<pre><code>## [1] 7.368</code></pre>
-<p>In this scenario, when power is approximately 6%, whenever we get a significant effect, the probability of obtaining the wrong sign is a whopping 21% and the effect is likely to be 7.3682 times larger than its true magnitude. The practical implication is as follows.</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1"><span class="co">## Type S error rate | signif:</span></a>
+<a class="sourceLine" id="cb132-2" data-line-number="2">(types_sig&lt;-<span class="kw">mean</span>(drep[signif]<span class="op">&lt;</span><span class="dv">0</span>))</a></code></pre></div>
+<pre><code>## [1] 0.1902</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="co">## Type M error rate | signif: </span></a>
+<a class="sourceLine" id="cb134-2" data-line-number="2">(typem_sig&lt;-<span class="kw">mean</span>(<span class="kw">abs</span>(drep[signif])<span class="op">/</span>D))</a></code></pre></div>
+<pre><code>## [1] 7.408</code></pre>
+<p>In this scenario, when power is approximately 6%, whenever we get a significant effect, the probability of obtaining the wrong sign is a whopping 19% and the effect is likely to be 7.4078 times larger than its true magnitude. The practical implication is as follows.</p>
 <p>When power is low, relying on the p-value (statistical significance) to declare an effect as being present will be misleading because the decision will be based on an overestimate of the effect (Type M error), and even the sign of the effect could be wrong. This isn’t just a theoretical point; it has real-world consequences for theory development. For an example from psycholinguistics regarding this point, see <span class="citation">Vasishth et al. (<a href="#ref-VasishthMertzenJaegerGelman2018">2018</a>)</span>.</p>
-<p>Another useful way to visualize Type M and S error is through the so-called funnel plot. As shown in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:funnel">2.13</a>, estimates obtained from low-powered studies will tend to be exaggerated (the lower part of the funnel), and as power goes up, the effect estimates start to cluster tightly around the true value of the effect.</p>
+<p>Another useful way to visualize Type M and S error is through the so-called funnel plot. As shown in Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:funnel">2.15</a>, estimates obtained from low-powered studies will tend to be exaggerated (the lower part of the funnel), and as power goes up, the effect estimates start to cluster tightly around the true value of the effect.</p>
 <div class="figure"><span id="fig:funnel"></span>
 <img src="Freq_CogSci_files/figure-html/funnel-1.svg" alt="An illustration of a funnel plot. Shown are repeated samples of an effect estimate under different values of power, where the true value  of the effect is 15 (marked by the vertical line). Significant effects are shaded gray. The lower the power, the wider the fluctuation of the effect; under low power, it is the exaggerated effects that end up statistically significant, even though they are very biased relative to the true value. As power goes up, the effect estimates start to cluster around the true value, and significant effects are also accurate estimates of the effect. Thus, low power leads to exaggerated estimates of the effect, especially if the data are filtered by statistical significance." width="672" />
 <p class="caption">
-FIGURE 2.13: An illustration of a funnel plot. Shown are repeated samples of an effect estimate under different values of power, where the true value of the effect is 15 (marked by the vertical line). Significant effects are shaded gray. The lower the power, the wider the fluctuation of the effect; under low power, it is the exaggerated effects that end up statistically significant, even though they are very biased relative to the true value. As power goes up, the effect estimates start to cluster around the true value, and significant effects are also accurate estimates of the effect. Thus, low power leads to exaggerated estimates of the effect, especially if the data are filtered by statistical significance.
+FIGURE 2.15: An illustration of a funnel plot. Shown are repeated samples of an effect estimate under different values of power, where the true value of the effect is 15 (marked by the vertical line). Significant effects are shaded gray. The lower the power, the wider the fluctuation of the effect; under low power, it is the exaggerated effects that end up statistically significant, even though they are very biased relative to the true value. As power goes up, the effect estimates start to cluster around the true value, and significant effects are also accurate estimates of the effect. Thus, low power leads to exaggerated estimates of the effect, especially if the data are filtered by statistical significance.
 </p>
 </div>
 <p>What is important to appreciate here is the fact that significant effects “point to the truth” just in case power is high; when power is low, either null results will frequently be found even if the null is false, and those results that turn out significant will be based on Type M error.</p>
@@ -625,53 +696,52 @@ FIGURE 2.13: An illustration of a funnel plot. Shown are repeated samples of an 
 <p>Since time and money are limited, he might decide to stop collecting data after some multiple of <span class="math inline">\(n\)</span> have been collected.</p>
 <p>One can simulate different scenarios here. Suppose that <span class="math inline">\(n\)</span> is initially <span class="math inline">\(15\)</span>.<br />
 Under the standard assumptions, we set Type I error to be <span class="math inline">\(0.05\)</span>. Let’s suppose that the null hypothesis that <span class="math inline">\(\mu=0\)</span> is in fact true, and that standard deviation is 250.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="co">## Standard properties of the t-test:</span></a>
-<a class="sourceLine" id="cb131-2" data-line-number="2">pvals &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb131-3" data-line-number="3">tstat_standard &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb131-4" data-line-number="4">n &lt;-<span class="st"> </span><span class="dv">15</span></a>
-<a class="sourceLine" id="cb131-5" data-line-number="5">nsim &lt;-<span class="st"> </span><span class="dv">10000</span></a>
-<a class="sourceLine" id="cb131-6" data-line-number="6"><span class="co">## assume a standard dev of 1:</span></a>
-<a class="sourceLine" id="cb131-7" data-line-number="7">stddev &lt;-<span class="st"> </span><span class="dv">250</span></a>
-<a class="sourceLine" id="cb131-8" data-line-number="8">mn &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb131-9" data-line-number="9"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsim) {</a>
-<a class="sourceLine" id="cb131-10" data-line-number="10">  samp &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dt">mean =</span> mn, <span class="dt">sd =</span> stddev)</a>
-<a class="sourceLine" id="cb131-11" data-line-number="11">  pvals[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(samp)<span class="op">$</span>p.value</a>
-<a class="sourceLine" id="cb131-12" data-line-number="12">  tstat_standard[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(samp)<span class="op">$</span>statistic</a>
-<a class="sourceLine" id="cb131-13" data-line-number="13">}</a></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1"><span class="co">##Standard properties of the t-test:</span></a>
+<a class="sourceLine" id="cb136-2" data-line-number="2">pvals&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb136-3" data-line-number="3">tstat_standard&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb136-4" data-line-number="4">n&lt;-<span class="dv">15</span></a>
+<a class="sourceLine" id="cb136-5" data-line-number="5">nsim&lt;-<span class="dv">10000</span></a>
+<a class="sourceLine" id="cb136-6" data-line-number="6"><span class="co">## assume a standard dev of 1:</span></a>
+<a class="sourceLine" id="cb136-7" data-line-number="7">stddev&lt;-<span class="dv">250</span></a>
+<a class="sourceLine" id="cb136-8" data-line-number="8">mn&lt;-<span class="dv">0</span></a>
+<a class="sourceLine" id="cb136-9" data-line-number="9"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsim){</a>
+<a class="sourceLine" id="cb136-10" data-line-number="10">  samp&lt;-<span class="kw">rnorm</span>(n,<span class="dt">mean=</span>mn,<span class="dt">sd=</span>stddev)</a>
+<a class="sourceLine" id="cb136-11" data-line-number="11">  pvals[i]&lt;-<span class="kw">t.test</span>(samp)<span class="op">$</span>p.value</a>
+<a class="sourceLine" id="cb136-12" data-line-number="12">  tstat_standard[i]&lt;-<span class="kw">t.test</span>(samp)<span class="op">$</span>statistic</a>
+<a class="sourceLine" id="cb136-13" data-line-number="13">}</a></code></pre></div>
 <p>Type I error rate is about 5%, consistent with our expectations:</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">mean</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>), <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">mean</span>(pvals<span class="op">&lt;</span><span class="fl">0.05</span>),<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 0.05</code></pre>
 <p>But the situation quickly deteriorates as soon as we adopt the strategy outlined above. Below, we will also track the distribution of the t-statistic.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1">pvals &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb134-2" data-line-number="2">tstat &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb134-3" data-line-number="3"><span class="co">## how many subjects can I run?</span></a>
-<a class="sourceLine" id="cb134-4" data-line-number="4">upper_bound &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb134-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb134-6" data-line-number="6"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsim) {</a>
-<a class="sourceLine" id="cb134-7" data-line-number="7">  significant &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb134-8" data-line-number="8">  x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dt">mean =</span> mn, <span class="dt">sd =</span> stddev)  <span class="co">## take sample</span></a>
-<a class="sourceLine" id="cb134-9" data-line-number="9">  <span class="cf">while</span> (<span class="op">!</span>significant <span class="op">&amp;</span><span class="st"> </span><span class="kw">length</span>(x) <span class="op">&lt;</span><span class="st"> </span>upper_bound) {</a>
-<a class="sourceLine" id="cb134-10" data-line-number="10">    <span class="co">## if not significant:</span></a>
-<a class="sourceLine" id="cb134-11" data-line-number="11">    <span class="cf">if</span> (<span class="kw">t.test</span>(x)<span class="op">$</span>p.value <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.05</span>) {</a>
-<a class="sourceLine" id="cb134-12" data-line-number="12">      x &lt;-<span class="st"> </span><span class="kw">append</span>(x, <span class="kw">rnorm</span>(n, <span class="dt">mean =</span> mn, <span class="dt">sd =</span> stddev))  <span class="co">## get more data</span></a>
-<a class="sourceLine" id="cb134-13" data-line-number="13">    } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb134-14" data-line-number="14">      significant &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb134-15" data-line-number="15">    }  <span class="co">## otherwise stop:</span></a>
-<a class="sourceLine" id="cb134-16" data-line-number="16">  }</a>
-<a class="sourceLine" id="cb134-17" data-line-number="17">  pvals[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(x)<span class="op">$</span>p.value</a>
-<a class="sourceLine" id="cb134-18" data-line-number="18">  tstat[i] &lt;-<span class="st"> </span><span class="kw">t.test</span>(x)<span class="op">$</span>statistic</a>
-<a class="sourceLine" id="cb134-19" data-line-number="19">}</a></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1">pvals&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb139-2" data-line-number="2">tstat&lt;-<span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb139-3" data-line-number="3"><span class="co">## how many subjects can I run?</span></a>
+<a class="sourceLine" id="cb139-4" data-line-number="4">upper_bound&lt;-n<span class="op">*</span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb139-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb139-6" data-line-number="6"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nsim){</a>
+<a class="sourceLine" id="cb139-7" data-line-number="7">  significant&lt;-<span class="ot">FALSE</span> </a>
+<a class="sourceLine" id="cb139-8" data-line-number="8">  x&lt;-<span class="kw">rnorm</span>(n,<span class="dt">mean=</span>mn,<span class="dt">sd=</span>stddev) <span class="co">## take sample</span></a>
+<a class="sourceLine" id="cb139-9" data-line-number="9"><span class="cf">while</span>(<span class="op">!</span>significant <span class="op">&amp;</span><span class="st"> </span><span class="kw">length</span>(x)<span class="op">&lt;</span>upper_bound){</a>
+<a class="sourceLine" id="cb139-10" data-line-number="10">  <span class="co">## if not significant:</span></a>
+<a class="sourceLine" id="cb139-11" data-line-number="11"><span class="cf">if</span>(<span class="kw">t.test</span>(x)<span class="op">$</span>p.value<span class="op">&gt;</span><span class="fl">0.05</span>){</a>
+<a class="sourceLine" id="cb139-12" data-line-number="12">  x&lt;-<span class="kw">append</span>(x,<span class="kw">rnorm</span>(n,<span class="dt">mean=</span>mn,<span class="dt">sd=</span>stddev)) <span class="co">## get more data</span></a>
+<a class="sourceLine" id="cb139-13" data-line-number="13">} <span class="cf">else</span> {significant&lt;-<span class="ot">TRUE</span>}   <span class="co">## otherwise stop:</span></a>
+<a class="sourceLine" id="cb139-14" data-line-number="14">}</a>
+<a class="sourceLine" id="cb139-15" data-line-number="15">pvals[i]&lt;-<span class="kw">t.test</span>(x)<span class="op">$</span>p.value</a>
+<a class="sourceLine" id="cb139-16" data-line-number="16">tstat[i]&lt;-<span class="kw">t.test</span>(x)<span class="op">$</span>statistic</a>
+<a class="sourceLine" id="cb139-17" data-line-number="17">}</a></code></pre></div>
 <p>Now, Type I error rate is much higher than 5%:</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">mean</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>), <span class="dv">2</span>)</a></code></pre></div>
-<pre><code>## [1] 0.16</code></pre>
-<p>Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:stoppingrule">2.14</a> shows the distributions of the t-statistic in the standard case vs with the above stopping rule:</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">mean</span>(pvals<span class="op">&lt;</span><span class="fl">0.05</span>),<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 0.15</code></pre>
+<p>Figure <a href="hypothesis-testing-the-one-sample-t-test.html#fig:stoppingrule">2.16</a> shows the distributions of the t-statistic in the standard case vs with the above stopping rule:</p>
 <div class="figure"><span id="fig:stoppingrule"></span>
 <img src="Freq_CogSci_files/figure-html/stoppingrule-1.svg" alt="A comparison of the distribution of t-values with an a priori fixed stopping rule, versus a flexible stopping rule conditional on finding significance." width="672" />
 <p class="caption">
-FIGURE 2.14: A comparison of the distribution of t-values with an a priori fixed stopping rule, versus a flexible stopping rule conditional on finding significance.
+FIGURE 2.16: A comparison of the distribution of t-values with an a priori fixed stopping rule, versus a flexible stopping rule conditional on finding significance.
 </p>
 </div>
-<p>What is important to realize here is that the inflation in Type I error we observed above was due to the fact that the t-distribution is no longer a t-distribution: we have bumps in the tails when we use the flexible stopping rule, and these raise our Type I error. This demonstrates why one should fix one’s sample size in advance, based on a power analysis. One should not deploy a stopping rule like the one above; if we used such a stopping rule, we are much more likely to incorrectly declare a result as statistically significant. There can be compelling reasons to adopt the peek-and-run strategy; e.g., if one wants to avoid exposing patients to a treatment that might turn out to be harmful. In such situations, one can run an adaptive experimental trial by correcting for Type I error inflation <span class="citation">(Pocock <a href="#ref-pocock2013clinical">2013</a>)</span>. In this book, we will aim to develop a workflow whereby the sample size is fixed through power analysis, in advance of running an experiment.</p>
+<p>What is important to realize here is that the inflation in Type I error we observed above was due to the fact that the t-distribution is no longer a t-distribution: we have bumps in the tails when we use the flexible stopping rule, and these raise our Type I error. This demonstrates why one should fix one’s sample size in advance, based on a power analysis. One should not deploy a stopping rule like the one above; if we used such a stopping rule, we are much more likely to incorrectly declare a result as statistically significant than our intended Type I error rate of 0.05.</p>
+<p>There can be compelling reasons to adopt the peek-and-run strategy; e.g., if one wants to avoid exposing patients to a treatment that might turn out to be harmful. In such situations, one can run an adaptive experimental trial by correcting for Type I error inflation <span class="citation">(Pocock <a href="#ref-pocock2013clinical">2013</a>)</span>. In this book, we will aim to develop a workflow whereby the sample size is fixed through power analysis, in advance of running an experiment.</p>
 </div>
 </div>
 <h3>References</h3>
@@ -681,6 +751,9 @@ FIGURE 2.14: A comparison of the distribution of t-values with an a priori fixed
 </div>
 <div id="ref-powerfailure">
 <p>Button, Katherine S, John PA Ioannidis, Claire Mokrysz, Brian A Nosek, Jonathan Flint, Emma SJ Robinson, and Marcus R Munafò. 2013. “Power Failure: Why Small Sample Size Undermines the Reliability of Neuroscience.” <em>Nature Reviews Neuroscience</em> 14 (5). Nature Publishing Group: 365–76.</p>
+</div>
+<div id="ref-powerbookcohen">
+<p>Cohen, Jacob. 1988. <em>Statistical power analysis for the behavioral sciences</em>. 2nd ed. Hillsdale, NJ: Lawrence Erlbaum.</p>
 </div>
 <div id="ref-cumming2014new">
 <p>Cumming, Geoff. 2014. “The New Statistics: Why and How.” <em>Psychological Science</em> 25 (1). Sage Publications Sage CA: Los Angeles, CA: 7–29.</p>
@@ -693,6 +766,9 @@ FIGURE 2.14: A comparison of the distribution of t-values with an a priori fixed
 </div>
 <div id="ref-ioannidis2008most">
 <p>Ioannidis, John PA. 2008. “Why Most Discovered True Associations Are Inflated.” <em>Epidemiology</em> 19 (5). LWW: 640–48.</p>
+</div>
+<div id="ref-lane1978estimating">
+<p>Lane, David M, and William P Dunlap. 1978. “Estimating Effect Size: Bias Resulting from the Significance Criterion in Editorial Decisions.” <em>British Journal of Mathematical and Statistical Psychology</em> 31 (2). Wiley Online Library: 107–12.</p>
 </div>
 <div id="ref-pocock2013clinical">
 <p>Pocock, Stuart J. 2013. <em>Clinical Trials: A Practical Approach</em>. John Wiley &amp; Sons.</p>
