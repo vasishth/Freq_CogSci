@@ -345,11 +345,11 @@ tycoon invite GAP DE official { have bad intentions}\\
 \end{exe}
 -->
 
-As iscussed in @gibsonwu, the consequence of Chinese relative clauses being prenominal  is that the distance between the gap in relative clause and the head noun is larger in subject relatives than object relatives. @hsiao03 were the first to suggest that the larger distance in subject relatives leads to longer reading time at the head noun. Under this view, the prediction is that subject relatives are harder to process than object relatives. If this is true, this is interesting because in most other languages that have been studied, subject relatives are easier to process than object relatives; so Chinese will be a very unusual exception cross-linguistically.
+As discussed in @gibsonwu, the consequence of Chinese relative clauses being prenominal  is that the distance between the gap in relative clause and the head noun is larger in subject relatives than object relatives. @hsiao03 were the first to suggest that the larger distance in subject relatives leads to longer reading time at the head noun. Under this view, the prediction is that subject relatives are harder to process than object relatives. If this is true, this is interesting because in most other languages that have been studied, subject relatives are easier to process than object relatives; so Chinese will be a very unusual exception cross-linguistically.
 
 The data provided are for the critical region (the head noun). The experiment method is self-paced reading, so we have reading times in milliseconds. 
 
-The research hypothesis is whether the difference in reading times between object and subject relative clauses is negative. For both data-sets, investigate this question by  (a) fitting a paired t-test (by-subjects and by items), (b) fitting the most complex linear mixed model you  can to the data and then interpreting the t-value, and (c) the likelihood ratio test.  What can we conclude  about the research question?
+The research hypothesis is whether the difference in reading times between object and subject relative clauses is negative. For both data-sets, investigate this question by  (a) fitting a paired t-test (by-subjects and by items), (b) fitting the most complex linear mixed model you  can to the data and then interpreting result using the t-value as well as the likelihood ratio test.  What can we conclude  about the research question?
 
 ### Agreement attraction in comprehension {#sec:HypTestExerciseAgrmt}
 
