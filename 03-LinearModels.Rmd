@@ -5,8 +5,9 @@
 We begin with the @grodner self-paced reading data we saw in the previous chapter. Load the data and compute the means for the raw reading times by condition:
 
 ```{r}
-gg05e1<-read.table("data/grodnergibsonE1crit.txt",
-                   header=TRUE)
+library(lingpsych)
+data("df_gg05e1")
+gg05e1<-df_gg05e1
 means<-round(with(gg05e1,tapply(rawRT,
                                 IND=condition,
                             mean)))
@@ -490,8 +491,6 @@ With this as background, we are ready to look at linear mixed models in detail.
 We return to our subject and object relative clause data from English (Grodner and Gibson, Expt 1). First we load the data as usual, define relative clause type as a sum coded predictor, and create a new column called `so` that represents the contrast coding ($\pm 1$ sum contrasts), and  a column that holds log-transformed reading time. 
 
 ```{r}
-gg05e1<-read.table("data/grodnergibsonE1crit.txt",header=TRUE)
-
 gg05e1$so <- ifelse(gg05e1$condition=="objgap",1,-1)
 gg05e1$logrt<-log(gg05e1$rawRT)
 ```
@@ -1168,61 +1167,63 @@ This means that linear mixed models will give you more robust estimates (think T
 
 ## Exercises {#sec:LMExercises1}
 
-Download the data-set E1\_data.csv. Then run the following commands to load the `lme4` library and to set up your data for analysis:
+Load the data-set below:
 
 ```{r}
-library(lme4)
-
-## load data:
-dat<-read.csv("data/E1_data.csv",header=TRUE)
-## convert RT to milliseconds:
-dat$RT<-dat$RT*1000
-## choose critical region:
-word_n<-4
-## subset critical data:
-crit<-subset(dat,Position==word_n)
+data("df_gibsonwu")
 ```
 
-The data consist of a repeated measures experiment comparing two conditions which are labeled Type 1 and Type 2. The column Sub refers to subject id, and the column ID refers to item id. RT refers to reading time in seconds (we have converted it above to milliseconds); NA is missing data. You can ignore the other columns. This is a standard Latin square design. We will work with the data frame `crit` below.
+The data consist of a repeated measures experiment comparing two conditions which are labeled obj-ext and subj-ext. The column subj refers to subject id, and the column item refers to item id. The column labeled rt refers to reading time in milliseconds.This is a standard Latin square design. 
 
 ### By-subjects t-test {#sec:LMExercisesPart1}
 
-Using RT as a dependent variable, carry out the appropriate by-subjects t-test to evaluate the null hypothesis that there is no difference between the conditions labeled Type 1 and 2. Write down all the R commands needed to do the appropriate t-test, and the resulting t-value and p-value. State whether we can reject the null hypothesis given the results of the t-test; explain why.
+Using rt as a dependent variable, carry out the appropriate by-subjects t-test to evaluate the null hypothesis that there is no difference between the two conditions. Write down all the R commands needed to do the appropriate t-test, and the resulting t-value and p-value. State whether we can reject the null hypothesis given the results of the t-test; explain why.
 
 ### Fitting a linear mixed model  {#sec:LMExercisesPart2}
 
 Now,  using the data-frame called `crit` above, fit a linear mixed model (called M0). Recode the column called Type as  sum contrasts.  
 
 ```{r echo=FALSE}
-crit$Type<-factor(crit$Type)
-contrasts(crit$Type)<-contr.sum(2)
+gibsonwu<-df_gibsonwu
+gibsonwu$so<-ifelse(gibsonwu$type=="obj-ext",-1,1)
 ```
 
 Assume varying intercepts for subjects and varying intercepts for items (varying intercepts are sometimes called random intercepts). Write down the linear mixed models command, and  write down the fixed-effects estimates (intercept and slope) along with their standard errors. State whether we can reject the null hypothesis given the results of the t-value shown in the linear mixed model output; explain why.
 
-### t-test vs. linear mixed model {#sec:LMExercisesPart3}
+### Raw RTs vs. Log RTs  {#sec:LMExercisesPart3}
 
- Why do the results of the t-test and the linear mixed model M0 differ? 
+Repeat the t-test and the linear mixed model with log reading times as the dependent measure, instead of raw reading times. Does the conclusion change compared to the analyses using raw reading times?
 
 ```{r echo=FALSE}
-crit$SO<-ifelse(crit$Type==1,1,-1)
-## a positive slope will mean SRs are harder
-
 ## correct t-test
-crit_subj<-aggregate(RT~Sub+Type,mean,na.rm=TRUE,
-                     data=crit)
-#t.test(RT~Type,crit_subj,paired=TRUE)
+crit_subj<-aggregate(rt~subj+type,mean,
+                     data=gibsonwu)
 
-M0<-lmer(RT~SO+(1|Sub)+(1|ID),
-           crit)
-#summary(M0)
+t.test(log(rt)~type,paired=TRUE,data = crit_subj)
+
+M0<-lmer(rt~so+(1|subj)+(1|item),
+           gibsonwu)
+summary(M0)
+
+gibsonwu$logrt<-log(gibsonwu$rt)
+crit_subj<-aggregate(logrt~subj+type,mean,
+                     data=gibsonwu)
+
+t.test(logrt~type,paired=TRUE,data = crit_subj)
+
+M0<-lmer(logrt~so+(1|subj)+(1|item),
+           gibsonwu)
+summary(M0)
 ```
 
 
 ### Power calculation using power.t.test {#sec:LMExercisesPart4}
 
 ```{r echo=FALSE}
-d<-subset(crit_subj,Type==1)$RT-subset(crit_subj,Type==2)$RT
+crit_subj<-aggregate(rt~subj+type,mean,
+                     data=gibsonwu)
+d<-subset(crit_subj,type=="subj-ext")$rt-
+  subset(crit_subj,type=="obj-ext")$rt
 stddev<-sd(d)
 n<-length(d)
 SE<-round(stddev/sqrt(n))
@@ -1231,7 +1232,7 @@ SE<-round(stddev/sqrt(n))
 The researcher wants to achieve 80% statistical power in a future study. Based on the available data above, she determines that the standard error (note: not the standard deviation!) of the difference in means between the conditions Type 1 and Type 2 is `r SE`.  She has reason to believe that the true  difference in means is 30 ms. What is the number of participants (to the nearest whole number) needed to  achieve approximately 80% power? Use the power.t.test function to compute your answer. Write down the `power.t.test` function specification you used, as well as the number of participants needed, based on the output of the power.t.test function. 
 
 ```{r echo=FALSE,eval=FALSE}
-nsubj<-length(unique(crit$Sub))
+nsubj<-37
 power.t.test(delta = 30,
              sd=SE*sqrt(nsubj), 
              power = .80, 
@@ -1242,22 +1243,25 @@ power.t.test(delta = 30,
 
 ### Residuals {#sec:LMExercisesPart5}
 
-The plot below shows the distribution of the residuals from model M0 plotted against the standard normal distribution with mean 0 and  standard  deviation 1. Explain what the plot tells us  about one of the model assumptions of the linear mixed model M0 that you fit earlier.
+The plot below shows the distribution of the residuals from model M0 (fit on raw reading times) plotted against the standard normal distribution with mean 0 and  standard  deviation 1. Explain what the plot tells us  about one of the model assumptions of the linear mixed model M0 that you fit earlier.
 
 (You can ignore the numbers below the plot.)
 
 ```{r echo=FALSE,message=FALSE,results="asis"}
+M0<-lmer(rt~so+(1|subj)+(1|item),
+           gibsonwu)
+
 library(car)
 qqnorm(residuals(M0))
 ```
 
 ### Understanding contrast coding {#sec:LMExercisesPart6}
 
-Using only your estimates of the intercept and the slope in model M0's fixed effects output, write down the mean of the  condition labeled Type 1 in the data, and the mean of the condition labeled Type 2.
+Using only your estimates of the intercept and the slope in model M0's fixed effects output (the model fit on raw reading times), write down the mean of the  condition labeled obj-ext in the data, and the mean of the condition labeled subj-ext.
 
 ### Understanding  the  fixed-effects output {#sec:LMExercisesPart7}
 
-Suppose that the model M0's output for the fixed effects analysis were as follows. SO is a sum-coded contrast specification for the conditions in the column labeled Type.
+Suppose that the model M0's output for the fixed effects analysis were as follows. `so` is the sum-coded contrast specification shown above.
 
 ```{r echo=FALSE}
 results<-summary(M0)$coefficients
@@ -1269,13 +1273,13 @@ results[2,2]<-NA
 results
 ```
 
-What is the value of the standard error of the slope (SO), which is labeled NA above?
+What is the value of the standard error of the slope (`so`), which is labeled NA above?
 
 ### Understanding the null hypothesis test {#sec:LMExercisesPart8}
 
 A researcher fits a linear mixed model to compare the reading times between two conditions (a) and (b), just like in the  above study. Her hypothesis is that the mean for condition (a) is larger than the  mean for (b). She observes that condition a has sample mean 500 ms, and condition (b) has  sample mean 450 ms.  She also establishes from the linear mixed model that the t-value is 1.94. The approximate p-value associated with  this t-value is `r round(2*pnorm(-1.94),3)`. Answer the following: (A) Do we have evidence against the null hypothesis and (B) do we have evidence for the particular research hypothesis that the researcher has? 
 
-The researcher runs the  same analysis as above on  a new data-set that has the same design as above, and now gets a p-value of 0.001.  Now she has stronger evidence than in the above case where the p-value was `r round(2*pnorm(-1.94),3)`. What does she have stronger evidence for? 
+The researcher runs the  same analysis as above on  a new data-set that has the same design as above, and now gets a p-value of 0.001.  Now she has stronger evidence than in the above case where the p-value was `r round(2*pnorm(-1.94),3)`. What does she have stronger evidence for? Does she have stronger evidence for the null hypothesis, or stronger evidence in favor of her particular research hypothesis?
 
 
 
