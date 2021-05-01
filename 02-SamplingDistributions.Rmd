@@ -1148,8 +1148,9 @@ In our running example above, we examined the case where we have a single vector
 Next, we consider a case where we have two vectors of data. The data-set below is from @johnson2011quantitative.  Shown below are F1 formant data (in Hertz) for different vowels produced by  male and female speakers of different languages. (In a speech wave, different bands of energy centered around particular frequencies are called formants.)
 
 ```{r}
-F1data<-read.table("data/F1_data.txt",header=TRUE)
-F1data
+library(lingpsych)
+data("df_F1data")
+F1data<-df_F1data
 ```
 
 Notice that the male and female values can be seen as *dependent* or *paired*: each row belongs to the same vowel and language. Nevertheless, we can compare males' and females' F1 frequencies, completely ignoring this paired nature of the data. The t-test does not "know" whether these data are paired or not---it is the researcher's job to make sure that model assumptions are met. In this case, the assumption of the t-test is that the data are independent. 
@@ -1271,10 +1272,8 @@ The data are from a self-paced reading study reported in @grodner, their experim
 First, load the data containing reading times from the region of interest (the relative clause verb):
 
 ```{r}
-gg05e1 <- read.table("data/grodnergibsonE1crit.txt",
-                     
-                     header=TRUE)
-
+data("df_gg05e1")
+gg05e1 <- df_gg05e1
 head(gg05e1)
 ```
 
@@ -1386,25 +1385,14 @@ Given that Type I error is 0.01; what is the highest value possible for Type II 
 In a self-paced reading study, @grodner investigated subjects vs. object relative clauses. They analyzed the reading times  at the relative clause verb. However, a reviewer objects that the whole sentence's reading times (total reading times) should be used to evaluate the difference between the two conditions, because one cannot know where the difficulty might arise. It isn't clear whether one should use mean reading times over the entire sentence, or total reading times (summing up all the reading times over the entire sentence). 
 Carry out a by-subjects paired t-test on (a) the critical relative clause verb, versus (b) mean reading time over all words in the two sentence types, and (c) total reading times over all words in the two sentence types. Compare the t-value across the three tests, and decide what the appropriate dependent variable might be (Note: there is no correct answer here).
 
-The data are loaded and pre-processed as follows. The code below gives you the reading times for the critical verb. You will have to work out how to obtain mean or total reading times for the whole sentence in each condition.
+The data are loaded and pre-processed as follows. The code below gives you the reading times for the full data-set. You will have to work out how to obtain mean or total reading times for the whole sentence in each condition.
 
 ```{r}
 ## load data:
-library(dplyr)
-gg05e1 <- read.table("data/GrodnerGibson2005E1.csv",sep=",", 
-                     header=TRUE)
-gge1 <- gg05e1 %>% 
-  filter(item != 0)
-
-gge1 <- gge1 %>% mutate(word_positionnew = ifelse(item != 15 & 
-                                                    word_position > 10,
-                                                  word_position-1, word_position)) 
-#there is a mistake in the coding of word position,
-#all items but 15 have regions 10 and higher coded
-#as words 11 and higher
-
+data("df_gg05e1_full")
+gg05e1_full<-df_gg05e1_full
 ## get data from relative clause verb:
-gge1crit <- subset(gge1, ( condition == "objgap" & 
+gge1crit <- subset(gg05e1_full, ( condition == "objgap" & 
                              word_position == 6 ) |
             ( condition == "subjgap" & word_position == 4 ))
 
