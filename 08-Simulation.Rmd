@@ -743,9 +743,19 @@ for(i in 1:100){
 
 ### Simulating data in factorial designs
 
-The `designr` library can be used to generate data from typical factorial designs used in psychology and linguistics. 
+The `designr` library can be used to generate data from typical factorial designs used in psychology and linguistics. For example, suppose we have a $2\times 2$ design
+
+
 
 ```{r}
+
+design <- fixed.factor("distance", c("long","short")) + 
+       fixed.factor("predictability", c("high","low")) + 
+       random.factor("Subject",instances=4) + ## 4x4 = 16 subjects
+       random.factor("Item",instances=4) +    ## 4x4=16 items
+       random.factor(c("Subject","Item"), groups = c("distance","predictability"))
+
+simdat<-design.codes(design)
 
 ````
 
