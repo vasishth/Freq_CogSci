@@ -76,13 +76,20 @@ to-do: add a Mackay type chapter ordering for different scenarios.
 
 The entire book, including all data and source code, is available online from [https://github.com/vasishth/Freq\_CogSci](https://github.com/vasishth/Freq_CogSci). Solutions to the exercises will be provided (to-do).
 
+The data and some useful functions used in this book can be accessed by installing the R package `lingpsych` available from: https://github.com/vasishth/lingpsych.
+
+The package can be installed by first installing the `devtools` package, and then by typing:
+
+`devtools::install_github("vasishth/lingpsych")`
+
 ## Software needed
 
 Before you start, please install
 
   - [R](https://cran.r-project.org/) (and [RStudio](https://www.rstudio.com/) or any other IDE)
   - The R packages `MASS`, `dplyr`, `purrr`, `readr`, `extraDistr`, `ggplot2`, `bivariate`,`intoo`,`barsurf`, `SIN`, `kableExtra`, `tidyverse`,`hypr`,`designr`
-    - These can be installed in the usual way: `install.packages(c("MASS", "dplyr", "purrr", "readr", "extraDistr", "ggplot2","bivariate","intoo","barsurf","SIN","kableExtra","tidyverse","hypr","designr"))`. 
+    - These can be installed in the usual way: `install.packages(c("MASS", "dplyr", "purrr", "readr", "extraDistr", "ggplot2","bivariate","intoo","barsurf","SIN",
+    "kableExtra","tidyverse","hypr","designr"))`. 
 
 In every R session, we'll need to set a seed (this ensures that the random numbers are always the same). 
 
@@ -108,7 +115,7 @@ library(designr)
 
 ## Acknowledgements
 
-We are grateful to the many generations of students at the University of Potsdam, various summer schools at ESSLLI, the LOT winter school, other short courses we have taught at various institutions, and the annual summer school on Statistical Methods for Linguistics and Psychology (SMLP) at the University of Potsdam. The participants in these courses helped us considerably in improving the material presented here. We are also grateful to members of Vasishth lab for comments on earlier drafts of this book.
+We are grateful to the many generations of students at the University of Potsdam, various summer schools at ESSLLI, the LOT winter school, other short courses we have taught at various institutions, and the annual summer school on Statistical Methods for Linguistics and Psychology (SMLP) at the University of Potsdam. The participants in these courses helped us considerably in improving the material presented here. We are also grateful to members of Vasishth lab for comments on earlier drafts of this book. 
 
 
 ```{block2, type='flushright', html.tag='p'}
