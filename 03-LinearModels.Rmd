@@ -1166,7 +1166,7 @@ This means that linear mixed models will give you more robust estimates (think T
 
 
 
-## Exercises {#sec:LMExercises}
+## Exercises {#sec:LMExercises1}
 
 Download the data-set E1\_data.csv. Then run the following commands to load the `lme4` library and to set up your data for analysis:
 
