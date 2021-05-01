@@ -1,5 +1,7 @@
 # Linear modeling theory {#ch:LMtheory} 
 
+$\mathbf{\theta}$
+
 So far, we have been studying linear models and linear mixed models rather informally. This approach is good enough for a first-pass at linear modeling. However, in order to fully understand the underlying machinery of linear models, the matrix formulation of the linear model is extremely important and useful. There is a price to be paid, however: one has to reactivate one's knowledge of matrix algebra, or one has to put in some work into reviewing elementary matrix theory. Fortunately, reviewing these concepts is not too difficult. We begin this chapter with a quick review of some basic concepts in matrix algebra, and then apply them to linear modeling. One very useful set of online lectures on the basic ideas behind linear algebra is the short set of videos by 3Blue1Brown: https://youtu.be/kjBOesZCoqc. You should look at these videos before reading the next section, if you have never encountered the basic concepts behind matrix algebra.
 
 ## A quick review of some basic concepts in matrix algebra
@@ -148,7 +150,16 @@ Pre-multiplying a matrix like $A$ above by its inverse $A^{-1}$ gives an identit
 
 If a matrix is not invertible, we say that it is **singular**.
 
-A useful fact to know about non-singular matrices is the following relationship. If A and B are non-singular matrices then $(AB)^{-1} = B^{-1}A^{-1}$.
+A useful fact to know about non-singular matrices is the following relationship. If A and B are non-singular matrices then $(AB)^{-1} = B^{-1}A^{-1}$. Let's try out an example:
+
+```{r}
+m6<-matrix(c(6,7,8,9),2,2)
+solve(m6)
+## (m5m6)^{-1}:
+solve(m5%*%m6)
+## m6^{-1}m5^{-1}:
+solve(m6)%*%solve(m5)
+```
 
 ### Linear independence, and rank
 
@@ -159,8 +170,18 @@ $\alpha r_1+ \beta r_2+ \gamma r_3 = (0,0,0)$.
 
 If the rows or columns of a matrix A are linearly dependent, then the matrix is singular, i.e., it is not invertible.
 
+```{r}
+(m7<-matrix(c(1,1,3,1,-1,1,-2,2,4),3,3,byrow=TRUE))
+## invertible:
+solve(m7)
+```
+
 Linear independence leads us to the concept of the rank of a matrix.
-The column rank of a matrix is the maximum number of linearly independent columns in the matrix. The row rank is the maximum number of linearly independent rows. Column rank is always equal to row rank, so we can just call it rank.
+The column rank of a matrix is the maximum number of linearly independent columns in the matrix. The row rank is the maximum number of linearly independent rows. Column rank is always equal to row rank, so we can just call it rank. Check the rank of matrix m7:
+
+```{r}
+rankMatrix(m7)
+```
 
 The above is the minimum vocabulary we need to understand the linear model in its matrix form. Let us now turn to the matrix formulation of the linear model.
 
@@ -317,7 +338,7 @@ The goal is to estimate $\beta$; we want to find a value of $\beta$ such that th
 In order to be able to identify $\beta$ from $X\beta$, the linear transformation $\beta \rightarrow X\beta$ should be one-to-one, so that every possible value of $\beta$ gives a different $X\beta$. This in turn requires that X be of full rank $p$. So, if a design matrix X is $n\times p$, then it is necessary that $n\geq p$. There must be at least as many observations as parameters. If this is not true, then the model is said to be **over-parameterized**.
 
 Assuming that X is of full rank, and that $n>p$, 
-Y can be considered a point in n-dimensional space and the set of candidate $X\beta$ is a $p$-dimensional subspace of this space; see Figure \@ref(fig:leatsquares). There will be one point in this subspace which is closest to Y in terms of Euclidean distance. The unique $\beta$ that corresponds to this point is the **least squares estimator** of $\beta$; we will call this estimator $\hat \beta$.
+Y can be considered a point in n-dimensional space and the set of candidate $X\beta$ is a $p$-dimensional subspace of this space; see Figure \@ref(fig:leastsquares). There will be one point in this subspace which is closest to Y in terms of Euclidean distance. The unique $\beta$ that corresponds to this point is the **least squares estimator** of $\beta$; we will call this estimator $\hat \beta$.
 
 
 ```{r leastsquares,echo=FALSE,fig.cap="Geometric visualization of the distance minimization procedure for estimating the parameters in a linear model."}
@@ -1046,7 +1067,7 @@ plot(dose.glm$fit,dose.glm$resid,xlab="Fitted values",
      main="Residuals versus fitted values")
 ```
 
-## Exercises {#sec:LMExercises}
+## Exercises {#sec:LMExercises2}
 
 ### Estimating the parameters in a linear model {#sec:LMparamest}
 
@@ -1066,34 +1087,6 @@ crit<-subset(dat,Position==word_n)
 
 Using 0,1 contrast coding (treatment contrast coding), fit a simple linear model (**not** a linear mixed model!) to RT, with Type as a predictor. This model is incorrect for the data but we ignore this detail for now. Notice that there is missing data in this data-set; you have to deal with that complication somehow.
 
-```{r echo=FALSE,eval=FALSE}
-crit$Type<-factor(crit$Type)
-contrasts(crit$Type)
-## failed attempt:
-m1<-lm(RT~Type,crit)
-X<-model.matrix(m1)
-dim(X)
-sigmahat<-summary(m1)$sigma
-vcovmat<-sigmahat*solve(t(X)%*%X)
-y<-as.matrix(crit$RT)
-## will not work because of missing data 
-hatbeta<-solve(t(X)%*%X)%*%t(X)%*%y
-
-## second attempt:
-## remove missing data:
-crit<-subset(crit,RT!="NA")
-m2<-lm(RT~Type,crit)
-summary(m2)
-X<-model.matrix(m2)
-dim(X)
-sigmahat<-summary(m2)$sigma
-vcovmat<-sigmahat*solve(t(X)%*%X)
-covariance<-vcovmat[1,2]
-y<-as.matrix(crit$RT)
-## will work because we removed the missing data 
-hatbeta<-solve(t(X)%*%X)%*%t(X)%*%y
-hatrho1 <- covariance/(sqrt(vcovmat[1,1])*sqrt(vcovmat[2,2]))
-```
 
 - Extract the model/design matrix X from the fitted model.
 - Extract sigma estimate $\hat\sigma$.
@@ -1106,29 +1099,14 @@ hatrho1 <- covariance/(sqrt(vcovmat[1,1])*sqrt(vcovmat[2,2]))
 
 Next, using $\pm 1$ contrast coding (sum contrast coding), fit a simple linear model (**not** a linear mixed model!) to RT, with Type as a predictor. This model is incorrect for the data but we ignore this detail for now.
 
-```{r echo=FALSE,eval=FALSE}
-## set up sum contrast coding:
-contrasts(crit$Type)<-contr.sum(2)
-m3<-lm(RT~Type,crit)
-summary(m3)
-X<-model.matrix(m3)
-dim(X)
-sigmahat<-summary(m3)$sigma
-vcovmat<-sigmahat*solve(t(X)%*%X)
-covariance<-vcovmat[1,2]
-y<-as.matrix(crit$RT)
-hatbeta<-solve(t(X)%*%X)%*%t(X)%*%y
-hatrho2 <- covariance/(sqrt(vcovmat[1,1])*sqrt(vcovmat[2,2]))
-```
-
 - Extract the model/design matrix X from the fitted model.
 - Extract sigma estimate $\hat\sigma$.
 - Compute $\hat\sigma  (X^TX)^{-1}$.
 - Use the X matrix and the y vector to estimate the $\hat\beta$ vector.
 - Compute the variance covariance matrix of $\hat\beta$.
-- Display the bivariate distribution of the sampling distribution of the intercept $\hat \beta_0$  and slope $\hat\beta_1$ as on slide 33 of the matrix formulation lecture.
+- Display the bivariate distribution of the sampling distribution of the intercept $\hat \beta_0$  and slope $\hat\beta_1$.
 - What is the correlation between $\hat \beta_0$ and $\hat\beta_1$?
-- Use the likelihood ratio test (use the anova() function in R), find out if we can reject the null hypothesis that Type 1 and 2 have no difference in reading time. Is the result of the likelihood ratio test any different from that in Question 1?
+- Use the likelihood ratio test (use the anova() function in R), find out if we can reject the null hypothesis that Type 1 and 2 have no difference in reading time. Is the result of the likelihood ratio test any different if you carry out a likelihood ratio test for the model with 0,1 contrast coding?
 - Speculate on why there a difference between the correlations of the $\hat\beta_0$ and $\hat\beta_1$ in the treatment vs. sum contrast coding you carried out above. 
 
 ### Using ANOVA to carry out hypothesis testing  {#sec:LMManova}
@@ -1163,31 +1141,10 @@ Total & n & $Y^T Y$ & \\
 \hline
 \end{tabular}
 \end{center}
-\label{tab:anovasummary}
+\label{tab:anovasummary2}
 \end{table}
 
 Reproduce this table for the analysis shown above as R code, and show that the results of `anova()` function (the F-value) above are identical to those produced through this table.
-
-```{r echo=FALSE,eval=FALSE}
-n<-length(y)
-p<-3 
-q<-2
-beta0<-coef(m0)
-X0<-model.matrix(m0)
-Y<-y
-beta1<-coef(m1)
-X1<-model.matrix(m1)
-beta0%*%t(X0)%*%Y
-beta1%*%t(X1)%*%Y-beta0%*%t(X0)%*%Y
-t(Y)%*%Y - beta1%*%t(X1)%*%Y
-## sum of squares
-(t(Y)%*%Y - beta0%*%t(X0)%*%Y)/(p-q)
-(t(Y)%*%Y - beta1%*%t(X1)%*%Y)/(n-p)
-(beta1%*%t(X1)%*%Y-beta0%*%t(X0)%*%Y)/(p-q)
-## F-value: (F(p-q,n-p)=F(1,1656))
-((beta1%*%t(X1)%*%Y-beta0%*%t(X0)%*%Y)/(p-q))/((t(Y)%*%Y - beta1%*%t(X1)%*%Y)/(n-p))
-```
-
 
 ### Generalized linear (mixed) model {#sec:GLMM}
 
