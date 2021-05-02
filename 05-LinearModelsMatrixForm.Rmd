@@ -1,7 +1,5 @@
 # Linear modeling theory {#ch:LMtheory} 
 
-$\mathbf{\theta}$
-
 So far, we have been studying linear models and linear mixed models rather informally. This approach is good enough for a first-pass at linear modeling. However, in order to fully understand the underlying machinery of linear models, the matrix formulation of the linear model is extremely important and useful. There is a price to be paid, however: one has to reactivate one's knowledge of matrix algebra, or one has to put in some work into reviewing elementary matrix theory. Fortunately, reviewing these concepts is not too difficult. We begin this chapter with a quick review of some basic concepts in matrix algebra, and then apply them to linear modeling. One very useful set of online lectures on the basic ideas behind linear algebra is the short set of videos by 3Blue1Brown: https://youtu.be/kjBOesZCoqc. If you have never encountered the basic concepts behind matrix algebra, you should look at these videos before reading the next section. At the end of this chapter, we provide some further reading for the interested reader.
 
 ## A quick review of some basic concepts in matrix algebra
@@ -748,12 +746,15 @@ In linear mixed models, there is a package called `influence.ME` [@influenceme] 
 
 #### Introduction: Logistic regression
 
-We start with an example data-set that appears in the Dobson et al book: the Beetle data-set. Although not a linguistic or psychological data-set, it is a good entry point into generalized linear models. Later we will apply the theory to psycholinguistic data.
+We start with an example data-set that appears in the @dobson2011introduction book: the Beetle data-set. Although not a linguistic or psychological data-set, it is a good entry point into generalized linear models. Later we will apply the theory to psycholinguistic data.
 
-The Beetle data-set shows the number of beetles killed when they were exposed to different doses of some toxic chemical. 
+The Beetle data-set shows the number of beetles killed after five hours' exposure to gaseous carbon disulphide at various concentrations ($\log_{10}CS_2 mg^{-1}$). The source for the data is @bliss1935calculation.
 
 ```{r}
-(beetle<-read.table("data/beetle.txt",header=TRUE))
+library(dobson)
+data(beetle)
+colnames(beetle)<-c("dose","number","killed")
+beetle
 ```
 
 The research question is: does dose affect probability of killing insects? The first thing we probably want to do is calculate the proportions:
@@ -893,10 +894,12 @@ Note that one should not try to predict outside the range of the design matrix. 
 
 #### Multiple logistic regression: Example from Hindi data}
 
-We have eyetracking data from 10 participants reading Hindi sentences. We can compute skipping probability, the probability of skipping a word entirely (i.e., never fixating it). We first have to create a vector that has value 1 if the word has 0~ms total reading time, and 0 otherwise. 
+We have eyetracking data from 10 participants reading Hindi sentences. The data come from @HusainVasishthNarayanan2015. We can compute skipping probability, the probability of skipping a word entirely (i.e., never fixating it). We first have to create a vector that has value 1 if the word has 0~ms total reading time, and 0 otherwise. 
 
 ```{r}
-hindi10<-read.table("data/hindi10.txt",header=TRUE)
+library(lingpsych)
+data("df_hindi")
+hindi10<-df_hindi
 skip<-ifelse(hindi10$TFT==0,1,0)
 hindi10$skip<-skip
 ## display relevant columns:
@@ -1079,21 +1082,16 @@ A complete introduction to the theory of linear algebra needed for statistics is
 
 ### Estimating the parameters in a linear model {#sec:LMparamest}
 
-The data consist of a repeated measures experiment comparing two conditions which are labeled Type 1 and Type 2. The column Sub refers to subject id, and the column ID refers to item id. RT refers to reading time in seconds (we have converted it below to milliseconds); NA is missing data. You can ignore the other columns. This is a standard Latin square design.
-
+The data consist of a repeated measures self-paced reading experiment comparing two conditions, subject and object relatives, in Chinese. The data are from @gibsonwu. 
 
 ```{r q1setup,echo=TRUE}
 ## load data:
-dat<-read.csv("data/Type1Type2_data.csv",header=TRUE)
-## convert RT to milliseconds:
-dat$RT<-dat$RT*1000
-## choose critical region:
-word_n<-4
-## subset critical data:
-crit<-subset(dat,Position==word_n)
+data("df_gibsonwu")
+dat<-df_gibsonwu
+head(dat)
 ```
 
-Using 0,1 contrast coding (treatment contrast coding), fit a simple linear model (**not** a linear mixed model!) to RT, with Type as a predictor. This model is incorrect for the data but we ignore this detail for now. Notice that there is missing data in this data-set; you have to deal with that complication somehow.
+Using 0,1 contrast coding (treatment contrast coding), fit a simple linear model (**not** a linear mixed model!) to rt, with type as a predictor. This model is incorrect for the data but we ignore this detail for now. 
 
 
 - Extract the model/design matrix X from the fitted model.
@@ -1105,7 +1103,7 @@ Using 0,1 contrast coding (treatment contrast coding), fit a simple linear model
 - What is the correlation between $\hat \beta_0$ and $\hat\beta_1$?
 
 
-Next, using $\pm 1$ contrast coding (sum contrast coding), fit a simple linear model (**not** a linear mixed model!) to RT, with Type as a predictor. This model is incorrect for the data but we ignore this detail for now.
+Next, using $\pm 1$ contrast coding (sum contrast coding), fit a simple linear model (**not** a linear mixed model!) to rt, with type as a predictor. This model is incorrect for the data but we ignore this detail for now.
 
 - Extract the model/design matrix X from the fitted model.
 - Extract sigma estimate $\hat\sigma$.
@@ -1114,7 +1112,7 @@ Next, using $\pm 1$ contrast coding (sum contrast coding), fit a simple linear m
 - Compute the variance covariance matrix of $\hat\beta$.
 - Display the bivariate distribution of the sampling distribution of the intercept $\hat \beta_0$  and slope $\hat\beta_1$.
 - What is the correlation between $\hat \beta_0$ and $\hat\beta_1$?
-- Use the likelihood ratio test (use the anova() function in R), find out if we can reject the null hypothesis that Type 1 and 2 have no difference in reading time. Is the result of the likelihood ratio test any different if you carry out a likelihood ratio test for the model with 0,1 contrast coding?
+- Use the likelihood ratio test (use the anova() function in R), find out if we can reject the null hypothesis that the relative clause types have no difference in reading time. Is the result of the likelihood ratio test any different if you carry out a likelihood ratio test for the model with 0,1 contrast coding?
 - Speculate on why there a difference between the correlations of the $\hat\beta_0$ and $\hat\beta_1$ in the treatment vs. sum contrast coding you carried out above. 
 
 ### Using ANOVA to carry out hypothesis testing  {#sec:LMManova}
@@ -1159,9 +1157,6 @@ Reproduce this table for the analysis shown above as R code, and show that the r
 In the chapter, we saw the following code in connection with the logistic regression model. This is Hindi eyetracking data excerpted from @HusainVasishthNarayanan2015. The code below evaluates the effect of various predictors of sentence processing difficulty, such as word complexity and storage cost (SC), on skipping probability. 
 
 ```{r}
-hindi10<-read.table("data/hindi10.txt",header=TRUE)
-skip<-ifelse(hindi10$TFT==0,1,0)
-hindi10$skip<-skip
 ## display relevant columns:
 head(hindi10[,c(1,2,3,24,33,34)])
 #fm_skip<-glm(skip ~ word_complex+SC,family=binomial(),hindi10)
