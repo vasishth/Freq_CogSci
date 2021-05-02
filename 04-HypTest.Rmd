@@ -268,7 +268,9 @@ Incidentally, if we had rescaled the contrast coding to be not $\pm 1$ but $\pm 
 Let's load the data, set up the contrast coding, and fit the null versus the alternative models. We will fit varying intercept and varying slopes for subject and item, without correlations for items. We don't attempt to fit a model with by-items varying intercepts and slopes with a correlation  because we would get a singularity in the variance covariance matrix. 
 
 ````{r}
-gg05e1<-read.table("data/grodnergibsonE1crit.txt",header=TRUE)
+library(lingpsych)
+data("df_gg05e1")
+gg05e1<-df_gg05e1
 
 gg05e1$so <- ifelse(gg05e1$condition=="objgap",1,-1)
 gg05e1$logrt<-log(gg05e1$rawRT)
@@ -319,10 +321,10 @@ A final point: the likelihood ratio has essentially the same logic as the t-test
 Load the following two data-sets:
 
 ```{r}
-gibsonwu<-read.table("data/gibsonwucrit.txt",
-                     header=TRUE)
-gibsonwu2<-read.table("data/gibsonwu2012datarepeat.txt",
-                      header=TRUE)
+data("df_gibsonwu")
+gibsonwu<-df_gibsonwu
+data("df_gibsonwu2")
+gibsonwu2<-df_gibsonwu2
 ```
 
 The data are taken from two experiments that investigate (inter alia) the effect of relative clause type on reading time in Chinese. The data are from @gibsonwu and @VasishthetalPLoSOne2013 respectively. The second data-set is a direct replication attempt of the first.
@@ -345,7 +347,7 @@ tycoon invite GAP DE official { have bad intentions}\\
 \end{exe}
 -->
 
-As discussed in @gibsonwu, the consequence of Chinese relative clauses being prenominal  is that the distance between the gap in relative clause and the head noun is larger in subject relatives than object relatives. @hsiao03 were the first to suggest that the larger distance in subject relatives leads to longer reading time at the head noun. Under this view, the prediction is that subject relatives are harder to process than object relatives. If this is true, this is interesting because in most other languages that have been studied, subject relatives are easier to process than object relatives; so Chinese will be a very unusual exception cross-linguistically.
+As discussed in @gibsonwu, the consequence of Chinese relative clauses being prenominal is that the distance between the gap in relative clause and the head noun is larger in subject relatives than object relatives. @hsiao03 were the first to suggest that the larger distance in subject relatives leads to longer reading time at the head noun. Under this view, the prediction is that subject relatives are harder to process than object relatives. If this is true, this is interesting because in most other languages that have been studied, subject relatives are easier to process than object relatives; so Chinese will be a very unusual exception cross-linguistically.
 
 The data provided are for the critical region (the head noun). The experiment method is self-paced reading, so we have reading times in milliseconds. 
 
@@ -356,7 +358,9 @@ The research hypothesis is whether the difference in reading times between objec
 Load the following data:
 
 ```{r}
-datE1<-read.table("data/dillonE1.txt",header=TRUE)
+data("df_dillonE1")
+dillonE1<-df_dillonE1
+head(dillonE1)
 ```
 
 The data are taken from an experiment that investigate (inter alia) the effect of number similarity between a noun and the auxiliary verb in sentences like the following. There are two levels to a factor called Int(erference): low and high. 
