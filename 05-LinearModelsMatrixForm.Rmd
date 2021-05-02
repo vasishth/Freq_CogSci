@@ -2,7 +2,7 @@
 
 $\mathbf{\theta}$
 
-So far, we have been studying linear models and linear mixed models rather informally. This approach is good enough for a first-pass at linear modeling. However, in order to fully understand the underlying machinery of linear models, the matrix formulation of the linear model is extremely important and useful. There is a price to be paid, however: one has to reactivate one's knowledge of matrix algebra, or one has to put in some work into reviewing elementary matrix theory. Fortunately, reviewing these concepts is not too difficult. We begin this chapter with a quick review of some basic concepts in matrix algebra, and then apply them to linear modeling. One very useful set of online lectures on the basic ideas behind linear algebra is the short set of videos by 3Blue1Brown: https://youtu.be/kjBOesZCoqc. You should look at these videos before reading the next section, if you have never encountered the basic concepts behind matrix algebra.
+So far, we have been studying linear models and linear mixed models rather informally. This approach is good enough for a first-pass at linear modeling. However, in order to fully understand the underlying machinery of linear models, the matrix formulation of the linear model is extremely important and useful. There is a price to be paid, however: one has to reactivate one's knowledge of matrix algebra, or one has to put in some work into reviewing elementary matrix theory. Fortunately, reviewing these concepts is not too difficult. We begin this chapter with a quick review of some basic concepts in matrix algebra, and then apply them to linear modeling. One very useful set of online lectures on the basic ideas behind linear algebra is the short set of videos by 3Blue1Brown: https://youtu.be/kjBOesZCoqc. If you have never encountered the basic concepts behind matrix algebra, you should look at these videos before reading the next section. At the end of this chapter, we provide some further reading for the interested reader.
 
 ## A quick review of some basic concepts in matrix algebra
 
@@ -1066,6 +1066,14 @@ plot(dose.glm$fit,dose.glm$resid,xlab="Fitted values",
      ylab="Residuals",
      main="Residuals versus fitted values")
 ```
+
+### Summary
+
+In this chapter, we learnt about the matrix formulation of the linear model. This led to the matrix formulation of the analysis of variance (ANOVA), and some other related topics in linear modeling, such as the variance inflation factor. Finally, we encountered the basic theory behind the generalized linear model, focusing on logistic regression.
+
+### Further reading
+
+A complete introduction to the theory of linear algebra needed for statistics is provided in @fieller. A good introduction to linear modeling theory is @fox1997applied. Other useful textbooks are @DraperSmith, @dobson2011introduction, @seber2012linear, and @monty. The classic textbook for generalized linear models is @mccullagh2019generalized.
 
 ## Exercises {#sec:LMExercises2}
 
