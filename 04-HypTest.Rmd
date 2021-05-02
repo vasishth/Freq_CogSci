@@ -380,13 +380,13 @@ The research  question is whether the difference in reading times between high a
 
 ### The grammaticality illusion {#sec:HypTestExerciseGramCE}
 
-Load the following data-sets:
+Load the following two data-sets:
 
 ```{r}
-english<-read.table("data/embeddingenglish.txt",
-                    header=TRUE)
-dutch<-read.table("data/embeddingdutch.txt",
-                  header=TRUE)
+data("df_english")
+english<-df_english
+data("df_dutch")
+dutch<-df_dutch
 ```
 
 In an offline accuracy rating study on English double center-embedding constructions, @gibsonthomas99 found that grammatical constructions (e.g., example a below) were no less acceptable than ungrammatical constructions (e.g., example b) where a middle verb phrase (e.g., was cleaning every week) was missing.
