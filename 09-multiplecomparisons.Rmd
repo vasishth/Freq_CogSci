@@ -1,27 +1,28 @@
-# Understanding the multiple comparisons problem {#ch:MultComp} 
+# Understanding Type I error inflation using simulation {#ch:MultComp} 
 
 
-```{r}
+```{r echo=FALSE}
 library(knitr)
-library(kableExtra)
-library(tidyverse)
 library(brms)
 library(bcogsci)
 library(papaja)
-library(afex)
 library(MASS)
 library(hypr)
+library(lme4)
+library(afex)
 ```
 
-# Introduction
 
-## Example: a two-condition repeated measures design
+The simplest situation we encountered in the earliest chapters was to carry out a single hypothesis test, having set Type I error to 0.05. In the linear mixed model setting, even this simple scenario is fraught with danger; Type I error can become startlingly large depending on the kind of linear mixed model you fit. We begin this chapter by illustrating this problem through an example of a simple two-condition experiment. However, there are at least two other sources of Type I error inflation: multiple comparison, and model misspecification.  We illustrate these issues below with an example from a $2\times 2\times 2$ repeated measures design.
 
-Load the data, fit a model with a full variance-covariance matrix for subjects and items, and then extract the parameters from the fitted model, just like we did in the simulation chapter.
+## Overly simple random effects structure in LMMs inflate Type I error
+
+We return here to the data-set we saw earlier, the @grodner self-paced reading study (their Experiment 1) on English relative clauses.
+First, load the data, fit a model with a full variance-covariance matrix for subjects and items, and then extract the parameters from the fitted model, just like we did in the simulation chapter.
 
 ```{r}
 library(lingpsych)
-## Grodner and Gibson 2005 Expt 1 data on English relative clauses:
+## Grodner and Gibson 2005 Expt 1 data:
 data("df_gg05e1")
 gg05e1<-df_gg05e1
 head(gg05e1)
@@ -114,7 +115,9 @@ gen_sim_lnorm2<-function(nitem=16,
   simdat}
 ```
 
-### Type I error with a varying intercepts only model
+We are now ready to compute Type I error using simulation.
+
+### Type I error with a varying intercepts-only model
 
 Compute Type I error for a varying intercepts model using log reading times:
 
@@ -137,20 +140,20 @@ simdat<-gen_sim_lnorm2(nitem=16,
 m<-lmer(log(rt)~so+(1|subj)+(1|item),simdat,
         control=lmerControl(calc.derivs=FALSE))
 ## extract the t-value
-significant[i]<-ifelse(abs(summary(m)$coefficients[2,3])>2,1,0)
+significant[i]<-ifelse(abs(summary(m)$coefficients[2,4])>2,1,0)
 }
 
-## Type I error is extraordinarily high:
+## Type I error is quite high:
 mean(significant)
 ```
 
-We find that Type I error is quite high. This is the problem with fitting varying intercepts only models that @barr2013 point out: if the data-generative process is such that varying slopes should have been included in the model, fitting a varying intercepts only model will lead to Type I error inflation, even if one is carrying out a single comparison.
+We find that Type I error is quite high. This is the problem with fitting varying intercepts-only models that @barr2013 point out: if the data-generative process is such that varying slopes should have been included in the model, fitting a varying intercepts-only model generally will lead to Type I error inflation. Of course, the extent of the inflation will vary from data-set to data-set; no simulation can give us a general answer to the question of how much inflation will happen.
 
 ### Type I error with a varying intercepts and varying slopes model
 
-Next, compute Type I error for a model with varying intercepts and varying slopes, but without correlations for the random effects (because these would be difficult to estimate with the number of subjects (42) and items (16) used in @grodner. The dependent measure is still log rt.
+Next, let's compute Type I error for a model with varying intercepts and varying slopes, but without correlations for the random effects (because these would be difficult to estimate with the number of subjects (42) and items (16) used in @grodner). The dependent measure is still log rt.
 
-```{r}
+```{r warning=FALSE,message=FALSE,results="asis"}
 significant<-rep(NA,nsim)
 
 for(i in 1:nsim){
@@ -166,7 +169,8 @@ simdat<-gen_sim_lnorm2(nitem=16,
 m<-lmer(log(rt)~so+(1+so|subj)+(1+so|item),simdat,
         control=lmerControl(calc.derivs=FALSE))
 ## extract the t-value
-significant[i]<-ifelse(abs(summary(m)$coefficients[2,3])>2,1,0)
+significant[i]<-ifelse(abs(summary(m)$coefficients[2,4])
+                       >2,1,0)
 }
 
 ## Type I error is the expected value:
@@ -175,12 +179,14 @@ mean(significant)
 
 Now we find that Type I error is near the expected 5%. As @barr2013 pointed out in their paper, when varying slopes are included, Type I error will have the expected value. 
 
-#### The effect of log vs. raw reading times on Type I error
+### Type I error inflation due to model mis-specification
 
-Although this point is not discussed in @barr2013, an inappropriate likelihood function, like the Normal likelihood in the case where the true generative process involves a log-normal distribution, can also lead to inflated Type I error. This is because of extreme values generated by the log-normal distribution being excessively influential in generating Type I errors.
+Although this point is not discussed in @barr2013, an inappropriate likelihood function, like the Normal likelihood in the case where the true generative process involves a log-normal distribution, can also lead to inflated Type I error. This can happen even if the model has a full variance-covariance matrix specified for it. This is because of extreme values generated by the log-normal distribution being excessively influential in generating Type I errors.
 
-```{r}
-effect_estimate<-significant<-rep(NA,nsim)
+```{r warning=FALSE,message=FALSE,results="asis"}
+nsim<-100
+intercept_log<-effect_estlog<-effect_estraw<-significantlog<-significantraw<-rep(NA,nsim)
+se_estlog<-se_estraw<-rep(NA,nsim)
 
 for(i in 1:nsim){
 #generate sim data:
@@ -191,17 +197,68 @@ simdat<-gen_sim_lnorm2(nitem=16,
                        Sigma_w=Sigma_w,
                       sigma_e=sigma_e)
 
-## fit model to sim data but on raw RTs:
-m<-lmer(rt~so+(1+so|subj)+(1+so|item),simdat,
+## fit model to log rts:
+mlog<-lmer(log(rt)~so+(1+so|subj)+(1+so|item),simdat,
         control=lmerControl(calc.derivs=FALSE))
+
+## fit model to sim data but on raw RTs:
+mraw<-lmer(rt~so+(1+so|subj)+(1+so|item),simdat,
+        control=lmerControl(calc.derivs=FALSE))
+
 ## is the effect significant?
-significant[i]<-ifelse(abs(summary(m)$coefficients[2,3])>2,1,0)
-#store estimate:
-effect_estimate[i]<-summary(m)$coefficients[2,1]
+significantlog[i]<-ifelse(abs(summary(mlog)$coefficients[2,4])
+                       >2,1,0)
+significantraw[i]<-ifelse(abs(summary(mraw)$coefficients[2,4])
+                       >2,1,0)
+
+#store estimates:
+intercept_log[i]<-summary(mlog)$coefficients[1,1]
+effect_estlog[i]<-summary(mlog)$coefficients[2,1]
+effect_estraw[i]<-summary(mraw)$coefficients[2,1]
+se_estlog[i]<-summary(mlog)$coefficients[2,2]
+se_estraw[i]<-summary(mraw)$coefficients[2,2]
 }
 
-## Type I error is inflated even with a maximal model!
-mean(significant)
+## Type I error is inflated even with a maximal model 
+## when the likelihood is mis-specified!
+mean(significantlog)
+mean(significantraw)
+
+logsig<-which(significantlog==1)
+
+## backtransform log estimates to raw ms:
+b_log<-exp(intercept_log[logsig]+
+                 effect_estlog[logsig]*0.5)-
+  exp(intercept_log[logsig]-effect_estlog[logsig]*0.5)
+b_log_upper<-exp(intercept_log[logsig]+
+                 (effect_estlog[logsig]+2*se_estlog[logsig])*0.5)-
+  exp(intercept_log[logsig]-(effect_estlog[logsig]+2*se_estlog[logsig])*0.5)
+b_log_lower<-exp(intercept_log[logsig]+
+                 (effect_estlog[logsig]-2*se_estlog[logsig])*0.5)-
+  exp(intercept_log[logsig]-(effect_estlog[logsig]-2*se_estlog[logsig])*0.5)
+
+rawsig<-which(significantraw==1)
+b_raw<-effect_estraw[rawsig]
+
+b_raw_upper<-b_raw+2*se_estraw[rawsig]
+b_raw_lower<-b_raw-2*se_estraw[rawsig]
+
+rawests<-data.frame(transform="raw",mn=b_raw,lower=b_raw_lower,upper=b_raw_upper)
+logests<-data.frame(transform="log",mn=b_log,lower=b_log_lower,upper=b_log_upper)
+ests<-rbind(rawests,logests)
+
+n<-dim(ests)[1]
+ests$n<-1:n
+
+ests$width<-ests$upper-ests$lower
+
+library(ggplot2)
+pd <- position_dodge(.3)
+ggplot(ests, aes(x=n, y=mn, colour=transform, group=transform)) + geom_errorbar(aes(ymin=lower, ymax=upper),
+width=.2, size=0.25, colour="black", position=pd) + geom_line(position=pd) +
+geom_point(position=pd, size=2.5)+theme_bw()
+
+with(ests,tapply(width,transform,mean))
 ```
 
 We see that the effect estimates that were significant were based wild over-/mis-estimates (the true effect is 0 ms).
@@ -211,9 +268,9 @@ We see that the effect estimates that were significant were based wild over-/mis
 effect_estimate[which(significant==1)]
 ```
 
-## Example: a $2\times 2 \times 2$ repeated measures design
+## Type I error inflation due to multiple comparisons
 
-Next, we consider a case where the design is more complex than a two-condition experiment. The data are from an eyetracking reading study conducted by @Dillon-EtAl-2013; this is a $2\times 2 \times 2$ repeated measures design. The dependent measure is total reading time at a particular word in the sentence. Because there are eight conditions, we can carry out seven comparisons. 
+Next, we consider a case where the design is more complex than a two-condition experiment. The data are from an eyetracking reading study conducted by @Dillon-EtAl-2013; this is a $2\times 2 \times 2$ repeated measures design. The dependent measure is total reading time at a particular word in the sentence. Because there are eight conditions, we can carry out at most seven comparisons. 
 
 The question we want to answer here is: if we carry out multiple (here, seven) hypothesis tests, what will be the probability of rejecting at least one of them incorrectly? Analytically, the answer is easy to compute. Assume that the Type I error probability for each hypothesis test is 0.05. The probability of getting none of the seven hypothesis tests significant is $0.95^7$; this assumes that the tests are independent. It follows that the probability of getting at least one test incorrectly coming out significant is $1-0.95^7=0.30$. Let's see what simulation gives us when we fit a varying intercepts and slopes model.
 
@@ -314,329 +371,214 @@ gen_fake_lnorm2x2x2<-function(ncond=8,
   gp8<-g8[rep(seq_len(nrow(g8)),
               nsubj/ncond),]
 
-  fakedat<-rbind(gp1,gp2,gp3,gp4,gp5,gp6,gp7,gp8)
+  simdat<-rbind(gp1,gp2,gp3,gp4,gp5,gp6,gp7,gp8)
 
   ## add subjects:
-  fakedat$subj<-rep(1:nsubj,each=nitem)
+  simdat$subj<-rep(1:nsubj,each=nitem)
 
   ## add contrast coding:
-  fakedat$Dep <- ifelse(fakedat$cond %in% c(1:4), 1, -1) # main effect of dependency type: agr=1, refl=-1
-  fakedat$Gram <- ifelse(fakedat$cond %in% c(1,2,5,6), -1, 1) # main effect of grammaticality: gram=-1, ungram=1
-  fakedat$DepxGram <- ifelse(fakedat$cond %in% c(3:6), 1, -1)
-  fakedat$Int_gram_refl <- ifelse(fakedat$cond %in% c(5), 1, ifelse  (fakedat$cond %in% c(6), -1, 0))
-  fakedat$Int_gram_agr <- ifelse(fakedat$cond %in% c(1), 1, ifelse(fakedat$cond %in% c(2), -1, 0))
-  fakedat$Int_ungram_refl <- ifelse(fakedat$cond %in% c(8), 1, ifelse(fakedat$cond %in% c(7), -1, 0))
-  fakedat$Int_ungram_agr <- ifelse(fakedat$cond %in% c(4), 1, ifelse(fakedat$cond %in% c(3), -1, 0))
+  simdat$Dep <- ifelse(simdat$cond %in% c(1:4), 
+                       1, -1) # main effect of dependency type: agr=1, refl=-1
+  simdat$Gram <- ifelse(simdat$cond %in% c(1,2,5,6), 
+                        -1, 1) # main effect of grammaticality: gram=-1, ungram=1
+  simdat$DepxGram <- ifelse(simdat$cond %in% c(3:6), 1, -1)
+  simdat$Int_gram_refl <- ifelse(simdat$cond %in% c(5), 1, 
+                                 ifelse  (simdat$cond %in% c(6), -1, 0))
+  simdat$Int_gram_agr <- ifelse(simdat$cond %in% c(1), 1, 
+                                ifelse(simdat$cond %in% c(2), -1, 0))
+  simdat$Int_ungram_refl <- ifelse(simdat$cond %in% c(8), 1, 
+                                   ifelse(simdat$cond %in% c(7), -1, 0))
+  simdat$Int_ungram_agr <- ifelse(simdat$cond %in% c(4), 1, 
+                                  ifelse(simdat$cond %in% c(3), -1, 0))
   ## subject random effects:
-  u<-mvrnorm(n=length(unique(fakedat$subj)),
+  u<-mvrnorm(n=length(unique(simdat$subj)),
              mu=c(rep(0,8)),Sigma=Sigma_u)
 
   ## item random effects
-  w<-mvrnorm(n=length(unique(fakedat$item)),
+  w<-mvrnorm(n=length(unique(simdat$item)),
              mu=c(rep(0,8)),Sigma=Sigma_w)
 
   ## generate data row by row:
-  N<-dim(fakedat)[1]
+  N<-dim(simdat)[1]
   rt<-rep(NA,N)
   for(i in 1:N){
     rt[i] <- rlnorm(1,beta[1] +
-                      u[fakedat[i,]$subj,1] +
-                      w[fakedat[i,]$item,1] +
-                      (beta[2]+u[fakedat[i,]$subj,2]+
-                         w[fakedat[i,]$item,2])*fakedat$Dep[i]+
-                      (beta[3]+u[fakedat[i,]$subj,3]+
-                         w[fakedat[i,]$item,3])*fakedat$Gram[i]+
-                      (beta[4]+u[fakedat[i,]$subj,4]+
-                         w[fakedat[i,]$item,4])*fakedat$DepxGram[i]+
-                      (beta[5]+u[fakedat[i,]$subj,5]+
-                         w[fakedat[i,]$item,5])*fakedat$Int_gram_refl[i]+
-                      (beta[6]+u[fakedat[i,]$subj,6]+
-                         w[fakedat[i,]$item,6])*fakedat$Int_gram_agr[i]+
-                      (beta[7]+u[fakedat[i,]$subj,7]+
-                         w[fakedat[i,]$item,7])*fakedat$Int_ungram_refl[i]+
-                      (beta[8]+u[fakedat[i,]$subj,8]+
-                         w[fakedat[i,]$item,8])*fakedat$Int_ungram_agr[i],
+                      u[simdat[i,]$subj,1] +
+                      w[simdat[i,]$item,1] +
+                      (beta[2]+u[simdat[i,]$subj,2]+
+                         w[simdat[i,]$item,2])*simdat$Dep[i]+
+                      (beta[3]+u[simdat[i,]$subj,3]+
+                         w[simdat[i,]$item,3])*simdat$Gram[i]+
+                      (beta[4]+u[simdat[i,]$subj,4]+
+                         w[simdat[i,]$item,4])*simdat$DepxGram[i]+
+                      (beta[5]+u[simdat[i,]$subj,5]+
+                         w[simdat[i,]$item,5])*simdat$Int_gram_refl[i]+
+                      (beta[6]+u[simdat[i,]$subj,6]+
+                         w[simdat[i,]$item,6])*simdat$Int_gram_agr[i]+
+                      (beta[7]+u[simdat[i,]$subj,7]+
+                         w[simdat[i,]$item,7])*simdat$Int_ungram_refl[i]+
+                      (beta[8]+u[simdat[i,]$subj,8]+
+                         w[simdat[i,]$item,8])*simdat$Int_ungram_agr[i],
 
                     sigma_e)
   }
-  fakedat$rt<-rt
-  fakedat$subj<-factor(fakedat$subj)
-  fakedat$item<-factor(fakedat$item)
-  fakedat
+  simdat$rt<-rt
+  simdat$subj<-factor(simdat$subj)
+  simdat$item<-factor(simdat$item)
+  simdat
 }
 ```
 
 Finally, we set all the slopes to zero, and compute Type I error under different conditions.
 
-### Type I error with varying intercepts only
-
 ```{r}
 ## set all effects to 0:
 betameans[2:8]<-0
-
-nsim<-100
-significant<-matrix(0,nsim,ncol=7)
-## record failed convergences, remove these later:
-failed<-rep(0,nsim)
-
-for(i in 1:nsim){
-    print(paste("********simulation ",i,"********",sep=""))
-  fakedat<-gen_fake_lnorm2x2x2(beta = betameans,
-                               Sigma_u=Sigma_u,Sigma_w=Sigma_w,
-                               sigma_e=sig,nitem=48,
-                               nsubj=40)
-
-  m_fake<-lmer(log(rt)~Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
-                 Int_ungram_refl+Int_ungram_agr+
-                 (1|subj)+
-                 (1|item),fakedat,
-               control=lmerControl(optimizer="nloptwrap", calc.derivs = FALSE))
-
-  ## ignore failed trials
-##  if(any( grepl("failed to converge", m_fake@optinfo$conv$lme4$messages) ) ||
-##     any( grepl("singular", m_fake@optinfo$conv$lme4$messages) )){
-##    failed[i]<-1
-##  } else{
-    ## first slope:
-    if(abs(summary(m_fake)$coefficients[2,3])>2){
-      significant[i,1]<-1
-    } else {significant[i,1]<-0}
-    ## second slope:
-    if(abs(summary(m_fake)$coefficients[3,3])>2){
-      significant[i,2]<-1
-    } else {significant[i,2]<-0}
-    ## third slope:
-    if(abs(summary(m_fake)$coefficients[4,3])>2){
-      significant[i,3]<-1
-    } else {significant[i,3]<-0}
-    ## fourth slope:
-    if(abs(summary(m_fake)$coefficients[5,3])>2){
-      significant[i,4]<-1
-    } else {significant[i,4]<-0}
-    ## fifth slope:
-    if(abs(summary(m_fake)$coefficients[6,3])>2){
-      significant[i,5]<-1
-    } else {significant[i,5]<-0}
-    ## sixth slope:
-    if(abs(summary(m_fake)$coefficients[7,3])>2){
-      significant[i,6]<-1
-    } else {significant[i,6]<-0}
-    ## seventh slope:
-    if(abs(summary(m_fake)$coefficients[8,3])>2){
-      significant[i,7]<-1
-    } else {significant[i,7]<-0}
-    ##}
-}
-
-## In 100 simulations, what is the proportion of times that *at least one* of the effects is significant?
-## save results:
-save(significant,file="minimalmodelsig.rda")
-
-counts<-table(rowSums(significant)>0)
-## Type I error under multiple comparisons:
-counts[2]/sum(counts)
 ```
 
-Type I error is hugely inflated due to the issue we illustrated above with the two-condition design (the @barr2013 observation).
+We will fit a model for a full variance-covariance matrix for both subjects and items. We avoid fitting the correlation parameters, because these will be difficult to estimate with the sample size (40 subjects and 48 items) used in the @@Dillon-EtAl-2013 study. To illustrate the effect of mis-specification of the likelihood function, we will fit the simulated data to both log and raw reading times.
 
-### Type I error with a varying intercepts and varying slopes model
-
-Next, we fit a model for a full variance-covariance matrix for both subjects and items. We avoid fitting the correlation parameters, because these will be difficult to estimate with the sample size (40 subjects and 48 items).
-
-```{r eval=FALSE,echo=FALSE}
+```{r fullmodelDillonEtAl2013,eval=FALSE}
 ## full model:
 nsim<-100
-significant<-matrix(0,nsim,ncol=7)
+significantlog<-significantraw<-matrix(0,nsim,ncol=7)
 ## record failed convergences, remove these later:
-failed<-rep(0,nsim)
+failedlog<-failedraw<-rep(0,nsim)
 
 for(i in 1:nsim){
-#  print(paste("********simulation ",i,"********",sep=""))
-  fakedat<-gen_fake_lnorm2x2x2(beta = betameans,
+##  print(paste("********simulation ",i,"********",sep=""))
+  simdat<-gen_fake_lnorm2x2x2(beta = betameans,
                                Sigma_u=Sigma_u,Sigma_w=Sigma_w,
                                sigma_e=sig,nitem=48,
                                nsubj=40)
 
-  m_fake<-lmer(log(rt)~Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
+  m_fakelog<-lmer(log(rt)~Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
                  Int_ungram_refl+Int_ungram_agr+
                  (1+Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
                     Int_ungram_refl+Int_ungram_agr||subj)+
-                 (1|item),fakedat,
+                 (1+Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
+                    Int_ungram_refl+Int_ungram_agr||item),simdat,
                control=lmerControl(optimizer="nloptwrap", calc.derivs = FALSE))
 
-  ## ignore failed trials
-    if(any( grepl("failed to converge", m_fake@optinfo$conv$lme4$messages) ) ||
-       any( grepl("singular", m_fake@optinfo$conv$lme4$messages) )){
-      failed[i]<-1
+    m_fakeraw<-lmer(rt~Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
+                 Int_ungram_refl+Int_ungram_agr+
+                 (1+Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
+                    Int_ungram_refl+Int_ungram_agr||subj)+
+                 (1+Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
+                    Int_ungram_refl+Int_ungram_agr||item),simdat,
+               control=lmerControl(optimizer="nloptwrap", 
+                                   calc.derivs = FALSE))
+
+  ## ignore failed trials (log rts model)
+    if(any( grepl("failed to converge", m_fakelog@optinfo$conv$lme4$messages) ) ||
+       any( grepl("singular", m_fakelog@optinfo$conv$lme4$messages) )){
+      failedlog[i]<-1
     } else{
   ## first slope:
-  if(abs(summary(m_fake)$coefficients[2,3])>2){
-    significant[i,1]<-1
-  } else {significant[i,1]<-0}
+  if(abs(summary(m_fakelog)$coefficients[2,4])>2){
+    significantlog[i,1]<-1
+  } else {significantlog[i,1]<-0}
   ## second slope:
-  if(abs(summary(m_fake)$coefficients[3,3])>2){
+  if(abs(summary(m_fakelog)$coefficients[3,4])>2){
     significant[i,2]<-1
-  } else {significant[i,2]<-0}
+  } else {significantlog[i,2]<-0}
   ## third slope:
-  if(abs(summary(m_fake)$coefficients[4,3])>2){
-    significant[i,3]<-1
-  } else {significant[i,3]<-0}
+  if(abs(summary(m_fakelog)$coefficients[4,4])>2){
+    significantlog[i,3]<-1
+  } else {significantlog[i,3]<-0}
   ## fourth slope:
-  if(abs(summary(m_fake)$coefficients[5,3])>2){
+  if(abs(summary(m_fakelog)$coefficients[5,4])>2){
     significant[i,4]<-1
-  } else {significant[i,4]<-0}
+  } else {significantlog[i,4]<-0}
   ## fifth slope:
-  if(abs(summary(m_fake)$coefficients[6,3])>2){
-    significant[i,5]<-1
-  } else {significant[i,5]<-0}
+  if(abs(summary(m_fakelog)$coefficients[6,4])>2){
+    significantlog[i,5]<-1
+  } else {significantlog[i,5]<-0}
   ## sixth slope:
-  if(abs(summary(m_fake)$coefficients[7,3])>2){
-    significant[i,6]<-1
-  } else {significant[i,6]<-0}
+  if(abs(summary(m_fakelog)$coefficients[7,4])>2){
+    significantlog[i,6]<-1
+  } else {significantlog[i,6]<-0}
   ## seventh slope:
-  if(abs(summary(m_fake)$coefficients[8,3])>2){
-    significant[i,7]<-1
-  } else {significant[i,7]<-0}
-  }
+  if(abs(summary(m_fakelog)$coefficients[8,4])>2){
+    significantlog[i,7]<-1
+  } else {significantlog[i,7]<-0}
+    }
+    
+    ## ignore failed trials (raw rts model)
+    if(any( grepl("failed to converge", m_fakeraw@optinfo$conv$lme4$messages) ) ||
+       any( grepl("singular", m_fakeraw@optinfo$conv$lme4$messages) )){
+      failedraw[i]<-1
+    } else{
+  ## first slope:
+  if(abs(summary(m_fakeraw)$coefficients[2,4])>2){
+    significantraw[i,1]<-1
+  } else {significantraw[i,1]<-0}
+  ## second slope:
+  if(abs(summary(m_fakeraw)$coefficients[3,4])>2){
+    significant[i,2]<-1
+  } else {significantraw[i,2]<-0}
+  ## third slope:
+  if(abs(summary(m_fakeraw)$coefficients[4,4])>2){
+    significantraw[i,3]<-1
+  } else {significantraw[i,3]<-0}
+  ## fourth slope:
+  if(abs(summary(m_fakeraw)$coefficients[5,4])>2){
+    significant[i,4]<-1
+  } else {significantraw[i,4]<-0}
+  ## fifth slope:
+  if(abs(summary(m_fakeraw)$coefficients[6,4])>2){
+    significantraw[i,5]<-1
+  } else {significantraw[i,5]<-0}
+  ## sixth slope:
+  if(abs(summary(m_fakeraw)$coefficients[7,4])>2){
+    significantraw[i,6]<-1
+  } else {significantraw[i,6]<-0}
+  ## seventh slope:
+  if(abs(summary(m_fakeraw)$coefficients[8,4])>2){
+    significantraw[i,7]<-1
+  } else {significantraw[i,7]<-0}
+  }  
 }
 
 ## In 100 simulations, what is the proportion of times that *at least one* of the effects is significant?
-save(significant,file="maxmodelsig.rda")
-counts<-table(rowSums(significant)>0)
+## Log rt model:
+save(significantlog,file="maxmodelsiglog.rda")
+countslog<-table(rowSums(significantlog)>0)
 ## Type I error under multiple comparisons:
-counts[2]/sum(counts)
+countslog[2]/sum(countslog)
+
+## Raw rt model:
+save(significantraw,file="maxmodelsigraw.rda")
+countsraw<-table(rowSums(significantraw)>0)
+## Type I error under multiple comparisons:
+countsraw[2]/sum(countsraw)
 ```
+
+```{r echo=FALSE}
+load("maxmodelsiglog.rda")
+load("maxmodelsigraw.rda")
+```
+
+What we see below is that (a) with the log reading time model, we get an inflation of Type I error when we compare multiple hypotheses, (b) model mis-specification (using a Normal likelihood when a log-normal should have been used) will further inflate Type I error.
 
 ```{r}
-## full model 2:
-nsim<-100
-significant<-matrix(0,nsim,ncol=7)
-## record failed convergences, remove these later:
-failed<-rep(0,nsim)
-
-for(i in 1:nsim){
-#  print(paste("********simulation ",i,"********",sep=""))
-  fakedat<-gen_fake_lnorm2x2x2(beta = betameans,
-                               Sigma_u=Sigma_u,Sigma_w=Sigma_w,
-                               sigma_e=sig,nitem=48,
-                               nsubj=40)
-
-  m_fake<-lmer(log(rt)~Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
-                 Int_ungram_refl+Int_ungram_agr+
-                 (1+Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
-                    Int_ungram_refl+Int_ungram_agr||subj)+
-                 (1+Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
-                    Int_ungram_refl+Int_ungram_agr||item),fakedat,
-               control=lmerControl(optimizer="nloptwrap", calc.derivs = FALSE))
-
-  ## ignore failed trials
-  if(any( grepl("failed to converge", m_fake@optinfo$conv$lme4$messages) ) ||
-     any( grepl("singular", m_fake@optinfo$conv$lme4$messages) )){
-    failed[i]<-1
-  } else{
-    ## first slope:
-    if(abs(summary(m_fake)$coefficients[2,3])>2){
-      significant[i,1]<-1
-    } else {significant[i,1]<-0}
-    ## second slope:
-    if(abs(summary(m_fake)$coefficients[3,3])>2){
-      significant[i,2]<-1
-    } else {significant[i,2]<-0}
-    ## third slope:
-    if(abs(summary(m_fake)$coefficients[4,3])>2){
-      significant[i,3]<-1
-    } else {significant[i,3]<-0}
-    ## fourth slope:
-    if(abs(summary(m_fake)$coefficients[5,3])>2){
-      significant[i,4]<-1
-    } else {significant[i,4]<-0}
-    ## fifth slope:
-    if(abs(summary(m_fake)$coefficients[6,3])>2){
-      significant[i,5]<-1
-    } else {significant[i,5]<-0}
-    ## sixth slope:
-    if(abs(summary(m_fake)$coefficients[7,3])>2){
-      significant[i,6]<-1
-    } else {significant[i,6]<-0}
-    ## seventh slope:
-    if(abs(summary(m_fake)$coefficients[8,3])>2){
-      significant[i,7]<-1
-    } else {significant[i,7]<-0}
-  }
-}
-
-## In 100 simulations, what is the proportion of times that *at least one* of the effects is significant?
-save(significant,file="maxmodelsig2.rda")
-counts<-table(rowSums(significant)>0)
+countslog<-table(rowSums(significantlog)>0)
 ## Type I error under multiple comparisons:
-counts[2]/sum(counts)
-#colSums(significant)/100
+countslog[2]/sum(countslog)
+
+countsraw<-table(rowSums(significantraw)>0)
+## Type I error under multiple comparisons + model mis-specification:
+countsraw[2]/sum(countsraw)
 ```
 
-As a final observation,  note that fitting the model using raw reading times inflates Type I error further:
+## The practical implications   
 
-```{r}
-## full model 2:
-nsim<-100
-significant<-matrix(0,nsim,ncol=7)
-## record failed convergences, remove these later:
-failed<-rep(0,nsim)
+What all this means is that when we have multiple hypothesis within a linear mixed model, we cannot reasonably assume that Type I error is 0.05 for each of the hypothesis tests.
 
-for(i in 1:nsim){
-#  print(paste("********simulation ",i,"********",sep=""))
-  fakedat<-gen_fake_lnorm2x2x2(beta = betameans,
-                               Sigma_u=Sigma_u,Sigma_w=Sigma_w,
-                               sigma_e=sig,nitem=48,
-                               nsubj=40)
+## Summary
 
-  m_fake<-lmer(log(rt)~Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
-                 Int_ungram_refl+Int_ungram_agr+
-                 (1+Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
-                    Int_ungram_refl+Int_ungram_agr||subj)+
-                 (1+Dep+Gram+DepxGram+Int_gram_refl+Int_gram_agr+
-                    Int_ungram_refl+Int_ungram_agr||item),fakedat,
-               control=lmerControl(optimizer="nloptwrap", calc.derivs = FALSE))
+This chapter demonstrates, through simulations, how Type I error can get inflated due to (a) an overly simplified random effects structure in linear mixed models, (b) mis-specification of the likelihood, and (c) multiple comparisons.
 
-  ## ignore failed trials
-  if(any( grepl("failed to converge", m_fake@optinfo$conv$lme4$messages) ) ||
-     any( grepl("singular", m_fake@optinfo$conv$lme4$messages) )){
-    failed[i]<-1
-  } else{
-    ## first slope:
-    if(abs(summary(m_fake)$coefficients[2,3])>2){
-      significant[i,1]<-1
-    } else {significant[i,1]<-0}
-    ## second slope:
-    if(abs(summary(m_fake)$coefficients[3,3])>2){
-      significant[i,2]<-1
-    } else {significant[i,2]<-0}
-    ## third slope:
-    if(abs(summary(m_fake)$coefficients[4,3])>2){
-      significant[i,3]<-1
-    } else {significant[i,3]<-0}
-    ## fourth slope:
-    if(abs(summary(m_fake)$coefficients[5,3])>2){
-      significant[i,4]<-1
-    } else {significant[i,4]<-0}
-    ## fifth slope:
-    if(abs(summary(m_fake)$coefficients[6,3])>2){
-      significant[i,5]<-1
-    } else {significant[i,5]<-0}
-    ## sixth slope:
-    if(abs(summary(m_fake)$coefficients[7,3])>2){
-      significant[i,6]<-1
-    } else {significant[i,6]<-0}
-    ## seventh slope:
-    if(abs(summary(m_fake)$coefficients[8,3])>2){
-      significant[i,7]<-1
-    } else {significant[i,7]<-0}
-  }
-}
+## Further reading
 
-## In 100 simulations, what is the proportion of times that *at least one* of the effects is significant?
-save(significant,file="maxmodelsig2raw.rda")
-counts<-table(rowSums(significant)>0)
-## Type I error under multiple comparisons:
-counts[2]/sum(counts)
-#colSums(significant)/100
-```
+@barr2013 is an important reference on the topic of Type I error inflation through overly simplified specification of the random effects structure of the linear mixed model, although also see @hannesBEAP and @BatesEtAlParsimonious. @MalsburgAngele2016 investigate the problem of Type I error through multiple comparisons in linear mixed models, focusing on eyetracking reading data.
