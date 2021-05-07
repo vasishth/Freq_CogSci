@@ -602,8 +602,8 @@ Compute the deviances $D_0$ and $D_1$ for each hypothesis, and compute $\Delta D
 
 \begin{equation}
 \begin{split}
-\Delta D =& D_0 - D_1 = \frac{1}{\sigma^2} [(Y^TY - \hat \beta_0 X_0^T Y) -  (Y^TY - \hat \beta_1 X_1^T Y)]\\
-=& \frac{1}{\sigma^2} [\hat \beta_1 X_1^T Y - \hat \beta_0 X_0^T Y]\\
+\Delta D =& D_0 - D_1 = \frac{1}{\sigma^2} [(Y^TY - \hat \beta_0^T X_0^T Y) -  (Y^TY - \hat \beta_1^T X_1^T Y)]\\
+=& \frac{1}{\sigma^2} [\hat \beta_1^T X_1^T Y - \hat \beta_0^T X_0^T Y]\\
 \end{split}
 \end{equation}
 
@@ -620,7 +620,7 @@ The observed F-statistic is:
 \begin{equation}
 \begin{split}
 F=&\frac{\Delta D/(p-q)}{D_1/(n-p)} \\
-=& \frac{\hat \beta_1 X_1^T Y - \hat \beta_0^T X_0^T Y}{p-q} /
+=& \frac{\hat \beta_1^T X_1^T Y - \hat \beta_0^T X_0^T Y}{p-q} /
 \frac{Y^T Y - \hat \beta_1^T X_1^TY}{n-p}\\
 \end{split}
 \end{equation}
@@ -635,7 +635,7 @@ Traditionally, the way the F-test is summarized is shown in Table \ref{tab:anova
 Source of variance & df & Sum of squares & Mean square\\
 \hline
 Model with $\beta_0$ & q & $\hat\beta_0^T X_0^T Y$ & \\
-Improvement due to & p-q & $\hat \beta_1 X_1^T Y - \hat \beta_0^T X_0^T Y$ & $\frac{\hat \beta_1 X_1^T Y - \hat \beta_0^T X_0^T Y}{p-q}$\\
+Improvement due to & p-q & $\hat \beta_1^T X_1^T Y - \hat \beta_0^T X_0^T Y$ & $\frac{\hat \beta_1^T X_1^T Y - \hat \beta_0^T X_0^T Y}{p-q}$\\
 $\beta_1$ & & & \\
 Residual & n-p & $Y^T Y - \hat \beta_1^T X_1^TY$  & $\frac{Y^T Y - \hat \beta_1^T X_1^TY}{n-p}$\\
 \hline
@@ -1139,7 +1139,7 @@ We also saw how an ANOVA is standardly summarized using matrix notation:
 Source of variance & df & Sum of squares & Mean square\\
 \hline
 Model with $\beta_0$ & q & $\hat\beta_0^T X_0^T Y$ & \\
-Improvement due to & p-q & $\hat \beta_1 X_1^T Y - \hat \beta_0^T X_0^T Y$ & $\frac{\hat \beta_1 X_1^T Y - \hat \beta_0^T X_0^T Y}{p-q}$\\
+Improvement due to & p-q & $\hat \beta_1^T X_1^T Y - \hat \beta_0^T X_0^T Y$ & $\frac{\hat \beta_1^T X_1^T Y - \hat \beta_0^T X_0^T Y}{p-q}$\\
 $\beta_1$ & & & \\
 Residual & n-p & $Y^T Y - \hat \beta_1^T X_1^TY$  & $\frac{Y^T Y - \hat \beta_1^T X_1^TY}{n-p}$\\
 \hline
