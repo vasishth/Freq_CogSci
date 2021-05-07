@@ -757,7 +757,7 @@ design <- fixed.factor("distance", c("long","short")) +
 
 simdat<-design.codes(design)
 
-````
+```
 
 ## Exercises {#sec:Simulationexercises}
 
