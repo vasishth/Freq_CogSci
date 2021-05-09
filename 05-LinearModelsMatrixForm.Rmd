@@ -1164,19 +1164,3 @@ head(hindi10[,c(1,2,3,24,33,34)])
 
 Fit a linear mixed model using the function `glmer` and the link function `family=binomial()`, with varying intercepts for subject and item, as well as varying slopes if possible, with centered word complexity and storage cost as predictors, and skipping probability (represented as 0,1 values) as dependent measure. Using the anova function, find out whether there is evidence for (a) word complexity, and (b) storage cost affecting skipping probability. Display the effects of these two variables on skipping probability on the probability scale by back-transforming the mean and 95% confidence interval of each effect from the log odds scale to the probability scale. 
 
-```{r eval=FALSE,echo=FALSE}
-library(lme4)
-fm_skip<-glmer(skip ~ scale(word_complex,scale=FALSE)+scale(SC,scale=FALSE)+(1|subj)+(1|item),family=binomial(),hindi10)
-summary(fm_skip)
-fm_skip0WC<-glmer(skip ~ scale(SC,scale=FALSE)+(1|subj)+(1|item),family=binomial(),hindi10)
-anova(fm_skip,fm_skip0WC)
-fm_skip0SC<-glmer(skip ~ scale(word_complex,scale=FALSE)+(1|subj)+(1|item),family=binomial(),hindi10)
-anova(fm_skip,fm_skip0SC)
-alpha<-summary(fm_skip)$coefficients[1,1]
-betawc<-summary(fm_skip)$coefficients[2,1]
-betasc<-summary(fm_skip)$coefficients[3,1]
-muhatwc<-alpha+betawc
-muhatsc<-alpha+betasc
-exp(muhatwc)/(1+exp(muhatwc))
-exp(muhatsc)/(1+exp(muhatsc))
-```
