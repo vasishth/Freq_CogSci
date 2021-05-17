@@ -726,4 +726,83 @@ The resulting contrast matrix is now the same as when the intercept was ignored,
 
 ## Summary
 
-To summarize, contrasts provide a way to tell the linear (mixed-effects) model how to code factors into numeric covariates. That is, they provide a way to define which comparisons between which condition means or bundles of condition means should be estimated in the Bayesian model. There are a number of default contrasts, like treatment contrasts, sum contrasts, repeated contrasts, or Helmert contrasts, that are known to test specific hypotheses about the data. A much more powerful procedure is to use the generalized matrix inverse, e.g., as implemented in the `hypr` package, to derive contrasts automatically after specifying the comparisons that a contrast should estimate. 
+Contrasts provide a way to tell the linear (mixed-effects) model how to code factors into numeric covariates. That is, they provide a way to define which comparisons between which condition means or bundles of condition means should be estimated in the Bayesian model. There are a number of default contrasts, like treatment contrasts, sum contrasts, repeated contrasts, or Helmert contrasts, that are known to test specific hypotheses about the data. A much more powerful procedure is to use the generalized matrix inverse, e.g., as implemented in the `hypr` package, to derive contrasts automatically after specifying the comparisons that a contrast should estimate. 
+
+
+## Exercises {#sec:Contrastsexercises}
+
+### Contrast coding for a four-condition design {#sec:ContrastsPersian}
+
+Load the following data. These data are from Experiment 1 in a set of reading studies on Persian [@SafaviEtAlFrontiers2016]. This is a self-paced reading study on particle-verb constructions, with a $2\times 2$ design: distance (short, long) and predictability (predictable, unpredictable). The data are from a critical region in the sentence. All the data from the @SafaviEtAlFrontiers2016 paper are available from https://github.com/vasishth/SafaviEtAl2016.
+
+```{r}
+library(lingpsych)
+data("df_persianE1")
+dat1<-df_persianE1
+head(dat1)
+```
+
+The four conditions are:
+
+- Distance=short and Predictability=unpredictable
+- Distance=short and Predictability=predictable
+- Distance=long and Predictability=unpredictable
+- Distance=long and Predictability=predictable
+
+The researcher wants to do the following sets of hypothesis tests:
+
+Compare the condition labeled Distance=short and Predictability=unpredictable with each of the following conditions:
+
+- Distance=short and Predictability=predictable
+- Distance=long and Predictability=unpredictable
+- Distance=long and Predictability=predictable
+
+Questions:
+
+- Which contrast coding is needed for such a comparison?
+- First, define the relevant contrast coding. Hint: You can do it by creating a condition column labeled a,b,c,d and then use a built-in contrast coding function.
+- Then, use the `hypr` library function to confirm that your contrast coding actually does the hypothesis tests you need. 
+- Fit a simple linear model with the above contrast coding and display the slopes, which constitute the relevant comparisons.
+- Now, compute each of the four conditions' means and check that the slopes from the linear model correspond to the relevant differences between means that you obtained from the data.
+
+
+
+### Helmert coding for a four-condition design {#sec:ContrastsNPIHelmert}
+
+Load the following data:
+
+```{r}
+library(lingpsych)
+data("df_polarity")
+head(df_polarity)
+```
+
+The data come from an eyetracking study in German reported in @VBLD07. The experiment is a reading study involving six conditions. The sentences are in English, but the original design was involved German sentences. In German, the word *durchaus* (certainly) is a positive polarity item: in the constructions used in this experiment, *durchaus* cannot have a c-commanding element that is a negative polarity item licensor. Here are the conditions:
+
+- Negative polarity items
+  - (a) Grammatical: No man who had a beard was ever thrifty. 
+  - (b) Ungrammatical (Intrusive NPI licensor): A man who had no beard was ever thrifty.
+  - (c) Ungrammatical: A man who had a beard was ever thrifty.
+- Positive polarity items
+  - (d) Ungrammatical: No man who had a beard was certainly thrifty. 
+  - (e) Grammatical (Intrusive NPI licensor): A man who had no beard was certainly thrifty.
+  - (f) Grammatical: A man who had a beard was certainly thrifty.
+
+We will focus only on re-reading time in this data-set. Subset the data so that we only have re-reading times in the data-frame:
+
+```{r}
+dat2<-subset(df_polarity,times=="RRT")
+head(dat2)
+```
+
+The comparisons we are interested in are:
+
+- What is the difference in reading time between negative polarity items and positive polarity items?
+- Within negative polarity items, what is the difference between grammatical and ungrammatical conditions?
+- Within negative polarity items, what is the difference between the two ungrammatical conditions?
+- Within positive polarity items, what is the difference between grammatical and ungrammatical conditions?
+- Within positive polarity items, what is the difference between the two grammatical conditions?
+
+Use the `hypr` package to specify the comparisons specified above, and then extract the contrast matrix. Finally, specify the contrasts to the condition column in the data frame. Fit a linear model using this contrast specification, and then check that the estimates from the model match the mean differences between the conditions being compared.  
+
+
