@@ -483,4 +483,56 @@ The results from this analysis show that the estimates for the two main effects 
 
 To summarize, we have seen interesting results for contrasts in the context of $2 \times 2$ designs, where depending on the contrast coding, the factors estimated nested effects (treatment contrasts) or main effects (sum contrasts). We also saw that it is possible to code contrasts for a $2 \times 2$ design, by creating one large factor comprising all design cells, and by specifying all effects of interest in one large contrast matrix. In designs with one factor and one covariate it is possible to control group differences for differences in the covariate (ANCOVA), or to test whether regression slopes are parallel in different experimental conditions. Finally, contrast coding in generalized linear models works the same way as in the standard linear model.
 
+## Exercises {#sec:Contrasts2x2exercises}
+
+### ANOVA coding for a four-condition design {#sec:Contrasts2x2PersianANOVA}
+
+Load the following data. These data are from Experiment 1 in a set of reading studies on Persian [@SafaviEtAlFrontiers2016]; we encountered these data in the preceding chapter's exercises.
+
+```{r}
+library(lingpsych)
+data("df_persianE1")
+dat1<-df_persianE1
+head(dat1)
+```
+
+The four conditions are:
+
+- Distance=short and Predictability=unpredictable
+- Distance=short and Predictability=predictable
+- Distance=long and Predictability=unpredictable
+- Distance=long and Predictability=predictable
+
+For the data given above, define an ANOVA-style contrast coding, and compute main effects and interactions. Check with `hypr` what the hypothesis tests are with an ANOVA coding, and write down the null hypotheses. 
+
+### ANOVA and nested comparisons in a $2\times 2\times 2$ design {#sec:Contrasts2x2Dillon2013}
+
+Load the following data-set. This is $2\times 2\times 2$ design from @jager2020interference, with the factors Grammaticality (grammatical vs. ungrammatical), Dependency (Agreement vs.\ Reflexives), and Interference (Interference vs.\ no interference). The experiment is a replication attempt of Experiment 1 reported in @Dillon-EtAl-2013.
+
+```{r}
+library(lingpsych)
+data("df_dillonrep")
+```
+
+- The grammatical conditions are a,b,e,f. The rest of the conditions are ungrammatical.
+- The agreement conditions are a,b,c,d. The other conditions are reflexives.
+- The interference conditions are a,d,e,h, and the others are the no-interference conditions.
+
+The dependent measure of interest is TFT (total fixation time, in milliseconds).
+
+Using a linear model, do a main effects and interactions ANOVA contrast coding, and obtain an estimate of the main effects of Grammaticality, Dependency, and Interference, and all interactions. You may find it easier to code the contrasts coding the main effects as +1, -1, using `ifelse` in R to code vectors corresponding to each main effect. This will make the specification of the interactions easy.
+
+The researchers had a further research hypothesis: in ungrammatical sentences only, agreement would show an interference effect but reflexives would not. In grammatical sentences, both agreement and reflexives are expected to show interference effects. This kind of research question can be answered with nested contrast coding. 
+
+To carry out the relevant nested contrasts, define contrasts that estimate the effects of
+
+- grammaticality
+- dependency type
+- the interaction between grammaticality and dependency type
+- reflexives interference within grammatical conditions
+- agreement interference within grammatical conditions
+- reflexives interference within ungrammatical conditions
+- agreement interference within ungrammatical conditions
+
+Do the estimates match expectations? Check this by computing the condition means and checking that the estimates from the models match the relevant differences between conditions or clusters of conditions.
 
