@@ -969,118 +969,47 @@ For readers interested in the mathematics needed for statistics, the books by @f
 
 #### Part 1 {#sec:FoundationsexercisespnormPart1}
 
-```{r echo=FALSE}
-## DATA GENERATION
-set.seed(4321)
-mean.val<-round(rnorm(1,mean=100,sd=100),digits=0)
-sd.val<-round(rnorm(1,mean=100,sd=1.5),digits=0)
-
-q1<-round(rnorm(1,mean=100,sd=100)+50,digits=0)
-q2<-round(rnorm(1,mean=100,sd=100)-100,digits=0)
-
-if(q1>q2){
-sol<-pnorm(q1,mean=abs(mean.val),sd=abs(sd.val))-pnorm(q2,mean=abs(mean.val),sd=abs(sd.val))
-} else {
-  sol<-pnorm(q2,mean=abs(mean.val),sd=abs(sd.val))-pnorm(q1,mean=abs(mean.val),sd=abs(sd.val))
-}
-```
-
-Given a normal distribution with mean ```r abs(mean.val)``` and standard deviation ```r abs(sd.val)```, use the pnorm function to calculate the probability of obtaining values between ```r format(q1)``` and ```r format(q2)``` from this distribution.
+Given a normal distribution with mean 500 and standard deviation 100, use the `pnorm` function to calculate the probability of obtaining values between 200 and 800 from this distribution.
 
 #### Part 2 {#sec:FoundationsexercisespnormPart2}
 
-```{r echo=FALSE}
-mu<-round(rnorm(1,mean=51,sd=2),digits=0)
-sigma<-round(runif(1,min=2,max=4),digits=0)
-
-q<-round(runif(1,min=40,max=50))
-q1<-round(runif(1,min=51,max=60))
-
-
-p1<-round(pnorm(q,mean=mu,sd=sigma),digits=3)
-p2<-round(1-pnorm(q,mean=mu,sd=sigma),digits=3)
-p3<-round(1-pnorm(q1,mean=mu,sd=sigma),digits=3)
-```
 
 Calculate the following probabilities. 
-Given a normal distribution with mean ```r mu``` and standard deviation ```r sigma```, what is the probability of getting 
+Given a normal distribution with mean 800 and standard deviation 150, what is the probability of getting 
 
-- a score of ```r q``` or less
-- a score of ```r q``` or more
-- a score of ```r q1``` or more
+- a score of 700 or less
+- a score of 900 or more
+- a score of 800 or more
 
 #### Part 3 {#sec:FoundationsexercisespnormPart3}
 
-```{r echo=FALSE}
-mu<-round(runif(1,min=45,max=55),digits=0)
-sigma<-round(runif(1,min=2,max=10),digits=0)
+Given a normal distribution with mean 600 and standard deviation 200, what is the probability of getting 
 
-p1<-round(pnorm(mu-5,mean=mu,sd=sigma),digits=3)
-p2<-round(pnorm(mu+3,mean=mu,sd=sigma)-pnorm(mu-3,mean=mu,sd=sigma),digits=3)
-p3<-round(1-pnorm(mu+1,mean=mu,sd=sigma),digits=3)
-```
-
-Given a normal distribution with mean ```r mu``` and standard deviation ```r sigma```, what is the probability of getting 
-
-- a score of ```r mu-5``` or less.
-- a score between ```r mu-3``` and ```r mu+3```.
-- a score of ```mu+1``` or more.
+- a score of 550 or less.
+- a score between 300 and 800.
+- a score of 900 or more.
 
 ### Practice using the ```qnorm``` function {#sec:Foundationsexercisesqnorm}
 
 #### Part 1 {#sec:FoundationsexercisesqnormPart1}
 
-```{r echo=FALSE}
-prob1<-round(runif(1,min=0,max=1),digits=2)
-if(prob1<=0.5){
- prob2<-round(runif(1,min=0.55,max=0.99),digits=2)
-} else {
-    prob2<-prob1
-    prob1<-round(runif(1,min=0.01,max=0.40),digits=2)}
-
-lower<-round(qnorm(prob1,mean=1,sd=1),digits=3)
-upper<-round(qnorm(prob2,mean=1,sd=1),digits=3)
-```
-
 Consider a normal distribution with mean 1 and standard deviation 1.
-
 Compute the lower and upper boundaries such that:
 
-- the area (the probability) to the left of the lower boundary is ```r prob1```. 
-- the area (the probability) to the left of the upper boundary is ```r prob2```.
+- the area (the probability) to the left of the lower boundary is 0.10. 
+- the area (the probability) to the left of the upper boundary is 0.90.
 
 #### Part 2 {#sec:FoundationsexercisesqnormPart2}
 
-```{r echo=FALSE}
-mu<-round(runif(1,min=50,max=60),digits=3)
-sigma<-round(runif(1,min=0.5,max=1.5),digits=3)
-probs<-c(.80,.85,.90,.95,.99)
-prob<-sample(probs,1)
-tailprob<-(1-prob)/2
-q1<-round(qnorm(tailprob,mean=mu,sd=sigma),digits=3)
-q2<-round(qnorm(tailprob,mean=mu,sd=sigma,lower.tail=FALSE),digits=3)
-```
-
-Given a normal distribution with mean ```r mu``` and standard deviation ```r sigma```. There exist two quantiles, the lower quantile q1 and the upper quantile q2, that are equidistant from the mean ```r mu```, such that the area under the curve of the Normal probability between q1 and q2  is ```r prob*100```%. Find q1 and q2. 
+Given a normal distribution with mean 650 and standard deviation 125. There exist two quantiles, the lower quantile q1 and the upper quantile q2, that are equidistant from the mean 650, such that the area under the curve of the Normal between q1 and q2  is 80%. Find q1 and q2. 
 
 ### Maximum likelihood estimation 1 {#sec:FoundationsexercisesMLE1}
 
-```{r echo=FALSE}
-x<-round(rnorm(1,mean=12,sd=5),3)
-mn<-seq(9,12,by=1)
-ans1<-round(dnorm(x,mean=mn[4],sd=5),3)
-ans2<-round(dnorm(x,mean=mn[3],sd=5),3)
-ans3<-round(dnorm(x,mean=mn[2],sd=5),3)
-ans4<-round(dnorm(x,mean=mn[1],sd=5),3)
-```
+The function `dnorm` gives the likelihood given a data point (or multiple data) and a value for the mean and the standard deviation (sd). Using `dnorm`, compute 
 
-
-The function ```dnorm``` gives the likelihood given a data point (or multiple data) and a value for the mean and the standard deviation (sd). Using ```dnorm```, compute 
-
-- the likelihood of the data point ```r x``` assuming a mean of ```r mn[4]``` and standard deviation 5.
-- the likelihood of the data point ```r x``` assuming a mean of ```r mn[3]``` and standard deviation 5.
-- the likelihood of the data point ```r x``` assuming a mean of ```r mn[2]``` and standard deviation 5.
-- the likelihood of the data point ```r x``` assuming a mean of ```r mn[1]``` and standard deviation 5.
+- the likelihood of the data point 420 assuming a mean of 500 and standard deviation 100.
+- the likelihood of the data point 420 assuming a mean of 420 and standard deviation 100.
+- the likelihood of the data point 420 assuming a mean of 400 and standard deviation 100.
 
 ### Maximum likelihood estimation 2 {#sec:FoundationsexercisesMLE2}
 
