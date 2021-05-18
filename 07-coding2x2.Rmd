@@ -1,9 +1,4 @@
----
-title: "08-coding2x2.Rmd"
-output: pdf_document
-editor_options: 
-  chunk_output_type: console
----
+# Contrast coding for designs with two predictor variables {#ch:coding2x2}
 
 ```{r}
 library(knitr)
@@ -17,8 +12,6 @@ library(MASS)
 library(hypr)
 library(bcogsci)
 ```
-
-# Contrast coding for designs with two predictor variables {#ch:coding2x2}
 
 Chapter\ \@ref(ch:contr) provides a basic introduction into contrast coding in situations where there is one predictor variable, i.e., one factor, which can be tested using one specified contrast matrix. Here, we will investigate how contrast coding generalizes to situations where there is more than one predictor variables. This could either be a situation where two factors are present or where one factor is paired with a continuous predictor variables, i.e., a covariate. We first discuss contrast coding for the case of two factors (for $2 \times 2$ designs; see section\ \@ref(sec:MR:ANOVA)) and then go on to investigate situations where one predictor is a factor and the other predictor is a continuous covariate (see section\ \@ref(sec:contrast:covariate)). Moreover, one problem in the analysis of interactions occurs in situations where the model is not linear, but has some non-linear link function, such as e.g., in logistic models or when assuming a log-normally distributed dependent variable. In these situations, the model makes predictions for each condition (i.e., design cell) at the latent level of the linear model. However, sometimes it is important to translate these model predictions to the level of the observations (e.g., to probabilities in a logistic regression model). We will discuss how this can be implemented in section\ \@ref(sec:interactions:NLM). Now, we first start by treating contrast coding in a factorial 2 x 2 design.
 
