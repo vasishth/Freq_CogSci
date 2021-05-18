@@ -728,6 +728,10 @@ The resulting contrast matrix is now the same as when the intercept was ignored,
 
 Contrasts provide a way to tell the linear (mixed-effects) model how to code factors into numeric covariates. That is, they provide a way to define which comparisons between which condition means or bundles of condition means should be estimated in the Bayesian model. There are a number of default contrasts, like treatment contrasts, sum contrasts, repeated contrasts, or Helmert contrasts, that are known to test specific hypotheses about the data. A much more powerful procedure is to use the generalized matrix inverse, e.g., as implemented in the `hypr` package, to derive contrasts automatically after specifying the comparisons that a contrast should estimate. 
 
+## Further reading
+
+A good discussion on contrast coding appears in Chapter 15 of @baguley2012serious.  A book-length treatment is by  @rosenthal2000contrasts. A brief discussion on contrast coding appears in @venablesripley.
+
 
 ## Exercises {#sec:Contrastsexercises}
 
