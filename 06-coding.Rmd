@@ -740,7 +740,10 @@ A good discussion on contrast coding appears in Chapter 15 of @baguley2012seriou
 
 ## Exercises {#sec:Contrastsexercises}
 
-### Contrast coding for a four-condition design {#sec:ContrastsPersian}
+```{exercise, ContrastsPersian}
+Contrast coding for a four-condition design.
+```
+
 
 Load the following data. These data are from Experiment 1 in a set of reading studies on Persian [@SafaviEtAlFrontiers2016]. This is a self-paced reading study on particle-verb constructions, with a $2\times 2$ design: distance (short, long) and predictability (predictable, unpredictable). The data are from a critical region in the sentence. All the data from the @SafaviEtAlFrontiers2016 paper are available from https://github.com/vasishth/SafaviEtAl2016.
 
@@ -775,13 +778,14 @@ Questions:
 - Now, compute each of the four conditions' means and check that the slopes from the linear model correspond to the relevant differences between means that you obtained from the data.
 
 
-
-### Helmert coding for a four-condition design {#sec:ContrastsNPIHelmert}
+```{exercise, ContrastsNPIHelmert}
+Helmert coding for a four-condition design.
+```
 
 Load the following data:
 
 ```{r}
-library(lingpsych)
+library(bcogsci)
 data("df_polarity")
 head(df_polarity)
 ```
