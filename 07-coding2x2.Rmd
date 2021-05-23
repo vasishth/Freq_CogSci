@@ -478,7 +478,10 @@ To summarize, we have seen interesting results for contrasts in the context of $
 
 ## Exercises {#sec:Contrasts2x2exercises}
 
-### ANOVA coding for a four-condition design {#sec:Contrasts2x2PersianANOVA}
+```{exercise, Contrasts2x2PersianANOVA}
+ANOVA coding for a four-condition design.
+```
+
 
 Load the following data. These data are from Experiment 1 in a set of reading studies on Persian [@SafaviEtAlFrontiers2016]; we encountered these data in the preceding chapter's exercises.
 
@@ -498,7 +501,9 @@ The four conditions are:
 
 For the data given above, define an ANOVA-style contrast coding, and compute main effects and interactions. Check with `hypr` what the hypothesis tests are with an ANOVA coding, and write down the null hypotheses. 
 
-### ANOVA and nested comparisons in a $2\times 2\times 2$ design {#sec:Contrasts2x2Dillon2013}
+```{exercise, Contrasts2x2x2Dillon2013}
+ANOVA and nested comparisons in a $2\times 2\times 2$ design.
+```
 
 Load the following data-set. This is $2\times 2\times 2$ design from @jager2020interference, with the factors Grammaticality (grammatical vs. ungrammatical), Dependency (Agreement vs.\ Reflexives), and Interference (Interference vs.\ no interference). The experiment is a replication attempt of Experiment 1 reported in @Dillon-EtAl-2013.
 
@@ -528,4 +533,19 @@ To carry out the relevant nested contrasts, define contrasts that estimate the e
 - agreement interference within ungrammatical conditions
 
 Do the estimates match expectations? Check this by computing the condition means and checking that the estimates from the models match the relevant differences between conditions or clusters of conditions.
+
+
+```{exercise, Contrasts2x2Smith2020}
+Another ANOVA comparison in a $2\times 2\times 2$ design.
+```
+
+Hypothesis testing can be a very fragile business. One situation that sometimes occurs is that a few influential data points can change the result from significant to non-significant. An example is a self-paced reading experiment (Experiment 1) by @smith2021encoding. This is a $2\times 2$ design, with a factor called N2Factor with two levels representing the number marking on the second of two nouns in the sentence, and another factor called SemFactor representing the semantic similarity of the two nouns in the sentence.   The data are from the critical region in the sentence (a verb), in milliseconds. The expectation is that when the two nouns are similar, reading times are slower at the critical region.
+
+```{r}
+library(lingpsych)
+data("df_smithE1")
+head(df_smithE1)
+```
+
+First, fit a linear mixed model using an ANOVA contrast coding, and determine whether there is a main effect of semantic similarity. Then refit the model, removing all the data points that are larger than 3000 milliseconds and reassess the main effect of semantic similarity. This should remove 9 data points out of 3441 data points. Does the significant effect of similarity disappear?
 
