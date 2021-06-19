@@ -12,7 +12,7 @@ lot: false
 lof: false
 fontsize: 12pt
 pdf_document:
-    extra_dependencies: ["gb4e"]
+    extra_dependencies: ["gb4e","tikz"]
 site: bookdown::bookdown_site
 description: "Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction"
 url: 'https\://github.com/vasishth/Freq_CogSci'
