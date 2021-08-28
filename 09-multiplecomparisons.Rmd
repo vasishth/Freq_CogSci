@@ -9,7 +9,6 @@ library(papaja)
 library(MASS)
 library(hypr)
 library(lme4)
-library(afex)
 library(lingpsych)
 library(ggplot2)
 ```
@@ -395,8 +394,8 @@ countsraw[2]/sum(countsraw)
 ```
 
 ```{r echo=FALSE}
-load("maxmodelsiglog.rda")
-load("maxmodelsigraw.rda")
+load("data/maxmodelsiglog.rda")
+load("data/maxmodelsigraw.rda")
 ```
 
 What we see below is that (a) with the log reading time model, we get an inflation of Type I error when we compare multiple hypotheses, (b) model mis-specification (using a Normal likelihood when a log-normal should have been used) will further inflate Type I error.
