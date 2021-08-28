@@ -48,7 +48,7 @@ Let's compare the traditional ANOVA with multiple regression for analyzing these
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
 # ANOVA: B_A(2) times B_B(2)
-fit_AB_aov<-aov_car(DV ~ A*B + Error(id), data=df_contrasts4)
+fit_AB_aov<-afex::aov_car(DV ~ A*B + Error(id), data=df_contrasts4)
 
 # MR: B_A(2) times B_B(2)
 fit_AB_mr <- lm(DV ~ 1 + A*B, data=df_contrasts4)
