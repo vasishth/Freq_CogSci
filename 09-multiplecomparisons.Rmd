@@ -86,8 +86,8 @@ simdat<-gen_sim_lnorm2(nitem=16,
 ## fit model to sim data:
 m<-lmer(log(rt)~so+(1|subj)+(1|item),simdat,
         control=lmerControl(calc.derivs=FALSE))
-## extract the t-value
-significant[i]<-ifelse(abs(summary(m)$coefficients[2,4])>2,1,0)
+## record whether t-value is significant:
+significant[i]<-ifelse(abs(summary(m)$coefficients[2,3])>2,1,0)
 }
 
 ## Type I error is quite high:
@@ -115,8 +115,8 @@ simdat<-gen_sim_lnorm2(nitem=16,
 ## fit model to sim data:
 m<-lmer(log(rt)~so+(1+so|subj)+(1+so|item),simdat,
         control=lmerControl(calc.derivs=FALSE))
-## extract the t-value
-significant[i]<-ifelse(abs(summary(m)$coefficients[2,4])
+## is the t-value significant?
+significant[i]<-ifelse(abs(summary(m)$coefficients[2,3])
                        >2,1,0)
 }
 
@@ -155,9 +155,9 @@ mraw<-lmer(rt~so+(1+so|subj)+(1+so|item),simdat,
         control=lmerControl(calc.derivs=FALSE))
 
 ## is the effect significant?
-significantlog[i]<-ifelse(abs(summary(mlog)$coefficients[2,4])
+significantlog[i]<-ifelse(abs(summary(mlog)$coefficients[2,3])
                        >2,1,0)
-significantraw[i]<-ifelse(abs(summary(mraw)$coefficients[2,4])
+significantraw[i]<-ifelse(abs(summary(mraw)$coefficients[2,3])
                        >2,1,0)
 
 #store estimates:
@@ -314,7 +314,7 @@ for(i in 1:nsim){
       failedlog[i]<-1
     } else{
   ## first slope:
-  if(abs(summary(m_fakelog)$coefficients[2,4])>2){
+  if(abs(summary(m_fakelog)$coefficients[2,3])>2){
     significantlog[i,1]<-1
   } else {significantlog[i,1]<-0}
   ## second slope:
@@ -349,7 +349,7 @@ for(i in 1:nsim){
       failedraw[i]<-1
     } else{
   ## first slope:
-  if(abs(summary(m_fakeraw)$coefficients[2,4])>2){
+  if(abs(summary(m_fakeraw)$coefficients[2,3])>2){
     significantraw[i,1]<-1
   } else {significantraw[i,1]<-0}
   ## second slope:
