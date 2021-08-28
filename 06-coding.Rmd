@@ -285,10 +285,10 @@ Consider an example with the three word classes nouns, verbs, and adjectives. We
 #source("functions/mixedDesign.v0.6.3.R")
 
 #M <- matrix(c(500, 450, 400), 
-            nrow=3, ncol=1, byrow=FALSE)
+#            nrow=3, ncol=1, byrow=FALSE)
 #set.seed(1)
 #simdat2 <- mixedDesign(B=3, W=NULL, 
-                       n=4, M=M,  SD=20, long = TRUE) 
+#                       n=4, M=M,  SD=20, long = TRUE) 
 
 data("df_contrasts2")
 head(df_contrasts2)
