@@ -16,7 +16,7 @@ pdf_document:
 site: bookdown::bookdown_site
 description: "Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction"
 url: 'https\://github.com/vasishth/Freq_CogSci'
-github-repo: rstudio/bookdown
+github-repo: https\://github.com/vasishth/Freq_CogSci
 cover-image: images/temporarycover.jpg
 output:
   bookdown::gitbook:
