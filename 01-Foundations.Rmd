@@ -430,6 +430,7 @@ Starting with the discrete case, consider the discrete bivariate distribution sh
 Figure \@ref(fig:bivardiscrete) shows the *joint probability mass function* of two random variables X and Y. The random variable X consists of 7 possible values (this is the 1-7 Likert response scale), and the random variable Y is response accuracy, with 0 representing incorrect responses, and 1 representing correct responses. 
 
 ```{r bivardiscrete,message="FALSE",warning=FALSE,results="asis",fig.cap="Example of a discrete bivariate distribution. In these data, in every trial, two pieces of information were collected: Likert responses and yes-no question responses. The random variable X represents Likert scale responses on a scale of 1-7. and the random variable Y represents 0, 1 (incorrect, correct) responses to comprehension questions."}
+library(bivariate)
 library(lingpsych)
 data("df_discreteagrmt")
 rating0<-table(subset(df_discreteagrmt,accuracy==0)$rating)
@@ -443,7 +444,7 @@ colnames(ratingsbivar)<-c(0,1)
 library (MASS)
 
 ## function from bivariate package:
-f <- cbvpmf (ratingsbivar)
+f <- bivariate::gbvpmf (as.matrix(ratingsbivar))
 plot (f, TRUE,
        arrows=FALSE)
 ```
@@ -620,7 +621,7 @@ plot (f1, all=TRUE, n=20,
       main="No correlation")
 ```
 
-```{r poscor,echo=FALSE,fig.cap="A bivariate Normal distribution with a positive  correlation of 0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
+```{r poscor,echo=FALSE,fig.cap="A bivariate Normal distribution with a negative  correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
 f3 <- nbvpdf (0, 0, 1, 1, -0.6)
 #f1 %$% matrix.variances
 plot (f3, all=TRUE, n=20,
@@ -628,7 +629,7 @@ plot (f3, all=TRUE, n=20,
 ```
 
 
-```{r negcor,echo=FALSE,fig.cap="A bivariate Normal distribution with a negative  correlation of -0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
+```{r negcor,echo=FALSE,fig.cap="A bivariate Normal distribution with a positive correlation of 0.6. Shown are four plots: the top-right plot shows the three-dimensional bivariate density, the top-left plot the contour plot of the distribution (seen from above). The lower plots show the cumulative distribution function from two views, as a three-dimensional plot and as a contour plot."}
 f2 <- nbvpdf (0, 0, 1, 1, 0.6)
 #f1 %$% matrix.variances
 plot (f2, all=TRUE, n=20,
@@ -875,7 +876,7 @@ For example, if we say that $Y \sim Binomial(n,\theta)$, then we are asserting t
 If we say that $Y\sim Normal(\mu,\sigma)$, we are asserting that the PDF is
 
 \begin{equation}
-Normal(y|\mu,\sigma)= \frac{1}{\sqrt{2\pi \sigma^2}} \exp \left(-\frac{y-\mu)^2}{2\sigma^2} \right)
+Normal(y|\mu,\sigma)= \frac{1}{\sqrt{2\pi \sigma^2}} \exp \left(-\frac{(y-\mu)^2}{2\sigma^2} \right)
 \end{equation}
 
 The **cumulative distribution function** or CDF is defined as follows: 
@@ -1028,10 +1029,10 @@ x
 
 The function ```dnorm``` gives the likelihood given  multiple data points and a value for the mean and the standard deviation. The log-likelihood can be computed by typing ```dnorm(...,log=TRUE)```.
 
-The product of the likelihoods for two independent data points can be computed like this: Suppose we have two independent and identically distributed data points 5 and 10. Then, assuming that the Normal distribution they come from has mean 10 and standard deviation 2, the joint likelihood of these is:
+The product of the likelihoods for two independent data points can be computed like this: Suppose we have two independent and identically distributed data points 5 and 10. Then, assuming that the Normal distribution they come from has mean 10 and standard deviation 5, the joint likelihood of these is:
 
 ```{r}
-dnorm(5,mean=10,sd=2)*dnorm(10,mean=10,sd=2)
+dnorm(5,mean=10,sd=2)*dnorm(10,mean=10,sd=5)
 ```
 
 It is easier to do this on the log scale, because then one can add instead of multiplying. This is because $\log(x\times y)= \log(x) + \log(y)$.  For example:
@@ -1044,18 +1045,19 @@ log(2) + log(3)
 So the joint log likelihood of the two data points is:
 
 ```{r}
-dnorm(5,mean=10,sd=2,log=TRUE)+dnorm(10,mean=10,sd=2,log=TRUE)
+dnorm(5,mean=10,sd=5,log=TRUE)+
+  dnorm(10,mean=10,sd=5,log=TRUE)
 ```
 
 Even more compactly:
 
 ```{r}
-sum(dnorm(c(5,10),mean=10,sd=2,log=TRUE))
+sum(dnorm(c(5,10),mean=10,sd=5,log=TRUE))
 ```
 
 - Given the 10 data points above, calculate the maximum likelihood estimate (MLE) of the expectation.
 - The sum of the log-likelihoods of the data x, using as the mean the MLE from the sample, and standard deviation 5.
-- What is the sum of the log-likelihood if the mean used to compute the log-likelihood is ```r mn-2```? 
+- What is the sum of the log-likelihood if the mean used to compute the log-likelihood is ```r mn-2``` (assume a standard deviation of 5)? 
 - Which value for the mean, the MLE or ```r mn-2```, gives the higher log-likelihood? 
 
 
