@@ -14,7 +14,7 @@ One claim in the literature is that, due to their simpler structure, active sent
 
 Technically, we are supposed to randomly choose participants; in practice, this randomization rarely happens. Instead we take whatever participants we get,  such as university students who happen to apply to participate in an experiment! So, random sampling is an assumption in all the discussions in this chapter, but in practice this assumption may or may not be perfectly met.
 
-One design decision that the researcher must take is whether to collect only one response from each participant in each condition, or whether we collect multiple measures from each participant. If we collect only one data point from each participant, we will say that the data points are *independent* of each other. When we collect multiple measurements from each participant, we will say that we have *dependent* data; such multiple measurements are also called *repeated measures*. With repeated measures, there will be some correlation between the data-points because the multiple measurements from a common source.
+One design decision that the researcher must take is whether to collect only one response from each participant in each condition, or whether we collect multiple measures from each participant. If we collect only one data point from each participant, we will say that the data points are *independent* of each other. When we collect multiple measurements from each participant, we will say that we have *dependent* data; such multiple measurements are also called *repeated measures*. With repeated measures, there will be some correlation between the data-points because there are  multiple measurements from a common source.
 
 In psycholinguistics, repeated measures experiments are the norm. Furthermore, it is common to use a so-called *Latin Square* design. To understand this design, suppose we want to conduct an experiment with two conditions, a and b, and that we want each participant to see each condition multiple times (repeated measurements). The way such an experiment (with two conditions) is set up with a Latin Square design is that we would create multiple pairs of items, e.g., items 1a, 1b, 2a, 2b, etc. For example, we are investigating active vs. passive sentences, item 1a could be the active clause *The man threw the ball*, and 1b would thene the passive counterpart *The ball was thrown by the man*. The two versions of the item are therefore minimal pairs---minimally different in that the sentence has the same words, but one is an active clause and the other a passive clause.
 
@@ -75,15 +75,15 @@ abline(v=500,lwd=2)
 Suppose now that you had not a single sample of size 1000 but many repeated samples. This isn't something one can normally do in real life; we often run a single experiment or, at most, repeat the same experiment once. However, one can simulate repeated sampling easily within R. Let us take 100 repeated samples like the one above, and save the samples in a matrix containing n=1000 rows and 100 columns, each column representing an experiment:
 
 ```{r}
-mu<-500
-sigma<-100
+mu <- 500
+sigma <- 100
 ## number of experiments:
-k<-100
+k <- 100
 ## store for data:
-y_matrix<-matrix(rep(NA,n*k),ncol=k)
-for(i in 1:k){
+y_matrix <- matrix(rep(NA, n * k), ncol = k)
+for (i in 1:k) {
   ## expt result with sample size n:
-  y_matrix[,i]<-rnorm(n,mean=mu,sd=sigma)
+  y_matrix[, i] <- rnorm(n, mean = mu, sd = sigma)
 }
 ```
 
@@ -91,9 +91,10 @@ Now, if we compute the means $\bar{y}_k$ of *each* of the $k=1,\dots,100$ experi
 
 ```{r}
 ## compute means from each replication:
-y_means<-colMeans(y_matrix)
+y_means <- colMeans(y_matrix)
 ## the mean and sd (=standard error) of the means
-mean(y_means);sd(y_means)
+mean(y_means)
+sd(y_means)
 ```
 
 ```{r sdsmnormal,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "Sampling from a normal distribution (left); and the sampling distribution of the means under repeated sampling (right). The right-hand plot shows an overlaid normal distribution, and the standard deviation (standard error) as error bars.", tidy = FALSE}
@@ -287,7 +288,7 @@ lines(seq(.9,1.1,by=0.01),
       dnorm(seq(.9,1.1,by=0.01),mean(y_means),sd(y_means)))
 ```
 
-As the Figure \@(fig:sdsmcauchy) illustrates, when the mean and variance for the likelihood are undefined, the central limit theorem doesn't hold. In the rest of this book, we will always assume that the data are coming from a distribution that has a mean and variance defined for it.
+As the Figure \@ref(fig:sdsmcauchy) illustrates, when the mean and variance for the likelihood are undefined, the central limit theorem doesn't hold. In the rest of this book, we will always assume that the data are coming from a distribution that has a mean and variance defined for it.
 
 ## The confidence interval, and what it's good for
 
@@ -303,22 +304,22 @@ the upper and lower bounds of the interval defined by the interval $\bar{y} \pm 
 This interval is usually computed after estimating the sample mean and  standard error from a data-set, and is called the *confidence interval* (CI). It has the following meaning: If you take samples repeatedly and compute the CI each time, 95\% of those CIs will contain the true population mean $\mu$. To understand this point, one can simulate this situation. This time we will do 1000 repeated experiments instead of 100. 
 
 ```{r}
-mu<-500
-sigma<-100
-n<-1000
-nsim<-1000
-lower<-rep(NA,nsim)
-upper<-rep(NA,nsim)
-for(i in 1:nsim){
-  y<-rnorm(n,mean=mu,sd=sigma)
-  lower[i]<-mean(y) - 2 * sd(y)/sqrt(n)
-  upper[i]<-mean(y) + 2 * sd(y)/sqrt(n)
+mu <- 500
+sigma <- 100
+n <- 1000
+nsim <- 1000
+lower <- rep(NA, nsim)
+upper <- rep(NA, nsim)
+for (i in 1:nsim) {
+  y <- rnorm(n, mean = mu, sd = sigma)
+  lower[i] <- mean(y) - 2 * sd(y) / sqrt(n)
+  upper[i] <- mean(y) + 2 * sd(y) / sqrt(n)
 }
 
 ## check how many CIs contain mu:
-CIs<-ifelse(lower<mu & upper>mu,1,0)
+CIs <- ifelse(lower < mu & upper > mu, 1, 0)
 ## approx. 95% of the CIs contain true mean:
-round(mean(CIs),2)
+round(mean(CIs), 2)
 ```
 
 Figure \@ref(fig:ciplot) visualizes the coverage properties of the confidence interval in 100 simulations; by coverage we mean here the proportion of cases where the true $\mu$ is contained in the CI.
@@ -403,14 +404,14 @@ It is important to realize here that the above sampling distribution is only as 
 Assume as before that we take an independent random sample of size $1000$ from a random variable $Y$ that is normally distributed, with mean 500 and standard deviation 100. As usual, begin by estimating the mean and SE:
 
 ```{r}
-n<-1000
-mu<-500
-sigma<-100
+n <- 1000
+mu <- 500
+sigma <- 100
 ## generate simulated data:
-y <- rnorm(n,mean=500,sd=100)
+y <- rnorm(n, mean = 500, sd = 100)
 ## compute summary statistics:
-y_bar<-mean(y)
-SE<-sd(y)/sqrt(n)
+y_bar <- mean(y)
+SE <- sd(y) / sqrt(n)
 ```
 
 The null hypothesis significance testing (NHST) approach as practised in psychology and other areas is to set up a null hypothesis that $\mu$ has some fixed value. Just as an  example, assume that our null hypothesis is:
@@ -423,12 +424,14 @@ This amounts to assuming that the true sampling distribution of sample means is 
 
 
 ```{r echo=FALSE}
-x<-seq(350,650,by=0.1)
-plot(x,dnorm(x,mean=450,sd=SE),type="l",
-     main="The sampling distribution with mu=450",
-     ylab="density")
-points(y_bar,0,col="red",pch=20)
-text(x=y_bar,y=0.01,label="sample \n mean",col="red")
+x <- seq(350, 650, by = 0.1)
+plot(x, dnorm(x, mean = 450, sd = SE),
+  type = "l",
+  main = "The sampling distribution with mu=450",
+  ylab = "density"
+)
+points(y_bar, 0, col = "red", pch = 20)
+text(x = y_bar, y = 0.01, label = "sample \n mean", col = "red")
 ```
 
 The intuitive idea here is that 
@@ -470,18 +473,20 @@ For large $n$, the pdf of the random variable $T$ approaches $N(0,1)$. This is i
 
 
 ```{r tnormal,echo=FALSE,fig.cap="A visual comparison of the t-distribution (with degrees of freedom ranging from 1 to 50) with the standard normal distribution (N(0,1)). The dashed line represents the t-distribution, and the solid line the normal distribution."}
-range <- seq(-4,4,.01)  
+range <- seq(-4, 4, .01)
 
-op<-par(mfrow=c(2,3),mar=c(2,2,3,2),pty="s")
+op <- par(mfrow = c(2, 3), mar = c(2, 2, 3, 2), pty = "s")
 
 
- for(i in c(1,2,5,15,20,50)){
-   plot(range,dnorm(range),type="l",lty=1,
-        xlab="",ylab="",
-        cex.axis=1,cex.axis=0.8)
-   lines(range,dt(range,df=i),lty=2,lwd=1)
-   mtext(paste("df=",i),cex=1.2)
- }
+for (i in c(1, 2, 5, 15, 20, 50)) {
+  plot(range, dnorm(range),
+    type = "l", lty = 1,
+    xlab = "", ylab = "",
+    cex.axis = 1, cex.axis = 0.8
+  )
+  lines(range, dt(range, df = i), lty = 2, lwd = 1)
+  mtext(paste("df=", i), cex = 1.2)
+}
 ```
 
 Thus, given a sample size $n$, we can define a t-distribution corresponding to the null hypothesis distribution. For large values of $n$, we could even use $N(0,1)$, although it is traditional in psychology and linguistics to always use the t-distribution no matter how large $n$ is.
@@ -503,30 +508,33 @@ What constitutes a large or small observed t-value?
 Intuitively, the t-value from the sample is large when we end up far in *either* tail of the distribution. The two tails of the t-distribution will be referred to as the *rejection region*. The word *region* here refers to the real number line along the x-axis, under the tails of the distribution. The rejection region will go off to infinity on the outer sides, and is demarcated by a vertical line on the inner side of each tail. This is shown in Figure \@ref(fig:tails). It goes off to infinity because the support---the range of possible values---of the random variable that the t-distribution belongs to stretches from minus infinity to plus infinity. 
 
 ```{r tails,echo=FALSE,fig.cap="The rejection region in a t-distribution. The rejection region is the x-axis under the gray-colored area."}
-x<-seq(-5,5,by=0.1)
-plot(x,dt(x,df=n),type="l",main="t(n-1)",
-     ylab="density")
+x <- seq(-5, 5, by = 0.1)
+plot(x, dt(x, df = n),
+  type = "l", main = "t(n-1)",
+  ylab = "density"
+)
 
-lower<-qt(0.025,df=n)
-upper<-qt(0.975,df=n)
-abline(v=lower)
-abline(v=upper)
+lower <- qt(0.025, df = n)
+upper <- qt(0.975, df = n)
+abline(v = lower)
+abline(v = upper)
 
-x1 <- seq(upper,20,0.001)
-y1 <- dt(x1,df=n)
-polygon(c(x1, rev(x1)), 
-        c(rep(0, length(x1)), rev(y1)), 
-        col = gray(0.8))
+x1 <- seq(upper, 20, 0.001)
+y1 <- dt(x1, df = n)
+polygon(c(x1, rev(x1)),
+  c(rep(0, length(x1)), rev(y1)),
+  col = gray(0.8)
+)
 
-x1 <- seq(-20,lower,0.001)
-y1 <- dt(x1,df=n)
-polygon(c(x1, rev(x1)), 
-        c(rep(0, length(x1)), rev(y1)), 
-        col = gray(0.8))
+x1 <- seq(-20, lower, 0.001)
+y1 <- dt(x1, df = n)
+polygon(c(x1, rev(x1)),
+  c(rep(0, length(x1)), rev(y1)),
+  col = gray(0.8)
+)
 
-points(2.4,0,col="black",pch=20)
-text(x=2.4,y=0.01,label="sample mean",col="black")
-
+points(2.4, 0, col = "black", pch = 20)
+text(x = 2.4, y = 0.01, label = "sample mean", col = "black")
 ```
 
 The location of the vertical lines is determined by the so-called *critical t-value* along the x-axis of the t-distribution.  This is the value such that the area under the curve in the tails to the left or right of the tails is 0.025. As discussed in chapter 1, this area under the curve represents the probability of observing a value as extreme as the critical t-value, or some value that is more extreme. Notice that if we ask ourselves what the probability is of observing some particular t-value (a point value), the answer must necessarily be $0$ (if you are unclear about why, re-read chapter 1). But we can ask the question: what is the absolute t-value, written $|t|$, such that $P(T>|t|)=0.025$?  That's the critical t-value. We call it the critical t-value because it demarcates the rejection region shown in Figure \@ref(fig:tails): we are adopting the convention that any observed t-value larger than this critical t-value allows us to reject the null hypothesis.
@@ -536,15 +544,15 @@ For a given sample size $n$, we can identify the rejection region by using the `
 Because the shape of the t-distribution depends on the degrees of freedom (n-1), the critical t-value beyond which we reject the null hypothesis will change depending on sample size. For large sample sizes, say $n>50$, the rejection point is about 2.
 
 ```{r}
-abs(qt(0.025,df=15))
-abs(qt(0.025,df=50))
+abs(qt(0.025, df = 15))
+abs(qt(0.025, df = 50))
 ```
 Consider the observed t-value from our sample in our running example:
 
 ```{r}
 ## null hypothesis mean:
-mu<-450
-(t_value<-(y_bar-mu)/SE)
+mu <- 450
+(t_value <- (y_bar - mu) / SE)
 ```
 
 This observed t-value is huge and is  telling you the distance of the sample mean from the null hypothesis mean $\mu$ in standard error units.
@@ -558,14 +566,14 @@ For large sample sizes, if the absolute t-value $|t|$ is greater than  $2$, we w
 For a smaller sample size $n$, you can compute the exact critical t-value:
 
 ```{r}
-qt(0.025,df=n-1)
+qt(0.025, df = n - 1)
 ```
 
 Why is this critical t-value negative in sign? That is because it is on the left-hand side of the t-distribution, which is symmetric.
 The corresponding value on the right-hand side is:
 
 ```{r}
-qt(0.975,df=n-1)
+qt(0.975, df = n - 1)
 ```
 
 These values are of course identical if we ignore the sign. This is why we always frame our discussion around the absolute t-value.
@@ -574,7 +582,7 @@ In R, the  built-in function `t.test` delivers the observed t-value. Given our r
 
 ```{r}
 ## observed t-value from t-test function:
-t.test(y,mu=450)$statistic
+t.test(y, mu = 450)$statistic
 ```
 
 The default value for the null hypothesis mean $\mu$ in this function is 0; so if one doesn't define a null hypothesis mean, the statistical test is done with  reference to a null hypothesis that $\mu=0$. That is why this t-value does not match our calculation above: 
@@ -592,15 +600,18 @@ Recall that behind the t-test lies the  assumption  that the observed t-value  i
 A quick simulation of t-values under repeated sampling makes this clear. Suppose that our null hypothesis mean is 450, and our sample size  $n=1000$. Assume that the data come from $Normal(\mu=450,\sigma=100)$. Let's do 10000 simulations, compute the sample mean each time, and then store the observed t-value. The t-distribution that results is shown in Figure \@ref(fig:simt).
 
 ```{r simt,fig.cap="The distribution of t-values under repeated sampling."}
-n<-1000
-nsim<-10000
-tvals<-rep(NA,nsim)
-for(i in 1:nsim){
-y<-rnorm(n,mean=450,sd=100)
-SE<-sd(y)/sqrt(n)
-tvals[i]<-(mean(y)-450)/SE
+n <- 1000
+nsim <- 10000
+tvals <- rep(NA, nsim)
+for (i in 1:nsim) {
+  y <- rnorm(n, mean = 450, sd = 100)
+  SE <- sd(y) / sqrt(n)
+  tvals[i] <- (mean(y) - 450) / SE
 }
-plot(density(tvals),main="Simulated t-distribution",xlab="t-values under repeated sampling")
+plot(density(tvals),
+  main = "Simulated t-distribution",
+  xlab = "t-values under repeated sampling"
+)
 ```
 
 This implicit idea of the experiment's repeatability leads to an important aspect of the t-test: the proportion of times we would reject the null hypothesis under repeated sampling, given that the null is in fact true or false. In other words, we will now study the t-test's ability (at least in theory) to lead the researchers to the correct decision under (hypothetical) repeated sampling. We turn to this issue next.
@@ -638,7 +649,7 @@ As the table shows, we can make two kinds of mistakes:
 In psychology and related areas, Type I error is usually fixed a priori at 0.05. This stipulated Type I error value is why the absolute critical t-value is kept at approximately $2$; if, following recommendations  from @benjamin2018redefine, we were to stipulate that the Type I  error be 0.005, then the critical t-value would have had to be set at:
 
 ```{r}
-abs(qt(0.0025,df=n-1))
+abs(qt(0.0025, df = n - 1))
 ```
 
 This suggested change in convention hasn't been taken up yet in cognitive science, but this could well change one day.
@@ -651,65 +662,67 @@ Consider the concrete situation where, in reality, the true value of $\mu$ is $2
 
 ```{r type12,echo=FALSE,fig.cap="A visualization of Type I  and II error. The dark-shaded tails of the left-hand side distribution represent Type I error; and  the light-colored shaded region of the right-hand side distribution represents Type II error. Power is the unshaded area under the curve in  the right-hand side distribution."}
 ## function for plotting the area under the curve:
-plot.prob<-function(x,
-                           x.min,
-                           x.max,
-                           prob,
-                           mean,
-                           sd,
-                           gray.level,main){
+plot.prob <- function(x,
+                      x.min,
+                      x.max,
+                      prob,
+                      mean,
+                      sd,
+                      gray.level, main) {
+  plot(x, dnorm(x, mean, sd),
+    type = "l", xlab = "",
+    ylab = "", main = main
+  )
+  abline(h = 0)
 
-        plot(x,dnorm(x,mean,sd), 
-                     type = "l",xlab="",
-             ylab="",main=main)
-        abline(h = 0)
+  ## shade X<x
+  x1 <- seq(x.min, qnorm(prob), abs(prob) / 5)
+  y1 <- dnorm(x1, mean, sd)
 
-## shade X<x    
-    x1 = seq(x.min, qnorm(prob), abs(prob)/5)
-    y1 = dnorm(x1, mean, sd)
-
-    polygon(c(x1, rev(x1)), 
-            c(rep(0, length(x1)), rev(y1)), 
-            col = gray.level)
-  }
-
-shadenormal<- 
-function (prob=0.5,
-          gray1=gray(0.3),
-          x.min=-6,
-          x.max=abs(x.min),
-          x = seq(x.min, x.max, 0.01),
-          mean=0,
-          sd=1,main="P(X<0)") 
-{
-
-plot.prob(x=x,x.min=x.min,x.max=x.max,
-               prob=prob,
-                      mean=mean,sd=sd,
-     gray.level=gray1,main=main)     
+  polygon(c(x1, rev(x1)),
+    c(rep(0, length(x1)), rev(y1)),
+    col = gray.level
+  )
 }
 
-shadenormal(prob=0.025,main="Type I, II error")
+shadenormal <-
+  function(prob = 0.5,
+           gray1 = gray(0.3),
+           x.min = -6,
+           x.max = abs(x.min),
+           x = seq(x.min, x.max, 0.01),
+           mean = 0,
+           sd = 1, main = "P(X<0)") {
+    plot.prob(
+      x = x, x.min = x.min, x.max = x.max,
+      prob = prob,
+      mean = mean, sd = sd,
+      gray.level = gray1, main = main
+    )
+  }
 
-x1 <- seq(qnorm(0.975),6,abs(0.975)/5)
+shadenormal(prob = 0.025, main = "Type I, II error")
+
+x1 <- seq(qnorm(0.975), 6, abs(0.975) / 5)
 y1 <- dnorm(x1)
 
-polygon(c(x1, rev(x1)), 
-        c(rep(0, length(x1)), rev(y1)), 
-        col = gray(0.3))
+polygon(c(x1, rev(x1)),
+  c(rep(0, length(x1)), rev(y1)),
+  col = gray(0.3)
+)
 
-x<-seq(-6,6,by=0.1)
-lines(x,dnorm(x,mean=2),col="black",lwd=2)
-abline(v=2)
-abline(v=-2)
+x <- seq(-6, 6, by = 0.1)
+lines(x, dnorm(x, mean = 2), col = "black", lwd = 2)
+abline(v = 2)
+abline(v = -2)
 
-x1 <- seq(-2,2,0.01)
-y1 <- dnorm(x1,mean=2)
+x1 <- seq(-2, 2, 0.01)
+y1 <- dnorm(x1, mean = 2)
 
-polygon(c(x1, rev(x1)), 
-        c(rep(0, length(x1)), rev(y1)), 
-        col = gray(0.8))
-
+polygon(c(x1, rev(x1)),
+  c(rep(0, length(x1)), rev(y1)),
+  col = gray(0.8)
+)
 ```
 
 To understand Figure \@ref(fig:type12), one has to consider two distributions side by side. First, consider the null hypothesis distribution, centered at 0. Under the null hypothesis distribution, the rejection region lies below the dark colored tails of the distributions. The area under the curve in these dark-colored tails is the Type I error (conventionally set at 0.05) that we decide on before we even conduct the experiment and collect the data. Because the Type I error is set at 0.05, and because the t-distribution is symmetric, the area under the curve in each tail is 0.025. The absolute critical t-value helps us demarcate the inner boundaries of the rejection regions through the vertical lines shown in the figure. These vertical lines play a crucial role in helping us understand Type II error and power. This becomes clear when we consider the distribution representing the alternative possible value of $\mu$, the distribution centered around 2. In this second distribution,  consider now the area under the curve  between the vertical lines demarcating the rejection region  under the  null. This area under the curve is the probability of accepting the null hypothesis when  the null hypothesis is false with some specific value (here, when $\mu$ has value 2). 
@@ -723,66 +736,68 @@ Some interesting observations follow. Suppose that the true effect is in fact $\
 
 ```{r highpower,echo=FALSE,fig.cap="The change in Type II error if the true effect has mean 4."}
 ## function for plotting the area under the curve:
-plot.prob<-function(x,
-                           x.min,
-                           x.max,
-                           prob,
-                           mean,
-                           sd,
-                           gray.level,main){
+plot.prob <- function(x,
+                      x.min,
+                      x.max,
+                      prob,
+                      mean,
+                      sd,
+                      gray.level, main) {
+  plot(x, dnorm(x, mean, sd),
+    type = "l", xlab = "",
+    ylab = "", main = main
+  )
+  abline(h = 0)
 
-        plot(x,dnorm(x,mean,sd), 
-                     type = "l",xlab="",
-             ylab="",main=main)
-        abline(h = 0)
+  ## shade X<x
+  x1 <- seq(x.min, qnorm(prob), abs(prob) / 5)
+  y1 <- dnorm(x1, mean, sd)
 
-## shade X<x    
-    x1 = seq(x.min, qnorm(prob), abs(prob)/5)
-    y1 = dnorm(x1, mean, sd)
-
-    polygon(c(x1, rev(x1)), 
-            c(rep(0, length(x1)), rev(y1)), 
-            col = gray.level)
-  }
-
-shadenormal<- 
-function (prob=0.5,
-          gray1=gray(0.3),
-          x.min=-6,
-          x.max=abs(x.min),
-          x = seq(x.min, x.max, 0.01),
-          mean=0,
-          sd=1,main="P(X<0)") 
-{
-
-plot.prob(x=x,x.min=x.min,x.max=x.max,
-               prob=prob,
-                      mean=mean,sd=sd,
-     gray.level=gray1,main=main)     
+  polygon(c(x1, rev(x1)),
+    c(rep(0, length(x1)), rev(y1)),
+    col = gray.level
+  )
 }
 
-shadenormal(prob=0.025,main="Type I, II error")
+shadenormal <-
+  function(prob = 0.5,
+           gray1 = gray(0.3),
+           x.min = -6,
+           x.max = abs(x.min),
+           x = seq(x.min, x.max, 0.01),
+           mean = 0,
+           sd = 1, main = "P(X<0)") {
+    plot.prob(
+      x = x, x.min = x.min, x.max = x.max,
+      prob = prob,
+      mean = mean, sd = sd,
+      gray.level = gray1, main = main
+    )
+  }
 
-x1 <- seq(qnorm(0.975),6,abs(0.975)/5)
+shadenormal(prob = 0.025, main = "Type I, II error")
+
+x1 <- seq(qnorm(0.975), 6, abs(0.975) / 5)
 y1 <- dnorm(x1)
 
-polygon(c(x1, rev(x1)), 
-        c(rep(0, length(x1)), rev(y1)), 
-        col = gray(0.3))
+polygon(c(x1, rev(x1)),
+  c(rep(0, length(x1)), rev(y1)),
+  col = gray(0.3)
+)
 
-x<-seq(-6,6,by=0.1)
-lines(x,dnorm(x,mean=4),col="black",lwd=2)
-abline(v=4)
-abline(v=2)
-abline(v=-2)
+x <- seq(-6, 6, by = 0.1)
+lines(x, dnorm(x, mean = 4), col = "black", lwd = 2)
+abline(v = 4)
+abline(v = 2)
+abline(v = -2)
 
-x1 <- seq(-2,2,0.01)
-y1 <- dnorm(x1,mean=4)
+x1 <- seq(-2, 2, 0.01)
+y1 <- dnorm(x1, mean = 4)
 
-polygon(c(x1, rev(x1)), 
-        c(rep(0, length(x1)), rev(y1)), 
-        col = gray(0.8))
-
+polygon(c(x1, rev(x1)),
+  c(rep(0, length(x1)), rev(y1)),
+  col = gray(0.8)
+)
 ```
 
 In summary, when we plan out an experiment, we are also required to specify the Type I and II error associated with the design. Both sources of error are within our control, at least to some extent.  The Type I error we decide to use will determine our critical t-value  and therefore our decision criterion for rejecting, failing to reject, or even (under certain conditions, to be discussed below) accepting the null hypothesis.  
@@ -807,21 +822,23 @@ There are two ways that one can compute power in connection with the t-test: eit
 Suppose that we have an expectation that an effect size is 15 ms $\pm 5$ ms (this could be based on the predictions of a theoretical model, or prior data); suppose also that prior experiments show standard deviations ranging from 100 to 300 ms. This is enough information to compute a power curve as a function of effect size and standard deviation. See Figure \@ref(fig:powercurve) and the associated code below.
 
 ```{r powercurve,fig.cap="An illustration of a power curve for 10 participants, as a function of standard deviation, and three estimates of the effect: 15, 10, and 20."}
-sds<-seq(100,300,by=1)
-lower<-power.t.test(delta=15-5,sd=sds,n=10,strict =TRUE)$power
-upper<-power.t.test(delta=15+5,sd=sds,n=10,strict =TRUE)$power
-meanval<-power.t.test(delta=15,sd=sds,n=10,strict =TRUE)$power
+sds <- seq(100, 300, by = 1)
+lower <- power.t.test(delta = 15 - 5, sd = sds, n = 10, strict = TRUE)$power
+upper <- power.t.test(delta = 15 + 5, sd = sds, n = 10, strict = TRUE)$power
+meanval <- power.t.test(delta = 15, sd = sds, n = 10, strict = TRUE)$power
 
-plot(sds,meanval,type="l",
-     main="Power curve (n=10)\n 
+plot(sds, meanval,
+  type = "l",
+  main = "Power curve (n=10)\n
      using power.t.test",
-     xlab="standard deviation",
-     ylab="power")
-lines(sds,lower,lty=2)
-lines(sds,upper,lty=2)
-text(125,0.053,"10")
-text(150,0.054,"15")
-text(175,0.056,"20")
+  xlab = "standard deviation",
+  ylab = "power"
+)
+lines(sds, lower, lty = 2)
+lines(sds, upper, lty = 2)
+text(125, 0.053, "10")
+text(150, 0.054, "15")
+text(175, 0.056, "20")
 ```
 
 #### Power calculations using simulation
@@ -830,14 +847,13 @@ An analogous calculation as the one shown above using the  `power.t.test` functi
 First, generate simulated data repeatedly for each possible combination of parameter values (here, effect size and standard deviation), and compute the proportion of significant effects for each parameter combination. This can be done by defining a function that takes as input the number of simulations, sample size, effect size, and standard deviation:
 
 ```{r}
-compute_power<-function(nsim=1000,n=10,
-                        effect = NULL,
-                        stddev=NULL
-                        ){
-  temp_power<-rep(NA,nsim)
-  for(i in 1:nsim){
-   y<-rnorm(n,mean=effect,sd=stddev)
-   temp_power[i]<-ifelse(abs(t.test(y)$statistic)>2,1,0)
+compute_power <- function(nsim = 1000, n = 10,
+                          effect = NULL,
+                          stddev = NULL) {
+  temp_power <- rep(NA, nsim)
+  for (i in 1:nsim) {
+    y <- rnorm(n, mean = effect, sd = stddev)
+    temp_power[i] <- ifelse(abs(t.test(y)$statistic) > 2, 1, 0)
   }
   ## return power calculation:
   mean(temp_power)
@@ -848,35 +864,43 @@ compute_power<-function(nsim=1000,n=10,
 Then, plot the power curves as a function of effect size and standard deviation, exactly as in Figure \@ref(fig:powercurve). Power calculations using simulations are shown in Figure \@ref(fig:powercurve2). It is clear that simulation-based power estimation is going to be noisy; this is because each  time we are generating simulated data and then carrying out a statistical  test on it. This is no longer a closed-form mathematical calculation as done in `power.t.test` (this function simply implements a formula for power calculation specified for this simple case). Because the power estimates will be noisy, we show a smoothed lowess line for each effect size estimate. 
 
 ```{r powercurve2,echo=FALSE,fig.cap="An illustration of a power curve using simulation, for 10 participants, as a function of standard deviation, and three estimates of the effect: 15, 10, and 20. The power curves are lowess-smoothed."}
-sds<-seq(100,300,by=5)
+sds <- seq(100, 300, by = 5)
 
 
-nsim<-10000
-n<-10
-power_meanval<-power_lowerval<-power_upperval<-rep(NA,length(sds))
-for(s in 1:length(sds)){
-  power_meanval[s]<-compute_power(nsim=1000,n=10,
-                        effect = 15,
-                        stddev=sds[s])
+nsim <- 10000
+n <- 10
+power_meanval <- power_lowerval <- power_upperval <- rep(NA, length(sds))
+for (s in 1:length(sds)) {
+  power_meanval[s] <- compute_power(
+    nsim = 1000, n = 10,
+    effect = 15,
+    stddev = sds[s]
+  )
 }
-for(s in 1:length(sds)){
-  power_lowerval[s]<-compute_power(nsim=1000,n=10,
-                        effect = 10,
-                        stddev=sds[s])
+for (s in 1:length(sds)) {
+  power_lowerval[s] <- compute_power(
+    nsim = 1000, n = 10,
+    effect = 10,
+    stddev = sds[s]
+  )
 }
-for(s in 1:length(sds)){
-  power_upperval[s]<-compute_power(nsim=1000,n=10,
-                        effect = 20,
-                        stddev=sds[s])
+for (s in 1:length(sds)) {
+  power_upperval[s] <- compute_power(
+    nsim = 1000, n = 10,
+    effect = 20,
+    stddev = sds[s]
+  )
 }
-plot(sds,lowess(power_upperval)$y,type="l",lty=2,
-     xlab="standard deviation",ylab="power",
-     main="Power curve (n=10) \n using simulation",ylim=c(min(power_lowerval),
-                                                          max(power_upperval)))
-lines(sds,lowess(power_lowerval)$y,lty=2)
-lines(sds,lowess(power_meanval)$y,lty=1)
-
-
+plot(sds, lowess(power_upperval)$y,
+  type = "l", lty = 2,
+  xlab = "standard deviation", ylab = "power",
+  main = "Power curve (n=10) \n using simulation", ylim = c(
+    min(power_lowerval),
+    max(power_upperval)
+  )
+)
+lines(sds, lowess(power_lowerval)$y, lty = 2)
+lines(sds, lowess(power_meanval)$y, lty = 1)
 ```
 
 In the above example, simulation-based power calculation is overkill, and completely unnecessary because we have `power.t.test`. However, the technique shown above will be extended and will become our bread-and-butter method once we switch to power calculations for complicated linear mixed models. There, no closed form calculation can be done to compute power, at least not without oversimplifying the model; simulation will be the only practical way to calculate power.
@@ -890,8 +914,8 @@ Continuing with our t-test example, the `t.test` function in R will not only pri
 We can compute the p-value "by hand". This can be computed, as done earlier, simply by calculating the area under the curve that lies beyond the observed t-value. It is standard practice to take the tail probability on both sides of the t-distribution. 
 
 ```{r}
-(t_value<-t.test(y,mu=450)$statistic)
-2*pt(abs(t_value),df=n-1,lower.tail=FALSE)
+(t_value <- t.test(y, mu = 450)$statistic)
+2 * pt(abs(t_value), df = n - 1, lower.tail = FALSE)
 ```
 
 The area from both sides of the tail is taken because it is conventional to do a so-called *two-sided t-test*: our null hypothesis is that $\mu=450$, and our alternative hypothesis is two-sided: $\mu$ is either less than 450 or $\mu$ is larger than 450. When we reject the null hypothesis, we are accepting this alternative, that  $\mu$ could be some value other than 450. Notice that this alternative hypothesis is remarkably vague; we would reject the null hypothesis regardless of whether the sample mean turns out to be 600 or -600, for example. The  practical implication is that the p-value gives us  the  strength of the evidence against the null hypothesis; it doesn't give us  evidence in favor of  a specific alternative, such  as saying that $\mu$ is positive or negative in sign. In psychology and allied disciplines, whenever the p-value falls below $0.05$, it is common practice to write something along the lines that "there was reliable evidence for the predicted effect." This statement  is incorrect! We only ever have evidence against the null. By looking at the sample mean and its sign, we are making a very big leap that we  have evidence for the specific sample mean we happened to get. As we will see below, the sample mean can be wildly far from the true mean that produced the data. 
@@ -901,7 +925,7 @@ One need not have a two-sided alternative; one could have defined the alternativ
 The p-value is always interpreted with reference to the pre-defined Type I error. Conventionally, we reject the null if $p<0.05$. This is because we set the Type I error at 0.05. Keep in mind that Type I error and the p-value are two distinct things. 
 Type I error is the probability of your incorrectly rejecting the null under repeated sampling. This is not the same thing as your p-value. The latter will be obtained from a particular experiment, and will vary from experiment to experiment; it is a random variable. Type I error is a value we fix in advance.
 
-#### *The distribution of the p-value under the null hypothesis
+#### The distribution of the p-value under the null hypothesis
 
 We have been talking about a continuous random variable as a dependent measure, and have learnt about the standard two-sided t-test, with a point null hypothesis. When we do such a test, we usually use the p-value to decide whether to reject the null hypothesis or not.
 
@@ -910,16 +934,18 @@ Sometimes, you will hear  statisticians (e.g., Andrew Gelman on his blog) critic
 Suppose that the null hypothesis is in fact true. We will now simulate the distribution of the p-value under repeated sampling:
 
 ```{r pvalnulltrue,echo=FALSE,fig.cap="The p-value has a uniform distribution when the null hypothesis is true; a demonstration using simulation."}
-nsim<-10000
-pvals<-rep(NA,nsim)
-for(i in 1:nsim){
+nsim <- 10000
+pvals <- rep(NA, nsim)
+for (i in 1:nsim) {
   ## Here, the Null Hypothesis is that mu = 0
-y<-rnorm(100)
-pvals[i]<-t.test(y)$p.value
+  y <- rnorm(100)
+  pvals[i] <- t.test(y)$p.value
 }
 
-hist(pvals,freq=FALSE,
-     main="The distrn of p-value\n when null is true")
+hist(pvals,
+  freq = FALSE,
+  main = "The distribution of p-values\n when null is true"
+)
 ```
 
 The distribution of the p-value is uniform---every value between 0 and 1 is equally likely.
@@ -983,24 +1009,24 @@ Suppose that a particular study has standard error $46$, and sample size $37$. A
 
 ```{r}
 ## probable effect size, derived from past studies:
-D<-15
+D <- 15
 ## SE from the study of interest:
-se<-46
-stddev<-se*sqrt(37)
-nsim<-10000
-drep<-rep(NA,nsim)
-for(i in 1:nsim){
-samp<-rnorm(37,mean=D,sd=stddev)
-drep[i]<-mean(samp)
+se <- 46
+stddev <- se * sqrt(37)
+nsim <- 10000
+drep <- rep(NA, nsim)
+for (i in 1:nsim) {
+  samp <- rnorm(37, mean = D, sd = stddev)
+  drep[i] <- mean(samp)
 }
 ```
 
 Power can be computed by simply determining the proportion of times that the absolute  observed t-value  is larger than 2:
 
 ```{r}
-##power: the proportion of cases where 
+## power: the proportion of cases where
 ## we reject the null hypothesis correctly:
-(pow<-mean(ifelse(abs(drep/se)>2,1,0)))
+(pow <- mean(ifelse(abs(drep / se) > 2, 1, 0)))
 ```
 
 Power is quite low here (we deliberately chose an example with  low power to illustrate Type S and M error). 
@@ -1009,16 +1035,16 @@ Next, we figure out which of the samples are statistically significant (which si
 
 ```{r}
 ## which results in drep are significant at alpha=0.05?
-signif<-which(abs(drep/se)>2)
+signif <- which(abs(drep / se) > 2)
 ```
 
 Type S error is the proportion of significant cases with the wrong sign (sign error), and Type M error is the ratio by which the true effect (of $\mu=15$) is exaggerated in those simulations that  happened to come out significant.
 
 ```{r}
 ## Type S error rate | signif:
-(types_sig<-mean(drep[signif]<0))
-## Type M error rate | signif: 
-(typem_sig<-mean(abs(drep[signif])/D))
+(types_sig <- mean(drep[signif] < 0))
+## Type M error rate | signif:
+(typem_sig <- mean(abs(drep[signif]) / D))
 ```
 
 In this scenario, when power is approximately 6%, whenever we get a significant effect, the probability of obtaining the wrong  sign is a  whopping `r round(types_sig*100)`% and the effect is likely to be `r typem_sig` times larger than its true magnitude. The practical implication is as follows.
@@ -1029,34 +1055,41 @@ Another useful way to  visualize Type M and S error  is through the so-called fu
 
 ```{r funnel,echo=FALSE,fig.cap="An illustration of a funnel plot. Shown are repeated samples of an effect estimate under different values of power, where the true value  of the effect is 15 (marked by the vertical line). Significant effects are shaded gray. The lower the power, the wider the fluctuation of the effect; under low power, it is the exaggerated effects that end up statistically significant, even though they are very biased relative to the true value. As power goes up, the effect estimates start to cluster around the true value, and significant effects are also accurate estimates of the effect. Thus, low power leads to exaggerated estimates of the effect, especially if the data are filtered by statistical significance."}
 ## funnel plot:
-truemu<-15
-sampsize<-seq(10,10000,by=10)
-n_expts<-length(sampsize)
-means<-power<-sig<-rep(NA,n_expts)
-for(i in 1:n_expts){
-  y<-rnorm(sampsize[i],mean=truemu,
-                       sd=250)
-  sig[i]<-ifelse(t.test(y)$p.value<0.05,1,0)
-  means[i]<-mean(y)
-  power[i]<-power.t.test(d=truemu,sd=250,
-                      n=sampsize[i])$power
+truemu <- 15
+sampsize <- seq(10, 10000, by = 10)
+n_expts <- length(sampsize)
+means <- power <- sig <- rep(NA, n_expts)
+for (i in 1:n_expts) {
+  y <- rnorm(sampsize[i],
+    mean = truemu,
+    sd = 250
+  )
+  sig[i] <- ifelse(t.test(y)$p.value < 0.05, 1, 0)
+  means[i] <- mean(y)
+  power[i] <- power.t.test(
+    d = truemu, sd = 250,
+    n = sampsize[i]
+  )$power
 }
 
-means_df<-data.frame(means,power,sig)
+means_df <- data.frame(means, power, sig)
 
-plot(jitter(means),jitter(power),
-     main="Funnel plot",
-     xlim=range(c(min(means),max(means))),
-     xlab="effect",ylab="power",
-     #ylim=c(0,0.003),
-     cex.lab=1.8,
-     cex.axis=1.5,cex.main=1.5)
-abline(v=15)
+plot(jitter(means), jitter(power),
+  main = "Funnel plot",
+  xlim = range(c(min(means), max(means))),
+  xlab = "effect", ylab = "power",
+  # ylim=c(0,0.003),
+  cex.lab = 1.8,
+  cex.axis = 1.5, cex.main = 1.5
+)
+abline(v = 15)
 
-sig_effects<-subset(means_df,sig==1)
+sig_effects <- subset(means_df, sig == 1)
 
-points(sig_effects$means,sig_effects$pow,pch=21,
-       bg='#CACACA')
+points(sig_effects$means, sig_effects$pow,
+  pch = 21,
+  bg = "#CACACA"
+)
 ```
 
 What is important to appreciate here is the fact that significant effects "point to the truth" just in case power is high; when power is low, either null results will frequently be found even if the null is false, and those results that turn out significant will be based on Type M error. 
@@ -1081,60 +1114,62 @@ One can simulate different scenarios here. Suppose that $n$ is initially $15$.
 Under the standard assumptions, we set Type I error to be $0.05$. Let's suppose that the null hypothesis that $\mu=0$ is in fact true, and that standard deviation is 250. 
 
 ```{r}
-##Standard properties of the t-test:
-pvals<-NULL
-tstat_standard<-NULL
-n<-15
-nsim<-10000
-## assume a standard dev of 1:
-stddev<-250
-mn<-0
-for(i in 1:nsim){
-  samp<-rnorm(n,mean=mn,sd=stddev)
-  pvals[i]<-t.test(samp)$p.value
-  tstat_standard[i]<-t.test(samp)$statistic
+## Standard properties of the t-test:
+pvals <- NULL
+tstat_standard <- NULL
+n <- 15
+nsim <- 10000
+## assume a standard dev of 250:
+stddev <- 250
+mn <- 0
+for (i in 1:nsim) {
+  samp <- rnorm(n, mean = mn, sd = stddev)
+  pvals[i] <- t.test(samp)$p.value
+  tstat_standard[i] <- t.test(samp)$statistic
 }
 ```
 
 Type I error rate is about 5%, consistent with our expectations:
 
 ```{r}
-round(mean(pvals<0.05),2)
+round(mean(pvals < 0.05), 2)
 ```
 
 But the situation quickly deteriorates as soon as we adopt the strategy outlined above. Below, we will also track the distribution of the t-statistic.
 
 ```{r}
-pvals<-NULL
-tstat<-NULL
+pvals <- NULL
+tstat <- NULL
 ## how many subjects can I run?
-upper_bound<-n*6
+upper_bound <- n * 6
 
-for(i in 1:nsim){
-  significant<-FALSE 
-  x<-rnorm(n,mean=mn,sd=stddev) ## take sample
-while(!significant & length(x)<upper_bound){
-  ## if not significant:
-if(t.test(x)$p.value>0.05){
-  x<-append(x,rnorm(n,mean=mn,sd=stddev)) ## get more data
-} else {significant<-TRUE}   ## otherwise stop:
-}
-pvals[i]<-t.test(x)$p.value
-tstat[i]<-t.test(x)$statistic
+for (i in 1:nsim) {
+  significant <- FALSE
+  x <- rnorm(n, mean = mn, sd = stddev) ## take sample
+  while (!significant & length(x) < upper_bound) {
+    ## if not significant:
+    if (t.test(x)$p.value > 0.05) {
+      x <- append(x, rnorm(n, mean = mn, sd = stddev)) ## get more data
+    } else {
+      significant <- TRUE
+    } ## otherwise stop:
+  }
+  pvals[i] <- t.test(x)$p.value
+  tstat[i] <- t.test(x)$statistic
 }
 ```
 
 Now, Type I error rate is much higher than 5%:
 
 ```{r}
-round(mean(pvals<0.05),2)
+round(mean(pvals < 0.05), 2)
 ```
 
 Figure \@ref(fig:stoppingrule) shows the distributions of the t-statistic in the standard case vs with the above stopping rule:
 
 ```{r stoppingrule,echo=FALSE,fig.cap="A comparison of the distribution of t-values with an a priori fixed stopping rule, versus a flexible stopping rule conditional on finding significance."}
-plot(density(tstat_standard),main="",xlab="t-value")
-lines(density(tstat),lty=2)
+plot(density(tstat_standard), main = "", xlab = "t-value")
+lines(density(tstat), lty = 2)
 ```
 
 What is important to realize here is that the inflation in Type I error we observed above was due to the fact that the t-distribution is no longer a t-distribution:  we have bumps in the tails when we use the flexible stopping rule, and these raise our Type I error. This demonstrates why one should fix one's sample size in advance, based on a power analysis. One should not deploy a stopping rule like the one above; if we used such a stopping rule, we are much more likely to incorrectly declare a result as statistically significant than our intended Type I error rate of 0.05. 
@@ -1150,7 +1185,7 @@ Next, we consider a case where we have two vectors of data. The data-set below i
 ```{r}
 library(lingpsych)
 data("df_F1data")
-F1data<-df_F1data
+F1data <- df_F1data
 ```
 
 Notice that the male and female values can be seen as *dependent* or *paired*: each row belongs to the same vowel and language. Nevertheless, we can compare males' and females' F1 frequencies, completely ignoring this paired nature of the data. The t-test does not "know" whether these data are paired or not---it is the researcher's job to make sure that model assumptions are met. In this case, the assumption of the t-test is that the data are independent. 
@@ -1163,9 +1198,10 @@ This kind of design calls for a two-sample t-test.
 The function call in R for a two-sample t-test is shown below. Note here that we are assuming that both the male and female F1 scores have equal variance.
 
 ```{r}
-t.test(F1data$female,F1data$male,
-       paired=FALSE,
-       var.equal=TRUE)
+t.test(F1data$female, F1data$male,
+  paired = FALSE,
+  var.equal = TRUE
+)
 ```
 
 This t-test is computing the following t-statistic:
@@ -1186,16 +1222,16 @@ SE_\delta
 = \sqrt{\frac{\hat\sigma_m^2}{n_m} + \frac{\hat\sigma_f^2}{n_f}}
 \end{equation}
   
-Here, $\hat\sigma_m$ is estimate of the standard deviation for males, and $\hat\sigma_f$  for the females; the $n$ are the respective sample sizes.
+Here, $\hat\sigma_m$ is an estimate of the standard deviation for males, and $\hat\sigma_f$  for the females; the $n$ are the respective sample sizes.
   
 ```{r}
-n_m<-n_f<-19
+n_m <- n_f <- 19
 ## difference of sample means:
-d<-mean(F1data$female)-mean(F1data$male)
-(SE<-sqrt(var(F1data$male)/n_m+var(F1data$female)/n_f))
-(observed_t <- (d-0)/SE)
+d <- mean(F1data$female) - mean(F1data$male)
+(SE <- sqrt(var(F1data$male) / n_m + var(F1data$female) / n_f))
+(observed_t <- (d - 0) / SE)
 ## p-value:
-2*(1-pt(observed_t,df=36))
+2 * (1 - pt(observed_t, df = 36))
 ```
   
 The output of the two-sample t-test and the hand-calculation above match up.
@@ -1205,14 +1241,14 @@ Now consider what will change once we take into account the fact that the data a
 For such  paired data,  the null hypothesis is as before: $H_0: \delta=0$. But since each row in the data-frame is paired (from the same vowel+language), we subtract the vector row-wise, and get a new *vector* $d$ (not a single number $d$ as in the two-sample t-test) with the row-wise differences. Then, we just do the familiar one-sample test we saw earlier:
   
 ```{r}
-d<-F1data$female-F1data$male
+d <- F1data$female - F1data$male
 t.test(d)
 ```
 
 An alternative syntax for the paired t-test explicitly feeds the two paired vectors into the function, but one must explicitly specify that they are paired, otherwise the test is a two-sample (i.e., unpaired) t-test:
 
 ```{r}
-t.test(F1data$female,F1data$male,paired=TRUE)
+t.test(F1data$female, F1data$male, paired = TRUE)
 ```
   
 Incidentally, notice that the p-value in the paired t-test is statistically significant, unlike the two-sample t-test above. The null hypothesis is the same in both tests, but the significance level leads to different conclusions. 
@@ -1281,15 +1317,15 @@ We have repeated measurements for each condition from the subjects, and from ite
 Notice that there are no missing data points:
 
 ```{r}
-t(xtabs(~subject+condition,gg05e1))
-t(xtabs(~item+condition,gg05e1))
+t(xtabs(~ subject + condition, gg05e1))
+t(xtabs(~ item + condition, gg05e1))
 ```
   
   
 It is important to stress once more that it is the researcher's responsibility to make sure that the t-test's assumptions are  met. For example, one could fit a two-sample t-test to the data as provided. The two-sample t-test can be implemented using the syntax shown below:
 
 ```{r}
-t.test(rawRT~condition,gg05e1)
+t.test(rawRT ~ condition, gg05e1)
 ```
 
 This t-test is incorrect for several reasons, but the most egregious error here is that the data are paired (each  subject delivers data for both  conditions), and that property of the data is being ignored. 
@@ -1297,7 +1333,7 @@ This t-test is incorrect for several reasons, but the most egregious error here 
 Another common mistake is to do a paired t-test on the data without checking that the data are independent in the sense discussed above. Again, the t.test function will happily return a meaningless result:
   
 ```{r}
-t.test(rawRT~condition,paired=TRUE,gg05e1)
+t.test(rawRT ~ condition, paired = TRUE, gg05e1)
 ```
   
 Here, the degrees of freedom indicate that we have fit the incorrect model. There are 42 subjects and 16 items, and the presentation of items to subjects uses a Latin square design (each subject sees only one condition per item). The 335 degrees of freedom come from $42\times 8=336$ data points, minus one. Why do we say $42\times 8$ and not $42\times 16$? That is because each subject will return eight differences in reading time for each condition: each subject gives us eight subject-relative data points and eight object-relative data points.  
@@ -1311,27 +1347,28 @@ What is needed is a *single* data-point for each subject and condition, and for 
 Consider the by-subjects aggregation procedure below. Now we have only one data-point for each condition and subject:
 
 ```{r}
-bysubj<-aggregate(rawRT~subject+condition,
-                  mean,
-                  data=gg05e1)
-t(xtabs(~subject+condition,bysubj))
+bysubj <- aggregate(rawRT ~ subject + condition,
+  mean,
+  data = gg05e1
+)
+t(xtabs(~ subject + condition, bysubj))
 ```
 
 
 Notice that the data are correlated: the longer the subject relative clause data from a participant, the longer their object relative clause data:
 
 ```{r}
-SRdata<-subset(bysubj,condition=="subjgap")$rawRT
-ORdata<-subset(bysubj,condition=="objgap")$rawRT
-plot(SRdata,ORdata)
-abline(lm(ORdata~SRdata))
-cor(SRdata,ORdata)
+SRdata <- subset(bysubj, condition == "subjgap")$rawRT
+ORdata <- subset(bysubj, condition == "objgap")$rawRT
+plot(SRdata, ORdata)
+abline(lm(ORdata ~ SRdata))
+cor(SRdata, ORdata)
 ```
 
 Returning to the t-test, by aggregating the data the  independence assumption of the t-test is met, and the degrees of freedom for this by-subjects analysis are now correct ($42-1=41$):
 
 ```{r}
-t.test(rawRT~condition, bysubj,paired=TRUE)
+t.test(rawRT ~ condition, bysubj, paired = TRUE)
 ```
 
 Similar to the by-subjects aggregation done above, one could do a by-items aggregation and then a by-items t-test (What should be the degrees of freedom for the by-items analysis? There are 16 items in this data-set). This is left as an exercise for the reader. 
@@ -1343,15 +1380,15 @@ The paired t-test illustrated above is actually not the best way to analyze this
 ### Practice using ```qt``` {#sec:SamplingDistrnexercisesqt}
 
 ```{r echo=FALSE}
-n<-142
-mu<-123 
-sigma<-70
-sample.sd<-50.885
-sample.mean<-145.242
-estimated.se<- round(sample.sd/sqrt(n),3)
-crit.t<-abs(round(qt(0.025,df=n-1),3))
-lower<-round(sample.mean-crit.t*estimated.se,digits=3)
-upper<-round(sample.mean+crit.t*estimated.se,digits=3)
+n <- 142
+mu <- 123
+sigma <- 70
+sample.sd <- 50.885
+sample.mean <- 145.242
+estimated.se <- round(sample.sd / sqrt(n), 3)
+crit.t <- abs(round(qt(0.025, df = n - 1), 3))
+lower <- round(sample.mean - crit.t * estimated.se, digits = 3)
+upper <- round(sample.mean + crit.t * estimated.se, digits = 3)
 ```
 
 Take an independent random sample of size ```r n``` from a normal distribution
@@ -1368,7 +1405,7 @@ with mean ```r mu```, and standard deviation ```r sigma```. Next, we are going t
 A paired t-test is done with data from 10 participants. The t-value from the test is 2.1. What is the p-value associated with a two-sided null hypothesis test? 
 
 ```{r echo=FALSE,eval=FALSE}
-round(2*pt(-2.1,df=9),3)
+round(2 * pt(-2.1, df = 9), 3)
 ```
 
 ### Computing the t-value {#sec:SamplingDistrnexercisesPart2}
@@ -1385,15 +1422,16 @@ Given that Type I error is 0.01; what is the highest value possible for Type II 
 In a self-paced reading study, @grodner investigated subjects vs. object relative clauses. They analyzed the reading times  at the relative clause verb. However, a reviewer objects that the whole sentence's reading times (total reading times) should be used to evaluate the difference between the two conditions, because one cannot know where the difficulty might arise. It isn't clear whether one should use mean reading times over the entire sentence, or total reading times (summing up all the reading times over the entire sentence). 
 Carry out a by-subjects paired t-test on (a) the critical relative clause verb, versus (b) mean reading time over all words in the two sentence types, and (c) total reading times over all words in the two sentence types. Compare the t-value across the three tests, and decide what the appropriate dependent variable might be (Note: there is no correct answer here).
 
-The data are loaded and pre-processed as follows. The code below gives you the reading times for the full data-set. You will have to work out how to obtain mean or total reading times for the whole sentence in each condition.
+The data are loaded and pre-processed as follows. The code below gives you the reading times for the data at the relative clause verb. You will have to work out how to obtain mean or total reading times for the whole sentence in each condition.
 
 ```{r}
-## load data:
+## load data from lingpsych package:
 data("df_gg05e1_full")
-gg05e1_full<-df_gg05e1_full
 ## get data from relative clause verb:
-gge1crit <- subset(gg05e1_full, ( condition == "objgap" & 
-                             word_position == 6 ) |
-            ( condition == "subjgap" & word_position == 4 ))
-
-````
+df_gge1crit <- subset(
+  df_gg05e1_full,
+  (condition == "objgap" &
+    word_position == 6) |
+    (condition == "subjgap" & word_position == 4)
+)
+```
