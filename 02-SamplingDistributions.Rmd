@@ -16,52 +16,112 @@ Technically, we are supposed to randomly choose participants; in practice, this 
 
 One design decision that the researcher must take is whether to collect only one response from each participant in each condition, or whether we collect multiple measures from each participant. If we collect only one data point from each participant, we will say that the data points are *independent* of each other. When we collect multiple measurements from each participant, we will say that we have *dependent* data; such multiple measurements are also called *repeated measures*. With repeated measures, there will be some correlation between the data-points because there are  multiple measurements from a common source.
 
-In psycholinguistics, repeated measures experiments are the norm. Furthermore, it is common to use a so-called *Latin Square* design. To understand this design, suppose we want to conduct an experiment with two conditions, a and b, and that we want each participant to see each condition multiple times (repeated measurements). The way such an experiment (with two conditions) is set up with a Latin Square design is that we would create multiple pairs of items, e.g., items 1a, 1b, 2a, 2b, etc. For example, we are investigating active vs. passive sentences, item 1a could be the active clause *The man threw the ball*, and 1b would thene the passive counterpart *The ball was thrown by the man*. The two versions of the item are therefore minimal pairs---minimally different in that the sentence has the same words, but one is an active clause and the other a passive clause.
+In psycholinguistics, repeated measures experiments are the norm. Furthermore, it is common to use a so-called *Latin Square* design. The term Latin Square refers to the fact that the ordering of the conditions forms a square (Table \@ref(tab:LatinSquare)); the word Latin apparently only refers to the fact the symbols for each condition were from the Latin script.
 
-Then, we would create two groups of items, G1 and G2. Group G1 would contain items 1a, 2b, 3a, 4b, etc; group G2 would contain items 1b, 2a, 3b, 4a, etc. Thus, if one had 16 items, each group would contain eight instance of each condition. Having set up these two groups, one would then randomly assign each participant to one of the two groups. In this way, from each participant, we would obtain eight repeated measures from each condition. One can (and should) of course randomize the order of presentation in each group, possibly randomizing afresh for each participant. The term Latin Square refers to the fact that the ordering of the conditions forms a square.
+```{r LatinSquare,echo=FALSE,results="asis"}
+latsq<-data.frame(rbind(letters[1:2],letters[2:1]))
+colnames(latsq)<-c("Group 1","Group 2")
 
----------
-| a  | b |
-| b  | a |
----------
+kableExtra::kable(latsq,
+                  digits = 2, booktabs = TRUE, 
+                  vline = "", # format="latex",
+  caption = "The Latin Square with two conditions labeled a and b.")
+```
 
-Each condition appears in each row exactly once. 
+A characteristic property of the Latin Square is that, as shown in Table \@ref(tab:LatinSquare), each condition appears in each row exactly once. The Latin square generalizes beyond two conditions easily. Suppose we have four conditions; then, the Latin Square is as in Table \@ref(tab:LatinSquare4). Similarly, if there are eight conditions, the Latin Square table would have the form shown in Table \@ref(tab:LatinSquare8). 
 
-The Latin square generalizes beyond two conditions easily. Suppose we have four conditions; then, the Latin Square is:
 
------------------
-| a | b | c | d |
-| b | c | d | a |
-| c | d | a | b |
-| d | a | b | d |
------------------
+```{r LatinSquare4,echo=FALSE,results="asis"}
+latsq4<-data.frame(rbind(letters[1:4],
+                        letters[c(2:4,1)],
+                  letters[c(3:4,1:2)],
+                  letters[c(4,1:3)]))
+colnames(latsq4)<-c("Group 1","Group 2","Group 3","Group 4")
 
-Similarly if you have eight conditions, the Latin Square table would look like this. 
+kableExtra::kable(latsq4,
+                  digits = 2, booktabs = TRUE, 
+                  vline = "", # format="latex",
+  caption = "A Latin Square design with four conditions labeled a, b, c, and d.")
+```
 
----------------------------------
-| a | b | c | d | e | f | g | h |
-| b | c | d | e | f | g | h | a |
-| c | d | e | f | g | h | a | b |
-| d | e | f | g | h | a | b | c |
-| e | f | g | h | a | b | c | d |
-| f | g | h | a | b | c | d | e |
-| g | h | a | b | c | d | e | f |
-| h | a | b | c | d | e | f | g |
---------------------------------
 
-As an aside, it is rarely a good idea to design such complex experiments! The more conditions you have in an experiment, the more decisions you will have to make about how to analyze the data, and the harder the interpretation of the data. Later in this course, we will demonstrate the price one has to pay for setting up overly complex designs. We mention this point here because it is a common beginner error to want to have as many conditions as possible in a single experiment. In fact, a student of ours once proposed a 180 condition design! 
+```{r LatinSquare8,echo=FALSE,results="asis"}
+latsq8<-data.frame(rbind(letters[1:8],
+                        letters[c(2:8,1)],
+                  letters[c(3:8,1:2)],
+                  letters[c(4:8,1:3)],
+                  letters[c(5:8,1:4)],
+                  letters[c(6:8,1:5)],
+                  letters[c(7:8,1:6)],
+                  letters[c(8,1:7)]
+                  ))
+colnames(latsq8)<-paste(rep("G",8),1:8,sep="")
 
-The Latin Square design is attractive for psycholinguistics and psychology because it has some optimality properties. Experiment design and the properties of different designs is a whole field in itself in statistics, but we won't get into these details.  
+kableExtra::kable(latsq8,
+                  digits = 2, booktabs = TRUE, 
+                  vline = "", # format="latex",
+  caption = "A Latin Square design with eight conditions labeled a, b, c, d, e, f, g, and h. The column names representing the eight groups are abbreviated as G1-G8.")
+```
 
-One consequence of the above repeated measurements design is that we have multiple measurements not just from participants but also from items! Thus, items can also be seen as producing dependent data.  In other words, both participants and items are producing dependent data in this design. Later on, we will see that this has an effect on the type of data analysis one can do. 
+As an aside, it is rarely a good idea to design such complex experiments as the one shown in Table \@ref(tab:LatinSquare8). The more conditions you have in an experiment, the more decisions you will have to make about how to analyze the data, the more complex the model will get, and the harder the interpretation of the data. Later in this course, we will demonstrate the price one has to pay for setting up overly complex designs. This point is mentioned here because it is a common beginner error to want to have as many conditions as possible in a single experiment. In fact, the first experiment a student of ours once proposed to us was a 180 condition design. 
 
-With this very brief introduction to experiment design, we now turn to the idea of hypothetical repeated sampling, and the central limit theorem.
+The Latin Square design is attractive for psycholinguistics and psychology because it has some important optimality properties. Experiment design and the properties of different designs is a whole field in itself in statistics, but we won't get into these details.  
+
+The Latin square design can be extended so that each participant sees repeated sets of each condition. For example, in a two-condition design, we may decide to create multiple (say 4) sets of items: item 1 will have two instances of conditions a and b; item 2 to 4 will each have two instances of conditions a and b. The Latin square then looks like the one shown in Table \@ref(tab:LatinSquarerep2).
+
+```{r LatinSquarerep2,echo=FALSE,results="asis"}
+latsqrep2<-data.frame(cbind(item=1:4,rep(letters[1:2],2),rep(letters[2:1],2)))
+
+colnames(latsqrep2)<-c("item","Group 1","Group 2")
+
+kableExtra::kable(latsqrep2,
+                  digits = 2, booktabs = TRUE, 
+                  vline = "", # format="latex",
+  caption = "The Latin Square with two conditions labeled a and b, and four items.")
+```
+
+Now, when each incoming participants is randomly assigned to Group 1 or Group 2, they will see two instances of each condition, but---crucially--each instance of each item will be seen only once. This has the advantage that we obtain repeated measures from each participant for each condition, leading to more accurate estimates from each participant for each condition; and we obtain measurements from multiple items as well. However, each participant sees each item only once; this can be important in cases where showing the same item to the participant more than once could bias their response. For example, if we show the same word twice to a participant, they might process the second instance of that word more easily, biasing the average response to that word. There can however be situations where it is appropriate/necessary to show the same item multiple times to a participant. In most of the designs considered in this book, participants will see one item only once.
+
+Having repeated measurements from participants and from items allows us to generalize beyond the specific participants and items that we have in the experiment.
+
+To come closer to a realistic experiment design, suppose that we have two participants (this is just for illustration---normally we will have many more than two participants). Then, the data frame will look like this:
+
+```{r}
+condition<-c(rep(letters[1:2],2),rep(letters[2:1],2))
+item<-rep(1:4,2)
+subj<-rep(1:2,each=4)
+df_example<-data.frame(subj,item,condition)
+df_example
+```
+
+As a consequence of this design, we say that we have a fully crossed subjects (participants) and items design: each participant sees exactly one item:
+
+```{r}
+xtabs(~subj+item,df_example)
+```
+
+You can also check that each subject sees two instances of each condition:
+
+```{r}
+xtabs(~subj+condition,df_example)
+```
+
+Notice also that there is exactly one measurement from each item for each condition. This is because only two subjects are involved here. If there were 10 subjects, there would be five instance of each condition for each item.
+
+```{r}
+xtabs(~item+condition,df_example)
+```
+
+So, one consequence of the above repeated measurements design is that there will, in general, be repeated measurements not just from subjects but also from items. Thus, items can also be seen as producing dependent data.  Later on, we will see that this design has far-reaching consequences regarding the type of data analysis one can and should do. 
+
+This is a very brief introduction to experiment design; but the reader should keep in mind that these are the kinds of designs we will primarily focus on in this book. 
+We now turn to the idea of hypothetical repeated sampling, and the central limit theorem.
 
 ## The central limit theorem using simulation
 
 Suppose we collect some data, which can be represented by a vector $y$; this is a *single sample*. Given data $y$, and assuming for concreteness that the underlying likelihood is a $Normal(\mu=500,\sigma=100)$, the sample mean and standard deviation, $\bar{y}$ and $s$  give us an estimate of the unknown parameters mean $\mu$ and the standard deviation $\sigma$ of the distribution from which we assume that our data come from. Figure \@ref(fig:normalsample) shows the distribution of a particular sample, where the number of data points is $n=1000$. Note that in this example the parameters are specified by us, so they are not unknown; in a real data-collection situation, the sample mean and standard deviation are all we have as estimates of the parameters.
 
-```{r normalsample,out.width='75%', fig.show = "hold", fig.cap = "A sample of data y of size n=100, from the distribution  Normal(500,100). The vertical line shows the true mean of the distribution we are sampling from.", tidy = FALSE}
+```{r normalsample,out.width='75%', fig.show = "hold", fig.cap = "A sample of data y of size n=1000, from the distribution  Normal(500,100). The vertical line shows the true mean of the distribution we are sampling from.", tidy = FALSE}
 ## sample size:
 n<-1000
 ##  independent and identically distributed sample:
@@ -72,13 +132,13 @@ hist(y,freq=FALSE)
 abline(v=500,lwd=2)
 ```
 
-Suppose now that you had not a single sample of size 1000 but many repeated samples. This isn't something one can normally do in real life; we often run a single experiment or, at most, repeat the same experiment once. However, one can simulate repeated sampling easily within R. Let us take 100 repeated samples like the one above, and save the samples in a matrix containing n=1000 rows and 100 columns, each column representing an experiment:
+Suppose now that you had not a single sample of size 1000 but many repeated samples. This isn't something one can normally do in real life; we often run a single experiment or, at most, repeat the same experiment once. However, one can simulate repeated sampling easily within R. Let us take 100 repeated samples like the one above, and save the samples in a matrix containing $n=1000$ rows and 2000 columns, each column representing an experiment:
 
 ```{r}
 mu <- 500
 sigma <- 100
 ## number of experiments:
-k <- 100
+k <- 2000
 ## store for data:
 y_matrix <- matrix(rep(NA, n * k), ncol = k)
 for (i in 1:k) {
@@ -102,7 +162,7 @@ op<-par(mfrow=c(1,2),pty="s")
 
 for(i in 1:k){
   if(i==1){
-plot(density(y_matrix[,i]),main="Samples from a Normal",
+plot(density(y_matrix[,i]),main="Samples from a \n Normal distribution",
      xlab="")
   } else {
 lines(density(y_matrix[,i]),lty=2)
@@ -178,7 +238,7 @@ E[\bar{Y}] = \mu \quad Var(\bar{Y}) = \frac{\sigma^2}{n}
 \end{equation}
 
 
-The above means that we can estimate the expectation $\bar{Y}$ and the variance  of $\bar{Y}$ from a *single* sample!!
+The above means that we can estimate the expectation $\bar{Y}$ and the variance  of $\bar{Y}$ from a *single* sample. (Of course, whether these estimates are accurate or not is subject to variation, as we will see below).
 
 The Central Limit Theorem, not proved here (for a proof, see p. 267 of @millermiller) can be  summarized as follows.
 
@@ -203,7 +263,7 @@ The Exponential distribution has a parameter $\lambda$ (parameterized in `R` as 
 ```{r sdsmexp,echo=FALSE,out.width='85%', fig.show = "hold", fig.cap = "Sampling from an exponential.", tidy = FALSE}
 ## Sampling from an Exponential:
 ## number of experiments:
-k<-100
+k<-2000
 y_matrix<-matrix(rep(NA,n*k),ncol=k)
 for(i in 1:k){
   y_matrix[,i]<-rexp(n,rate=1/10)
@@ -212,7 +272,7 @@ for(i in 1:k){
 op<-par(mfrow=c(1,2),pty="s")
 for(i in 1:k){
   if(i==1){
-plot(density(y_matrix[,i]),main="Samples from an Exponential",
+plot(density(y_matrix[,i]),main="Samples from an \n  Exponential distribution",
      xlab="",ylim=c(0,0.15))
   } else {
 lines(density(y_matrix[,i]),lty=2)
@@ -229,22 +289,23 @@ lines(seq(9,11,by=0.01),
       dnorm(seq(9,11,by=0.01),mean(y_means),sd(y_means)))
 ```
 
-A further example is samples from a Gamma distribution. Suppose we sample from a Gamma distribution with shape parameter chosen arbitrarily to be 1. The distribution of means is again going to be approximately normal; see Figure \@ref(fig:sdsmgamma).
+A further example is samples from a Gamma distribution. The Gamma distribution has two parameters, a and b, and is written Gamma(a,b).
+In R, the parameters a and b are called shape and rate, respectively. The mean of the Gamma distribution is $\frac{a}{b}$ and the variance is $\frac{a}{b^2}$. Suppose we sample from a Gamma distribution with shape parameter chosen arbitrarily to be 1. The distribution of means is again going to be approximately normal; see Figure \@ref(fig:sdsmgamma).
 
 
 ```{r sdsmgamma,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "Sampling from a Gamma distribution.", tidy = FALSE}
 ## Sampling from a Gamma:
 ## number of experiments:
-k<-100
+k<-2000
 y_matrix<-matrix(rep(NA,n*k),ncol=k)
 for(i in 1:k){
-  y_matrix[,i]<-rgamma(n,shape=1)
+  y_matrix[,i]<-rgamma(n,shape=1,rate=1)
 }
 
 op<-par(mfrow=c(1,2),pty="s")
 for(i in 1:k){
   if(i==1){
-plot(density(y_matrix[,i]),main="Samples from a Gamma",
+plot(density(y_matrix[,i]),main="Samples from a \n Gamma distribution",
      xlab="")
   } else {
 lines(density(y_matrix[,i]),lty=2)
@@ -262,9 +323,9 @@ lines(seq(.9,1.1,by=0.01),
 As a final example, consider what happens if sample from a distribution, the Cauchy, that doesn't have any mean or variance defined for it. 
 
 ```{r sdsmcauchy,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "Sampling from a Cauchy distribution.", tidy = FALSE}
-## Sampling from a Gamma:
+## Sampling from a Cauchy:
 ## number of experiments:
-k<-100
+k<-2000
 y_matrix<-matrix(rep(NA,n*k),ncol=k)
 for(i in 1:k){
   y_matrix[,i]<-rcauchy(n)
@@ -273,7 +334,7 @@ for(i in 1:k){
 op<-par(mfrow=c(1,2),pty="s")
 for(i in 1:k){
   if(i==1){
-plot(density(y_matrix[,i]),main="Samples from a Cauchy",
+plot(density(y_matrix[,i]),main="Samples from a \n Cauchy distribution",
      xlab="")
   } else {
 lines(density(y_matrix[,i]),lty=2)
@@ -288,7 +349,7 @@ lines(seq(.9,1.1,by=0.01),
       dnorm(seq(.9,1.1,by=0.01),mean(y_means),sd(y_means)))
 ```
 
-As the Figure \@ref(fig:sdsmcauchy) illustrates, when the mean and variance for the likelihood are undefined, the central limit theorem doesn't hold. In the rest of this book, we will always assume that the data are coming from a distribution that has a mean and variance defined for it.
+As Figure \@ref(fig:sdsmcauchy) illustrates, when the mean and variance for the likelihood are undefined, the central limit theorem doesn't hold. In the rest of this book, we will always assume that the data are coming from a distribution that has a mean and variance defined for it.
 
 ## The confidence interval, and what it's good for
 
@@ -376,9 +437,11 @@ arrows(x0,y0=cis[,1],
        x1,y1=cis[,2],length=0,lwd=cis[,3])
 ```
 
+### Confidence interals are often misinterpreted
+
 The confidence interval is widely misinterpreted, i.e., as representing the range of plausible value of the $\mu$ parameter. This is the wrong interpretation because $\mu$ is a point value by assumption, it doesn't have a pdf associated with it. The frequentist CI is defined with reference to the sampling distribution of the mean under repeated sampling, not the probability distribution of $\mu$.
 By contrast, the Bayesian credible interval does have this interpretation. 
-In most modeling settings we have encountered in our work, the frequentist confidence interval and Bayesian credible interval have very similar widths, with the Bayesian interval being slightly wider depending on the prior specifications. 
+In most modeling settings that the authors have encountered in their work, the frequentist confidence interval and Bayesian credible interval have very similar widths, with the Bayesian interval being slightly wider depending on the prior specifications. But these similarities in the intervals do not change the fact that they have different meanings.
 
 Given the convoluted meaning of the CI, and the impossibility of interpreting a single CI, it is reasonable to ask: what good is a CI? One can treat the CI as a summary that tells us the width of the sampling distribution of the mean---the wider the sampling distribution, the more the implied variability under repeated sampling. The confidence interval can therefore be used to assess how uncertain we can be about the estimate of the sample mean under hypothetical repeated sampling. See @cumming2014new for a useful perspective relating to using confidence intervals for inference. As discussed later in the book, we will use the CI to informally assess uncertainty.
 
@@ -463,6 +526,30 @@ T  = \frac{\bar{X} - \mu}{SE}
 
 This random variable has a pdf associated with it, the  t-distribution, which is defined in terms of the sample size $n$; the pdf is written $t(n-1)$. Under repeated sampling, the t-distribution is generated from this random variable $T$. 
 
+Figure \@ref(fig:tdistrn) quickly  visualizes this: sample 10000 times from a $Y\sim Normal(\mu=450,\sigma=100)$. Assume that the null hypothesis is $\mu_0=450$; that is, the null hypothesis is in fact true in this case. The sample size is $n=5$. Then compute the t statistic each time, and plot the distribution of the t-values as a histogram. Plot a $t(n-1)$ distribution on top of this histogram to compare to the two distributions. A Normal(0,1) distribution is plotted as a broken line for comparison with the $t(df=4)$ distribution.
+
+```{r tdistrn,fig.cap="The distribution of the t-value under repeated sampling assuming that the null hypothesis is true, compared with a t(n-1) distribution and a Normal(0,1) distribution."}
+set.seed(4321)
+nsim<-10000
+n<-5
+mu<-450
+## null hypothesis mean:
+mu0<-450
+sigma<-100
+tval<-rep(NA,nsim)
+se<-sigma/sqrt(n)
+for(i in 1:nsim){
+  y<-rnorm(n,mean=mu,sd=sigma)
+  xbar<-mean(y)
+  tval[i]<-(xbar-mu0)/se
+}
+
+hist(tval,freq=FALSE,main="t-value distribution")
+x<-seq(-4,4,by=0.001)
+lines(x,dt(x,df=n-1))
+lines(x,dnorm(x),lty=2)
+```
+
 We will compactly express the statement that "the observed t-value is assumed to be generated (under repeated sampling) from a t-distribution with  n-1 degrees of freedom" as:  
 
 \begin{equation}
@@ -472,7 +559,7 @@ T \sim t(n-1)
 For large $n$, the pdf of the random variable $T$ approaches $N(0,1)$. This is illustrated in Figure  \@ref(fig:tnormal); notice that the t-distribution has fatter tails than the normal for small $n$, say $n<20$, but for larger n, the t-distribution and the normal become increasingly similar in shape. Incidentally,  when n=2, the t-distribution $t(1)$ is the Cauchy distribution we saw earlier; this distribution is characterized by fat tails, and has no mean or variance defined for it.
 
 
-```{r tnormal,echo=FALSE,fig.cap="A visual comparison of the t-distribution (with degrees of freedom ranging from 1 to 50) with the standard normal distribution (N(0,1)). The dashed line represents the t-distribution, and the solid line the normal distribution."}
+```{r tnormal,echo=FALSE,fig.cap="A visual comparison of the t-distribution (with degrees of freedom ranging from 1 to 50) with the standard normal distribution (N(0,1)). The dashed line represents the standard normal distribution, and the solid line the t-distribution with the relevant degrees of freedom."}
 range <- seq(-4, 4, .01)
 
 op <- par(mfrow = c(2, 3), mar = c(2, 2, 3, 2), pty = "s")
@@ -480,11 +567,11 @@ op <- par(mfrow = c(2, 3), mar = c(2, 2, 3, 2), pty = "s")
 
 for (i in c(1, 2, 5, 15, 20, 50)) {
   plot(range, dnorm(range),
-    type = "l", lty = 1,
+    type = "l", lty = 2,
     xlab = "", ylab = "",
     cex.axis = 1, cex.axis = 0.8
   )
-  lines(range, dt(range, df = i), lty = 2, lwd = 1)
+  lines(range, dt(range, df = i), lty = 1, lwd = 1)
   mtext(paste("df=", i), cex = 1.2)
 }
 ```
@@ -507,41 +594,44 @@ t=\frac{\bar{y}-\mu}{s/\sqrt{n}}
 What constitutes a large or small observed t-value?
 Intuitively, the t-value from the sample is large when we end up far in *either* tail of the distribution. The two tails of the t-distribution will be referred to as the *rejection region*. The word *region* here refers to the real number line along the x-axis, under the tails of the distribution. The rejection region will go off to infinity on the outer sides, and is demarcated by a vertical line on the inner side of each tail. This is shown in Figure \@ref(fig:tails). It goes off to infinity because the support---the range of possible values---of the random variable that the t-distribution belongs to stretches from minus infinity to plus infinity. 
 
-```{r tails,echo=FALSE,fig.cap="The rejection region in a t-distribution. The rejection region is the x-axis under the gray-colored area."}
+```{r tails,echo=FALSE,fig.cap="The rejection region in a t-distribution (sample size 20) assuming that the null hypothesis is true. The rejection region is the x-axis under the gray-colored area."}
+n<-20
 x <- seq(-5, 5, by = 0.1)
-plot(x, dt(x, df = n),
+plot(x, dt(x, df = n-1),
   type = "l", main = "t(n-1)",
-  ylab = "density"
+  ylab = "density",
+  yaxs="i",
+  xlab = "t-values"
 )
 
-lower <- qt(0.025, df = n)
-upper <- qt(0.975, df = n)
+lower <- qt(0.025, df = n-1)
+upper <- qt(0.975, df = n-1)
 abline(v = lower)
 abline(v = upper)
 
 x1 <- seq(upper, 20, 0.001)
-y1 <- dt(x1, df = n)
+y1 <- dt(x1, df = n-1)
 polygon(c(x1, rev(x1)),
   c(rep(0, length(x1)), rev(y1)),
   col = gray(0.8)
 )
 
 x1 <- seq(-20, lower, 0.001)
-y1 <- dt(x1, df = n)
+y1 <- dt(x1, df = n-1)
 polygon(c(x1, rev(x1)),
   c(rep(0, length(x1)), rev(y1)),
   col = gray(0.8)
 )
 
-points(2.4, 0, col = "black", pch = 20)
-text(x = 2.4, y = 0.01, label = "sample mean", col = "black")
+points(1.8, 0.005, col = "black", pch = 20)
+text(x = 1.8, y = 0.04, label = "observed t-value", col = "black")
 ```
 
-The location of the vertical lines is determined by the so-called *critical t-value* along the x-axis of the t-distribution.  This is the value such that the area under the curve in the tails to the left or right of the tails is 0.025. As discussed in chapter 1, this area under the curve represents the probability of observing a value as extreme as the critical t-value, or some value that is more extreme. Notice that if we ask ourselves what the probability is of observing some particular t-value (a point value), the answer must necessarily be $0$ (if you are unclear about why, re-read chapter 1). But we can ask the question: what is the absolute t-value, written $|t|$, such that $P(T>|t|)=0.025$?  That's the critical t-value. We call it the critical t-value because it demarcates the rejection region shown in Figure \@ref(fig:tails): we are adopting the convention that any observed t-value larger than this critical t-value allows us to reject the null hypothesis.
+The location of the vertical lines is determined by the so-called *absolute critical t-value* along the x-axis of the t-distribution.  This is the value such that the area under the curve in the tails to the left or right of the tails is 0.025. As discussed in chapter 1, this area under the curve represents the probability of observing a value as extreme as the critical t-value, or some value that is more extreme. Notice that if we ask ourselves what the probability is of observing some particular t-value (a point value), the answer must necessarily be $0$ (if you are unclear about why, re-read chapter 1). But we can ask the question: what is the absolute t-value, written $|t|$, such that $P(T>|t|)=0.05$?  That's the critical t-value. We call it the critical t-value because it demarcates the rejection region shown in Figure \@ref(fig:tails): we are adopting the convention that any observed t-value larger than this critical t-value allows us to reject the null hypothesis.
 
 For a given sample size $n$, we can identify the rejection region by using the `qt` function, whose usage is analogous to the `qnorm` function, discussed in chapter 1.
 
-Because the shape of the t-distribution depends on the degrees of freedom (n-1), the critical t-value beyond which we reject the null hypothesis will change depending on sample size. For large sample sizes, say $n>50$, the rejection point is about 2.
+Because the shape of the t-distribution depends on the degrees of freedom (n-1), the absolute critical t-value beyond which we reject the null hypothesis will change depending on sample size. For large sample sizes, say $n>50$, the rejection point is about 2.
 
 ```{r}
 abs(qt(0.025, df = 15))
@@ -599,7 +689,7 @@ Recall that behind the t-test lies the  assumption  that the observed t-value  i
 
 A quick simulation of t-values under repeated sampling makes this clear. Suppose that our null hypothesis mean is 450, and our sample size  $n=1000$. Assume that the data come from $Normal(\mu=450,\sigma=100)$. Let's do 10000 simulations, compute the sample mean each time, and then store the observed t-value. The t-distribution that results is shown in Figure \@ref(fig:simt).
 
-```{r simt,fig.cap="The distribution of t-values under repeated sampling."}
+```{r simt,fig.cap="The distribution of t-values under repeated sampling. The null hypothesis is true."}
 n <- 1000
 nsim <- 10000
 tvals <- rep(NA, nsim)
@@ -817,14 +907,18 @@ Power (which is 1-Type II error) is a function of three variables:
 There are two ways that one can compute power in connection with the t-test: either one can use the built-in R function, `power.t.test`, or one can use simulation. 
 
 
-#### Power calculation using the power.t.test
+#### Power calculation using the `power.t.test` function
 
 Suppose that we have an expectation that an effect size is 15 ms $\pm 5$ ms (this could be based on the predictions of a theoretical model, or prior data); suppose also that prior experiments show standard deviations ranging from 100 to 300 ms. This is enough information to compute a power curve as a function of effect size and standard deviation. See Figure \@ref(fig:powercurve) and the associated code below.
 
 ```{r powercurve,fig.cap="An illustration of a power curve for 10 participants, as a function of standard deviation, and three estimates of the effect: 15, 10, and 20."}
 sds <- seq(100, 300, by = 1)
-lower <- power.t.test(delta = 15 - 5, sd = sds, n = 10, strict = TRUE)$power
-upper <- power.t.test(delta = 15 + 5, sd = sds, n = 10, strict = TRUE)$power
+lower <- power.t.test(delta = 15 - 5, 
+                      sd = sds, n = 10, 
+                      strict = TRUE)$power
+upper <- power.t.test(delta = 15 + 5, 
+                      sd = sds, n = 10, 
+                      strict = TRUE)$power
 meanval <- power.t.test(delta = 15, sd = sds, n = 10, strict = TRUE)$power
 
 plot(sds, meanval,
@@ -853,7 +947,8 @@ compute_power <- function(nsim = 1000, n = 10,
   temp_power <- rep(NA, nsim)
   for (i in 1:nsim) {
     y <- rnorm(n, mean = effect, sd = stddev)
-    temp_power[i] <- ifelse(abs(t.test(y)$statistic) > 2, 1, 0)
+    temp_power[i] <- ifelse(abs(t.test(y)$statistic) 
+                            > 2, 1, 0)
   }
   ## return power calculation:
   mean(temp_power)
@@ -1308,6 +1403,7 @@ The data are from a self-paced reading study reported in @grodner, their experim
 First, load the data containing reading times from the region of interest (the relative clause verb):
 
 ```{r}
+## From the library lingpsych:
 data("df_gg05e1")
 gg05e1 <- df_gg05e1
 head(gg05e1)
