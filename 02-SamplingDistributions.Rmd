@@ -1056,8 +1056,8 @@ Sometimes, you will hear  statisticians (e.g., Andrew Gelman on his blog) critic
 
 Suppose that the null hypothesis is in fact true. We will now simulate the distribution of the p-value under repeated sampling:
 
-```{r pvalnulltrue,echo=FALSE,fig.cap="The p-value has a uniform distribution when the null hypothesis is true; a demonstration using simulation."}
-nsim <- 10000
+```{r pvalnulltrue,cache=TRUE,echo=FALSE,fig.cap="The p-value has a uniform distribution when the null hypothesis is true; a demonstration using simulation."}
+nsim <- 100000
 pvals <- rep(NA, nsim)
 for (i in 1:nsim) {
   ## Here, the Null Hypothesis is that mu = 0
@@ -1068,7 +1068,8 @@ for (i in 1:nsim) {
 hist(pvals,
   freq = FALSE,
   main = "The distribution of p-values\n when null is true"
-)
+,xlab = "p-values",
+ylab = "density")
 ```
 
 The distribution of the p-value is uniform---every value between 0 and 1 is equally likely.
@@ -1111,7 +1112,22 @@ P(Z\leq z) =& P(F(T)\leq z)\\
 \end{split}
 \end{equation}
 
-It is for this reason that statisticians like Andrew Gelman periodically point out that "the null hypothesis significance test is a specific random number generator". The practical implication of this criticism of p-values is that when we do a single experiment and obtain a p-value under the assumption that the null is true, if the null were in fact true, then we are just using a random number generator to make a decision that the effect is present or absent. A broader implication is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are as or even more important.
+It is for this reason that statisticians like Andrew Gelman periodically point out that "the null hypothesis significance test is a specific random number generator". 
+
+The practical implication of this criticism of p-values is that when we do a single experiment and obtain a p-value under the assumption that the null is true, if the null were in fact true, then we are just using a random number generator to make a decision that the effect is present or absent. We are literally using the output of a uniform(0,1) distribution to decide to reject the null hypothesis:
+
+<<>>=
+pval <- runif(1, min = 0, max = 1)
+if (pval < 0.05) {
+  print("reject")
+} else {
+  "fail to reject"
+}
+@
+
+This doesn't seem like a meaningful way to test a scientific hypothesis!
+
+A broader implication is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are as or even more important.
 
 
 ### Type M and S error in the face of low power
