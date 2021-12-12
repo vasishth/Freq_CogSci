@@ -1080,7 +1080,9 @@ A complete introduction to the theory of linear algebra needed for statistics is
 
 ## Exercises {#sec:LMExercises2}
 
-### Estimating the parameters in a linear model {#sec:LMparamest}
+```{exercise, LMparamest}
+Estimating the parameters in a linear model
+```
 
 The data consist of a repeated measures self-paced reading experiment comparing two conditions, subject and object relatives, in Chinese. The data are from @gibsonwu. 
 
@@ -1115,11 +1117,15 @@ Next, using $\pm 1$ contrast coding (sum contrast coding), fit a simple linear m
 - Use the likelihood ratio test (use the anova() function in R), find out if we can reject the null hypothesis that the relative clause types have no difference in reading time. Is the result of the likelihood ratio test any different if you carry out a likelihood ratio test for the model with 0,1 contrast coding?
 - Speculate on why there a difference between the correlations of the $\hat\beta_0$ and $\hat\beta_1$ in the treatment vs. sum contrast coding you carried out above. 
 
-### Using ANOVA to carry out hypothesis testing  {#sec:LMManova}
+```{exercise, LMManova}
+Using ANOVA to carry out hypothesis testing
+```
 
 Using the above data, with the sum contrast coding you defined above, carry out a null hypothesis significance test using the anova() function with an appropriate linear mixed model. What null hypothesis are you testing here, and what is your conclusion?
 
-### Computing ANOVA by hand {#sec:anovabyhand}
+```{exercise, anovabyhand}
+Computing ANOVA by hand
+```
 
 In this chapter, we saw how the ANOVA is computed in R:
 
@@ -1152,7 +1158,10 @@ Total & n & $Y^T Y$ & \\
 
 Reproduce this table for the analysis shown above as R code, and show that the results of `anova()` function (the F-value) above are identical to those produced through this table.
 
-### Generalized linear (mixed) model {#sec:GLMM}
+```{exercise, GLMM}
+Generalized linear (mixed) model
+```
+
 
 In the chapter, we saw the following code in connection with the logistic regression model. This is Hindi eyetracking data excerpted from @HusainVasishthNarayanan2015. The code below evaluates the effect of various predictors of sentence processing difficulty, such as word complexity and storage cost (SC), on skipping probability. 
 
