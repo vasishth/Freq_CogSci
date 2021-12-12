@@ -1631,7 +1631,7 @@ uppersigma<- 300
 
 [In this exercise, assume that Type I error probability is 0.05 unless otherwise stated, and that we are doing a one-sample t-test, with a two-sided hypothesis test.]
 
-You are given that the effect size is `r mu`, with 95\% confidence intervals \Sexpr{lowermu} and `r uppermu`. The standard deviation can range from `r lowersigma` to `r uppersigma`. 
+You are given that the effect size is `r mu`, with 95\% confidence intervals `r lowermu` and `r uppermu`. The standard deviation can range from `r lowersigma` to `r uppersigma`. 
 
 First, using the power.t.test function, draw for sample size `r n` three power curves for the three effect sizes (`r mu`, `r lowermu` and `r uppermu`), assuming that the standard deviation ranges from `r lowersigma` to `r uppersigma`. Draw a single plot showing all three curves, with the standard deviation on the x-axis and power on the y-axis.  
 
