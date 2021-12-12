@@ -966,14 +966,15 @@ For readers interested in the mathematics needed for statistics, the books by @f
 
 ## Exercises {#sec:Foundationsexercises}
 
-### Practice using the ```pnorm``` function {#sec:Foundationsexercisespnorm}
-
-#### Part 1 {#sec:FoundationsexercisespnormPart1}
+```{exercise, Foundationsexercisespnorm1}
+Practice using the ```pnorm``` function 
+```
 
 Given a normal distribution with mean 500 and standard deviation 100, use the `pnorm` function to calculate the probability of obtaining values between 200 and 800 from this distribution.
 
-#### Part 2 {#sec:FoundationsexercisespnormPart2}
-
+```{exercise, Foundationsexercisespnorm2}
+Practice using the ```pnorm``` function 
+```
 
 Calculate the following probabilities. 
 Given a normal distribution with mean 800 and standard deviation 150, what is the probability of getting 
@@ -982,17 +983,20 @@ Given a normal distribution with mean 800 and standard deviation 150, what is th
 - a score of 900 or more
 - a score of 800 or more
 
-#### Part 3 {#sec:FoundationsexercisespnormPart3}
 
+```{exercise, Foundationsexercisespnorm3}
+Practice using the ```pnorm``` function 
+```
 Given a normal distribution with mean 600 and standard deviation 200, what is the probability of getting 
 
 - a score of 550 or less.
 - a score between 300 and 800.
 - a score of 900 or more.
 
-### Practice using the ```qnorm``` function {#sec:Foundationsexercisesqnorm}
 
-#### Part 1 {#sec:FoundationsexercisesqnormPart1}
+```{exercise, Foundationsexercisesqnorm1}
+Practice using the ```qnorm``` function 
+```
 
 Consider a normal distribution with mean 1 and standard deviation 1.
 Compute the lower and upper boundaries such that:
@@ -1000,11 +1004,16 @@ Compute the lower and upper boundaries such that:
 - the area (the probability) to the left of the lower boundary is 0.10. 
 - the area (the probability) to the left of the upper boundary is 0.90.
 
-#### Part 2 {#sec:FoundationsexercisesqnormPart2}
+```{exercise, Foundationsexercisesqnorm2}
+Practice using the ```qnorm``` function 
+```
 
 Given a normal distribution with mean 650 and standard deviation 125. There exist two quantiles, the lower quantile q1 and the upper quantile q2, that are equidistant from the mean 650, such that the area under the curve of the Normal between q1 and q2  is 80%. Find q1 and q2. 
 
-### Maximum likelihood estimation 1 {#sec:FoundationsexercisesMLE1}
+
+```{exercise, Foundationsexercisesmle1}
+Maximum likelihood estimation
+```
 
 The function `dnorm` gives the likelihood given a data point (or multiple data) and a value for the mean and the standard deviation (sd). Using `dnorm`, compute 
 
@@ -1012,7 +1021,9 @@ The function `dnorm` gives the likelihood given a data point (or multiple data) 
 - the likelihood of the data point 420 assuming a mean of 420 and standard deviation 100.
 - the likelihood of the data point 420 assuming a mean of 400 and standard deviation 100.
 
-### Maximum likelihood estimation 2 {#sec:FoundationsexercisesMLE2}
+```{exercise, Foundationsexercisesmle2}
+Maximum likelihood estimation
+```
 
 ```{r echo=FALSE}
 x<-round(rnorm(10,mean=500,sd=10),0)
@@ -1060,12 +1071,15 @@ sum(dnorm(c(5,10),mean=10,sd=5,log=TRUE))
 - What is the sum of the log-likelihood if the mean used to compute the log-likelihood is ```r mn-2``` (assume a standard deviation of 5)? 
 - Which value for the mean, the MLE or ```r mn-2```, gives the higher log-likelihood? 
 
-
-### Generating bivariate data {#sec:Foundationsexercisesbivar}
+```{exercise, Foundationsexercisesbivariate}
+Generating bivariate data
+```
 
 Generate 50 data points from two random variables X and Y, where $X\sim Normal(50,100)$ and $Y\sim Normal(100,20)$. The correlation between the random variables is  0.7. Plot the simulated data points from Y against those from X.
 
-### Generating multivariate data {#sec:Foundationsexercisesmultivar}
+```{exercise, Foundationsexercisesmultivariate}
+Generating multivariate data
+```
 
 The bivariate case can be generalized to more than two dimensions.
 Generate 50 data points from three random variables X, Y, and Z, where $X\sim Normal(50,100)$, $Y\sim Normal(100,20)$, and $Z\sim Normal(200,50)$. The correlation between the random variables X and Y is  0.5, between X and Z is 0.2, an between Y and Z is 0.7. Here, you will have to define a $3\times 3$ variance covariance matrix, with the pairwise covariances in the off-diagonals. Plot the simulated data points as two-dimensional figures: Y against X, Y against Z, and X against Z.
