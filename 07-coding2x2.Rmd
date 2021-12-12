@@ -21,7 +21,7 @@ In chapter\ \@ref(ch:contr) in section\ \@ref(sec:4levelFactor), we have used a 
 ```{r, echo=FALSE, message=FALSE}
 data("df_contrasts4") 
 table4 <- df_contrasts4 %>% group_by(A, B) %>% # plot interaction
-    summarize(N=length(DV), M=mean(DV), SD=sd(DV), SE=SD/sqrt(N))
+    dplyr::summarise(N=length(DV), M=mean(DV), SD=sd(DV), SE=SD/sqrt(N))
 GM <-  mean(table4$M) # Grand Mean
 
 table4a <- as.data.frame(table4)
@@ -253,7 +253,7 @@ contrasts(df_contrasts4$A) <- contr.treatment(2)
 contrasts(df_contrasts4$B) <- contr.treatment(2)
 XcTr <- df_contrasts4 %>%
   group_by(A, B) %>%
-  summarise() %>%
+  dplyr::summarise() %>%
   model.matrix(~ 1 + A*B, .) %>%
   as.data.frame() %>% as.matrix()
 rownames(XcTr) <- c("A1_B1","A1_B2","A2_B1","A2_B2")
@@ -287,7 +287,7 @@ contrasts(df_contrasts4$A) <- contr.sum(2)
 contrasts(df_contrasts4$B) <- contr.sum(2)
 XcSum <- df_contrasts4 %>%
   group_by(A, B) %>%
-  summarise() %>%
+  dplyr::summarise() %>%
   model.matrix(~ 1 + A*B, .) %>%
   as.data.frame() %>% as.matrix()
 rownames(XcSum) <- c("A1_B1","A1_B2","A2_B1","A2_B2")
@@ -331,7 +331,7 @@ round(summary(fit_RT_F)$coefficients)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, results="hide"}
-tab5 <- df_contrasts5 %>% group_by(F) %>% summarize(M=mean(RT), SE=sd(RT)/sqrt(n()))
+tab5 <- df_contrasts5 %>% group_by(F) %>% dplyr::summarize(M=mean(RT), SE=sd(RT)/sqrt(n()))
 ```
 ```{r figRTF, fig=TRUE, include=TRUE, echo=FALSE, cache=FALSE, fig.width=2.5, fig.height=3, fig.cap = "Means and error bars (showing standard errors) for a simulated data-set of response times for two different groups of subjects, who have obtained a training in lexical decisions (F2) versus have obtained a control training (F1)."}
 (plot_RT <- ggplot(data=tab5, aes(x=F, y=M, ymin=M-SE, ymax=M+SE)) + 
@@ -344,7 +344,7 @@ We find (see model estimates and data shown in Fig.\ \@ref(fig:figRTF)) that res
 However, let's assume we have allocated subjects to the two groups randomly. Let's say that we also measured the IQ of each person using an IQ test. We did so, because we expected that IQ could have a strong influence on response times, and we wanted to control for this influence. We now can check whether the two groups had the same average IQ.
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
-df_contrasts5 %>% group_by(F) %>% summarize(M.IQ = mean(IQ))
+df_contrasts5 %>% group_by(F) %>% dplyr::summarize(M.IQ = mean(IQ))
 ```
 
 Interestingly, group F2 did not only obtain an additional training and had faster response times, but group F2 also had a higher IQ (mean of 115) on average than group F1 (mean IQ = 85). Thus, the random allocation of subjects to the two groups seems to have created - by chance - a difference in IQs. Now we can ask the question: why may response times in group F2 be faster than in group F1? Is this because of the training program in F2? Or is this simply because the average IQ in group F2 was higher than in group F1? To investigate this question, we add both predictor variables simultaneously in a linear model. Before we enter the continuous IQ variable, we center it, by subtracting its mean. Centering covariates is generally good practice. Moreover, it is often important to z-transform the covariate, i.e., to not only subtract the mean, but also to divide by its standard deviation (this can be done as follows: `df_contrasts5$IQ.s <- scale(df_contrasts5$IQ)`). The reason why this is often important is that the estimation doesn’t work well if predictors have different scales. For the simple models we use here, the estimation works fine without z-transformation. However, for more realistic more complex models, z-transformation of covariates is often very important.
@@ -445,7 +445,7 @@ str(df_contrasts7)
 
 ```{r cTab7Means, echo=FALSE, message=FALSE, warning=FALSE, results = "asis"}
 table7 <- df_contrasts7 %>% group_by(A, B) %>% # plot interaction
-    summarize(N=length(pDV), M=mean(pDV))
+    dplyr::summarize(N=length(pDV), M=mean(pDV))
 GM <-  mean(table7$M) # Grand Mean
 table7a <- as.data.frame(table7)
 names(table7a) <- c("Factor A","Factor B","N data",
