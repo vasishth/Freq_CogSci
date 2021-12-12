@@ -1165,7 +1165,13 @@ This means that linear mixed models will give you more robust estimates (think T
 
 
 
+
+
 ## Exercises {#sec:LMExercises1}
+
+```{exercise, LMsttest}
+By-subjects t-test in a two-condition design
+```
 
 Load the data-set below:
 
@@ -1173,55 +1179,35 @@ Load the data-set below:
 data("df_gibsonwu")
 ```
 
-The data consist of a repeated measures experiment comparing two conditions which are labeled obj-ext and subj-ext. The column subj refers to subject id, and the column item refers to item id. The column labeled rt refers to reading time in milliseconds.This is a standard Latin square design. 
+The data consist of a repeated measures experiment (self-paced reading) involving Chinese relative clauses. The experiment compares two conditions which are labeled obj-ext and subj-ext. The column subj refers to subject id, and the column item refers to item id. The column labeled rt refers to reading time in milliseconds at a critical word in the sentence. This is a standard Latin square design. 
 
-### By-subjects t-test {#sec:LMExercisesPart1}
+Using rt as a dependent variable, carry out the appropriate by-subjects and by-items t-test to evaluate the null hypothesis that there is no difference between the two conditions. Write down all the R commands needed to do the appropriate t-tests, and the resulting t-values and p-values. State whether we can reject the null hypothesis given the results of the t-tests; explain why.
 
-Using rt as a dependent variable, carry out the appropriate by-subjects t-test to evaluate the null hypothesis that there is no difference between the two conditions. Write down all the R commands needed to do the appropriate t-test, and the resulting t-value and p-value. State whether we can reject the null hypothesis given the results of the t-test; explain why.
+```{exercise, LMMGibsonWu}
+A linear mixed model for the two-condition design
+```
 
-### Fitting a linear mixed model  {#sec:LMExercisesPart2}
-
-Now,  using the data-frame called `crit` above, fit a linear mixed model (called M0). Recode the column called Type as  sum contrasts.  
+Now,  fit a linear mixed model (call it M1). Recode the column called Type as  sum contrasts ($\pm 0.5$).  
 
 ```{r echo=FALSE}
-gibsonwu<-df_gibsonwu
-gibsonwu$so<-ifelse(gibsonwu$type=="obj-ext",-1,1)
+df_gibsonwu$so<-ifelse(df_gibsonwu$type=="obj-ext",-1/2,1/2)
 ```
 
 Assume varying intercepts for subjects and varying intercepts for items (varying intercepts are sometimes called random intercepts). Write down the linear mixed models command, and  write down the fixed-effects estimates (intercept and slope) along with their standard errors. State whether we can reject the null hypothesis given the results of the t-value shown in the linear mixed model output; explain why.
 
-### Raw RTs vs. Log RTs  {#sec:LMExercisesPart3}
+```{exercise, LMMGibsonWuLogRT}
+Raw RTs vs. Log RTs
+```
 
 Repeat the t-test and the linear mixed model with log reading times as the dependent measure, instead of raw reading times. Does the conclusion change compared to the analyses using raw reading times?
 
-```{r echo=FALSE}
-## correct t-test
-crit_subj<-aggregate(rt~subj+type,mean,
-                     data=gibsonwu)
-
-t.test(log(rt)~type,paired=TRUE,data = crit_subj)
-
-M0<-lmer(rt~so+(1|subj)+(1|item),
-           gibsonwu)
-summary(M0)
-
-gibsonwu$logrt<-log(gibsonwu$rt)
-crit_subj<-aggregate(logrt~subj+type,mean,
-                     data=gibsonwu)
-
-t.test(logrt~type,paired=TRUE,data = crit_subj)
-
-M0<-lmer(logrt~so+(1|subj)+(1|item),
-           gibsonwu)
-summary(M0)
+```{exercise, LMMGibsonWuPower}
+Power analysis on the Gibson and Wu data
 ```
 
-
-### Power calculation using power.t.test {#sec:LMExercisesPart4}
-
 ```{r echo=FALSE}
 crit_subj<-aggregate(rt~subj+type,mean,
-                     data=gibsonwu)
+                     data=df_gibsonwu)
 d<-subset(crit_subj,type=="subj-ext")$rt-
   subset(crit_subj,type=="obj-ext")$rt
 stddev<-sd(d)
@@ -1229,42 +1215,37 @@ n<-length(d)
 SE<-round(stddev/sqrt(n))
 ```
 
-The researcher wants to achieve 80% statistical power in a future study. Based on the available data above, she determines that the standard error (note: not the standard deviation!) of the difference in means between the conditions Type 1 and Type 2 is `r SE`.  She has reason to believe that the true  difference in means is 30 ms. What is the number of participants (to the nearest whole number) needed to  achieve approximately 80% power? Use the power.t.test function to compute your answer. Write down the `power.t.test` function specification you used, as well as the number of participants needed, based on the output of the power.t.test function. 
+The researcher wants to achieve 80% statistical power in a future study that replicates the Gibson and Wu study. Based on the available data above, she determines that the standard error (note: not the standard deviation!) of the difference in means between the two conditions is `r SE`.  She has reason to believe that the true  difference in means is $30$ ms. What is the number of participants  needed to  achieve approximately 80% power? Use the power.t.test function to compute your answer. Write down the `power.t.test` function specification you used, as well as the number of participants needed, based on the output of the power.t.test function. 
 
-```{r echo=FALSE,eval=FALSE}
-nsubj<-37
-power.t.test(delta = 30,
-             sd=SE*sqrt(nsubj), 
-             power = .80, 
-             sig.level = 0.05,
-             type = "one.sample",
-             alternative = "two.sided")$n
+```{exercise, LMMGibsonWuresiduals}
+Residuals in a linear mixed model for the two-condition design
 ```
-
-### Residuals {#sec:LMExercisesPart5}
-
-The plot below shows the distribution of the residuals from model M0 (fit on raw reading times) plotted against the standard normal distribution with mean 0 and  standard  deviation 1. Explain what the plot tells us  about one of the model assumptions of the linear mixed model M0 that you fit earlier.
+The plot below shows the distribution of the residuals from model M (fit on raw reading times) plotted against the standard normal distribution with mean 0 and  standard  deviation 1. Explain what the plot tells us  about one of the model assumptions of the linear mixed model M that we fit earlier.
 
 (You can ignore the numbers below the plot.)
 
 ```{r echo=FALSE,message=FALSE,results="asis"}
-M0<-lmer(rt~so+(1|subj)+(1|item),
-           gibsonwu)
+M<-lmer(rt~so+(1|subj)+(1|item),
+           df_gibsonwu)
 
 library(car)
-qqnorm(residuals(M0))
+qqnorm(residuals(M))
 ```
 
-### Understanding contrast coding {#sec:LMExercisesPart6}
+```{exercise, LMMGibsonWuContrastCoding}
+Understanding contrast coding
+```
 
-Using only your estimates of the intercept and the slope in model M0's fixed effects output (the model fit on raw reading times), write down the mean of the  condition labeled obj-ext in the data, and the mean of the condition labeled subj-ext.
+Using only your estimates of the intercept and the slope in model M's fixed effects output (the model fit on raw reading times), write down the mean of the  condition labeled obj-ext in the data, and the mean of the condition labeled subj-ext.
 
-### Understanding  the  fixed-effects output {#sec:LMExercisesPart7}
+```{exercise, LMMGibsonWuFE}
+Understanding the fixed-effects output
+```
 
-Suppose that the model M0's output for the fixed effects analysis were as follows. `so` is the sum-coded contrast specification shown above.
+Suppose that the model M's output for the fixed effects analysis were as follows. `so` is the sum-coded contrast specification shown above.
 
 ```{r echo=FALSE}
-results<-summary(M0)$coefficients
+results<-summary(M)$coefficients
 results[2,3]<-2
 results[2,2]<-NA
 ```
@@ -1275,12 +1256,10 @@ results
 
 What is the value of the standard error of the slope (`so`), which is labeled NA above?
 
-### Understanding the null hypothesis test {#sec:LMExercisesPart8}
+```{exercise, LMMGibsonWuNHST}
+Understanding the null hypothesis test
+```
 
-A researcher fits a linear mixed model to compare the reading times between two conditions (a) and (b), just like in the  above study. Her hypothesis is that the mean for condition (a) is larger than the  mean for (b). She observes that condition a has sample mean 500 ms, and condition (b) has  sample mean 450 ms.  She also establishes from the linear mixed model that the t-value is 1.94. The approximate p-value associated with  this t-value is `r round(2*pnorm(-1.94),3)`. Answer the following: (A) Do we have evidence against the null hypothesis and (B) do we have evidence for the particular research hypothesis that the researcher has? 
+A researcher fits a linear mixed model a new data set to compare the reading times between two conditions (a) and (b), just like in the  above study. Her hypothesis is that the mean for condition (a) is larger than the  mean for (b). She observes that condition (a) has sample mean 500 ms, and condition (b) has  sample mean 450 ms.  She also establishes from the linear mixed model that the t-value is 1.94. The approximate p-value associated with  this t-value is `r round(2*pnorm(-1.94),3)`. Answer the following: (A) Do we have evidence against the null hypothesis, and (B) do we have evidence for the particular research hypothesis that the researcher has? 
 
-The researcher runs the  same analysis as above on  a new data-set that has the same design as above, and now gets a p-value of 0.001.  Now she has stronger evidence than in the above case where the p-value was `r round(2*pnorm(-1.94),3)`. What does she have stronger evidence for? Does she have stronger evidence for the null hypothesis, or stronger evidence in favor of her particular research hypothesis?
-
-
-
-
+The researcher runs the  same analysis as above on  a new data-set that has the same design as above, and now gets a p-value of 0.001. What is the approximate t-value here (assume that the standard normal distribution can be used to approximate the t-value)?  Now she has stronger evidence than in the above case where the p-value was `r round(2*pnorm(-1.94),3)`. What does she have stronger evidence for? Does she have stronger evidence for the null hypothesis, or stronger evidence in favor of her particular research hypothesis (or both)?
