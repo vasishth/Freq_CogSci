@@ -19,7 +19,7 @@ str(df_contrasts1)
 
 ```{r, echo=FALSE}
 table1 <- df_contrasts1 %>% group_by(F) %>% # Table for main effect F
-   summarize(N=n(), M=mean(DV), SD=sd(DV), SE=round(SD/sqrt(N),1) )
+   dplyr::summarize(N=n(), M=mean(DV), SD=sd(DV), SE=round(SD/sqrt(N),1) )
 table1a <- as.data.frame(table1)
 names(table1a) <- c("Factor","N data","Est. means","Std. dev.","Std. errors")
 (GM <-  mean(table1$M)) # Grand Mean
@@ -298,7 +298,7 @@ names(df_contrasts2)[1]
 
 ```{r, echo=FALSE}
 table.word <- df_contrasts2 %>% group_by(F) %>% 
-  summarise(N=length(DV), M=mean(DV), 
+  dplyr::summarise(N=length(DV), M=mean(DV), 
             SD=sd(DV), SE=sd(DV)/sqrt(N))
 table.word1 <- as.data.frame(table.word)
 names(table.word1) <- c("Factor","N data",
@@ -512,7 +512,7 @@ The sample sizes for each level and the means and standard errors are shown in T
 ```{r, echo=FALSE, message=FALSE}
 data("df_contrasts3") 
 table3 <- df_contrasts3 %>% group_by(F) %>% 
-   summarize(N=length(DV), M=mean(DV), SD=sd(DV), SE=SD/sqrt(N) )
+   dplyr::summarize(N=length(DV), M=mean(DV), SD=sd(DV), SE=SD/sqrt(N) )
 (GM <-  mean(table3$M)) # Grand Mean
 table3a <- as.data.frame(table3)
 names(table3a) <- c("Factor","N data","Est. means","Std. dev.","Std. errors")
