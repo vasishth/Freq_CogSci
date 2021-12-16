@@ -314,6 +314,10 @@ The test indicates that we can reject the null hypothesis that the correlation p
 
 A final point: the likelihood ratio has essentially the same logic as the t-test, and that includes the fact that the focus is on the rejection of the null. The null cannot be accepted in the face of a null result, unless there is a good case to be made that power is sufficiently high (we will investigate this point later, in the simulation chapter). Also, since the likelihood ratio depends on defining the alternative model using the maximum likelihood estimate (the sample mean), it suffers from exactly the same problem as the t-test (Type M errors in the face of low power). We will also investigate this point in the simulation chapter. 
 
+## Summary
+
+## Further reading
+
 ## Exercises {#sec:HypTestExercises}
 
 ```{exercise, HypTestExercisesChinese}
