@@ -57,22 +57,17 @@ Many excellent introductory textbooks already exist that discuss data analysis i
 eyetracking data (visual world and reading experiments), response time data (e.g., self-paced reading, picture naming), event-related potential data, ratings (e.g., acceptability ratings), yes/no responses (e.g., speeded grammaticality judgements), and accuracy data.  Second, from the very outset, we stress a particular workflow that has as its centerpiece data simulation; we aim to teach a philosophy that involves thinking about the assumed underlying generative process, *even before the data are collected*. By the "generative process", we mean the underlying assumptions about the "process" that produced the data; what exactly this means will presently become clear. 
 The data analysis approach that we hope to teach through this book (once this book is in its final form) involves a cycle of experiment design analysis and model validation using simulated data.     
 
-## Prerequisites 
+## Prerequisites {-}
 
 This book assumes high school arithmetic and algebra. Elementary concepts of probability theory are assumed; the sum and the  product rules, and the fact that  the probabilities of all possible events must sum to 1, are the extent of the knowledge assumed.  We also expect that the reader already knows basic constructs in the programming language R [@R-base], such as writing for-loops. For newcomers to R, we will eventually provide a quick introduction in the appendix that covers all the constructs used in the book (this has not yet been done). For those lacking background in R, there are many good online resources on R that they can consult as needed. Examples are: [R for data science](https://r4ds.had.co.nz/), and [Efficient R programming](https://csgillespie.github.io/efficientR/). We also assume that the reader has done some data analysis previously, either in linguistics or psychology. This should not be the first statistics-related book they read. The reader should have encountered concepts like parameters and parameter estimation.
 
-
-```{block2, type='rmdnote'}
-provide comprehensive book recommendations 
-```
-
-## How to read this book
+## How to read this book {-}
 
 The chapters in this book are intended to be read in sequence.   
 
 to-do: add a Mackay type chapter ordering for different scenarios.
 
-## Online materials
+## Online materials {-}
 
 The entire book, including all data and source code, is available online from [https://github.com/vasishth/Freq\_CogSci](https://github.com/vasishth/Freq_CogSci). Solutions to the exercises will be provided (to-do).
 
@@ -82,7 +77,7 @@ The package can be installed by first installing the `devtools` package, and the
 
 `devtools::install_github("vasishth/lingpsych")`
 
-## Software needed
+## Software needed {-}
 
 Before you start, please install
 
@@ -113,7 +108,7 @@ library(designr)
 ```
 
 
-## Acknowledgements
+## Acknowledgements {-}
 
 We are grateful to the many generations of students at the University of Potsdam, various summer schools at ESSLLI, the LOT winter school, other short courses we have taught at various institutions, and the annual summer school on Statistical Methods for Linguistics and Psychology (SMLP) at the University of Potsdam. The participants in these courses helped us considerably in improving the material presented here. We are also grateful to members of Vasishth lab for comments on earlier drafts of this book. 
 
