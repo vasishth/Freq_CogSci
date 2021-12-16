@@ -373,9 +373,13 @@ mean(y);var(y)
 
 As mentioned earlier, depending on the sample size, the sample mean and sample variance *from a particular sample* may or may not be close to the true values of the respective parameters, despite the fact that these are *maximum likelihood estimates*. The estimates of the mean and variance from a particular sample will be close to the true values of the parameters as the sample size goes to infinity.
 
+
+
 ## Other common distributions
 
 Here, we briefly present some of the distributions that we will need or use in this book. Throughout, we assume independent and identically distributed data.
+
+### The Chi-square distribution
 
 ### The t-distribution
 
@@ -394,6 +398,8 @@ The t-distribution becomes the Cauchy distribution if $n=2$. The Cauchy distribu
 
 There are four functions in `R` that serve the same purpose as the `dnorm`, `pnorm`, `qnorm`, `rnorm` functions for the Normal:
 `dt`, `pt`, `qt`, `rt`.
+
+### The F distribution
 
 ### The Gamma distribution
 
@@ -819,26 +825,10 @@ One significance of the MLE is that, having assumed a particular underlying PMF/
 
 What are the distributional properties of the mean **under repeated sampling**? This is a question that forms the basis for hypothesis testing in the frequentist paradigm. So we turn to this topic in the next chapter.
 
-
-
-## Summary of useful R functions relating to univariate distributions
-
-Table \@ref(tab:dpqrfunctions) summarizes the different functions relating to univariate PMFs and PDFs, using the Binomial and Normal as examples.
-
-Table: (\#tab:dpqrfunctions) Important R functions relating to two univariate distributions, the Binomial and the Normal. In the table, prob represents probability and ranges from 0 to 1. $P(y)$ is the probability of observing $y$; $F(y)$ is the cumulative distribution function (CDF); and $F^{-1}(prob)$ is the inverse of the CDF.
-
-                                              Discrete              Continuous
-  ------------------------------------ ---------------------- ----------------------
-  Example:                              Binomial(n,$\theta$)   Normal($\mu,\sigma$)
-  Likelihood function                          dbinom                 dnorm
-  Probability: $P(Y=y)$                 dbinom                always 0
-  CDF, $F(y)=P(Y\geq y)=prob$           pbinom                 pnorm
-  Inverse CDF, $F^{-1}(prob)=y$         qbinom                 qnorm
-  Generate simulated data                      rbinom                 rnorm
-
-Other distributions, such as the t-distribution, the Uniform, Exponential, Gamma, Beta, etc., have their own set of d-p-q-r functions in R. 
-
-## Summary of random variable theory
+:::: {.blackbox data-latex=""}
+::: {data-latex=""}
+**Basic random variable theory: A formal statement**
+:::
 
 We can summarize the above informal concepts relating to random variables very compactly if we re-state them in mathematical form. A mathematical statement has the advantage not only of brevity but also of reducing ambiguity.  
 
@@ -957,8 +947,26 @@ Similarly:
 \begin{equation}
 f_Y(y) =  \int_{-\infty}^{\infty} f(x,y)\, dx		
 \end{equation}
+::::
 
-	
+## Useful R functions relating to univariate distributions
+
+Table \@ref(tab:dpqrfunctions) summarizes the different functions relating to univariate PMFs and PDFs, using the Binomial and Normal as examples.
+
+Table: (\#tab:dpqrfunctions) Important R functions relating to two univariate distributions, the Binomial and the Normal. In the table, prob represents probability and ranges from 0 to 1. $P(y)$ is the probability of observing $y$; $F(y)$ is the cumulative distribution function (CDF); and $F^{-1}(prob)$ is the inverse of the CDF.
+
+                                              Discrete              Continuous
+  ------------------------------------ ---------------------- ----------------------
+  Example:                              Binomial(n,$\theta$)   Normal($\mu,\sigma$)
+  Likelihood function                          dbinom                 dnorm
+  Probability: $P(Y=y)$                 dbinom                always 0
+  CDF, $F(y)=P(Y\geq y)=prob$           pbinom                 pnorm
+  Inverse CDF, $F^{-1}(prob)=y$         qbinom                 qnorm
+  Generate simulated data                      rbinom                 rnorm
+
+Other distributions, such as the t-distribution, the Uniform, Exponential, Gamma, Beta, etc., have their own set of d-p-q-r functions in R. 
+
+## Summary	
 	
 ## Further reading
 
