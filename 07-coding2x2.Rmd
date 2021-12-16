@@ -65,7 +65,7 @@ row.names(tab16) <- NULL
 kbl(tab16, booktabs = T, position= "h",vline = "", caption="Estimated ANOVA model.") # format="latex", 
 ```
 
-```{r table17, echo=FALSE, results="asis", eval = FALSE}
+```{r table17, echo=FALSE, results="asis", eval = TRUE}
 tab17 <- data.frame(round(coef(summary(fit_AB_mr)),3))
 names(tab17) <- c("Estimate","Std. Error","t","p")
 tab17 <- cbind(Predictor=row.names(tab17),tab17)
