@@ -1070,11 +1070,11 @@ plot(dose.glm$fit,dose.glm$resid,xlab="Fitted values",
      main="Residuals versus fitted values")
 ```
 
-### Summary
+## Summary
 
 In this chapter, we learnt about the matrix formulation of the linear model. This led to the matrix formulation of the analysis of variance (ANOVA), and some other related topics in linear modeling, such as the variance inflation factor. Finally, we encountered the basic theory behind the generalized linear model, focusing on logistic regression.
 
-### Further reading
+## Further reading
 
 A complete introduction to the theory of linear algebra needed for statistics is provided in @fieller. A good introduction to linear modeling theory is @fox1997applied. Other useful textbooks are @DraperSmith, @dobson2011introduction, @seber2012linear, and @monty. The classic textbook for generalized linear models is @mccullagh2019generalized.
 
