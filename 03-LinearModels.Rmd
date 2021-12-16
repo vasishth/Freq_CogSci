@@ -78,13 +78,13 @@ y = 471 - 102 \times 1 + \varepsilon \hbox{ where } \varepsilon \sim Normal(0,\h
 In these data,  the parameter $\hat\sigma$ is estimated to be $213$. How do we know what this estimate is? This parameter's estimate can be derived from the by-subjects t-test output above: The observed t-value is 
 
 \begin{equation}
-obs.t= \frac{\bar{x}}{s/\sqrt{n}} 
+t_obs= \frac{\bar{x}}{s/\sqrt{n}} 
 \end{equation}
 
 Solving for $s$:
 
 \begin{equation}
- s = \bar{x} \times \sqrt{n}/obs.t = -102 \times \sqrt{42}/-3.109  =  213
+ s = \bar{x} \times \sqrt{n}/t_obs = -102 \times \sqrt{42}/-3.109  =  213
 \end{equation}
 
 So, our model for the relative clause data consists of two equations:
@@ -186,7 +186,7 @@ $H_0: \beta_1 = 0$
 The t-test value printed out in the linear model is simply the familiar t-test formula in action:
 
 \begin{equation}
-obs.t = \frac{\beta_1 - 0}{SE}
+t_obs = \frac{\beta_1 - 0}{SE}
 \end{equation}
 
 The  intercept also has a null hypothesis associated with it, namely that 
@@ -1163,9 +1163,7 @@ This means that linear mixed models will give you more robust estimates (think T
 
 ## Summary 
 
-
-
-
+## Further reading
 
 ## Exercises {#sec:LMExercises1}
 
