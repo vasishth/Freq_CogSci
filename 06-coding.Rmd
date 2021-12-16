@@ -484,7 +484,7 @@ HcSum <- hypr(b1 = nouns ~ (nouns + verbs + adjectives)/3,
 HcSum
 ```
 
-The results show that the null hypotheses or comparisons between condition means have been re-written into a form where $0$ is coded on the left side of the equation, and the condition means together with associated weights are written on the right side of the equation. This presentation makes it easy to see the weights of the condition means to code a certain null hypothesis or comparison. The next part of the results shows the hypothesis matrix, which contains the weights from the condition means. Thus, `hypr` takes as input comparisons between condition means, which also define null hypotheses, and automatically extracts the corresponding weights and encodes them into the hypothesis matrix. `hypr` moreover applies the generalized matrix inverse to obtain the contrast matrix from the hypothesis matrix. Note that the different steps correspond exactly to the steps we had carried out manually in the preceeding section. `hypr` automatically performs these steps for us. We can now extract the contrast matrix by a simple function call:
+The results show that the null hypotheses or comparisons between condition means have been re-written into a form where $0$ is coded on the left side of the equation, and the condition means together with associated weights are written on the right side of the equation. This presentation makes it easy to see the weights of the condition means to code a certain null hypothesis or comparison. The next part of the results shows the hypothesis matrix, which contains the weights from the condition means. Thus, `hypr` takes as input comparisons between condition means, which also define null hypotheses, and automatically extracts the corresponding weights and encodes them into the hypothesis matrix. `hypr` moreover applies the generalized matrix inverse to obtain the contrast matrix from the hypothesis matrix. Note that the different steps correspond exactly to the steps we had carried out manually in the preceding section. `hypr` automatically performs these steps for us. We can now extract the contrast matrix by a simple function call:
 
 ```{r}
 contr.hypothesis(HcSum)
@@ -493,6 +493,8 @@ contr.hypothesis(HcSum)
 We can assign this contrast to our factor as we did before, and again fit a linear model:
 
 ```{r, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
+df_contrasts2$F<-factor(df_contrasts2$F,
+                        levels=c("nouns","verbs","adjectives"))
 contrasts(df_contrasts2$F) <- contr.hypothesis(HcSum)
 fit_Sum2 <- lm(DV ~ 1 + F,
                  data = df_contrasts2) 
