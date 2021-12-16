@@ -450,7 +450,8 @@ for(i in 1:nsim){
 ## minimize convergence problems: 
 ## analysis done after log-transforming:  
 m<-lmer(log(rt) ~ so + (so||subj) + 
-          (so||item), data=dat_sim)
+          (so||item), data=dat_sim,
+        control=lmerControl(calc.derivs=FALSE))
 ## ignore failed trials
 if(any( grepl("failed to converge", m@optinfo$conv$lme4$messages)) ||
         any(grepl("boundary", m@optinfo$conv$lme4$messages))){
@@ -530,7 +531,7 @@ for(i in 1:nsim){
 ## no correlations estimated to avoid convergence problems: 
 ## analysis done after log-transforming:  
 m<-lmer(log(rt) ~ so + (so||subj) + 
-          (so||item), data=dat_sim)
+          (so||item), data=dat_sim,control=lmerControl(calc.derivs=FALSE))
 ## ignore failed trials
 if(any( grepl("failed to converge", m@optinfo$conv$lme4$messages) )){
   failed[i]<-1
@@ -573,7 +574,8 @@ Next, we fit a linear mixed model to the data. As an example, we use raw reading
 ```{r}
 ## frequentist analysis:
 library(lme4)
-m_lmer<-lmer(rawRT~so + (1+so|subject)+(1+so|item),gg05e1)
+m_lmer<-lmer(rawRT~so + (1+so|subject)+(1+so|item),gg05e1,
+             control=lmerControl(calc.derivs=FALSE))
 summary(m_lmer)
 ```
 
@@ -759,30 +761,42 @@ simdat<-design.codes(design)
 
 ```
 
+
+
 ## Exercises {#sec:Simulationexercises}
 
-### Drawing a power curve given a range of effect sizes {#sec:SimulationexercisesPart1}
+```{exercise,SimulationexercisesPart1}
+Drawing a power curve given a range of effect sizes
+```
 
 Use the simulation code as provided to compute a power function for effects sizes for the English relative clause effect ranging from 0.025, 0.05, 0.10, and 0.15, given that you have 16 items and 42 participants.
 
-### Power and log-transformation {#sec:SimulationexercisesPart2}
+```{exercise,SimulationexercisesPart2}
+Power and log-transformation
+```
 
 Modify the simulation code to generate not log-normally distributed data, but normally distributed data. Refit the @grodner data using raw reading times (i.e., do not log-transform them), and then use the parameter estimates from the data to compute a power function for effects sizes for the relative clause effect ranging from 10, 30, 60, 80 ms, given that you have 16 items and 42 participants. Compare your power curve with that of Part 1. 
 
-### Evaluating models by generating simulated data {#sec:SimulationexercisesPart3}
+```{exercise,SimulationexercisesPart3}
+Evaluating models by generating simulated data
+```
 
 Generate data from the simulation function assuming a log-normal likelihood and then generate data from the function you wrote in Part 2 that assumes a normal likelihood. Compare the distributions of the two sets of  simulated data to the observed distributions. Which simulation code produces more realistic data, and why?
 
-### Using simulation to check parameter recovery {#sec:SimulationexercisesPart4}
+```{exercise,SimulationexercisesPart4}
+Using simulation to check parameter recovery
+```
 
 Check whether the simulation code you wrote assuming a normal likelihood can recover the parameters. 
 
-### Sample size calculations using simulation {#sec:SimulationexercisesPart5}
+```{exercise,SimulationexercisesPart5}
+Sample size calculations using simulation
+```
 
 Load the data-set shown below: 
 
 ```{r}
-gibsonwu<-read.table("data/gibsonwucrit.txt")
+data("gibsonwu")
 ```
 
 Use simulation to determine how many subjects you would need to achieve power of 80%, given 16 items, and an effect size of  0.02 on the log ms scale. Draw a power curve: on the x-axis show the number of subjects, and on the y-axis the estimated power. Now draw two further curves, one for an effect size of 0.05 and another for an effect size of 0.10. This gives you a power curve, taking the uncertainty in the effect size into account.
