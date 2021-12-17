@@ -10,7 +10,7 @@ An example of a $2\times 2$ matrix:
 
 ```{r}
 ## a 2x2 matrix:
-(m1<-matrix(1:4,2,2))
+(m1 <- matrix(1:4, 2, 2))
 ```
 
 An important operation on matrices is the transpose: the rows become columns and the columns rows. If $X$ is  matrix, $X^T$ is its transpose. R has a function ```t()``` that transposes a matrix: 
@@ -25,14 +25,14 @@ t(m1)
 Matrix addition and subtraction are easy, they are cell-wise operations. An example shows how this works:
 
 ```{r}
-m1+m1
-m1-m1
+m1 + m1
+m1 - m1
 ```
 
 Matrix multiplication is defined as follows. Think of this simple situation first, where you have a vector of values:
 
 ```{r}
-(m2<-rnorm(5))
+(m2 <- rnorm(5))
 ## this is a vector:
 str(m2)
 ```
@@ -44,15 +44,15 @@ $x_1 \cdot x_1+x_2 \cdot x_2+x_3 \cdot x_3+x_4 \cdot x_4+x_5 \cdot x_5$
 Using R:
 
 ```{r}
-(sum(m2*m2))
+(sum(m2 * m2))
 ```
 
 An important observation we will need later is that if two vectors are orthogonal, i.e., at 90 degrees to one another, then their dot product is 0. A simple example is two vectors on the cartesian plane that go along the x and y axes:
 
 ```{r}
-v1<-c(0,1)
-v2<-c(1,0)
-sum(v1*v2)
+v1 <- c(0, 1)
+v2 <- c(1, 0)
+sum(v1 * v2)
 ```
 
 Matrix multiplication does exactly the above dot product operation (for arbitrarily large matrices). In R, matrix multiplication is carried out using a special operator (the * operator we are used to using for multiplication is used only for ordinary scalar multiplication). Notice that we have first converted the vector with $5$ cells into a $5\times 1$ matrix:
@@ -60,7 +60,7 @@ Matrix multiplication does exactly the above dot product operation (for arbitrar
 ```{r}
 t(matrix(m2))
 matrix(m2)
-t(matrix(m2))%*%matrix(m2)
+t(matrix(m2)) %*% matrix(m2)
 ```
 
 Note that two matrices can only be multiplied if they are **conformable**: the number of columns of the first matrix has to be the same as the number of rows of the second matrix. So, if you have an $1\times 5$ matrix, you can multiply it with an $5\times 1$ matrix, and the end result of the multiplication will be an $1\times 1$ matrix (i.e., a scalar value). In the above example, the vector m2, converted to a matrix, is $5\times 1$ in dimensions; you cannot multiply a $5\times 1$  with a $5\times 1$  matrix, but the transform of m2 to a $1\times 5$ matrix can be multiplied with the $5\times 1$ matrix.
@@ -68,35 +68,35 @@ Note that two matrices can only be multiplied if they are **conformable**: the n
 More generally, if you have an $n\times m$ matrix and multiply it with an $m\times p$ matrix, you will get a $n\times p$ matrix, and the operations we have to do is the dot product operation, repeatedly applied to each row of the first matrix and each column of the second matrix. For example:
 
 ```{r}
-X1<-matrix(rnorm(4),ncol=2)
-X2<-matrix(rnorm(4),ncol=2)
+X1 <- matrix(rnorm(4), ncol = 2)
+X2 <- matrix(rnorm(4), ncol = 2)
 ## matrix multiplication:
-X1%*%X2
+X1 %*% X2
 ## is a series of dot products of vectors:
-sum(X1[1,] * X2[,1])
-sum(X1[1,] * X2[,2])
-sum(X1[2,] * X2[,1])
-sum(X1[2,] * X2[,2])
+sum(X1[1, ] * X2[, 1])
+sum(X1[1, ] * X2[, 2])
+sum(X1[2, ] * X2[, 1])
+sum(X1[2, ] * X2[, 2])
 ```
 
 Scalar matrix multiplication is easy. Multiplying a matrix M with a scalar value just amounts to multiplying the scalar with each cell of the matrix. The order of multiplication doesn't matter:
 
 ```{r}
-5*m2
-m2*5
+5 * m2
+m2 * 5
 ```
 ### Diagonal matrix and identity matrix
 
 A diagonal matrix is a square matrix that has zeros in its off-diagonals:
 
 ```{r}
-diag(c(1,2,4))
+diag(c(1, 2, 4))
 ```
 
 An identity matrix is a diagonal matrix with 1's along its diagonal:
 
 ```{r}
-diag(rep(1,3))
+diag(rep(1, 3))
 ```
 
 For a $3\times 3$ identity matrix, we can write $I_3$, and for an nxn identity matrix, $I_n$.
@@ -104,15 +104,15 @@ For a $3\times 3$ identity matrix, we can write $I_3$, and for an nxn identity m
 Multiplying an identity matrix with any (conformable) matrix gives that matrix back:
 
 ```{r}
-(I<-diag(c(1,1)))
+(I <- diag(c(1, 1)))
 
-(m3<-matrix(c(6,7,8,9),2,2))
-(I%*%m3)
+(m3 <- matrix(c(6, 7, 8, 9), 2, 2))
+(I %*% m3)
 
 
 ## the matrix does not have to be square:
-(m4<-matrix(c(2,3,6,7,8,9),2,3))
-(I%*%m4)
+(m4 <- matrix(c(2, 3, 6, 7, 8, 9), 2, 3))
+(I %*% m4)
 ```
 
 
@@ -121,8 +121,8 @@ Multiplying an identity matrix with any (conformable) matrix gives that matrix b
 If A is a square $n\times n$ matrix, then we write $AA$ as $A^2$, and so on. If A is diagonal, then $AA$ is just the diagonal matrix with the diagonal elements of A squared:
 
 ```{r}
-m<-diag(c(1,2,3))
-m%*%m
+m <- diag(c(1, 2, 3))
+m %*% m
 ```
 
 
@@ -142,8 +142,8 @@ then, $B$ is the inverse (it is unique) of $A$. We write $B=A^{-1}$.  The invers
 Pre-multiplying a matrix like $A$ above by its inverse $A^{-1}$ gives an identity matrix (the R function ```solve``` computes the inverse of a matrix):
 
 ```{r}
-(m5<-matrix(c(2,3,4,5),2,2))
-(round(solve(m5)%*%m5))
+(m5 <- matrix(c(2, 3, 4, 5), 2, 2))
+(round(solve(m5) %*% m5))
 ```
 
 If a matrix is not invertible, we say that it is **singular**.
@@ -151,12 +151,12 @@ If a matrix is not invertible, we say that it is **singular**.
 A useful fact to know about non-singular matrices is the following relationship. If A and B are non-singular matrices then $(AB)^{-1} = B^{-1}A^{-1}$. Let's try out an example:
 
 ```{r}
-m6<-matrix(c(6,7,8,9),2,2)
+m6 <- matrix(c(6, 7, 8, 9), 2, 2)
 solve(m6)
 ## (m5m6)^{-1}:
-solve(m5%*%m6)
+solve(m5 %*% m6)
 ## m6^{-1}m5^{-1}:
-solve(m6)%*%solve(m5)
+solve(m6) %*% solve(m5)
 ```
 
 ### Linear independence, and rank
@@ -169,7 +169,7 @@ $\alpha r_1+ \beta r_2+ \gamma r_3 = (0,0,0)$.
 If the rows or columns of a matrix A are linearly dependent, then the matrix is singular, i.e., it is not invertible.
 
 ```{r}
-(m7<-matrix(c(1,1,3,1,-1,1,-2,2,4),3,3,byrow=TRUE))
+(m7 <- matrix(c(1, 1, 3, 1, -1, 1, -2, 2, 4), 3, 3, byrow = TRUE))
 ## invertible:
 solve(m7)
 ```
@@ -238,9 +238,9 @@ library(languageR)
 
 ```{r}
 data("lexdec")
-m<-lm(RT~Frequency,lexdec)
+m <- lm(RT ~ Frequency, lexdec)
 summary(m)$coefficients
-plot(RT~Frequency,lexdec)
+plot(RT ~ Frequency, lexdec)
 abline(m)
 ```
 
@@ -315,8 +315,8 @@ When we have a deterministic model  $y=\phi(f(x)^T,\beta)=\beta_0+\beta_1x$, thi
 This is like solving the equation $Ax=b$ in linear algebra: we solve for $\beta$ in $X\beta=y$ e.g., by pre-multiplying by $X^{-1}$: $X^{-1}X\beta=X^{-1}y$. For example, if we have:
 
 ```{r}
-(X<-matrix(c(1,2,2,2,2,4,6,8,3,6,8,10),nrow =3,byrow=TRUE))
-(y<-matrix(c(1,5,6)))
+(X <- matrix(c(1, 2, 2, 2, 2, 4, 6, 8, 3, 6, 8, 10), nrow = 3, byrow = TRUE))
+(y <- matrix(c(1, 5, 6)))
 ```
 
 We can solve for $x$ as follows (ginv is a function that computed a so-called generalized inverse for non-square matrices):
@@ -324,9 +324,9 @@ We can solve for $x$ as follows (ginv is a function that computed a so-called ge
 ```{r}
 library(MASS)
 ## Solve for x in Ax=y:
-x<-ginv(X)%*%y
+x <- ginv(X) %*% y
 ## confirm:
-X%*%x
+X %*% x
 ```
 
 But when we have a non-deterministic model 
@@ -373,8 +373,10 @@ X is of full rank, therefore $X^TX$ is invertible. One crucial detail, whose sig
 Let's look at a concrete example:
 
 ```{r}
-(X<-matrix(c(rep(1,8),rep(c(-1,1),each=4),
-            rep(c(-1,1),each=2,2)),ncol=3))
+(X <- matrix(c(
+  rep(1, 8), rep(c(-1, 1), each = 4),
+  rep(c(-1, 1), each = 2, 2)
+), ncol = 3))
 library(Matrix)
 ## full rank:
 rankMatrix(X)
@@ -455,21 +457,21 @@ Var(\hat\beta)= \sigma^2 (X^TX)^{-1}
 Let's make this concrete using the ```lexdec``` data-set as an example:
 
 ```{r}
-y<-lexdec$RT
-x<-lexdec$Frequency
-m0<-lm(y~x)
+y <- lexdec$RT
+x <- lexdec$Frequency
+m0 <- lm(y ~ x)
 
 ## design matrix:
-X<-model.matrix(m0)
-head(X,n=4)
+X <- model.matrix(m0)
+head(X, n = 4)
 ## (X^TX)^{-1}
-invXTX<-solve(t(X)%*%X)
+invXTX <- solve(t(X) %*% X)
 ## estimate of beta:
-(hat_beta<-invXTX%*%t(X)%*%y)
+(hat_beta <- invXTX %*% t(X) %*% y)
 
 ## estimated variance (se^2) of the estimate of beta:
-(hat_sigma<-summary(m0)$sigma)
-(hat_var<-hat_sigma^2*invXTX)
+(hat_sigma <- summary(m0)$sigma)
+(hat_var <- hat_sigma^2 * invXTX)
 ```
 
 What we have here is a bivariate normal distribution as an estimate of the $\beta$ parameters:
@@ -508,26 +510,26 @@ So the correlation between the $\hat\beta$ is
 
 ```{r}
 ## hat rho:
-hat_var[1,2]/(sqrt(hat_var[1,1])*sqrt(hat_var[2,2]))
+hat_var[1, 2] / (sqrt(hat_var[1, 1]) * sqrt(hat_var[2, 2]))
 ```
 
 Notice what happens to this correlation when we center the predictor:
 
 ```{r}
-x_c<-scale(x,scale=FALSE)
-m<-lm(y~x_c)
+x_c <- scale(x, scale = FALSE)
+m <- lm(y ~ x_c)
 ## design matrix:
-X<-model.matrix(m)
+X <- model.matrix(m)
 ## (X^TX)^{-1}
-invXTX<-solve(t(X)%*%X)
+invXTX <- solve(t(X) %*% X)
 ## estimate of beta:
-(hat_beta<-invXTX%*%t(X)%*%y)
+(hat_beta <- invXTX %*% t(X) %*% y)
 
 ## estimated variance (se^2) of the estimate of beta:
-(hat_sigma<-summary(m0)$sigma)
-(hat_var<-hat_sigma^2*invXTX)
+(hat_sigma <- summary(m0)$sigma)
+(hat_var <- hat_sigma^2 * invXTX)
 ## correlation:
-round(hat_var[1,2]/(sqrt(hat_var[1,1])*sqrt(hat_var[2,2])),4)
+round(hat_var[1, 2] / (sqrt(hat_var[1, 1]) * sqrt(hat_var[2, 2])), 4)
 ```
 
 The correlation now is (effectively) zero. This is one of the consequences of centering your predictor: the intercept-slope sampling distributions become independent. The relevance of this fact will be discussed in the chapters on contrast coding.
@@ -537,16 +539,16 @@ The correlation now is (effectively) zero. This is one of the consequences of ce
 We can compare two models, one nested inside another, as follows:
 
 ```{r}
-m1<-lm(y~x_c)
-m0<-lm(y~1)
-anova(m0,m1)
+m1 <- lm(y ~ x_c)
+m0 <- lm(y ~ 1)
+anova(m0, m1)
 ```
 
 The F-score you get here is actually the square of the t-value you get in the linear model summary:
 
 ```{r}
-sqrt(anova(m0,m1)$F[2])
-summary(m1)$coefficients[2,3]
+sqrt(anova(m0, m1)$F[2])
+summary(m1)$coefficients[2, 3]
 ```
 
 This is because $t^2 = F$. The proof is discussed on page 9 of the Dobson and Barnett book, but we also briefly alluded to this in the likelihood ratio test chapter.
@@ -654,7 +656,7 @@ Total & n & $Y^T Y$ & \\
 The linear modeling framework is very flexible, and allows us to add multiple predictors at the same time. For example, in the lexical decision data set, we could look at the effect of Frequency and FamilySize:
 
 ```{r}
-m<-lm(RT~Frequency+FamilySize,lexdec)
+m <- lm(RT ~ Frequency + FamilySize, lexdec)
 summary(m)
 ```
 
@@ -686,14 +688,14 @@ Consider frequency and family size in the lexdec data:
 
 ```{r}
 library(car)
-m<-lm(RT~Frequency+FamilySize,lexdec)
+m <- lm(RT ~ Frequency + FamilySize, lexdec)
 vif(m)
 ```
 
 Here is a somewhat worse situation:
 
 ```{r}
-m<-lm(RT~FreqSingular+FreqPlural,lexdec)
+m <- lm(RT ~ FreqSingular + FreqPlural, lexdec)
 vif(m)
 ```
 
@@ -724,7 +726,7 @@ In our model (which is the multiple regression we did in connection with the col
 
 ```{r}
 library(lme4)
-m<-lmer(RT~FreqSingular+FreqPlural+(1|Subject),lexdec)
+m <- lmer(RT ~ FreqSingular + FreqPlural + (1 | Subject), lexdec)
 acf(residuals(m))
 ```
 
@@ -736,7 +738,7 @@ For checking this, plot residuals against fitted values. A fanning-out suggests 
 R also provides a diagnostics plot, which is generated using the model fit:
 
 ```{r}
-op<-par(mfrow=c(2,2),pty="s")
+op <- par(mfrow = c(2, 2), pty = "s")
 plot(m)
 ```
 
@@ -753,20 +755,20 @@ The Beetle data-set shows the number of beetles killed after five hours' exposur
 ```{r}
 library(dobson)
 data(beetle)
-colnames(beetle)<-c("dose","number","killed")
+colnames(beetle) <- c("dose", "number", "killed")
 beetle
 ```
 
 The research question is: does dose affect probability of killing insects? The first thing we probably want to do is calculate the proportions:
 
 ```{r}
-(beetle$propn.dead<-beetle$killed/beetle$number)
+(beetle$propn.dead <- beetle$killed / beetle$number)
 ```
 
 It's also reasonable to just plot the relationship between dose and proportion of deaths.
 
 ```{r}
-with(beetle,plot(dose,propn.dead))
+with(beetle, plot(dose, propn.dead))
 ```
 
 Notice that the y-axis is by definition bounded between 0 and 1.
@@ -774,15 +776,17 @@ Notice that the y-axis is by definition bounded between 0 and 1.
 We could easily fit a linear model to this data-set. We may want to center the predictor, for reasons discussed earlier:
 
 ```{r}
-fm<-lm(propn.dead~scale(dose,scale=FALSE),beetle)
+fm <- lm(propn.dead ~ scale(dose, scale = FALSE), beetle)
 summary(fm)$coefficients
 ```
 
 Next, add the best-fit (linear model) line to the plot:
 
 ```{r}
-with(beetle,plot(scale(dose,scale=FALSE),
-                 propn.dead))
+with(beetle, plot(
+  scale(dose, scale = FALSE),
+  propn.dead
+))
 abline(coef(fm))
 ```
 
@@ -828,10 +832,11 @@ p = \frac{\exp( \beta_0 + \beta_1 \hbox{dose})}{1+\exp( \beta_0 + \beta_1 \hbox{
 We fit the model in R as follows. Note that as long as we are willing to avoid interpreting the intercept and just interpret the estimate of $\beta_1$, there is no need to center the predictor here:
 
 ```{r}
-fm1<-glm(propn.dead~dose,
-         family=binomial(logit),
-         weights=number,
-         data=beetle)
+fm1 <- glm(propn.dead ~ dose,
+  family = binomial(logit),
+  weights = number,
+  data = beetle
+)
 summary(fm1)
 ```
 
@@ -840,18 +845,18 @@ In the glm function call, `binomial(logit)` can be written simply as `binomial()
 We can also plot the observed proportions and the fitted values together; the fit looks pretty good.
 
 ```{r propndeadplot,fig.width=6}
-plot(propn.dead~dose,beetle)
-points(fm1$fitted~dose,beetle,pch=4)
+plot(propn.dead ~ dose, beetle)
+points(fm1$fitted ~ dose, beetle, pch = 4)
 ```
 
 We can now compute the log odds of death for concentration 1.7552 (for example):
 
 ```{r}
-## compute log odds of death for 
+## compute log odds of death for
 ## concentration 1.7552:
-x<-as.matrix(c(1, 1.7552))
-#log odds:
-(log.odds<-t(x)%*%coef(fm1))
+x <- as.matrix(c(1, 1.7552))
+# log odds:
+(log.odds <- t(x) %*% coef(fm1))
 ```
 
 We can also obtain the variance-covariance matrix of the fitted coefficients, and use it to compute the variance-covariance matrix for the does 1.7552:
@@ -859,19 +864,19 @@ We can also obtain the variance-covariance matrix of the fitted coefficients, an
 ```{r}
 ### compute CI for log odds:
 ## Get vcov matrix:
-(vcovmat<-vcov(fm1))
+(vcovmat <- vcov(fm1))
 ## x^T VCOV x for dose 1.7552:
-(var.log.odds<-t(x)%*%vcovmat%*%x)
+(var.log.odds <- t(x) %*% vcovmat %*% x)
 ```
 
 Assuming that the log odds have a distribution that is approximately normal, we can compute the confidence interval for the log odds
 of death given dose 1.7552:
 
 ```{r}
-##lower
-(lower<-log.odds-1.96*sqrt(var.log.odds))
-##upper
-(upper<-log.odds+1.96*sqrt(var.log.odds))
+## lower
+(lower <- log.odds - 1.96 * sqrt(var.log.odds))
+## upper
+(upper <- log.odds + 1.96 * sqrt(var.log.odds))
 ```
 
 The lower and upper confidence interval bounds on the 
@@ -880,9 +885,9 @@ using equation \ref{problogisticregression}.
 
 
 ```{r}
-(meanprob<-exp(log.odds)/(1+exp(log.odds)))
-(lowerprob<-exp(lower)/(1+exp(lower)))
-(upperprob<-exp(upper)/(1+exp(upper)))
+(meanprob <- exp(log.odds) / (1 + exp(log.odds)))
+(lowerprob <- exp(lower) / (1 + exp(lower)))
+(upperprob <- exp(upper) / (1 + exp(upper)))
 ```
 
 So for dose 1.7552, the probability of death is 0.36,
@@ -899,12 +904,12 @@ We have eyetracking data from 10 participants reading Hindi sentences. The data 
 ```{r}
 library(lingpsych)
 data("df_hindi")
-hindi10<-df_hindi
-skip<-ifelse(hindi10$TFT==0,1,0)
-hindi10$skip<-skip
+hindi10 <- df_hindi
+skip <- ifelse(hindi10$TFT == 0, 1, 0)
+hindi10$skip <- skip
 ## display relevant columns:
-head(hindi10[,c(1,2,3,24,33,34)])
-fm_skip<-glm(skip ~ word_complex+SC,family=binomial(),hindi10)
+head(hindi10[, c(1, 2, 3, 24, 33, 34)])
+fm_skip <- glm(skip ~ word_complex + SC, family = binomial(), hindi10)
 summary(fm_skip)
 ```
 
@@ -957,8 +962,9 @@ We discuss hypothesis testing first, then evaluating goodness of fit using devia
 Returning to our beetle data, let's say we fit our model:
 
 ```{r}
-glm1<-glm(propn.dead~dose,binomial(logit),
-          weights=number,data=beetle)
+glm1 <- glm(propn.dead ~ dose, binomial(logit),
+  weights = number, data = beetle
+)
 ```
 
 
@@ -973,35 +979,41 @@ But we also see something called **Null deviance** and **Residual deviance**. Th
 
 ```{r propndead2,fig.width=6}
 # beta.hat is (-60.71745 ,   34.27033)
-(eta.hat<-  -60.71745 +   34.27033*beetle$dose)
-(mu.hat<-exp(eta.hat)/(1+exp(eta.hat)))
+(eta.hat <- -60.71745 + 34.27033 * beetle$dose)
+(mu.hat <- exp(eta.hat) / (1 + exp(eta.hat)))
 
 # compare mu.hat with observed proportions
-plot(mu.hat,beetle$propn.dead)
-abline(0,1)
+plot(mu.hat, beetle$propn.dead)
+abline(0, 1)
 ```
 
 To evaluate whether dose has an effect, we will do something analogous to the model comparison methods we saw earlier. First, fit a model with only an intercept. Notice that the null deviance is 284 on 7 degrees of freedom.
 
 ```{r propndead3,fig.width=6}
-null.glm<-glm(propn.dead~1,binomial(logit),
-          weights=number,data=beetle)
+null.glm <- glm(propn.dead ~ 1, binomial(logit),
+  weights = number, data = beetle
+)
 summary(null.glm)
 
-plot(beetle$dose,beetle$propn.dead,xlab="log concentration",
-    ylab="proportion dead",main="minimal model")
-points(beetle$dose,null.glm$fitted,pch=4)
+plot(beetle$dose, beetle$propn.dead,
+  xlab = "log concentration",
+  ylab = "proportion dead", main = "minimal model"
+)
+points(beetle$dose, null.glm$fitted, pch = 4)
 ```
 
 Add a term for dose. Now, the residual deviance is 11.2 on 6 dfs:
 
 ```{r propndead4,fig.width=6}
-dose.glm<-glm(propn.dead~dose,binomial(logit),
-          weights=number,data=beetle)
+dose.glm <- glm(propn.dead ~ dose, binomial(logit),
+  weights = number, data = beetle
+)
 summary(dose.glm)
-plot(beetle$dose,beetle$propn.dead,xlab="log concentration",
-    ylab="proportion dead",main="dose model")
-points(beetle$dose,dose.glm$fitted,pch=4)
+plot(beetle$dose, beetle$propn.dead,
+  xlab = "log concentration",
+  ylab = "proportion dead", main = "dose model"
+)
+points(beetle$dose, dose.glm$fitted, pch = 4)
 ```
 
 The change in deviance from the null model is 284.2-11.2=273 on 1 df. Since the critical $\chi_1^2 = 3.84$, we reject the null hypothesis that $\beta_1 = 0$.
@@ -1009,7 +1021,7 @@ The change in deviance from the null model is 284.2-11.2=273 on 1 df. Since the 
 You can do the model comparison using the anova function. Note that no statistical test is calculated; you need to do that yourself.
 
 ```{r}
-anova(null.glm,dose.glm)
+anova(null.glm, dose.glm)
 ```
 
 Actually, you don't even need to define the null model; the anova function automatically compares the fitted model to the null model:
@@ -1025,14 +1037,14 @@ The deviance for a given degrees of freedom $v$ should have a $\chi_v^2$ distrib
 ```{r}
 deviance(null.glm)
 ## critical value:
-qchisq(0.95,df=7)
+qchisq(0.95, df = 7)
 ```
 
 Now consider the model with dose as predictor. The deviance is less than the 95th percentile, so the fit is adequate.
 
 ```{r}
 deviance(dose.glm)
-qchisq(0.95,df=6)
+qchisq(0.95, df = 6)
 ```
 
 ##### Residuals in GLMs
@@ -1053,21 +1065,24 @@ These can be used to check for model adequacy as discussed earlier in the contex
 One can just use the plot function inspect the residuals:
 
 ```{r residualsglm,fig.width=6}
-op<-par(mfrow=c(2,2),pty="s")
+op <- par(mfrow = c(2, 2), pty = "s")
 plot(dose.glm)
 ```
 
 Alternatively, one can do this by hand:
 
 ```{r qqnormglm,fig.width=6}
-op<- par(mfrow=c(2,2),pty="s")
+op <- par(mfrow = c(2, 2), pty = "s")
 plot(dose.glm$resid,
-     xlab="index",ylab="residuals",main="Index plot")
-qqnorm(dose.glm$resid,main="QQ-plot")
-hist(dose.glm$resid,xlab="Residuals",main="Histogram")
-plot(dose.glm$fit,dose.glm$resid,xlab="Fitted values",
-     ylab="Residuals",
-     main="Residuals versus fitted values")
+  xlab = "index", ylab = "residuals", main = "Index plot"
+)
+qqnorm(dose.glm$resid, main = "QQ-plot")
+hist(dose.glm$resid, xlab = "Residuals", main = "Histogram")
+plot(dose.glm$fit, dose.glm$resid,
+  xlab = "Fitted values",
+  ylab = "Residuals",
+  main = "Residuals versus fitted values"
+)
 ```
 
 ## Summary
@@ -1089,7 +1104,7 @@ The data consist of a repeated measures self-paced reading experiment comparing 
 ```{r q1setup,echo=TRUE}
 ## load data:
 data("df_gibsonwu")
-dat<-df_gibsonwu
+dat <- df_gibsonwu
 head(dat)
 ```
 
@@ -1130,9 +1145,9 @@ Computing ANOVA by hand
 In this chapter, we saw how the ANOVA is computed in R:
 
 ```{r eval=FALSE}
-m1<-lm(y~x_c)
-m0<-lm(y~1)
-anova(m0,m1)
+m1 <- lm(y ~ x_c)
+m0 <- lm(y ~ 1)
+anova(m0, m1)
 ```
 
 We also saw how an ANOVA is standardly summarized using matrix notation:
@@ -1167,9 +1182,8 @@ In the chapter, we saw the following code in connection with the logistic regres
 
 ```{r}
 ## display relevant columns:
-head(hindi10[,c(1,2,3,24,33,34)])
-#fm_skip<-glm(skip ~ word_complex+SC,family=binomial(),hindi10)
+head(hindi10[, c(1, 2, 3, 24, 33, 34)])
+# fm_skip<-glm(skip ~ word_complex+SC,family=binomial(),hindi10)
 ```
 
 Fit a linear mixed model using the function `glmer` and the link function `family=binomial()`, with varying intercepts for subject and item, as well as varying slopes if possible, with centered word complexity and storage cost as predictors, and skipping probability (represented as 0,1 values) as dependent measure. Using the anova function, find out whether there is evidence for (a) word complexity, and (b) storage cost affecting skipping probability. Display the effects of these two variables on skipping probability on the probability scale by back-transforming the mean and 95% confidence interval of each effect from the log odds scale to the probability scale. 
-
