@@ -12,31 +12,33 @@ We first consider the simplest case: suppose we want to compare the means of a d
 
 ```{r, echo=TRUE}
 library(lingpsych)
-data("df_contrasts1") 
+data("df_contrasts1")
 df_contrasts1
 str(df_contrasts1)
 ```
 
 ```{r, echo=FALSE}
 table1 <- df_contrasts1 %>% group_by(F) %>% # Table for main effect F
-   dplyr::summarize(N=n(), M=mean(DV), SD=sd(DV), SE=round(SD/sqrt(N),1) )
+  dplyr::summarize(N = n(), M = mean(DV), SD = sd(DV), SE = round(SD / sqrt(N), 1))
 table1a <- as.data.frame(table1)
-names(table1a) <- c("Factor","N data","Est. means","Std. dev.","Std. errors")
-(GM <-  mean(table1$M)) # Grand Mean
+names(table1a) <- c("Factor", "N data", "Est. means", "Std. dev.", "Std. errors")
+(GM <- mean(table1$M)) # Grand Mean
 ```
 
 ```{r cTab1Means, echo=FALSE, results = "asis"}
-kbl(table1a, position="b", digits=1, 
-    caption="Summary statistics per condition for the simulated data.")
+kbl(table1a,
+  position = "b", digits = 1,
+  caption = "Summary statistics per condition for the simulated data."
+)
 ```
 
 ```{r cFig1Means, fig=TRUE, include=TRUE, echo=FALSE, cache=FALSE, fig.width=4, fig.height=3.6, fig.cap = "Means and standard errors of the simulated dependent variable (e.g., response times in seconds) in two conditions F1 and F2."}
-(plot1 <- qplot(x=F, y=M, group=1, data=table1, geom=c("point", "line")) + 
-	 geom_errorbar(aes(max=M+SE, min=M-SE), width=0) + 
-   #scale_y_continuous(breaks=c(250,275,300)) + 
-   scale_y_continuous(breaks=seq(0,1,.2)) + coord_cartesian(ylim=c(0,1)) + 
-   labs(y="Mean Response Time [sec]", x="Factor F") +
-   theme_bw())
+(plot1 <- qplot(x = F, y = M, group = 1, data = table1, geom = c("point", "line")) +
+  geom_errorbar(aes(max = M + SE, min = M - SE), width = 0) +
+  # scale_y_continuous(breaks=c(250,275,300)) +
+  scale_y_continuous(breaks = seq(0, 1, .2)) + coord_cartesian(ylim = c(0, 1)) +
+  labs(y = "Mean Response Time [sec]", x = "Factor F") +
+  theme_bw())
 ```
 
 The results, displayed in Figure\ \@ref(fig:cFig1Means) and shown in Table\ \@ref(tab:cTab1Means), show that the assumed true condition means are exactly realized with the simulated data. The numbers are exact because the used `mvrnorm()` function (see the documentation for `df_contrasts1`) ensures that the data are generated so that the sample mean yields the true means for each level. In real data-sets, of course, the sample means will vary from experiment to experiment.
@@ -45,10 +47,11 @@ A simple Bayesian linear model of `DV` on `F` using the function `brm` yields a 
 
 ```{r fitmodel, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_F <- lm(DV ~ 1 + F,
-                 data = df_contrasts1) 
+  data = df_contrasts1
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_F)$coefficients,3)
+round(summary(fit_F)$coefficients, 3)
 ```
 
 Comparing the means for each condition with the coefficients (*Estimates*) reveals that (i) the intercept ($0.8$) is the mean for condition F1, $\hat\mu_1$; and (ii) the slope (`FF2`: $-0.4$) is the difference between the estimated means for the two groups, $\mu_2 - \mu_1$ [@Bolker2018]:
@@ -157,8 +160,9 @@ The fact that the intercept term formally tests the null hypothesis that the mea
 In R, factor levels are ordered alphabetically and by default the first level is used as the baseline in treatment contrasts. Obviously, this default mapping will only be correct for a given data-set if the levels' alphabetical ordering matches the desired contrast coding. When it does not, it is possible to re-order the levels. Here is one way of re-ordering the levels in R:
 
 ```{r, echo=TRUE}
-df_contrasts1$Fb <- factor(df_contrasts1$F,  
-                           levels = c("F2","F1"))
+df_contrasts1$Fb <- factor(df_contrasts1$F,
+  levels = c("F2", "F1")
+)
 contrasts(df_contrasts1$Fb)
 ```
 
@@ -167,10 +171,11 @@ This re-ordering did not change any data associated with the factor, only one of
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_Fb <- lm(DV ~ 1 + Fb,
-                 data = df_contrasts1) 
+  data = df_contrasts1
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_Fb)$coefficients,3)
+round(summary(fit_Fb)$coefficients, 3)
 ```
 
 The model now estimates different quantities. The intercept now codes the mean of condition `F2`, and the slope measures the difference in means between `F1` minus `F2`. This represents an alternative coding of the treatment contrast.
@@ -182,12 +187,13 @@ Treatment contrasts are only one of many options. It is also possible to use sum
 To use this contrast in a linear regression, use the `contrasts` function:
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
-(contrasts(df_contrasts1$F) <- c(-0.5,+0.5))
+(contrasts(df_contrasts1$F) <- c(-0.5, +0.5))
 fit_mSum <- lm(DV ~ 1 + F,
-                 data = df_contrasts1)
+  data = df_contrasts1
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_mSum)$coefficients,3)
+round(summary(fit_mSum)$coefficients, 3)
 ```
 
 Here, the slope (`F1`) again codes the difference of the groups associated with the first and second factor levels. It has the same value as in the treatment contrast.
@@ -268,10 +274,11 @@ One alternative option is to use the so-called cell means parameterization. In t
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_mCM <- lm(DV ~ -1 + F,
-                 data = df_contrasts1) 
+  data = df_contrasts1
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_mCM)$coefficients,3)
+round(summary(fit_mCM)$coefficients, 3)
 ```
 
 Now, the regression coefficients (see the column labeled 'Estimate') estimate the mean of the first factor level ($0.8$) and the mean of the second factor level ($0.4$). This cell means parameterization usually does not allow a test of the hypotheses of interest, as these hypotheses usually relate to differences between conditions rather than to whether each condition differs from zero. 
@@ -282,13 +289,13 @@ Consider an example with the three word classes nouns, verbs, and adjectives. We
 
 
 ```{r, echo=TRUE}
-#source("functions/mixedDesign.v0.6.3.R")
+# source("functions/mixedDesign.v0.6.3.R")
 
-#M <- matrix(c(500, 450, 400), 
+# M <- matrix(c(500, 450, 400),
 #            nrow=3, ncol=1, byrow=FALSE)
-#set.seed(1)
-#simdat2 <- mixedDesign(B=3, W=NULL, 
-#                       n=4, M=M,  SD=20, long = TRUE) 
+# set.seed(1)
+# simdat2 <- mixedDesign(B=3, W=NULL,
+#                       n=4, M=M,  SD=20, long = TRUE)
 
 data("df_contrasts2")
 head(df_contrasts2)
@@ -297,17 +304,24 @@ names(df_contrasts2)[1]
 ```
 
 ```{r, echo=FALSE}
-table.word <- df_contrasts2 %>% group_by(F) %>% 
-  dplyr::summarise(N=length(DV), M=mean(DV), 
-            SD=sd(DV), SE=sd(DV)/sqrt(N))
+table.word <- df_contrasts2 %>%
+  group_by(F) %>%
+  dplyr::summarise(
+    N = length(DV), M = mean(DV),
+    SD = sd(DV), SE = sd(DV) / sqrt(N)
+  )
 table.word1 <- as.data.frame(table.word)
-names(table.word1) <- c("Factor","N data",
-                        "Est. means","Std. dev.","Std. errors")
+names(table.word1) <- c(
+  "Factor", "N data",
+  "Est. means", "Std. dev.", "Std. errors"
+)
 ```
 
 ```{r cTab2Means, echo=FALSE, results = "asis"}
-kbl(table.word1, position="b", digits=1, 
-    caption="Summary statistics per condition for the simulated data.")
+kbl(table.word1,
+  position = "b", digits = 1,
+  caption = "Summary statistics per condition for the simulated data."
+)
 ```
 
 As shown in Table\ \@ref(tab:cTab2Means), the estimated means reflect our assumptions about the true means in the data simulation: Response times are longest for nouns and shortest for adjectives. 
@@ -396,9 +410,11 @@ This estimate and null hypothesis has weights of $1/3$ for all condition means.
 The weights from all three model parameters / hypotheses that were defined are now combined and written into a matrix that we refer to as the *hypothesis matrix* (`Hc`):
 
 ```{r, echo=TRUE}
-HcSum <- rbind(cH00=c(adjectives= 1/3, nouns= 1/3, verbs= 1/3), 
-               cH01=c(adjectives=+2/3, nouns=-1/3, verbs=-1/3), 
-               cH02=c(adjecctives=-1/3, nouns=+2/3, verbs=-1/3))
+HcSum <- rbind(
+  cH00 = c(adjectives = 1 / 3, nouns = 1 / 3, verbs = 1 / 3),
+  cH01 = c(adjectives = +2 / 3, nouns = -1 / 3, verbs = -1 / 3),
+  cH02 = c(adjecctives = -1 / 3, nouns = +2 / 3, verbs = -1 / 3)
+)
 fractions(t(HcSum))
 ```
 
@@ -409,9 +425,11 @@ In R this next step is done using the function `ginv()` from the `MASS` package.
 
 ```{r, echo=TRUE}
 # define a function to make the output nicer
-ginv2 <- function(x) 
+ginv2 <- function(x) {
   fractions(provideDimnames(ginv(x),
-                            base=dimnames(x)[2:1]))
+    base = dimnames(x)[2:1]
+  ))
+}
 ```
 
 [^2a]: At this point, there is no need to understand in detail what this means. We refer the interested reader to @schad2020capitalize. For a quick overview, we recommend a vignette explaining the generalized inverse in the [matlib package](https://cran.r-project.org/web/packages/matlib/vignettes/ginv.html) [@friendly_matlib].
@@ -431,18 +449,19 @@ The important point here is that unless we know the relationship between the hyp
 To verify this custom-made contrast matrix, it is compared to the sum contrast matrix as generated by the R function `contr.sum()` in the `stats` package. The resulting contrast matrix is identical to the result when adding the intercept term, a column of ones, to the contrast matrix:
 
 ```{r, echo=TRUE}
-fractions(cbind(1,contr.sum(3)))
+fractions(cbind(1, contr.sum(3)))
 ```
 
 In order to estimate model parameters, step four in our procedure involves assigning sum contrasts to the factor `F` in our example data, and running a linear (mixed) model. This allows us to estimate the regression coefficients associated with each contrast. We compare these to the data shown above (Table\ \@ref(tab:cTab2Means)) to test whether the regression coefficients actually correspond to the differences of condition means, as intended. To define the contrast, it is necessary to remove the intercept term, as this is automatically added by the linear model function `lm()`.
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
-contrasts(df_contrasts2$F) <- XcSum[,2:3]
-fit_Sum<- lm(DV ~ 1 + F,
-                 data = df_contrasts2) 
+contrasts(df_contrasts2$F) <- XcSum[, 2:3]
+fit_Sum <- lm(DV ~ 1 + F,
+  data = df_contrasts2
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_Sum)$coefficients,1)
+round(summary(fit_Sum)$coefficients, 1)
 ```
 
 The linear model regression coefficients show the GM response time of $450$ ms in the intercept. Remember that the first regression coefficient `FcH01` was designed to estimate the extent to which nouns are responded to slower than the GM. The regression coefficient `FcH01` ('Estimate') of $50$ reflects the difference between adjectives ($400$ ms) and the GM of $450$ ms. The estimate of interest was in how response times for adjectives differ from the GM. The fact that the second regression coefficient `FcH02` is close to $-50$ indicates that response times for adjectives ($400$ ms) are 50 ms faster than the GM of $450$ ms. Verbs are estimated to have $50$ ms longer reading times than the GM (the second slope labeled FcH02).
@@ -478,9 +497,11 @@ These null hypotheses are effectively comparisons between condition means or bet
 To do so, we use some labels to indicate factor levels. E.g., `nouns`, `verbs`, and `adjectives` can represent factor levels $\mu_1$, $\mu_2$, and $\mu_3$. The first comparison/hypothesis specifies that $\mu_1 = \frac{\mu_1+\mu_2+\mu_3}{3}$. This can be written as a formula in R: `nouns ~ (nouns + verbs + adjectives)/3`. The second comparison/hypothesis is that $\mu_2 = \frac{\mu_1+\mu_2+\mu_3}{3}$, which can be written in R as `verbs ~ (nouns + verbs + adjectives)/3`.
 
 ```{r loadHypr}
-HcSum <- hypr(b1 = nouns ~ (nouns + verbs + adjectives)/3, 
-              b2 = verbs ~ (nouns + verbs + adjectives)/3, 
-              levels=c("nouns","verbs","adjectives"))
+HcSum <- hypr(
+  b1 = nouns ~ (nouns + verbs + adjectives) / 3,
+  b2 = verbs ~ (nouns + verbs + adjectives) / 3,
+  levels = c("nouns", "verbs", "adjectives")
+)
 HcSum
 ```
 
@@ -493,14 +514,16 @@ contr.hypothesis(HcSum)
 We can assign this contrast to our factor as we did before, and again fit a linear model:
 
 ```{r, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
-df_contrasts2$F<-factor(df_contrasts2$F,
-                        levels=c("nouns","verbs","adjectives"))
+df_contrasts2$F <- factor(df_contrasts2$F,
+  levels = c("nouns", "verbs", "adjectives")
+)
 contrasts(df_contrasts2$F) <- contr.hypothesis(HcSum)
 fit_Sum2 <- lm(DV ~ 1 + F,
-                 data = df_contrasts2) 
+  data = df_contrasts2
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_Sum2)$coefficients,1)
+round(summary(fit_Sum2)$coefficients, 1)
 ```
 
 In the `hypr`,  the focus lies on estimation of contrasts that code comparisons between condition means or groups of condition means. Thus, the null hypotheses that one specifies implicitly imply the estimation of a difference between condition means or bundles of condition means. The output of the `hypr()` function (see the first section of the results) makes this clear - these formulate the null hypotheses in a way that also illustrates the estimation of model parameters. I.e., the null hypothesis `H0.b1: 0 = 2/3*m1 - 1/3*m2 - 1/3*m3` corresponds to a parameter estimate of `b1 = 2/3*m1 - 1/3*m2 - 1/3*m3`. The resulting contrasts will then allow us to estimate the specified differences between condition means or bundles of condition means.
@@ -512,25 +535,28 @@ We load a corresponding data set, which contains simulated data about response t
 The sample sizes for each level and the means and standard errors are shown in Table\ \@ref(tab:cTab3Means), and the means and standard errors are also shown graphically in Figure \@ref(fig:helmertsimdatFig).
 
 ```{r, echo=FALSE, message=FALSE}
-data("df_contrasts3") 
-table3 <- df_contrasts3 %>% group_by(F) %>% 
-   dplyr::summarize(N=length(DV), M=mean(DV), SD=sd(DV), SE=SD/sqrt(N) )
-(GM <-  mean(table3$M)) # Grand Mean
+data("df_contrasts3")
+table3 <- df_contrasts3 %>%
+  group_by(F) %>%
+  dplyr::summarize(N = length(DV), M = mean(DV), SD = sd(DV), SE = SD / sqrt(N))
+(GM <- mean(table3$M)) # Grand Mean
 table3a <- as.data.frame(table3)
-names(table3a) <- c("Factor","N data","Est. means","Std. dev.","Std. errors")
+names(table3a) <- c("Factor", "N data", "Est. means", "Std. dev.", "Std. errors")
 ```
 
 ```{r helmertsimdatFig, fig=TRUE, include=TRUE, echo=FALSE, cache=FALSE, fig.width=4.7, fig.height=3.4, fig.cap = "Means and error bars (showing standard errors) for a simulated data-set with one between-subjects factor with four levels."}
-(plot2 <- qplot(x=F, y=M, group=1, data=table3, geom=c("point", "line")) + 
-	 geom_errorbar(aes(max=M+SE, min=M-SE), width=0) + 
-   #scale_y_continuous(breaks=c(250,275,300)) + 
-   labs(y="Mean DV", x="Factor F") +
-   theme_bw())
+(plot2 <- qplot(x = F, y = M, group = 1, data = table3, geom = c("point", "line")) +
+  geom_errorbar(aes(max = M + SE, min = M - SE), width = 0) +
+  # scale_y_continuous(breaks=c(250,275,300)) +
+  labs(y = "Mean DV", x = "Factor F") +
+  theme_bw())
 ```
 
 ```{r cTab3Means, echo=FALSE, results = "asis"}
-kbl(table3a, position="b", digits=1, 
-    caption="Summary statistics per condition for the simulated data.")
+kbl(table3a,
+  position = "b", digits = 1,
+  caption = "Summary statistics per condition for the simulated data."
+)
 ```
 
 We assume that the four factor levels `F1` to `F4` reflect levels of word frequency, including the levels `low`, `medium-low`, `medium-high`, and `high` frequency words, and that the dependent variable reflects  response time.[^41]
@@ -560,9 +586,11 @@ H_{0_{4-3}}: 0 \cdot \mu_1 + 0 \cdot \mu_2 - 1 \cdot \mu_3 + 1 \cdot \mu_4 = 0
 Here, the $\mu_x$ are the mean response times in condition $x$. Each hypothesis gives weights to the different condition means. The first hypothesis ($H_{0_{2-1}}$) tests the difference between condition mean for `F2` ($\mu_2$) minus the condition mean for `F1` ($\mu_1$), but ignores condition means for `F3` and `F4` ($\mu_3$, $\mu_4$). $\mu_1$ has a weight of $-1$, $\mu_2$ has a weight of $+1$, and $\mu_3$ and $\mu_4$ have weights of $0$. As the second step, the vector of weights for the first hypothesis is extracted as `c2vs1 <- c(F1=-1,F2=+1,F3=0,F4=0)`. Next, the same thing is done for the other hypotheses - the weights for all hypotheses are extracted and coded into a _hypothesis matrix_ in R:
 
 ```{r, echo=TRUE}
-t(HcRE <- rbind(c2vs1=c(F1=-1,F2=+1,F3= 0,F4= 0),
-                c3vs2=c(F1= 0,F2=-1,F3=+1,F4= 0),
-                c4vs3=c(F1= 0,F2= 0,F3=-1,F4=+1)))
+t(HcRE <- rbind(
+  c2vs1 = c(F1 = -1, F2 = +1, F3 = 0, F4 = 0),
+  c3vs2 = c(F1 = 0, F2 = -1, F3 = +1, F4 = 0),
+  c4vs3 = c(F1 = 0, F2 = 0, F3 = -1, F4 = +1)
+))
 ```
 
 Again, we show the transposed version of the hypothesis matrix (switching rows and columns), but now we leave out the hypothesis for the intercept (below, we discuss when this can be ignored).
@@ -584,10 +612,11 @@ Step four in the procedure is to apply repeated contrasts to the factor `F` in t
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 contrasts(df_contrasts3$F) <- XcRE
 fit_Rep <- lm(DV ~ 1 + F,
-                 data = df_contrasts3) 
+  data = df_contrasts3
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_Rep)$coefficients,1)
+round(summary(fit_Rep)$coefficients, 1)
 ```
 
 The results show that, as expected, the regression coefficients reflect the differences that were of interest: the regression coefficient ('Estimate') `Fc2vs1` has a value of $10$, which exactly corresponds to the difference between the condition mean for `F2` ($20$) minus the condition mean for `F1` ($10$), i.e., $20 - 10 = 10$. Likewise, the regression coefficient `Fc3vs2` has a value of $-10$, which corresponds to the difference between the condition mean for `F3` ($10$) minus the condition mean for `F2` ($20$), i.e., $10 - 20 = -10$. Finally, the regression coefficient `Fc4vs3` has a value of roughly $30$, which reflects the difference between condition `F4` ($40$) minus condition `F3` ($10$), i.e., $40 - 10 = 30$. Thus, the regression coefficients estimate differences between successive or neighboring condition means, and test the corresponding null hypotheses.
@@ -603,7 +632,7 @@ The contrast matrix $X_c$ that we have looked at so far has one entry (row) for 
 
 ```{r, echo=TRUE}
 # contrast matrix
-(contrasts(df_contrasts3$F) <- XcRE) 
+(contrasts(df_contrasts3$F) <- XcRE)
 # design matrix
 covars <- model.matrix(~ 1 + F, df_contrasts3)
 (covars <- as.data.frame(covars))
@@ -614,18 +643,19 @@ For each of the $20$ subjects, four numbers are stored in this model matrix. The
 To further illustrate this, the covariates are extracted from this design matrix and stored separately as numeric predictor variables in the data-frame:
 
 ```{r, echo=TRUE}
-df_contrasts3[,c("Fc2vs1","Fc3vs2","Fc4vs3")] <- 
-  covars[,2:4]
+df_contrasts3[, c("Fc2vs1", "Fc3vs2", "Fc4vs3")] <-
+  covars[, 2:4]
 ```
 
 They are now used as numeric predictor variables in a multiple regression analysis:
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_m3 <- lm(DV ~ 1 + Fc2vs1 + Fc3vs2 + Fc4vs3,
-                 data = df_contrasts3) 
+  data = df_contrasts3
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_m3)$coefficients,1)
+round(summary(fit_m3)$coefficients, 1)
 ```
 
 The results show that the regression coefficients are the same as in the contrast-based analysis shown in the previous section. This demonstrates that contrasts serve to code discrete factor levels into a linear/multiple regression analysis by numerically encoding comparisons between specific condition means.
@@ -640,10 +670,11 @@ Xpol <- contr.poly(4)
 ```
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_Pol <- lm(DV ~ 1 + F,
-                 data = df_contrasts3) 
+  data = df_contrasts3
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_Pol)$coefficients,1)
+round(summary(fit_Pol)$coefficients, 1)
 ```
 
 In this example, condition means increase across factor levels in a linear fashion, but there may also be quadratic and cubic trends.
@@ -693,8 +724,10 @@ Orthogonality can be determined easily in R by computing the correlation between
 For example, coding two factors in a $2 \times 2$ design (we return to this case in a section on designs with two factors below) using sum contrasts, these sum contrasts and their interaction are orthogonal to each other:
 
 ```{r, echo=TRUE}
-(Xsum <- cbind(F1=c(1,1,-1,-1), F2=c(1,-1,1,-1), 
-               F1xF2=c(1,-1,-1,1)))
+(Xsum <- cbind(
+  F1 = c(1, 1, -1, -1), F2 = c(1, -1, 1, -1),
+  F1xF2 = c(1, -1, -1, 1)
+))
 cor(Xsum)
 ```
 
@@ -722,8 +755,8 @@ A related question concerns whether the intercept needs to be considered when co
 We can see that considering the intercept makes a difference for the treatment contrast. First, we define the comparisons involved in a treatment contrast, where two experimental conditions `b` and `c` are each compared to a baseline condition `a` (`b~a` and `c~a`). In addition, we explicitly code the intercept term, which involves a comparison of the baseline to 0 (`a~0`). We take a look at the resulting contrast matrix:
 
 ```{r}
-hypr(int=a~0, b1=b~a, b2=c~a)
-contr.treatment(c("a","b","c"))
+hypr(int = a ~ 0, b1 = b ~ a, b2 = c ~ a)
+contr.treatment(c("a", "b", "c"))
 ```
 
 This shows a contrast matrix that we know from the treatment contrast. The intercept is coded as a column of 1s. And each of the comparisons is coded as a 1 in the condition which is compared to the baseline, and a 0 in other conditions. The point is here that this gives us the contrast matrix that is expected and known for the treatment contrast.
@@ -731,13 +764,13 @@ This shows a contrast matrix that we know from the treatment contrast. The inter
 However, we can also ignore the intercept in the specification of the hypotheses:
 
 ```{r}
-hypr(b1=b~a, b2=c~a)
+hypr(b1 = b ~ a, b2 = c ~ a)
 ```
 
 Interestingly, the resulting contrast matrix now looks very different from the contrast matrix that we know from the treatment contrast. Indeed, this contrast also estimates a reasonable set of quantities. It again estimates how strongly condition mean `m1` differs from the baseline and how `m2` differs from baseline. The intercept, however, now estimates the average dependent variable across all three conditions (i.e., the GM). This can be seen by explicitly adding a comparison of the average of all three conditions to 0:
 
 ```{r}
-hypr(int=(a+b+c)/3~0, b1=b~a, b2=c~a)
+hypr(int = (a + b + c) / 3 ~ 0, b1 = b ~ a, b2 = c ~ a)
 ```
 
 The resulting contrast matrix is now the same as when the intercept was ignored, which confirms that these both test the same hypotheses.
@@ -764,7 +797,7 @@ Load the following data. These data are from Experiment 1 in a set of reading st
 ```{r}
 library(lingpsych)
 data("df_persianE1")
-dat1<-df_persianE1
+dat1 <- df_persianE1
 head(dat1)
 ```
 
@@ -818,7 +851,7 @@ The data come from an eyetracking study in German reported in @VBLD07. The exper
 We will focus only on re-reading time in this data-set. Subset the data so that we only have re-reading times in the data-frame:
 
 ```{r}
-dat2<-subset(df_polarity,times=="RRT")
+dat2 <- subset(df_polarity, times == "RRT")
 head(dat2)
 ```
 
@@ -831,5 +864,3 @@ The comparisons we are interested in are:
 - Within positive polarity items, what is the difference between the two grammatical conditions?
 
 Use the `hypr` package to specify the comparisons specified above, and then extract the contrast matrix. Finally, specify the contrasts to the condition column in the data frame. Fit a linear model using this contrast specification, and then check that the estimates from the model match the mean differences between the conditions being compared.  
-
-
