@@ -25,8 +25,10 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(tidy.opts=list(width.cutoff=50),
-               tidy=FALSE)
+opts_chunk$set(
+  tidy.opts = list(width.cutoff = 50),
+  tidy = FALSE
+)
 
 options(
   htmltools.dir.version = FALSE, formatR.indent = 2,
@@ -34,21 +36,22 @@ options(
 )
 
 local({
-  r = getOption('repos')
-  if (!length(r) || identical(unname(r['CRAN']), '@CRAN@'))
-    r['CRAN'] = 'https://cran.rstudio.com' 
+  r <- getOption("repos")
+  if (!length(r) || identical(unname(r["CRAN"]), "@CRAN@")) {
+    r["CRAN"] <- "https://cran.rstudio.com"
+  }
   options(repos = r)
 })
 
-lapply(c('DT', 'citr', 'formatR', 'svglite'), function(pkg) {
-  if (system.file(package = pkg) == '') install.packages(pkg)
+lapply(c("DT", "citr", "formatR", "svglite"), function(pkg) {
+  if (system.file(package = pkg) == "") install.packages(pkg)
 })
 ```
 
 # Preface {-}
 
 ```{r eval=FALSE,fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), fig.link='https://www.crcpress.com/product/isbn/9781138700109'}
-knitr::include_graphics('images/temporarycover.jpg', dpi = NA)
+knitr::include_graphics("images/temporarycover.jpg", dpi = NA)
 ```
 
 This book (once completed! :) is intended to be a relatively complete introduction to the application of linear mixed models in areas related to linguistics and psychology; throughout, we use the programming language R. Our target audience is cognitive scientists (e.g., linguists and psychologists) who carry out behavioral experiments, and who are interested in learning the foundational ideas behind modern statistical methodology from the ground up and in a principled manner. 
@@ -91,15 +94,15 @@ In every R session, we'll need to set a seed (this ensures that the random numbe
 ```{r load, cache =FALSE, message=FALSE,include=FALSE}
 set.seed(42)
 library(MASS)
-##be careful to load dplyr after MASS
+## be careful to load dplyr after MASS
 library(dplyr)
 library(purrr)
 library(readr)
 library(extraDistr)
 library(ggplot2)
-library (intoo)
-library (barsurf)
-library (bivariate)
+library(intoo)
+library(barsurf)
+library(bivariate)
 library(SIN)
 library(kableExtra)
 library(tidyverse)
@@ -120,4 +123,3 @@ Audrey Bürki,
 Reinhold Kliegl, 
 Potsdam, Germany
 ```
-
