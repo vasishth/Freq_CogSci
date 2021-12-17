@@ -19,27 +19,31 @@ Chapter\ \@ref(ch:contr) provides a basic introduction into contrast coding in s
 In chapter\ \@ref(ch:contr) in section\ \@ref(sec:4levelFactor), we have used a data set with one 4-level factor. Here, we assume that the exact same four means come from an $A(2) \times B(2)$ between-subject-factor design rather than an F(4) between-subject-factor design. We load the artificial, simulated data and show summary statistics in Table\ \@ref(tab:cTab4Means) and in Figure \@ref(fig:twobytwosimdatFig). The means and standard deviations are exactly the same as in Figure \@ref(fig:helmertsimdatFig) and in Table\ \@ref(tab:cTab3Means).
 
 ```{r, echo=FALSE, message=FALSE}
-data("df_contrasts4") 
+data("df_contrasts4")
 table4 <- df_contrasts4 %>% group_by(A, B) %>% # plot interaction
-    dplyr::summarise(N=length(DV), M=mean(DV), SD=sd(DV), SE=SD/sqrt(N))
-GM <-  mean(table4$M) # Grand Mean
+  dplyr::summarise(N = length(DV), M = mean(DV), SD = sd(DV), SE = SD / sqrt(N))
+GM <- mean(table4$M) # Grand Mean
 
 table4a <- as.data.frame(table4)
-names(table4a) <- c("Factor A","Factor B","N data",
-                    "Means","Std. dev.","Std. errors")
+names(table4a) <- c(
+  "Factor A", "Factor B", "N data",
+  "Means", "Std. dev.", "Std. errors"
+)
 ```
 
 ```{r twobytwosimdatFig, fig=TRUE, include=TRUE, echo=FALSE, cache=FALSE, fig.width=5, fig.height=3, fig.cap = "Means and error bars (showing standard errors) for a simulated data-set with a two-by-two  between-subjects factorial design."}
-(plot2 <- qplot(x=A, y=M, group=B, linetype=B, shape=B, data=table4, geom=c("point", "line")) + 
-   labs(y="Dependent variable", x="Factor A", colour="Factor B", linetype="Factor B", shape="Factor B")+
-	 geom_errorbar(aes(max=M+SE, min=M-SE), width=0) ) 
+(plot2 <- qplot(x = A, y = M, group = B, linetype = B, shape = B, data = table4, geom = c("point", "line")) +
+  labs(y = "Dependent variable", x = "Factor A", colour = "Factor B", linetype = "Factor B", shape = "Factor B") +
+  geom_errorbar(aes(max = M + SE, min = M - SE), width = 0))
 ```
 
 ```{r cTab4Means, echo=FALSE, results = "asis"}
-#apa_table(table4a, placement="b", digits=1, 
+# apa_table(table4a, placement="b", digits=1,
 #    caption="Summary statistics per condition for the simulated data.")
-kbl(table4a, digits=1, booktabs = T, position="h",vline = "", # format="latex", 
-    caption="Summary statistics per condition for the simulated data.")
+kbl(table4a,
+  digits = 1, booktabs = T, position = "h", vline = "", # format="latex",
+  caption = "Summary statistics per condition for the simulated data."
+)
 ```
 
 ### The difference between an ANOVA and a multiple regression
@@ -48,32 +52,32 @@ Let's compare the traditional ANOVA with multiple regression for analyzing these
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
 # ANOVA: B_A(2) times B_B(2)
-fit_AB_aov<-afex::aov_car(DV ~ A*B + Error(id), data=df_contrasts4)
+fit_AB_aov <- afex::aov_car(DV ~ A * B + Error(id), data = df_contrasts4)
 
 # MR: B_A(2) times B_B(2)
-fit_AB_mr <- lm(DV ~ 1 + A*B, data=df_contrasts4)
+fit_AB_mr <- lm(DV ~ 1 + A * B, data = df_contrasts4)
 ```
 
 ```{r table16, eval=FALSE, echo=FALSE, results="asis"}
-tab16 <- round(data.frame(summary(fit_AB_aov)),3)
-names(tab16) <- c("DF(num)","DF(den)","MSE","F","ges","p")
-tab16 <- cbind(Effect=row.names(tab16),tab16)
+tab16 <- round(data.frame(summary(fit_AB_aov)), 3)
+names(tab16) <- c("DF(num)", "DF(den)", "MSE", "F", "ges", "p")
+tab16 <- cbind(Effect = row.names(tab16), tab16)
 row.names(tab16) <- NULL
-#apa_table(tab16, placement="!htbp", caption="Estimated ANOVA model.")
-#papaja::apa_table(papaja::apa_print(fit_AB_aov)$table, placement="!htbp",
+# apa_table(tab16, placement="!htbp", caption="Estimated ANOVA model.")
+# papaja::apa_table(papaja::apa_print(fit_AB_aov)$table, placement="!htbp",
 #        caption="Estimated ANOVA model.")
-kbl(tab16, booktabs = T, position= "h",vline = "", caption="Estimated ANOVA model.") # format="latex", 
+kbl(tab16, booktabs = T, position = "h", vline = "", caption = "Estimated ANOVA model.") # format="latex",
 ```
 
 ```{r table17, echo=FALSE, results="asis", eval = TRUE}
-tab17 <- data.frame(round(coef(summary(fit_AB_mr)),3))
-names(tab17) <- c("Estimate","Std. Error","t","p")
-tab17 <- cbind(Predictor=row.names(tab17),tab17)
+tab17 <- data.frame(round(coef(summary(fit_AB_mr)), 3))
+names(tab17) <- c("Estimate", "Std. Error", "t", "p")
+tab17 <- cbind(Predictor = row.names(tab17), tab17)
 row.names(tab17) <- NULL
-#apa_table(tab17, placement="!htbp", caption="Estimated regression model.")
-#papaja::apa_table(papaja::apa_print(fit_AB_mr, digits=0, est_name="Estimate")$table, placement="!htbp",
+# apa_table(tab17, placement="!htbp", caption="Estimated regression model.")
+# papaja::apa_table(papaja::apa_print(fit_AB_mr, digits=0, est_name="Estimate")$table, placement="!htbp",
 #  caption="Estimated regression model.")
-kbl(tab17, booktabs = T, position="h", vline = "", caption="Estimated regression model.") # format="latex", 
+kbl(tab17, booktabs = T, position = "h", vline = "", caption = "Estimated regression model.") # format="latex",
 ```
 
 The results from the two analyses, shown in the R output and in Table \@ref(tab:table17), are very different. 
@@ -86,16 +90,16 @@ The reason that the results from the ANOVA and the results from the multiple reg
 contrasts(df_contrasts4$A) <- contr.sum(2)
 contrasts(df_contrasts4$B) <- contr.sum(2)
 # frequentist LM
-fit_AB_mr.sum <- lm(DV ~ 1 + A*B, data=df_contrasts4)
+fit_AB_mr.sum <- lm(DV ~ 1 + A * B, data = df_contrasts4)
 ```
 
 
 ```{r table18, echo=FALSE, results="asis"}
-tab18 <- data.frame(round(coef(summary(fit_AB_mr.sum)),3))
-names(tab18) <- c("Estimate","Std. Error","t","p")
-tab18 <- cbind(Predictor=row.names(tab18),tab18)
+tab18 <- data.frame(round(coef(summary(fit_AB_mr.sum)), 3))
+names(tab18) <- c("Estimate", "Std. Error", "t", "p")
+tab18 <- cbind(Predictor = row.names(tab18), tab18)
 row.names(tab18) <- NULL
-kbl(tab18, booktabs = T, position = "h", vline = "", caption="Regression analysis with sum contrasts.") # format="latex", 
+kbl(tab18, booktabs = T, position = "h", vline = "", caption = "Regression analysis with sum contrasts.") # format="latex",
 ```
 
 When using sum contrasts, the results from the multiple regression models (see Table \@ref(tab:table18)) are identical to the results from the ANOVA (see R output<!--Table  \@ref(tab:table16)-->). Factor $A$ now has $t^2=-2.24^2 = 5$, factor $B$ has $t^2=-4.47^2 = 20$, and the interaction has $t^22.24^2 = 5$. All F-values are now the same as in the ANOVA model. 
@@ -103,21 +107,25 @@ When using sum contrasts, the results from the multiple regression models (see T
 Next, we reproduce the $A(2) \times B(2)$ - ANOVA with contrasts specified for the corresponding one-way $F(4)$ ANOVA, that is by treating the $2 \times 2 = 4$ condition means as four levels of a single factor F. In other words, we go back to the data frame simulated for the analysis of repeated contrasts (see chapter\ \@ref(ch:contr), section\ \@ref(sec:4levelFactor)). We first define weights for condition means according to our hypotheses, invert this matrix, and use it as the contrast matrix for factor F in an LM. We define weights of $1/4$ and $-1/4$. We do so because (a) we want to compare the mean of two conditions to the mean of two other conditions (e.g., factor A compares $\frac{F1 + F2}{2}$ to $\frac{F3 + F4}{2}$). Moreover, (b) we want to use sum contrasts, where the regression coefficients assess half the difference between means. Together (a+b), this yields weights of $1/2 \cdot 1/2 = 1/4$. The resulting contrast matrix contains contrast coefficients of $+1$ or $-1$, showing that we successfully implemented sum contrasts. The results are identical to the previous models.
 
 ```{r, echo=FALSE}
-ginv2 <- function(x) # define a function to make the output nicer
-  fractions(provideDimnames(ginv(x),base=dimnames(x)[2:1]))
+ginv2 <- function(x) { # define a function to make the output nicer
+  fractions(provideDimnames(ginv(x), base = dimnames(x)[2:1]))
+}
 ```
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
 data("df_contrasts3")
-t(fractions(HcInt <- rbind(A  =c(F1=1/4,F2= 1/4,F3=-1/4,F4=-1/4),
-                           B  =c(F1=1/4,F2=-1/4,F3= 1/4,F4=-1/4),
-                           AxB=c(F1=1/4,F2=-1/4,F3=-1/4,F4= 1/4))))
+t(fractions(HcInt <- rbind(
+  A = c(F1 = 1 / 4, F2 = 1 / 4, F3 = -1 / 4, F4 = -1 / 4),
+  B = c(F1 = 1 / 4, F2 = -1 / 4, F3 = 1 / 4, F4 = -1 / 4),
+  AxB = c(F1 = 1 / 4, F2 = -1 / 4, F3 = -1 / 4, F4 = 1 / 4)
+)))
 (XcInt <- ginv2(HcInt))
 contrasts(df_contrasts3$F) <- XcInt
 ```
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_F4.sum <- lm(DV ~ 1 + F,
-                 data = df_contrasts3) 
+  data = df_contrasts3
+)
 ```
 ```{r, echo=TRUE}
 round(summary(fit_F4.sum)$coefficients)
@@ -128,15 +136,18 @@ This shows that it is possible to specify the contrasts not only for each factor
 In this approach, it can again be very useful to apply the `hypr` package to construct contrasts for a $2 \times 2$ design. The first hypothesis estimates the main effect A, i.e., it compares the average of `F1` and `F2` to the average of `F3` and `F4`. The second parameter estimates the main effect B, i.e., it compares the average of `F1` and `F3` to the average of `F2` and `F4`. Note that we code direct differences between the averages, i.e., we implement scaled sum contrasts instead of sum contrasts. This becomes clear below as the contrast matrix contains coefficients of $+1/2$ and $-1/2$ instead of $+1$ and $-1$. The interaction term estimates the difference between differences, i.e., the difference between `F1 - F2` and `F3 - F4`.
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
-hAxB <- hypr(A   = (F1+F2)/2~(F3+F4)/2,
-             B   = (F1+F3)/2~(F2+F4)/2,
-             AxB = (F1-F2)/2~(F3-F4)/2)
+hAxB <- hypr(
+  A = (F1 + F2) / 2 ~ (F3 + F4) / 2,
+  B = (F1 + F3) / 2 ~ (F2 + F4) / 2,
+  AxB = (F1 - F2) / 2 ~ (F3 - F4) / 2
+)
 hAxB
 contrasts(df_contrasts3$F) <- contr.hypothesis(hAxB)
 ```
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_F4hypr <- lm(DV ~ 1 + F,
-                 data = df_contrasts3)
+  data = df_contrasts3
+)
 ```
 ```{r, echo=TRUE}
 round(summary(fit_F4hypr)$coefficients)
@@ -155,9 +166,11 @@ One can specify hypotheses that do not correspond directly to main effects and i
 In this version, we test whether there is a main effect of part of speech ($B$; as in traditional ANOVA). However, instead of also estimating the second main effect word frequency, $A$, and the interaction, we estimate (1) whether the two levels of word frequency, $A$, differ for the first level of $B$ (i.e., nouns) and (2) whether the two levels of word frequency, $A$, differ for the second level of $B$ (i.e., verbs). In other words, we estimate whether there are differences for $A$ in each of the levels of $B$. Often researchers have hypotheses about these differences, and not about the interaction.
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
-t(fractions(HcNes <- rbind(B   =c(F1= 1/2,F2=-1/2,F3= 1/2,F4=-1/2),
-                           B1xA=c(F1=-1  ,F2= 0  ,F3= 1  ,F4= 0  ),
-                           B2xA=c(F1= 0  ,F2=-1  ,F3= 0  ,F4= 1 ))))
+t(fractions(HcNes <- rbind(
+  B = c(F1 = 1 / 2, F2 = -1 / 2, F3 = 1 / 2, F4 = -1 / 2),
+  B1xA = c(F1 = -1, F2 = 0, F3 = 1, F4 = 0),
+  B2xA = c(F1 = 0, F2 = -1, F3 = 0, F4 = 1)
+)))
 (XcNes <- ginv2(HcNes))
 contrasts(df_contrasts3$F) <- XcNes
 ```
@@ -166,7 +179,8 @@ contrasts(df_contrasts3$F) <- XcNes
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_Nest <- lm(DV ~ 1 + F,
-                 data = df_contrasts3) 
+  data = df_contrasts3
+)
 ```
 ```{r, echo=TRUE}
 round(summary(fit_Nest)$coefficients)
@@ -181,10 +195,11 @@ These custom nested contrasts' columns are scaled versions of the corresponding 
 There is also a built-in R formula specification of nested designs. The order of factors in the formula from left to right specifies a top-down order of nesting within levels, i.e., here factor $A$ (word frequency) is nested within levels of the factor $B$ (part of speech). This yields the exact same result as our previous result based on custom nested contrasts:
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
-contrasts(df_contrasts4$A) <- c(-0.5,+0.5)
-contrasts(df_contrasts4$B) <- c(+0.5,-0.5)
+contrasts(df_contrasts4$A) <- c(-0.5, +0.5)
+contrasts(df_contrasts4$B) <- c(+0.5, -0.5)
 fit_Nest2 <- lm(DV ~ 1 + B / A,
-                 data = df_contrasts4) 
+  data = df_contrasts4
+)
 ```
 ```{r, echo=TRUE}
 round(summary(fit_Nest2)$coefficients)
@@ -198,9 +213,11 @@ Note that in cases such as these, where $A_{B1}$ vs. $A_{B2}$ are nested within 
 Again, we show how nested contrasts can be easily implemented using `hypr`:
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
-hNest <- hypr(B    = (F1+F3)/2~(F2+F4)/2,
-              B1xA = F3~F1,
-              B2xA = F4~F2)
+hNest <- hypr(
+  B = (F1 + F3) / 2 ~ (F2 + F4) / 2,
+  B1xA = F3 ~ F1,
+  B2xA = F4 ~ F2
+)
 hNest
 contrasts(df_contrasts3$F) <- contr.hypothesis(hNest)
 ```
@@ -208,7 +225,8 @@ contrasts(df_contrasts3$F) <- contr.hypothesis(hNest)
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_NestHypr <- lm(DV ~ 1 + F,
-                 data = df_contrasts3) 
+  data = df_contrasts3
+)
 ```
 ```{r, echo=TRUE}
 round(summary(fit_NestHypr)$coefficients)
@@ -217,15 +235,18 @@ round(summary(fit_NestHypr)$coefficients)
 Of course, we can also ask the reverse question: Are there differences for part of speech ($B$) in the levels of word frequency ($A$; in addition to estimating the main effect of word frequency, $A$)? That is, do nouns differ from verbs for low-frequency words ($B_{A1}$) and do nouns differ from verbs for high-frequency words ($B_{A2}$)?
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
-hNest2 <- hypr(A    = (F1+F2)/2~(F3+F4)/2,
-               A1xB = F2~F1,
-               A2xB = F4~F3)
+hNest2 <- hypr(
+  A = (F1 + F2) / 2 ~ (F3 + F4) / 2,
+  A1xB = F2 ~ F1,
+  A2xB = F4 ~ F3
+)
 hNest2
 contrasts(df_contrasts3$F) <- contr.hypothesis(hNest2)
 ```
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_Nest2Hypr <- lm(DV ~ 1 + F,
-                 data = df_contrasts3) 
+  data = df_contrasts3
+)
 ```
 ```{r, echo=TRUE}
 round(summary(fit_Nest2Hypr)$coefficients)
@@ -254,9 +275,10 @@ contrasts(df_contrasts4$B) <- contr.treatment(2)
 XcTr <- df_contrasts4 %>%
   group_by(A, B) %>%
   dplyr::summarise() %>%
-  model.matrix(~ 1 + A*B, .) %>%
-  as.data.frame() %>% as.matrix()
-rownames(XcTr) <- c("A1_B1","A1_B2","A2_B1","A2_B2")
+  model.matrix(~ 1 + A * B, .) %>%
+  as.data.frame() %>%
+  as.matrix()
+rownames(XcTr) <- c("A1_B1", "A1_B2", "A2_B1", "A2_B2")
 XcTr
 ```
 
@@ -288,9 +310,10 @@ contrasts(df_contrasts4$B) <- contr.sum(2)
 XcSum <- df_contrasts4 %>%
   group_by(A, B) %>%
   dplyr::summarise() %>%
-  model.matrix(~ 1 + A*B, .) %>%
-  as.data.frame() %>% as.matrix()
-rownames(XcSum) <- c("A1_B1","A1_B2","A2_B1","A2_B2")
+  model.matrix(~ 1 + A * B, .) %>%
+  as.data.frame() %>%
+  as.matrix()
+rownames(XcSum) <- c("A1_B1", "A1_B2", "A2_B1", "A2_B2")
 
 hsum <- hypr() # initialize empty hypr object
 cmat(hsum) <- XcSum # assign contrast matrix to hypr object
@@ -324,19 +347,23 @@ We run a linear model to estimate the effect of factor F, i.e., how strongly the
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_RT_F <- lm(RT ~ 1 + F,
-                 data = df_contrasts5) 
+  data = df_contrasts5
+)
 ```
 ```{r, echo=TRUE}
 round(summary(fit_RT_F)$coefficients)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, results="hide"}
-tab5 <- df_contrasts5 %>% group_by(F) %>% dplyr::summarize(M=mean(RT), SE=sd(RT)/sqrt(n()))
+tab5 <- df_contrasts5 %>%
+  group_by(F) %>%
+  dplyr::summarize(M = mean(RT), SE = sd(RT) / sqrt(n()))
 ```
 ```{r figRTF, fig=TRUE, include=TRUE, echo=FALSE, cache=FALSE, fig.width=2.5, fig.height=3, fig.cap = "Means and error bars (showing standard errors) for a simulated data-set of response times for two different groups of subjects, who have obtained a training in lexical decisions (F2) versus have obtained a control training (F1)."}
-(plot_RT <- ggplot(data=tab5, aes(x=F, y=M, ymin=M-SE, ymax=M+SE)) + 
-    geom_bar(stat="identity") + geom_errorbar(width=0.2)+
-    labs(y="Response times [ms]", x="Group (F)") ) 
+(plot_RT <- ggplot(data = tab5, aes(x = F, y = M, ymin = M - SE, ymax = M + SE)) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(width = 0.2) +
+  labs(y = "Response times [ms]", x = "Group (F)"))
 ```
 
 We find (see model estimates and data shown in Fig.\ \@ref(fig:figRTF)) that response times in group F2 are roughly 25 ms faster than in group F1 (Estimate of $-24$). The 95\% confidence intervals do not overlap with zero. This suggests that as expected, the training program that group F2 obtained seems to be successful in speeding up response times. We could now run a Bayes factor analysis on this data set to directly test this hypothesis, and maybe this would provide evidence for a difference in response times between groups.
@@ -344,7 +371,9 @@ We find (see model estimates and data shown in Fig.\ \@ref(fig:figRTF)) that res
 However, let's assume we have allocated subjects to the two groups randomly. Let's say that we also measured the IQ of each person using an IQ test. We did so, because we expected that IQ could have a strong influence on response times, and we wanted to control for this influence. We now can check whether the two groups had the same average IQ.
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
-df_contrasts5 %>% group_by(F) %>% dplyr::summarize(M.IQ = mean(IQ))
+df_contrasts5 %>%
+  group_by(F) %>%
+  dplyr::summarize(M.IQ = mean(IQ))
 ```
 
 Interestingly, group F2 did not only obtain an additional training and had faster response times, but group F2 also had a higher IQ (mean of 115) on average than group F1 (mean IQ = 85). Thus, the random allocation of subjects to the two groups seems to have created - by chance - a difference in IQs. Now we can ask the question: why may response times in group F2 be faster than in group F1? Is this because of the training program in F2? Or is this simply because the average IQ in group F2 was higher than in group F1? To investigate this question, we add both predictor variables simultaneously in a linear model. Before we enter the continuous IQ variable, we center it, by subtracting its mean. Centering covariates is generally good practice. Moreover, it is often important to z-transform the covariate, i.e., to not only subtract the mean, but also to divide by its standard deviation (this can be done as follows: `df_contrasts5$IQ.s <- scale(df_contrasts5$IQ)`). The reason why this is often important is that the estimation doesn’t work well if predictors have different scales. For the simple models we use here, the estimation works fine without z-transformation. However, for more realistic more complex models, z-transformation of covariates is often very important.
@@ -352,18 +381,20 @@ Interestingly, group F2 did not only obtain an additional training and had faste
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 df_contrasts5$IQ.c <- df_contrasts5$IQ - mean(df_contrasts5$IQ)
 fit_RT_F_IQ <- lm(RT ~ 1 + F + IQ.c,
-                 data = df_contrasts5) 
+  data = df_contrasts5
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_RT_F_IQ)$coefficients,2)
+round(summary(fit_RT_F_IQ)$coefficients, 2)
 ```
 
 The results from the brms model now show that the difference in response times between groups (i.e., factor F) is not estimated to be $-25$ ms any more, but instead, the estimate is about $+7$ ms, and the 95\% confidence intervals strongly overlap with zero ($-20$ to $33$). Thus, it looks as if the groups would not differ from each other any more. At the same time, we see that the predictor variable IQ shows a negative effect (Estimate = $-1$ with 95\% confidence interval: $-1.7$ to $-0.4$), suggesting that - as expected - response times seem to be faster in subjects with higher IQ. 
 
 ```{r figRTFIQ, fig=TRUE, include=TRUE, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE, fig.width=4.5, fig.height=3, fig.cap = "Response times as a function of individual IQ for two groups with a lexical decision training (F2) versus a control training (F1). Points indicate individual subjects, and lines with error bands indicate linear regression lines."}
-(plot_RT_IQ <- ggplot(data=df_contrasts5, aes(x=IQ, y=RT, colour=F, linetype=F)) + 
-    geom_point() + geom_smooth(method="lm")+
-    labs(y="Response times [ms]") ) 
+(plot_RT_IQ <- ggplot(data = df_contrasts5, aes(x = IQ, y = RT, colour = F, linetype = F)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(y = "Response times [ms]"))
 ```
 
 This result can also be seen in Figure\ \@ref(fig:figRTFIQ), which shows that response times decrease with increasing IQ, as suggested by the linear model. However, the heights of the two regression lines do not differ from each other, consistent with the observation in the brms model that the effect of factor F did not seem to differ from zero. That is, factor F in the linear model estimates the difference in height of the regression line between both groups.
@@ -373,10 +404,11 @@ Importantly, we can see in Figure\ \@ref(fig:figRTFIQ) that the two regression l
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_RT_FxIQ <- lm(RT ~ 1 + F * IQ.c,
-                 data = df_contrasts5)
+  data = df_contrasts5
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_RT_FxIQ)$coefficients,2)
+round(summary(fit_RT_FxIQ)$coefficients, 2)
 ```
 
 The estimate for the interaction (the term "F1:IQ.c") is very small here (close to 0) and the 95\% confidence intervals clearly overlap with zero, showing that the two regression lines are estimated to be very similar, or parallel, to each other. If this is the case, then it is possible to correct for IQ when testing the group difference.
@@ -387,16 +419,17 @@ We now take a look at a different data set.
 
 ```{r, echo=TRUE}
 data("df_contrasts6")
-levels(df_contrasts6$F) <- c("simple","complex")
+levels(df_contrasts6$F) <- c("simple", "complex")
 str(df_contrasts6)
 ```
 
 This again contains data from response times (RT) in two groups. Let's assume the two groups have performed two different response time tasks, where one simple RT task doesn't rely on much cognitive processing (group "simple"), whereas the other task is more complex and depends on complex cognitive operations (group "complex"). We therefore expect that RTs in the simple task should be independent of IQ, whereas in the complex task, individuals with a high IQ should be faster in responding compared to individuals with low IQ. Thus, our primary hypothesis of interest states that the influence of IQ on RT differs between conditions. This means that we are interested in the difference between slopes. A slope in a linear regression assesses how strongly the dependent variable (here RT) changes with an increase of one unit on the covariate (here IQ), it thus assesses how "steep" the regression line is. Our research hypothesis is that the regression lines differ between groups.
 
 ```{r figRTFxIQ, fig=TRUE, include=TRUE, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE, fig.width=4.5, fig.height=3, fig.cap = "Response times as a function of individual IQ for two groups performing a simple versus a complex task. Points indicate individual subjects, and lines with error bands indicate linear regression lines."}
-(plot_RTxIQ <- ggplot(data=df_contrasts6, aes(x=IQ, y=RT, colour=F, linetype=F)) + 
-    geom_point() + geom_smooth(method="lm")+
-    labs(y="Response times [ms]") ) 
+(plot_RTxIQ <- ggplot(data = df_contrasts6, aes(x = IQ, y = RT, colour = F, linetype = F)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(y = "Response times [ms]"))
 ```
 
 The results, displayed in Figure\ \@ref(fig:figRTFxIQ), suggest that the data are consistent with our research hypothesis. For the subjects performing the complex task, response times seem to decrease with increasing IQ, whereas for subjects performing the simple task, response times seem to be independent of IQ. As stated before, our primary hypothesis relates to the difference in slopes. Statistically speaking, this is assessed in the interaction between the factor and the covariate. Thus, we run a linear model where the interaction is included. Importantly, we first use scaled sum contrasts for the group effect, and again center the covariate IQ.
@@ -405,10 +438,11 @@ The results, displayed in Figure\ \@ref(fig:figRTFxIQ), suggest that the data ar
 contrasts(df_contrasts6$F) <- c(-0.5, +0.5)
 df_contrasts6$IQ.c <- df_contrasts6$IQ - mean(df_contrasts6$IQ)
 fit_RT_FxIQ2 <- lm(RT ~ 1 + F * IQ.c,
-                 data = df_contrasts6)
+  data = df_contrasts6
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_RT_FxIQ2)$coefficients,2)
+round(summary(fit_RT_FxIQ2)$coefficients, 2)
 ```
 
 We can see that the main effect of IQ (term "IQ.c") is negative ($-0.8$) with 95\% confidence intervals $-1.5$ to $-0.2$, suggesting that overall response times decrease with increasing IQ. However, this is qualified by the interaction term, which is estimated to be negative ($-1.6$), with 95\% confidence intervals $-2.9$ to $-0.3$. This suggests that the slope in the complex group (which was coded as $+0.5$ in the scaled sum contrast) is more negative than the slope in the simple group (which was coded as $-0.5$ in the scaled sum contrast). Thus, the interaction assesses the difference between slopes.
@@ -417,10 +451,11 @@ We can also run a model where the simple slopes are estimated, i.e., the slope o
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 fit_RT_FnIQ2 <- lm(RT ~ 1 + F / IQ.c,
-                 data = df_contrasts6)
+  data = df_contrasts6
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_RT_FnIQ2)$coefficients,2)
+round(summary(fit_RT_FnIQ2)$coefficients, 2)
 ```
 
 Now we see that the slope of IQ in the simple group ("Fsimple:IQ.c") is estimated to be $0$, with confidence intervals clearly including zero. By contrast, the slope in the complex group ("Fcomplex:IQ.c") is estimated as $-1.6$ (95\% confidence interval $-2.5$ to $-0.7$). This is consistent with our hypothesis that high IQ speeds up response times for the complex but not for the simple task. 
@@ -445,28 +480,31 @@ str(df_contrasts7)
 
 ```{r cTab7Means, echo=FALSE, message=FALSE, warning=FALSE, results = "asis"}
 table7 <- df_contrasts7 %>% group_by(A, B) %>% # plot interaction
-    dplyr::summarize(N=length(pDV), M=mean(pDV))
-GM <-  mean(table7$M) # Grand Mean
+  dplyr::summarize(N = length(pDV), M = mean(pDV))
+GM <- mean(table7$M) # Grand Mean
 table7a <- as.data.frame(table7)
-names(table7a) <- c("Factor A","Factor B","N data",
-                    "Means")
-#apa_table(table7a, placement="b", digits=2, 
+names(table7a) <- c(
+  "Factor A", "Factor B", "N data",
+  "Means"
+)
+# apa_table(table7a, placement="b", digits=2,
 #    caption="Summary statistics per condition for the simulated data.")
-kbl(table7a, booktabs = T, vline = "", position= "h", digits=2, caption="Summary statistics per condition for the simulated data.") # format="latex", 
+kbl(table7a, booktabs = T, vline = "", position = "h", digits = 2, caption = "Summary statistics per condition for the simulated data.") # format="latex",
 ```
 
 To analyze this data, we use scaled sum contrasts, as we had done above for the $2 \times 2$ design with response times as the dependent variable, and which allow us to interpret the main effects as main effects. Next, we fit a linear model. The model specification is the same as the model with response times - with two differences: First, the `family` argument is now specified as `family = binomial(link = "logit")` to indicate the logistic model. 
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, results="hide"}
-contrasts(df_contrasts7$A) <- c(-0.5,+0.5)
-contrasts(df_contrasts7$B) <- c(-0.5,+0.5)
+contrasts(df_contrasts7$A) <- c(-0.5, +0.5)
+contrasts(df_contrasts7$B) <- c(-0.5, +0.5)
 # GLM
-fit_pDV_AB.sum <-glm(pDV ~ 1 + A*B,
-                 data = df_contrasts7,
-                 family = binomial(link = "logit"))
+fit_pDV_AB.sum <- glm(pDV ~ 1 + A * B,
+  data = df_contrasts7,
+  family = binomial(link = "logit")
+)
 ```
 ```{r, echo=TRUE}
-round(summary(fit_pDV_AB.sum)$coefficients,2)
+round(summary(fit_pDV_AB.sum)$coefficients, 2)
 ```
 
 The results from this analysis show that the estimates for the two main effects ("A1" and "B1") as well as the interaction ("A1:B1") are positive and the 95\% confidence intervals do not include zero. We could now proceed to perform likelihood ratio tests to investigate the evidence that there is for each of the effects. 
@@ -487,7 +525,7 @@ Load the following data. These data are from Experiment 1 in a set of reading st
 ```{r}
 library(lingpsych)
 data("df_persianE1")
-dat1<-df_persianE1
+dat1 <- df_persianE1
 head(dat1)
 ```
 
@@ -547,4 +585,3 @@ head(df_smithE1)
 ```
 
 First, fit a linear mixed model using an ANOVA contrast coding, and determine whether there is a main effect of semantic similarity. Then refit the model, removing all the data points that are larger than 3000 milliseconds and reassess the main effect of semantic similarity. This should remove 9 data points out of 3441 data points. Does the significant effect of similarity disappear?
-
