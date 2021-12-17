@@ -7,10 +7,11 @@ We begin with the @grodner self-paced reading data we saw in the previous chapte
 ```{r}
 library(lingpsych)
 data("df_gg05e1")
-gg05e1<-df_gg05e1
-means<-round(with(gg05e1,tapply(rawRT,
-                                IND=condition,
-                            mean)))
+gg05e1 <- df_gg05e1
+means <- round(with(gg05e1, tapply(rawRT,
+  IND = condition,
+  mean
+)))
 means
 ```
 
@@ -19,16 +20,22 @@ As predicted by theory [@grodner], object relatives (labeled objgap here) are re
 As discussed in the previous chapter, a paired t-test can be done to evaluate whether we have evidence against the null hypothesis that object relatives and subject relatives have identical reading times. However, we have to aggregate the data by subjects and by items first. 
 
 ```{r}
-bysubj<-aggregate(rawRT~subject+
-                    condition,
-                  mean,data=gg05e1)
-byitem<-aggregate(rawRT~item+
-                    condition,
-                  mean,data=gg05e1)
-t.test(rawRT~condition,
-       paired=TRUE,bysubj)$statistic
-t.test(rawRT~condition,
-       paired=TRUE,byitem)$statistic
+bysubj <- aggregate(rawRT ~ subject +
+  condition,
+mean,
+data = gg05e1
+)
+byitem <- aggregate(rawRT ~ item +
+  condition,
+mean,
+data = gg05e1
+)
+t.test(rawRT ~ condition,
+  paired = TRUE, bysubj
+)$statistic
+t.test(rawRT ~ condition,
+  paired = TRUE, byitem
+)$statistic
 ```
 
 What these two t-tests show is that both by subjects and by items, there is strong evidence against the null hypothesis that the object and relatives have identical reading times. 
@@ -37,10 +44,10 @@ Interestingly, exactly the same t-values can be obtained by running the followin
 
 ```{r}
 library(lme4)
-m0lmersubj<-lmer(rawRT~condition+(1|subject),bysubj)
+m0lmersubj <- lmer(rawRT ~ condition + (1 | subject), bysubj)
 summary(m0lmersubj)$coefficients
 
-m0lmeritem<-lmer(rawRT~condition+(1|item),byitem)
+m0lmeritem <- lmer(rawRT ~ condition + (1 | item), byitem)
 summary(m0lmeritem)$coefficients
 ```
 
@@ -120,7 +127,7 @@ Mean subject relative reading times:
 There is a function in R, the `lm()` function, which expresses the above statistical model, and prints out exactly the same numerical values that we used above:
 
 ```{r}
-summary(m0<-lm(rawRT~condition,bysubj))$coefficients
+summary(m0 <- lm(rawRT ~ condition, bysubj))$coefficients
 ```
 
 
@@ -128,7 +135,7 @@ The linear model function `lm()` prints out two coefficients, $471$ and  $-102$,
 
 ```{r}
 ## make sure that the condition column is of type factor:
-bysubj$condition<-factor(bysubj$condition)
+bysubj$condition <- factor(bysubj$condition)
 contrasts(bysubj$condition)
 ```
 
@@ -145,23 +152,25 @@ Note that the meaning of the intercept and slope depends on the ordering of the 
 
 ```{r}
 ## reverse the factor level ordering:
-bysubj$condition<-factor(bysubj$condition,
-                         levels=c("subjgap","objgap"))
+bysubj$condition <- factor(bysubj$condition,
+  levels = c("subjgap", "objgap")
+)
 contrasts(bysubj$condition)
 ```
 
 Now, the intercept is the mean of the subject relatives, and the slope is the difference between object and subject relatives reading times. Note that  the  sign of the t-value has changed---the sign depends on the contrast coding. 
 
 ```{r}
-m1a<-lm(rawRT~condition,bysubj)
+m1a <- lm(rawRT ~ condition, bysubj)
 summary(m1a)$coefficients
 ```
 
 Let's switch back to the original  factor level ordering:
 
 ```{r}
-bysubj$condition<-factor(bysubj$condition,
-                         levels=c("objgap","subjgap"))
+bysubj$condition <- factor(bysubj$condition,
+  levels = c("objgap", "subjgap")
+)
 contrasts(bysubj$condition)
 ```
 
@@ -195,8 +204,9 @@ $H_0: \beta_0 = 0$. However, this null hypothesis test is of absolutely no inter
 The *contrast coding* mentioned above determines the meaning of the $\beta$ parameters:
 
 ```{r}
-bysubj$condition<-factor(bysubj$condition,
-                         levels=c("objgap","subjgap"))
+bysubj$condition <- factor(bysubj$condition,
+  levels = c("objgap", "subjgap")
+)
 contrasts(bysubj$condition)
 ```
 
@@ -218,19 +228,19 @@ We can change the contrast coding of the `condition` vector in the following way
 
 ```{r}
 ## new contrast coding:
-bysubj$cond<-ifelse(bysubj$condition=="objgap",1,-1)
+bysubj$cond <- ifelse(bysubj$condition == "objgap", 1, -1)
 ```
 
 Now, the two conditions  are coded not as 0, 1 but as -1 and +1:
 
 ```{r}
-xtabs(~cond+condition,bysubj)
+xtabs(~ cond + condition, bysubj)
 ```
 
 With  this coding, the model parameters have a different meaning:
 
 ```{r}
-m1<-lm(rawRT~cond,bysubj)
+m1 <- lm(rawRT ~ cond, bysubj)
 round(coef(m1))
 ```
 
@@ -277,7 +287,7 @@ Here is how we can check whether this normality assumption is met:
 
 ```{r}
 ## extract residuals:
-res.m1<-residuals(m1)
+res.m1 <- residuals(m1)
 ```
 
 Compare the residuals to the quantiles of the standard normal distribution ($Normal(0,1)$): 
@@ -291,7 +301,7 @@ When the normality assumption is met, the residuals will align perfectly with th
 In the above case, a log transform of the data improves the normality of residuals.  We will discuss transformation in detail later in this book; for now, it is sufficient to note that  for continuous data that consists of all-positive values (here, reading times), a log transform will often be the appropriate transform.
 
 ```{r}
-m1log<-lm(log(rawRT)~cond,bysubj)
+m1log <- lm(log(rawRT) ~ cond, bysubj)
 qqnorm(residuals(m1log))
 ```
 
@@ -323,7 +333,7 @@ This approach gives us the following estimates on the ms scale:
 The difference in reading time is 417-352=65 ms. If we had fit the model to raw reading times, the difference would have been:
 
 ```{r}
-m1raw<-lm(rawRT~cond,bysubj)
+m1raw <- lm(rawRT ~ cond, bysubj)
 ```
 
 - Estimated mean object relative reading time: $\hat\beta_0+\hat\beta_1=`r round(coef(m1raw)[1],2)`+`r round(coef(m1raw)[2],2)`=`r round(coef(m1raw)[1],2)+round(coef(m1raw)[2],2)`$.
@@ -338,24 +348,25 @@ The larger estimate based on the  raw scale is less realistic, and we will see l
 One important point to notice is that the observed t-value of the  paired t-test and the t-test printed out by the linear model don't match:
 
 ```{r}
-t.test(rawRT~condition,bysubj,paired=TRUE)$statistic
-round(summary(m0)$coefficients,2)[,c(1:3)]
+t.test(rawRT ~ condition, bysubj, paired = TRUE)$statistic
+round(summary(m0)$coefficients, 2)[, c(1:3)]
 ```
 
 This is because the linear model is equivalent to the unpaired (i.e., two sample) t-test:
 
 ```{r}
-summary(lm(rawRT~condition,bysubj))
+summary(lm(rawRT ~ condition, bysubj))
 
-round(t.test(rawRT~condition,bysubj,
-             paired=FALSE)$statistic,2)
+round(t.test(rawRT ~ condition, bysubj,
+  paired = FALSE
+)$statistic, 2)
 ```
 
 
 The paired t-test has an equivalent in the linear modeling framework: the linear mixed model. We turn next to this extension of the simple linear model. The command corresponding to the   paired t-test in the  linear modeling framework is:
 
 ```{r}
-m0.lmer<-lmer(rawRT~condition+(1|subject),bysubj)
+m0.lmer <- lmer(rawRT ~ condition + (1 | subject), bysubj)
 summary(m0.lmer)$coefficients
 ```
 
@@ -382,21 +393,21 @@ $\rho=0.5$, and that the data are balanced.
 
 ```{r}
 library(MASS)
-samplesize<-12
+samplesize <- 12
 mu <- c(.3, .2)
-rho<-0.5
-stddev<-1
-Sigma <- matrix(stddev, nrow=2, ncol=2) + diag(2)
-Sigma<-Sigma/2
+rho <- 0.5
+stddev <- 1
+Sigma <- matrix(stddev, nrow = 2, ncol = 2) + diag(2)
+Sigma <- Sigma / 2
 Sigma
 
 ## simulated data:
-x <- mvrnorm(n=samplesize, mu=mu, Sigma=Sigma, empirical=TRUE)
+x <- mvrnorm(n = samplesize, mu = mu, Sigma = Sigma, empirical = TRUE)
 head(x)
 
-n<-samplesize
-x1<-x[,1]
-x2<-x[,2]
+n <- samplesize
+x1 <- x[, 1]
+x2 <- x[, 2]
 x1
 x2
 ```
@@ -429,9 +440,9 @@ t_{n-1} = \frac{mean(x_1) - mean(x_2)}{\sqrt{2\sigma^2(1-\rho)/n}}
 Now compare the paired t-test output and the by-hand calculation:
 
 ```{r}
-t.test(x1,x2,paired=TRUE)$statistic
+t.test(x1, x2, paired = TRUE)$statistic
 
-(mean(x1)-mean(x2))/sqrt((2*stddev^2*(1-rho))/n)
+(mean(x1) - mean(x2)) / sqrt((2 * stddev^2 * (1 - rho)) / n)
 ```
 
 The linear mixed model we present next will fit exactly the same model as in the paired t-test above.  To  see this, suppose we have $i$ subjects and $j=1,2$ conditions. For simplicity, assume that each subject sees each condition once (e.g., the by-subjects aggregated English relative clause data), so we have two data points from each subject. In other words, the data are paired.
@@ -474,12 +485,12 @@ Let's check that this is true using our simulated data. In the code below, the t
 
 ```{r}
 library(lme4)
-dat<-data.frame(y=c(x1,x2),cond=rep(letters[1:2],each=n),subj=rep(1:n,2))
-dat$cond<-factor(dat$cond)
-contrasts(dat$cond)<-contr.sum(2)
+dat <- data.frame(y = c(x1, x2), cond = rep(letters[1:2], each = n), subj = rep(1:n, 2))
+dat$cond <- factor(dat$cond)
+contrasts(dat$cond) <- contr.sum(2)
 contrasts(dat$cond)
 
-summary(m<-lmer(y~cond+(1|subj),dat))
+summary(m <- lmer(y ~ cond + (1 | subj), dat))
 ```
 
 The t-statistic from the linear mixed model is exactly the same as that from the paired t-test.
@@ -491,37 +502,41 @@ With this as background, we are ready to look at linear mixed models in detail.
 We return to our subject and object relative clause data from English (Grodner and Gibson, Expt 1). First we load the data as usual, define relative clause type as a sum coded predictor, and create a new column called `so` that represents the contrast coding ($\pm 1$ sum contrasts), and  a column that holds log-transformed reading time. 
 
 ```{r}
-gg05e1$so <- ifelse(gg05e1$condition=="objgap",1,-1)
-gg05e1$logrt<-log(gg05e1$rawRT)
+gg05e1$so <- ifelse(gg05e1$condition == "objgap", 1, -1)
+gg05e1$logrt <- log(gg05e1$rawRT)
 ```
 
 Recall that these data have multiple measurements from each subject for each condition:
 
 ```{r}
-t(xtabs(~subject+condition, gg05e1))
+t(xtabs(~ subject + condition, gg05e1))
 ```
 
 We can visualize the different responses of subjects:
 
 ```{r echo=FALSE}
 library(ggplot2)
-gg_xyplot <- function(x, y, formula, shape, size, data){
-    ggplot(data = data, aes(x = data[,x],
-                            y = data[,y]))  +
+gg_xyplot <- function(x, y, formula, shape, size, data) {
+  ggplot(data = data, aes(
+    x = data[, x],
+    y = data[, y]
+  )) +
     facet_wrap(formula) +
-    geom_smooth(method="lm")+
+    geom_smooth(method = "lm") +
     geom_point(color = "blue", shape = shape, size = size) +
     theme(panel.grid.minor = element_blank()) +
     theme_bw() +
-#     scale_x_discrete(breaks=c("-1","0.5","0","0.5","1"),labels=c("OR","", "", "", "SR"))+
-     scale_x_continuous(breaks = round(seq(-1, 1, by = 2),1))+ 
+    #     scale_x_discrete(breaks=c("-1","0.5","0","0.5","1"),labels=c("OR","", "", "", "SR"))+
+    scale_x_continuous(breaks = round(seq(-1, 1, by = 2), 1)) +
     ylab(y) +
     xlab("condition (-1: SR, +1: OR)")
 }
 
-gg_xyplot(x = "so", y = "logrt",  ~ subject,  
-          shape = 1, size = 3, 
-          data = gg05e1)
+gg_xyplot(
+  x = "so", y = "logrt", ~subject,
+  shape = 1, size = 3,
+  data = gg05e1
+)
 ```
 
 It's clear that different subjects  have different effects of the  relative clause manipulation: some slopes are positive sloping, some are flat, and some are negatively sloping. There is between-subject variability in the relative clause effect.
@@ -531,7 +546,7 @@ Given these differences between subjects, you could fit a separate linear model 
 ```{r}
 library(lme4)
 
-lmlist.fm1<-lmList(logrt~so|subject,gg05e1)
+lmlist.fm1 <- lmList(logrt ~ so | subject, gg05e1)
 ```
 
 One can extract the intercept and slope estimates for each subject. For example, for subject 1:
@@ -544,21 +559,24 @@ One can plot the individual lines for each subject, as well as the  fit of a sim
 
 ```{r echo=FALSE}
 plot(gg05e1$so,
-     gg05e1$logrt,
-     axes=F,
-     xlab="condition",
-     ylab="log rt")
-axis(1,at=c(-1,1),
-     labels=c("SR","OR"))
+  gg05e1$logrt,
+  axes = F,
+  xlab = "condition",
+  ylab = "log rt"
+)
+axis(1,
+  at = c(-1, 1),
+  labels = c("SR", "OR")
+)
 axis(2)
 
-subjects<-1:42
+subjects <- 1:42
 
-for(i in subjects){
-abline(lmlist.fm1[[i]])
+for (i in subjects) {
+  abline(lmlist.fm1[[i]])
 }
 
-abline(lm(gg05e1$logrt~gg05e1$so),lwd=3,col="gray")
+abline(lm(gg05e1$logrt ~ gg05e1$so), lwd = 3, col = "gray")
 ```
 
 
@@ -573,16 +591,20 @@ t.test(coef(lmlist.fm1)[2])
 The above test is *exactly* the same as the paired t-test and the varying intercepts linear mixed model that we fit in the last chapter using the by-subject aggregated data:
 
 ```{r}
-bysubj<-aggregate(log(rawRT)~subject+condition,
-                  mean,data=gg05e1)
+bysubj <- aggregate(log(rawRT) ~ subject + condition,
+  mean,
+  data = gg05e1
+)
 
-colnames(bysubj)[3]<-"logrt"
+colnames(bysubj)[3] <- "logrt"
 
-t.test(logrt~condition,bysubj,paired=TRUE)$statistic
+t.test(logrt ~ condition, bysubj, paired = TRUE)$statistic
 
 ## compare with linear mixed model:
-summary(lmer(logrt~condition+(1|subject),
-             bysubj))$coefficients[2,]
+summary(lmer(
+  logrt ~ condition + (1 | subject),
+  bysubj
+))$coefficients[2, ]
 ```
 
 The above lmList model we just fit is called *repeated measures regression*. We now look at how to model unaggregated data using the linear mixed model. Incidentally, this repeated measures regression model is now largely of historical interest, and useful only for understanding the linear mixed model, which is the modern standard approach.  
@@ -602,7 +624,7 @@ adjusts the grand mean estimates of the intercept by a term (a number) for each 
 
 
 ```{r}
-m0.lmer<-lmer(logrt~so+(1|subject),gg05e1)
+m0.lmer <- lmer(logrt ~ so + (1 | subject), gg05e1)
 ```
 
 Notice that we did not aggregate the data.
@@ -628,14 +650,14 @@ The intercept adjustments for each subject can be viewed by typing:
 
 ```{r}
 ## first 10 subjects' intercept adjustments:
-ranef(m0.lmer)$subject[,1][1:10]
+ranef(m0.lmer)$subject[, 1][1:10]
 ```
 
 Here is another way to summarize the adjustments to the grand mean intercept by subject. The error bars represent 95\% confidence intervals.
 
 ```{r}
 library(lattice)
-print(dotplot(ranef(m0.lmer,condVar=TRUE)))
+print(dotplot(ranef(m0.lmer, condVar = TRUE)))
 ```
 
 ### The formal statement of the varying intercepts model
@@ -646,7 +668,7 @@ Once we know the subject id and the item id, we know which subject saw which con
 
 
 ```{r}
-subset(gg05e1,subject==1 & item == 1)
+subset(gg05e1, subject == 1 & item == 1)
 ```
 
 The mathematical form of the linear mixed model is:
@@ -667,20 +689,20 @@ We can visualize the adjustments for each subject to the intercepts as shown bel
 
 
 ```{r echo=FALSE}
-a<-fixef(m0.lmer)[1]
-newa<-a+ranef(m0.lmer)$subj
+a <- fixef(m0.lmer)[1]
+newa <- a + ranef(m0.lmer)$subj
 
-ab<-data.frame(newa=newa,b=fixef(m0.lmer)[2])
+ab <- data.frame(newa = newa, b = fixef(m0.lmer)[2])
 
-plot(gg05e1$so,gg05e1$logrt,xlab="condition",ylab="log rt",axes=F)
-axis(1,at=c(-1,1),labels=c("SR","OR"))
+plot(gg05e1$so, gg05e1$logrt, xlab = "condition", ylab = "log rt", axes = F)
+axis(1, at = c(-1, 1), labels = c("SR", "OR"))
 axis(2)
 
-for(i in 1:42){
-abline(a=ab[i,1],b=ab[i,2])
+for (i in 1:42) {
+  abline(a = ab[i, 1], b = ab[i, 2])
 }
 
-abline(lm(logrt~so,gg05e1),lwd=3,col="gray")
+abline(lm(logrt ~ so, gg05e1), lwd = 3, col = "gray")
 ```
 
 
@@ -704,7 +726,7 @@ y_{ij} = \beta_0 + u_{0i}+(\beta_1+u_{1i})\times so_{ij} + \varepsilon_{ij}
 That is, we additionally assume that $u_{1i} \sim Normal(0,\sigma_{u1})$. The `lmer` notation for fitting separate intercepts and slopes is `(1+so||subject)`. We will just explain what the double vertical bars represent.
 
 ```{r}
-m1.lmer<-lmer(logrt~so+(1+so||subject),gg05e1)
+m1.lmer <- lmer(logrt ~ so + (1 + so || subject), gg05e1)
 ```
 
 The output of this model will now show that there are not two but three sources of variability. These are:
@@ -736,25 +758,27 @@ so            0.0620     0.0221    2.81
 These fits for each subject are visualized below (the gray line shows the model with a single intercept and slope, i.e., our old model `m0`):
 
 ```{r echo=FALSE}
-a<-fixef(m1.lmer)[1]
-b<-fixef(m1.lmer)[2]
+a <- fixef(m1.lmer)[1]
+b <- fixef(m1.lmer)[2]
 
-newa<-a+ranef(m1.lmer)$subject[1]
-newb<-b+ranef(m1.lmer)$subject[2]
+newa <- a + ranef(m1.lmer)$subject[1]
+newb <- b + ranef(m1.lmer)$subject[2]
 
-ab<-data.frame(newa=newa,b=newb)
+ab <- data.frame(newa = newa, b = newb)
 
-plot(gg05e1$so,gg05e1$logrt,xlab="condition",
-     ylab="log rt",axes=F,
-main="varying intercepts and slopes for each subject")
-axis(1,at=c(-1,1),labels=c("SR","OR"))
+plot(gg05e1$so, gg05e1$logrt,
+  xlab = "condition",
+  ylab = "log rt", axes = F,
+  main = "varying intercepts and slopes for each subject"
+)
+axis(1, at = c(-1, 1), labels = c("SR", "OR"))
 axis(2)
 
-for(i in 1:42){
-abline(a=ab[i,1],b=ab[i,2])
+for (i in 1:42) {
+  abline(a = ab[i, 1], b = ab[i, 2])
 }
 
-abline(lm(logrt~so,gg05e1),lwd=3,col="gray")
+abline(lm(logrt ~ so, gg05e1), lwd = 3, col = "gray")
 ```
 
 #### Comparing lmList model with the varying intercepts model
@@ -762,44 +786,48 @@ abline(lm(logrt~so,gg05e1),lwd=3,col="gray")
 Compare this model with the `lmlist.fm1` model we fitted earlier:
 
 ```{r echo=FALSE}
-op<-par(mfrow=c(1,2),pty="s")
+op <- par(mfrow = c(1, 2), pty = "s")
 
-plot(gg05e1$so,gg05e1$logrt,axes=F,xlab="condition",
-     ylab="log rt",main="ordinary linear model")
-axis(1,at=c(-1,1),labels=c("SR","OR"))
+plot(gg05e1$so, gg05e1$logrt,
+  axes = F, xlab = "condition",
+  ylab = "log rt", main = "ordinary linear model"
+)
+axis(1, at = c(-1, 1), labels = c("SR", "OR"))
 axis(2)
 
-subjects<-1:42
+subjects <- 1:42
 
-lmlistcoef<-coef(lmlist.fm1)
-a_lmlist<-lmlistcoef$`(Intercept)`
-b_lmlist<-lmlistcoef$so
+lmlistcoef <- coef(lmlist.fm1)
+a_lmlist <- lmlistcoef$`(Intercept)`
+b_lmlist <- lmlistcoef$so
 
-for(i in subjects){
-abline(a=a_lmlist[i],b=b_lmlist[i])
+for (i in subjects) {
+  abline(a = a_lmlist[i], b = b_lmlist[i])
 }
 
-abline(lm(logrt~so,gg05e1),lwd=3,col="gray")
+abline(lm(logrt ~ so, gg05e1), lwd = 3, col = "gray")
 
-a<-fixef(m1.lmer)[1]
-b<-fixef(m1.lmer)[2]
+a <- fixef(m1.lmer)[1]
+b <- fixef(m1.lmer)[2]
 
-newa<-a+ranef(m1.lmer)$subj[1]
-newb<-b+ranef(m1.lmer)$subj[2]
+newa <- a + ranef(m1.lmer)$subj[1]
+newb <- b + ranef(m1.lmer)$subj[2]
 
-ab<-data.frame(newa=newa,b=newb)
+ab <- data.frame(newa = newa, b = newb)
 
-plot(gg05e1$so,gg05e1$logrt,axes=FALSE,
-main="varying intercepts and slopes",
-xlab="condition",ylab="log rt")
-axis(1,at=c(-1,1),labels=c("SR","OR"))
+plot(gg05e1$so, gg05e1$logrt,
+  axes = FALSE,
+  main = "varying intercepts and slopes",
+  xlab = "condition", ylab = "log rt"
+)
+axis(1, at = c(-1, 1), labels = c("SR", "OR"))
 axis(2)
 
-for(i in 1:42){
-abline(a=ab[i,1],b=ab[i,2])
+for (i in 1:42) {
+  abline(a = ab[i, 1], b = ab[i, 2])
 }
 
-abline(lm(logrt~so,gg05e1),lwd=3,col="gray")
+abline(lm(logrt ~ so, gg05e1), lwd = 3, col = "gray")
 ```
 
 What is striking is that each subject's estimated best fit line is "smoothed out" compared to the lmList fits. This aspect of the linear mixed model is called shrinkage; we return to this point shortly.
@@ -810,7 +838,7 @@ As before, it is instructive to visualize the by-subjects adjustments to the int
 
 
 ```{r}
-print(dotplot(ranef(m1.lmer,condVar=TRUE)))
+print(dotplot(ranef(m1.lmer, condVar = TRUE)))
 ```
 
 What this is showing is wide variability in the mean reading times between subjects, but very little variation in the slope between subjects.
@@ -839,14 +867,14 @@ The varying intercepts and slopes model  doesn't capture all the sources of vari
 Notice that in this design (as in many designs in psycholinguistics or linguistic research) each subject sees all the items. In such cases, we say that subjects and items are crossed.
 
 ```{r}
-head(xtabs(~subject+item,gg05e1))
+head(xtabs(~ subject + item, gg05e1))
 ```
 
 Linear mixed model with crossed subject and items random effects can be defined with the following syntax:
 
 ```{r}
-m2.lmer<-lmer(logrt~so+(1+so||subject)+
-(1+so||item),gg05e1)
+m2.lmer <- lmer(logrt ~ so + (1 + so || subject) +
+  (1 + so || item), gg05e1)
 ```
 
 Analogously to the preceding example, now there are five variance components:
@@ -870,7 +898,7 @@ so            0.0620     0.0242    2.56
 The item intercept and slope adjustments can be visualized as well. Notice that there is a lot less item-level variation; this is often the case in planned experiments in sentence processing, where the experimental items are carefully constructed to vary as little as possible. 
 
 ```{r}
-print(dotplot(ranef(m2.lmer,condVar=TRUE))$item)
+print(dotplot(ranef(m2.lmer, condVar = TRUE))$item)
 ```
 
 In the above models, there is an assumption that there is no correlation between the intercept and slope adjustments by subject, and no correlation between the intercept and slope adjustments by item. It is possible that the intercept and slope adjustments are in fact correlated.  We turn to this model next.
@@ -880,8 +908,10 @@ In the above models, there is an assumption that there is no correlation between
 A correlation can be introduced between the intercept and slope adjustments by using a single vertical bar instead of two vertical bars in the random effects structure:
 
 ```{r}
-m3.lmer<-lmer(logrt~so+(1+so|subject)+(1+so|item),
-              gg05e1)
+m3.lmer <- lmer(
+  logrt ~ so + (1 + so | subject) + (1 + so | item),
+  gg05e1
+)
 ```
 
 To understand what this model is doing, we have to recall what a bivariate/multivariate distribution is.
@@ -969,15 +999,16 @@ where $\varepsilon_{ij} \sim Normal(0,\sigma)$ and
 One can visualize the correlation between intercepts and slopes by subjects. The positive correlation of 0.58 between subject intercept and slope adjustments implies that slower subjects show larger effects. However, the dotplot below doesn't show a convincing indication that such a correlation exists: 
 
 ```{r}
-print(dotplot(ranef(m3.lmer,condVar=TRUE))$subject)
+print(dotplot(ranef(m3.lmer, condVar = TRUE))$subject)
 ```
 
 The correlation pattern is easier to see if we plot the slope adjustments against the intercept adjustments.
 
 ```{r}
-plot(ranef(m3.lmer)$subject[,1],ranef(m3.lmer)$subject[,2],
-xlab="Intercept adjustments (subject)",
-ylab="Slope adjustments")
+plot(ranef(m3.lmer)$subject[, 1], ranef(m3.lmer)$subject[, 2],
+  xlab = "Intercept adjustments (subject)",
+  ylab = "Slope adjustments"
+)
 ```
 
 When we talk about hypothesis testing, we will look at what inferences we can draw from this correlation.
@@ -986,7 +1017,7 @@ The dotplot showing the item-level effects shows a perfect correlation between i
 
 
 ```{r}
-print(dotplot(ranef(m3.lmer,condVar=TRUE))$item)
+print(dotplot(ranef(m3.lmer, condVar = TRUE))$item)
 ```
 
 ## Shrinkage in linear mixed models
@@ -1058,23 +1089,23 @@ The importance and value of shrinkage becomes clear once we simulate a situation
 ```{r}
 set.seed(4321)
 ## choose some data randomly to remove:
-rand<-rbinom(1,n=16,prob=0.5)
+rand <- rbinom(1, n = 16, prob = 0.5)
 ```
 
 Here are subject 37's reading times (16 data points):
 
 ```{r}
-gg05e1[which(gg05e1$subject==37),]$rawRT
+gg05e1[which(gg05e1$subject == 37), ]$rawRT
 ```
 
 Now, we randomly delete half the data:
 
 ```{r}
-gg05e1$deletedRT<-gg05e1$rawRT
-gg05e1[which(gg05e1$subject==37),]$deletedRT<-
-  
-  ifelse(rand,NA,
-         gg05e1[which(gg05e1$subject==37),]$rawRT)
+gg05e1$deletedRT <- gg05e1$rawRT
+gg05e1[which(gg05e1$subject == 37), ]$deletedRT <-
+  ifelse(rand, NA,
+    gg05e1[which(gg05e1$subject == 37), ]$rawRT
+  )
 ```
 
 
@@ -1082,16 +1113,16 @@ Now subject 37's estimates are going to be pretty wild, because they are based o
 
 
 ```{r}
-subset(gg05e1,subject==37)$deletedRT
+subset(gg05e1, subject == 37)$deletedRT
 ```
 
 ```{r echo=FALSE}
 ## original no pooling estimate:
-lmList.fm1_old<-lmList(log(rawRT)~so|subject,gg05e1)
-coefs_old<-coef(lmList.fm1_old)
-intercepts_old<-coefs_old[1]
-colnames(intercepts_old)<-"intercept"
-slopes_old<-coefs_old[2]
+lmList.fm1_old <- lmList(log(rawRT) ~ so | subject, gg05e1)
+coefs_old <- coef(lmList.fm1_old)
+intercepts_old <- coefs_old[1]
+colnames(intercepts_old) <- "intercept"
+slopes_old <- coefs_old[2]
 ## subject 37's original estimates:
 intercepts_old$intercept[37]
 slopes_old$so[37]
@@ -1099,11 +1130,11 @@ slopes_old$so[37]
 
 ```{r echo=FALSE}
 ## on deleted data:
-lmList.fm1_deleted<-lmList(log(deletedRT)~so|subject,gg05e1)
-coefs<-coef(lmList.fm1_deleted)
-intercepts<-coefs[1]
-colnames(intercepts)<-"intercept"
-slopes<-coefs[2]
+lmList.fm1_deleted <- lmList(log(deletedRT) ~ so | subject, gg05e1)
+coefs <- coef(lmList.fm1_deleted)
+intercepts <- coefs[1]
+colnames(intercepts) <- "intercept"
+slopes <- coefs[2]
 ## subject 37's new estimates on deleted data:
 intercepts$intercept[37]
 slopes$so[37]
@@ -1188,7 +1219,7 @@ A linear mixed model for the two-condition design
 Now,  fit a linear mixed model (call it M1). Recode the column called Type as  sum contrasts ($\pm 0.5$).  
 
 ```{r echo=FALSE}
-df_gibsonwu$so<-ifelse(df_gibsonwu$type=="obj-ext",-1/2,1/2)
+df_gibsonwu$so <- ifelse(df_gibsonwu$type == "obj-ext", -1 / 2, 1 / 2)
 ```
 
 Assume varying intercepts for subjects and varying intercepts for items (varying intercepts are sometimes called random intercepts). Write down the linear mixed models command, and  write down the fixed-effects estimates (intercept and slope) along with their standard errors. State whether we can reject the null hypothesis given the results of the t-value shown in the linear mixed model output; explain why.
@@ -1204,13 +1235,14 @@ Power analysis on the Gibson and Wu data
 ```
 
 ```{r echo=FALSE}
-crit_subj<-aggregate(rt~subj+type,mean,
-                     data=df_gibsonwu)
-d<-subset(crit_subj,type=="subj-ext")$rt-
-  subset(crit_subj,type=="obj-ext")$rt
-stddev<-sd(d)
-n<-length(d)
-SE<-round(stddev/sqrt(n))
+crit_subj <- aggregate(rt ~ subj + type, mean,
+  data = df_gibsonwu
+)
+d <- subset(crit_subj, type == "subj-ext")$rt -
+  subset(crit_subj, type == "obj-ext")$rt
+stddev <- sd(d)
+n <- length(d)
+SE <- round(stddev / sqrt(n))
 ```
 
 The researcher wants to achieve 80% statistical power in a future study that replicates the Gibson and Wu study. Based on the available data above, she determines that the standard error (note: not the standard deviation!) of the difference in means between the two conditions is `r SE`.  She has reason to believe that the true  difference in means is $30$ ms. What is the number of participants  needed to  achieve approximately 80% power? Use the power.t.test function to compute your answer. Write down the `power.t.test` function specification you used, as well as the number of participants needed, based on the output of the power.t.test function. 
@@ -1223,8 +1255,10 @@ The plot below shows the distribution of the residuals from model M (fit on raw 
 (You can ignore the numbers below the plot.)
 
 ```{r echo=FALSE,message=FALSE,results="asis"}
-M<-lmer(rt~so+(1|subj)+(1|item),
-           df_gibsonwu)
+M <- lmer(
+  rt ~ so + (1 | subj) + (1 | item),
+  df_gibsonwu
+)
 
 library(car)
 qqnorm(residuals(M))
@@ -1243,9 +1277,9 @@ Understanding the fixed-effects output
 Suppose that the model M's output for the fixed effects analysis were as follows. `so` is the sum-coded contrast specification shown above.
 
 ```{r echo=FALSE}
-results<-summary(M)$coefficients
-results[2,3]<-2
-results[2,2]<-NA
+results <- summary(M)$coefficients
+results[2, 3] <- 2
+results[2, 2] <- NA
 ```
 
 ```{r}
