@@ -71,23 +71,24 @@ The above mathematical model expresses a generative process. In order to produce
 First we load and prepare the relative clause data for data analysis. 
 
 ```{r}
-gg05e1<-read.table("data/grodnergibsonE1crit.txt",header=TRUE)
+gg05e1 <- read.table("data/grodnergibsonE1crit.txt", header = TRUE)
 
 
-gg05e1$so <- ifelse(gg05e1$condition=="objgap",1/2,-1/2)
-gg05e1$logrt<-log(gg05e1$rawRT)
+gg05e1$so <- ifelse(gg05e1$condition == "objgap", 1 / 2, -1 / 2)
+gg05e1$logrt <- log(gg05e1$rawRT)
 ```
 
 Next, fit the so-called maximal model. We will ignore the singularity warning as it won't affect us in our simulations.
 
 ```{r}
 library(lme4)
-m<-lmer(logrt ~ so + 
-          (1+so|subject) + 
-          (1+so|item), 
-        data=gg05e1,
-        ## "switch off" warnings:
-        control=lmerControl(calc.derivs=FALSE))
+m <- lmer(logrt ~ so +
+  (1 + so | subject) +
+  (1 + so | item),
+data = gg05e1,
+## "switch off" warnings:
+control = lmerControl(calc.derivs = FALSE)
+)
 ```
 
 The model summary shows that we can reject the null hypothesis of no difference in relative clauses:
@@ -105,21 +106,22 @@ What we are doing below will *look* like post-hoc power because we are using exi
 Notice that the effect in milliseconds is relatively large, given the estimates from similar phenomena in reading studies in psycholinguistics [@JaegerEngelmannVasishth2017]:
 
 ```{r}
-b0<-summary(m)$coefficients[1,1]
-b1<-summary(m)$coefficients[2,1]
+b0 <- summary(m)$coefficients[1, 1]
+b1 <- summary(m)$coefficients[2, 1]
 ## effect estimate in log ms:
 b1
 ## effect estimate in ms:
-exp(b0+b1*(0.5))-exp(b0+b1*(-0.5))
+exp(b0 + b1 * (0.5)) - exp(b0 + b1 * (-0.5))
 ```
 
 But the standard errors tell us that the effect could be as small or as large as the following values:
 
 ```{r}
-b1_stderr<-summary(m)$coefficients[2,2]
-lower<-b1-2*b1_stderr
-upper<-b1+2*b1_stderr
-lower;upper
+b1_stderr <- summary(m)$coefficients[2, 2]
+lower <- b1 - 2 * b1_stderr
+upper <- b1 + 2 * b1_stderr
+lower
+upper
 ```
 
 The above range `r round(lower,2)` and `r round(upper,2)` arises because the range of plausible effect sizes is between $\hat\beta_1 \pm 2SE$ on the log ms scale.
@@ -127,8 +129,8 @@ The above range `r round(lower,2)` and `r round(upper,2)` arises because the ran
 On the ms scale, the range is:
 
 ```{r}
-exp(b0+lower*(0.5))-exp(b0+lower*(-0.5))
-exp(b0+upper*(0.5))-exp(b0+upper*(-0.5))
+exp(b0 + lower * (0.5)) - exp(b0 + lower * (-0.5))
+exp(b0 + upper * (0.5)) - exp(b0 + upper * (-0.5))
 ```
 
 On the ms scale we see that that's a *lot* of uncertainty in the effect size! With some experience, you will come to recognize that such a wide confidence bound is a sign of low power. We will just establish the prospective power properties of this study in a minute.
@@ -153,33 +155,38 @@ Next, in preparation for the power analysis, we extract all the parameter estima
 The correlation matrices and the subject/item random effects standard deviations are used to assemble the variance covariance matrix; this is done using the `sdcor2cov` function from the `SIN` package; recall the discussion in chapter 1. For the variance covariance matrix for items random effects, we use an intermediate value of 0.5 for the correlation parameter because the linear mixed model was unable to estimate the parameter. 
 
 ```{r}
-m<-lmer(logrt ~ so + 
-          (1+so|subject) + 
-          (1+so|item), 
-        data=gg05e1,
-        ## "switch off" warnings:
-        control=lmerControl(calc.derivs=FALSE))
+m <- lmer(logrt ~ so +
+  (1 + so | subject) +
+  (1 + so | item),
+data = gg05e1,
+## "switch off" warnings:
+control = lmerControl(calc.derivs = FALSE)
+)
 
 ## extract parameter estimates:
-beta<-round(summary(m)$coefficients[,1],4)
-sigma_e<-round(attr(VarCorr(m),"sc"),2)
-subj_ranefsd<-round(attr(VarCorr(m)$subject,"stddev"),4)
-subj_ranefcorr<-round(attr(VarCorr(m)$subject,"corr"),1)
+beta <- round(summary(m)$coefficients[, 1], 4)
+sigma_e <- round(attr(VarCorr(m), "sc"), 2)
+subj_ranefsd <- round(attr(VarCorr(m)$subject, "stddev"), 4)
+subj_ranefcorr <- round(attr(VarCorr(m)$subject, "corr"), 1)
 
 ## assemble variance-covariance matrix for subjects:
-Sigma_u<-SIN::sdcor2cov(stddev=subj_ranefsd,
-                        corr=subj_ranefcorr)
+Sigma_u <- SIN::sdcor2cov(
+  stddev = subj_ranefsd,
+  corr = subj_ranefcorr
+)
 
-item_ranefsd<-round(attr(VarCorr(m)$item,"stddev"),4)
-item_ranefcorr<-round(attr(VarCorr(m)$item,"corr"),1)
+item_ranefsd <- round(attr(VarCorr(m)$item, "stddev"), 4)
+item_ranefcorr <- round(attr(VarCorr(m)$item, "corr"), 1)
 
 ## assemble variance matrix for items:
 
 ## choose some intermediate values for correlations:
-corr_matrix<-(diag(2) + matrix(rep(1,4),ncol=2))/2
+corr_matrix <- (diag(2) + matrix(rep(1, 4), ncol = 2)) / 2
 
-Sigma_w<-SIN::sdcor2cov(stddev=item_ranefsd,
-                        corr=corr_matrix)
+Sigma_w <- SIN::sdcor2cov(
+  stddev = item_ranefsd,
+  corr = corr_matrix
+)
 ```
 
 ## Define a function for generating data
@@ -197,36 +204,45 @@ We explain these steps next.
 First, consider how one can create a Latin-square design. Suppose we have four items and four subjects. For such an experiment, we would create two groups, g1 and g2, with the following layout.
 
 ```{r}
-nitem<-4
-nsubj<-4
+nitem <- 4
+nsubj <- 4
 
-g1<-data.frame(item=1:nitem,
-                 cond=rep(c("a","b"),nitem/2))
-g2<-data.frame(item=1:nitem,
-                 cond=rep(c("b","a"),nitem/2))
-g1; g2
+g1 <- data.frame(
+  item = 1:nitem,
+  cond = rep(c("a", "b"), nitem / 2)
+)
+g2 <- data.frame(
+  item = 1:nitem,
+  cond = rep(c("b", "a"), nitem / 2)
+)
+g1
+g2
 ```
 
 Half the total number of subjects will be assigned to group 1 and half to group 2:
 
 ```{r}  
-  ## assemble data frame:
-  gp1<-g1[rep(seq_len(nrow(g1)), 
-              nsubj/2),]
-  gp2<-g2[rep(seq_len(nrow(g2)), 
-              nsubj/2),]
-  
-  simdat<-rbind(gp1,gp2)
-  
-  ## add subject column:
-  simdat$subj<-rep(1:nsubj,each=nitem)
+## assemble data frame:
+gp1 <- g1[rep(
+  seq_len(nrow(g1)),
+  nsubj / 2
+), ]
+gp2 <- g2[rep(
+  seq_len(nrow(g2)),
+  nsubj / 2
+), ]
+
+simdat <- rbind(gp1, gp2)
+
+## add subject column:
+simdat$subj <- rep(1:nsubj, each = nitem)
 ```
 
 Finally, the contrast coding for each  row in the data-frame is set up:
 
 ```{r}
-  ## add contrast coding:
-  simdat$so<-ifelse(simdat$cond=="a",-1/2,1/2)
+## add contrast coding:
+simdat$so <- ifelse(simdat$cond == "a", -1 / 2, 1 / 2)
 ```
 
 ### Generate data row-by-row
@@ -234,20 +250,20 @@ Finally, the contrast coding for each  row in the data-frame is set up:
 Then, we proceed row-by-row in this data frame, and generate data for each subject, item, and condition. For example, the first row of our simulated data-set has subject id:
 
 ```{r}
-simdat[1,]$subj
+simdat[1, ]$subj
 ```
 
 Similarly, the first row has item id:
 
 ```{r}
-simdat[1,]$item
+simdat[1, ]$item
 ```
 
 
 The first row's condition coding is:
 
 ```{r}
-simdat[1,]$so
+simdat[1, ]$so
 ```
 
 These three pieces of information are what we need to generate data for the first row. Recall that the model for subject $i$ and item $j$ in condition `so` is
@@ -260,28 +276,32 @@ The terms u0, w0, and u1, w1, which are the adjustments to the intercepts and sl
 
 ```{r}
 library(MASS)
-u<-mvrnorm(n=10,
-             mu=c(0,0),Sigma=Sigma_u)
+u <- mvrnorm(
+  n = 10,
+  mu = c(0, 0), Sigma = Sigma_u
+)
 u
 ```
 
 Each row in this matrix is the intercept and slope adjustment for a subject; the row number indexes the subject id. For example, subject 1's intercept adjustment is:
 
 ```{r}
-u[1,1]
+u[1, 1]
 ```
 
 Subject 1's slope adjustment is:
 
 ```{r}
-u[1,2]
+u[1, 2]
 ```
 
 Analogously to the subject random effects matrix, a matrix for items random effects is also generated. As an example, we generate simulated random effects for 10 items:
 
 ```{r}
-w<-mvrnorm(n=10,
-             mu=c(0,0),Sigma=Sigma_w)
+w <- mvrnorm(
+  n = 10,
+  mu = c(0, 0), Sigma = Sigma_w
+)
 w
 ```
 
@@ -289,9 +309,11 @@ w
 Now, to generate simulated data for subject 1 and item 1 for object relatives, we simply need to run this line of code:
 
 ```{r}
-rlnorm(1,beta[1] +    u[1,1] + w[1,1] + 
-         (beta[2]+u[1,2]+w[1,2])*(0.5),
-                   sigma_e) 
+rlnorm(
+  1, beta[1] + u[1, 1] + w[1, 1] +
+    (beta[2] + u[1, 2] + w[1, 2]) * (0.5),
+  sigma_e
+)
 ```
 
 For subject 2, all that would change is the subject id: instead of `u[1,1]`, and `u[1,2]` we would write `u[2,1]` and `u[2,2]`. The for-loop below works through the `simdat` data-frame row by row, looks up the subject id, the item id for that row, and the condition coding for that row, and fills in the simulated reading time using the above code. This is how the simulated data are generated.
@@ -300,82 +322,99 @@ Here is the complete function for generating simulated data. It uses all the bit
 
 ```{r}
 library(MASS)
-## assumes that no. of subjects and 
+## assumes that no. of subjects and
 ## no. of items is divisible by 2.
-gen_sim_lnorm2<-function(nitem=16,
-                         nsubj=42,
-                         beta=NULL,
-                         Sigma_u=NULL, # subject vcov matrix
-                         Sigma_w=NULL, # item vcov matrix
-                         sigma_e=NULL){
+gen_sim_lnorm2 <- function(nitem = 16,
+                           nsubj = 42,
+                           beta = NULL,
+                           Sigma_u = NULL, # subject vcov matrix
+                           Sigma_w = NULL, # item vcov matrix
+                           sigma_e = NULL) {
   ## prepare data frame for a two-condition latin square:
-  g1<-data.frame(item=1:nitem,
-                 cond=rep(c("a","b"),nitem/2))
-  g2<-data.frame(item=1:nitem,
-                 cond=rep(c("b","a"),nitem/2))
+  g1 <- data.frame(
+    item = 1:nitem,
+    cond = rep(c("a", "b"), nitem / 2)
+  )
+  g2 <- data.frame(
+    item = 1:nitem,
+    cond = rep(c("b", "a"), nitem / 2)
+  )
 
-  
+
   ## assemble data frame:
-  gp1<-g1[rep(seq_len(nrow(g1)), 
-              nsubj/2),]
-  gp2<-g2[rep(seq_len(nrow(g2)), 
-              nsubj/2),]
-  
-  simdat<-rbind(gp1,gp2)
-  
+  gp1 <- g1[rep(
+    seq_len(nrow(g1)),
+    nsubj / 2
+  ), ]
+  gp2 <- g2[rep(
+    seq_len(nrow(g2)),
+    nsubj / 2
+  ), ]
+
+  simdat <- rbind(gp1, gp2)
+
   ## add subject column:
-  simdat$subj<-rep(1:nsubj,each=nitem)
-  
+  simdat$subj <- rep(1:nsubj, each = nitem)
+
   ## add contrast coding:
-  simdat$so<-ifelse(simdat$cond=="a",-1/2,1/2)
+  simdat$so <- ifelse(simdat$cond == "a", -1 / 2, 1 / 2)
 
   ## subject random effects:
-  u<-mvrnorm(n=length(unique(simdat$subj)),
-             mu=c(0,0),Sigma=Sigma_u)
-  
-  ## item random effects
-  w<-mvrnorm(n=length(unique(simdat$item)),
-             mu=c(0,0),Sigma=Sigma_w)
+  u <- mvrnorm(
+    n = length(unique(simdat$subj)),
+    mu = c(0, 0), Sigma = Sigma_u
+  )
 
-  ## generate data row by row:  
-  N<-dim(simdat)[1]
-  rt<-rep(NA,N)
-  for(i in 1:N){
-    rt[i] <- rlnorm(1,beta[1] + 
-                      u[simdat[i,]$subj,1] +
-                      w[simdat[i,]$item,1] + 
-                      (beta[2]+u[simdat[i,]$subj,2]+
-                         w[simdat[i,]$item,2])*simdat$so[i],
-                   sigma_e) 
-  }   
-  simdat$rt<-rt
-  simdat$subj<-factor(simdat$subj)
-  simdat$item<-factor(simdat$item)
-  simdat}
+  ## item random effects
+  w <- mvrnorm(
+    n = length(unique(simdat$item)),
+    mu = c(0, 0), Sigma = Sigma_w
+  )
+
+  ## generate data row by row:
+  N <- dim(simdat)[1]
+  rt <- rep(NA, N)
+  for (i in 1:N) {
+    rt[i] <- rlnorm(
+      1, beta[1] +
+        u[simdat[i, ]$subj, 1] +
+        w[simdat[i, ]$item, 1] +
+        (beta[2] + u[simdat[i, ]$subj, 2] +
+          w[simdat[i, ]$item, 2]) * simdat$so[i],
+      sigma_e
+    )
+  }
+  simdat$rt <- rt
+  simdat$subj <- factor(simdat$subj)
+  simdat$item <- factor(simdat$item)
+  simdat
+}
 ```
 
 Let's generate some simulated data and check what the data look like:
 
 ```{r}
-dat<-gen_sim_lnorm2(nitem=16,
-                         nsubj=42,
-                       beta=beta,
-                       Sigma_u=Sigma_u,
-                       Sigma_w=Sigma_w,
-                      sigma_e=sigma_e)
+dat <- gen_sim_lnorm2(
+  nitem = 16,
+  nsubj = 42,
+  beta = beta,
+  Sigma_u = Sigma_u,
+  Sigma_w = Sigma_w,
+  sigma_e = sigma_e
+)
 ```
 
 The data have the expected structure:
 
 ```{r}
 ## fully  crossed subjects and items:
-head(t(xtabs(~subj+item,dat)))
+head(t(xtabs(~ subj + item, dat)))
 ##  8 measurements per condition:
-head(t(xtabs(~subj+cond,dat)))
+head(t(xtabs(~ subj + cond, dat)))
 ##  contrast coding check:
-xtabs(~so+cond,dat)
+xtabs(~ so + cond, dat)
 ## condition b is slower than a:
-round(with(dat,tapply(rt,cond,mean)))
+round(with(dat, tapply(rt, cond, mean)))
 ```
 
 Everything checks out.
@@ -385,27 +424,30 @@ Everything checks out.
 With the function for simulating data ready, we are now able to repeatedly generated simulated data. Next, we generate data 100 times, fit a linear mixed model each time, and extract the t-value from each linear mixed model fit. The vector t-values is then used to compute power: we simply look at the proportion of absolute t-values that exceed the value 2. 
 
 ```{r eval=FALSE}
-nsim<-100
-sotval<-rep(NA,nsim)
+nsim <- 100
+sotval <- rep(NA, nsim)
 
-for(i in 1:nsim){
-#generate sim data:
-dat<-gen_sim_lnorm2(nitem=16,
-                         nsubj=42,
-                       beta=beta,
-                       Sigma_u=Sigma_u,
-                       Sigma_w=Sigma_w,
-                      sigma_e=sigma_e)
+for (i in 1:nsim) {
+  # generate sim data:
+  dat <- gen_sim_lnorm2(
+    nitem = 16,
+    nsubj = 42,
+    beta = beta,
+    Sigma_u = Sigma_u,
+    Sigma_w = Sigma_w,
+    sigma_e = sigma_e
+  )
 
-## fit model to sim data:
-m<-lmer(log(rt)~so+(1+so|subj)+(1+so|item),dat,
-        control=lmerControl(calc.derivs=FALSE))
-## extract the t-value
-sotval[i]<-summary(m)$coefficients[2,3]
+  ## fit model to sim data:
+  m <- lmer(log(rt) ~ so + (1 + so | subj) + (1 + so | item), dat,
+    control = lmerControl(calc.derivs = FALSE)
+  )
+  ## extract the t-value
+  sotval[i] <- summary(m)$coefficients[2, 3]
 }
 
-pow<-mean(abs(sotval)>2)
-##save(pow,file="data/powerbeta1mean.Rda")
+pow <- mean(abs(sotval) > 2)
+## save(pow,file="data/powerbeta1mean.Rda")
 ```
 
 ```{r echo=FALSE}
@@ -419,11 +461,11 @@ Here, we will assume that the true effect has the following range of plausible v
 
 ```{r}
 ## lower bound:
-.12-2*.05 
+.12 - 2 * .05
 ## mean
 .12
 ## upper bound
-.12+2*.05
+.12 + 2 * .05
 ```
 
 We will run two for-loops now: the first for-loop selects one of the plausible values as the value for the slope, and then the second for-loop runs 100 simulations to compute power for that effect size.
@@ -431,34 +473,40 @@ We will run two for-loops now: the first for-loop selects one of the plausible v
 This time, instead of ignoring convergence problems, we can record the proportion of times that we get a convergence failure or problem, and we can discard that result:
 
 ```{r eval=FALSE}
-nsim<-100
+nsim <- 100
 ## effect size possibilities:
-b1_est<-c(0.02,0.12,0.22)
-sotvals<-matrix(rep(NA,nsim*length(b1_est)),ncol=nsim)
-failed<-matrix(rep(0,nsim*length(b1_est)),ncol=nsim)
-for(j in 1:length(b1_est)){
-for(i in 1:nsim){
-  beta[2]<-b1_est[j]
-  dat_sim<-gen_sim_lnorm2(nitem=16,
-                         nsubj=42,
-                       beta=beta,
-                       Sigma_u=Sigma_u,
-                       Sigma_w=Sigma_w,
-                      sigma_e=sigma_e)
+b1_est <- c(0.02, 0.12, 0.22)
+sotvals <- matrix(rep(NA, nsim * length(b1_est)), ncol = nsim)
+failed <- matrix(rep(0, nsim * length(b1_est)), ncol = nsim)
+for (j in 1:length(b1_est)) {
+  for (i in 1:nsim) {
+    beta[2] <- b1_est[j]
+    dat_sim <- gen_sim_lnorm2(
+      nitem = 16,
+      nsubj = 42,
+      beta = beta,
+      Sigma_u = Sigma_u,
+      Sigma_w = Sigma_w,
+      sigma_e = sigma_e
+    )
 
-## no correlations estimated to 
-## minimize convergence problems: 
-## analysis done after log-transforming:  
-m<-lmer(log(rt) ~ so + (so||subj) + 
-          (so||item), data=dat_sim,
-        control=lmerControl(calc.derivs=FALSE))
-## ignore failed trials
-if(any( grepl("failed to converge", m@optinfo$conv$lme4$messages)) ||
-        any(grepl("boundary", m@optinfo$conv$lme4$messages))){
-  failed[j,i]<-1
-} else{
-sotvals[j,i]<-summary(m)$coefficients[2,3]
-}}}
+    ## no correlations estimated to
+    ## minimize convergence problems:
+    ## analysis done after log-transforming:
+    m <- lmer(log(rt) ~ so + (so || subj) +
+      (so || item),
+    data = dat_sim,
+    control = lmerControl(calc.derivs = FALSE)
+    )
+    ## ignore failed trials
+    if (any(grepl("failed to converge", m@optinfo$conv$lme4$messages)) ||
+      any(grepl("boundary", m@optinfo$conv$lme4$messages))) {
+      failed[j, i] <- 1
+    } else {
+      sotvals[j, i] <- summary(m)$coefficients[2, 3]
+    }
+  }
+}
 ```
 
 You can examine the proportion of failed convergences:
@@ -471,12 +519,12 @@ rowMeans(failed)
 Power can now be computed for each effect size:
 
 ```{r eval=FALSE}
-pow<-rep(NA,length(b1_est))
-for(k in 1:length(b1_est)){
-  pow[k]<-mean(abs(sotvals[k,])>2,na.rm=TRUE)
+pow <- rep(NA, length(b1_est))
+for (k in 1:length(b1_est)) {
+  pow[k] <- mean(abs(sotvals[k, ]) > 2, na.rm = TRUE)
 }
 
-##save(pow,file="data/powerbeta1meanlowerupper.Rda")
+## save(pow,file="data/powerbeta1meanlowerupper.Rda")
 ```
 
 ```{r echo=FALSE}
@@ -506,51 +554,57 @@ You can also study Type I  error properties of your model as a function of wheth
 Example: Compute power as a function of effect size and sample size. Note that the number of subjects has to be even, otherwise the simulation code will fail! One could put in a test for this in the code: if the number of subjects is divisible by 2, the modulo function should return 0:
 
 ```{r}
-10%%2
-11%%2
+10 %% 2
+11 %% 2
 ```
 
 ```{r}
-## define a function for computing power 
-## (as a function of effect size and 
+## define a function for computing power
+## (as a function of effect size and
 ## subject sample size:
-compute_power<-function(b=NULL,nsubjects=28){
-if(nsubjects%%2!=0){stop("No. of subjects must be divisible by 2.")}  
-nsim<-100
-sotvals<-rep(NA,nsim)
-failed<-rep(0,nsim)
-for(i in 1:nsim){
-  beta[2]<-b
-  dat_sim<-gen_sim_lnorm2(nitem=24,
-                         nsubj=nsubjects,
-                       beta=beta,
-                       Sigma_u=Sigma_u,
-                       Sigma_w=Sigma_w,
-                      sigma_e=sigma_e)
+compute_power <- function(b = NULL, nsubjects = 28) {
+  if (nsubjects %% 2 != 0) {
+    stop("No. of subjects must be divisible by 2.")
+  }
+  nsim <- 100
+  sotvals <- rep(NA, nsim)
+  failed <- rep(0, nsim)
+  for (i in 1:nsim) {
+    beta[2] <- b
+    dat_sim <- gen_sim_lnorm2(
+      nitem = 24,
+      nsubj = nsubjects,
+      beta = beta,
+      Sigma_u = Sigma_u,
+      Sigma_w = Sigma_w,
+      sigma_e = sigma_e
+    )
 
-## no correlations estimated to avoid convergence problems: 
-## analysis done after log-transforming:  
-m<-lmer(log(rt) ~ so + (so||subj) + 
-          (so||item), data=dat_sim,control=lmerControl(calc.derivs=FALSE))
-## ignore failed trials
-if(any( grepl("failed to converge", m@optinfo$conv$lme4$messages) )){
-  failed[i]<-1
-} else{
-sotvals[i]<-summary(m)$coefficients[2,3]
-}}
+    ## no correlations estimated to avoid convergence problems:
+    ## analysis done after log-transforming:
+    m <- lmer(log(rt) ~ so + (so || subj) +
+      (so || item), data = dat_sim, control = lmerControl(calc.derivs = FALSE))
+    ## ignore failed trials
+    if (any(grepl("failed to converge", m@optinfo$conv$lme4$messages))) {
+      failed[i] <- 1
+    } else {
+      sotvals[i] <- summary(m)$coefficients[2, 3]
+    }
+  }
 
-## power:
-paste("Power:",round(mean(abs(sotvals)>2,
-                          na.rm=TRUE),2),sep=" ")
+  ## power:
+  paste("Power:", round(mean(abs(sotvals) > 2,
+    na.rm = TRUE
+  ), 2), sep = " ")
 }
 ```
 
 ```{r message=FALSE,warning=FALSE,results="asis"}
-## usage: this will halt function 
+## usage: this will halt function
 ## with an error message
 # compute_power(b=0.03,nsubjects=29)
 
-compute_power(b=0.03,nsubjects=28)
+compute_power(b = 0.03, nsubjects = 28)
 ```
 
 ## Using the package `designr` to simulate data and compute power
@@ -564,9 +618,9 @@ An R package, `designr`, provides some built-in functions that can simplify the 
 First, load the data, and prepare the contrast coding and log-transform the reading times.
 
 ```{r}
-gg05e1<-read.table("data/grodnergibsonE1crit.txt",header=TRUE)
-gg05e1$so <- ifelse(gg05e1$condition=="objgap",1/2,-1/2)
-gg05e1$logrt<-log(gg05e1$rawRT)
+gg05e1 <- read.table("data/grodnergibsonE1crit.txt", header = TRUE)
+gg05e1$so <- ifelse(gg05e1$condition == "objgap", 1 / 2, -1 / 2)
+gg05e1$logrt <- log(gg05e1$rawRT)
 ```
 
 Next, we fit a linear mixed model to the data. As an example, we use raw reading times on the millisecond scale.
@@ -574,15 +628,16 @@ Next, we fit a linear mixed model to the data. As an example, we use raw reading
 ```{r}
 ## frequentist analysis:
 library(lme4)
-m_lmer<-lmer(rawRT~so + (1+so|subject)+(1+so|item),gg05e1,
-             control=lmerControl(calc.derivs=FALSE))
+m_lmer <- lmer(rawRT ~ so + (1 + so | subject) + (1 + so | item), gg05e1,
+  control = lmerControl(calc.derivs = FALSE)
+)
 summary(m_lmer)
 ```
 
 The correlations between the varying intercepts and slopes could not be estimated, so the model is over-parameterized. We can refit the model without correlations:
 
 ```{r}
-m_lmer<-lmer(rawRT~so + (1+so||subject)+(1+so||item),gg05e1)
+m_lmer <- lmer(rawRT ~ so + (1 + so || subject) + (1 + so || item), gg05e1)
 summary(m_lmer)
 ```
 
@@ -593,77 +648,85 @@ library(designr)
 
 ## example
 ## define data frame:
-design<-fixed.factor("so", levels=c("subjgap", "objgap")) +
-  random.factor("subject", instances=42)+
-  random.factor("item", instances=16)
+design <- fixed.factor("so", levels = c("subjgap", "objgap")) +
+  random.factor("subject", instances = 42) +
+  random.factor("item", instances = 16)
 dat <- design.codes(design)
-dat$so <- ifelse(dat$so=="objgap",1/2,-1/2)
+dat$so <- ifelse(dat$so == "objgap", 1 / 2, -1 / 2)
 head(dat)
 ```
 
 To compute prospective power based on the estimates from the English relative clause data, the following for-loop is run. In each iteration, data is first generated using the design set up above; this is done using the `simLMM` function from the `designr` package. Notice here that a "maximal" model is specified, but the correlations are set to zero (CP=0.0);  this has the effect that the data generated assume no correlation between the intercept and slope for subjects and items. Having generated the data, the `lmer` function is used to fit the model to the simulated data, and then the t-value of the slope is saved. This t-value can then be used to compute power in the usual way.
 
 ```{r cache=TRUE}
-tvals<-rep(NA,100)
+tvals <- rep(NA, 100)
 
-for(i in 1:100){
-## generate data:
-dat$ysim <- simLMM(formula = ~ 1 + so + (1 + so | subject) + 
-                     (1+so|item),
-                   data = dat,
-                   LMM = m_lmer,
-                   CP =  0.0,
-                   empirical=FALSE,verbose=FALSE,
-                   family="gaussian")
+for (i in 1:100) {
+  ## generate data:
+  dat$ysim <- simLMM(
+    formula = ~ 1 + so + (1 + so | subject) +
+      (1 + so | item),
+    data = dat,
+    LMM = m_lmer,
+    CP = 0.0,
+    empirical = FALSE, verbose = FALSE,
+    family = "gaussian"
+  )
 
-## fit model to simulated data:
-m<-lme4::lmer(ysim ~ so + (so || subject) + (so||item), 
-              data=dat,
-              control=lmerControl(calc.derivs=FALSE))
-## save t-value
-tvals[i]<-summary(m)$coefficients[2,3]
+  ## fit model to simulated data:
+  m <- lme4::lmer(ysim ~ so + (so || subject) + (so || item),
+    data = dat,
+    control = lmerControl(calc.derivs = FALSE)
+  )
+  ## save t-value
+  tvals[i] <- summary(m)$coefficients[2, 3]
 }
 
-mean(abs(tvals)>2)
+mean(abs(tvals) > 2)
 ```
 
 If we also want to examine the distribution of the data generated, and the distribution of the parameters under repeated sampling, we can easily record that information within the for-loop:
 
 ```{r cache=TRUE}
-n<-dim(dat)[1]
-nsim<-100
-ysims<-matrix(rep(NA,n*nsim),ncol=nsim)
+n <- dim(dat)[1]
+nsim <- 100
+ysims <- matrix(rep(NA, n * nsim), ncol = nsim)
 
-for(i in 1:100){
-## generate data:
-ysim <- simLMM(formula = ~ 1 + so + (1 + so | subject) + (1+so|item),
-                   data = dat,
-                   LMM = m_lmer,
-                   CP =  0.0,
-                   empirical=FALSE,verbose=FALSE,
-                   family="gaussian")
-## store simulated data:
-ysims[,i]<-ysim
-## add current simulated data to data-frame:
-dat$ysim<-ysim
+for (i in 1:100) {
+  ## generate data:
+  ysim <- simLMM(
+    formula = ~ 1 + so + (1 + so | subject) + (1 + so | item),
+    data = dat,
+    LMM = m_lmer,
+    CP = 0.0,
+    empirical = FALSE, verbose = FALSE,
+    family = "gaussian"
+  )
+  ## store simulated data:
+  ysims[, i] <- ysim
+  ## add current simulated data to data-frame:
+  dat$ysim <- ysim
 
-## fit model to simulated data:
-m<-lme4::lmer(ysim ~ so + (so || subject) + (so||item), 
-              data=dat,
-              control=lmerControl(calc.derivs=FALSE))
-## save t-value
-tvals[i]<-summary(m)$coefficients[2,3]
+  ## fit model to simulated data:
+  m <- lme4::lmer(ysim ~ so + (so || subject) + (so || item),
+    data = dat,
+    control = lmerControl(calc.derivs = FALSE)
+  )
+  ## save t-value
+  tvals[i] <- summary(m)$coefficients[2, 3]
 }
 
-mean(abs(tvals)>2)
+mean(abs(tvals) > 2)
 ```
 
 ```{r}
-hist(gg05e1$rawRT,freq = FALSE,ylab="density",
-     xlim=c(-1000,5000),
-     main="",xlab="reading times (ms)")
-for(i in 1:100){
-  lines(density(ysims[,i]))
+hist(gg05e1$rawRT,
+  freq = FALSE, ylab = "density",
+  xlim = c(-1000, 5000),
+  main = "", xlab = "reading times (ms)"
+)
+for (i in 1:100) {
+  lines(density(ysims[, i]))
 }
 ```
 
@@ -673,73 +736,81 @@ If we want to fit the model on log RTs, the code changes as follows.
 First, the model is fit to the data on the log ms scale:
 
 ```{r}
-m_lmer<-lmer(logrt~so + (1+so||subject)+(1+so||item),gg05e1)
+m_lmer <- lmer(logrt ~ so + (1 + so || subject) + (1 + so || item), gg05e1)
 summary(m_lmer)
 ```
 
 The design remains unchanged; only the for-loop changes: the `simLMM` function is passed through the `exp()` function, to exponentiate the data generated on the log scale.
 
 ```{r cache=TRUE}
-tvals<-rep(NA,100)
+tvals <- rep(NA, 100)
 
-for(i in 1:100){
-## generate data:
-dat$ysim <- exp(simLMM(formula = ~ 1 + so + (1 + so | subject) + (1+so|item),
-                   data = dat,
-                   LMM = m_lmer,
-                   CP =  0.0,
-                   empirical=FALSE,verbose=FALSE,
-                   family="gaussian"))
+for (i in 1:100) {
+  ## generate data:
+  dat$ysim <- exp(simLMM(
+    formula = ~ 1 + so + (1 + so | subject) + (1 + so | item),
+    data = dat,
+    LMM = m_lmer,
+    CP = 0.0,
+    empirical = FALSE, verbose = FALSE,
+    family = "gaussian"
+  ))
 
-## fit model to simulated data:
-m<-lme4::lmer(log(ysim) ~ so + (so || subject) + (so||item), 
-              data=dat,
-              control=lmerControl(calc.derivs=FALSE))
-## save t-value
-tvals[i]<-summary(m)$coefficients[2,3]
+  ## fit model to simulated data:
+  m <- lme4::lmer(log(ysim) ~ so + (so || subject) + (so || item),
+    data = dat,
+    control = lmerControl(calc.derivs = FALSE)
+  )
+  ## save t-value
+  tvals[i] <- summary(m)$coefficients[2, 3]
 }
 
-mean(abs(tvals)>2)
+mean(abs(tvals) > 2)
 ```
 
 The model fit on log RTs produces much more realistic data:
 
 ```{r cache=TRUE}
-n<-dim(dat)[1]
-nsim<-100
-ysims<-matrix(rep(NA,n*nsim),ncol=nsim)
+n <- dim(dat)[1]
+nsim <- 100
+ysims <- matrix(rep(NA, n * nsim), ncol = nsim)
 
-for(i in 1:100){
-## generate data:
-ysim <- exp(simLMM(formula = ~ 1 + so + (1 + so | subject) + 
-                     (1+so|item),
-                   data = dat,
-                   LMM = m_lmer,
-                   CP =  0.0,
-                   empirical=FALSE,verbose=FALSE,
-                   family="gaussian"))
-## store simulated data:
-ysims[,i]<-ysim
-## add current simulated data to data-frame:
-dat$ysim<-ysim
+for (i in 1:100) {
+  ## generate data:
+  ysim <- exp(simLMM(
+    formula = ~ 1 + so + (1 + so | subject) +
+      (1 + so | item),
+    data = dat,
+    LMM = m_lmer,
+    CP = 0.0,
+    empirical = FALSE, verbose = FALSE,
+    family = "gaussian"
+  ))
+  ## store simulated data:
+  ysims[, i] <- ysim
+  ## add current simulated data to data-frame:
+  dat$ysim <- ysim
 
-## fit model to simulated data:
-m<-lme4::lmer(log(ysim) ~ so + (so || subject) + (so||item), 
-              data=dat,
-              control=lmerControl(calc.derivs=FALSE))
-## save t-value
-tvals[i]<-summary(m)$coefficients[2,3]
+  ## fit model to simulated data:
+  m <- lme4::lmer(log(ysim) ~ so + (so || subject) + (so || item),
+    data = dat,
+    control = lmerControl(calc.derivs = FALSE)
+  )
+  ## save t-value
+  tvals[i] <- summary(m)$coefficients[2, 3]
 }
 
-mean(abs(tvals)>2)
+mean(abs(tvals) > 2)
 ```
 
 ```{r}
-hist(gg05e1$rawRT,freq = FALSE,ylab="density",
-     xlim=c(-1000,5000),
-     main="",xlab="reading times (ms)",ylim=c(0,0.003))
-for(i in 1:100){
-  lines(density(ysims[,i]))
+hist(gg05e1$rawRT,
+  freq = FALSE, ylab = "density",
+  xlim = c(-1000, 5000),
+  main = "", xlab = "reading times (ms)", ylim = c(0, 0.003)
+)
+for (i in 1:100) {
+  lines(density(ysims[, i]))
 }
 ```
 
@@ -751,14 +822,13 @@ The `designr` library can be used to generate data from typical factorial design
 
 ```{r}
 
-design <- fixed.factor("distance", c("long","short")) + 
-       fixed.factor("predictability", c("high","low")) + 
-       random.factor("Subject",instances=4) + ## 4x4 = 16 subjects
-       random.factor("Item",instances=4) +    ## 4x4=16 items
-       random.factor(c("Subject","Item"), groups = c("distance","predictability"))
+design <- fixed.factor("distance", c("long", "short")) +
+  fixed.factor("predictability", c("high", "low")) +
+  random.factor("Subject", instances = 4) + ## 4x4 = 16 subjects
+  random.factor("Item", instances = 4) + ## 4x4=16 items
+  random.factor(c("Subject", "Item"), groups = c("distance", "predictability"))
 
-simdat<-design.codes(design)
-
+simdat <- design.codes(design)
 ```
 
 
