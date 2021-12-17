@@ -100,4 +100,34 @@
 }
 \makeatother
 
+\usepackage[most]{tcolorbox}
+
+\newtcolorbox[auto counter,number within=section]{blackbox}[2][]{% 
+  colback=white,
+  colframe=gray,
+  coltext=black,
+  boxsep=5pt,
+  arc=4pt,
+  breakable=true,
+fonttitle=\bfseries, 
+title=Box~\thetcbcounter}
+
+\newtcolorbox[auto counter,number within=section]{mytheorem}[2][]{% 
+  colback=white,
+  colframe=black,
+  coltext=black,
+  boxsep=5pt,
+  arc=4pt,
+  breakable=true,
+fonttitle=\bfseries, 
+title=Theorem~\thetcbcounter}
+
+%\newtcolorbox{blackbox}{
+  %colback=white,
+  %colframe=gray,
+  %coltext=black,
+  %boxsep=5pt,
+  %arc=4pt,
+  %breakable=true}
+
 \frontmatter
