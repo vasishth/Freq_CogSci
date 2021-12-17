@@ -19,48 +19,54 @@ One design decision that the researcher must take is whether to collect only one
 In psycholinguistics, repeated measures experiments are the norm. Furthermore, it is common to use a so-called *Latin Square* design. The term Latin Square refers to the fact that the ordering of the conditions forms a square (Table \@ref(tab:LatinSquare)); the word Latin apparently only refers to the fact the symbols for each condition were from the Latin script.
 
 ```{r LatinSquare,echo=FALSE,results="asis"}
-latsq<-data.frame(rbind(letters[1:2],letters[2:1]))
-colnames(latsq)<-c("Group 1","Group 2")
+latsq <- data.frame(rbind(letters[1:2], letters[2:1]))
+colnames(latsq) <- c("Group 1", "Group 2")
 
 kableExtra::kable(latsq,
-                  digits = 2, booktabs = TRUE, 
-                  vline = "", # format="latex",
-  caption = "The Latin Square with two conditions labeled a and b.")
+  digits = 2, booktabs = TRUE,
+  vline = "", # format="latex",
+  caption = "The Latin Square with two conditions labeled a and b."
+)
 ```
 
 A characteristic property of the Latin Square is that, as shown in Table \@ref(tab:LatinSquare), each condition appears in each row exactly once. The Latin square generalizes beyond two conditions easily. Suppose we have four conditions; then, the Latin Square is as in Table \@ref(tab:LatinSquare4). Similarly, if there are eight conditions, the Latin Square table would have the form shown in Table \@ref(tab:LatinSquare8). 
 
 
 ```{r LatinSquare4,echo=FALSE,results="asis"}
-latsq4<-data.frame(rbind(letters[1:4],
-                        letters[c(2:4,1)],
-                  letters[c(3:4,1:2)],
-                  letters[c(4,1:3)]))
-colnames(latsq4)<-c("Group 1","Group 2","Group 3","Group 4")
+latsq4 <- data.frame(rbind(
+  letters[1:4],
+  letters[c(2:4, 1)],
+  letters[c(3:4, 1:2)],
+  letters[c(4, 1:3)]
+))
+colnames(latsq4) <- c("Group 1", "Group 2", "Group 3", "Group 4")
 
 kableExtra::kable(latsq4,
-                  digits = 2, booktabs = TRUE, 
-                  vline = "", # format="latex",
-  caption = "A Latin Square design with four conditions labeled a, b, c, and d.")
+  digits = 2, booktabs = TRUE,
+  vline = "", # format="latex",
+  caption = "A Latin Square design with four conditions labeled a, b, c, and d."
+)
 ```
 
 
 ```{r LatinSquare8,echo=FALSE,results="asis"}
-latsq8<-data.frame(rbind(letters[1:8],
-                        letters[c(2:8,1)],
-                  letters[c(3:8,1:2)],
-                  letters[c(4:8,1:3)],
-                  letters[c(5:8,1:4)],
-                  letters[c(6:8,1:5)],
-                  letters[c(7:8,1:6)],
-                  letters[c(8,1:7)]
-                  ))
-colnames(latsq8)<-paste(rep("G",8),1:8,sep="")
+latsq8 <- data.frame(rbind(
+  letters[1:8],
+  letters[c(2:8, 1)],
+  letters[c(3:8, 1:2)],
+  letters[c(4:8, 1:3)],
+  letters[c(5:8, 1:4)],
+  letters[c(6:8, 1:5)],
+  letters[c(7:8, 1:6)],
+  letters[c(8, 1:7)]
+))
+colnames(latsq8) <- paste(rep("G", 8), 1:8, sep = "")
 
 kableExtra::kable(latsq8,
-                  digits = 2, booktabs = TRUE, 
-                  vline = "", # format="latex",
-  caption = "A Latin Square design with eight conditions labeled a, b, c, d, e, f, g, and h. The column names representing the eight groups are abbreviated as G1-G8.")
+  digits = 2, booktabs = TRUE,
+  vline = "", # format="latex",
+  caption = "A Latin Square design with eight conditions labeled a, b, c, d, e, f, g, and h. The column names representing the eight groups are abbreviated as G1-G8."
+)
 ```
 
 As an aside, it is rarely a good idea to design such complex experiments as the one shown in Table \@ref(tab:LatinSquare8). The more conditions you have in an experiment, the more decisions you will have to make about how to analyze the data, the more complex the model will get, and the harder the interpretation of the data. Later in this course, we will demonstrate the price one has to pay for setting up overly complex designs. This point is mentioned here because it is a common beginner error to want to have as many conditions as possible in a single experiment. In fact, the first experiment a student of ours once proposed to us was a 180 condition design. 
@@ -70,14 +76,15 @@ The Latin Square design is attractive for psycholinguistics and psychology becau
 The Latin square design can be extended so that each participant sees repeated sets of each condition. For example, in a two-condition design, we may decide to create multiple (say 4) sets of items: item 1 will have two instances of conditions a and b; item 2 to 4 will each have two instances of conditions a and b. The Latin square then looks like the one shown in Table \@ref(tab:LatinSquarerep2).
 
 ```{r LatinSquarerep2,echo=FALSE,results="asis"}
-latsqrep2<-data.frame(cbind(item=1:4,rep(letters[1:2],2),rep(letters[2:1],2)))
+latsqrep2 <- data.frame(cbind(item = 1:4, rep(letters[1:2], 2), rep(letters[2:1], 2)))
 
-colnames(latsqrep2)<-c("item","Group 1","Group 2")
+colnames(latsqrep2) <- c("item", "Group 1", "Group 2")
 
 kableExtra::kable(latsqrep2,
-                  digits = 2, booktabs = TRUE, 
-                  vline = "", # format="latex",
-  caption = "The Latin Square with two conditions labeled a and b, and four items.")
+  digits = 2, booktabs = TRUE,
+  vline = "", # format="latex",
+  caption = "The Latin Square with two conditions labeled a and b, and four items."
+)
 ```
 
 Now, when each incoming participants is randomly assigned to Group 1 or Group 2, they will see two instances of each condition, but---crucially--each instance of each item will be seen only once. This has the advantage that we obtain repeated measures from each participant for each condition, leading to more accurate estimates from each participant for each condition; and we obtain measurements from multiple items as well. However, each participant sees each item only once; this can be important in cases where showing the same item to the participant more than once could bias their response. For example, if we show the same word twice to a participant, they might process the second instance of that word more easily, biasing the average response to that word. There can however be situations where it is appropriate/necessary to show the same item multiple times to a participant. In most of the designs considered in this book, participants will see one item only once.
@@ -87,29 +94,29 @@ Having repeated measurements from participants and from items allows us to gener
 To come closer to a realistic experiment design, suppose that we have two participants (this is just for illustration---normally we will have many more than two participants). Then, the data frame will look like this:
 
 ```{r}
-condition<-c(rep(letters[1:2],2),rep(letters[2:1],2))
-item<-rep(1:4,2)
-subj<-rep(1:2,each=4)
-df_example<-data.frame(subj,item,condition)
+condition <- c(rep(letters[1:2], 2), rep(letters[2:1], 2))
+item <- rep(1:4, 2)
+subj <- rep(1:2, each = 4)
+df_example <- data.frame(subj, item, condition)
 df_example
 ```
 
 As a consequence of this design, we say that we have a fully crossed subjects (participants) and items design: each participant sees exactly one item:
 
 ```{r}
-xtabs(~subj+item,df_example)
+xtabs(~ subj + item, df_example)
 ```
 
 You can also check that each subject sees two instances of each condition:
 
 ```{r}
-xtabs(~subj+condition,df_example)
+xtabs(~ subj + condition, df_example)
 ```
 
 Notice also that there is exactly one measurement from each item for each condition. This is because only two subjects are involved here. If there were 10 subjects, there would be five instance of each condition for each item.
 
 ```{r}
-xtabs(~item+condition,df_example)
+xtabs(~ item + condition, df_example)
 ```
 
 So, one consequence of the above repeated measurements design is that there will, in general, be repeated measurements not just from subjects but also from items. Thus, items can also be seen as producing dependent data.  Later on, we will see that this design has far-reaching consequences regarding the type of data analysis one can and should do. 
@@ -515,8 +522,8 @@ plot(x, dnorm(x, mean = 450, sd = SE),
   type = "l",
   main = "The sampling distribution with mu=450",
   ylab = "density",
-  yaxs="i",
-  ylim=c(0,.15)
+  yaxs = "i",
+  ylim = c(0, .15)
 )
 points(y_bar, 0.001, col = "black", pch = 20)
 text(x = y_bar, y = 0.01, label = "sample \n mean", col = "black")
@@ -595,7 +602,7 @@ for (i in c(1, 2, 5, 15, 20, 50)) {
     type = "l", lty = 2,
     xlab = "", ylab = "",
     cex.axis = 1, cex.axis = 0.8,
-    yaxs="i"
+    yaxs = "i"
   )
   lines(range, dt(range, df = i), lty = 1, lwd = 1)
   mtext(paste("df=", i), cex = 1.2)
@@ -621,29 +628,29 @@ What constitutes a large or small observed t-value?
 Intuitively, the t-value from the sample is large when we end up far in *either* tail of the distribution. The two tails of the t-distribution will be referred to as the *rejection region*. The word *region* here refers to the real number line along the x-axis, under the tails of the distribution. The rejection region will go off to infinity on the outer sides, and is demarcated by a vertical line on the inner side of each tail. This is shown in Figure \@ref(fig:tails). It goes off to infinity because the support---the range of possible values---of the random variable that the t-distribution belongs to stretches from minus infinity to plus infinity. 
 
 ```{r tails,echo=FALSE,fig.cap="The rejection region in a t-distribution (sample size 20) assuming that the null hypothesis is true. The rejection region is the x-axis under the gray-colored area."}
-n<-20
+n <- 20
 x <- seq(-5, 5, by = 0.1)
-plot(x, dt(x, df = n-1),
+plot(x, dt(x, df = n - 1),
   type = "l", main = "t(n-1)",
   ylab = "density",
-  yaxs="i",
+  yaxs = "i",
   xlab = "t-values"
 )
 
-lower <- qt(0.025, df = n-1)
-upper <- qt(0.975, df = n-1)
+lower <- qt(0.025, df = n - 1)
+upper <- qt(0.975, df = n - 1)
 abline(v = lower)
 abline(v = upper)
 
 x1 <- seq(upper, 20, 0.001)
-y1 <- dt(x1, df = n-1)
+y1 <- dt(x1, df = n - 1)
 polygon(c(x1, rev(x1)),
   c(rep(0, length(x1)), rev(y1)),
   col = gray(0.8)
 )
 
 x1 <- seq(-20, lower, 0.001)
-y1 <- dt(x1, df = n-1)
+y1 <- dt(x1, df = n - 1)
 polygon(c(x1, rev(x1)),
   c(rep(0, length(x1)), rev(y1)),
   col = gray(0.8)
@@ -651,10 +658,9 @@ polygon(c(x1, rev(x1)),
 
 points(1.8, 0.005, col = "black", pch = 20)
 text(x = 1.8, y = 0.04, label = "observed t-value", col = "black")
-text(0,.2,"fail-to-reject \n region")
-text(-3.5,.2,"rejection \n region")
-text(3.5,.2,"rejection \n region")
-
+text(0, .2, "fail-to-reject \n region")
+text(-3.5, .2, "rejection \n region")
+text(3.5, .2, "rejection \n region")
 ```
 
 The location of the vertical lines is determined by the so-called *absolute critical t-value* along the x-axis of the t-distribution.  This is the value such that the area under the curve in the tails to the left or right of the tails is 0.025. As discussed in chapter 1, this area under the curve represents the probability of observing a value as extreme as the critical t-value, or some value that is more extreme. Notice that if we ask ourselves what the probability is of observing some particular t-value (a point value), the answer must necessarily be $0$ (if you are unclear about why, re-read chapter 1). But we can ask the question: what is the absolute t-value, written $|t|$, such that $P(T>|t|)=0.05$?  That's the critical t-value. We call it the critical t-value because it demarcates the rejection region shown in Figure \@ref(fig:tails): we are adopting the convention that any observed t-value larger than this critical t-value allows us to reject the null hypothesis.
@@ -966,15 +972,21 @@ Suppose that we have an expectation that an effect size is 15 ms $\pm 5$ ms (thi
 
 ```{r powercurve,fig.cap="An illustration of a power curve for 10 participants, as a function of standard deviation, and three estimates of the effect: 15, 10, and 20."}
 sds <- seq(100, 300, by = 1)
-lower <- power.t.test(delta = 15 - 5, 
-                      sd = sds, n = 10, 
-                      strict = TRUE)$power
-upper <- power.t.test(delta = 15 + 5, 
-                      sd = sds, n = 10, 
-                      strict = TRUE)$power
-meanval <- power.t.test(delta = 15, 
-                        sd = sds, n = 10,
-                        strict = TRUE)$power
+lower <- power.t.test(
+  delta = 15 - 5,
+  sd = sds, n = 10,
+  strict = TRUE
+)$power
+upper <- power.t.test(
+  delta = 15 + 5,
+  sd = sds, n = 10,
+  strict = TRUE
+)$power
+meanval <- power.t.test(
+  delta = 15,
+  sd = sds, n = 10,
+  strict = TRUE
+)$power
 
 plot(sds, meanval,
   type = "l",
@@ -982,8 +994,8 @@ plot(sds, meanval,
      using power.t.test",
   xlab = "standard deviation",
   ylab = "power",
-  yaxs="i",
-  ylim=c(0.05,0.07)
+  yaxs = "i",
+  ylim = c(0.05, 0.12)
 )
 lines(sds, lower, lty = 2)
 lines(sds, upper, lty = 2)
@@ -1001,12 +1013,12 @@ First, generate simulated data repeatedly for each possible combination of param
 compute_power <- function(nsim = 100000, n = 10,
                           effect = NULL,
                           stddev = NULL) {
-  crit_t<-abs(qt(0.025,df=n-1))
+  crit_t <- abs(qt(0.025, df = n - 1))
   temp_power <- rep(NA, nsim)
   for (i in 1:nsim) {
     y <- rnorm(n, mean = effect, sd = stddev)
-    temp_power[i] <- ifelse(abs(t.test(y)$statistic) 
-                            > crit_t, 1, 0)
+    temp_power[i] <- ifelse(abs(t.test(y)$statistic)
+    > crit_t, 1, 0)
   }
   ## return power calculation:
   mean(temp_power)
@@ -1041,12 +1053,12 @@ for (s in 1:length(sds)) {
 }
 plot(sds, lowess(power_upperval)$y,
   type = "l", lty = 2,
-  xlab = "standard deviation", 
+  xlab = "standard deviation",
   ylab = "power",
-  main = "Power curve (n=10) \n using simulation", 
-  ylim = c(0.05,0.12),
-    yaxs = "i"
-  )
+  main = "Power curve (n=10) \n using simulation",
+  ylim = c(0.05, 0.12),
+  yaxs = "i"
+)
 lines(sds, lowess(power_lowerval)$y, lty = 2)
 lines(sds, lowess(power_meanval)$y, lty = 1)
 ```
@@ -1095,16 +1107,31 @@ for (i in 1:nsim) {
 
 hist(pvals,
   freq = FALSE,
-  main = "The distribution of p-values\n when null is true"
-,xlab = "p-values",
-ylab = "density")
+  main = "The distribution of p-values\n when null is true",
+  xlab = "p-values",
+  ylab = "density"
+)
 ```
 
-The distribution of the p-value is uniform---every value between 0 and 1 is equally likely.
+The distribution of the p-value is uniform---every value between 0 and 1 is equally likely. The practical implication of this criticism of p-values is that when we do a single experiment and obtain a p-value under the assumption that the null is true, if the null were in fact true, then we are just using a random number generator (generating a random number between 0 and 1, $Z\sim uniform(0,1)$) to make a decision that the effect is present or absent. Using the output of a $uniform(0,1)$ distribution to decide to reject the null hypothesis makes no sense at all. 
+
+Here is the scientific procedure in R code, in the case where the null hypothesis is in fact true:
+
+```{r}
+pval <- runif(1, min = 0, max = 1)
+if (pval < 0.05) {
+  print("reject")
+} else {
+  "fail to reject"
+}
+```
+
+A broader implication is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are more important than the p-value.
+
 
 :::: {.blackbox data-latex=""}
 ::: {data-latex=""}
-**Proof that the p-value is uniformly distributed under the null**
+**Proof that the p-value is uniformly distributed under the null: The probability integral transform**
 :::
 
 
@@ -1127,8 +1154,8 @@ This is an amazing fact. To get a grip on this, let's first think about the fact
 You can verify this by typing:
 
 ```{r}
-z<-c(0,0.25,0.5,0.75,1)
-punif(z,min=0,max=1)
+z <- c(0, 0.25, 0.5, 0.75, 1)
+punif(z, min = 0, max = 1)
 ```
 
 Next, we will prove the above statement, that if a random variable $Z=F(T)$, i.e., if $Z$ is the 
@@ -1155,21 +1182,6 @@ P(Z\leq z) =& P(F(T)\leq z)\\
 It is for this reason that statisticians like Andrew Gelman periodically point out that "the null hypothesis significance test is a specific random number generator". 
 
 ::::
-
-The practical implication of this criticism of p-values is that when we do a single experiment and obtain a p-value under the assumption that the null is true, if the null were in fact true, then we are just using a random number generator (generating a random number between 0 and 1, $Z\sim uniform(0,1)$) to make a decision that the effect is present or absent. Using the output of a $uniform(0,1)$ distribution to decide to reject the null hypothesis makes no sense at all. 
-
-Here is the scientific procedure in R code, in the case where the null hypothesis is in fact true:
-
-```{r}
-pval <- runif(1, min = 0, max = 1)
-if (pval < 0.05) {
-  print("reject")
-} else {
-  "fail to reject"
-}
-```
-
-A broader implication is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are  more important than the p-value.
 
 ### Type M and S error in the face of low power
 
@@ -1334,7 +1346,7 @@ for (i in 1:nsim) {
     ## if not significant:
     if (t.test(x)$p.value > 0.05) {
       ## get more data
-      x <- append(x, rnorm(n, mean = mn, sd = stddev)) 
+      x <- append(x, rnorm(n, mean = mn, sd = stddev))
     } else {
       significant <- TRUE
     } ## otherwise stop:
@@ -1383,13 +1395,39 @@ Now, our null hypothesis is $H_0: \mu_m = \mu_f$ or $H_0: \mu_m - \mu_f = \delta
 
 This kind of design calls for a two-sample t-test. The two-sample t-test stands in contrast to the paired t-test, discussed below.
 
+Because the formatting of the t-test in R is somewhat verbose, here is a function that extracts the essential information from a t-test:
+
+```{r}
+summary_ttest<-function(res,paired=TRUE){
+  obs_t<-round(res$statistic,2)
+  dfs<-round(res$parameter)
+  pval<-round(res$p.value,3)
+  ci<-round(res$conf.int,2)
+  est<-round(res$estimate,2)
+  if(paired==TRUE){
+  print(paste("t(",dfs,")=",
+              obs_t,sep=""))
+  print(paste("p=",pval,sep=""))
+  print(paste("estimate: ",est," [",ci[1],",",ci[2],"]",sep=""))
+  } else {
+    print(paste("t(",dfs,")=",
+              obs_t,sep=""))
+  print(paste("p=",pval,sep=""))
+  print(paste("estimate 1: ",est[1],sep=""))
+  print(paste("estimate 2: ",est[2],sep=""))
+  print(paste("CI of difference in means: [",ci[1],",",ci[2],"]",sep=""))
+  }
+}  
+```
+
 The function call in R for a two-sample t-test is shown below. The assumption is that both the male and female F1 scores have equal variance.
 
 ```{r}
-t.test(F1data$female, F1data$male,
+res<-t.test(F1data$female, F1data$male,
   paired = FALSE,
   var.equal = TRUE
 )
+summary_ttest(res,paired=FALSE)
 ```
 
 This t-test is computing the following t-statistic:
@@ -1430,13 +1468,15 @@ For such  paired data,  the null hypothesis is that the F1 format value produced
   
 ```{r}
 d <- F1data$female - F1data$male
-t.test(d)
+res<-t.test(d)
+summary_ttest(res)
 ```
 
 An alternative syntax for the paired t-test explicitly feeds the two paired vectors into the function, but one must explicitly specify that they are paired, otherwise the test is a two-sample (i.e., unpaired) t-test:
 
 ```{r}
-t.test(F1data$female, F1data$male, paired = TRUE)
+res<-t.test(F1data$female, F1data$male, paired = TRUE)
+summary_ttest(res)
 ```
   
 A crucial assumption in the above paired t-test is that all the vowel-and-language combinations are independent of each other. Whether this assumption is correct or not (or approximately correct) depends on domain knowledge.
@@ -1445,9 +1485,162 @@ Incidentally, the p-value in the paired t-test is statistically significant, unl
 
 In the data sets we will encounter in the remainder of this book, we will never use one or two-sample or paired t-tests. Instead, we will be using linear models or linear mixed models. The different varieties of t-test are discussed here because they are frequently used (and misused) in published papers.
 
-Next, we look at some perhaps subtle points about the t-test.
+Next, we look at some applications of the t-test and some subtle points relating to this statistical test.
+
+## Using paired t-tests in complex factorial designs
+
+In psychology and psycholinguistics, it is fairly common to run relatively complex factorial designs. An example is the $2\times 2$ repeated measures design in @levy2013expectation. Even more complex designs, like $2\times 2\times 2$ design, are widely used; an example is @fedorenko2006nature. We single out these two papers because the authors were exemplary in that they released their data on request.^[Research has repeatedly shown that relatively few researchers are willing to release their data. For example, @wicherts2011willingness report that ``Of the 49 corresponding authors, 21 (42.9%) had shared some data with Wicherts et al. Thirteen corresponding authors (26.5%) failed to respond to the request or any of the two reminders. Three corresponding authors (6.1%) refused to share data either because the data were lost or because they lacked time to retrieve the data and write a codebook. Twelve corresponding authors (24.5%) promised to share data at a later date, but have not done so in the past six years (we did not follow up on it). These authors commonly indicated that the data were not readily available or that they first needed to write a codebook.'' Interestingly, researchers refuse to release data even if the journal requires it; for example, after the *Journal of Memory and Language* instituted an obligatory data and code release policy, 10 out of 57 articles never released any data [@LaurinavichyuteVasishth2021].]
+
+### Analyzing a $2\times 2$ repeated measures design using paired t-tests
+
+The @levy2013expectation paper was a reading study on German that used eye-tracking and had two experiments, each with a $2\times 2$ design. In Experiment 1, the four conditions are as shown in Figure \@ref(fig:lk13E1). The four conditions can be described as follows:
+
+- Condition a: dative noun in main clause, adjunct in main clause.
+- Condition b: dative noun in main clause, adjunct in subordinate clause.
+- Condition c: dative noun in subordinate clause, adjunct in main clause.
+- Condition d: dative clause in subordinate clause, adjunct in subordinate clause.
+
+The research questions are: is there (i) a main effect of dative-noun location (main or subordinate clause), (ii) a main effect of adjunct location (main or subordinate clause), and (iii) is there an interaction between the two factors?
+
+(ref:lk13E1) The experiment design in Experiment 1 of @levy2013expectation. The figure is re-used with permission from @VasishthMertzenJaegerGelman2018.
+
+```{r lk13E1, fig.cap = "(ref:lk13E1)", out.width = "80%", echo = FALSE, fig.align = "center"}
+knitr::include_graphics("figures/lk13E1.png", dpi = 1000)
+```
+
+Some pre-processing is needed to do the t-tests necessary to answer these questions. First, load the data, create a condition column, and then examine its structure:
+```{r}
+data("df_levykeller13E1")
+head(df_levykeller13E1)
+## create a condition column:
+df_levykeller13E1$cond<-factor(ifelse(df_levykeller13E1$dat=="main" & df_levykeller13E1$adj=="main","a",
+                               ifelse(df_levykeller13E1$dat=="main" & df_levykeller13E1$adj=="sub","b",
+                        ifelse(df_levykeller13E1$dat=="sub" & df_levykeller13E1$adj=="main","c",
+                               ifelse(df_levykeller13E1$dat=="sub" & df_levykeller13E1$adj=="sub","d","NA")))))
+```
+
+Notice that each of the 28 subjects sees each condition six times:
+
+```{r}
+t(xtabs(~subj+cond,df_levykeller13E1))
+```
+
+This is problematic for the t-test because the t-test assumes that each subject delivers exactly one data point per condition. The t-test requires that the data be aggregated: we have to restructure the data so that each subject's response for each of the four conditions is the mean of the six repetitions. This is often called a by-subject analysis:
+
+```{r echo=FALSE}
+bysubj <- aggregate(TFT ~ subj + cond,
+  mean,
+  data = df_levykeller13E1
+)
+head(bysubj)
+```
+
+Now, each subject delivers exactly one data point per condition, as the t-test demands. 
+
+```{r}
+t(xtabs(~subj+cond,bysubj))
+```
+
+The research questions (main effects and interactions of the two factors) can be visualized as in Figure \@ref(fig:lk13E1plot). 
+
+```{r echo=FALSE, fig.cap="Visualizing the means from the four conditions in the Levy and Keller 2013 Experiment 1 design allows us to graphically summarize the statistical comparisons of interest: the main effects of the two factrs, and their interactions."}
+meansE1<-with(bysubj,tapply(TFT,cond,mean))
+names(meansE1)<-c("dat:main, \n adj:main",
+                  "dat:main, \n adj:sub",
+                  "dat:sub, \n adj:main",
+                  "dat:sub, \n adj:sub")
+barplot(meansE1,ylab="Total fixation time (ms)",xlab="conditions",main="Main effects and interactions\n Levy and Keller, 2013, Expt 1")
+
+```
+
+The main effect of dative is asking whether the average of the two dat:main conditions is different from the average of the two dat:sub conditions. The null hypothesis is then:
+
+\begin{equation}
+H_{0,MEdat}: \frac{\mu_a + \mu_b}{2} = \frac{\mu_c + \mu_d}{2}
+\end{equation}
+
+The paired t-test can be used to test this main effect:
+
+```{r}
+cond_a<-subset(bysubj,cond=="a")$TFT
+cond_b<-subset(bysubj,cond=="b")$TFT
+cond_c<-subset(bysubj,cond=="c")$TFT
+cond_d<-subset(bysubj,cond=="d")$TFT
+
+mean_ab<-(cond_a+cond_b)/2
+mean_cd<-(cond_c+cond_d)/2
+
+res<-t.test(mean_ab,mean_cd,paired=TRUE)
+summary_ttest(res)
+```
+
+
+The main effect of adjunct is asking whether the average of the two adj:main conditions is different from the average of the two adj:sub conditions. 
+
+\begin{equation}
+H_{0,MEadj}: \frac{\mu_a + \mu_c}{2} = \frac{\mu_b + \mu_d}{2}
+\end{equation}
+
+This main effect can be tested as follows:
+
+```{r}
+mean_ac<-(cond_a+cond_c)/2
+mean_bd<-(cond_b+cond_d)/2
+res<-t.test(mean_ac,mean_bd,paired=TRUE)
+summary_ttest(res)
+```
+
+Finally, the interaction of the two factors (call it $dat\times adj$) is asking whether the adjunct effect within dat:main is different from the adjunct effect in dat:sub; in other words, the interaction is a difference between two differences:
+
+\begin{equation}
+H_{0,dat\times adj}: (\mu_a - \mu_b) = (\mu_c - \mu_d)
+\end{equation}
+
+The interaction is therefore testing a difference between two differences.  The implementation of the t-test works like this:
+
+```{r}
+diff_ab<-cond_a-cond_b
+diff_cd<-cond_c-cond_d
+res<-t.test(diff_ab,diff_cd,paired=TRUE)
+summary_ttest(res)
+```
+
+
+
+### Analyzing a $2\times 2\times 2$ repeated measures design using paired t-tests
+
+@fedorenko2006nature report a self-paced reading study with eight conditions. 
+
+1. Factor: One noun in memory set or three nouns
+
+easy: Joel 
+
+hard: Joel-Greg-Andy 
+
+2. Factor: Noun type, either proper name or occupation
+
+name: Joel-Greg-Andy 
+
+occ: poet-cartoonist-voter
+
+3. Factor: Relative clause type:
+
+(1) 
+a. Subject-extracted, version 1:
+The physician | who consulted the cardiologist | checked the files | in the office.
+b. Subject-extracted, version 2:
+The cardiologist | who consulted the physician | checked the files | in the office.
+
+(2)
+a. Object-extracted, version 1:
+The physician | who the cardiologist consulted | checked the files | in the office.
+b. Object-extracted, version 2:
+The cardiologist | who the physician consulted | checked the files | in the office.
+
 
 ## Common mistakes involving the (paired) t-test
+
+### Ignoring the independence assumption
 
 The paired t-test assumes that each pair of data points that goes into the t-test is independent of the other pairs of data points. This implies that the data-frame cannot have more than one row for a particular pair. In other words, the data-frame cannot have repeated measurements spread out across rows.  
 
@@ -1521,9 +1714,10 @@ t.test(rawRT ~ condition, df_gg05e1)
 
 This t-test is incorrect for several reasons, but the most egregious error here is that the data are paired (each  subject delivers data for both  conditions), and that property of the data is being ignored. 
 
-Another common mistake is to do a paired t-test on the data without checking that the data are independent in the sense discussed above. Again, the `t.test` function will happily return a meaningless result:
+Another common mistake is to do a paired t-test on the data without checking that the data are independent in the sense discussed above. This kind of mistake happens when researchers neglect to aggregate the data. Again, the `t.test` function will happily return a meaningless result:
   
 ```{r}
+## Incorrect paired t-test!
 t.test(rawRT ~ condition, paired = TRUE, df_gg05e1)
 ```
   
@@ -1533,7 +1727,7 @@ For each of the 42 subjects, the t-test function internally creates a vector of 
 
 These 336 data points are assumed by the t-test to be independent of each other; but this cannot be the case because each subject delivers eight data points for each condition; these are obviously dependent (correlated) because they come from the same subject. 
 
-What is needed is a single data point, the mean reading time for each subject and condition. That is called a by-subjects t-test because the averaging is done over the items for each subject. Analogously, it is also common to compute a by-items t-test; this time, the averaging is done over the subjects for each item. In order to conduct the t-test correctly, aggregation of the data by subjects and by items is necessary. 
+What is needed is a single data point, the mean reading time for each subject and condition. That is called a by-subjects t-test because the averaging is done over the items for each subject. Analogously, it is also common to compute a by-items t-test; this time, the averaging is done over the subjects for each item. In order to conduct the t-test correctly, aggregation of the data by subjects and by items is necessary. This necessity of analyzing data both by subjects and by items is discussed by @clark73 in a famous article.
 
 Consider the by-subjects aggregation procedure below. Once the code below is run, we have only one data point for each condition and subject:
 
@@ -1551,7 +1745,7 @@ Returning to the t-test, by aggregating the data the  independence assumption of
 t.test(rawRT ~ condition, bysubj, paired = TRUE)
 ```
 
-One unsurprising property of the averaged data is that the longer the average subject relative clause reading time for a particular subject, the longer that subject's average object relative clause reading time (Figure \@ref(fig:averageorsr)).
+One unsurprising property of the averaged data is that the longer the average subject relative clause reading time for a particular subject, the longer that subject's average object relative clause reading time (Figure \@ref(fig:averageorsr)). This is not surprising because the mean reading times for each condition are coming from the same subject.
 
 ```{r averageorsr,fig.cap="The correlation between average object and subject relative clause reading times for the 42 subjects in the Grodner and Gibson (2005) experiment."}
 SRdata <- subset(bysubj, condition == "subjgap")$rawRT
@@ -1570,23 +1764,37 @@ byitem <- aggregate(rawRT ~ item + condition,
 )
 t(xtabs(~ item + condition, byitem))
 
-t.test(rawRT ~ condition,byitem,paired=TRUE)
+t.test(rawRT ~ condition, byitem, paired = TRUE)
 ```
 
 As in the by-subjects analysis, there seems to be a slight correlation between the average object and subject reading times among the items, but the sparse data (16 items) leads to a lot of variability around the fitted line (Figure \@ref(fig:averageorsritems)).
 
 ```{r averageorsritems,fig.cap="The correlation between average object and subject relative clause reading times for the 42 subjects in the Grodner and Gibson (2005) experiment."}
-SRdatabyitem <- subset(byitem,
-                       condition == "subjgap")$rawRT
-ORdatabyitem <- subset(byitem,
-                       condition == "objgap")$rawRT
+SRdatabyitem <- subset(
+  byitem,
+  condition == "subjgap"
+)$rawRT
+ORdatabyitem <- subset(
+  byitem,
+  condition == "objgap"
+)$rawRT
 plot(SRdatabyitem, ORdatabyitem)
 abline(lm(ORdatabyitem) ~ log(SRdatabyitem))
 cor(SRdatabyitem, ORdatabyitem)
 ```
 
+### Doing a by-subjects and by-items paired t-test is generally dangerous
 
-The paired t-test illustrated above is in general quite a dangerous way to analyze this data-set, because it ignores the fact that each subject  delivers not one but eight data points per condition. Each subject's repeated measurements will introduce a source of variance, but this source of variance is being suppressed in the by-subjects t-test, leading to a possibly over-enthusiastic t-value. In order to take this variability into account, we must switch to the linear mixed model. But before we get to the linear mixed model, we have to understand the linear model. The next chapter turns to this topic.
+The paired t-test illustrated above is in general quite a dangerous way to analyze this data-set, because it ignores the fact that each subject  delivers not one but eight data points per condition. Each subject's repeated measurements will introduce a source of variance, but this source of variance is being suppressed in the by-subjects t-test, leading to a possibly over-enthusiastic t-value. Similarly, each item also delivers multiple data points, and therefore introduce a potential source of variance within each item that will be artificially ignored when we aggregate data.
+
+In order to take this variability into account, we must switch to the linear mixed model. The next chapter develops this more general framework.
+
+
+### The difference between a significant and a non-significant result need not itself be significant
+
+A very common error in psychology and psycholinguistics is to find a significant effect in one study, then find a non-significant effect in another study that changes one variable from the first study. The conclusion then drawn is that the variable that differs between the two studies is  ``significant.''  @gelmanhill07 summarize this mistake as ``the difference between significant and non-significant is itself not significant.'' Indeed, @nieuwenhuis2011erroneous shows that this mistake is widespread in areas like neuroscience. A real-live example will illustrate the problem.
+
+@levy2013expectation published a paper in the *Journal of Memory and Language* in which they carried out two experiments. Experiment 1, which had a relatively simple syntactic structure, they had a $2\times 2$ repeated measures design in which a significant interaction was found, but in Experiment 2, which had a more complex syntactic structure, the interact was not significant. The conclusion was that the syntactic complexity in Experiment 2 was responsible for the switch from a significant effect in Experiment 1 vs. the non-significant effect in Experiment 2. Such a claim can be made only if the difference in the interaction between Experiments 1 and 2 is tested for.
 
 ## Exercises {#sec:SamplingDistrnexercises}
 
@@ -1657,12 +1865,12 @@ Using the power.t.test function
 ```
 
 ```{r echo=FALSE}
-n<- 163
-mu<-24
-lowermu<-19
-uppermu<-29
-lowersigma<- 119
-uppersigma<- 300
+n <- 163
+mu <- 24
+lowermu <- 19
+uppermu <- 29
+lowersigma <- 119
+uppersigma <- 300
 ```
 
 [In this exercise, assume that Type I error probability is 0.05 unless otherwise stated, and that we are doing a one-sample t-test, with a two-sided hypothesis test.]
@@ -1682,5 +1890,3 @@ What will be the statistical power if the effect size is `r mu`, sample size is 
 What sample size is needed to obtain a statistical power of 0.80 when the effect size is `r mu`,  and standard deviation is `r uppersigma`? 
 \item Suppose now that Type I error probability is changed to 0.005. What sample size is needed to obtain a statistical power of 0.80 when the effect size is `r mu`, and standard deviation is `r uppersigma`? 
 \end{enumerate}
-
-
