@@ -1,0 +1,46 @@
+\documentclass[tikz,border=10pt,multi]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usetikzlibrary{trees}
+\begin{document}
+\begin{tikzpicture}
+  [
+    scale=1.5,
+    font=\footnotesize,
+    level 1/.style={level distance=12mm,sibling distance=43mm},
+    level 2/.style={level distance=15mm,sibling distance=20mm},
+    level 3/.style={level distance=15mm,sibling distance=10mm},
+    solid node/.style={circle,draw,inner sep=1,fill=black},
+  ]
+
+  \node(0)[solid node]{}
+
+  child{node(1)[solid node,label=left:{$ME_{dat}, \hbox{fail}$}]{}
+    child{node[solid node,label=left:{$ME_{adj}, \hbox{fail}$}]{}
+      child{node[solid node,label=below:{$INT, \hbox{fail}$}]{} edge from parent node [left]{$0.95$}}
+      child{node[solid node,label=below:{$INT, \hbox{rej.}$}]{} edge from parent node [right]{$1-q$}}
+      edge from parent node [left]{$0.95$}
+    }
+    child{node[solid node,label=right:{$ME_{adj}, \hbox{rej.}$}]{}
+      child{node[solid node,label=below:{$INT, \hbox{fail}$}]{} edge from parent node [left]{$0.95$}}
+      child{ node[solid node,label=below:{$INT, \hbox{rej.}$}]{} edge from parent node [right]{$0.05$}}
+      edge from parent node [right]{$0.05$}
+    }
+    edge from parent node [left, yshift=3]{$0.95$}
+  }
+  child{node(2)[solid node,label=right:{$ME_{dat}, \hbox{rej.}$}]{}
+    child{node[solid node,label=left:{$ME_{adj}, \hbox{fail}$}]{}
+      child{node[solid node,label=below:{$INT, \hbox{fail}$}]{} edge from parent node [left]{$0.95$}}
+      child{ node[solid node,label=below:{$INT, \hbox{rej.}$}]{} edge from parent node [right]{$0.05$}}
+      edge from parent node [left]{$0.95$}
+    }
+    child{node[solid node,label=right:{$ME_{adj}, \hbox{rej.}$}]{}
+      child{node[solid node,label=below:{$INT, \hbox{fail}$}]{} edge from parent node [left]{$0.95$}}
+      child{ node[solid node,label=below:{$INT, \hbox{rej.}$}]{} edge from parent node [right]{$0.05$}}
+      edge from parent node [right]{$0.05$}
+    }
+    edge from parent node [right, yshift=3]{$0.05$}
+  };
+
+\end{tikzpicture}
+\end{document}
