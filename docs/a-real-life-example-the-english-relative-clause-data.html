@@ -6,25 +6,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.3 A real-life example: The English relative clause data | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.3 A real-life example: The English relative clause data | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
-  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="github-repo" content="rstudio/bookdown" />
+  <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="4.3 A real-life example: The English relative clause data | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   
   <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
 
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-04-27" />
+<meta name="date" content="2021-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,8 +32,10 @@
   
   
 <link rel="prev" href="a-practical-example-using-simulated-data.html"/>
-<link rel="next" href="sec-HypTestExercises.html"/>
-<script src="libs/jquery/jquery.min.js"></script>
+<link rel="next" href="summary-3.html"/>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,31 +51,34 @@
 
 
 
-
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -82,9 +87,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -116,6 +121,29 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
@@ -132,188 +160,214 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Linear Mixed Models in Linguistics and Psychology</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
-<li class="chapter" data-level="0.2" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.2</b> How to read this book</a></li>
-<li class="chapter" data-level="0.3" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.3</b> Online materials</a></li>
-<li class="chapter" data-level="0.4" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.4</b> Software needed</a></li>
-<li class="chapter" data-level="0.5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i>How to read this book</a></li>
+<li class="chapter" data-level="" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i>Online materials</a></li>
+<li class="chapter" data-level="" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i>Software needed</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
-<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a><ul>
-<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a><ul>
+<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.1.1</b> The mean and variance of the Binomial distribution</a></li>
 <li class="chapter" data-level="1.1.2" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.1.2</b> What information does a probability distribution provide?</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
-<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.1</b> The t-distribution</a></li>
-<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-gamma-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The Gamma distribution</a></li>
-<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-exponential-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Exponential distribution</a></li>
+<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-standard-normal-mathitnormalmu0sigma1"><i class="fa fa-check"></i><b>1.3.1</b> The standard normal: <span class="math inline">\(\mathit{normal}(\mu=0,\sigma=1)\)</span></a></li>
+<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-uniform-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The uniform distribution</a></li>
+<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-chi-square-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Chi-square distribution</a></li>
+<li class="chapter" data-level="1.3.4" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.4</b> The t-distribution</a></li>
+<li class="chapter" data-level="1.3.5" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-f-distribution"><i class="fa fa-check"></i><b>1.3.5</b> The F distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a><ul>
+<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.1</b> Example 1: Discrete bivariate distributions</a></li>
 <li class="chapter" data-level="1.4.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.2</b> Example 2: Continuous bivariate distributions</a></li>
 <li class="chapter" data-level="1.4.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.4.3</b> Generate simulated bivariate (multivariate) data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a><ul>
+<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html#the-importance-of-the-mle"><i class="fa fa-check"></i><b>1.5.1</b> The importance of the MLE</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><a href="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Summary of useful R functions relating to univariate distributions</a></li>
-<li class="chapter" data-level="1.7" data-path="summary-of-random-variable-theory.html"><a href="summary-of-random-variable-theory.html"><i class="fa fa-check"></i><b>1.7</b> Summary of random variable theory</a></li>
+<li class="chapter" data-level="1.6" data-path="useful-r-functions-relating-to-univariate-distributions.html"><a href="useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Useful R functions relating to univariate distributions</a></li>
+<li class="chapter" data-level="1.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>1.7</b> Summary</a></li>
 <li class="chapter" data-level="1.8" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.8</b> Further reading</a></li>
-<li class="chapter" data-level="1.9" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a><ul>
-<li class="chapter" data-level="1.9.1" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisespnorm"><i class="fa fa-check"></i><b>1.9.1</b> Practice using the <code>pnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.2" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqnorm"><i class="fa fa-check"></i><b>1.9.2</b> Practice using the <code>qnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.3</b> Maximum likelihood estimation 1</a></li>
-<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 2</a></li>
-<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.5</b> Generating bivariate data</a></li>
-<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating multivariate data</a></li>
+<li class="chapter" data-level="1.9" data-path="sec:Foundationsexercises.html"><a href="sec:Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a><ul>
+<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><a href="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><i class="fa fa-check"></i><b>2.1</b> Some terminology surrounding typical experiment designs in linguistics and psychology</a></li>
 <li class="chapter" data-level="2.2" data-path="the-central-limit-theorem-using-simulation.html"><a href="the-central-limit-theorem-using-simulation.html"><i class="fa fa-check"></i><b>2.2</b> The central limit theorem using simulation</a></li>
 <li class="chapter" data-level="2.3" data-path="three-examples-of-the-sampling-distribution.html"><a href="three-examples-of-the-sampling-distribution.html"><i class="fa fa-check"></i><b>2.3</b> Three examples of the sampling distribution</a></li>
-<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a></li>
-<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a><ul>
+<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html#confidence-interals-are-often-misinterpreted"><i class="fa fa-check"></i><b>2.4.1</b> Confidence interals are often misinterpreted</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.1</b> The one-sample t-test</a></li>
 <li class="chapter" data-level="2.5.2" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-i-ii-error-and-power"><i class="fa fa-check"></i><b>2.5.2</b> Type I, II error, and power</a></li>
 <li class="chapter" data-level="2.5.3" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#how-to-compute-power-for-the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.3</b> How to compute power for the one-sample t-test</a></li>
 <li class="chapter" data-level="2.5.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-p-value"><i class="fa fa-check"></i><b>2.5.4</b> The p-value</a></li>
-<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.5</b> Type M and S error in the face of low power</a></li>
-<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.6</b> Searching for significance</a></li>
+<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-distribution-of-the-p-value-under-the-null-hypothesis"><i class="fa fa-check"></i><b>2.5.5</b> The distribution of the p-value under the null hypothesis</a></li>
+<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
+<li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.6.1</b> Common mistakes involving the t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
+<li class="chapter" data-level="2.7.2" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#a-complication-with-multiple-t-tests-inflation-of-type-i-error-probability"><i class="fa fa-check"></i><b>2.7.2</b> A complication with multiple t-tests: Inflation of Type I error probability</a></li>
+<li class="chapter" data-level="2.7.3" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.3</b> Analyzing a <span class="math inline">\(2\times 2\times 2\)</span> repeated measures design using paired t-tests</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesqt"><i class="fa fa-check"></i><b>2.7.1</b> Practice using <code>qt</code></a></li>
-<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.2</b> Computing the p-value</a></li>
-<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.3</b> Computing the t-value</a></li>
-<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.4</b> Type I and II error</a></li>
-<li class="chapter" data-level="2.7.5" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.5</b> Practice with the paired t-test</a></li>
+<li class="chapter" data-level="2.8" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.8</b> Common mistakes involving the (paired) t-test</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#ignoring-the-independence-assumption"><i class="fa fa-check"></i><b>2.8.1</b> Ignoring the independence assumption</a></li>
+<li class="chapter" data-level="2.8.2" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#doing-a-by-subjects-and-by-items-paired-t-test-is-generally-dangerous"><i class="fa fa-check"></i><b>2.8.2</b> Doing a by-subjects and by-items paired t-test is generally dangerous</a></li>
+<li class="chapter" data-level="2.8.3" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#the-difference-between-a-significant-and-a-non-significant-result-need-not-itself-be-significant"><i class="fa fa-check"></i><b>2.8.3</b> The difference between a significant and a non-significant result need not itself be significant</a></li>
 </ul></li>
+<li class="chapter" data-level="2.9" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>2.9</b> Summary</a></li>
+<li class="chapter" data-level="2.10" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>2.10</b> Further readings</a></li>
+<li class="chapter" data-level="2.11" data-path="sec:SamplingDistrnexercises.html"><a href="sec:SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a><ul>
+<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="from-the-t-test-to-the-linear-mixed-model.html"><a href="from-the-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.1</b> From the t-test to the linear (mixed) model</a></li>
 <li class="chapter" data-level="3.2" data-path="sum-coding.html"><a href="sum-coding.html"><i class="fa fa-check"></i><b>3.2</b> Sum coding</a></li>
 <li class="chapter" data-level="3.3" data-path="checking-model-assumptions.html"><a href="checking-model-assumptions.html"><i class="fa fa-check"></i><b>3.3</b> Checking model assumptions</a></li>
 <li class="chapter" data-level="3.4" data-path="from-the-paired-t-test-to-the-linear-mixed-model.html"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.4</b> From the paired t-test to the linear mixed model</a></li>
-<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a><ul>
+<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
 <li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
-<li class="chapter" data-level="3.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
-<li class="chapter" data-level="3.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
-<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
-<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
-<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
-<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
-<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
-<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
-<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
-<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
+<li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
+<li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a><ul>
+<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="the-likelihood-ratio-test-the-theory.html"><a href="the-likelihood-ratio-test-the-theory.html"><i class="fa fa-check"></i><b>4.1</b> The likelihood ratio test: The theory</a></li>
 <li class="chapter" data-level="4.2" data-path="a-practical-example-using-simulated-data.html"><a href="a-practical-example-using-simulated-data.html"><i class="fa fa-check"></i><b>4.2</b> A practical example using simulated data</a></li>
 <li class="chapter" data-level="4.3" data-path="a-real-life-example-the-english-relative-clause-data.html"><a href="a-real-life-example-the-english-relative-clause-data.html"><i class="fa fa-check"></i><b>4.3</b> A real-life example: The English relative clause data</a></li>
-<li class="chapter" data-level="4.4" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html"><i class="fa fa-check"></i><b>4.4</b> Exercises</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExercisesChinese"><i class="fa fa-check"></i><b>4.4.1</b> Chinese relative clauses</a></li>
-<li class="chapter" data-level="4.4.2" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseAgrmt"><i class="fa fa-check"></i><b>4.4.2</b> Agreement attraction in comprehension</a></li>
-<li class="chapter" data-level="4.4.3" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseGramCE"><i class="fa fa-check"></i><b>4.4.3</b> The grammaticality illusion</a></li>
+<li class="chapter" data-level="4.4" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+<li class="chapter" data-level="4.5" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
+<li class="chapter" data-level="4.6" data-path="sec:HypTestExercises.html"><a href="sec:HypTestExercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="ch-LMtheory.html"><a href="ch-LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a><ul>
-<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a><ul>
+<li class="chapter" data-level="5" data-path="ch:LMtheory.html"><a href="ch:LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#matrix-addition-subtraction-and-multiplication"><i class="fa fa-check"></i><b>5.1.1</b> Matrix addition, subtraction, and multiplication</a></li>
 <li class="chapter" data-level="5.1.2" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#diagonal-matrix-and-identity-matrix"><i class="fa fa-check"></i><b>5.1.2</b> Diagonal matrix and identity matrix</a></li>
 <li class="chapter" data-level="5.1.3" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#powers-of-matrices"><i class="fa fa-check"></i><b>5.1.3</b> Powers of matrices</a></li>
 <li class="chapter" data-level="5.1.4" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.1.4</b> Inverse of a matrix</a></li>
 <li class="chapter" data-level="5.1.5" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#linear-independence-and-rank"><i class="fa fa-check"></i><b>5.1.5</b> Linear independence, and rank</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a><ul>
+<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#least-squares-estimation-geometric-argument"><i class="fa fa-check"></i><b>5.2.1</b> Least squares estimation: Geometric argument</a></li>
 <li class="chapter" data-level="5.2.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#the-expectation-and-variance-of-the-parameters-beta"><i class="fa fa-check"></i><b>5.2.2</b> The expectation and variance of the parameters beta</a></li>
 <li class="chapter" data-level="5.2.3" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#hypothesis-testing-using-analysis-of-variance-anova"><i class="fa fa-check"></i><b>5.2.3</b> Hypothesis testing using Analysis of variance (ANOVA)</a></li>
 <li class="chapter" data-level="5.2.4" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#some-further-important-topics-in-linear-modeling"><i class="fa fa-check"></i><b>5.2.4</b> Some further important topics in linear modeling</a></li>
 <li class="chapter" data-level="5.2.5" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#generalized-linear-models"><i class="fa fa-check"></i><b>5.2.5</b> Generalized linear models</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html"><i class="fa fa-check"></i><b>5.3</b> Exercises</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMparamest"><i class="fa fa-check"></i><b>5.3.1</b> Estimating the parameters in a linear model</a></li>
-<li class="chapter" data-level="5.3.2" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMManova"><i class="fa fa-check"></i><b>5.3.2</b> Using ANOVA to carry out hypothesis testing</a></li>
-<li class="chapter" data-level="5.3.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:anovabyhand"><i class="fa fa-check"></i><b>5.3.3</b> Computing ANOVA by hand</a></li>
-<li class="chapter" data-level="5.3.4" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:GLMM"><i class="fa fa-check"></i><b>5.3.4</b> Generalized linear (mixed) model</a></li>
+<li class="chapter" data-level="5.3" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.3</b> Summary</a></li>
+<li class="chapter" data-level="5.4" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>5.4</b> Further reading</a></li>
+<li class="chapter" data-level="5.5" data-path="sec:LMExercises2.html"><a href="sec:LMExercises2.html"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a><ul>
-<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a><ul>
+<li class="chapter" data-level="6" data-path="ch:contr.html"><a href="ch:contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
 <li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
 <li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
+<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
 <li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="6.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
+<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
 <li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
 <li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+<li class="chapter" data-level="6.5" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+<li class="chapter" data-level="6.6" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.7" data-path="sec:Contrastsexercises.html"><a href="sec:Contrastsexercises.html"><i class="fa fa-check"></i><b>6.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
-<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
-<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
-<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+<li class="chapter" data-level="7" data-path="ch:coding2x2.html"><a href="ch:coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
-<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+<li class="chapter" data-level="7.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
-<li class="chapter" data-level="7.4" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="7.3" data-path="sec:interactions:NLM.html"><a href="sec:interactions:NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="7.5" data-path="sec:Contrasts2x2exercises.html"><a href="sec:Contrasts2x2exercises.html"><i class="fa fa-check"></i><b>7.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a><ul>
+<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>8.1</b> A reminder: The maximal linear mixed model</a></li>
 <li class="chapter" data-level="8.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>8.2</b> Obtain estimates from a previous study</a></li>
 <li class="chapter" data-level="8.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>8.3</b> Decide on a range of plausible values of the effect size</a></li>
 <li class="chapter" data-level="8.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>8.4</b> Extract parameter estimates</a></li>
-<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a><ul>
+<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a>
+<ul>
 <li class="chapter" data-level="8.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>8.5.1</b> Generate a Latin-square design</a></li>
 <li class="chapter" data-level="8.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>8.5.2</b> Generate data row-by-row</a></li>
 </ul></li>
 <li class="chapter" data-level="8.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>8.6</b> Repeated generation of data to compute power</a></li>
 <li class="chapter" data-level="8.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>8.7</b> What you can now do</a></li>
-<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a><ul>
+<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a>
+<ul>
 <li class="chapter" data-level="8.8.1" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-with-two-conditions"><i class="fa fa-check"></i><b>8.8.1</b> Simulating data with two conditions</a></li>
 <li class="chapter" data-level="8.8.2" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-in-factorial-designs"><i class="fa fa-check"></i><b>8.8.2</b> Simulating data in factorial designs</a></li>
 </ul></li>
-<li class="chapter" data-level="8.9" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a><ul>
-<li class="chapter" data-level="8.9.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>8.9.1</b> Drawing a power curve given a range of effect sizes</a></li>
-<li class="chapter" data-level="8.9.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>8.9.2</b> Power and log-transformation</a></li>
-<li class="chapter" data-level="8.9.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>8.9.3</b> Evaluating models by generating simulated data</a></li>
-<li class="chapter" data-level="8.9.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>8.9.4</b> Using simulation to check parameter recovery</a></li>
-<li class="chapter" data-level="8.9.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>8.9.5</b> Sample size calculations using simulation</a></li>
+<li class="chapter" data-level="8.9" data-path="sec:Simulationexercises.html"><a href="sec:Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="ch:MultComp.html"><a href="ch:MultComp.html"><i class="fa fa-check"></i><b>9</b> Understanding Type I error inflation using simulation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><i class="fa fa-check"></i><b>9.1</b> Overly simple random effects structure in LMMs inflate Type I error</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-only-model"><i class="fa fa-check"></i><b>9.1.1</b> Type I error with a varying intercepts-only model</a></li>
+<li class="chapter" data-level="9.1.2" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-and-varying-slopes-model"><i class="fa fa-check"></i><b>9.1.2</b> Type I error with a varying intercepts and varying slopes model</a></li>
+<li class="chapter" data-level="9.1.3" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-inflation-due-to-model-mis-specification"><i class="fa fa-check"></i><b>9.1.3</b> Type I error inflation due to model mis-specification</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ch-multcomp.html"><a href="ch-multcomp.html"><i class="fa fa-check"></i><b>9</b> Understanding the multiple comparisons problem</a></li>
-<li class="chapter" data-level="10" data-path="ch-modelselection.html"><a href="ch-modelselection.html"><i class="fa fa-check"></i><b>10</b> Model selection</a></li>
+<li class="chapter" data-level="9.2" data-path="type-i-error-inflation-due-to-multiple-comparisons.html"><a href="type-i-error-inflation-due-to-multiple-comparisons.html"><i class="fa fa-check"></i><b>9.2</b> Type I error inflation due to multiple comparisons</a></li>
+<li class="chapter" data-level="9.3" data-path="the-practical-implications.html"><a href="the-practical-implications.html"><i class="fa fa-check"></i><b>9.3</b> The practical implications</a></li>
+<li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -335,9 +389,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-real-life-example-the-english-relative-clause-data" class="section level2">
+<div id="a-real-life-example-the-english-relative-clause-data" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> A real-life example: The English relative clause data</h2>
-<p>The likelihood ratio test is also the way that hypothesis testing is done with the linear mixed model. Here is how it works. Let’s look again at the <span class="citation">Grodner and Gibson (<a href="#ref-grodner">2005</a>)</span> English relative clause data. The null hypothesis here refers to the slope parameter. When we have the sum contrast coding, the intercept <span class="math inline">\(\beta_0\)</span> refers to the grand mean, and the slope <span class="math inline">\(\beta_1\)</span> is the amount by which subject and object relative clause mean reading times deviate from the grand mean. Testing the null hypothesis that <span class="math inline">\(\beta_1\)</span> is 0 amounts to testing whether there is any difference in means between the two relative clause types. This becomes clear if we consider the following.</p>
+<p>The likelihood ratio test is also the way that hypothesis testing is done with the linear mixed model. Here is how it works. Let’s look again at the <span class="citation"><a href="#ref-grodner" role="doc-biblioref">Grodner and Gibson</a> (<a href="#ref-grodner" role="doc-biblioref">2005</a>)</span> English relative clause data. The null hypothesis here refers to the slope parameter. When we have the sum contrast coding, the intercept <span class="math inline">\(\beta_0\)</span> refers to the grand mean, and the slope <span class="math inline">\(\beta_1\)</span> is the amount by which subject and object relative clause mean reading times deviate from the grand mean. Testing the null hypothesis that <span class="math inline">\(\beta_1\)</span> is 0 amounts to testing whether there is any difference in means between the two relative clause types. This becomes clear if we consider the following.</p>
 <p>Let object relatives be coded as <span class="math inline">\(+1\)</span> and subject relatives as <span class="math inline">\(-1\)</span>. Then, the mean reading time <span class="math inline">\(\mu_{or}\)</span> for object relatives in the linear mixed model is:</p>
 <p><span class="math display">\[\begin{equation}
 \mu_{or}=\beta_0 + \beta_1
@@ -359,67 +413,72 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 2\beta_1= 0
 \end{equation}\]</span></p>
 <p>Dividing both sides of the equation by 2, we get the null hypothesis that <span class="math inline">\(\beta_1=0\)</span>.</p>
-<p>Incidentally, if we had rescaled the contrast coding to be not <span class="math inline">\(\pm 1\)</span> but <span class="math inline">\(\pm 1/2\)</span>, the parameter <span class="math inline">\(\beta_1\)</span> would represent exactly the difference between the two means, and null hypothesis in equation <a href="#eq:nullhypsumcontrast">(<strong>??</strong>)</a> would have come out to be <span class="math inline">\(\beta_1= 0\)</span>. This is why it is sometimes better to recode the contrasts as <span class="math inline">\(\pm 1/2\)</span> rather than <span class="math inline">\(\pm 1\)</span>. See <span class="citation">Schad et al. (<a href="#ref-SchadEtAlcontrasts">2020</a><a href="#ref-SchadEtAlcontrasts">a</a>)</span> for details; we will discuss this in the contrast coding chapter as well.</p>
+<p>Incidentally, if we had rescaled the contrast coding to be not <span class="math inline">\(\pm 1\)</span> but <span class="math inline">\(\pm 1/2\)</span>, the parameter <span class="math inline">\(\beta_1\)</span> would represent exactly the difference between the two means, and null hypothesis in equation <a href="#eq:nullhypsumcontrast">(<strong>??</strong>)</a> would have come out to be <span class="math inline">\(\beta_1= 0\)</span>. This is why it is sometimes better to recode the contrasts as <span class="math inline">\(\pm 1/2\)</span> rather than <span class="math inline">\(\pm 1\)</span>. See <span class="citation"><a href="#ref-SchadEtAlcontrasts" role="doc-biblioref">Schad et al.</a> (<a href="#ref-SchadEtAlcontrasts" role="doc-biblioref">2020a</a>)</span> for details; we will discuss this in the contrast coding chapter as well.</p>
 <p>Let’s load the data, set up the contrast coding, and fit the null versus the alternative models. We will fit varying intercept and varying slopes for subject and item, without correlations for items. We don’t attempt to fit a model with by-items varying intercepts and slopes with a correlation because we would get a singularity in the variance covariance matrix.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" data-line-number="1">gg05e1&lt;-<span class="kw">read.table</span>(<span class="st">&quot;data/grodnergibsonE1crit.txt&quot;</span>,<span class="dt">header=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb303-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb303-3" data-line-number="3">gg05e1<span class="op">$</span>so &lt;-<span class="st"> </span><span class="kw">ifelse</span>(gg05e1<span class="op">$</span>condition<span class="op">==</span><span class="st">&quot;objgap&quot;</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb303-4" data-line-number="4">gg05e1<span class="op">$</span>logrt&lt;-<span class="kw">log</span>(gg05e1<span class="op">$</span>rawRT)</a>
-<a class="sourceLine" id="cb303-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb303-6" data-line-number="6"><span class="kw">library</span>(lme4)</a>
-<a class="sourceLine" id="cb303-7" data-line-number="7">m0&lt;-<span class="kw">lmer</span>(logrt<span class="op">~</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">|</span>subject)<span class="op">+</span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">||</span>item),gg05e1)</a>
-<a class="sourceLine" id="cb303-8" data-line-number="8">m1&lt;-<span class="kw">lmer</span>(logrt<span class="op">~</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">|</span>subject)<span class="op">+</span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">||</span>item),gg05e1)</a></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="a-real-life-example-the-english-relative-clause-data.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lingpsych)</span>
+<span id="cb370-2"><a href="a-real-life-example-the-english-relative-clause-data.html#cb370-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_gg05e1&quot;</span>)</span>
+<span id="cb370-3"><a href="a-real-life-example-the-english-relative-clause-data.html#cb370-3" aria-hidden="true" tabindex="-1"></a>gg05e1 <span class="ot">&lt;-</span> df_gg05e1</span>
+<span id="cb370-4"><a href="a-real-life-example-the-english-relative-clause-data.html#cb370-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb370-5"><a href="a-real-life-example-the-english-relative-clause-data.html#cb370-5" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>so <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(gg05e1<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb370-6"><a href="a-real-life-example-the-english-relative-clause-data.html#cb370-6" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>logrt <span class="ot">&lt;-</span> <span class="fu">log</span>(gg05e1<span class="sc">$</span>rawRT)</span>
+<span id="cb370-7"><a href="a-real-life-example-the-english-relative-clause-data.html#cb370-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb370-8"><a href="a-real-life-example-the-english-relative-clause-data.html#cb370-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb370-9"><a href="a-real-life-example-the-english-relative-clause-data.html#cb370-9" aria-hidden="true" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> item), gg05e1)</span>
+<span id="cb370-10"><a href="a-real-life-example-the-english-relative-clause-data.html#cb370-10" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> item), gg05e1)</span></code></pre></div>
 <p>Notice that we keep all random effects in the null model. We say that the null model is nested inside the full model.</p>
 <p>Next, we compare the two models’ log likelihoods. There is a function in the <code>lme4</code> package that achieves that: the <code>anova</code> function:</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" data-line-number="1"><span class="kw">anova</span>(m0,m1)</a></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="a-real-life-example-the-english-relative-clause-data.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m0, m1)</span></code></pre></div>
 <pre><code>## refitting model(s) with ML (instead of REML)</code></pre>
 <pre><code>## Data: gg05e1
 ## Models:
 ## m0: logrt ~ 1 + (1 + so | subject) + ((1 | item) + (0 + so | item))
-## m1: logrt ~ 1 + so + (1 + so | subject) + ((1 | item) + (0 + so | 
-## m1:     item))
-##    npar AIC BIC logLik deviance Chisq Df Pr(&gt;Chisq)
-## m0    7 707 739   -347      693                    
-## m1    8 703 739   -343      687  6.15  1      0.013</code></pre>
+## m1: logrt ~ 1 + so + (1 + so | subject) + ((1 | item) + (0 + so | item))
+##    npar AIC BIC logLik deviance Chisq Df Pr(&gt;Chisq)  
+## m0    7 707 739   -347      693                      
+## m1    8 703 739   -343      687  6.15  1      0.013 *
+## ---
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>You can confirm from the output that the <code>Chisq</code> value shown is minus two times the difference in log likelihood of the two models. The p-value is computed using the chi-squared distribution with one degree of freedom because in the two models the difference in the number of parameters is one:</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">pchisq</span>(<span class="fl">6.15</span>,<span class="dt">df=</span><span class="dv">1</span>,<span class="dt">lower.tail=</span><span class="ot">FALSE</span>),<span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="a-real-life-example-the-english-relative-clause-data.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">pchisq</span>(<span class="fl">6.15</span>, <span class="at">df =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>), <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 0.013</code></pre>
 <p>It is common in the psycholinguistics literature to use the t-value from the linear mixed model output to conduct the hypothesis test on the slope:</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" data-line-number="1"><span class="kw">summary</span>(m1)<span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="a-real-life-example-the-english-relative-clause-data.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)<span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value
 ## (Intercept)  5.88306    0.05176 113.669
 ## so           0.06202    0.02422   2.561</code></pre>
-<p>The most general method for hypothesis testing is the likelihood ratio test shown above. One can use the t-test output from the linear mixed model for hypothesis testing, but this should be done only when the data are balanced. If there is lack of balance (e.g., missing data for whatever reason), the likelihood ratio test is the best way to proceed. In any case, when we talk about the evidence against the null hypothesis, the likelihood ratio test is the only reasonable way to talk about what evidence we have. See <span class="citation">Royall (<a href="#ref-Royall">1997</a>)</span> for more discussion of this point. The essence of Royall’s point is that the most reasonable way to talk about the evidence in favor of a particular model is with reference to, i.e., relative to, a baseline model.</p>
+<p>The most general method for hypothesis testing is the likelihood ratio test shown above. One can use the t-test output from the linear mixed model for hypothesis testing, but this should be done only when the data are balanced. If there is lack of balance (e.g., missing data for whatever reason), the likelihood ratio test is the best way to proceed. In any case, when we talk about the evidence against the null hypothesis, the likelihood ratio test is the only reasonable way to talk about what evidence we have. See <span class="citation"><a href="#ref-Royall" role="doc-biblioref">Royall</a> (<a href="#ref-Royall" role="doc-biblioref">1997</a>)</span> for more discussion of this point. The essence of Royall’s point is that the most reasonable way to talk about the evidence in favor of a particular model is with reference to, i.e., relative to, a baseline model.</p>
 <p>One can also use the likelihood ratio test to evaluate whether a variance component should be included or not. For example, is the correlation parameter justified for the subjects random effects? Recall that we had a correlation of 0.58. Is this statistically significant? One can test this in the following way:</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" data-line-number="1">m1&lt;-<span class="kw">lmer</span>(logrt<span class="op">~</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">|</span>subject)<span class="op">+</span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">||</span>item),gg05e1)</a>
-<a class="sourceLine" id="cb311-2" data-line-number="2">m1NoCorr&lt;-<span class="kw">lmer</span>(logrt<span class="op">~</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">||</span>subject)<span class="op">+</span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">||</span>item),gg05e1)</a>
-<a class="sourceLine" id="cb311-3" data-line-number="3"><span class="kw">anova</span>(m1,m1NoCorr)</a></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="a-real-life-example-the-english-relative-clause-data.html#cb378-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> item), gg05e1)</span>
+<span id="cb378-2"><a href="a-real-life-example-the-english-relative-clause-data.html#cb378-2" aria-hidden="true" tabindex="-1"></a>m1NoCorr <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> item), gg05e1)</span>
+<span id="cb378-3"><a href="a-real-life-example-the-english-relative-clause-data.html#cb378-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m1, m1NoCorr)</span></code></pre></div>
 <pre><code>## refitting model(s) with ML (instead of REML)</code></pre>
 <pre><code>## Data: gg05e1
 ## Models:
-## m1NoCorr: logrt ~ 1 + so + ((1 | subject) + (0 + so | subject)) + ((1 | 
-## m1NoCorr:     item) + (0 + so | item))
-## m1: logrt ~ 1 + so + (1 + so | subject) + ((1 | item) + (0 + so | 
-## m1:     item))
+## m1NoCorr: logrt ~ 1 + so + ((1 | subject) + (0 + so | subject)) + ((1 | item) + (0 + so | item))
+## m1: logrt ~ 1 + so + (1 + so | subject) + ((1 | item) + (0 + so | item))
 ##          npar AIC BIC logLik deviance Chisq Df
 ## m1NoCorr    7 710 741   -348      696         
 ## m1          8 703 739   -343      687   8.7  1
-##          Pr(&gt;Chisq)
-## m1NoCorr           
-## m1           0.0032</code></pre>
+##          Pr(&gt;Chisq)   
+## m1NoCorr              
+## m1           0.0032 **
+## ---
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The test indicates that we can reject the null hypothesis that the correlation parameter is 0. We will return to this parameter in the chapter on simulation.</p>
 <p>A final point: the likelihood ratio has essentially the same logic as the t-test, and that includes the fact that the focus is on the rejection of the null. The null cannot be accepted in the face of a null result, unless there is a good case to be made that power is sufficiently high (we will investigate this point later, in the simulation chapter). Also, since the likelihood ratio depends on defining the alternative model using the maximum likelihood estimate (the sample mean), it suffers from exactly the same problem as the t-test (Type M errors in the face of low power). We will also investigate this point in the simulation chapter.</p>
 </div>
 <h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-grodner">
-<p>Grodner, Daniel, and Edward Gibson. 2005. “Consequences of the Serial Nature of Linguistic Input.” <em>Cognitive Science</em> 29: 261–90.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-grodner" class="csl-entry">
+Grodner, Daniel, and Edward Gibson. 2005. <span>“Consequences of the Serial Nature of Linguistic Input.”</span> <em>Cognitive Science</em> 29: 261–90.
 </div>
-<div id="ref-Royall">
-<p>Royall, Richard. 1997. <em>Statistical Evidence: A Likelihood Paradigm</em>. New York: Chapman; Hall, CRC Press.</p>
+<div id="ref-Royall" class="csl-entry">
+Royall, Richard. 1997. <em>Statistical Evidence: <span>A</span> Likelihood Paradigm</em>. New York: Chapman; Hall, CRC Press.
 </div>
-<div id="ref-SchadEtAlcontrasts">
-<p>Schad, Daniel J., Shravan Vasishth, Sven Hohenstein, and Reinhold Kliegl. 2020a. “How to Capitalize on a Priori Contrasts in Linear (Mixed) Models: A Tutorial.” <em>Journal of Memory and Language</em> 110.</p>
+<div id="ref-SchadEtAlcontrasts" class="csl-entry">
+———. 2020a. <span>“How to Capitalize on a Priori Contrasts in Linear (Mixed) Models: <span>A</span> Tutorial.”</span> <em>Journal of Memory and Language</em> 110.
 </div>
 </div>
             </section>
@@ -428,11 +487,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="a-practical-example-using-simulated-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sec-HypTestExercises.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="summary-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/clipboard.min.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
 <script src="libs/gitbook/js/plugin-sharing.js"></script>
@@ -451,6 +509,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -471,6 +530,10 @@ gitbook.start({
 "text": null
 },
 "download": ["Freq_CogSci.pdf", "Freq_CogSci.epub", "Freq_CogSci.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }

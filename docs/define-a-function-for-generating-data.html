@@ -6,25 +6,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.5 Define a function for generating data | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.5 Define a function for generating data | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
-  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="github-repo" content="rstudio/bookdown" />
+  <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="8.5 Define a function for generating data | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   
   <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
 
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-04-27" />
+<meta name="date" content="2021-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,9 @@
   
 <link rel="prev" href="extract-parameter-estimates.html"/>
 <link rel="next" href="repeated-generation-of-data-to-compute-power.html"/>
-<script src="libs/jquery/jquery.min.js"></script>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,31 +51,34 @@
 
 
 
-
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -82,9 +87,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -116,6 +121,29 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
@@ -132,188 +160,214 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Linear Mixed Models in Linguistics and Psychology</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
-<li class="chapter" data-level="0.2" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.2</b> How to read this book</a></li>
-<li class="chapter" data-level="0.3" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.3</b> Online materials</a></li>
-<li class="chapter" data-level="0.4" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.4</b> Software needed</a></li>
-<li class="chapter" data-level="0.5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i>How to read this book</a></li>
+<li class="chapter" data-level="" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i>Online materials</a></li>
+<li class="chapter" data-level="" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i>Software needed</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
-<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a><ul>
-<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a><ul>
+<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.1.1</b> The mean and variance of the Binomial distribution</a></li>
 <li class="chapter" data-level="1.1.2" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.1.2</b> What information does a probability distribution provide?</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
-<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.1</b> The t-distribution</a></li>
-<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-gamma-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The Gamma distribution</a></li>
-<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-exponential-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Exponential distribution</a></li>
+<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-standard-normal-mathitnormalmu0sigma1"><i class="fa fa-check"></i><b>1.3.1</b> The standard normal: <span class="math inline">\(\mathit{normal}(\mu=0,\sigma=1)\)</span></a></li>
+<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-uniform-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The uniform distribution</a></li>
+<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-chi-square-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Chi-square distribution</a></li>
+<li class="chapter" data-level="1.3.4" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.4</b> The t-distribution</a></li>
+<li class="chapter" data-level="1.3.5" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-f-distribution"><i class="fa fa-check"></i><b>1.3.5</b> The F distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a><ul>
+<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.1</b> Example 1: Discrete bivariate distributions</a></li>
 <li class="chapter" data-level="1.4.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.2</b> Example 2: Continuous bivariate distributions</a></li>
 <li class="chapter" data-level="1.4.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.4.3</b> Generate simulated bivariate (multivariate) data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a><ul>
+<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html#the-importance-of-the-mle"><i class="fa fa-check"></i><b>1.5.1</b> The importance of the MLE</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><a href="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Summary of useful R functions relating to univariate distributions</a></li>
-<li class="chapter" data-level="1.7" data-path="summary-of-random-variable-theory.html"><a href="summary-of-random-variable-theory.html"><i class="fa fa-check"></i><b>1.7</b> Summary of random variable theory</a></li>
+<li class="chapter" data-level="1.6" data-path="useful-r-functions-relating-to-univariate-distributions.html"><a href="useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Useful R functions relating to univariate distributions</a></li>
+<li class="chapter" data-level="1.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>1.7</b> Summary</a></li>
 <li class="chapter" data-level="1.8" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.8</b> Further reading</a></li>
-<li class="chapter" data-level="1.9" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a><ul>
-<li class="chapter" data-level="1.9.1" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisespnorm"><i class="fa fa-check"></i><b>1.9.1</b> Practice using the <code>pnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.2" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqnorm"><i class="fa fa-check"></i><b>1.9.2</b> Practice using the <code>qnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.3</b> Maximum likelihood estimation 1</a></li>
-<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 2</a></li>
-<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.5</b> Generating bivariate data</a></li>
-<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating multivariate data</a></li>
+<li class="chapter" data-level="1.9" data-path="sec:Foundationsexercises.html"><a href="sec:Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a><ul>
+<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><a href="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><i class="fa fa-check"></i><b>2.1</b> Some terminology surrounding typical experiment designs in linguistics and psychology</a></li>
 <li class="chapter" data-level="2.2" data-path="the-central-limit-theorem-using-simulation.html"><a href="the-central-limit-theorem-using-simulation.html"><i class="fa fa-check"></i><b>2.2</b> The central limit theorem using simulation</a></li>
 <li class="chapter" data-level="2.3" data-path="three-examples-of-the-sampling-distribution.html"><a href="three-examples-of-the-sampling-distribution.html"><i class="fa fa-check"></i><b>2.3</b> Three examples of the sampling distribution</a></li>
-<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a></li>
-<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a><ul>
+<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html#confidence-interals-are-often-misinterpreted"><i class="fa fa-check"></i><b>2.4.1</b> Confidence interals are often misinterpreted</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.1</b> The one-sample t-test</a></li>
 <li class="chapter" data-level="2.5.2" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-i-ii-error-and-power"><i class="fa fa-check"></i><b>2.5.2</b> Type I, II error, and power</a></li>
 <li class="chapter" data-level="2.5.3" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#how-to-compute-power-for-the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.3</b> How to compute power for the one-sample t-test</a></li>
 <li class="chapter" data-level="2.5.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-p-value"><i class="fa fa-check"></i><b>2.5.4</b> The p-value</a></li>
-<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.5</b> Type M and S error in the face of low power</a></li>
-<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.6</b> Searching for significance</a></li>
+<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-distribution-of-the-p-value-under-the-null-hypothesis"><i class="fa fa-check"></i><b>2.5.5</b> The distribution of the p-value under the null hypothesis</a></li>
+<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
+<li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.6.1</b> Common mistakes involving the t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
+<li class="chapter" data-level="2.7.2" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#a-complication-with-multiple-t-tests-inflation-of-type-i-error-probability"><i class="fa fa-check"></i><b>2.7.2</b> A complication with multiple t-tests: Inflation of Type I error probability</a></li>
+<li class="chapter" data-level="2.7.3" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.3</b> Analyzing a <span class="math inline">\(2\times 2\times 2\)</span> repeated measures design using paired t-tests</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesqt"><i class="fa fa-check"></i><b>2.7.1</b> Practice using <code>qt</code></a></li>
-<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.2</b> Computing the p-value</a></li>
-<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.3</b> Computing the t-value</a></li>
-<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.4</b> Type I and II error</a></li>
-<li class="chapter" data-level="2.7.5" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.5</b> Practice with the paired t-test</a></li>
+<li class="chapter" data-level="2.8" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.8</b> Common mistakes involving the (paired) t-test</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#ignoring-the-independence-assumption"><i class="fa fa-check"></i><b>2.8.1</b> Ignoring the independence assumption</a></li>
+<li class="chapter" data-level="2.8.2" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#doing-a-by-subjects-and-by-items-paired-t-test-is-generally-dangerous"><i class="fa fa-check"></i><b>2.8.2</b> Doing a by-subjects and by-items paired t-test is generally dangerous</a></li>
+<li class="chapter" data-level="2.8.3" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#the-difference-between-a-significant-and-a-non-significant-result-need-not-itself-be-significant"><i class="fa fa-check"></i><b>2.8.3</b> The difference between a significant and a non-significant result need not itself be significant</a></li>
 </ul></li>
+<li class="chapter" data-level="2.9" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>2.9</b> Summary</a></li>
+<li class="chapter" data-level="2.10" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>2.10</b> Further readings</a></li>
+<li class="chapter" data-level="2.11" data-path="sec:SamplingDistrnexercises.html"><a href="sec:SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a><ul>
+<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="from-the-t-test-to-the-linear-mixed-model.html"><a href="from-the-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.1</b> From the t-test to the linear (mixed) model</a></li>
 <li class="chapter" data-level="3.2" data-path="sum-coding.html"><a href="sum-coding.html"><i class="fa fa-check"></i><b>3.2</b> Sum coding</a></li>
 <li class="chapter" data-level="3.3" data-path="checking-model-assumptions.html"><a href="checking-model-assumptions.html"><i class="fa fa-check"></i><b>3.3</b> Checking model assumptions</a></li>
 <li class="chapter" data-level="3.4" data-path="from-the-paired-t-test-to-the-linear-mixed-model.html"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.4</b> From the paired t-test to the linear mixed model</a></li>
-<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a><ul>
+<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
 <li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
-<li class="chapter" data-level="3.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
-<li class="chapter" data-level="3.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
-<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
-<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
-<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
-<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
-<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
-<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
-<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
-<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
+<li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
+<li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a><ul>
+<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="the-likelihood-ratio-test-the-theory.html"><a href="the-likelihood-ratio-test-the-theory.html"><i class="fa fa-check"></i><b>4.1</b> The likelihood ratio test: The theory</a></li>
 <li class="chapter" data-level="4.2" data-path="a-practical-example-using-simulated-data.html"><a href="a-practical-example-using-simulated-data.html"><i class="fa fa-check"></i><b>4.2</b> A practical example using simulated data</a></li>
 <li class="chapter" data-level="4.3" data-path="a-real-life-example-the-english-relative-clause-data.html"><a href="a-real-life-example-the-english-relative-clause-data.html"><i class="fa fa-check"></i><b>4.3</b> A real-life example: The English relative clause data</a></li>
-<li class="chapter" data-level="4.4" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html"><i class="fa fa-check"></i><b>4.4</b> Exercises</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExercisesChinese"><i class="fa fa-check"></i><b>4.4.1</b> Chinese relative clauses</a></li>
-<li class="chapter" data-level="4.4.2" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseAgrmt"><i class="fa fa-check"></i><b>4.4.2</b> Agreement attraction in comprehension</a></li>
-<li class="chapter" data-level="4.4.3" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseGramCE"><i class="fa fa-check"></i><b>4.4.3</b> The grammaticality illusion</a></li>
+<li class="chapter" data-level="4.4" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+<li class="chapter" data-level="4.5" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
+<li class="chapter" data-level="4.6" data-path="sec:HypTestExercises.html"><a href="sec:HypTestExercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="ch-LMtheory.html"><a href="ch-LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a><ul>
-<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a><ul>
+<li class="chapter" data-level="5" data-path="ch:LMtheory.html"><a href="ch:LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#matrix-addition-subtraction-and-multiplication"><i class="fa fa-check"></i><b>5.1.1</b> Matrix addition, subtraction, and multiplication</a></li>
 <li class="chapter" data-level="5.1.2" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#diagonal-matrix-and-identity-matrix"><i class="fa fa-check"></i><b>5.1.2</b> Diagonal matrix and identity matrix</a></li>
 <li class="chapter" data-level="5.1.3" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#powers-of-matrices"><i class="fa fa-check"></i><b>5.1.3</b> Powers of matrices</a></li>
 <li class="chapter" data-level="5.1.4" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.1.4</b> Inverse of a matrix</a></li>
 <li class="chapter" data-level="5.1.5" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#linear-independence-and-rank"><i class="fa fa-check"></i><b>5.1.5</b> Linear independence, and rank</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a><ul>
+<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#least-squares-estimation-geometric-argument"><i class="fa fa-check"></i><b>5.2.1</b> Least squares estimation: Geometric argument</a></li>
 <li class="chapter" data-level="5.2.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#the-expectation-and-variance-of-the-parameters-beta"><i class="fa fa-check"></i><b>5.2.2</b> The expectation and variance of the parameters beta</a></li>
 <li class="chapter" data-level="5.2.3" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#hypothesis-testing-using-analysis-of-variance-anova"><i class="fa fa-check"></i><b>5.2.3</b> Hypothesis testing using Analysis of variance (ANOVA)</a></li>
 <li class="chapter" data-level="5.2.4" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#some-further-important-topics-in-linear-modeling"><i class="fa fa-check"></i><b>5.2.4</b> Some further important topics in linear modeling</a></li>
 <li class="chapter" data-level="5.2.5" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#generalized-linear-models"><i class="fa fa-check"></i><b>5.2.5</b> Generalized linear models</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html"><i class="fa fa-check"></i><b>5.3</b> Exercises</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMparamest"><i class="fa fa-check"></i><b>5.3.1</b> Estimating the parameters in a linear model</a></li>
-<li class="chapter" data-level="5.3.2" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMManova"><i class="fa fa-check"></i><b>5.3.2</b> Using ANOVA to carry out hypothesis testing</a></li>
-<li class="chapter" data-level="5.3.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:anovabyhand"><i class="fa fa-check"></i><b>5.3.3</b> Computing ANOVA by hand</a></li>
-<li class="chapter" data-level="5.3.4" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:GLMM"><i class="fa fa-check"></i><b>5.3.4</b> Generalized linear (mixed) model</a></li>
+<li class="chapter" data-level="5.3" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.3</b> Summary</a></li>
+<li class="chapter" data-level="5.4" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>5.4</b> Further reading</a></li>
+<li class="chapter" data-level="5.5" data-path="sec:LMExercises2.html"><a href="sec:LMExercises2.html"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a><ul>
-<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a><ul>
+<li class="chapter" data-level="6" data-path="ch:contr.html"><a href="ch:contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
 <li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
 <li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
+<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
 <li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="6.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
+<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
 <li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
 <li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+<li class="chapter" data-level="6.5" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+<li class="chapter" data-level="6.6" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.7" data-path="sec:Contrastsexercises.html"><a href="sec:Contrastsexercises.html"><i class="fa fa-check"></i><b>6.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
-<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
-<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
-<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+<li class="chapter" data-level="7" data-path="ch:coding2x2.html"><a href="ch:coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
-<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+<li class="chapter" data-level="7.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
-<li class="chapter" data-level="7.4" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="7.3" data-path="sec:interactions:NLM.html"><a href="sec:interactions:NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="7.5" data-path="sec:Contrasts2x2exercises.html"><a href="sec:Contrasts2x2exercises.html"><i class="fa fa-check"></i><b>7.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a><ul>
+<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>8.1</b> A reminder: The maximal linear mixed model</a></li>
 <li class="chapter" data-level="8.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>8.2</b> Obtain estimates from a previous study</a></li>
 <li class="chapter" data-level="8.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>8.3</b> Decide on a range of plausible values of the effect size</a></li>
 <li class="chapter" data-level="8.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>8.4</b> Extract parameter estimates</a></li>
-<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a><ul>
+<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a>
+<ul>
 <li class="chapter" data-level="8.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>8.5.1</b> Generate a Latin-square design</a></li>
 <li class="chapter" data-level="8.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>8.5.2</b> Generate data row-by-row</a></li>
 </ul></li>
 <li class="chapter" data-level="8.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>8.6</b> Repeated generation of data to compute power</a></li>
 <li class="chapter" data-level="8.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>8.7</b> What you can now do</a></li>
-<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a><ul>
+<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a>
+<ul>
 <li class="chapter" data-level="8.8.1" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-with-two-conditions"><i class="fa fa-check"></i><b>8.8.1</b> Simulating data with two conditions</a></li>
 <li class="chapter" data-level="8.8.2" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-in-factorial-designs"><i class="fa fa-check"></i><b>8.8.2</b> Simulating data in factorial designs</a></li>
 </ul></li>
-<li class="chapter" data-level="8.9" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a><ul>
-<li class="chapter" data-level="8.9.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>8.9.1</b> Drawing a power curve given a range of effect sizes</a></li>
-<li class="chapter" data-level="8.9.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>8.9.2</b> Power and log-transformation</a></li>
-<li class="chapter" data-level="8.9.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>8.9.3</b> Evaluating models by generating simulated data</a></li>
-<li class="chapter" data-level="8.9.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>8.9.4</b> Using simulation to check parameter recovery</a></li>
-<li class="chapter" data-level="8.9.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>8.9.5</b> Sample size calculations using simulation</a></li>
+<li class="chapter" data-level="8.9" data-path="sec:Simulationexercises.html"><a href="sec:Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="ch:MultComp.html"><a href="ch:MultComp.html"><i class="fa fa-check"></i><b>9</b> Understanding Type I error inflation using simulation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><i class="fa fa-check"></i><b>9.1</b> Overly simple random effects structure in LMMs inflate Type I error</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-only-model"><i class="fa fa-check"></i><b>9.1.1</b> Type I error with a varying intercepts-only model</a></li>
+<li class="chapter" data-level="9.1.2" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-and-varying-slopes-model"><i class="fa fa-check"></i><b>9.1.2</b> Type I error with a varying intercepts and varying slopes model</a></li>
+<li class="chapter" data-level="9.1.3" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-inflation-due-to-model-mis-specification"><i class="fa fa-check"></i><b>9.1.3</b> Type I error inflation due to model mis-specification</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ch-multcomp.html"><a href="ch-multcomp.html"><i class="fa fa-check"></i><b>9</b> Understanding the multiple comparisons problem</a></li>
-<li class="chapter" data-level="10" data-path="ch-modelselection.html"><a href="ch-modelselection.html"><i class="fa fa-check"></i><b>10</b> Model selection</a></li>
+<li class="chapter" data-level="9.2" data-path="type-i-error-inflation-due-to-multiple-comparisons.html"><a href="type-i-error-inflation-due-to-multiple-comparisons.html"><i class="fa fa-check"></i><b>9.2</b> Type I error inflation due to multiple comparisons</a></li>
+<li class="chapter" data-level="9.3" data-path="the-practical-implications.html"><a href="the-practical-implications.html"><i class="fa fa-check"></i><b>9.3</b> The practical implications</a></li>
+<li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -335,7 +389,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="define-a-function-for-generating-data" class="section level2">
+<div id="define-a-function-for-generating-data" class="section level2" number="8.5">
 <h2><span class="header-section-number">8.5</span> Define a function for generating data</h2>
 <p>Next, we define a function that generates repeated measures data given the parameter estimates. The basic idea here is the following.</p>
 <ul>
@@ -343,62 +397,73 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Then, given the condition id, and the subject and item ids in each row of the data frame, generate data row-by-row.</li>
 </ul>
 <p>We explain these steps next.</p>
-<div id="generate-a-latin-square-design" class="section level3">
+<div id="generate-a-latin-square-design" class="section level3" number="8.5.1">
 <h3><span class="header-section-number">8.5.1</span> Generate a Latin-square design</h3>
 <p>First, consider how one can create a Latin-square design. Suppose we have four items and four subjects. For such an experiment, we would create two groups, g1 and g2, with the following layout.</p>
-<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb695-1" data-line-number="1">nitem&lt;-<span class="dv">4</span></a>
-<a class="sourceLine" id="cb695-2" data-line-number="2">nsubj&lt;-<span class="dv">4</span></a>
-<a class="sourceLine" id="cb695-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb695-4" data-line-number="4">g1&lt;-<span class="kw">data.frame</span>(<span class="dt">item=</span><span class="dv">1</span><span class="op">:</span>nitem,</a>
-<a class="sourceLine" id="cb695-5" data-line-number="5">                 <span class="dt">cond=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>),nitem<span class="op">/</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb695-6" data-line-number="6">g2&lt;-<span class="kw">data.frame</span>(<span class="dt">item=</span><span class="dv">1</span><span class="op">:</span>nitem,</a>
-<a class="sourceLine" id="cb695-7" data-line-number="7">                 <span class="dt">cond=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;b&quot;</span>,<span class="st">&quot;a&quot;</span>),nitem<span class="op">/</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb695-8" data-line-number="8">g1; g2</a></code></pre></div>
+<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="define-a-function-for-generating-data.html#cb760-1" aria-hidden="true" tabindex="-1"></a>nitem <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb760-2"><a href="define-a-function-for-generating-data.html#cb760-2" aria-hidden="true" tabindex="-1"></a>nsubj <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb760-3"><a href="define-a-function-for-generating-data.html#cb760-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb760-4"><a href="define-a-function-for-generating-data.html#cb760-4" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb760-5"><a href="define-a-function-for-generating-data.html#cb760-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">item =</span> <span class="dv">1</span><span class="sc">:</span>nitem,</span>
+<span id="cb760-6"><a href="define-a-function-for-generating-data.html#cb760-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), nitem <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb760-7"><a href="define-a-function-for-generating-data.html#cb760-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb760-8"><a href="define-a-function-for-generating-data.html#cb760-8" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb760-9"><a href="define-a-function-for-generating-data.html#cb760-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">item =</span> <span class="dv">1</span><span class="sc">:</span>nitem,</span>
+<span id="cb760-10"><a href="define-a-function-for-generating-data.html#cb760-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>), nitem <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb760-11"><a href="define-a-function-for-generating-data.html#cb760-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb760-12"><a href="define-a-function-for-generating-data.html#cb760-12" aria-hidden="true" tabindex="-1"></a>g1</span></code></pre></div>
 <pre><code>##   item cond
 ## 1    1    a
 ## 2    2    b
 ## 3    3    a
 ## 4    4    b</code></pre>
+<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="define-a-function-for-generating-data.html#cb762-1" aria-hidden="true" tabindex="-1"></a>g2</span></code></pre></div>
 <pre><code>##   item cond
 ## 1    1    b
 ## 2    2    a
 ## 3    3    b
 ## 4    4    a</code></pre>
 <p>Half the total number of subjects will be assigned to group 1 and half to group 2:</p>
-<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb698-1" data-line-number="1">  <span class="co">## assemble data frame:</span></a>
-<a class="sourceLine" id="cb698-2" data-line-number="2">  gp1&lt;-g1[<span class="kw">rep</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(g1)), </a>
-<a class="sourceLine" id="cb698-3" data-line-number="3">              nsubj<span class="op">/</span><span class="dv">2</span>),]</a>
-<a class="sourceLine" id="cb698-4" data-line-number="4">  gp2&lt;-g2[<span class="kw">rep</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(g2)), </a>
-<a class="sourceLine" id="cb698-5" data-line-number="5">              nsubj<span class="op">/</span><span class="dv">2</span>),]</a>
-<a class="sourceLine" id="cb698-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb698-7" data-line-number="7">  simdat&lt;-<span class="kw">rbind</span>(gp1,gp2)</a>
-<a class="sourceLine" id="cb698-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb698-9" data-line-number="9">  <span class="co">## add subject column:</span></a>
-<a class="sourceLine" id="cb698-10" data-line-number="10">  simdat<span class="op">$</span>subj&lt;-<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>nsubj,<span class="dt">each=</span>nitem)</a></code></pre></div>
+<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb764-1"><a href="define-a-function-for-generating-data.html#cb764-1" aria-hidden="true" tabindex="-1"></a><span class="do">## assemble data frame:</span></span>
+<span id="cb764-2"><a href="define-a-function-for-generating-data.html#cb764-2" aria-hidden="true" tabindex="-1"></a>gp1 <span class="ot">&lt;-</span> g1[<span class="fu">rep</span>(</span>
+<span id="cb764-3"><a href="define-a-function-for-generating-data.html#cb764-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seq_len</span>(<span class="fu">nrow</span>(g1)),</span>
+<span id="cb764-4"><a href="define-a-function-for-generating-data.html#cb764-4" aria-hidden="true" tabindex="-1"></a>  nsubj <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb764-5"><a href="define-a-function-for-generating-data.html#cb764-5" aria-hidden="true" tabindex="-1"></a>), ]</span>
+<span id="cb764-6"><a href="define-a-function-for-generating-data.html#cb764-6" aria-hidden="true" tabindex="-1"></a>gp2 <span class="ot">&lt;-</span> g2[<span class="fu">rep</span>(</span>
+<span id="cb764-7"><a href="define-a-function-for-generating-data.html#cb764-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seq_len</span>(<span class="fu">nrow</span>(g2)),</span>
+<span id="cb764-8"><a href="define-a-function-for-generating-data.html#cb764-8" aria-hidden="true" tabindex="-1"></a>  nsubj <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb764-9"><a href="define-a-function-for-generating-data.html#cb764-9" aria-hidden="true" tabindex="-1"></a>), ]</span>
+<span id="cb764-10"><a href="define-a-function-for-generating-data.html#cb764-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb764-11"><a href="define-a-function-for-generating-data.html#cb764-11" aria-hidden="true" tabindex="-1"></a>simdat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(gp1, gp2)</span>
+<span id="cb764-12"><a href="define-a-function-for-generating-data.html#cb764-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb764-13"><a href="define-a-function-for-generating-data.html#cb764-13" aria-hidden="true" tabindex="-1"></a><span class="do">## add subject column:</span></span>
+<span id="cb764-14"><a href="define-a-function-for-generating-data.html#cb764-14" aria-hidden="true" tabindex="-1"></a>simdat<span class="sc">$</span>subj <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>nsubj, <span class="at">each =</span> nitem)</span></code></pre></div>
 <p>Finally, the contrast coding for each row in the data-frame is set up:</p>
-<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb699-1" data-line-number="1">  <span class="co">## add contrast coding:</span></a>
-<a class="sourceLine" id="cb699-2" data-line-number="2">  simdat<span class="op">$</span>so&lt;-<span class="kw">ifelse</span>(simdat<span class="op">$</span>cond<span class="op">==</span><span class="st">&quot;a&quot;</span>,<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="define-a-function-for-generating-data.html#cb765-1" aria-hidden="true" tabindex="-1"></a><span class="do">## add contrast coding:</span></span>
+<span id="cb765-2"><a href="define-a-function-for-generating-data.html#cb765-2" aria-hidden="true" tabindex="-1"></a>simdat<span class="sc">$</span>so <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(simdat<span class="sc">$</span>cond <span class="sc">==</span> <span class="st">&quot;a&quot;</span>, <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>)</span></code></pre></div>
 </div>
-<div id="generate-data-row-by-row" class="section level3">
+<div id="generate-data-row-by-row" class="section level3" number="8.5.2">
 <h3><span class="header-section-number">8.5.2</span> Generate data row-by-row</h3>
 <p>Then, we proceed row-by-row in this data frame, and generate data for each subject, item, and condition. For example, the first row of our simulated data-set has subject id:</p>
-<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb700-1" data-line-number="1">simdat[<span class="dv">1</span>,]<span class="op">$</span>subj</a></code></pre></div>
+<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="define-a-function-for-generating-data.html#cb766-1" aria-hidden="true" tabindex="-1"></a>simdat[<span class="dv">1</span>, ]<span class="sc">$</span>subj</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>Similarly, the first row has item id:</p>
-<div class="sourceCode" id="cb702"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb702-1" data-line-number="1">simdat[<span class="dv">1</span>,]<span class="op">$</span>item</a></code></pre></div>
+<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="define-a-function-for-generating-data.html#cb768-1" aria-hidden="true" tabindex="-1"></a>simdat[<span class="dv">1</span>, ]<span class="sc">$</span>item</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>The first row’s condition coding is:</p>
-<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb704-1" data-line-number="1">simdat[<span class="dv">1</span>,]<span class="op">$</span>so</a></code></pre></div>
+<div class="sourceCode" id="cb770"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb770-1"><a href="define-a-function-for-generating-data.html#cb770-1" aria-hidden="true" tabindex="-1"></a>simdat[<span class="dv">1</span>, ]<span class="sc">$</span>so</span></code></pre></div>
 <pre><code>## [1] -0.5</code></pre>
 <p>These three pieces of information are what we need to generate data for the first row. Recall that the model for subject <span class="math inline">\(i\)</span> and item <span class="math inline">\(j\)</span> in condition <code>so</code> is</p>
 <p><span class="math display">\[\begin{equation}
 \beta_0 + u_{0i} + w_{0j} + (\beta + u_{1i} + w_{1j})\times so + \varepsilon \hbox{ where } \varepsilon \sim N(0,\sigma)
 \end{equation}\]</span></p>
 <p>The terms u0, w0, and u1, w1, which are the adjustments to the intercepts and slopes by subject and item, are stored in two matrices that are generated randomly each time that we simulate new subjects/items. Recall from chapter 1 how bivariate data are generated. The intercept and slope adjustments will be generated using the <code>mvrnorm</code> function in the MASS library. For example, given the variance covariance matrix for subjects <code>Sigma_u</code> that we created above, the subject random effects (intercept and slope adjustments) for 10 subjects can be generated in a matrix as follows:</p>
-<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb706-1" data-line-number="1"><span class="kw">library</span>(MASS)</a>
-<a class="sourceLine" id="cb706-2" data-line-number="2">u&lt;-<span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb706-3" data-line-number="3">             <span class="dt">mu=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="dt">Sigma=</span>Sigma_u)</a>
-<a class="sourceLine" id="cb706-4" data-line-number="4">u</a></code></pre></div>
+<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb772-1"><a href="define-a-function-for-generating-data.html#cb772-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb772-2"><a href="define-a-function-for-generating-data.html#cb772-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(</span>
+<span id="cb772-3"><a href="define-a-function-for-generating-data.html#cb772-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">10</span>,</span>
+<span id="cb772-4"><a href="define-a-function-for-generating-data.html#cb772-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">Sigma =</span> Sigma_u</span>
+<span id="cb772-5"><a href="define-a-function-for-generating-data.html#cb772-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb772-6"><a href="define-a-function-for-generating-data.html#cb772-6" aria-hidden="true" tabindex="-1"></a>u</span></code></pre></div>
 <pre><code>##       (Intercept)       so
 ##  [1,]     0.11016  0.28122
 ##  [2,]     0.83391  0.21912
@@ -411,17 +476,19 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##  [9,]    -0.48465 -0.39614
 ## [10,]    -0.04833  0.35370</code></pre>
 <p>Each row in this matrix is the intercept and slope adjustment for a subject; the row number indexes the subject id. For example, subject 1’s intercept adjustment is:</p>
-<div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb708-1" data-line-number="1">u[<span class="dv">1</span>,<span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb774-1"><a href="define-a-function-for-generating-data.html#cb774-1" aria-hidden="true" tabindex="-1"></a>u[<span class="dv">1</span>, <span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## (Intercept) 
 ##      0.1102</code></pre>
 <p>Subject 1’s slope adjustment is:</p>
-<div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb710-1" data-line-number="1">u[<span class="dv">1</span>,<span class="dv">2</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="define-a-function-for-generating-data.html#cb776-1" aria-hidden="true" tabindex="-1"></a>u[<span class="dv">1</span>, <span class="dv">2</span>]</span></code></pre></div>
 <pre><code>##     so 
 ## 0.2812</code></pre>
 <p>Analogously to the subject random effects matrix, a matrix for items random effects is also generated. As an example, we generate simulated random effects for 10 items:</p>
-<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb712-1" data-line-number="1">w&lt;-<span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb712-2" data-line-number="2">             <span class="dt">mu=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="dt">Sigma=</span>Sigma_w)</a>
-<a class="sourceLine" id="cb712-3" data-line-number="3">w</a></code></pre></div>
+<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="define-a-function-for-generating-data.html#cb778-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(</span>
+<span id="cb778-2"><a href="define-a-function-for-generating-data.html#cb778-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">10</span>,</span>
+<span id="cb778-3"><a href="define-a-function-for-generating-data.html#cb778-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">Sigma =</span> Sigma_w</span>
+<span id="cb778-4"><a href="define-a-function-for-generating-data.html#cb778-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb778-5"><a href="define-a-function-for-generating-data.html#cb778-5" aria-hidden="true" tabindex="-1"></a>w</span></code></pre></div>
 <pre><code>##            [,1]       [,2]
 ##  [1,]  0.020043  0.0733144
 ##  [2,]  0.040632  0.0099160
@@ -434,75 +501,94 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##  [9,] -0.047864  0.1347658
 ## [10,] -0.014866  0.0425107</code></pre>
 <p>Now, to generate simulated data for subject 1 and item 1 for object relatives, we simply need to run this line of code:</p>
-<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb714-1" data-line-number="1"><span class="kw">rlnorm</span>(<span class="dv">1</span>,beta[<span class="dv">1</span>] <span class="op">+</span><span class="st">    </span>u[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>w[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb714-2" data-line-number="2"><span class="st">         </span>(beta[<span class="dv">2</span>]<span class="op">+</span>u[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">+</span>w[<span class="dv">1</span>,<span class="dv">2</span>])<span class="op">*</span>(<span class="fl">0.5</span>),</a>
-<a class="sourceLine" id="cb714-3" data-line-number="3">                   sigma_e) </a></code></pre></div>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="define-a-function-for-generating-data.html#cb780-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rlnorm</span>(</span>
+<span id="cb780-2"><a href="define-a-function-for-generating-data.html#cb780-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, beta[<span class="dv">1</span>] <span class="sc">+</span> u[<span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">+</span> w[<span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">+</span></span>
+<span id="cb780-3"><a href="define-a-function-for-generating-data.html#cb780-3" aria-hidden="true" tabindex="-1"></a>    (beta[<span class="dv">2</span>] <span class="sc">+</span> u[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">+</span> w[<span class="dv">1</span>, <span class="dv">2</span>]) <span class="sc">*</span> (<span class="fl">0.5</span>),</span>
+<span id="cb780-4"><a href="define-a-function-for-generating-data.html#cb780-4" aria-hidden="true" tabindex="-1"></a>  sigma_e</span>
+<span id="cb780-5"><a href="define-a-function-for-generating-data.html#cb780-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## [1] 423.2</code></pre>
 <p>For subject 2, all that would change is the subject id: instead of <code>u[1,1]</code>, and <code>u[1,2]</code> we would write <code>u[2,1]</code> and <code>u[2,2]</code>. The for-loop below works through the <code>simdat</code> data-frame row by row, looks up the subject id, the item id for that row, and the condition coding for that row, and fills in the simulated reading time using the above code. This is how the simulated data are generated.</p>
 <p>Here is the complete function for generating simulated data. It uses all the bits of code we discussed above.</p>
-<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb716-1" data-line-number="1"><span class="kw">library</span>(MASS)</a>
-<a class="sourceLine" id="cb716-2" data-line-number="2"><span class="co">## assumes that no. of subjects and </span></a>
-<a class="sourceLine" id="cb716-3" data-line-number="3"><span class="co">## no. of items is divisible by 2.</span></a>
-<a class="sourceLine" id="cb716-4" data-line-number="4">gen_sim_lnorm2&lt;-<span class="cf">function</span>(<span class="dt">nitem=</span><span class="dv">16</span>,</a>
-<a class="sourceLine" id="cb716-5" data-line-number="5">                         <span class="dt">nsubj=</span><span class="dv">42</span>,</a>
-<a class="sourceLine" id="cb716-6" data-line-number="6">                         <span class="dt">beta=</span><span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb716-7" data-line-number="7">                         <span class="dt">Sigma_u=</span><span class="ot">NULL</span>, <span class="co"># subject vcov matrix</span></a>
-<a class="sourceLine" id="cb716-8" data-line-number="8">                         <span class="dt">Sigma_w=</span><span class="ot">NULL</span>, <span class="co"># item vcov matrix</span></a>
-<a class="sourceLine" id="cb716-9" data-line-number="9">                         <span class="dt">sigma_e=</span><span class="ot">NULL</span>){</a>
-<a class="sourceLine" id="cb716-10" data-line-number="10">  <span class="co">## prepare data frame for a two-condition latin square:</span></a>
-<a class="sourceLine" id="cb716-11" data-line-number="11">  g1&lt;-<span class="kw">data.frame</span>(<span class="dt">item=</span><span class="dv">1</span><span class="op">:</span>nitem,</a>
-<a class="sourceLine" id="cb716-12" data-line-number="12">                 <span class="dt">cond=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>),nitem<span class="op">/</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb716-13" data-line-number="13">  g2&lt;-<span class="kw">data.frame</span>(<span class="dt">item=</span><span class="dv">1</span><span class="op">:</span>nitem,</a>
-<a class="sourceLine" id="cb716-14" data-line-number="14">                 <span class="dt">cond=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;b&quot;</span>,<span class="st">&quot;a&quot;</span>),nitem<span class="op">/</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb716-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb716-16" data-line-number="16">  </a>
-<a class="sourceLine" id="cb716-17" data-line-number="17">  <span class="co">## assemble data frame:</span></a>
-<a class="sourceLine" id="cb716-18" data-line-number="18">  gp1&lt;-g1[<span class="kw">rep</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(g1)), </a>
-<a class="sourceLine" id="cb716-19" data-line-number="19">              nsubj<span class="op">/</span><span class="dv">2</span>),]</a>
-<a class="sourceLine" id="cb716-20" data-line-number="20">  gp2&lt;-g2[<span class="kw">rep</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(g2)), </a>
-<a class="sourceLine" id="cb716-21" data-line-number="21">              nsubj<span class="op">/</span><span class="dv">2</span>),]</a>
-<a class="sourceLine" id="cb716-22" data-line-number="22">  </a>
-<a class="sourceLine" id="cb716-23" data-line-number="23">  simdat&lt;-<span class="kw">rbind</span>(gp1,gp2)</a>
-<a class="sourceLine" id="cb716-24" data-line-number="24">  </a>
-<a class="sourceLine" id="cb716-25" data-line-number="25">  <span class="co">## add subject column:</span></a>
-<a class="sourceLine" id="cb716-26" data-line-number="26">  simdat<span class="op">$</span>subj&lt;-<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span>nsubj,<span class="dt">each=</span>nitem)</a>
-<a class="sourceLine" id="cb716-27" data-line-number="27">  </a>
-<a class="sourceLine" id="cb716-28" data-line-number="28">  <span class="co">## add contrast coding:</span></a>
-<a class="sourceLine" id="cb716-29" data-line-number="29">  simdat<span class="op">$</span>so&lt;-<span class="kw">ifelse</span>(simdat<span class="op">$</span>cond<span class="op">==</span><span class="st">&quot;a&quot;</span>,<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb716-30" data-line-number="30"></a>
-<a class="sourceLine" id="cb716-31" data-line-number="31">  <span class="co">## subject random effects:</span></a>
-<a class="sourceLine" id="cb716-32" data-line-number="32">  u&lt;-<span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="kw">length</span>(<span class="kw">unique</span>(simdat<span class="op">$</span>subj)),</a>
-<a class="sourceLine" id="cb716-33" data-line-number="33">             <span class="dt">mu=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="dt">Sigma=</span>Sigma_u)</a>
-<a class="sourceLine" id="cb716-34" data-line-number="34">  </a>
-<a class="sourceLine" id="cb716-35" data-line-number="35">  <span class="co">## item random effects</span></a>
-<a class="sourceLine" id="cb716-36" data-line-number="36">  w&lt;-<span class="kw">mvrnorm</span>(<span class="dt">n=</span><span class="kw">length</span>(<span class="kw">unique</span>(simdat<span class="op">$</span>item)),</a>
-<a class="sourceLine" id="cb716-37" data-line-number="37">             <span class="dt">mu=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="dt">Sigma=</span>Sigma_w)</a>
-<a class="sourceLine" id="cb716-38" data-line-number="38"></a>
-<a class="sourceLine" id="cb716-39" data-line-number="39">  <span class="co">## generate data row by row:  </span></a>
-<a class="sourceLine" id="cb716-40" data-line-number="40">  N&lt;-<span class="kw">dim</span>(simdat)[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb716-41" data-line-number="41">  rt&lt;-<span class="kw">rep</span>(<span class="ot">NA</span>,N)</a>
-<a class="sourceLine" id="cb716-42" data-line-number="42">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>N){</a>
-<a class="sourceLine" id="cb716-43" data-line-number="43">    rt[i] &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">1</span>,beta[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb716-44" data-line-number="44"><span class="st">                      </span>u[simdat[i,]<span class="op">$</span>subj,<span class="dv">1</span>] <span class="op">+</span></a>
-<a class="sourceLine" id="cb716-45" data-line-number="45"><span class="st">                      </span>w[simdat[i,]<span class="op">$</span>item,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb716-46" data-line-number="46"><span class="st">                      </span>(beta[<span class="dv">2</span>]<span class="op">+</span>u[simdat[i,]<span class="op">$</span>subj,<span class="dv">2</span>]<span class="op">+</span></a>
-<a class="sourceLine" id="cb716-47" data-line-number="47"><span class="st">                         </span>w[simdat[i,]<span class="op">$</span>item,<span class="dv">2</span>])<span class="op">*</span>simdat<span class="op">$</span>so[i],</a>
-<a class="sourceLine" id="cb716-48" data-line-number="48">                   sigma_e) </a>
-<a class="sourceLine" id="cb716-49" data-line-number="49">  }   </a>
-<a class="sourceLine" id="cb716-50" data-line-number="50">  simdat<span class="op">$</span>rt&lt;-rt</a>
-<a class="sourceLine" id="cb716-51" data-line-number="51">  simdat<span class="op">$</span>subj&lt;-<span class="kw">factor</span>(simdat<span class="op">$</span>subj)</a>
-<a class="sourceLine" id="cb716-52" data-line-number="52">  simdat<span class="op">$</span>item&lt;-<span class="kw">factor</span>(simdat<span class="op">$</span>item)</a>
-<a class="sourceLine" id="cb716-53" data-line-number="53">  simdat}</a></code></pre></div>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="define-a-function-for-generating-data.html#cb782-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb782-2"><a href="define-a-function-for-generating-data.html#cb782-2" aria-hidden="true" tabindex="-1"></a><span class="do">## assumes that no. of subjects and</span></span>
+<span id="cb782-3"><a href="define-a-function-for-generating-data.html#cb782-3" aria-hidden="true" tabindex="-1"></a><span class="do">## no. of items is divisible by 2.</span></span>
+<span id="cb782-4"><a href="define-a-function-for-generating-data.html#cb782-4" aria-hidden="true" tabindex="-1"></a>gen_sim_lnorm2 <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">nitem =</span> <span class="dv">16</span>,</span>
+<span id="cb782-5"><a href="define-a-function-for-generating-data.html#cb782-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">nsubj =</span> <span class="dv">42</span>,</span>
+<span id="cb782-6"><a href="define-a-function-for-generating-data.html#cb782-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">beta =</span> <span class="cn">NULL</span>,</span>
+<span id="cb782-7"><a href="define-a-function-for-generating-data.html#cb782-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">Sigma_u =</span> <span class="cn">NULL</span>, <span class="co"># subject vcov matrix</span></span>
+<span id="cb782-8"><a href="define-a-function-for-generating-data.html#cb782-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">Sigma_w =</span> <span class="cn">NULL</span>, <span class="co"># item vcov matrix</span></span>
+<span id="cb782-9"><a href="define-a-function-for-generating-data.html#cb782-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">sigma_e =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb782-10"><a href="define-a-function-for-generating-data.html#cb782-10" aria-hidden="true" tabindex="-1"></a>  <span class="do">## prepare data frame for a two-condition latin square:</span></span>
+<span id="cb782-11"><a href="define-a-function-for-generating-data.html#cb782-11" aria-hidden="true" tabindex="-1"></a>  g1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb782-12"><a href="define-a-function-for-generating-data.html#cb782-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">item =</span> <span class="dv">1</span><span class="sc">:</span>nitem,</span>
+<span id="cb782-13"><a href="define-a-function-for-generating-data.html#cb782-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">cond =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), nitem <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb782-14"><a href="define-a-function-for-generating-data.html#cb782-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb782-15"><a href="define-a-function-for-generating-data.html#cb782-15" aria-hidden="true" tabindex="-1"></a>  g2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb782-16"><a href="define-a-function-for-generating-data.html#cb782-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">item =</span> <span class="dv">1</span><span class="sc">:</span>nitem,</span>
+<span id="cb782-17"><a href="define-a-function-for-generating-data.html#cb782-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">cond =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>), nitem <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb782-18"><a href="define-a-function-for-generating-data.html#cb782-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb782-19"><a href="define-a-function-for-generating-data.html#cb782-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb782-20"><a href="define-a-function-for-generating-data.html#cb782-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb782-21"><a href="define-a-function-for-generating-data.html#cb782-21" aria-hidden="true" tabindex="-1"></a>  <span class="do">## assemble data frame:</span></span>
+<span id="cb782-22"><a href="define-a-function-for-generating-data.html#cb782-22" aria-hidden="true" tabindex="-1"></a>  gp1 <span class="ot">&lt;-</span> g1[<span class="fu">rep</span>(</span>
+<span id="cb782-23"><a href="define-a-function-for-generating-data.html#cb782-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">seq_len</span>(<span class="fu">nrow</span>(g1)),</span>
+<span id="cb782-24"><a href="define-a-function-for-generating-data.html#cb782-24" aria-hidden="true" tabindex="-1"></a>    nsubj <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb782-25"><a href="define-a-function-for-generating-data.html#cb782-25" aria-hidden="true" tabindex="-1"></a>  ), ]</span>
+<span id="cb782-26"><a href="define-a-function-for-generating-data.html#cb782-26" aria-hidden="true" tabindex="-1"></a>  gp2 <span class="ot">&lt;-</span> g2[<span class="fu">rep</span>(</span>
+<span id="cb782-27"><a href="define-a-function-for-generating-data.html#cb782-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">seq_len</span>(<span class="fu">nrow</span>(g2)),</span>
+<span id="cb782-28"><a href="define-a-function-for-generating-data.html#cb782-28" aria-hidden="true" tabindex="-1"></a>    nsubj <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb782-29"><a href="define-a-function-for-generating-data.html#cb782-29" aria-hidden="true" tabindex="-1"></a>  ), ]</span>
+<span id="cb782-30"><a href="define-a-function-for-generating-data.html#cb782-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb782-31"><a href="define-a-function-for-generating-data.html#cb782-31" aria-hidden="true" tabindex="-1"></a>  simdat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(gp1, gp2)</span>
+<span id="cb782-32"><a href="define-a-function-for-generating-data.html#cb782-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb782-33"><a href="define-a-function-for-generating-data.html#cb782-33" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add subject column:</span></span>
+<span id="cb782-34"><a href="define-a-function-for-generating-data.html#cb782-34" aria-hidden="true" tabindex="-1"></a>  simdat<span class="sc">$</span>subj <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>nsubj, <span class="at">each =</span> nitem)</span>
+<span id="cb782-35"><a href="define-a-function-for-generating-data.html#cb782-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb782-36"><a href="define-a-function-for-generating-data.html#cb782-36" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add contrast coding:</span></span>
+<span id="cb782-37"><a href="define-a-function-for-generating-data.html#cb782-37" aria-hidden="true" tabindex="-1"></a>  simdat<span class="sc">$</span>so <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(simdat<span class="sc">$</span>cond <span class="sc">==</span> <span class="st">&quot;a&quot;</span>, <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb782-38"><a href="define-a-function-for-generating-data.html#cb782-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb782-39"><a href="define-a-function-for-generating-data.html#cb782-39" aria-hidden="true" tabindex="-1"></a>  <span class="do">## subject random effects:</span></span>
+<span id="cb782-40"><a href="define-a-function-for-generating-data.html#cb782-40" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(</span>
+<span id="cb782-41"><a href="define-a-function-for-generating-data.html#cb782-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">length</span>(<span class="fu">unique</span>(simdat<span class="sc">$</span>subj)),</span>
+<span id="cb782-42"><a href="define-a-function-for-generating-data.html#cb782-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">Sigma =</span> Sigma_u</span>
+<span id="cb782-43"><a href="define-a-function-for-generating-data.html#cb782-43" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb782-44"><a href="define-a-function-for-generating-data.html#cb782-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb782-45"><a href="define-a-function-for-generating-data.html#cb782-45" aria-hidden="true" tabindex="-1"></a>  <span class="do">## item random effects</span></span>
+<span id="cb782-46"><a href="define-a-function-for-generating-data.html#cb782-46" aria-hidden="true" tabindex="-1"></a>  w <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(</span>
+<span id="cb782-47"><a href="define-a-function-for-generating-data.html#cb782-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">length</span>(<span class="fu">unique</span>(simdat<span class="sc">$</span>item)),</span>
+<span id="cb782-48"><a href="define-a-function-for-generating-data.html#cb782-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">Sigma =</span> Sigma_w</span>
+<span id="cb782-49"><a href="define-a-function-for-generating-data.html#cb782-49" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb782-50"><a href="define-a-function-for-generating-data.html#cb782-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb782-51"><a href="define-a-function-for-generating-data.html#cb782-51" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data row by row:</span></span>
+<span id="cb782-52"><a href="define-a-function-for-generating-data.html#cb782-52" aria-hidden="true" tabindex="-1"></a>  N <span class="ot">&lt;-</span> <span class="fu">dim</span>(simdat)[<span class="dv">1</span>]</span>
+<span id="cb782-53"><a href="define-a-function-for-generating-data.html#cb782-53" aria-hidden="true" tabindex="-1"></a>  rt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, N)</span>
+<span id="cb782-54"><a href="define-a-function-for-generating-data.html#cb782-54" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb782-55"><a href="define-a-function-for-generating-data.html#cb782-55" aria-hidden="true" tabindex="-1"></a>    rt[i] <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(</span>
+<span id="cb782-56"><a href="define-a-function-for-generating-data.html#cb782-56" aria-hidden="true" tabindex="-1"></a>      <span class="dv">1</span>, beta[<span class="dv">1</span>] <span class="sc">+</span></span>
+<span id="cb782-57"><a href="define-a-function-for-generating-data.html#cb782-57" aria-hidden="true" tabindex="-1"></a>        u[simdat[i, ]<span class="sc">$</span>subj, <span class="dv">1</span>] <span class="sc">+</span></span>
+<span id="cb782-58"><a href="define-a-function-for-generating-data.html#cb782-58" aria-hidden="true" tabindex="-1"></a>        w[simdat[i, ]<span class="sc">$</span>item, <span class="dv">1</span>] <span class="sc">+</span></span>
+<span id="cb782-59"><a href="define-a-function-for-generating-data.html#cb782-59" aria-hidden="true" tabindex="-1"></a>        (beta[<span class="dv">2</span>] <span class="sc">+</span> u[simdat[i, ]<span class="sc">$</span>subj, <span class="dv">2</span>] <span class="sc">+</span></span>
+<span id="cb782-60"><a href="define-a-function-for-generating-data.html#cb782-60" aria-hidden="true" tabindex="-1"></a>          w[simdat[i, ]<span class="sc">$</span>item, <span class="dv">2</span>]) <span class="sc">*</span> simdat<span class="sc">$</span>so[i],</span>
+<span id="cb782-61"><a href="define-a-function-for-generating-data.html#cb782-61" aria-hidden="true" tabindex="-1"></a>      sigma_e</span>
+<span id="cb782-62"><a href="define-a-function-for-generating-data.html#cb782-62" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb782-63"><a href="define-a-function-for-generating-data.html#cb782-63" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb782-64"><a href="define-a-function-for-generating-data.html#cb782-64" aria-hidden="true" tabindex="-1"></a>  simdat<span class="sc">$</span>rt <span class="ot">&lt;-</span> rt</span>
+<span id="cb782-65"><a href="define-a-function-for-generating-data.html#cb782-65" aria-hidden="true" tabindex="-1"></a>  simdat<span class="sc">$</span>subj <span class="ot">&lt;-</span> <span class="fu">factor</span>(simdat<span class="sc">$</span>subj)</span>
+<span id="cb782-66"><a href="define-a-function-for-generating-data.html#cb782-66" aria-hidden="true" tabindex="-1"></a>  simdat<span class="sc">$</span>item <span class="ot">&lt;-</span> <span class="fu">factor</span>(simdat<span class="sc">$</span>item)</span>
+<span id="cb782-67"><a href="define-a-function-for-generating-data.html#cb782-67" aria-hidden="true" tabindex="-1"></a>  simdat</span>
+<span id="cb782-68"><a href="define-a-function-for-generating-data.html#cb782-68" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Let’s generate some simulated data and check what the data look like:</p>
-<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb717-1" data-line-number="1">dat&lt;-<span class="kw">gen_sim_lnorm2</span>(<span class="dt">nitem=</span><span class="dv">16</span>,</a>
-<a class="sourceLine" id="cb717-2" data-line-number="2">                         <span class="dt">nsubj=</span><span class="dv">42</span>,</a>
-<a class="sourceLine" id="cb717-3" data-line-number="3">                       <span class="dt">beta=</span>beta,</a>
-<a class="sourceLine" id="cb717-4" data-line-number="4">                       <span class="dt">Sigma_u=</span>Sigma_u,</a>
-<a class="sourceLine" id="cb717-5" data-line-number="5">                       <span class="dt">Sigma_w=</span>Sigma_w,</a>
-<a class="sourceLine" id="cb717-6" data-line-number="6">                      <span class="dt">sigma_e=</span>sigma_e)</a></code></pre></div>
+<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb783-1"><a href="define-a-function-for-generating-data.html#cb783-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">gen_sim_lnorm2</span>(</span>
+<span id="cb783-2"><a href="define-a-function-for-generating-data.html#cb783-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">nitem =</span> <span class="dv">16</span>,</span>
+<span id="cb783-3"><a href="define-a-function-for-generating-data.html#cb783-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">nsubj =</span> <span class="dv">42</span>,</span>
+<span id="cb783-4"><a href="define-a-function-for-generating-data.html#cb783-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">beta =</span> beta,</span>
+<span id="cb783-5"><a href="define-a-function-for-generating-data.html#cb783-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sigma_u =</span> Sigma_u,</span>
+<span id="cb783-6"><a href="define-a-function-for-generating-data.html#cb783-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sigma_w =</span> Sigma_w,</span>
+<span id="cb783-7"><a href="define-a-function-for-generating-data.html#cb783-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma_e =</span> sigma_e</span>
+<span id="cb783-8"><a href="define-a-function-for-generating-data.html#cb783-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>The data have the expected structure:</p>
-<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb718-1" data-line-number="1"><span class="co">## fully  crossed subjects and items:</span></a>
-<a class="sourceLine" id="cb718-2" data-line-number="2"><span class="kw">head</span>(<span class="kw">t</span>(<span class="kw">xtabs</span>(<span class="op">~</span>subj<span class="op">+</span>item,dat)))</a></code></pre></div>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="define-a-function-for-generating-data.html#cb784-1" aria-hidden="true" tabindex="-1"></a><span class="do">## fully  crossed subjects and items:</span></span>
+<span id="cb784-2"><a href="define-a-function-for-generating-data.html#cb784-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span> subj <span class="sc">+</span> item, dat)))</span></code></pre></div>
 <pre><code>##     subj
 ## item 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
 ##    1 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1  1  1  1
@@ -527,8 +613,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##    4  1  1  1  1  1  1  1
 ##    5  1  1  1  1  1  1  1
 ##    6  1  1  1  1  1  1  1</code></pre>
-<div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb720-1" data-line-number="1"><span class="co">##  8 measurements per condition:</span></a>
-<a class="sourceLine" id="cb720-2" data-line-number="2"><span class="kw">head</span>(<span class="kw">t</span>(<span class="kw">xtabs</span>(<span class="op">~</span>subj<span class="op">+</span>cond,dat)))</a></code></pre></div>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb786-1"><a href="define-a-function-for-generating-data.html#cb786-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 measurements per condition:</span></span>
+<span id="cb786-2"><a href="define-a-function-for-generating-data.html#cb786-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span> subj <span class="sc">+</span> cond, dat)))</span></code></pre></div>
 <pre><code>##     subj
 ## cond 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
 ##    a 8 8 8 8 8 8 8 8 8  8  8  8  8  8  8  8  8  8  8
@@ -541,14 +627,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## cond 36 37 38 39 40 41 42
 ##    a  8  8  8  8  8  8  8
 ##    b  8  8  8  8  8  8  8</code></pre>
-<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb722-1" data-line-number="1"><span class="co">##  contrast coding check:</span></a>
-<a class="sourceLine" id="cb722-2" data-line-number="2"><span class="kw">xtabs</span>(<span class="op">~</span>so<span class="op">+</span>cond,dat)</a></code></pre></div>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb788-1"><a href="define-a-function-for-generating-data.html#cb788-1" aria-hidden="true" tabindex="-1"></a><span class="do">##  contrast coding check:</span></span>
+<span id="cb788-2"><a href="define-a-function-for-generating-data.html#cb788-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> so <span class="sc">+</span> cond, dat)</span></code></pre></div>
 <pre><code>##       cond
 ## so       a   b
 ##   -0.5 336   0
 ##   0.5    0 336</code></pre>
-<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb724-1" data-line-number="1"><span class="co">## condition b is slower than a:</span></a>
-<a class="sourceLine" id="cb724-2" data-line-number="2"><span class="kw">round</span>(<span class="kw">with</span>(dat,<span class="kw">tapply</span>(rt,cond,mean)))</a></code></pre></div>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="define-a-function-for-generating-data.html#cb790-1" aria-hidden="true" tabindex="-1"></a><span class="do">## condition b is slower than a:</span></span>
+<span id="cb790-2"><a href="define-a-function-for-generating-data.html#cb790-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">with</span>(dat, <span class="fu">tapply</span>(rt, cond, mean)))</span></code></pre></div>
 <pre><code>##   a   b 
 ## 371 459</code></pre>
 <p>Everything checks out.</p>
@@ -564,7 +650,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/clipboard.min.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
 <script src="libs/gitbook/js/plugin-sharing.js"></script>
@@ -583,6 +668,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -603,6 +689,10 @@ gitbook.start({
 "text": null
 },
 "download": ["Freq_CogSci.pdf", "Freq_CogSci.epub", "Freq_CogSci.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }

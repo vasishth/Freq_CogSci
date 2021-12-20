@@ -6,25 +6,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.5 Linear mixed models | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.5 Linear mixed models | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
-  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="github-repo" content="rstudio/bookdown" />
+  <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="3.5 Linear mixed models | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   
   <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
 
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-04-27" />
+<meta name="date" content="2021-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,9 @@
   
 <link rel="prev" href="from-the-paired-t-test-to-the-linear-mixed-model.html"/>
 <link rel="next" href="shrinkage-in-linear-mixed-models.html"/>
-<script src="libs/jquery/jquery.min.js"></script>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,31 +51,34 @@
 
 
 
-
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -82,9 +87,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -116,6 +121,29 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
@@ -132,188 +160,214 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Linear Mixed Models in Linguistics and Psychology</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
-<li class="chapter" data-level="0.2" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.2</b> How to read this book</a></li>
-<li class="chapter" data-level="0.3" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.3</b> Online materials</a></li>
-<li class="chapter" data-level="0.4" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.4</b> Software needed</a></li>
-<li class="chapter" data-level="0.5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i>How to read this book</a></li>
+<li class="chapter" data-level="" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i>Online materials</a></li>
+<li class="chapter" data-level="" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i>Software needed</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
-<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a><ul>
-<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a><ul>
+<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.1.1</b> The mean and variance of the Binomial distribution</a></li>
 <li class="chapter" data-level="1.1.2" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.1.2</b> What information does a probability distribution provide?</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
-<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.1</b> The t-distribution</a></li>
-<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-gamma-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The Gamma distribution</a></li>
-<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-exponential-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Exponential distribution</a></li>
+<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-standard-normal-mathitnormalmu0sigma1"><i class="fa fa-check"></i><b>1.3.1</b> The standard normal: <span class="math inline">\(\mathit{normal}(\mu=0,\sigma=1)\)</span></a></li>
+<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-uniform-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The uniform distribution</a></li>
+<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-chi-square-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Chi-square distribution</a></li>
+<li class="chapter" data-level="1.3.4" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.4</b> The t-distribution</a></li>
+<li class="chapter" data-level="1.3.5" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-f-distribution"><i class="fa fa-check"></i><b>1.3.5</b> The F distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a><ul>
+<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.1</b> Example 1: Discrete bivariate distributions</a></li>
 <li class="chapter" data-level="1.4.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.2</b> Example 2: Continuous bivariate distributions</a></li>
 <li class="chapter" data-level="1.4.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.4.3</b> Generate simulated bivariate (multivariate) data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a><ul>
+<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html#the-importance-of-the-mle"><i class="fa fa-check"></i><b>1.5.1</b> The importance of the MLE</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><a href="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Summary of useful R functions relating to univariate distributions</a></li>
-<li class="chapter" data-level="1.7" data-path="summary-of-random-variable-theory.html"><a href="summary-of-random-variable-theory.html"><i class="fa fa-check"></i><b>1.7</b> Summary of random variable theory</a></li>
+<li class="chapter" data-level="1.6" data-path="useful-r-functions-relating-to-univariate-distributions.html"><a href="useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Useful R functions relating to univariate distributions</a></li>
+<li class="chapter" data-level="1.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>1.7</b> Summary</a></li>
 <li class="chapter" data-level="1.8" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.8</b> Further reading</a></li>
-<li class="chapter" data-level="1.9" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a><ul>
-<li class="chapter" data-level="1.9.1" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisespnorm"><i class="fa fa-check"></i><b>1.9.1</b> Practice using the <code>pnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.2" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqnorm"><i class="fa fa-check"></i><b>1.9.2</b> Practice using the <code>qnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.3</b> Maximum likelihood estimation 1</a></li>
-<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 2</a></li>
-<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.5</b> Generating bivariate data</a></li>
-<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating multivariate data</a></li>
+<li class="chapter" data-level="1.9" data-path="sec:Foundationsexercises.html"><a href="sec:Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a><ul>
+<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><a href="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><i class="fa fa-check"></i><b>2.1</b> Some terminology surrounding typical experiment designs in linguistics and psychology</a></li>
 <li class="chapter" data-level="2.2" data-path="the-central-limit-theorem-using-simulation.html"><a href="the-central-limit-theorem-using-simulation.html"><i class="fa fa-check"></i><b>2.2</b> The central limit theorem using simulation</a></li>
 <li class="chapter" data-level="2.3" data-path="three-examples-of-the-sampling-distribution.html"><a href="three-examples-of-the-sampling-distribution.html"><i class="fa fa-check"></i><b>2.3</b> Three examples of the sampling distribution</a></li>
-<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a></li>
-<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a><ul>
+<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html#confidence-interals-are-often-misinterpreted"><i class="fa fa-check"></i><b>2.4.1</b> Confidence interals are often misinterpreted</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.1</b> The one-sample t-test</a></li>
 <li class="chapter" data-level="2.5.2" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-i-ii-error-and-power"><i class="fa fa-check"></i><b>2.5.2</b> Type I, II error, and power</a></li>
 <li class="chapter" data-level="2.5.3" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#how-to-compute-power-for-the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.3</b> How to compute power for the one-sample t-test</a></li>
 <li class="chapter" data-level="2.5.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-p-value"><i class="fa fa-check"></i><b>2.5.4</b> The p-value</a></li>
-<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.5</b> Type M and S error in the face of low power</a></li>
-<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.6</b> Searching for significance</a></li>
+<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-distribution-of-the-p-value-under-the-null-hypothesis"><i class="fa fa-check"></i><b>2.5.5</b> The distribution of the p-value under the null hypothesis</a></li>
+<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
+<li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.6.1</b> Common mistakes involving the t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
+<li class="chapter" data-level="2.7.2" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#a-complication-with-multiple-t-tests-inflation-of-type-i-error-probability"><i class="fa fa-check"></i><b>2.7.2</b> A complication with multiple t-tests: Inflation of Type I error probability</a></li>
+<li class="chapter" data-level="2.7.3" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.3</b> Analyzing a <span class="math inline">\(2\times 2\times 2\)</span> repeated measures design using paired t-tests</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesqt"><i class="fa fa-check"></i><b>2.7.1</b> Practice using <code>qt</code></a></li>
-<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.2</b> Computing the p-value</a></li>
-<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.3</b> Computing the t-value</a></li>
-<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.4</b> Type I and II error</a></li>
-<li class="chapter" data-level="2.7.5" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.5</b> Practice with the paired t-test</a></li>
+<li class="chapter" data-level="2.8" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.8</b> Common mistakes involving the (paired) t-test</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#ignoring-the-independence-assumption"><i class="fa fa-check"></i><b>2.8.1</b> Ignoring the independence assumption</a></li>
+<li class="chapter" data-level="2.8.2" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#doing-a-by-subjects-and-by-items-paired-t-test-is-generally-dangerous"><i class="fa fa-check"></i><b>2.8.2</b> Doing a by-subjects and by-items paired t-test is generally dangerous</a></li>
+<li class="chapter" data-level="2.8.3" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#the-difference-between-a-significant-and-a-non-significant-result-need-not-itself-be-significant"><i class="fa fa-check"></i><b>2.8.3</b> The difference between a significant and a non-significant result need not itself be significant</a></li>
 </ul></li>
+<li class="chapter" data-level="2.9" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>2.9</b> Summary</a></li>
+<li class="chapter" data-level="2.10" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>2.10</b> Further readings</a></li>
+<li class="chapter" data-level="2.11" data-path="sec:SamplingDistrnexercises.html"><a href="sec:SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a><ul>
+<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="from-the-t-test-to-the-linear-mixed-model.html"><a href="from-the-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.1</b> From the t-test to the linear (mixed) model</a></li>
 <li class="chapter" data-level="3.2" data-path="sum-coding.html"><a href="sum-coding.html"><i class="fa fa-check"></i><b>3.2</b> Sum coding</a></li>
 <li class="chapter" data-level="3.3" data-path="checking-model-assumptions.html"><a href="checking-model-assumptions.html"><i class="fa fa-check"></i><b>3.3</b> Checking model assumptions</a></li>
 <li class="chapter" data-level="3.4" data-path="from-the-paired-t-test-to-the-linear-mixed-model.html"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.4</b> From the paired t-test to the linear mixed model</a></li>
-<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a><ul>
+<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
 <li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
-<li class="chapter" data-level="3.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
-<li class="chapter" data-level="3.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
-<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
-<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
-<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
-<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
-<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
-<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
-<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
-<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
+<li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
+<li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a><ul>
+<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="the-likelihood-ratio-test-the-theory.html"><a href="the-likelihood-ratio-test-the-theory.html"><i class="fa fa-check"></i><b>4.1</b> The likelihood ratio test: The theory</a></li>
 <li class="chapter" data-level="4.2" data-path="a-practical-example-using-simulated-data.html"><a href="a-practical-example-using-simulated-data.html"><i class="fa fa-check"></i><b>4.2</b> A practical example using simulated data</a></li>
 <li class="chapter" data-level="4.3" data-path="a-real-life-example-the-english-relative-clause-data.html"><a href="a-real-life-example-the-english-relative-clause-data.html"><i class="fa fa-check"></i><b>4.3</b> A real-life example: The English relative clause data</a></li>
-<li class="chapter" data-level="4.4" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html"><i class="fa fa-check"></i><b>4.4</b> Exercises</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExercisesChinese"><i class="fa fa-check"></i><b>4.4.1</b> Chinese relative clauses</a></li>
-<li class="chapter" data-level="4.4.2" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseAgrmt"><i class="fa fa-check"></i><b>4.4.2</b> Agreement attraction in comprehension</a></li>
-<li class="chapter" data-level="4.4.3" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseGramCE"><i class="fa fa-check"></i><b>4.4.3</b> The grammaticality illusion</a></li>
+<li class="chapter" data-level="4.4" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+<li class="chapter" data-level="4.5" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
+<li class="chapter" data-level="4.6" data-path="sec:HypTestExercises.html"><a href="sec:HypTestExercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="ch-LMtheory.html"><a href="ch-LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a><ul>
-<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a><ul>
+<li class="chapter" data-level="5" data-path="ch:LMtheory.html"><a href="ch:LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#matrix-addition-subtraction-and-multiplication"><i class="fa fa-check"></i><b>5.1.1</b> Matrix addition, subtraction, and multiplication</a></li>
 <li class="chapter" data-level="5.1.2" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#diagonal-matrix-and-identity-matrix"><i class="fa fa-check"></i><b>5.1.2</b> Diagonal matrix and identity matrix</a></li>
 <li class="chapter" data-level="5.1.3" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#powers-of-matrices"><i class="fa fa-check"></i><b>5.1.3</b> Powers of matrices</a></li>
 <li class="chapter" data-level="5.1.4" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.1.4</b> Inverse of a matrix</a></li>
 <li class="chapter" data-level="5.1.5" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#linear-independence-and-rank"><i class="fa fa-check"></i><b>5.1.5</b> Linear independence, and rank</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a><ul>
+<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#least-squares-estimation-geometric-argument"><i class="fa fa-check"></i><b>5.2.1</b> Least squares estimation: Geometric argument</a></li>
 <li class="chapter" data-level="5.2.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#the-expectation-and-variance-of-the-parameters-beta"><i class="fa fa-check"></i><b>5.2.2</b> The expectation and variance of the parameters beta</a></li>
 <li class="chapter" data-level="5.2.3" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#hypothesis-testing-using-analysis-of-variance-anova"><i class="fa fa-check"></i><b>5.2.3</b> Hypothesis testing using Analysis of variance (ANOVA)</a></li>
 <li class="chapter" data-level="5.2.4" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#some-further-important-topics-in-linear-modeling"><i class="fa fa-check"></i><b>5.2.4</b> Some further important topics in linear modeling</a></li>
 <li class="chapter" data-level="5.2.5" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#generalized-linear-models"><i class="fa fa-check"></i><b>5.2.5</b> Generalized linear models</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html"><i class="fa fa-check"></i><b>5.3</b> Exercises</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMparamest"><i class="fa fa-check"></i><b>5.3.1</b> Estimating the parameters in a linear model</a></li>
-<li class="chapter" data-level="5.3.2" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMManova"><i class="fa fa-check"></i><b>5.3.2</b> Using ANOVA to carry out hypothesis testing</a></li>
-<li class="chapter" data-level="5.3.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:anovabyhand"><i class="fa fa-check"></i><b>5.3.3</b> Computing ANOVA by hand</a></li>
-<li class="chapter" data-level="5.3.4" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:GLMM"><i class="fa fa-check"></i><b>5.3.4</b> Generalized linear (mixed) model</a></li>
+<li class="chapter" data-level="5.3" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.3</b> Summary</a></li>
+<li class="chapter" data-level="5.4" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>5.4</b> Further reading</a></li>
+<li class="chapter" data-level="5.5" data-path="sec:LMExercises2.html"><a href="sec:LMExercises2.html"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a><ul>
-<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a><ul>
+<li class="chapter" data-level="6" data-path="ch:contr.html"><a href="ch:contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
 <li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
 <li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
+<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
 <li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="6.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
+<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
 <li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
 <li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+<li class="chapter" data-level="6.5" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+<li class="chapter" data-level="6.6" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.7" data-path="sec:Contrastsexercises.html"><a href="sec:Contrastsexercises.html"><i class="fa fa-check"></i><b>6.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
-<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
-<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
-<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+<li class="chapter" data-level="7" data-path="ch:coding2x2.html"><a href="ch:coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
-<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+<li class="chapter" data-level="7.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
-<li class="chapter" data-level="7.4" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="7.3" data-path="sec:interactions:NLM.html"><a href="sec:interactions:NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="7.5" data-path="sec:Contrasts2x2exercises.html"><a href="sec:Contrasts2x2exercises.html"><i class="fa fa-check"></i><b>7.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a><ul>
+<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>8.1</b> A reminder: The maximal linear mixed model</a></li>
 <li class="chapter" data-level="8.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>8.2</b> Obtain estimates from a previous study</a></li>
 <li class="chapter" data-level="8.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>8.3</b> Decide on a range of plausible values of the effect size</a></li>
 <li class="chapter" data-level="8.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>8.4</b> Extract parameter estimates</a></li>
-<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a><ul>
+<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a>
+<ul>
 <li class="chapter" data-level="8.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>8.5.1</b> Generate a Latin-square design</a></li>
 <li class="chapter" data-level="8.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>8.5.2</b> Generate data row-by-row</a></li>
 </ul></li>
 <li class="chapter" data-level="8.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>8.6</b> Repeated generation of data to compute power</a></li>
 <li class="chapter" data-level="8.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>8.7</b> What you can now do</a></li>
-<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a><ul>
+<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a>
+<ul>
 <li class="chapter" data-level="8.8.1" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-with-two-conditions"><i class="fa fa-check"></i><b>8.8.1</b> Simulating data with two conditions</a></li>
 <li class="chapter" data-level="8.8.2" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-in-factorial-designs"><i class="fa fa-check"></i><b>8.8.2</b> Simulating data in factorial designs</a></li>
 </ul></li>
-<li class="chapter" data-level="8.9" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a><ul>
-<li class="chapter" data-level="8.9.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>8.9.1</b> Drawing a power curve given a range of effect sizes</a></li>
-<li class="chapter" data-level="8.9.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>8.9.2</b> Power and log-transformation</a></li>
-<li class="chapter" data-level="8.9.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>8.9.3</b> Evaluating models by generating simulated data</a></li>
-<li class="chapter" data-level="8.9.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>8.9.4</b> Using simulation to check parameter recovery</a></li>
-<li class="chapter" data-level="8.9.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>8.9.5</b> Sample size calculations using simulation</a></li>
+<li class="chapter" data-level="8.9" data-path="sec:Simulationexercises.html"><a href="sec:Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="ch:MultComp.html"><a href="ch:MultComp.html"><i class="fa fa-check"></i><b>9</b> Understanding Type I error inflation using simulation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><i class="fa fa-check"></i><b>9.1</b> Overly simple random effects structure in LMMs inflate Type I error</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-only-model"><i class="fa fa-check"></i><b>9.1.1</b> Type I error with a varying intercepts-only model</a></li>
+<li class="chapter" data-level="9.1.2" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-and-varying-slopes-model"><i class="fa fa-check"></i><b>9.1.2</b> Type I error with a varying intercepts and varying slopes model</a></li>
+<li class="chapter" data-level="9.1.3" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-inflation-due-to-model-mis-specification"><i class="fa fa-check"></i><b>9.1.3</b> Type I error inflation due to model mis-specification</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ch-multcomp.html"><a href="ch-multcomp.html"><i class="fa fa-check"></i><b>9</b> Understanding the multiple comparisons problem</a></li>
-<li class="chapter" data-level="10" data-path="ch-modelselection.html"><a href="ch-modelselection.html"><i class="fa fa-check"></i><b>10</b> Model selection</a></li>
+<li class="chapter" data-level="9.2" data-path="type-i-error-inflation-due-to-multiple-comparisons.html"><a href="type-i-error-inflation-due-to-multiple-comparisons.html"><i class="fa fa-check"></i><b>9.2</b> Type I error inflation due to multiple comparisons</a></li>
+<li class="chapter" data-level="9.3" data-path="the-practical-implications.html"><a href="the-practical-implications.html"><i class="fa fa-check"></i><b>9.3</b> The practical implications</a></li>
+<li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -335,15 +389,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="linear-mixed-models" class="section level2">
+<div id="linear-mixed-models" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Linear mixed models</h2>
 <p>We return to our subject and object relative clause data from English (Grodner and Gibson, Expt 1). First we load the data as usual, define relative clause type as a sum coded predictor, and create a new column called <code>so</code> that represents the contrast coding (<span class="math inline">\(\pm 1\)</span> sum contrasts), and a column that holds log-transformed reading time.</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" data-line-number="1">gg05e1&lt;-<span class="kw">read.table</span>(<span class="st">&quot;data/grodnergibsonE1crit.txt&quot;</span>,<span class="dt">header=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb238-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb238-3" data-line-number="3">gg05e1<span class="op">$</span>so &lt;-<span class="st"> </span><span class="kw">ifelse</span>(gg05e1<span class="op">$</span>condition<span class="op">==</span><span class="st">&quot;objgap&quot;</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb238-4" data-line-number="4">gg05e1<span class="op">$</span>logrt&lt;-<span class="kw">log</span>(gg05e1<span class="op">$</span>rawRT)</a></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="linear-mixed-models.html#cb305-1" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>so <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(gg05e1<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb305-2"><a href="linear-mixed-models.html#cb305-2" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>logrt <span class="ot">&lt;-</span> <span class="fu">log</span>(gg05e1<span class="sc">$</span>rawRT)</span></code></pre></div>
 <p>Recall that these data have multiple measurements from each subject for each condition:</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1"><span class="kw">t</span>(<span class="kw">xtabs</span>(<span class="op">~</span>subject<span class="op">+</span>condition, gg05e1))</a></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="linear-mixed-models.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span> subject <span class="sc">+</span> condition, gg05e1))</span></code></pre></div>
 <pre><code>##          subject
 ## condition 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
 ##   objgap  8 8 8 8 8 8 8 8 8  8  8  8  8  8  8  8  8  8
@@ -358,20 +410,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##   subjgap  8  8  8  8  8  8  8  8  8</code></pre>
 <p>We can visualize the different responses of subjects:</p>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-101-1.svg" width="672" /></p>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-124-1.svg" width="672" /></p>
 <p>It’s clear that different subjects have different effects of the relative clause manipulation: some slopes are positive sloping, some are flat, and some are negatively sloping. There is between-subject variability in the relative clause effect.</p>
 <p>Given these differences between subjects, you could fit a separate linear model for each subject, collect together the intercepts and slopes for each subject, and then check if the slopes are significantly different from zero. There is a function in the package  that computes separate linear models for each subject: <em>lmList</em>.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" data-line-number="1"><span class="kw">library</span>(lme4)</a>
-<a class="sourceLine" id="cb242-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb242-3" data-line-number="3">lmlist.fm1&lt;-<span class="kw">lmList</span>(logrt<span class="op">~</span>so<span class="op">|</span>subject,gg05e1)</a></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="linear-mixed-models.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb309-2"><a href="linear-mixed-models.html#cb309-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb309-3"><a href="linear-mixed-models.html#cb309-3" aria-hidden="true" tabindex="-1"></a>lmlist.fm1 <span class="ot">&lt;-</span> <span class="fu">lmList</span>(logrt <span class="sc">~</span> so <span class="sc">|</span> subject, gg05e1)</span></code></pre></div>
 <p>One can extract the intercept and slope estimates for each subject. For example, for subject 1:</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1">lmlist.fm1<span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span><span class="op">$</span>coefficients</a></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="linear-mixed-models.html#cb310-1" aria-hidden="true" tabindex="-1"></a>lmlist.fm1<span class="sc">$</span><span class="st">`</span><span class="at">1</span><span class="st">`</span><span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>## (Intercept)          so 
 ##     5.76962     0.04352</code></pre>
 <p>One can plot the individual lines for each subject, as well as the fit of a simple linear model m0 for all the data taken together; this will show how each subject deviates in intercept and slope from the model m0’s intercept and slope.</p>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-104-1.svg" width="672" /></p>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-127-1.svg" width="672" /></p>
 <p>To find out if there is an effect of relative clause type, we simply need to check whether the slopes of the individual subjects’ fitted lines taken together are significantly different from zero. A one-sample t-test will achieve this:</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1"><span class="kw">t.test</span>(<span class="kw">coef</span>(lmlist.fm1)[<span class="dv">2</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="linear-mixed-models.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">coef</span>(lmlist.fm1)[<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
 ## 
@@ -384,22 +436,26 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## mean of x 
 ##   0.06202</code></pre>
 <p>The above test is <em>exactly</em> the same as the paired t-test and the varying intercepts linear mixed model that we fit in the last chapter using the by-subject aggregated data:</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1">bysubj&lt;-<span class="kw">aggregate</span>(<span class="kw">log</span>(rawRT)<span class="op">~</span>subject<span class="op">+</span>condition,</a>
-<a class="sourceLine" id="cb247-2" data-line-number="2">                  mean,<span class="dt">data=</span>gg05e1)</a>
-<a class="sourceLine" id="cb247-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb247-4" data-line-number="4"><span class="kw">colnames</span>(bysubj)[<span class="dv">3</span>]&lt;-<span class="st">&quot;logrt&quot;</span></a>
-<a class="sourceLine" id="cb247-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb247-6" data-line-number="6"><span class="kw">t.test</span>(logrt<span class="op">~</span>condition,bysubj,<span class="dt">paired=</span><span class="ot">TRUE</span>)<span class="op">$</span>statistic</a></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="linear-mixed-models.html#cb314-1" aria-hidden="true" tabindex="-1"></a>bysubj <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(<span class="fu">log</span>(rawRT) <span class="sc">~</span> subject <span class="sc">+</span> condition,</span>
+<span id="cb314-2"><a href="linear-mixed-models.html#cb314-2" aria-hidden="true" tabindex="-1"></a>  mean,</span>
+<span id="cb314-3"><a href="linear-mixed-models.html#cb314-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> gg05e1</span>
+<span id="cb314-4"><a href="linear-mixed-models.html#cb314-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb314-5"><a href="linear-mixed-models.html#cb314-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-6"><a href="linear-mixed-models.html#cb314-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(bysubj)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">&quot;logrt&quot;</span></span>
+<span id="cb314-7"><a href="linear-mixed-models.html#cb314-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb314-8"><a href="linear-mixed-models.html#cb314-8" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(logrt <span class="sc">~</span> condition, bysubj, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>statistic</span></code></pre></div>
 <pre><code>##    t 
 ## 2.81</code></pre>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" data-line-number="1"><span class="co">## compare with linear mixed model:</span></a>
-<a class="sourceLine" id="cb249-2" data-line-number="2"><span class="kw">summary</span>(<span class="kw">lmer</span>(logrt<span class="op">~</span>condition<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>subject),</a>
-<a class="sourceLine" id="cb249-3" data-line-number="3">             bysubj))<span class="op">$</span>coefficients[<span class="dv">2</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="linear-mixed-models.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="do">## compare with linear mixed model:</span></span>
+<span id="cb316-2"><a href="linear-mixed-models.html#cb316-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lmer</span>(</span>
+<span id="cb316-3"><a href="linear-mixed-models.html#cb316-3" aria-hidden="true" tabindex="-1"></a>  logrt <span class="sc">~</span> condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subject),</span>
+<span id="cb316-4"><a href="linear-mixed-models.html#cb316-4" aria-hidden="true" tabindex="-1"></a>  bysubj</span>
+<span id="cb316-5"><a href="linear-mixed-models.html#cb316-5" aria-hidden="true" tabindex="-1"></a>))<span class="sc">$</span>coefficients[<span class="dv">2</span>, ]</span></code></pre></div>
 <pre><code>##   Estimate Std. Error    t value 
 ##   -0.12403    0.04414   -2.81021</code></pre>
 <p>The above lmList model we just fit is called <em>repeated measures regression</em>. We now look at how to model unaggregated data using the linear mixed model. Incidentally, this repeated measures regression model is now largely of historical interest, and useful only for understanding the linear mixed model, which is the modern standard approach.</p>
 <p>We turn next to three main types of linear mixed model; other variants will be introduced in later chapters.</p>
-<div id="model-type-1-varying-intercepts" class="section level3">
+<div id="model-type-1-varying-intercepts" class="section level3" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Model type 1: Varying intercepts</h3>
 <p>The <em>linear mixed model</em> does something related to the above by-subject fits, but with some crucial twists, as we see below.
 In the model shown below, the statement</p>
@@ -407,7 +463,7 @@ In the model shown below, the statement</p>
 (1 \mid \hbox{subject}) 
 \end{equation}\]</span></p>
 <p>adjusts the grand mean estimates of the intercept by a term (a number) for each subject.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1">m0.lmer&lt;-<span class="kw">lmer</span>(logrt<span class="op">~</span>so<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>subject),gg05e1)</a></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="linear-mixed-models.html#cb318-1" aria-hidden="true" tabindex="-1"></a>m0.lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subject), gg05e1)</span></code></pre></div>
 <p>Notice that we did not aggregate the data.</p>
 <p>Here is the abbreviated output:</p>
 <pre><code>Random effects:
@@ -422,21 +478,21 @@ Fixed effects:
 so           0.06202    0.01475   4.205</code></pre>
 <p>One thing to notice in the present example is that the coefficients (intercept and slope) of the fixed effects of the above model are identical to those in the linear model <code>m0</code> above. What is different between the linear model and the linear mixed model is the standard error. In the latter, the standard error is determined by more than one source of variance, as we explain below.</p>
 <p>The intercept adjustments for each subject can be viewed by typing:</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="co">## first 10 subjects&#39; intercept adjustments:</span></a>
-<a class="sourceLine" id="cb253-2" data-line-number="2"><span class="kw">ranef</span>(m0.lmer)<span class="op">$</span>subject[,<span class="dv">1</span>][<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="linear-mixed-models.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="do">## first 10 subjects&#39; intercept adjustments:</span></span>
+<span id="cb320-2"><a href="linear-mixed-models.html#cb320-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(m0.lmer)<span class="sc">$</span>subject[, <span class="dv">1</span>][<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code>##  [1] -0.103928  0.077195 -0.230621  0.234198  0.008828
 ##  [6] -0.095363 -0.205571 -0.155371  0.075944 -0.364367</code></pre>
 <p>Here is another way to summarize the adjustments to the grand mean intercept by subject. The error bars represent 95% confidence intervals.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1"><span class="kw">library</span>(lattice)</a>
-<a class="sourceLine" id="cb255-2" data-line-number="2"><span class="kw">print</span>(<span class="kw">dotplot</span>(<span class="kw">ranef</span>(m0.lmer,<span class="dt">condVar=</span><span class="ot">TRUE</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="linear-mixed-models.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
+<span id="cb322-2"><a href="linear-mixed-models.html#cb322-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dotplot</span>(<span class="fu">ranef</span>(m0.lmer, <span class="at">condVar =</span> <span class="cn">TRUE</span>)))</span></code></pre></div>
 <pre><code>## $subject</code></pre>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-109-1.svg" width="672" /></p>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-132-1.svg" width="672" /></p>
 </div>
-<div id="the-formal-statement-of-the-varying-intercepts-model" class="section level3">
+<div id="the-formal-statement-of-the-varying-intercepts-model" class="section level3" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> The formal statement of the varying intercepts model</h3>
 <p>The model <code>m0.lmer</code> above prints out the following type of linear model. <span class="math inline">\(i\)</span> indexes subject, and <span class="math inline">\(j\)</span> indexes items.</p>
 <p>Once we know the subject id and the item id, we know which subject saw which condition:</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1"><span class="kw">subset</span>(gg05e1,subject<span class="op">==</span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>item <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="linear-mixed-models.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(gg05e1, subject <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> item <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>##   subject item condition rawRT so logrt
 ## 6       1    1    objgap   320  1 5.768</code></pre>
 <p>The mathematical form of the linear mixed model is:</p>
@@ -449,7 +505,7 @@ u_{0i} \sim Normal(0,\sigma_{u0})
 \end{equation}\]</span></p>
 <p>The ordinary linear model m0 has one intercept <span class="math inline">\(\beta_0\)</span> for all subjects, whereas this linear mixed model with varying intercepts <code>m0.lmer</code> has a different intercept (<span class="math inline">\(\beta_0 + u_{0i}\)</span>) for each subject <span class="math inline">\(i\)</span>.</p>
 <p>We can visualize the adjustments for each subject to the intercepts as shown below.</p>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-111-1.svg" width="672" /></p>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-134-1.svg" width="672" /></p>
 <p>An important point is that in this model there are two variance components or sources of variance (cf. the linear model, which had only one):</p>
 <ul>
 <li><span class="math inline">\(u_0 \sim Normal(0,\sigma_{u0})\)</span></li>
@@ -457,7 +513,7 @@ u_{0i} \sim Normal(0,\sigma_{u0})
 </ul>
 <p>These two standard deviations determine the standard error of the <span class="math inline">\(\beta_1\)</span> slope parameter.</p>
 </div>
-<div id="model-type-2-varying-intercepts-and-slopes-without-a-correlation" class="section level3">
+<div id="model-type-2-varying-intercepts-and-slopes-without-a-correlation" class="section level3" number="3.5.3">
 <h3><span class="header-section-number">3.5.3</span> Model type 2: Varying intercepts and slopes, without a correlation</h3>
 <p>Unlike the figure associated with the <code>lmlist.fm1</code> model above, which also involves fitting separate models for each subject, the model <code>m0.lmer</code> assumes <em>different intercepts</em> for each subject <em>but the same slope</em>.</p>
 <p>We can choose to fit different intercepts as well as different slopes for each subject. To achieve this, assume now that each subject’s slope is also adjusted:</p>
@@ -465,7 +521,7 @@ u_{0i} \sim Normal(0,\sigma_{u0})
 y_{ij} = \beta_0 + u_{0i}+(\beta_1+u_{1i})\times so_{ij} + \varepsilon_{ij}
 \end{equation}\]</span></p>
 <p>That is, we additionally assume that <span class="math inline">\(u_{1i} \sim Normal(0,\sigma_{u1})\)</span>. The <code>lmer</code> notation for fitting separate intercepts and slopes is <code>(1+so||subject)</code>. We will just explain what the double vertical bars represent.</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" data-line-number="1">m1.lmer&lt;-<span class="kw">lmer</span>(logrt<span class="op">~</span>so<span class="op">+</span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">||</span>subject),gg05e1)</a></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="linear-mixed-models.html#cb326-1" aria-hidden="true" tabindex="-1"></a>m1.lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> subject), gg05e1)</span></code></pre></div>
 <p>The output of this model will now show that there are not two but three sources of variability. These are:</p>
 <ul>
 <li><span class="math inline">\(u_0 \sim Normal(0,\sigma_{u0})\)</span></li>
@@ -490,22 +546,22 @@ Fixed effects:
 (Intercept)   5.8831     0.0509  115.50
 so            0.0620     0.0221    2.81</code></pre>
 <p>These fits for each subject are visualized below (the gray line shows the model with a single intercept and slope, i.e., our old model <code>m0</code>):</p>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-113-1.svg" width="672" /></p>
-<div id="comparing-lmlist-model-with-the-varying-intercepts-model" class="section level4">
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-136-1.svg" width="672" /></p>
+<div id="comparing-lmlist-model-with-the-varying-intercepts-model" class="section level4" number="3.5.3.1">
 <h4><span class="header-section-number">3.5.3.1</span> Comparing lmList model with the varying intercepts model</h4>
 <p>Compare this model with the <code>lmlist.fm1</code> model we fitted earlier:</p>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-114-1.svg" width="672" /></p>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-137-1.svg" width="672" /></p>
 <p>What is striking is that each subject’s estimated best fit line is “smoothed out” compared to the lmList fits. This aspect of the linear mixed model is called shrinkage; we return to this point shortly.</p>
 </div>
-<div id="visualizing-random-effects" class="section level4">
+<div id="visualizing-random-effects" class="section level4" number="3.5.3.2">
 <h4><span class="header-section-number">3.5.3.2</span> Visualizing random effects</h4>
 <p>As before, it is instructive to visualize the by-subjects adjustments to the intercept and slope:</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">dotplot</span>(<span class="kw">ranef</span>(m1.lmer,<span class="dt">condVar=</span><span class="ot">TRUE</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="linear-mixed-models.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dotplot</span>(<span class="fu">ranef</span>(m1.lmer, <span class="at">condVar =</span> <span class="cn">TRUE</span>)))</span></code></pre></div>
 <pre><code>## $subject</code></pre>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-115-1.svg" width="672" /></p>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-138-1.svg" width="672" /></p>
 <p>What this is showing is wide variability in the mean reading times between subjects, but very little variation in the slope between subjects.</p>
 </div>
-<div id="the-formal-statement-of-varying-intercepts-and-varying-slopes-linear-mixed-model" class="section level4">
+<div id="the-formal-statement-of-varying-intercepts-and-varying-slopes-linear-mixed-model" class="section level4" number="3.5.3.3">
 <h4><span class="header-section-number">3.5.3.3</span> The formal statement of varying intercepts and varying slopes linear mixed model</h4>
 <p>Here is the full statement of the varying intercept and slopes model. Again, i indexes subjects, j items.</p>
 <p><span class="math display">\[\begin{equation}
@@ -518,11 +574,11 @@ y_{ij} = \beta_0 + u_{0i}+(\beta_1+u_{1i})\times so_{ij} + \varepsilon_{ij}
 <li><span class="math inline">\(\varepsilon \sim Normal(0,\sigma)\)</span></li>
 </ul>
 </div>
-<div id="crossed-random-effects-for-subjects-and-for-items" class="section level4">
+<div id="crossed-random-effects-for-subjects-and-for-items" class="section level4" number="3.5.3.4">
 <h4><span class="header-section-number">3.5.3.4</span> Crossed random effects for subjects and for items</h4>
 <p>The varying intercepts and slopes model doesn’t capture all the sources of variance yet. The items also contribute sources of variance: just like subjects, items may also vary in their reading times or in the extent to which the reading times are impacted by condition. I other words, they might have different intercepts and slopes.</p>
 <p>Notice that in this design (as in many designs in psycholinguistics or linguistic research) each subject sees all the items. In such cases, we say that subjects and items are crossed.</p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">xtabs</span>(<span class="op">~</span>subject<span class="op">+</span>item,gg05e1))</a></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="linear-mixed-models.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">xtabs</span>(<span class="sc">~</span> subject <span class="sc">+</span> item, gg05e1))</span></code></pre></div>
 <pre><code>##        item
 ## subject 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
 ##       1 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1
@@ -532,8 +588,8 @@ y_{ij} = \beta_0 + u_{0i}+(\beta_1+u_{1i})\times so_{ij} + \varepsilon_{ij}
 ##       5 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1
 ##       6 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1</code></pre>
 <p>Linear mixed model with crossed subject and items random effects can be defined with the following syntax:</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1">m2.lmer&lt;-<span class="kw">lmer</span>(logrt<span class="op">~</span>so<span class="op">+</span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">||</span>subject)<span class="op">+</span></a>
-<a class="sourceLine" id="cb265-2" data-line-number="2">(<span class="dv">1</span><span class="op">+</span>so<span class="op">||</span>item),gg05e1)</a></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="linear-mixed-models.html#cb332-1" aria-hidden="true" tabindex="-1"></a>m2.lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> subject) <span class="sc">+</span></span>
+<span id="cb332-2"><a href="linear-mixed-models.html#cb332-2" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> item), gg05e1)</span></code></pre></div>
 <p>Analogously to the preceding example, now there are five variance components:</p>
 <pre><code>Random effects:
  Groups    Name        Variance Std.Dev.
@@ -549,16 +605,18 @@ Fixed effects:
 (Intercept)   5.8831     0.0517  113.72
 so            0.0620     0.0242    2.56</code></pre>
 <p>The item intercept and slope adjustments can be visualized as well. Notice that there is a lot less item-level variation; this is often the case in planned experiments in sentence processing, where the experimental items are carefully constructed to vary as little as possible.</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">dotplot</span>(<span class="kw">ranef</span>(m2.lmer,<span class="dt">condVar=</span><span class="ot">TRUE</span>))<span class="op">$</span>item)</a></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-118-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="linear-mixed-models.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dotplot</span>(<span class="fu">ranef</span>(m2.lmer, <span class="at">condVar =</span> <span class="cn">TRUE</span>))<span class="sc">$</span>item)</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-141-1.svg" width="672" /></p>
 <p>In the above models, there is an assumption that there is no correlation between the intercept and slope adjustments by subject, and no correlation between the intercept and slope adjustments by item. It is possible that the intercept and slope adjustments are in fact correlated. We turn to this model next.</p>
 </div>
 </div>
-<div id="model-type-3-varying-intercepts-and-varying-slopes-with-correlation" class="section level3">
+<div id="model-type-3-varying-intercepts-and-varying-slopes-with-correlation" class="section level3" number="3.5.4">
 <h3><span class="header-section-number">3.5.4</span> Model type 3: Varying intercepts and varying slopes, with correlation</h3>
 <p>A correlation can be introduced between the intercept and slope adjustments by using a single vertical bar instead of two vertical bars in the random effects structure:</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" data-line-number="1">m3.lmer&lt;-<span class="kw">lmer</span>(logrt<span class="op">~</span>so<span class="op">+</span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">|</span>subject)<span class="op">+</span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">|</span>item),</a>
-<a class="sourceLine" id="cb268-2" data-line-number="2">              gg05e1)</a></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="linear-mixed-models.html#cb335-1" aria-hidden="true" tabindex="-1"></a>m3.lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb335-2"><a href="linear-mixed-models.html#cb335-2" aria-hidden="true" tabindex="-1"></a>  logrt <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
+<span id="cb335-3"><a href="linear-mixed-models.html#cb335-3" aria-hidden="true" tabindex="-1"></a>  gg05e1</span>
+<span id="cb335-4"><a href="linear-mixed-models.html#cb335-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
 <p>To understand what this model is doing, we have to recall what a bivariate/multivariate distribution is.</p>
 <pre><code>Random effects:
@@ -575,8 +633,8 @@ Fixed effects:
 (Intercept)   5.8831     0.0520  113.09
 so            0.0620     0.0247    2.51</code></pre>
 <p>The correlations (0.58 and 1.00) you see in the model output below are the correlations between the varying intercepts and slopes for subjects and for items. Notice that the variance covariance matrix for items is degenerate: its correlation is 1. This matrix cannot be inverted.</p>
-<p>When the correlation is +1 or -1 or near these numbers, this means that the optimizer in lme4 is unable to estimate the correlation parameter, usually due to there not being enough data. If you are in such a situation, you are better off not trying to estimate this parameter with the data you have, and instead fitting one of the simpler models. We will return to this point when discussing model selection. For further discussion, see <span class="citation">Barr et al. (<a href="#ref-barr2013">2013</a>)</span>, <span class="citation">Bates et al. (<a href="#ref-BatesEtAlParsimonious">2015</a>)</span>, and <span class="citation">Matuschek et al. (<a href="#ref-hannesBEAP">2017</a>)</span>.</p>
-<div id="formal-statement-of-varying-intercepts-and-varying-slopes-linear-mixed-model-with-correlation" class="section level4">
+<p>When the correlation is +1 or -1 or near these numbers, this means that the optimizer in lme4 is unable to estimate the correlation parameter, usually due to there not being enough data. If you are in such a situation, you are better off not trying to estimate this parameter with the data you have, and instead fitting one of the simpler models. We will return to this point when discussing model selection. For further discussion, see <span class="citation"><a href="#ref-barr2013" role="doc-biblioref">Barr et al.</a> (<a href="#ref-barr2013" role="doc-biblioref">2013</a>)</span>, <span class="citation"><a href="#ref-BatesEtAlParsimonious" role="doc-biblioref">Bates et al.</a> (<a href="#ref-BatesEtAlParsimonious" role="doc-biblioref">2015</a>)</span>, and <span class="citation"><a href="#ref-hannesBEAP" role="doc-biblioref">Matuschek et al.</a> (<a href="#ref-hannesBEAP" role="doc-biblioref">2017</a>)</span>.</p>
+<div id="formal-statement-of-varying-intercepts-and-varying-slopes-linear-mixed-model-with-correlation" class="section level4" number="3.5.4.1">
 <h4><span class="header-section-number">3.5.4.1</span> Formal statement of varying intercepts and varying slopes linear mixed model with correlation</h4>
 <p>As usual, i indexes subjects, j items. The vector <code>so</code> is the sum-coded factor levels: +1 for object relatives and -1 for subject relatives. The only new thing in this model is the item-level effects, and the specification of the variance-covariance matrix for subjects and items, in order to include the correlation parameters.</p>
 <p><span class="math display">\[\begin{equation}
@@ -626,33 +684,34 @@ y_{ij} = \alpha + u_{0i} + w_{0j} + (\beta + u_{1i} + w_{1j}) \times so_{ij} + \
 \right)
 \end{equation}\]</span></p>
 </div>
-<div id="visualizing-the-random-effects" class="section level4">
+<div id="visualizing-the-random-effects" class="section level4" number="3.5.4.2">
 <h4><span class="header-section-number">3.5.4.2</span> Visualizing the random effects</h4>
 <p>One can visualize the correlation between intercepts and slopes by subjects. The positive correlation of 0.58 between subject intercept and slope adjustments implies that slower subjects show larger effects. However, the dotplot below doesn’t show a convincing indication that such a correlation exists:</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">dotplot</span>(<span class="kw">ranef</span>(m3.lmer,<span class="dt">condVar=</span><span class="ot">TRUE</span>))<span class="op">$</span>subject)</a></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-120-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="linear-mixed-models.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dotplot</span>(<span class="fu">ranef</span>(m3.lmer, <span class="at">condVar =</span> <span class="cn">TRUE</span>))<span class="sc">$</span>subject)</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-143-1.svg" width="672" /></p>
 <p>The correlation pattern is easier to see if we plot the slope adjustments against the intercept adjustments.</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" data-line-number="1"><span class="kw">plot</span>(<span class="kw">ranef</span>(m3.lmer)<span class="op">$</span>subject[,<span class="dv">1</span>],<span class="kw">ranef</span>(m3.lmer)<span class="op">$</span>subject[,<span class="dv">2</span>],</a>
-<a class="sourceLine" id="cb272-2" data-line-number="2"><span class="dt">xlab=</span><span class="st">&quot;Intercept adjustments (subject)&quot;</span>,</a>
-<a class="sourceLine" id="cb272-3" data-line-number="3"><span class="dt">ylab=</span><span class="st">&quot;Slope adjustments&quot;</span>)</a></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-121-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="linear-mixed-models.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ranef</span>(m3.lmer)<span class="sc">$</span>subject[, <span class="dv">1</span>], <span class="fu">ranef</span>(m3.lmer)<span class="sc">$</span>subject[, <span class="dv">2</span>],</span>
+<span id="cb339-2"><a href="linear-mixed-models.html#cb339-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Intercept adjustments (subject)&quot;</span>,</span>
+<span id="cb339-3"><a href="linear-mixed-models.html#cb339-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Slope adjustments&quot;</span></span>
+<span id="cb339-4"><a href="linear-mixed-models.html#cb339-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-144-1.svg" width="672" /></p>
 <p>When we talk about hypothesis testing, we will look at what inferences we can draw from this correlation.</p>
 <p>The dotplot showing the item-level effects shows a perfect correlation between intercept and slope adjustments, but as mentioned above these are from a degenerate variance covariance matrix and not meaningful.</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">dotplot</span>(<span class="kw">ranef</span>(m3.lmer,<span class="dt">condVar=</span><span class="ot">TRUE</span>))<span class="op">$</span>item)</a></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-122-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="linear-mixed-models.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dotplot</span>(<span class="fu">ranef</span>(m3.lmer, <span class="at">condVar =</span> <span class="cn">TRUE</span>))<span class="sc">$</span>item)</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-145-1.svg" width="672" /></p>
 </div>
 </div>
 </div>
 <h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-barr2013">
-<p>Barr, Dale J, Roger Levy, Christoph Scheepers, and Harry J Tily. 2013. “Random Effects Structure for Confirmatory Hypothesis Testing: Keep It Maximal.” <em>Journal of Memory and Language</em> 68 (3). Elsevier: 255–78.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-barr2013" class="csl-entry">
+Barr, Dale J, Roger Levy, Christoph Scheepers, and Harry J Tily. 2013. <span>“Random Effects Structure for Confirmatory Hypothesis Testing: <span>K</span>eep It Maximal.”</span> <em>Journal of Memory and Language</em> 68 (3): 255–78.
 </div>
-<div id="ref-BatesEtAlParsimonious">
-<p>Bates, Douglas M., Reinhold Kliegl, Shravan Vasishth, and Harald Baayen. 2015. “Parsimonious Mixed Models.”</p>
+<div id="ref-BatesEtAlParsimonious" class="csl-entry">
+Bates, Douglas M., Reinhold Kliegl, Shravan Vasishth, and Harald Baayen. 2015. <span>“Parsimonious Mixed Models.”</span>
 </div>
-<div id="ref-hannesBEAP">
-<p>Matuschek, Hannes, Reinhold Kliegl, Shravan Vasishth, R. Harald Baayen, and Douglas M. Bates. 2017. “Balancing Type I Error and Power in Linear Mixed Models.” <em>Journal of Memory and Language</em> 94: 305–15. <a href="https://doi.org/10.1016/j.jml.2017.01.001">https://doi.org/10.1016/j.jml.2017.01.001</a>.</p>
+<div id="ref-hannesBEAP" class="csl-entry">
+Matuschek, Hannes, Reinhold Kliegl, Shravan Vasishth, R. Harald Baayen, and Douglas M. Bates. 2017. <span>“<span class="nocase">Balancing Type I Error and Power in Linear Mixed Models</span>.”</span> <em>Journal of Memory and Language</em> 94: 305–15. <a href="https://doi.org/10.1016/j.jml.2017.01.001">https://doi.org/10.1016/j.jml.2017.01.001</a>.
 </div>
 </div>
             </section>
@@ -665,7 +724,6 @@ y_{ij} = \alpha + u_{0i} + w_{0j} + (\beta + u_{1i} + w_{1j}) \times so_{ij} + \
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/clipboard.min.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
 <script src="libs/gitbook/js/plugin-sharing.js"></script>
@@ -684,6 +742,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -704,6 +763,10 @@ gitbook.start({
 "text": null
 },
 "download": ["Freq_CogSci.pdf", "Freq_CogSci.epub", "Freq_CogSci.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }

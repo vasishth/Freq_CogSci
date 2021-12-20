@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.7 Using paired t-tests in complex factorial designs | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
+  <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.7 Using paired t-tests in complex factorial designs | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
+  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
+  <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.7 Using paired t-tests in complex factorial designs | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
+  
+  <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
+
+<meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
+
+
+<meta name="date" content="2021-12-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="the-two-sample-t-test-vs.-the-paired-t-test.html"/>
+<link rel="next" href="common-mistakes-involving-the-paired-t-test.html"/>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
+<link href="libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Linear Mixed Models in Linguistics and Psychology</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i>How to read this book</a></li>
+<li class="chapter" data-level="" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i>Online materials</a></li>
+<li class="chapter" data-level="" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i>Software needed</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="part"><span><b>I Foundational ideas</b></span></li>
+<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.1.1</b> The mean and variance of the Binomial distribution</a></li>
+<li class="chapter" data-level="1.1.2" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.1.2</b> What information does a probability distribution provide?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
+<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-standard-normal-mathitnormalmu0sigma1"><i class="fa fa-check"></i><b>1.3.1</b> The standard normal: <span class="math inline">\(\mathit{normal}(\mu=0,\sigma=1)\)</span></a></li>
+<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-uniform-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The uniform distribution</a></li>
+<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-chi-square-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Chi-square distribution</a></li>
+<li class="chapter" data-level="1.3.4" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.4</b> The t-distribution</a></li>
+<li class="chapter" data-level="1.3.5" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-f-distribution"><i class="fa fa-check"></i><b>1.3.5</b> The F distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.1</b> Example 1: Discrete bivariate distributions</a></li>
+<li class="chapter" data-level="1.4.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.2</b> Example 2: Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.4.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.4.3</b> Generate simulated bivariate (multivariate) data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html#the-importance-of-the-mle"><i class="fa fa-check"></i><b>1.5.1</b> The importance of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="useful-r-functions-relating-to-univariate-distributions.html"><a href="useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Useful R functions relating to univariate distributions</a></li>
+<li class="chapter" data-level="1.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>1.7</b> Summary</a></li>
+<li class="chapter" data-level="1.8" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.8</b> Further reading</a></li>
+<li class="chapter" data-level="1.9" data-path="sec:Foundationsexercises.html"><a href="sec:Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><a href="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><i class="fa fa-check"></i><b>2.1</b> Some terminology surrounding typical experiment designs in linguistics and psychology</a></li>
+<li class="chapter" data-level="2.2" data-path="the-central-limit-theorem-using-simulation.html"><a href="the-central-limit-theorem-using-simulation.html"><i class="fa fa-check"></i><b>2.2</b> The central limit theorem using simulation</a></li>
+<li class="chapter" data-level="2.3" data-path="three-examples-of-the-sampling-distribution.html"><a href="three-examples-of-the-sampling-distribution.html"><i class="fa fa-check"></i><b>2.3</b> Three examples of the sampling distribution</a></li>
+<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html#confidence-interals-are-often-misinterpreted"><i class="fa fa-check"></i><b>2.4.1</b> Confidence interals are often misinterpreted</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.1</b> The one-sample t-test</a></li>
+<li class="chapter" data-level="2.5.2" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-i-ii-error-and-power"><i class="fa fa-check"></i><b>2.5.2</b> Type I, II error, and power</a></li>
+<li class="chapter" data-level="2.5.3" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#how-to-compute-power-for-the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.3</b> How to compute power for the one-sample t-test</a></li>
+<li class="chapter" data-level="2.5.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-p-value"><i class="fa fa-check"></i><b>2.5.4</b> The p-value</a></li>
+<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-distribution-of-the-p-value-under-the-null-hypothesis"><i class="fa fa-check"></i><b>2.5.5</b> The distribution of the p-value under the null hypothesis</a></li>
+<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
+<li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
+<li class="chapter" data-level="2.7.2" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#a-complication-with-multiple-t-tests-inflation-of-type-i-error-probability"><i class="fa fa-check"></i><b>2.7.2</b> A complication with multiple t-tests: Inflation of Type I error probability</a></li>
+<li class="chapter" data-level="2.7.3" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.3</b> Analyzing a <span class="math inline">\(2\times 2\times 2\)</span> repeated measures design using paired t-tests</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.8</b> Common mistakes involving the (paired) t-test</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#ignoring-the-independence-assumption"><i class="fa fa-check"></i><b>2.8.1</b> Ignoring the independence assumption</a></li>
+<li class="chapter" data-level="2.8.2" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#doing-a-by-subjects-and-by-items-paired-t-test-is-generally-dangerous"><i class="fa fa-check"></i><b>2.8.2</b> Doing a by-subjects and by-items paired t-test is generally dangerous</a></li>
+<li class="chapter" data-level="2.8.3" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#the-difference-between-a-significant-and-a-non-significant-result-need-not-itself-be-significant"><i class="fa fa-check"></i><b>2.8.3</b> The difference between a significant and a non-significant result need not itself be significant</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>2.9</b> Summary</a></li>
+<li class="chapter" data-level="2.10" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>2.10</b> Further readings</a></li>
+<li class="chapter" data-level="2.11" data-path="sec:SamplingDistrnexercises.html"><a href="sec:SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.11</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="from-the-t-test-to-the-linear-mixed-model.html"><a href="from-the-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.1</b> From the t-test to the linear (mixed) model</a></li>
+<li class="chapter" data-level="3.2" data-path="sum-coding.html"><a href="sum-coding.html"><i class="fa fa-check"></i><b>3.2</b> Sum coding</a></li>
+<li class="chapter" data-level="3.3" data-path="checking-model-assumptions.html"><a href="checking-model-assumptions.html"><i class="fa fa-check"></i><b>3.3</b> Checking model assumptions</a></li>
+<li class="chapter" data-level="3.4" data-path="from-the-paired-t-test-to-the-linear-mixed-model.html"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.4</b> From the paired t-test to the linear mixed model</a></li>
+<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
+<li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
+<li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="the-likelihood-ratio-test-the-theory.html"><a href="the-likelihood-ratio-test-the-theory.html"><i class="fa fa-check"></i><b>4.1</b> The likelihood ratio test: The theory</a></li>
+<li class="chapter" data-level="4.2" data-path="a-practical-example-using-simulated-data.html"><a href="a-practical-example-using-simulated-data.html"><i class="fa fa-check"></i><b>4.2</b> A practical example using simulated data</a></li>
+<li class="chapter" data-level="4.3" data-path="a-real-life-example-the-english-relative-clause-data.html"><a href="a-real-life-example-the-english-relative-clause-data.html"><i class="fa fa-check"></i><b>4.3</b> A real-life example: The English relative clause data</a></li>
+<li class="chapter" data-level="4.4" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+<li class="chapter" data-level="4.5" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
+<li class="chapter" data-level="4.6" data-path="sec:HypTestExercises.html"><a href="sec:HypTestExercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ch:LMtheory.html"><a href="ch:LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#matrix-addition-subtraction-and-multiplication"><i class="fa fa-check"></i><b>5.1.1</b> Matrix addition, subtraction, and multiplication</a></li>
+<li class="chapter" data-level="5.1.2" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#diagonal-matrix-and-identity-matrix"><i class="fa fa-check"></i><b>5.1.2</b> Diagonal matrix and identity matrix</a></li>
+<li class="chapter" data-level="5.1.3" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#powers-of-matrices"><i class="fa fa-check"></i><b>5.1.3</b> Powers of matrices</a></li>
+<li class="chapter" data-level="5.1.4" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.1.4</b> Inverse of a matrix</a></li>
+<li class="chapter" data-level="5.1.5" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#linear-independence-and-rank"><i class="fa fa-check"></i><b>5.1.5</b> Linear independence, and rank</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#least-squares-estimation-geometric-argument"><i class="fa fa-check"></i><b>5.2.1</b> Least squares estimation: Geometric argument</a></li>
+<li class="chapter" data-level="5.2.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#the-expectation-and-variance-of-the-parameters-beta"><i class="fa fa-check"></i><b>5.2.2</b> The expectation and variance of the parameters beta</a></li>
+<li class="chapter" data-level="5.2.3" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#hypothesis-testing-using-analysis-of-variance-anova"><i class="fa fa-check"></i><b>5.2.3</b> Hypothesis testing using Analysis of variance (ANOVA)</a></li>
+<li class="chapter" data-level="5.2.4" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#some-further-important-topics-in-linear-modeling"><i class="fa fa-check"></i><b>5.2.4</b> Some further important topics in linear modeling</a></li>
+<li class="chapter" data-level="5.2.5" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#generalized-linear-models"><i class="fa fa-check"></i><b>5.2.5</b> Generalized linear models</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.3</b> Summary</a></li>
+<li class="chapter" data-level="5.4" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>5.4</b> Further reading</a></li>
+<li class="chapter" data-level="5.5" data-path="sec:LMExercises2.html"><a href="sec:LMExercises2.html"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ch:contr.html"><a href="ch:contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
+<li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
+<li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
+<li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
+<li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+<li class="chapter" data-level="6.6" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.7" data-path="sec:Contrastsexercises.html"><a href="sec:Contrastsexercises.html"><i class="fa fa-check"></i><b>6.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch:coding2x2.html"><a href="ch:coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sec:interactions:NLM.html"><a href="sec:interactions:NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="7.5" data-path="sec:Contrasts2x2exercises.html"><a href="sec:Contrasts2x2exercises.html"><i class="fa fa-check"></i><b>7.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>8.1</b> A reminder: The maximal linear mixed model</a></li>
+<li class="chapter" data-level="8.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>8.2</b> Obtain estimates from a previous study</a></li>
+<li class="chapter" data-level="8.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>8.3</b> Decide on a range of plausible values of the effect size</a></li>
+<li class="chapter" data-level="8.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>8.4</b> Extract parameter estimates</a></li>
+<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>8.5.1</b> Generate a Latin-square design</a></li>
+<li class="chapter" data-level="8.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>8.5.2</b> Generate data row-by-row</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>8.6</b> Repeated generation of data to compute power</a></li>
+<li class="chapter" data-level="8.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>8.7</b> What you can now do</a></li>
+<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-with-two-conditions"><i class="fa fa-check"></i><b>8.8.1</b> Simulating data with two conditions</a></li>
+<li class="chapter" data-level="8.8.2" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-in-factorial-designs"><i class="fa fa-check"></i><b>8.8.2</b> Simulating data in factorial designs</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="sec:Simulationexercises.html"><a href="sec:Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch:MultComp.html"><a href="ch:MultComp.html"><i class="fa fa-check"></i><b>9</b> Understanding Type I error inflation using simulation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><i class="fa fa-check"></i><b>9.1</b> Overly simple random effects structure in LMMs inflate Type I error</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-only-model"><i class="fa fa-check"></i><b>9.1.1</b> Type I error with a varying intercepts-only model</a></li>
+<li class="chapter" data-level="9.1.2" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-and-varying-slopes-model"><i class="fa fa-check"></i><b>9.1.2</b> Type I error with a varying intercepts and varying slopes model</a></li>
+<li class="chapter" data-level="9.1.3" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-inflation-due-to-model-mis-specification"><i class="fa fa-check"></i><b>9.1.3</b> Type I error inflation due to model mis-specification</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="type-i-error-inflation-due-to-multiple-comparisons.html"><a href="type-i-error-inflation-due-to-multiple-comparisons.html"><i class="fa fa-check"></i><b>9.2</b> Type I error inflation due to multiple comparisons</a></li>
+<li class="chapter" data-level="9.3" data-path="the-practical-implications.html"><a href="the-practical-implications.html"><i class="fa fa-check"></i><b>9.3</b> The practical implications</a></li>
+<li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="using-paired-t-tests-in-complex-factorial-designs" class="section level2" number="2.7">
+<h2><span class="header-section-number">2.7</span> Using paired t-tests in complex factorial designs</h2>
+<p>In psychology and psycholinguistics, it is fairly common to run relatively complex factorial designs. An example is the <span class="math inline">\(2\times 2\)</span> repeated measures design in <span class="citation"><a href="#ref-levy2013expectation" role="doc-biblioref">Levy and Keller</a> (<a href="#ref-levy2013expectation" role="doc-biblioref">2013</a>)</span>. Even more complex designs, like <span class="math inline">\(2\times 2\times 2\)</span> design, are widely used; an example is <span class="citation"><a href="#ref-fedorenko2006nature" role="doc-biblioref">Fedorenko, Gibson, and Rohde</a> (<a href="#ref-fedorenko2006nature" role="doc-biblioref">2006</a>)</span>. The data from these two papers illustrate some of the more common problems with the use and abuse of the t-test.</p>
+<div id="analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests" class="section level3" number="2.7.1">
+<h3><span class="header-section-number">2.7.1</span> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</h3>
+<p>The <span class="citation"><a href="#ref-levy2013expectation" role="doc-biblioref">Levy and Keller</a> (<a href="#ref-levy2013expectation" role="doc-biblioref">2013</a>)</span> paper was a reading study on German that used eye-tracking and had two experiments, each with a <span class="math inline">\(2\times 2\)</span> design. In Experiment 1, the four conditions are as shown in Figure <a href="using-paired-t-tests-in-complex-factorial-designs.html#fig:lk13E1">2.20</a>. The four conditions can be described as follows:</p>
+<ul>
+<li>Condition a: adjunct in subordinate clause, dative noun in subordinate clause.</li>
+<li>Condition b: adjunct in main clause, dative noun in subordinate clause.</li>
+<li>Condition c: adjunct in subordinate clause, dative noun in main clause.</li>
+<li>Condition d: adjunct in main clause, dative clause in main clause.</li>
+</ul>
+<p>The research questions in this paper can be characterized in terms of so-called main effects and interactions: Is there</p>
+<ul>
+<li>a main effect of dative-noun location (main or subordinate clause)</li>
+<li>a main effect of adjunct location (main or subordinate clause)</li>
+<li>an interaction between the two factors?</li>
+</ul>
+
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:lk13E1"></span>
+<img src="figures/lk13E1.png" alt="The experiment design in Experiment 1 of Levy and Keller (2013). The figure is re-used with permission from S. Vasishth et al. (2018) (License number 5211790221849)." width="80%" />
+<p class="caption">
+FIGURE 2.20: The experiment design in Experiment 1 of <span class="citation"><a href="#ref-levy2013expectation" role="doc-biblioref">Levy and Keller</a> (<a href="#ref-levy2013expectation" role="doc-biblioref">2013</a>)</span>. The figure is re-used with permission from <span class="citation"><a href="#ref-VasishthMertzenJaegerGelman2018" role="doc-biblioref">S. Vasishth et al.</a> (<a href="#ref-VasishthMertzenJaegerGelman2018" role="doc-biblioref">2018</a>)</span> (License number 5211790221849).
+</p>
+</div>
+<p>Some pre-processing has to be carried out to do the t-tests needed to answer these questions. First, load the data, create a condition column, and then examine the resulting structure of the data frame:</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_levykeller13E1&quot;</span>)</span>
+<span id="cb183-2"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_levykeller13E1)</span></code></pre></div>
+<pre><code>##   subj item  dat  adj  TFT
+## 1    1    1 main main  594
+## 2    1    2 main  sub  472
+## 3    1    3  sub main  600
+## 4    1    5  sub  sub  768
+## 5    1    6 main main 1190
+## 6    1    7 main  sub  318</code></pre>
+<p>As will become clear below, it is convenient to recode the <span class="math inline">\(2\times 2\)</span> design in terms of the four conditions labeled a-d.</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="do">## create a condition column:</span></span>
+<span id="cb185-2"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-2" aria-hidden="true" tabindex="-1"></a>df_levykeller13E1<span class="sc">$</span>cond <span class="ot">&lt;-</span></span>
+<span id="cb185-3"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">factor</span>(<span class="fu">ifelse</span>(df_levykeller13E1<span class="sc">$</span>dat <span class="sc">==</span> <span class="st">&quot;sub&quot;</span> <span class="sc">&amp;</span> </span>
+<span id="cb185-4"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-4" aria-hidden="true" tabindex="-1"></a>                  df_levykeller13E1<span class="sc">$</span>adj <span class="sc">==</span> <span class="st">&quot;sub&quot;</span>, <span class="st">&quot;a&quot;</span>,</span>
+<span id="cb185-5"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ifelse</span>(df_levykeller13E1<span class="sc">$</span>dat <span class="sc">==</span> <span class="st">&quot;sub&quot;</span> <span class="sc">&amp;</span> </span>
+<span id="cb185-6"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-6" aria-hidden="true" tabindex="-1"></a>             df_levykeller13E1<span class="sc">$</span>adj <span class="sc">==</span> <span class="st">&quot;main&quot;</span>, <span class="st">&quot;b&quot;</span>,</span>
+<span id="cb185-7"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ifelse</span>(df_levykeller13E1<span class="sc">$</span>dat <span class="sc">==</span> <span class="st">&quot;main&quot;</span> <span class="sc">&amp;</span> </span>
+<span id="cb185-8"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-8" aria-hidden="true" tabindex="-1"></a>               df_levykeller13E1<span class="sc">$</span>adj <span class="sc">==</span> <span class="st">&quot;sub&quot;</span>, <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb185-9"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ifelse</span>(df_levykeller13E1<span class="sc">$</span>dat <span class="sc">==</span> <span class="st">&quot;main&quot;</span> <span class="sc">&amp;</span> </span>
+<span id="cb185-10"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-10" aria-hidden="true" tabindex="-1"></a>                 df_levykeller13E1<span class="sc">$</span>adj <span class="sc">==</span> <span class="st">&quot;main&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;NA&quot;</span>)</span>
+<span id="cb185-11"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-11" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb185-12"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb185-13"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-13" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb185-14"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-14" aria-hidden="true" tabindex="-1"></a><span class="do">## sanity check:</span></span>
+<span id="cb185-15"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb185-15" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> cond <span class="sc">+</span> adj, df_levykeller13E1)</span></code></pre></div>
+<pre><code>##     adj
+## cond main sub
+##    a    0 168
+##    b  168   0
+##    c    0 168
+##    d  168   0</code></pre>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> cond <span class="sc">+</span> dat, df_levykeller13E1)</span></code></pre></div>
+<pre><code>##     dat
+## cond main sub
+##    a    0 168
+##    b    0 168
+##    c  168   0
+##    d  168   0</code></pre>
+<p>Notice that each of the 28 subjects sees each condition six times. This is a Latin square design, which means that there should be <span class="math inline">\(6\times 4=24\)</span> items. You must check this!</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>subj<span class="sc">+</span>cond,df_levykeller13E1))</span></code></pre></div>
+<pre><code>##     subj
+## cond 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+##    a 6 6 6 6 6 6 6 6 6  6  6  6  6  6  6  6  6  6  6
+##    b 6 6 6 6 6 6 6 6 6  6  6  6  6  6  6  6  6  6  6
+##    c 6 6 6 6 6 6 6 6 6  6  6  6  6  6  6  6  6  6  6
+##    d 6 6 6 6 6 6 6 6 6  6  6  6  6  6  6  6  6  6  6
+##     subj
+## cond 20 21 22 23 24 25 26 27 28
+##    a  6  6  6  6  6  6  6  6  6
+##    b  6  6  6  6  6  6  6  6  6
+##    c  6  6  6  6  6  6  6  6  6
+##    d  6  6  6  6  6  6  6  6  6</code></pre>
+<p>The repeated measurements from each subject in each condition is problematic for the t-test: the t-test assumes that each subject delivers exactly one data point per condition. Mathematically, what’s assumed in the t-test is that for <span class="math inline">\(i=1,\dots,28\)</span> subjects, we have four vectors of length 28, one for each condition:</p>
+<ul>
+<li><span class="math inline">\(x_{a,1},\dots,x_{a,28}\)</span></li>
+<li><span class="math inline">\(x_{b,1},\dots,x_{b,28}\)</span></li>
+<li><span class="math inline">\(x_{c,1},\dots,x_{c,28}\)</span></li>
+<li><span class="math inline">\(x_{d,1},\dots,x_{d,28}\)</span></li>
+</ul>
+<p>Instead, what we have is four vectors, each of length <span class="math inline">\(28\times 6\)</span>. For example, look at condition a’s data:</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">subset</span>(df_levykeller13E1,cond<span class="sc">==</span><span class="st">&quot;a&quot;</span>)<span class="sc">$</span>TFT)</span></code></pre></div>
+<pre><code>## [1] 168</code></pre>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="dv">28</span><span class="sc">*</span><span class="dv">6</span></span></code></pre></div>
+<pre><code>## [1] 168</code></pre>
+<p>What is necessary here is to force the data into the format that t-test expects. The data be aggregated: restructure the data so that each subject’s response for each of the four conditions is the mean of the six repetitions. This is often called a by-subject analysis:</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb195-1" aria-hidden="true" tabindex="-1"></a>bysubj <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(TFT <span class="sc">~</span> subj <span class="sc">+</span> cond,</span>
+<span id="cb195-2"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb195-2" aria-hidden="true" tabindex="-1"></a>  mean,</span>
+<span id="cb195-3"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb195-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_levykeller13E1</span>
+<span id="cb195-4"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb195-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb195-5"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb195-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bysubj)</span></code></pre></div>
+<pre><code>##   subj cond    TFT
+## 1    1    a  601.7
+## 2    2    a  798.3
+## 3    3    a  640.7
+## 4    4    a  732.7
+## 5    5    a 1255.7
+## 6    6    a  385.3</code></pre>
+<p>Now, each subject delivers exactly one data point per condition, as the t-test demands.</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">subset</span>(bysubj,cond<span class="sc">==</span><span class="st">&quot;a&quot;</span>)<span class="sc">$</span>TFT)</span></code></pre></div>
+<pre><code>## [1] 28</code></pre>
+<p>Notice that now we have no column any more indicating which items the subjects saw—this information has disappeared because for each subject, we took the average over all the six items for each condition. We have lost information; as discussed later, this loss of information can have far-reaching, adverse consequences for statistical inference.</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>subj<span class="sc">+</span>cond,bysubj))</span></code></pre></div>
+<pre><code>##     subj
+## cond 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+##    a 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1  1  1  1
+##    b 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1  1  1  1
+##    c 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1  1  1  1
+##    d 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1  1  1  1
+##     subj
+## cond 20 21 22 23 24 25 26 27 28
+##    a  1  1  1  1  1  1  1  1  1
+##    b  1  1  1  1  1  1  1  1  1
+##    c  1  1  1  1  1  1  1  1  1
+##    d  1  1  1  1  1  1  1  1  1</code></pre>
+<p>The main effects and interactions can be visualized as in Figure <a href="using-paired-t-tests-in-complex-factorial-designs.html#fig:lk13E1plot">2.21</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:lk13E1plot"></span>
+<img src="Freq_CogSci_files/figure-html/lk13E1plot-1.svg" alt="Visualizing the means from the four conditions in the Levy and Keller 2013 Experiment 1 design allows us to graphically summarize the statistical comparisons of interest: the main effects of the two factors, and their interactions." width="672" />
+<p class="caption">
+FIGURE 2.21: Visualizing the means from the four conditions in the Levy and Keller 2013 Experiment 1 design allows us to graphically summarize the statistical comparisons of interest: the main effects of the two factors, and their interactions.
+</p>
+</div>
+<p>The main effect of dative is asking whether the average of the two dat:main conditions is different from the average of the two dat:sub conditions. In terms of the means of the four conditions labeled a-d, the null hypothesis is then:</p>
+<p><span class="math display">\[\begin{equation}
+H_{0,MEdat}: \frac{\mu_a + \mu_b}{2} = \frac{\mu_c + \mu_d}{2}
+\end{equation}\]</span></p>
+<p>The paired t-test can be used to test this main effect. It will be convenient to obtain the reading times for each condition, and just do paired t-tests. (Each of the main effects and the interaction are going to be paired t-tests.)</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb201-1" aria-hidden="true" tabindex="-1"></a>cond_a<span class="ot">&lt;-</span><span class="fu">subset</span>(bysubj,cond<span class="sc">==</span><span class="st">&quot;a&quot;</span>)<span class="sc">$</span>TFT</span>
+<span id="cb201-2"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb201-2" aria-hidden="true" tabindex="-1"></a>cond_b<span class="ot">&lt;-</span><span class="fu">subset</span>(bysubj,cond<span class="sc">==</span><span class="st">&quot;b&quot;</span>)<span class="sc">$</span>TFT</span>
+<span id="cb201-3"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb201-3" aria-hidden="true" tabindex="-1"></a>cond_c<span class="ot">&lt;-</span><span class="fu">subset</span>(bysubj,cond<span class="sc">==</span><span class="st">&quot;c&quot;</span>)<span class="sc">$</span>TFT</span>
+<span id="cb201-4"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb201-4" aria-hidden="true" tabindex="-1"></a>cond_d<span class="ot">&lt;-</span><span class="fu">subset</span>(bysubj,cond<span class="sc">==</span><span class="st">&quot;d&quot;</span>)<span class="sc">$</span>TFT</span></code></pre></div>
+<p>Here is the computation for the main effect of the dative noun:</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="do">## main effect of dative:</span></span>
+<span id="cb202-2"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb202-2" aria-hidden="true" tabindex="-1"></a>mean_ab<span class="ot">&lt;-</span>(cond_a<span class="sc">+</span>cond_b)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb202-3"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb202-3" aria-hidden="true" tabindex="-1"></a>mean_cd<span class="ot">&lt;-</span>(cond_c<span class="sc">+</span>cond_d)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb202-4"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb202-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-5"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb202-5" aria-hidden="true" tabindex="-1"></a>MEdat_res<span class="ot">&lt;-</span><span class="fu">t.test</span>(mean_ab,mean_cd,<span class="at">paired=</span><span class="cn">TRUE</span>)</span>
+<span id="cb202-6"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb202-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(MEdat_res)</span></code></pre></div>
+<pre><code>## [1] &quot;t(27)=3.14 p=0.004&quot;
+## [1] &quot;est.: 107.98 [37.36,178.61] ms&quot;</code></pre>
+<p><span class="citation"><a href="#ref-levy2013expectation" role="doc-biblioref">Levy and Keller</a> (<a href="#ref-levy2013expectation" role="doc-biblioref">2013</a>)</span> report (their Table 6) a main effect of dative as having an estimate of <span class="math inline">\(102.48\)</span> ms (no confidence interval is reported), with a p-value below <span class="math inline">\(0.01\)</span>. The small difference between their estimate and ours is because they analyzed unaggregated data with a linear mixed model. Their analysis is actually the better way to analyze these data, as we will discuss later in this book.</p>
+<p>The main effect of adjunct is asking whether the average of the two adj:main conditions is different from the average of the two adj:sub conditions.</p>
+<p><span class="math display">\[\begin{equation}
+H_{0,MEadj}: \frac{\mu_a + \mu_c}{2} = \frac{\mu_b + \mu_d}{2}
+\end{equation}\]</span></p>
+<p>This main effect can be tested as follows:</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb204-1" aria-hidden="true" tabindex="-1"></a>mean_ac<span class="ot">&lt;-</span>(cond_a<span class="sc">+</span>cond_c)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb204-2"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb204-2" aria-hidden="true" tabindex="-1"></a>mean_bd<span class="ot">&lt;-</span>(cond_b<span class="sc">+</span>cond_d)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb204-3"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb204-3" aria-hidden="true" tabindex="-1"></a>MEadj_res<span class="ot">&lt;-</span><span class="fu">t.test</span>(mean_bd,mean_ac,<span class="at">paired=</span><span class="cn">TRUE</span>)</span>
+<span id="cb204-4"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb204-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(MEadj_res)</span></code></pre></div>
+<pre><code>## [1] &quot;t(27)=-0.7 p=0.487&quot;
+## [1] &quot;est.: -18.38 [-71.88,35.13] ms&quot;</code></pre>
+<p><span class="citation"><a href="#ref-levy2013expectation" role="doc-biblioref">Levy and Keller</a> (<a href="#ref-levy2013expectation" role="doc-biblioref">2013</a>)</span> also report a non-significant effect estimate of 16.28 ms, so this approximately matches our estimate.</p>
+<p>Finally, the interaction of the two factors (call it <span class="math inline">\(dat\times adj\)</span>) is asking whether the adjunct effect within dat:main has the same value as the adjunct effect in dat:sub. In other words, the interaction is testing for no difference between two differences:</p>
+<p><span class="math display">\[\begin{equation}
+H_{0,dat\times adj}: (\mu_a - \mu_b) = (\mu_c - \mu_d)
+\end{equation}\]</span></p>
+<p>Another way to write this null hypothesis is as testing whether the difference between the two differences is 0:</p>
+<p><span class="math display">\[\begin{equation}
+H_{0,dat\times adj}: (\mu_a - \mu_b) - (\mu_c - \mu_d) = 0
+\end{equation}\]</span></p>
+<p>The implementation of the t-test works like this:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb206-1" aria-hidden="true" tabindex="-1"></a>diff_ab<span class="ot">&lt;-</span>cond_a<span class="sc">-</span>cond_b</span>
+<span id="cb206-2"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb206-2" aria-hidden="true" tabindex="-1"></a>diff_cd<span class="ot">&lt;-</span>cond_c<span class="sc">-</span>cond_d</span>
+<span id="cb206-3"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb206-3" aria-hidden="true" tabindex="-1"></a>INTdatxadj_res<span class="ot">&lt;-</span><span class="fu">t.test</span>(diff_ab,diff_cd,<span class="at">paired=</span><span class="cn">TRUE</span>)</span>
+<span id="cb206-4"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb206-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(INTdatxadj_res)</span></code></pre></div>
+<pre><code>## [1] &quot;t(27)=-1.27 p=0.216&quot;
+## [1] &quot;est.: -88.61 [-232,54.78] ms&quot;</code></pre>
+<p><span class="citation"><a href="#ref-levy2013expectation" role="doc-biblioref">Levy and Keller</a> (<a href="#ref-levy2013expectation" role="doc-biblioref">2013</a>)</span> report a non-significant estimate of <span class="math inline">\(-96.82\)</span> ms for the interaction. This also approximately matches our calculations.</p>
+<p>The broader lesson here is that one can break down a design with a factorial design to a series of paired t-tests. Although it is extremely easy to analyze factorial designs like these with paired t-tests, there is an important price to be paid. The price is inflation of Type I error probability.</p>
+</div>
+<div id="a-complication-with-multiple-t-tests-inflation-of-type-i-error-probability" class="section level3" number="2.7.2">
+<h3><span class="header-section-number">2.7.2</span> A complication with multiple t-tests: Inflation of Type I error probability</h3>
+<p>Each of the three hypothesis tests has a Type I error probability set at <span class="math inline">\(0.05\)</span>. Once the three hypothesis tests are carried out, the probability space is as shown in Figure <a href="using-paired-t-tests-in-complex-factorial-designs.html#fig:probtree">2.22</a>. The way to interpret the probability space is as follows: Each time that a hypothesis is tested, if the null hypothesis is in fact true, we can reject it incorrectly with probability 0.05, and accept it correctly with probability 0.95. Each successive hypothesis test takes us further down the tree, and the binary branches represent all the possible paths that could be taken. Thus, if we want to compute the probability of correctly failing to reject the null in all three hypothesis tests assuming that the null is true, we simply multiply the three probabilities 0.95 to get 0.8574. Subtracting one from this quantity gives us the probability of rejecting <em>at least one</em> null hypothesis incorrectly.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:probtree"></span>
+<img src="figures/probtree.png" alt="The probability space representing three successive independent hypothesis tests when all null hypotheses are true, and Type I error probability is 0.05. Each hypothesis can either be rejected (rej.) or fail to be rejected (fail)." width="80%" />
+<p class="caption">
+FIGURE 2.22: The probability space representing three successive independent hypothesis tests when all null hypotheses are true, and Type I error probability is 0.05. Each hypothesis can either be rejected (rej.) or fail to be rejected (fail).
+</p>
+</div>
+<p>The probability of rejecting <em>at least one</em> of the three hypotheses incorrectly is no longer <span class="math inline">\(0.05\)</span>, but rather:</p>
+<p><span class="math display">\[\begin{equation}
+1-0.95^3 = 0.1426
+\end{equation}\]</span></p>
+<p>This inflated Type I error probability can become very serious; for example, <span class="citation"><a href="#ref-levy2013expectation" role="doc-biblioref">Levy and Keller</a> (<a href="#ref-levy2013expectation" role="doc-biblioref">2013</a>)</span> carried out 32 hypothesis tests; this results in an inflated Type I error probability of</p>
+<p><span class="math display">\[\begin{equation}
+1-0.95^{32} = 0.8063
+\end{equation}\]</span></p>
+<p>That is an 80% probability of incorrectly rejecting at least one of the hypotheses tested! It is not uncommon to run 250 or even more hypothesis tests in a single paper. That would be a Type I error probability of 1 of rejecting at least one null hypothesis incorrectly; you are essentially sure to get something come out significant incorrectly.</p>
+<p>A standard approach to correcting this inflation is to use the Bonferroni correction: divide the standard Type I error by the number of tests, and use this corrected probability as the new Type I error. For example, in <span class="citation"><a href="#ref-levy2013expectation" role="doc-biblioref">Levy and Keller</a> (<a href="#ref-levy2013expectation" role="doc-biblioref">2013</a>)</span>, the corrected <span class="math inline">\(\alpha\)</span> for 32 hypothesis tests would be 0.05/32=0.0016. One should use this corrected <span class="math inline">\(\alpha\)</span> to interpret multiple comparisons.</p>
+</div>
+<div id="analyzing-a-2times-2times-2-repeated-measures-design-using-paired-t-tests" class="section level3" number="2.7.3">
+<h3><span class="header-section-number">2.7.3</span> Analyzing a <span class="math inline">\(2\times 2\times 2\)</span> repeated measures design using paired t-tests</h3>
+<p>Even more complex designs can be analyzed using paired t-tests. For example, <span class="citation"><a href="#ref-fedorenko2006nature" role="doc-biblioref">Fedorenko, Gibson, and Rohde</a> (<a href="#ref-fedorenko2006nature" role="doc-biblioref">2006</a>)</span> report a self-paced reading study with eight conditions.</p>
+<ul>
+<li>Factor: One noun in memory set or three nouns
+easy: Joel
+hard: Joel-Greg-Andy</li>
+<li>Factor: Noun type, either proper name or occupation
+name: Joel-Greg-Andy
+occ: poet-cartoonist-voter</li>
+<li>Factor: Relative clause type: subject vs. object relatives (in English)</li>
+</ul>
+<p>The relative clause sentences are the following; the reading time is measured in the relative clause regions <em>who consulted the cardiologist</em> and <em>who the cardiologist consulted</em>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Subject-extracted:
+The physician | who consulted the cardiologist | checked the files | in the office.</p></li>
+<li><p>Object-extracted:
+The physician | who the cardiologist consulted | checked the files | in the office.</p></li>
+</ol>
+<p>The authors had two versions of each of the two relative clause types, but we ignore that detail here. Another problem in the data is that subject 1 delivers twice as much data as the other subjects; this could be due to two subjects being misclassified as subject 1. But we ignore this problem in the data as well.</p>
+<p>First, load and examine the data:</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_fedorenko06&quot;</span>)</span>
+<span id="cb208-2"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_fedorenko06)</span></code></pre></div>
+<pre><code>##    rctype nountype load item subj region   RT
+## 2     obj     name hard   16    1      2 4454
+## 6    subj     name hard    4    1      2 5718
+## 10   subj     name easy   10    1      2 2137
+## 14   subj     name hard   20    1      2  903
+## 18   subj     name hard   12    1      2 1837
+## 22   subj      occ hard   19    1      2 1128</code></pre>
+<p>As explained above, we have a <span class="math inline">\(2\times 2\times 2\)</span> design: rctype [obj,subj] <span class="math inline">\(\times\)</span> nountype [name, occupation] <span class="math inline">\(\times\)</span> load [hard,easy]. Region 2 is the critical region, the entire relative clause, and RT is the reading time for this region. Subject and item columns are self-explanatory.</p>
+<p>The paired t-test can be used repeatedly to compute the main effects and interactions. This will be assigned as an exercise at the end of this chapter. Here, we want to focus on one interesting analysis in the original paper. The result from that paper is summarized in the quote below (emphasis ours):</p>
+<p>“<em>The most interesting result presented here is <strong>an interaction between syntactic complexity and the memory- noun/sentence-noun similarity during the critical region of the linguistic materials in the hard-load (three memory-nouns) conditions</strong>: people processed object-extracted relative clauses more slowly when they had to maintain a set of nouns that were similar to the nouns in the sentence than when they had to maintain a set of nouns that were dissimilar from the nouns in the sentence; in contrast, for the less complex subject-extracted relative clauses, there was no reading time difference between the similar and dissimilar memory load conditions. In the easy-load (one memory-noun) conditions, no interaction between syntactic complexity and memory-noun/sentence-noun similarity was observed.
+<strong>These results provide evidence against the hypothesis whereby there is a pool of domain-specific verbal working memory resources for sentence comprehension, contra Caplan and Waters (1999).</strong>
+</em>”</p>
+<p>If the analyses described in the quote above are to be carried out using t-tests (or repeated measures ANOVA), the approach that must be taken is to subset the data such that there are two <span class="math inline">\(2\times 2\)</span> subsetted data sets: one for the hard memory conditions and the other for the easy memory conditions. Then, one can investigate the interaction between the relative clause type (syntactic complexity) and the noun type (proper name vs. occupation) by computing aggregated differences between (i) the relative clause type in Noun Type occupation, and (i) the relative clause type in Noun Type proper name.</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-1" aria-hidden="true" tabindex="-1"></a>fed06hard<span class="ot">&lt;-</span><span class="fu">subset</span>(df_fedorenko06,load<span class="sc">==</span><span class="st">&quot;hard&quot;</span>)</span>
+<span id="cb210-2"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-3"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Compute difference between OR and SR </span></span>
+<span id="cb210-4"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-4" aria-hidden="true" tabindex="-1"></a><span class="do">## in Noun Type occupation:</span></span>
+<span id="cb210-5"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-5" aria-hidden="true" tabindex="-1"></a>RCocc<span class="ot">&lt;-</span><span class="fu">aggregate</span>(RT<span class="sc">~</span>subj<span class="sc">+</span>rctype,</span>
+<span id="cb210-6"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-6" aria-hidden="true" tabindex="-1"></a>                 mean,<span class="at">data=</span><span class="fu">subset</span>(fed06hard,</span>
+<span id="cb210-7"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-7" aria-hidden="true" tabindex="-1"></a>                                  nountype<span class="sc">==</span><span class="st">&quot;occ&quot;</span>))</span>
+<span id="cb210-8"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-8" aria-hidden="true" tabindex="-1"></a>diff_occ_hard<span class="ot">&lt;-</span><span class="fu">subset</span>(RCocc,rctype<span class="sc">==</span><span class="st">&quot;obj&quot;</span>)<span class="sc">$</span>RT<span class="sc">-</span></span>
+<span id="cb210-9"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(RCocc,rctype<span class="sc">==</span><span class="st">&quot;subj&quot;</span>)<span class="sc">$</span>RT</span>
+<span id="cb210-10"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-11"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Compute difference between OR and SR </span></span>
+<span id="cb210-12"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-12" aria-hidden="true" tabindex="-1"></a><span class="do">## in Noun Type proper name:</span></span>
+<span id="cb210-13"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-13" aria-hidden="true" tabindex="-1"></a>RCname<span class="ot">&lt;-</span><span class="fu">aggregate</span>(RT<span class="sc">~</span>subj<span class="sc">+</span>rctype,</span>
+<span id="cb210-14"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-14" aria-hidden="true" tabindex="-1"></a>                  mean,<span class="at">data=</span><span class="fu">subset</span>(fed06hard,</span>
+<span id="cb210-15"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-15" aria-hidden="true" tabindex="-1"></a>                                   nountype<span class="sc">==</span><span class="st">&quot;name&quot;</span>))</span>
+<span id="cb210-16"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-16" aria-hidden="true" tabindex="-1"></a>diff_name_hard<span class="ot">&lt;-</span><span class="fu">subset</span>(RCname,rctype<span class="sc">==</span><span class="st">&quot;obj&quot;</span>)<span class="sc">$</span>RT<span class="sc">-</span></span>
+<span id="cb210-17"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(RCname,rctype<span class="sc">==</span><span class="st">&quot;subj&quot;</span>)<span class="sc">$</span>RT</span>
+<span id="cb210-18"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-19"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-19" aria-hidden="true" tabindex="-1"></a><span class="do">## by-subject interaction:</span></span>
+<span id="cb210-20"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-20" aria-hidden="true" tabindex="-1"></a>hardINTres<span class="ot">&lt;-</span><span class="fu">t.test</span>(diff_name_hard,</span>
+<span id="cb210-21"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-21" aria-hidden="true" tabindex="-1"></a>                   diff_occ_hard,<span class="at">paired=</span><span class="cn">TRUE</span>)</span>
+<span id="cb210-22"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb210-22" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(hardINTres)</span></code></pre></div>
+<pre><code>## [1] &quot;t(43)=-2.13 p=0.039&quot;
+## [1] &quot;est.: -404.81 [-787.91,-21.71] ms&quot;</code></pre>
+<p>One can also investigate the interaction between RC type and Noun Type in the easy conditions:</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-1" aria-hidden="true" tabindex="-1"></a>fed06easy <span class="ot">&lt;-</span> <span class="fu">subset</span>(df_fedorenko06, </span>
+<span id="cb212-2"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-2" aria-hidden="true" tabindex="-1"></a>                    load <span class="sc">==</span> <span class="st">&quot;easy&quot;</span>)</span>
+<span id="cb212-3"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb212-4"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Compute difference between OR and SR </span></span>
+<span id="cb212-5"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-5" aria-hidden="true" tabindex="-1"></a><span class="do">## in Noun Type occupation:</span></span>
+<span id="cb212-6"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-6" aria-hidden="true" tabindex="-1"></a>RCocc <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(RT <span class="sc">~</span> subj <span class="sc">+</span> rctype, </span>
+<span id="cb212-7"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-7" aria-hidden="true" tabindex="-1"></a>                   mean, <span class="at">data =</span> <span class="fu">subset</span>(fed06easy, </span>
+<span id="cb212-8"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-8" aria-hidden="true" tabindex="-1"></a>                                       nountype <span class="sc">==</span> <span class="st">&quot;occ&quot;</span>))</span>
+<span id="cb212-9"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-9" aria-hidden="true" tabindex="-1"></a>diff_occ_easy <span class="ot">&lt;-</span> <span class="fu">subset</span>(RCocc, rctype <span class="sc">==</span> <span class="st">&quot;obj&quot;</span>)<span class="sc">$</span>RT <span class="sc">-</span> </span>
+<span id="cb212-10"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(RCocc, rctype <span class="sc">==</span> <span class="st">&quot;subj&quot;</span>)<span class="sc">$</span>RT</span>
+<span id="cb212-11"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb212-12"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Compute difference between OR and SR </span></span>
+<span id="cb212-13"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-13" aria-hidden="true" tabindex="-1"></a><span class="do">## in Noun Type proper name:</span></span>
+<span id="cb212-14"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-14" aria-hidden="true" tabindex="-1"></a>RCname <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(RT <span class="sc">~</span> subj <span class="sc">+</span> rctype,</span>
+<span id="cb212-15"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-15" aria-hidden="true" tabindex="-1"></a>                    mean, <span class="at">data =</span> <span class="fu">subset</span>(fed06easy, </span>
+<span id="cb212-16"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-16" aria-hidden="true" tabindex="-1"></a>                                        nountype <span class="sc">==</span> <span class="st">&quot;name&quot;</span>))</span>
+<span id="cb212-17"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-17" aria-hidden="true" tabindex="-1"></a>diff_name_easy <span class="ot">&lt;-</span> <span class="fu">subset</span>(RCname, </span>
+<span id="cb212-18"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-18" aria-hidden="true" tabindex="-1"></a>                         rctype <span class="sc">==</span> <span class="st">&quot;obj&quot;</span>)<span class="sc">$</span>RT <span class="sc">-</span> </span>
+<span id="cb212-19"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(RCname, rctype <span class="sc">==</span> <span class="st">&quot;subj&quot;</span>)<span class="sc">$</span>RT</span>
+<span id="cb212-20"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb212-21"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-21" aria-hidden="true" tabindex="-1"></a><span class="do">## by-subject interaction:</span></span>
+<span id="cb212-22"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-22" aria-hidden="true" tabindex="-1"></a>easyINTres <span class="ot">&lt;-</span> <span class="fu">t.test</span>(diff_name_easy, </span>
+<span id="cb212-23"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-23" aria-hidden="true" tabindex="-1"></a>                     diff_occ_easy, </span>
+<span id="cb212-24"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-24" aria-hidden="true" tabindex="-1"></a>                     <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb212-25"><a href="using-paired-t-tests-in-complex-factorial-designs.html#cb212-25" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(easyINTres)</span></code></pre></div>
+<pre><code>## [1] &quot;t(43)=-0.1 p=0.922&quot;
+## [1] &quot;est.: -15.16 [-326.05,295.74] ms&quot;</code></pre>
+<p>Based on these aggregated by-subjects analyses, it would be tempting to conclude, as <span class="citation"><a href="#ref-fedorenko2006nature" role="doc-biblioref">Fedorenko, Gibson, and Rohde</a> (<a href="#ref-fedorenko2006nature" role="doc-biblioref">2006</a>)</span> did, that there is a significant interaction in the hard conditions but not in the easy conditions. However, there are at least two problems here. First,
+the paired t-test (or the identical test, the repeated measures ANOVA) has a serious limitation: it is ignoring the by-item variability (because that is averaged out); later we will see that once one takes all sources of variance into account simultaneously, the picture changes dramatically. Second, the authors implicitly assume that the difference between a significant effect in the hard conditions and the non-significant effect in the easy conditions is itself significant—we will see below that that this conclusion is not warranted in the present case.</p>
+<p>In summary, the (paired) t-test is a quick and easy tool for comparing means from two conditions, and even relatively complex designs can be analyzed. In fact, a well-known mathematical psychologist once told the first author of this book: “If you need to run anything more complex than a t-test, you are asking the wrong question.” Indeed, many scientists have had long and successful careers with just the t-test as their entire statistical tool. However, as they say, if all you have is a hammer, everything starts to look like a nail. As we show in this book, much important information is lost when one attempts to boil the data down to fit the constraints of the t-test.</p>
+<p>A further point is that the t-test is often used incorrectly. Some of the most common mistakes are discussed next.</p>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-fedorenko2006nature" class="csl-entry">
+Fedorenko, Evelina, Edward Gibson, and Douglas Rohde. 2006. <span>“The Nature of Working Memory Capacity in Sentence Comprehension: <span>E</span>vidence Against Domain-Specific Working Memory Resources.”</span> <em>Journal of Memory and Language</em> 54 (4): 541–53.
+</div>
+<div id="ref-levy2013expectation" class="csl-entry">
+Levy, Roger P, and Frank Keller. 2013. <span>“Expectation and Locality Effects in <span>G</span>erman Verb-Final Structures.”</span> <em>Journal of Memory and Language</em> 68 (2): 199–222.
+</div>
+<div id="ref-VasishthMertzenJaegerGelman2018" class="csl-entry">
+Vasishth, Shravan, Daniela Mertzen, Lena A. Jäger, and Andrew Gelman. 2018. <span>“The Statistical Significance Filter Leads to Overoptimistic Expectations of Replicability.”</span> <em>Journal of Memory and Language</em> 103: 151–75. https://doi.org/<a href="https://doi.org/10.1016/j.jml.2018.07.004">https://doi.org/10.1016/j.jml.2018.07.004</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="the-two-sample-t-test-vs.-the-paired-t-test.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="common-mistakes-involving-the-paired-t-test.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/02-SamplingDistributions.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Freq_CogSci.pdf", "Freq_CogSci.epub", "Freq_CogSci.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

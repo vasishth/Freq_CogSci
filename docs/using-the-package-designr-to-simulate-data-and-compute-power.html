@@ -6,25 +6,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.8 Using the package designr to simulate data and compute power | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.8 Using the package designr to simulate data and compute power | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
-  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="github-repo" content="rstudio/bookdown" />
+  <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="8.8 Using the package designr to simulate data and compute power | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   
   <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSciimages/temporarycover.jpg" />
+  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
 
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-04-27" />
+<meta name="date" content="2021-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,8 +32,10 @@
   
   
 <link rel="prev" href="what-you-can-now-do.html"/>
-<link rel="next" href="sec-Simulationexercises.html"/>
-<script src="libs/jquery/jquery.min.js"></script>
+<link rel="next" href="sec:Simulationexercises.html"/>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,31 +51,34 @@
 
 
 
-
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -82,9 +87,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -116,6 +121,29 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
@@ -132,188 +160,214 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Linear Mixed Models in Linguistics and Psychology</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>0.1</b> Prerequisites</a></li>
-<li class="chapter" data-level="0.2" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i><b>0.2</b> How to read this book</a></li>
-<li class="chapter" data-level="0.3" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i><b>0.3</b> Online materials</a></li>
-<li class="chapter" data-level="0.4" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i><b>0.4</b> Software needed</a></li>
-<li class="chapter" data-level="0.5" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i>How to read this book</a></li>
+<li class="chapter" data-level="" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i>Online materials</a></li>
+<li class="chapter" data-level="" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i>Software needed</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
 <li class="part"><span><b>I Foundational ideas</b></span></li>
-<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a><ul>
-<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a><ul>
+<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a>
+<ul>
 <li class="chapter" data-level="1.1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.1.1</b> The mean and variance of the Binomial distribution</a></li>
 <li class="chapter" data-level="1.1.2" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.1.2</b> What information does a probability distribution provide?</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
-<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.1</b> The t-distribution</a></li>
-<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-gamma-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The Gamma distribution</a></li>
-<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-exponential-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Exponential distribution</a></li>
+<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-standard-normal-mathitnormalmu0sigma1"><i class="fa fa-check"></i><b>1.3.1</b> The standard normal: <span class="math inline">\(\mathit{normal}(\mu=0,\sigma=1)\)</span></a></li>
+<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-uniform-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The uniform distribution</a></li>
+<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-chi-square-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Chi-square distribution</a></li>
+<li class="chapter" data-level="1.3.4" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.4</b> The t-distribution</a></li>
+<li class="chapter" data-level="1.3.5" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-f-distribution"><i class="fa fa-check"></i><b>1.3.5</b> The F distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a><ul>
+<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.1</b> Example 1: Discrete bivariate distributions</a></li>
 <li class="chapter" data-level="1.4.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.2</b> Example 2: Continuous bivariate distributions</a></li>
 <li class="chapter" data-level="1.4.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.4.3</b> Generate simulated bivariate (multivariate) data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a><ul>
+<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html#the-importance-of-the-mle"><i class="fa fa-check"></i><b>1.5.1</b> The importance of the MLE</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><a href="summary-of-useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Summary of useful R functions relating to univariate distributions</a></li>
-<li class="chapter" data-level="1.7" data-path="summary-of-random-variable-theory.html"><a href="summary-of-random-variable-theory.html"><i class="fa fa-check"></i><b>1.7</b> Summary of random variable theory</a></li>
+<li class="chapter" data-level="1.6" data-path="useful-r-functions-relating-to-univariate-distributions.html"><a href="useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Useful R functions relating to univariate distributions</a></li>
+<li class="chapter" data-level="1.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>1.7</b> Summary</a></li>
 <li class="chapter" data-level="1.8" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.8</b> Further reading</a></li>
-<li class="chapter" data-level="1.9" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a><ul>
-<li class="chapter" data-level="1.9.1" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisespnorm"><i class="fa fa-check"></i><b>1.9.1</b> Practice using the <code>pnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.2" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesqnorm"><i class="fa fa-check"></i><b>1.9.2</b> Practice using the <code>qnorm</code> function</a></li>
-<li class="chapter" data-level="1.9.3" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE1"><i class="fa fa-check"></i><b>1.9.3</b> Maximum likelihood estimation 1</a></li>
-<li class="chapter" data-level="1.9.4" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:FoundationsexercisesMLE2"><i class="fa fa-check"></i><b>1.9.4</b> Maximum likelihood estimation 2</a></li>
-<li class="chapter" data-level="1.9.5" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesbivar"><i class="fa fa-check"></i><b>1.9.5</b> Generating bivariate data</a></li>
-<li class="chapter" data-level="1.9.6" data-path="sec-Foundationsexercises.html"><a href="sec-Foundationsexercises.html#sec:Foundationsexercisesmultivar"><i class="fa fa-check"></i><b>1.9.6</b> Generating multivariate data</a></li>
+<li class="chapter" data-level="1.9" data-path="sec:Foundationsexercises.html"><a href="sec:Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a><ul>
+<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><a href="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><i class="fa fa-check"></i><b>2.1</b> Some terminology surrounding typical experiment designs in linguistics and psychology</a></li>
 <li class="chapter" data-level="2.2" data-path="the-central-limit-theorem-using-simulation.html"><a href="the-central-limit-theorem-using-simulation.html"><i class="fa fa-check"></i><b>2.2</b> The central limit theorem using simulation</a></li>
 <li class="chapter" data-level="2.3" data-path="three-examples-of-the-sampling-distribution.html"><a href="three-examples-of-the-sampling-distribution.html"><i class="fa fa-check"></i><b>2.3</b> Three examples of the sampling distribution</a></li>
-<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a></li>
-<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a><ul>
+<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html#confidence-interals-are-often-misinterpreted"><i class="fa fa-check"></i><b>2.4.1</b> Confidence interals are often misinterpreted</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a>
+<ul>
 <li class="chapter" data-level="2.5.1" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.1</b> The one-sample t-test</a></li>
 <li class="chapter" data-level="2.5.2" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-i-ii-error-and-power"><i class="fa fa-check"></i><b>2.5.2</b> Type I, II error, and power</a></li>
 <li class="chapter" data-level="2.5.3" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#how-to-compute-power-for-the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.3</b> How to compute power for the one-sample t-test</a></li>
 <li class="chapter" data-level="2.5.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-p-value"><i class="fa fa-check"></i><b>2.5.4</b> The p-value</a></li>
-<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.5</b> Type M and S error in the face of low power</a></li>
-<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.6</b> Searching for significance</a></li>
+<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-distribution-of-the-p-value-under-the-null-hypothesis"><i class="fa fa-check"></i><b>2.5.5</b> The distribution of the p-value under the null hypothesis</a></li>
+<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
+<li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="the-two-sample-t-test-vs-the-paired-t-test.html"><a href="the-two-sample-t-test-vs-the-paired-t-test.html#common-mistakes-involving-the-t-test"><i class="fa fa-check"></i><b>2.6.1</b> Common mistakes involving the t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
+<li class="chapter" data-level="2.7.2" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#a-complication-with-multiple-t-tests-inflation-of-type-i-error-probability"><i class="fa fa-check"></i><b>2.7.2</b> A complication with multiple t-tests: Inflation of Type I error probability</a></li>
+<li class="chapter" data-level="2.7.3" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.3</b> Analyzing a <span class="math inline">\(2\times 2\times 2\)</span> repeated measures design using paired t-tests</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesqt"><i class="fa fa-check"></i><b>2.7.1</b> Practice using <code>qt</code></a></li>
-<li class="chapter" data-level="2.7.2" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart1"><i class="fa fa-check"></i><b>2.7.2</b> Computing the p-value</a></li>
-<li class="chapter" data-level="2.7.3" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart2"><i class="fa fa-check"></i><b>2.7.3</b> Computing the t-value</a></li>
-<li class="chapter" data-level="2.7.4" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#sec:SamplingDistrnexercisesPart3"><i class="fa fa-check"></i><b>2.7.4</b> Type I and II error</a></li>
-<li class="chapter" data-level="2.7.5" data-path="sec-SamplingDistrnexercises.html"><a href="sec-SamplingDistrnexercises.html#practice-with-the-paired-t-test"><i class="fa fa-check"></i><b>2.7.5</b> Practice with the paired t-test</a></li>
+<li class="chapter" data-level="2.8" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.8</b> Common mistakes involving the (paired) t-test</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#ignoring-the-independence-assumption"><i class="fa fa-check"></i><b>2.8.1</b> Ignoring the independence assumption</a></li>
+<li class="chapter" data-level="2.8.2" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#doing-a-by-subjects-and-by-items-paired-t-test-is-generally-dangerous"><i class="fa fa-check"></i><b>2.8.2</b> Doing a by-subjects and by-items paired t-test is generally dangerous</a></li>
+<li class="chapter" data-level="2.8.3" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#the-difference-between-a-significant-and-a-non-significant-result-need-not-itself-be-significant"><i class="fa fa-check"></i><b>2.8.3</b> The difference between a significant and a non-significant result need not itself be significant</a></li>
 </ul></li>
+<li class="chapter" data-level="2.9" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>2.9</b> Summary</a></li>
+<li class="chapter" data-level="2.10" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>2.10</b> Further readings</a></li>
+<li class="chapter" data-level="2.11" data-path="sec:SamplingDistrnexercises.html"><a href="sec:SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.11</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a><ul>
+<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="from-the-t-test-to-the-linear-mixed-model.html"><a href="from-the-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.1</b> From the t-test to the linear (mixed) model</a></li>
 <li class="chapter" data-level="3.2" data-path="sum-coding.html"><a href="sum-coding.html"><i class="fa fa-check"></i><b>3.2</b> Sum coding</a></li>
 <li class="chapter" data-level="3.3" data-path="checking-model-assumptions.html"><a href="checking-model-assumptions.html"><i class="fa fa-check"></i><b>3.3</b> Checking model assumptions</a></li>
 <li class="chapter" data-level="3.4" data-path="from-the-paired-t-test-to-the-linear-mixed-model.html"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.4</b> From the paired t-test to the linear mixed model</a></li>
-<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a><ul>
+<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a>
+<ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
 <li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
-<li class="chapter" data-level="3.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
-<li class="chapter" data-level="3.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html"><i class="fa fa-check"></i><b>3.8</b> Exercises</a><ul>
-<li class="chapter" data-level="3.8.1" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart1"><i class="fa fa-check"></i><b>3.8.1</b> By-subjects t-test</a></li>
-<li class="chapter" data-level="3.8.2" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart2"><i class="fa fa-check"></i><b>3.8.2</b> Fitting a linear mixed model</a></li>
-<li class="chapter" data-level="3.8.3" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart3"><i class="fa fa-check"></i><b>3.8.3</b> t-test vs. linear mixed model</a></li>
-<li class="chapter" data-level="3.8.4" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart4"><i class="fa fa-check"></i><b>3.8.4</b> Power calculation using power.t.test</a></li>
-<li class="chapter" data-level="3.8.5" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart5"><i class="fa fa-check"></i><b>3.8.5</b> Residuals</a></li>
-<li class="chapter" data-level="3.8.6" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart6"><i class="fa fa-check"></i><b>3.8.6</b> Understanding contrast coding</a></li>
-<li class="chapter" data-level="3.8.7" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart7"><i class="fa fa-check"></i><b>3.8.7</b> Understanding the fixed-effects output</a></li>
-<li class="chapter" data-level="3.8.8" data-path="sec-LMExercises1.html"><a href="sec-LMExercises1.html#sec:LMExercisesPart8"><i class="fa fa-check"></i><b>3.8.8</b> Understanding the null hypothesis test</a></li>
+<li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
+<li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a><ul>
+<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="the-likelihood-ratio-test-the-theory.html"><a href="the-likelihood-ratio-test-the-theory.html"><i class="fa fa-check"></i><b>4.1</b> The likelihood ratio test: The theory</a></li>
 <li class="chapter" data-level="4.2" data-path="a-practical-example-using-simulated-data.html"><a href="a-practical-example-using-simulated-data.html"><i class="fa fa-check"></i><b>4.2</b> A practical example using simulated data</a></li>
 <li class="chapter" data-level="4.3" data-path="a-real-life-example-the-english-relative-clause-data.html"><a href="a-real-life-example-the-english-relative-clause-data.html"><i class="fa fa-check"></i><b>4.3</b> A real-life example: The English relative clause data</a></li>
-<li class="chapter" data-level="4.4" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html"><i class="fa fa-check"></i><b>4.4</b> Exercises</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExercisesChinese"><i class="fa fa-check"></i><b>4.4.1</b> Chinese relative clauses</a></li>
-<li class="chapter" data-level="4.4.2" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseAgrmt"><i class="fa fa-check"></i><b>4.4.2</b> Agreement attraction in comprehension</a></li>
-<li class="chapter" data-level="4.4.3" data-path="sec-HypTestExercises.html"><a href="sec-HypTestExercises.html#sec:HypTestExerciseGramCE"><i class="fa fa-check"></i><b>4.4.3</b> The grammaticality illusion</a></li>
+<li class="chapter" data-level="4.4" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+<li class="chapter" data-level="4.5" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
+<li class="chapter" data-level="4.6" data-path="sec:HypTestExercises.html"><a href="sec:HypTestExercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="ch-LMtheory.html"><a href="ch-LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a><ul>
-<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a><ul>
+<li class="chapter" data-level="5" data-path="ch:LMtheory.html"><a href="ch:LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#matrix-addition-subtraction-and-multiplication"><i class="fa fa-check"></i><b>5.1.1</b> Matrix addition, subtraction, and multiplication</a></li>
 <li class="chapter" data-level="5.1.2" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#diagonal-matrix-and-identity-matrix"><i class="fa fa-check"></i><b>5.1.2</b> Diagonal matrix and identity matrix</a></li>
 <li class="chapter" data-level="5.1.3" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#powers-of-matrices"><i class="fa fa-check"></i><b>5.1.3</b> Powers of matrices</a></li>
 <li class="chapter" data-level="5.1.4" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.1.4</b> Inverse of a matrix</a></li>
 <li class="chapter" data-level="5.1.5" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#linear-independence-and-rank"><i class="fa fa-check"></i><b>5.1.5</b> Linear independence, and rank</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a><ul>
+<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#least-squares-estimation-geometric-argument"><i class="fa fa-check"></i><b>5.2.1</b> Least squares estimation: Geometric argument</a></li>
 <li class="chapter" data-level="5.2.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#the-expectation-and-variance-of-the-parameters-beta"><i class="fa fa-check"></i><b>5.2.2</b> The expectation and variance of the parameters beta</a></li>
 <li class="chapter" data-level="5.2.3" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#hypothesis-testing-using-analysis-of-variance-anova"><i class="fa fa-check"></i><b>5.2.3</b> Hypothesis testing using Analysis of variance (ANOVA)</a></li>
 <li class="chapter" data-level="5.2.4" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#some-further-important-topics-in-linear-modeling"><i class="fa fa-check"></i><b>5.2.4</b> Some further important topics in linear modeling</a></li>
 <li class="chapter" data-level="5.2.5" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#generalized-linear-models"><i class="fa fa-check"></i><b>5.2.5</b> Generalized linear models</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html"><i class="fa fa-check"></i><b>5.3</b> Exercises</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMparamest"><i class="fa fa-check"></i><b>5.3.1</b> Estimating the parameters in a linear model</a></li>
-<li class="chapter" data-level="5.3.2" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:LMManova"><i class="fa fa-check"></i><b>5.3.2</b> Using ANOVA to carry out hypothesis testing</a></li>
-<li class="chapter" data-level="5.3.3" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:anovabyhand"><i class="fa fa-check"></i><b>5.3.3</b> Computing ANOVA by hand</a></li>
-<li class="chapter" data-level="5.3.4" data-path="sec-LMExercises2.html"><a href="sec-LMExercises2.html#sec:GLMM"><i class="fa fa-check"></i><b>5.3.4</b> Generalized linear (mixed) model</a></li>
+<li class="chapter" data-level="5.3" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.3</b> Summary</a></li>
+<li class="chapter" data-level="5.4" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>5.4</b> Further reading</a></li>
+<li class="chapter" data-level="5.5" data-path="sec:LMExercises2.html"><a href="sec:LMExercises2.html"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="ch-contr.html"><a href="ch-contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a><ul>
-<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a><ul>
+<li class="chapter" data-level="6" data-path="ch:contr.html"><a href="ch:contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
 <li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
 <li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a><ul>
+<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
 <li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
 <li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
-<li class="chapter" data-level="6.3.2" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
-<li class="chapter" data-level="6.3.3" data-path="sec-4levelFactor.html"><a href="sec-4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+<li class="chapter" data-level="6.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a><ul>
+<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
 <li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
 <li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+<li class="chapter" data-level="6.5" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+<li class="chapter" data-level="6.6" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.7" data-path="sec:Contrastsexercises.html"><a href="sec:Contrastsexercises.html"><i class="fa fa-check"></i><b>6.7</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="ch-coding2x2.html"><a href="ch-coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a><ul>
-<li class="chapter" data-level="7.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
-<li class="chapter" data-level="7.1.2" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
-<li class="chapter" data-level="7.1.3" data-path="sec-MR-ANOVA.html"><a href="sec-MR-ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+<li class="chapter" data-level="7" data-path="ch:coding2x2.html"><a href="ch:coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
-<li class="chapter" data-level="7.2.2" data-path="sec-contrast-covariate.html"><a href="sec-contrast-covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+<li class="chapter" data-level="7.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="sec-interactions-NLM.html"><a href="sec-interactions-NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
-<li class="chapter" data-level="7.4" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="7.3" data-path="sec:interactions:NLM.html"><a href="sec:interactions:NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="7.5" data-path="sec:Contrasts2x2exercises.html"><a href="sec:Contrasts2x2exercises.html"><i class="fa fa-check"></i><b>7.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a><ul>
+<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>8.1</b> A reminder: The maximal linear mixed model</a></li>
 <li class="chapter" data-level="8.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>8.2</b> Obtain estimates from a previous study</a></li>
 <li class="chapter" data-level="8.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>8.3</b> Decide on a range of plausible values of the effect size</a></li>
 <li class="chapter" data-level="8.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>8.4</b> Extract parameter estimates</a></li>
-<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a><ul>
+<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a>
+<ul>
 <li class="chapter" data-level="8.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>8.5.1</b> Generate a Latin-square design</a></li>
 <li class="chapter" data-level="8.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>8.5.2</b> Generate data row-by-row</a></li>
 </ul></li>
 <li class="chapter" data-level="8.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>8.6</b> Repeated generation of data to compute power</a></li>
 <li class="chapter" data-level="8.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>8.7</b> What you can now do</a></li>
-<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a><ul>
+<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a>
+<ul>
 <li class="chapter" data-level="8.8.1" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-with-two-conditions"><i class="fa fa-check"></i><b>8.8.1</b> Simulating data with two conditions</a></li>
 <li class="chapter" data-level="8.8.2" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-in-factorial-designs"><i class="fa fa-check"></i><b>8.8.2</b> Simulating data in factorial designs</a></li>
 </ul></li>
-<li class="chapter" data-level="8.9" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a><ul>
-<li class="chapter" data-level="8.9.1" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart1"><i class="fa fa-check"></i><b>8.9.1</b> Drawing a power curve given a range of effect sizes</a></li>
-<li class="chapter" data-level="8.9.2" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart2"><i class="fa fa-check"></i><b>8.9.2</b> Power and log-transformation</a></li>
-<li class="chapter" data-level="8.9.3" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart3"><i class="fa fa-check"></i><b>8.9.3</b> Evaluating models by generating simulated data</a></li>
-<li class="chapter" data-level="8.9.4" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart4"><i class="fa fa-check"></i><b>8.9.4</b> Using simulation to check parameter recovery</a></li>
-<li class="chapter" data-level="8.9.5" data-path="sec-Simulationexercises.html"><a href="sec-Simulationexercises.html#sec:SimulationexercisesPart5"><i class="fa fa-check"></i><b>8.9.5</b> Sample size calculations using simulation</a></li>
+<li class="chapter" data-level="8.9" data-path="sec:Simulationexercises.html"><a href="sec:Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="ch:MultComp.html"><a href="ch:MultComp.html"><i class="fa fa-check"></i><b>9</b> Understanding Type I error inflation using simulation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><i class="fa fa-check"></i><b>9.1</b> Overly simple random effects structure in LMMs inflate Type I error</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-only-model"><i class="fa fa-check"></i><b>9.1.1</b> Type I error with a varying intercepts-only model</a></li>
+<li class="chapter" data-level="9.1.2" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-and-varying-slopes-model"><i class="fa fa-check"></i><b>9.1.2</b> Type I error with a varying intercepts and varying slopes model</a></li>
+<li class="chapter" data-level="9.1.3" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-inflation-due-to-model-mis-specification"><i class="fa fa-check"></i><b>9.1.3</b> Type I error inflation due to model mis-specification</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="ch-multcomp.html"><a href="ch-multcomp.html"><i class="fa fa-check"></i><b>9</b> Understanding the multiple comparisons problem</a></li>
-<li class="chapter" data-level="10" data-path="ch-modelselection.html"><a href="ch-modelselection.html"><i class="fa fa-check"></i><b>10</b> Model selection</a></li>
+<li class="chapter" data-level="9.2" data-path="type-i-error-inflation-due-to-multiple-comparisons.html"><a href="type-i-error-inflation-due-to-multiple-comparisons.html"><i class="fa fa-check"></i><b>9.2</b> Type I error inflation due to multiple comparisons</a></li>
+<li class="chapter" data-level="9.3" data-path="the-practical-implications.html"><a href="the-practical-implications.html"><i class="fa fa-check"></i><b>9.3</b> The practical implications</a></li>
+<li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -335,27 +389,28 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="using-the-package-designr-to-simulate-data-and-compute-power" class="section level2">
+<div id="using-the-package-designr-to-simulate-data-and-compute-power" class="section level2" number="8.8">
 <h2><span class="header-section-number">8.8</span> Using the package <code>designr</code> to simulate data and compute power</h2>
 <p>There are major advantages to writing one’s own code for generating repeated measures data: one can control exactly what one considers to be the generative process, and one can obtain a deeper understanding of how the linear mixed model is set up. However, for certain standard experimental designs, one can use pre-defined functions for simulating data. The advantage of using such packages is that one can abstract away from the implementation details; but this can also be a disadvantage because one might end up simulating data without really understanding the assumptions behind the data-generative process.</p>
-<p>An R package, <code>designr</code>, provides some built-in functions that can simplify the process of computing power for standard repeated measures designs. For example, consider again the two-condition design involving English relative clauses that we saw earlier <span class="citation">(Grodner and Gibson <a href="#ref-grodner">2005</a>)</span>.</p>
-<div id="simulating-data-with-two-conditions" class="section level3">
+<p>An R package, <code>designr</code>, provides some built-in functions that can simplify the process of computing power for standard repeated measures designs. For example, consider again the two-condition design involving English relative clauses that we saw earlier <span class="citation">(<a href="#ref-grodner" role="doc-biblioref">Grodner and Gibson 2005</a>)</span>.</p>
+<div id="simulating-data-with-two-conditions" class="section level3" number="8.8.1">
 <h3><span class="header-section-number">8.8.1</span> Simulating data with two conditions</h3>
 <p>First, load the data, and prepare the contrast coding and log-transform the reading times.</p>
-<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb742-1" data-line-number="1">gg05e1&lt;-<span class="kw">read.table</span>(<span class="st">&quot;data/grodnergibsonE1crit.txt&quot;</span>,<span class="dt">header=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb742-2" data-line-number="2">gg05e1<span class="op">$</span>so &lt;-<span class="st"> </span><span class="kw">ifelse</span>(gg05e1<span class="op">$</span>condition<span class="op">==</span><span class="st">&quot;objgap&quot;</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb742-3" data-line-number="3">gg05e1<span class="op">$</span>logrt&lt;-<span class="kw">log</span>(gg05e1<span class="op">$</span>rawRT)</a></code></pre></div>
+<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb808-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb808-1" aria-hidden="true" tabindex="-1"></a>gg05e1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data/grodnergibsonE1crit.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb808-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb808-2" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>so <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(gg05e1<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb808-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb808-3" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>logrt <span class="ot">&lt;-</span> <span class="fu">log</span>(gg05e1<span class="sc">$</span>rawRT)</span></code></pre></div>
 <p>Next, we fit a linear mixed model to the data. As an example, we use raw reading times on the millisecond scale.</p>
-<div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb743-1" data-line-number="1"><span class="co">## frequentist analysis:</span></a>
-<a class="sourceLine" id="cb743-2" data-line-number="2"><span class="kw">library</span>(lme4)</a>
-<a class="sourceLine" id="cb743-3" data-line-number="3">m_lmer&lt;-<span class="kw">lmer</span>(rawRT<span class="op">~</span>so <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">|</span>subject)<span class="op">+</span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">|</span>item),gg05e1)</a></code></pre></div>
-<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
-<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb745-1" data-line-number="1"><span class="kw">summary</span>(m_lmer)</a></code></pre></div>
-<pre><code>## Linear mixed model fit by REML. t-tests use
-##   Satterthwaite&#39;s method [lmerModLmerTest]
+<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb809-1" aria-hidden="true" tabindex="-1"></a><span class="do">## frequentist analysis:</span></span>
+<span id="cb809-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb809-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb809-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb809-3" aria-hidden="true" tabindex="-1"></a>m_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rawRT <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item), gg05e1,</span>
+<span id="cb809-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb809-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb809-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb809-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb809-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb809-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_lmer)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: 
 ## rawRT ~ so + (1 + so | subject) + (1 + so | item)
 ##    Data: gg05e1
+## Control: lmerControl(calc.derivs = FALSE)
 ## 
 ## REML criterion at convergence: 9645
 ## 
@@ -373,22 +428,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## Number of obs: 672, groups:  subject, 42; item, 16
 ## 
 ## Fixed effects:
-##             Estimate Std. Error    df t value Pr(&gt;|t|)
-## (Intercept)    420.2       29.1  43.6    14.4   &lt;2e-16
-## so             102.3       40.9  32.1     2.5    0.018
+##             Estimate Std. Error t value
+## (Intercept)    420.2       29.1    14.4
+## so             102.3       40.9     2.5
 ## 
 ## Correlation of Fixed Effects:
 ##    (Intr)
-## so 0.734 
-## optimizer (nloptwrap) convergence code: 0 (OK)
-## boundary (singular) fit: see ?isSingular</code></pre>
+## so 0.734</code></pre>
 <p>The correlations between the varying intercepts and slopes could not be estimated, so the model is over-parameterized. We can refit the model without correlations:</p>
-<div class="sourceCode" id="cb747"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb747-1" data-line-number="1">m_lmer&lt;-<span class="kw">lmer</span>(rawRT<span class="op">~</span>so <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">||</span>subject)<span class="op">+</span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">||</span>item),gg05e1)</a>
-<a class="sourceLine" id="cb747-2" data-line-number="2"><span class="kw">summary</span>(m_lmer)</a></code></pre></div>
-<pre><code>## Linear mixed model fit by REML. t-tests use
-##   Satterthwaite&#39;s method [lmerModLmerTest]
+<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb811-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb811-1" aria-hidden="true" tabindex="-1"></a>m_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rawRT <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> item), gg05e1)</span>
+<span id="cb811-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb811-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_lmer)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: 
-## rawRT ~ so + (1 + so || subject) + (1 + so || item)
+## rawRT ~ so + ((1 | subject) + (0 + so | subject)) + ((1 | item) +  
+##     (0 + so | item))
 ##    Data: gg05e1
 ## 
 ## REML criterion at convergence: 9684
@@ -407,25 +460,25 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## Number of obs: 672, groups:  subject, 42; item, 16
 ## 
 ## Fixed effects:
-##             Estimate Std. Error    df t value Pr(&gt;|t|)
-## (Intercept)    420.2       28.0  40.1   15.00   &lt;2e-16
-## so             102.3       36.2  24.0    2.82   0.0094
+##             Estimate Std. Error t value
+## (Intercept)    420.2       28.0   15.00
+## so             102.3       36.2    2.82
 ## 
 ## Correlation of Fixed Effects:
 ##    (Intr)
 ## so 0.000</code></pre>
 <p>Next, we generate a data-frame through the <code>designr</code> package, with the same design as the data used above:</p>
-<div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb749-1" data-line-number="1"><span class="kw">library</span>(designr)</a>
-<a class="sourceLine" id="cb749-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb749-3" data-line-number="3"><span class="co">## example</span></a>
-<a class="sourceLine" id="cb749-4" data-line-number="4"><span class="co">## define data frame:</span></a>
-<a class="sourceLine" id="cb749-5" data-line-number="5">design&lt;-<span class="kw">fixed.factor</span>(<span class="st">&quot;so&quot;</span>, <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;subjgap&quot;</span>, <span class="st">&quot;objgap&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb749-6" data-line-number="6"><span class="st">  </span><span class="kw">random.factor</span>(<span class="st">&quot;subject&quot;</span>, <span class="dt">instances=</span><span class="dv">42</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb749-7" data-line-number="7"><span class="st">  </span><span class="kw">random.factor</span>(<span class="st">&quot;item&quot;</span>, <span class="dt">instances=</span><span class="dv">16</span>)</a>
-<a class="sourceLine" id="cb749-8" data-line-number="8">dat &lt;-<span class="st"> </span><span class="kw">design.codes</span>(design)</a>
-<a class="sourceLine" id="cb749-9" data-line-number="9">dat<span class="op">$</span>so &lt;-<span class="st"> </span><span class="kw">ifelse</span>(dat<span class="op">$</span>so<span class="op">==</span><span class="st">&quot;objgap&quot;</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb749-10" data-line-number="10"><span class="kw">head</span>(dat)</a></code></pre></div>
-<pre><code>## # A tibble: 6 x 3
+<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb813-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(designr)</span>
+<span id="cb813-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb813-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-3" aria-hidden="true" tabindex="-1"></a><span class="do">## example</span></span>
+<span id="cb813-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-4" aria-hidden="true" tabindex="-1"></a><span class="do">## define data frame:</span></span>
+<span id="cb813-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-5" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">fixed.factor</span>(<span class="st">&quot;so&quot;</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;subjgap&quot;</span>, <span class="st">&quot;objgap&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb813-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="st">&quot;subject&quot;</span>, <span class="at">instances =</span> <span class="dv">42</span>) <span class="sc">+</span></span>
+<span id="cb813-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="st">&quot;item&quot;</span>, <span class="at">instances =</span> <span class="dv">16</span>)</span>
+<span id="cb813-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-8" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">design.codes</span>(design)</span>
+<span id="cb813-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-9" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>so <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dat<span class="sc">$</span>so <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb813-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
 ##   subject   item      so
 ##   &lt;fct&gt;     &lt;fct&gt;  &lt;dbl&gt;
 ## 1 subject01 item01  -0.5
@@ -435,72 +488,80 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 5 subject01 item03  -0.5
 ## 6 subject01 item03   0.5</code></pre>
 <p>To compute prospective power based on the estimates from the English relative clause data, the following for-loop is run. In each iteration, data is first generated using the design set up above; this is done using the <code>simLMM</code> function from the <code>designr</code> package. Notice here that a “maximal” model is specified, but the correlations are set to zero (CP=0.0); this has the effect that the data generated assume no correlation between the intercept and slope for subjects and items. Having generated the data, the <code>lmer</code> function is used to fit the model to the simulated data, and then the t-value of the slope is saved. This t-value can then be used to compute power in the usual way.</p>
-<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb751-1" data-line-number="1">tvals&lt;-<span class="kw">rep</span>(<span class="ot">NA</span>,<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb751-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb751-3" data-line-number="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>){</a>
-<a class="sourceLine" id="cb751-4" data-line-number="4"><span class="co">## generate data:</span></a>
-<a class="sourceLine" id="cb751-5" data-line-number="5">dat<span class="op">$</span>ysim &lt;-<span class="st"> </span><span class="kw">simLMM</span>(<span class="dt">formula =</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">|</span><span class="st"> </span>subject) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb751-6" data-line-number="6"><span class="st">                     </span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">|</span>item),</a>
-<a class="sourceLine" id="cb751-7" data-line-number="7">                   <span class="dt">data =</span> dat,</a>
-<a class="sourceLine" id="cb751-8" data-line-number="8">                   <span class="dt">LMM =</span> m_lmer,</a>
-<a class="sourceLine" id="cb751-9" data-line-number="9">                   <span class="dt">CP =</span>  <span class="fl">0.0</span>,</a>
-<a class="sourceLine" id="cb751-10" data-line-number="10">                   <span class="dt">empirical=</span><span class="ot">FALSE</span>,<span class="dt">verbose=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb751-11" data-line-number="11">                   <span class="dt">family=</span><span class="st">&quot;gaussian&quot;</span>)</a>
-<a class="sourceLine" id="cb751-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb751-13" data-line-number="13"><span class="co">## fit model to simulated data:</span></a>
-<a class="sourceLine" id="cb751-14" data-line-number="14">m&lt;-lme4<span class="op">::</span><span class="kw">lmer</span>(ysim <span class="op">~</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(so <span class="op">||</span><span class="st"> </span>subject) <span class="op">+</span><span class="st"> </span>(so<span class="op">||</span>item), </a>
-<a class="sourceLine" id="cb751-15" data-line-number="15">              <span class="dt">data=</span>dat,</a>
-<a class="sourceLine" id="cb751-16" data-line-number="16">              <span class="dt">control=</span><span class="kw">lmerControl</span>(<span class="dt">calc.derivs=</span><span class="ot">FALSE</span>))</a>
-<a class="sourceLine" id="cb751-17" data-line-number="17"><span class="co">## save t-value</span></a>
-<a class="sourceLine" id="cb751-18" data-line-number="18">tvals[i]&lt;-<span class="kw">summary</span>(m)<span class="op">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb751-19" data-line-number="19">}</a>
-<a class="sourceLine" id="cb751-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb751-21" data-line-number="21"><span class="kw">mean</span>(<span class="kw">abs</span>(tvals)<span class="op">&gt;</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb815-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-1" aria-hidden="true" tabindex="-1"></a>tvals <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb815-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb815-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb815-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data:</span></span>
+<span id="cb815-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-5" aria-hidden="true" tabindex="-1"></a>  dat<span class="sc">$</span>ysim <span class="ot">&lt;-</span> <span class="fu">simLMM</span>(</span>
+<span id="cb815-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span></span>
+<span id="cb815-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-7" aria-hidden="true" tabindex="-1"></a>      (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
+<span id="cb815-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb815-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">LMM =</span> m_lmer,</span>
+<span id="cb815-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">CP =</span> <span class="fl">0.0</span>,</span>
+<span id="cb815-11"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb815-12"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span></span>
+<span id="cb815-13"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb815-14"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb815-15"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-15" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to simulated data:</span></span>
+<span id="cb815-16"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-16" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(ysim <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subject) <span class="sc">+</span> (so <span class="sc">||</span> item),</span>
+<span id="cb815-17"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb815-18"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb815-19"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb815-20"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">## save t-value</span></span>
+<span id="cb815-21"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-21" aria-hidden="true" tabindex="-1"></a>  tvals[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb815-22"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb815-23"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb815-24"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-24" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tvals) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.91</code></pre>
 <p>If we also want to examine the distribution of the data generated, and the distribution of the parameters under repeated sampling, we can easily record that information within the for-loop:</p>
-<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb753-1" data-line-number="1">n&lt;-<span class="kw">dim</span>(dat)[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb753-2" data-line-number="2">nsim&lt;-<span class="dv">100</span></a>
-<a class="sourceLine" id="cb753-3" data-line-number="3">ysims&lt;-<span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="ot">NA</span>,n<span class="op">*</span>nsim),<span class="dt">ncol=</span>nsim)</a>
-<a class="sourceLine" id="cb753-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb753-5" data-line-number="5"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>){</a>
-<a class="sourceLine" id="cb753-6" data-line-number="6"><span class="co">## generate data:</span></a>
-<a class="sourceLine" id="cb753-7" data-line-number="7">ysim &lt;-<span class="st"> </span><span class="kw">simLMM</span>(<span class="dt">formula =</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">|</span><span class="st"> </span>subject) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">|</span>item),</a>
-<a class="sourceLine" id="cb753-8" data-line-number="8">                   <span class="dt">data =</span> dat,</a>
-<a class="sourceLine" id="cb753-9" data-line-number="9">                   <span class="dt">LMM =</span> m_lmer,</a>
-<a class="sourceLine" id="cb753-10" data-line-number="10">                   <span class="dt">CP =</span>  <span class="fl">0.0</span>,</a>
-<a class="sourceLine" id="cb753-11" data-line-number="11">                   <span class="dt">empirical=</span><span class="ot">FALSE</span>,<span class="dt">verbose=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb753-12" data-line-number="12">                   <span class="dt">family=</span><span class="st">&quot;gaussian&quot;</span>)</a>
-<a class="sourceLine" id="cb753-13" data-line-number="13"><span class="co">## store simulated data:</span></a>
-<a class="sourceLine" id="cb753-14" data-line-number="14">ysims[,i]&lt;-ysim</a>
-<a class="sourceLine" id="cb753-15" data-line-number="15"><span class="co">## add current simulated data to data-frame:</span></a>
-<a class="sourceLine" id="cb753-16" data-line-number="16">dat<span class="op">$</span>ysim&lt;-ysim</a>
-<a class="sourceLine" id="cb753-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb753-18" data-line-number="18"><span class="co">## fit model to simulated data:</span></a>
-<a class="sourceLine" id="cb753-19" data-line-number="19">m&lt;-lme4<span class="op">::</span><span class="kw">lmer</span>(ysim <span class="op">~</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(so <span class="op">||</span><span class="st"> </span>subject) <span class="op">+</span><span class="st"> </span>(so<span class="op">||</span>item), </a>
-<a class="sourceLine" id="cb753-20" data-line-number="20">              <span class="dt">data=</span>dat,</a>
-<a class="sourceLine" id="cb753-21" data-line-number="21">              <span class="dt">control=</span><span class="kw">lmerControl</span>(<span class="dt">calc.derivs=</span><span class="ot">FALSE</span>))</a>
-<a class="sourceLine" id="cb753-22" data-line-number="22"><span class="co">## save t-value</span></a>
-<a class="sourceLine" id="cb753-23" data-line-number="23">tvals[i]&lt;-<span class="kw">summary</span>(m)<span class="op">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb753-24" data-line-number="24">}</a>
-<a class="sourceLine" id="cb753-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb753-26" data-line-number="26"><span class="kw">mean</span>(<span class="kw">abs</span>(tvals)<span class="op">&gt;</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(dat)[<span class="dv">1</span>]</span>
+<span id="cb817-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb817-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-3" aria-hidden="true" tabindex="-1"></a>ysims <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n <span class="sc">*</span> nsim), <span class="at">ncol =</span> nsim)</span>
+<span id="cb817-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb817-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb817-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data:</span></span>
+<span id="cb817-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-7" aria-hidden="true" tabindex="-1"></a>  ysim <span class="ot">&lt;-</span> <span class="fu">simLMM</span>(</span>
+<span id="cb817-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
+<span id="cb817-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb817-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">LMM =</span> m_lmer,</span>
+<span id="cb817-11"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">CP =</span> <span class="fl">0.0</span>,</span>
+<span id="cb817-12"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb817-13"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span></span>
+<span id="cb817-14"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb817-15"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-15" aria-hidden="true" tabindex="-1"></a>  <span class="do">## store simulated data:</span></span>
+<span id="cb817-16"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-16" aria-hidden="true" tabindex="-1"></a>  ysims[, i] <span class="ot">&lt;-</span> ysim</span>
+<span id="cb817-17"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-17" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add current simulated data to data-frame:</span></span>
+<span id="cb817-18"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-18" aria-hidden="true" tabindex="-1"></a>  dat<span class="sc">$</span>ysim <span class="ot">&lt;-</span> ysim</span>
+<span id="cb817-19"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb817-20"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to simulated data:</span></span>
+<span id="cb817-21"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-21" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(ysim <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subject) <span class="sc">+</span> (so <span class="sc">||</span> item),</span>
+<span id="cb817-22"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb817-23"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb817-24"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-24" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb817-25"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-25" aria-hidden="true" tabindex="-1"></a>  <span class="do">## save t-value</span></span>
+<span id="cb817-26"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-26" aria-hidden="true" tabindex="-1"></a>  tvals[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb817-27"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb817-28"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb817-29"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-29" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tvals) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.9</code></pre>
-<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb755-1" data-line-number="1"><span class="kw">hist</span>(gg05e1<span class="op">$</span>rawRT,<span class="dt">freq =</span> <span class="ot">FALSE</span>,<span class="dt">ylab=</span><span class="st">&quot;density&quot;</span>,</a>
-<a class="sourceLine" id="cb755-2" data-line-number="2">     <span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1000</span>,<span class="dv">5000</span>),</a>
-<a class="sourceLine" id="cb755-3" data-line-number="3">     <span class="dt">main=</span><span class="st">&quot;&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;reading times (ms)&quot;</span>)</a>
-<a class="sourceLine" id="cb755-4" data-line-number="4"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>){</a>
-<a class="sourceLine" id="cb755-5" data-line-number="5">  <span class="kw">lines</span>(<span class="kw">density</span>(ysims[,i]))</a>
-<a class="sourceLine" id="cb755-6" data-line-number="6">}</a></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-337-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(gg05e1<span class="sc">$</span>rawRT,</span>
+<span id="cb819-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">ylab =</span> <span class="st">&quot;density&quot;</span>,</span>
+<span id="cb819-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>, <span class="dv">5000</span>),</span>
+<span id="cb819-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;reading times (ms)&quot;</span></span>
+<span id="cb819-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb819-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb819-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">density</span>(ysims[, i]))</span>
+<span id="cb819-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-360-1.svg" width="672" /></p>
 <p>As the above plot shows, a model using raw readings times lead to predicted reading times including negative values, which is obviously implausible.</p>
 <p>If we want to fit the model on log RTs, the code changes as follows.
 First, the model is fit to the data on the log ms scale:</p>
-<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb756-1" data-line-number="1">m_lmer&lt;-<span class="kw">lmer</span>(logrt<span class="op">~</span>so <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">||</span>subject)<span class="op">+</span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">||</span>item),gg05e1)</a>
-<a class="sourceLine" id="cb756-2" data-line-number="2"><span class="kw">summary</span>(m_lmer)</a></code></pre></div>
-<pre><code>## Linear mixed model fit by REML. t-tests use
-##   Satterthwaite&#39;s method [lmerModLmerTest]
+<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb820-1" aria-hidden="true" tabindex="-1"></a>m_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> item), gg05e1)</span>
+<span id="cb820-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb820-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_lmer)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: 
-## logrt ~ so + (1 + so || subject) + (1 + so || item)
+## logrt ~ so + ((1 | subject) + (0 + so | subject)) + ((1 | item) +  
+##     (0 + so | item))
 ##    Data: gg05e1
 ## 
 ## REML criterion at convergence: 704
@@ -519,91 +580,96 @@ First, the model is fit to the data on the log ms scale:</p>
 ## Number of obs: 672, groups:  subject, 42; item, 16
 ## 
 ## Fixed effects:
-##             Estimate Std. Error      df t value
-## (Intercept)   5.8831     0.0517 42.1801  113.72
-## so            0.1240     0.0485 28.6962    2.56
-##             Pr(&gt;|t|)
-## (Intercept)   &lt;2e-16
-## so             0.016
+##             Estimate Std. Error t value
+## (Intercept)   5.8831     0.0517  113.72
+## so            0.1240     0.0485    2.56
 ## 
 ## Correlation of Fixed Effects:
 ##    (Intr)
 ## so 0.000</code></pre>
 <p>The design remains unchanged; only the for-loop changes: the <code>simLMM</code> function is passed through the <code>exp()</code> function, to exponentiate the data generated on the log scale.</p>
-<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb758-1" data-line-number="1">tvals&lt;-<span class="kw">rep</span>(<span class="ot">NA</span>,<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb758-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb758-3" data-line-number="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>){</a>
-<a class="sourceLine" id="cb758-4" data-line-number="4"><span class="co">## generate data:</span></a>
-<a class="sourceLine" id="cb758-5" data-line-number="5">dat<span class="op">$</span>ysim &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">simLMM</span>(<span class="dt">formula =</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">|</span><span class="st"> </span>subject) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">|</span>item),</a>
-<a class="sourceLine" id="cb758-6" data-line-number="6">                   <span class="dt">data =</span> dat,</a>
-<a class="sourceLine" id="cb758-7" data-line-number="7">                   <span class="dt">LMM =</span> m_lmer,</a>
-<a class="sourceLine" id="cb758-8" data-line-number="8">                   <span class="dt">CP =</span>  <span class="fl">0.0</span>,</a>
-<a class="sourceLine" id="cb758-9" data-line-number="9">                   <span class="dt">empirical=</span><span class="ot">FALSE</span>,<span class="dt">verbose=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb758-10" data-line-number="10">                   <span class="dt">family=</span><span class="st">&quot;gaussian&quot;</span>))</a>
-<a class="sourceLine" id="cb758-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb758-12" data-line-number="12"><span class="co">## fit model to simulated data:</span></a>
-<a class="sourceLine" id="cb758-13" data-line-number="13">m&lt;-lme4<span class="op">::</span><span class="kw">lmer</span>(<span class="kw">log</span>(ysim) <span class="op">~</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(so <span class="op">||</span><span class="st"> </span>subject) <span class="op">+</span><span class="st"> </span>(so<span class="op">||</span>item), </a>
-<a class="sourceLine" id="cb758-14" data-line-number="14">              <span class="dt">data=</span>dat,</a>
-<a class="sourceLine" id="cb758-15" data-line-number="15">              <span class="dt">control=</span><span class="kw">lmerControl</span>(<span class="dt">calc.derivs=</span><span class="ot">FALSE</span>))</a>
-<a class="sourceLine" id="cb758-16" data-line-number="16"><span class="co">## save t-value</span></a>
-<a class="sourceLine" id="cb758-17" data-line-number="17">tvals[i]&lt;-<span class="kw">summary</span>(m)<span class="op">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb758-18" data-line-number="18">}</a>
-<a class="sourceLine" id="cb758-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb758-20" data-line-number="20"><span class="kw">mean</span>(<span class="kw">abs</span>(tvals)<span class="op">&gt;</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb822-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-1" aria-hidden="true" tabindex="-1"></a>tvals <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb822-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb822-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb822-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data:</span></span>
+<span id="cb822-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-5" aria-hidden="true" tabindex="-1"></a>  dat<span class="sc">$</span>ysim <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">simLMM</span>(</span>
+<span id="cb822-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
+<span id="cb822-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb822-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">LMM =</span> m_lmer,</span>
+<span id="cb822-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">CP =</span> <span class="fl">0.0</span>,</span>
+<span id="cb822-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb822-11"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span></span>
+<span id="cb822-12"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-12" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb822-13"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb822-14"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-14" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to simulated data:</span></span>
+<span id="cb822-15"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-15" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(<span class="fu">log</span>(ysim) <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subject) <span class="sc">+</span> (so <span class="sc">||</span> item),</span>
+<span id="cb822-16"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb822-17"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb822-18"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb822-19"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-19" aria-hidden="true" tabindex="-1"></a>  <span class="do">## save t-value</span></span>
+<span id="cb822-20"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-20" aria-hidden="true" tabindex="-1"></a>  tvals[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb822-21"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb822-22"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb822-23"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-23" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tvals) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.75</code></pre>
 <p>The model fit on log RTs produces much more realistic data:</p>
-<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb760-1" data-line-number="1">n&lt;-<span class="kw">dim</span>(dat)[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb760-2" data-line-number="2">nsim&lt;-<span class="dv">100</span></a>
-<a class="sourceLine" id="cb760-3" data-line-number="3">ysims&lt;-<span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="ot">NA</span>,n<span class="op">*</span>nsim),<span class="dt">ncol=</span>nsim)</a>
-<a class="sourceLine" id="cb760-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb760-5" data-line-number="5"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>){</a>
-<a class="sourceLine" id="cb760-6" data-line-number="6"><span class="co">## generate data:</span></a>
-<a class="sourceLine" id="cb760-7" data-line-number="7">ysim &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">simLMM</span>(<span class="dt">formula =</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>so <span class="op">|</span><span class="st"> </span>subject) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb760-8" data-line-number="8"><span class="st">                     </span>(<span class="dv">1</span><span class="op">+</span>so<span class="op">|</span>item),</a>
-<a class="sourceLine" id="cb760-9" data-line-number="9">                   <span class="dt">data =</span> dat,</a>
-<a class="sourceLine" id="cb760-10" data-line-number="10">                   <span class="dt">LMM =</span> m_lmer,</a>
-<a class="sourceLine" id="cb760-11" data-line-number="11">                   <span class="dt">CP =</span>  <span class="fl">0.0</span>,</a>
-<a class="sourceLine" id="cb760-12" data-line-number="12">                   <span class="dt">empirical=</span><span class="ot">FALSE</span>,<span class="dt">verbose=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb760-13" data-line-number="13">                   <span class="dt">family=</span><span class="st">&quot;gaussian&quot;</span>))</a>
-<a class="sourceLine" id="cb760-14" data-line-number="14"><span class="co">## store simulated data:</span></a>
-<a class="sourceLine" id="cb760-15" data-line-number="15">ysims[,i]&lt;-ysim</a>
-<a class="sourceLine" id="cb760-16" data-line-number="16"><span class="co">## add current simulated data to data-frame:</span></a>
-<a class="sourceLine" id="cb760-17" data-line-number="17">dat<span class="op">$</span>ysim&lt;-ysim</a>
-<a class="sourceLine" id="cb760-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb760-19" data-line-number="19"><span class="co">## fit model to simulated data:</span></a>
-<a class="sourceLine" id="cb760-20" data-line-number="20">m&lt;-lme4<span class="op">::</span><span class="kw">lmer</span>(<span class="kw">log</span>(ysim) <span class="op">~</span><span class="st"> </span>so <span class="op">+</span><span class="st"> </span>(so <span class="op">||</span><span class="st"> </span>subject) <span class="op">+</span><span class="st"> </span>(so<span class="op">||</span>item), </a>
-<a class="sourceLine" id="cb760-21" data-line-number="21">              <span class="dt">data=</span>dat,</a>
-<a class="sourceLine" id="cb760-22" data-line-number="22">              <span class="dt">control=</span><span class="kw">lmerControl</span>(<span class="dt">calc.derivs=</span><span class="ot">FALSE</span>))</a>
-<a class="sourceLine" id="cb760-23" data-line-number="23"><span class="co">## save t-value</span></a>
-<a class="sourceLine" id="cb760-24" data-line-number="24">tvals[i]&lt;-<span class="kw">summary</span>(m)<span class="op">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb760-25" data-line-number="25">}</a>
-<a class="sourceLine" id="cb760-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb760-27" data-line-number="27"><span class="kw">mean</span>(<span class="kw">abs</span>(tvals)<span class="op">&gt;</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(dat)[<span class="dv">1</span>]</span>
+<span id="cb824-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb824-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-3" aria-hidden="true" tabindex="-1"></a>ysims <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n <span class="sc">*</span> nsim), <span class="at">ncol =</span> nsim)</span>
+<span id="cb824-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb824-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb824-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data:</span></span>
+<span id="cb824-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-7" aria-hidden="true" tabindex="-1"></a>  ysim <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">simLMM</span>(</span>
+<span id="cb824-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span></span>
+<span id="cb824-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-9" aria-hidden="true" tabindex="-1"></a>      (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
+<span id="cb824-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb824-11"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">LMM =</span> m_lmer,</span>
+<span id="cb824-12"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">CP =</span> <span class="fl">0.0</span>,</span>
+<span id="cb824-13"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb824-14"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span></span>
+<span id="cb824-15"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-15" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb824-16"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-16" aria-hidden="true" tabindex="-1"></a>  <span class="do">## store simulated data:</span></span>
+<span id="cb824-17"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-17" aria-hidden="true" tabindex="-1"></a>  ysims[, i] <span class="ot">&lt;-</span> ysim</span>
+<span id="cb824-18"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-18" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add current simulated data to data-frame:</span></span>
+<span id="cb824-19"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-19" aria-hidden="true" tabindex="-1"></a>  dat<span class="sc">$</span>ysim <span class="ot">&lt;-</span> ysim</span>
+<span id="cb824-20"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb824-21"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-21" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to simulated data:</span></span>
+<span id="cb824-22"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-22" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(<span class="fu">log</span>(ysim) <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subject) <span class="sc">+</span> (so <span class="sc">||</span> item),</span>
+<span id="cb824-23"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb824-24"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb824-25"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb824-26"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-26" aria-hidden="true" tabindex="-1"></a>  <span class="do">## save t-value</span></span>
+<span id="cb824-27"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-27" aria-hidden="true" tabindex="-1"></a>  tvals[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb824-28"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb824-29"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb824-30"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-30" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tvals) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.76</code></pre>
-<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb762-1" data-line-number="1"><span class="kw">hist</span>(gg05e1<span class="op">$</span>rawRT,<span class="dt">freq =</span> <span class="ot">FALSE</span>,<span class="dt">ylab=</span><span class="st">&quot;density&quot;</span>,</a>
-<a class="sourceLine" id="cb762-2" data-line-number="2">     <span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1000</span>,<span class="dv">5000</span>),</a>
-<a class="sourceLine" id="cb762-3" data-line-number="3">     <span class="dt">main=</span><span class="st">&quot;&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;reading times (ms)&quot;</span>,<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.003</span>))</a>
-<a class="sourceLine" id="cb762-4" data-line-number="4"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>){</a>
-<a class="sourceLine" id="cb762-5" data-line-number="5">  <span class="kw">lines</span>(<span class="kw">density</span>(ysims[,i]))</a>
-<a class="sourceLine" id="cb762-6" data-line-number="6">}</a></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-341-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(gg05e1<span class="sc">$</span>rawRT,</span>
+<span id="cb826-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">ylab =</span> <span class="st">&quot;density&quot;</span>,</span>
+<span id="cb826-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>, <span class="dv">5000</span>),</span>
+<span id="cb826-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;reading times (ms)&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.003</span>)</span>
+<span id="cb826-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb826-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb826-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">density</span>(ysims[, i]))</span>
+<span id="cb826-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-364-1.svg" width="672" /></p>
 </div>
-<div id="simulating-data-in-factorial-designs" class="section level3">
+<div id="simulating-data-in-factorial-designs" class="section level3" number="8.8.2">
 <h3><span class="header-section-number">8.8.2</span> Simulating data in factorial designs</h3>
 <p>The <code>designr</code> library can be used to generate data from typical factorial designs used in psychology and linguistics. For example, suppose we have a <span class="math inline">\(2\times 2\)</span> design</p>
-<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb763-1" data-line-number="1">design &lt;-<span class="st"> </span><span class="kw">fixed.factor</span>(<span class="st">&quot;distance&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;long&quot;</span>,<span class="st">&quot;short&quot;</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb763-2" data-line-number="2"><span class="st">       </span><span class="kw">fixed.factor</span>(<span class="st">&quot;predictability&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;high&quot;</span>,<span class="st">&quot;low&quot;</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb763-3" data-line-number="3"><span class="st">       </span><span class="kw">random.factor</span>(<span class="st">&quot;Subject&quot;</span>,<span class="dt">instances=</span><span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="co">## 4x4 = 16 subjects</span></a>
-<a class="sourceLine" id="cb763-4" data-line-number="4"><span class="st">       </span><span class="kw">random.factor</span>(<span class="st">&quot;Item&quot;</span>,<span class="dt">instances=</span><span class="dv">4</span>) <span class="op">+</span><span class="st">    </span><span class="co">## 4x4=16 items</span></a>
-<a class="sourceLine" id="cb763-5" data-line-number="5"><span class="st">       </span><span class="kw">random.factor</span>(<span class="kw">c</span>(<span class="st">&quot;Subject&quot;</span>,<span class="st">&quot;Item&quot;</span>), <span class="dt">groups =</span> <span class="kw">c</span>(<span class="st">&quot;distance&quot;</span>,<span class="st">&quot;predictability&quot;</span>))</a>
-<a class="sourceLine" id="cb763-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb763-7" data-line-number="7">simdat&lt;-<span class="kw">design.codes</span>(design)</a></code></pre></div>
+<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb827-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">fixed.factor</span>(<span class="st">&quot;distance&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;long&quot;</span>, <span class="st">&quot;short&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb827-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fixed.factor</span>(<span class="st">&quot;predictability&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb827-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="st">&quot;Subject&quot;</span>, <span class="at">instances =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="do">## 4x4 = 16 subjects</span></span>
+<span id="cb827-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="st">&quot;Item&quot;</span>, <span class="at">instances =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="do">## 4x4=16 items</span></span>
+<span id="cb827-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="fu">c</span>(<span class="st">&quot;Subject&quot;</span>, <span class="st">&quot;Item&quot;</span>), <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;distance&quot;</span>, <span class="st">&quot;predictability&quot;</span>))</span>
+<span id="cb827-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb827-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-7" aria-hidden="true" tabindex="-1"></a>simdat <span class="ot">&lt;-</span> <span class="fu">design.codes</span>(design)</span></code></pre></div>
 </div>
 </div>
 <h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-grodner">
-<p>Grodner, Daniel, and Edward Gibson. 2005. “Consequences of the Serial Nature of Linguistic Input.” <em>Cognitive Science</em> 29: 261–90.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-grodner" class="csl-entry">
+Grodner, Daniel, and Edward Gibson. 2005. <span>“Consequences of the Serial Nature of Linguistic Input.”</span> <em>Cognitive Science</em> 29: 261–90.
 </div>
 </div>
             </section>
@@ -612,11 +678,10 @@ First, the model is fit to the data on the log ms scale:</p>
         </div>
       </div>
 <a href="what-you-can-now-do.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sec-Simulationexercises.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sec:Simulationexercises.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/clipboard.min.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
 <script src="libs/gitbook/js/plugin-sharing.js"></script>
@@ -635,6 +700,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -655,6 +721,10 @@ gitbook.start({
 "text": null
 },
 "download": ["Freq_CogSci.pdf", "Freq_CogSci.epub", "Freq_CogSci.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9.2 Type I error inflation due to multiple comparisons | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
+  <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9.2 Type I error inflation due to multiple comparisons | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
+  <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
+  <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9.2 Type I error inflation due to multiple comparisons | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
+  
+  <meta name="twitter:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
+  <meta name="twitter:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
+
+<meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
+
+
+<meta name="date" content="2021-12-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"/>
+<link rel="next" href="the-practical-implications.html"/>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<script src="libs/kePrint/kePrint.js"></script>
+<link href="libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Linear Mixed Models in Linguistics and Psychology</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="how-to-read-this-book.html"><a href="how-to-read-this-book.html"><i class="fa fa-check"></i>How to read this book</a></li>
+<li class="chapter" data-level="" data-path="online-materials.html"><a href="online-materials.html"><i class="fa fa-check"></i>Online materials</a></li>
+<li class="chapter" data-level="" data-path="software-needed.html"><a href="software-needed.html"><i class="fa fa-check"></i>Software needed</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about-the-authors.html"><a href="about-the-authors.html"><i class="fa fa-check"></i>About the Authors</a></li>
+<li class="part"><span><b>I Foundational ideas</b></span></li>
+<li class="chapter" data-level="1" data-path="some-important-facts-about-distributions.html"><a href="some-important-facts-about-distributions.html"><i class="fa fa-check"></i><b>1</b> Some important facts about distributions</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html"><i class="fa fa-check"></i><b>1.1</b> Discrete random variables: An example using the Binomial distribution</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution"><i class="fa fa-check"></i><b>1.1.1</b> The mean and variance of the Binomial distribution</a></li>
+<li class="chapter" data-level="1.1.2" data-path="discrete-random-variables-an-example-using-the-binomial-distribution.html"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide"><i class="fa fa-check"></i><b>1.1.2</b> What information does a probability distribution provide?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="continuous-random-variables-an-example-using-the-normal-distribution.html"><a href="continuous-random-variables-an-example-using-the-normal-distribution.html"><i class="fa fa-check"></i><b>1.2</b> Continuous random variables: An example using the Normal distribution</a></li>
+<li class="chapter" data-level="1.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html"><i class="fa fa-check"></i><b>1.3</b> Other common distributions</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-standard-normal-mathitnormalmu0sigma1"><i class="fa fa-check"></i><b>1.3.1</b> The standard normal: <span class="math inline">\(\mathit{normal}(\mu=0,\sigma=1)\)</span></a></li>
+<li class="chapter" data-level="1.3.2" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-uniform-distribution"><i class="fa fa-check"></i><b>1.3.2</b> The uniform distribution</a></li>
+<li class="chapter" data-level="1.3.3" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-chi-square-distribution"><i class="fa fa-check"></i><b>1.3.3</b> The Chi-square distribution</a></li>
+<li class="chapter" data-level="1.3.4" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-t-distribution"><i class="fa fa-check"></i><b>1.3.4</b> The t-distribution</a></li>
+<li class="chapter" data-level="1.3.5" data-path="other-common-distributions.html"><a href="other-common-distributions.html#the-f-distribution"><i class="fa fa-check"></i><b>1.3.5</b> The F distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html"><i class="fa fa-check"></i><b>1.4</b> Bivariate and multivariate distributions</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-1-discrete-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.1</b> Example 1: Discrete bivariate distributions</a></li>
+<li class="chapter" data-level="1.4.2" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#example-2-continuous-bivariate-distributions"><i class="fa fa-check"></i><b>1.4.2</b> Example 2: Continuous bivariate distributions</a></li>
+<li class="chapter" data-level="1.4.3" data-path="bivariate-and-multivariate-distributions.html"><a href="bivariate-and-multivariate-distributions.html#generate-simulated-bivariate-multivariate-data"><i class="fa fa-check"></i><b>1.4.3</b> Generate simulated bivariate (multivariate) data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html"><i class="fa fa-check"></i><b>1.5</b> Likelihood and maximum likelihood estimation</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="likelihood-and-maximum-likelihood-estimation.html"><a href="likelihood-and-maximum-likelihood-estimation.html#the-importance-of-the-mle"><i class="fa fa-check"></i><b>1.5.1</b> The importance of the MLE</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="useful-r-functions-relating-to-univariate-distributions.html"><a href="useful-r-functions-relating-to-univariate-distributions.html"><i class="fa fa-check"></i><b>1.6</b> Useful R functions relating to univariate distributions</a></li>
+<li class="chapter" data-level="1.7" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>1.7</b> Summary</a></li>
+<li class="chapter" data-level="1.8" data-path="further-reading.html"><a href="further-reading.html"><i class="fa fa-check"></i><b>1.8</b> Further reading</a></li>
+<li class="chapter" data-level="1.9" data-path="sec:Foundationsexercises.html"><a href="sec:Foundationsexercises.html"><i class="fa fa-check"></i><b>1.9</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hypothetical-repeated-sampling-and-the-t-test.html"><a href="hypothetical-repeated-sampling-and-the-t-test.html"><i class="fa fa-check"></i><b>2</b> Hypothetical repeated sampling and the t-test</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><a href="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"><i class="fa fa-check"></i><b>2.1</b> Some terminology surrounding typical experiment designs in linguistics and psychology</a></li>
+<li class="chapter" data-level="2.2" data-path="the-central-limit-theorem-using-simulation.html"><a href="the-central-limit-theorem-using-simulation.html"><i class="fa fa-check"></i><b>2.2</b> The central limit theorem using simulation</a></li>
+<li class="chapter" data-level="2.3" data-path="three-examples-of-the-sampling-distribution.html"><a href="three-examples-of-the-sampling-distribution.html"><i class="fa fa-check"></i><b>2.3</b> Three examples of the sampling distribution</a></li>
+<li class="chapter" data-level="2.4" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html"><i class="fa fa-check"></i><b>2.4</b> The confidence interval, and what it’s good for</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="the-confidence-interval-and-what-its-good-for.html"><a href="the-confidence-interval-and-what-its-good-for.html#confidence-interals-are-often-misinterpreted"><i class="fa fa-check"></i><b>2.4.1</b> Confidence interals are often misinterpreted</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html"><i class="fa fa-check"></i><b>2.5</b> Hypothesis testing: The one sample t-test</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.1</b> The one-sample t-test</a></li>
+<li class="chapter" data-level="2.5.2" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-i-ii-error-and-power"><i class="fa fa-check"></i><b>2.5.2</b> Type I, II error, and power</a></li>
+<li class="chapter" data-level="2.5.3" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#how-to-compute-power-for-the-one-sample-t-test"><i class="fa fa-check"></i><b>2.5.3</b> How to compute power for the one-sample t-test</a></li>
+<li class="chapter" data-level="2.5.4" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-p-value"><i class="fa fa-check"></i><b>2.5.4</b> The p-value</a></li>
+<li class="chapter" data-level="2.5.5" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#the-distribution-of-the-p-value-under-the-null-hypothesis"><i class="fa fa-check"></i><b>2.5.5</b> The distribution of the p-value under the null hypothesis</a></li>
+<li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
+<li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
+<li class="chapter" data-level="2.7.2" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#a-complication-with-multiple-t-tests-inflation-of-type-i-error-probability"><i class="fa fa-check"></i><b>2.7.2</b> A complication with multiple t-tests: Inflation of Type I error probability</a></li>
+<li class="chapter" data-level="2.7.3" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.3</b> Analyzing a <span class="math inline">\(2\times 2\times 2\)</span> repeated measures design using paired t-tests</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.8</b> Common mistakes involving the (paired) t-test</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#ignoring-the-independence-assumption"><i class="fa fa-check"></i><b>2.8.1</b> Ignoring the independence assumption</a></li>
+<li class="chapter" data-level="2.8.2" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#doing-a-by-subjects-and-by-items-paired-t-test-is-generally-dangerous"><i class="fa fa-check"></i><b>2.8.2</b> Doing a by-subjects and by-items paired t-test is generally dangerous</a></li>
+<li class="chapter" data-level="2.8.3" data-path="common-mistakes-involving-the-paired-t-test.html"><a href="common-mistakes-involving-the-paired-t-test.html#the-difference-between-a-significant-and-a-non-significant-result-need-not-itself-be-significant"><i class="fa fa-check"></i><b>2.8.3</b> The difference between a significant and a non-significant result need not itself be significant</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>2.9</b> Summary</a></li>
+<li class="chapter" data-level="2.10" data-path="further-readings.html"><a href="further-readings.html"><i class="fa fa-check"></i><b>2.10</b> Further readings</a></li>
+<li class="chapter" data-level="2.11" data-path="sec:SamplingDistrnexercises.html"><a href="sec:SamplingDistrnexercises.html"><i class="fa fa-check"></i><b>2.11</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-models-and-linear-mixed-models.html"><a href="linear-models-and-linear-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Linear models and linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="from-the-t-test-to-the-linear-mixed-model.html"><a href="from-the-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.1</b> From the t-test to the linear (mixed) model</a></li>
+<li class="chapter" data-level="3.2" data-path="sum-coding.html"><a href="sum-coding.html"><i class="fa fa-check"></i><b>3.2</b> Sum coding</a></li>
+<li class="chapter" data-level="3.3" data-path="checking-model-assumptions.html"><a href="checking-model-assumptions.html"><i class="fa fa-check"></i><b>3.3</b> Checking model assumptions</a></li>
+<li class="chapter" data-level="3.4" data-path="from-the-paired-t-test-to-the-linear-mixed-model.html"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html"><i class="fa fa-check"></i><b>3.4</b> From the paired t-test to the linear mixed model</a></li>
+<li class="chapter" data-level="3.5" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html"><i class="fa fa-check"></i><b>3.5</b> Linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
+<li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
+<li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="hypothesis-testing-using-the-likelihood-ratio-test.html"><a href="hypothesis-testing-using-the-likelihood-ratio-test.html"><i class="fa fa-check"></i><b>4</b> Hypothesis testing using the likelihood ratio test</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="the-likelihood-ratio-test-the-theory.html"><a href="the-likelihood-ratio-test-the-theory.html"><i class="fa fa-check"></i><b>4.1</b> The likelihood ratio test: The theory</a></li>
+<li class="chapter" data-level="4.2" data-path="a-practical-example-using-simulated-data.html"><a href="a-practical-example-using-simulated-data.html"><i class="fa fa-check"></i><b>4.2</b> A practical example using simulated data</a></li>
+<li class="chapter" data-level="4.3" data-path="a-real-life-example-the-english-relative-clause-data.html"><a href="a-real-life-example-the-english-relative-clause-data.html"><i class="fa fa-check"></i><b>4.3</b> A real-life example: The English relative clause data</a></li>
+<li class="chapter" data-level="4.4" data-path="summary-3.html"><a href="summary-3.html"><i class="fa fa-check"></i><b>4.4</b> Summary</a></li>
+<li class="chapter" data-level="4.5" data-path="further-reading-2.html"><a href="further-reading-2.html"><i class="fa fa-check"></i><b>4.5</b> Further reading</a></li>
+<li class="chapter" data-level="4.6" data-path="sec:HypTestExercises.html"><a href="sec:HypTestExercises.html"><i class="fa fa-check"></i><b>4.6</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ch:LMtheory.html"><a href="ch:LMtheory.html"><i class="fa fa-check"></i><b>5</b> Linear modeling theory</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><i class="fa fa-check"></i><b>5.1</b> A quick review of some basic concepts in matrix algebra</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#matrix-addition-subtraction-and-multiplication"><i class="fa fa-check"></i><b>5.1.1</b> Matrix addition, subtraction, and multiplication</a></li>
+<li class="chapter" data-level="5.1.2" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#diagonal-matrix-and-identity-matrix"><i class="fa fa-check"></i><b>5.1.2</b> Diagonal matrix and identity matrix</a></li>
+<li class="chapter" data-level="5.1.3" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#powers-of-matrices"><i class="fa fa-check"></i><b>5.1.3</b> Powers of matrices</a></li>
+<li class="chapter" data-level="5.1.4" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.1.4</b> Inverse of a matrix</a></li>
+<li class="chapter" data-level="5.1.5" data-path="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#linear-independence-and-rank"><i class="fa fa-check"></i><b>5.1.5</b> Linear independence, and rank</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html"><i class="fa fa-check"></i><b>5.2</b> The essentials of linear modeling theory</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#least-squares-estimation-geometric-argument"><i class="fa fa-check"></i><b>5.2.1</b> Least squares estimation: Geometric argument</a></li>
+<li class="chapter" data-level="5.2.2" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#the-expectation-and-variance-of-the-parameters-beta"><i class="fa fa-check"></i><b>5.2.2</b> The expectation and variance of the parameters beta</a></li>
+<li class="chapter" data-level="5.2.3" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#hypothesis-testing-using-analysis-of-variance-anova"><i class="fa fa-check"></i><b>5.2.3</b> Hypothesis testing using Analysis of variance (ANOVA)</a></li>
+<li class="chapter" data-level="5.2.4" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#some-further-important-topics-in-linear-modeling"><i class="fa fa-check"></i><b>5.2.4</b> Some further important topics in linear modeling</a></li>
+<li class="chapter" data-level="5.2.5" data-path="the-essentials-of-linear-modeling-theory.html"><a href="the-essentials-of-linear-modeling-theory.html#generalized-linear-models"><i class="fa fa-check"></i><b>5.2.5</b> Generalized linear models</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="summary-4.html"><a href="summary-4.html"><i class="fa fa-check"></i><b>5.3</b> Summary</a></li>
+<li class="chapter" data-level="5.4" data-path="further-reading-3.html"><a href="further-reading-3.html"><i class="fa fa-check"></i><b>5.4</b> Further reading</a></li>
+<li class="chapter" data-level="5.5" data-path="sec:LMExercises2.html"><a href="sec:LMExercises2.html"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ch:contr.html"><a href="ch:contr.html"><i class="fa fa-check"></i><b>6</b> Contrast coding</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html"><i class="fa fa-check"></i><b>6.1</b> Basic concepts illustrated using a two-level factor</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts"><i class="fa fa-check"></i><b>6.1.1</b> Default contrast coding: Treatment contrasts</a></li>
+<li class="chapter" data-level="6.1.2" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix"><i class="fa fa-check"></i><b>6.1.2</b> Defining hypotheses</a></li>
+<li class="chapter" data-level="6.1.3" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding"><i class="fa fa-check"></i><b>6.1.3</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.1.4" data-path="basic-concepts-illustrated-using-a-two-level-factor.html"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans"><i class="fa fa-check"></i><b>6.1.4</b> Cell means parameterization and posterior comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><i class="fa fa-check"></i><b>6.2</b> The hypothesis matrix illustrated with a three-level factor</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#sumcontrasts"><i class="fa fa-check"></i><b>6.2.1</b> Sum contrasts</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#the-hypothesis-matrix"><i class="fa fa-check"></i><b>6.2.2</b> The hypothesis matrix</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"><a href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html#generating-contrasts-the-hypr-package"><i class="fa fa-check"></i><b>6.2.3</b> Generating contrasts: The <code>hypr</code> package</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html"><i class="fa fa-check"></i><b>6.3</b> Further examples of contrasts illustrated with a factor with four levels</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#repeatedcontrasts"><i class="fa fa-check"></i><b>6.3.1</b> Repeated contrasts</a></li>
+<li class="chapter" data-level="6.3.2" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#contrasts-in-linear-regression-analysis-the-design-or-model-matrix"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts in linear regression analysis: The design or model matrix</a></li>
+<li class="chapter" data-level="6.3.3" data-path="sec:4levelFactor.html"><a href="sec:4levelFactor.html#polynomialContrasts"><i class="fa fa-check"></i><b>6.3.3</b> Polynomial contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html"><i class="fa fa-check"></i><b>6.4</b> What makes a good set of contrasts?</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#centered-contrasts"><i class="fa fa-check"></i><b>6.4.1</b> Centered contrasts</a></li>
+<li class="chapter" data-level="6.4.2" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#orthogonal-contrasts"><i class="fa fa-check"></i><b>6.4.2</b> Orthogonal contrasts</a></li>
+<li class="chapter" data-level="6.4.3" data-path="nonOrthogonal.html"><a href="nonOrthogonal.html#the-role-of-the-intercept-in-non-centered-contrasts"><i class="fa fa-check"></i><b>6.4.3</b> The role of the intercept in non-centered contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="summary-5.html"><a href="summary-5.html"><i class="fa fa-check"></i><b>6.5</b> Summary</a></li>
+<li class="chapter" data-level="6.6" data-path="further-reading-4.html"><a href="further-reading-4.html"><i class="fa fa-check"></i><b>6.6</b> Further reading</a></li>
+<li class="chapter" data-level="6.7" data-path="sec:Contrastsexercises.html"><a href="sec:Contrastsexercises.html"><i class="fa fa-check"></i><b>6.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch:coding2x2.html"><a href="ch:coding2x2.html"><i class="fa fa-check"></i><b>7</b> Contrast coding for designs with two predictor variables</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html"><i class="fa fa-check"></i><b>7.1</b> Contrast coding in a factorial 2 x 2 design</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression"><i class="fa fa-check"></i><b>7.1.1</b> The difference between an ANOVA and a multiple regression</a></li>
+<li class="chapter" data-level="7.1.2" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#nestedEffects"><i class="fa fa-check"></i><b>7.1.2</b> Nested effects</a></li>
+<li class="chapter" data-level="7.1.3" data-path="sec:MR:ANOVA.html"><a href="sec:MR:ANOVA.html#interactions-between-contrasts"><i class="fa fa-check"></i><b>7.1.3</b> Interactions between contrasts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html"><i class="fa fa-check"></i><b>7.2</b> One factor and one covariate</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-a-group-difference-and-controlling-for-a-covariate"><i class="fa fa-check"></i><b>7.2.1</b> Estimating a group-difference and controlling for a covariate</a></li>
+<li class="chapter" data-level="7.2.2" data-path="sec:contrast:covariate.html"><a href="sec:contrast:covariate.html#estimating-differences-in-slopes"><i class="fa fa-check"></i><b>7.2.2</b> Estimating differences in slopes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="sec:interactions:NLM.html"><a href="sec:interactions:NLM.html"><i class="fa fa-check"></i><b>7.3</b> Interactions in generalized linear models (with non-linear link functions)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>7.4</b> Summary</a></li>
+<li class="chapter" data-level="7.5" data-path="sec:Contrasts2x2exercises.html"><a href="sec:Contrasts2x2exercises.html"><i class="fa fa-check"></i><b>7.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="using-simulation-to-understand-your-model.html"><a href="using-simulation-to-understand-your-model.html"><i class="fa fa-check"></i><b>8</b> Using simulation to understand your model</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="a-reminder-the-maximal-linear-mixed-model.html"><a href="a-reminder-the-maximal-linear-mixed-model.html"><i class="fa fa-check"></i><b>8.1</b> A reminder: The maximal linear mixed model</a></li>
+<li class="chapter" data-level="8.2" data-path="obtain-estimates-from-a-previous-study.html"><a href="obtain-estimates-from-a-previous-study.html"><i class="fa fa-check"></i><b>8.2</b> Obtain estimates from a previous study</a></li>
+<li class="chapter" data-level="8.3" data-path="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><a href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"><i class="fa fa-check"></i><b>8.3</b> Decide on a range of plausible values of the effect size</a></li>
+<li class="chapter" data-level="8.4" data-path="extract-parameter-estimates.html"><a href="extract-parameter-estimates.html"><i class="fa fa-check"></i><b>8.4</b> Extract parameter estimates</a></li>
+<li class="chapter" data-level="8.5" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html"><i class="fa fa-check"></i><b>8.5</b> Define a function for generating data</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-a-latin-square-design"><i class="fa fa-check"></i><b>8.5.1</b> Generate a Latin-square design</a></li>
+<li class="chapter" data-level="8.5.2" data-path="define-a-function-for-generating-data.html"><a href="define-a-function-for-generating-data.html#generate-data-row-by-row"><i class="fa fa-check"></i><b>8.5.2</b> Generate data row-by-row</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="repeated-generation-of-data-to-compute-power.html"><a href="repeated-generation-of-data-to-compute-power.html"><i class="fa fa-check"></i><b>8.6</b> Repeated generation of data to compute power</a></li>
+<li class="chapter" data-level="8.7" data-path="what-you-can-now-do.html"><a href="what-you-can-now-do.html"><i class="fa fa-check"></i><b>8.7</b> What you can now do</a></li>
+<li class="chapter" data-level="8.8" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html"><i class="fa fa-check"></i><b>8.8</b> Using the package <code>designr</code> to simulate data and compute power</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-with-two-conditions"><i class="fa fa-check"></i><b>8.8.1</b> Simulating data with two conditions</a></li>
+<li class="chapter" data-level="8.8.2" data-path="using-the-package-designr-to-simulate-data-and-compute-power.html"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-in-factorial-designs"><i class="fa fa-check"></i><b>8.8.2</b> Simulating data in factorial designs</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="sec:Simulationexercises.html"><a href="sec:Simulationexercises.html"><i class="fa fa-check"></i><b>8.9</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch:MultComp.html"><a href="ch:MultComp.html"><i class="fa fa-check"></i><b>9</b> Understanding Type I error inflation using simulation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><i class="fa fa-check"></i><b>9.1</b> Overly simple random effects structure in LMMs inflate Type I error</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-only-model"><i class="fa fa-check"></i><b>9.1.1</b> Type I error with a varying intercepts-only model</a></li>
+<li class="chapter" data-level="9.1.2" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-and-varying-slopes-model"><i class="fa fa-check"></i><b>9.1.2</b> Type I error with a varying intercepts and varying slopes model</a></li>
+<li class="chapter" data-level="9.1.3" data-path="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-inflation-due-to-model-mis-specification"><i class="fa fa-check"></i><b>9.1.3</b> Type I error inflation due to model mis-specification</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="type-i-error-inflation-due-to-multiple-comparisons.html"><a href="type-i-error-inflation-due-to-multiple-comparisons.html"><i class="fa fa-check"></i><b>9.2</b> Type I error inflation due to multiple comparisons</a></li>
+<li class="chapter" data-level="9.3" data-path="the-practical-implications.html"><a href="the-practical-implications.html"><i class="fa fa-check"></i><b>9.3</b> The practical implications</a></li>
+<li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="type-i-error-inflation-due-to-multiple-comparisons" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Type I error inflation due to multiple comparisons</h2>
+<p>Next, we consider a case where the design is more complex than a two-condition experiment. The data are from an eyetracking reading study conducted by <span class="citation"><a href="#ref-Dillon-EtAl-2013" role="doc-biblioref">Dillon et al.</a> (<a href="#ref-Dillon-EtAl-2013" role="doc-biblioref">2013</a>)</span>; this is a <span class="math inline">\(2\times 2 \times 2\)</span> repeated measures design. The dependent measure is total reading time at a particular word in the sentence. Because there are eight conditions, we can carry out at most seven comparisons.</p>
+<p>The question we want to answer here is: if we carry out multiple (here, seven) hypothesis tests, what will be the probability of rejecting at least one of them incorrectly? Analytically, the answer is easy to compute. Assume that the Type I error probability for each hypothesis test is 0.05. To keep things simple, suppose we are testing two null hypotheses. The probability of getting both the two null hypothesis tests correctly accepted is <span class="math inline">\(0.95^2\)</span>; this assumes that the tests are independent. It follows that the probability of getting at least one null hypothesis test incorrectly rejected is <span class="math inline">\(1-0.95^2=0.0.0975\)</span>. That’s higher than our desired Type I error of 0.05.</p>
+<p></p>
+<p>Next, let’s see what simulation gives us when we fit a varying intercepts and slopes model for the case where we are testing seven hypotheses.</p>
+<p>First, load the data, and obtain the estimates from a fitted linear mixed model with full variance-covariance matrices for subjects and items. Because fitting such a model with <code>lmer</code> will lead to convergence errors, we fit the model using a Bayesian linear mixed model, and use the estimates from this model to simulate data.</p>
+<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb843-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lingpsych)</span>
+<span id="cb843-2"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb843-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;dillonE1ttnested&quot;</span>)</span>
+<span id="cb843-3"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb843-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb843-4"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb843-4" aria-hidden="true" tabindex="-1"></a>postD_mE1ttnested<span class="ot">&lt;-</span><span class="fu">posterior_samples</span>(dillonE1ttnested)</span></code></pre></div>
+<pre><code>## Warning: Method &#39;posterior_samples&#39; is deprecated.
+## Please see ?as_draws for recommended alternatives.</code></pre>
+<div class="sourceCode" id="cb845"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb845-1"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb845-1" aria-hidden="true" tabindex="-1"></a>beta1<span class="ot">&lt;-</span>postD_mE1ttnested<span class="sc">$</span>b_Intercept</span>
+<span id="cb845-2"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb845-2" aria-hidden="true" tabindex="-1"></a>beta2<span class="ot">&lt;-</span>postD_mE1ttnested<span class="sc">$</span><span class="st">&quot;b_dep&quot;</span></span>
+<span id="cb845-3"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb845-3" aria-hidden="true" tabindex="-1"></a>beta3<span class="ot">&lt;-</span>postD_mE1ttnested<span class="sc">$</span><span class="st">&quot;b_gram&quot;</span></span>
+<span id="cb845-4"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb845-4" aria-hidden="true" tabindex="-1"></a>beta4<span class="ot">&lt;-</span>postD_mE1ttnested<span class="sc">$</span><span class="st">&quot;b_dep:gram&quot;</span></span>
+<span id="cb845-5"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb845-5" aria-hidden="true" tabindex="-1"></a>beta5<span class="ot">&lt;-</span>postD_mE1ttnested<span class="sc">$</span><span class="st">&quot;b_int.rg&quot;</span></span>
+<span id="cb845-6"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb845-6" aria-hidden="true" tabindex="-1"></a>beta6<span class="ot">&lt;-</span>postD_mE1ttnested<span class="sc">$</span><span class="st">&quot;b_int.ag&quot;</span></span>
+<span id="cb845-7"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb845-7" aria-hidden="true" tabindex="-1"></a><span class="do">## the two estimates of interest:</span></span>
+<span id="cb845-8"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb845-8" aria-hidden="true" tabindex="-1"></a>beta7<span class="ot">&lt;-</span>postD_mE1ttnested<span class="sc">$</span><span class="st">&quot;b_int.ru&quot;</span></span>
+<span id="cb845-9"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb845-9" aria-hidden="true" tabindex="-1"></a>beta8<span class="ot">&lt;-</span>postD_mE1ttnested<span class="sc">$</span><span class="st">&quot;b_int.au&quot;</span></span>
+<span id="cb845-10"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb845-10" aria-hidden="true" tabindex="-1"></a>betameans<span class="ot">&lt;-</span><span class="fu">c</span>(beta1,beta2,beta3,beta4,beta5,beta6,beta7,beta8)</span>
+<span id="cb845-11"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb845-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb845-12"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb845-12" aria-hidden="true" tabindex="-1"></a>cor<span class="ot">&lt;-</span><span class="fu">posterior_samples</span>(postD_mE1ttnested,<span class="st">&quot;^cor&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Method &#39;posterior_samples&#39; is deprecated.
+## Please see ?as_draws for recommended alternatives.</code></pre>
+<div class="sourceCode" id="cb847"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb847-1"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb847-1" aria-hidden="true" tabindex="-1"></a>sd<span class="ot">&lt;-</span><span class="fu">posterior_samples</span>(postD_mE1ttnested,<span class="st">&quot;^sd&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Method &#39;posterior_samples&#39; is deprecated.
+## Please see ?as_draws for recommended alternatives.</code></pre>
+<div class="sourceCode" id="cb849"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb849-1"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb849-1" aria-hidden="true" tabindex="-1"></a>sigma<span class="ot">&lt;-</span><span class="fu">posterior_samples</span>(postD_mE1ttnested,<span class="st">&quot;sigma&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Method &#39;posterior_samples&#39; is deprecated.
+## Please see ?as_draws for recommended alternatives.</code></pre>
+<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb851-1"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb851-1" aria-hidden="true" tabindex="-1"></a>item_re<span class="ot">&lt;-</span><span class="fu">posterior_samples</span>(postD_mE1ttnested,<span class="st">&quot;^r_item&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Method &#39;posterior_samples&#39; is deprecated.
+## Please see ?as_draws for recommended alternatives.</code></pre>
+<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb853-1"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb853-1" aria-hidden="true" tabindex="-1"></a>subj_re<span class="ot">&lt;-</span><span class="fu">posterior_samples</span>(postD_mE1ttnested,<span class="st">&quot;^r_subj&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Method &#39;posterior_samples&#39; is deprecated.
+## Please see ?as_draws for recommended alternatives.</code></pre>
+<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb855-1"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb855-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SIN)</span>
+<span id="cb855-2"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb855-2" aria-hidden="true" tabindex="-1"></a>sds<span class="ot">&lt;-</span><span class="fu">colMeans</span>(sd)</span>
+<span id="cb855-3"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb855-3" aria-hidden="true" tabindex="-1"></a>cors<span class="ot">&lt;-</span><span class="fu">colMeans</span>(cor)</span>
+<span id="cb855-4"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb855-4" aria-hidden="true" tabindex="-1"></a>sig<span class="ot">&lt;-</span><span class="fu">mean</span>(sigma<span class="sc">$</span>sigma)</span>
+<span id="cb855-5"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb855-5" aria-hidden="true" tabindex="-1"></a><span class="do">## assume intermediate correlation:</span></span>
+<span id="cb855-6"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb855-6" aria-hidden="true" tabindex="-1"></a>cormat<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="fl">0.5</span>,<span class="dv">8</span><span class="sc">*</span><span class="dv">8</span>),<span class="at">ncol=</span><span class="dv">8</span>)</span>
+<span id="cb855-7"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb855-7" aria-hidden="true" tabindex="-1"></a>diagmat<span class="ot">&lt;-</span><span class="fu">diag</span>(<span class="fu">rep</span>(<span class="fl">0.5</span>,<span class="dv">8</span>))</span>
+<span id="cb855-8"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb855-8" aria-hidden="true" tabindex="-1"></a>cormat<span class="ot">&lt;-</span>cormat<span class="sc">+</span>diagmat</span>
+<span id="cb855-9"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb855-9" aria-hidden="true" tabindex="-1"></a>Sigma_u<span class="ot">&lt;-</span>SIN<span class="sc">::</span><span class="fu">sdcor2cov</span>(<span class="at">stddev=</span>sds[<span class="dv">8</span><span class="sc">+</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">4</span>))],</span>
+<span id="cb855-10"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb855-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">corr=</span>cormat)</span>
+<span id="cb855-11"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb855-11" aria-hidden="true" tabindex="-1"></a>Sigma_w<span class="ot">&lt;-</span>SIN<span class="sc">::</span><span class="fu">sdcor2cov</span>(<span class="at">stddev=</span>sds[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">4</span>)],</span>
+<span id="cb855-12"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb855-12" aria-hidden="true" tabindex="-1"></a>                          <span class="at">corr=</span>cormat)</span></code></pre></div>
+<p>Finally, we set all the slopes to zero, and compute Type I error under different conditions.</p>
+<div class="sourceCode" id="cb856"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb856-1"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb856-1" aria-hidden="true" tabindex="-1"></a><span class="do">## set all effects to 0:</span></span>
+<span id="cb856-2"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb856-2" aria-hidden="true" tabindex="-1"></a>betameans[<span class="dv">2</span><span class="sc">:</span><span class="dv">8</span>]<span class="ot">&lt;-</span><span class="dv">0</span></span></code></pre></div>
+<p>We will fit a model for a full variance-covariance matrix for both subjects and items. We avoid fitting the correlation parameters, because these will be difficult to estimate with the sample size (40 subjects and 48 items) used in the @<span class="citation"><a href="#ref-Dillon-EtAl-2013" role="doc-biblioref">Dillon et al.</a> (<a href="#ref-Dillon-EtAl-2013" role="doc-biblioref">2013</a>)</span> study. To illustrate the effect of mis-specification of the likelihood function, we will fit the simulated data to both log and raw reading times.</p>
+<div class="sourceCode" id="cb857"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb857-1"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-1" aria-hidden="true" tabindex="-1"></a><span class="do">## full model:</span></span>
+<span id="cb857-2"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-2" aria-hidden="true" tabindex="-1"></a>nsim<span class="ot">&lt;-</span><span class="dv">100</span></span>
+<span id="cb857-3"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-3" aria-hidden="true" tabindex="-1"></a>significantlog<span class="ot">&lt;-</span>significantraw<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="dv">0</span>,nsim,<span class="at">ncol=</span><span class="dv">7</span>)</span>
+<span id="cb857-4"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-4" aria-hidden="true" tabindex="-1"></a><span class="do">## record failed convergences, remove these later:</span></span>
+<span id="cb857-5"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-5" aria-hidden="true" tabindex="-1"></a>failedlog<span class="ot">&lt;-</span>failedraw<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">0</span>,nsim)</span>
+<span id="cb857-6"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb857-7"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb857-8"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  print(paste(&quot;********simulation &quot;,i,&quot;********&quot;,sep=&quot;&quot;))</span></span>
+<span id="cb857-9"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-9" aria-hidden="true" tabindex="-1"></a>  simdat<span class="ot">&lt;-</span><span class="fu">gen_fake_lnorm2x2x2</span>(<span class="at">beta =</span> betameans,</span>
+<span id="cb857-10"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-10" aria-hidden="true" tabindex="-1"></a>                               <span class="at">Sigma_u=</span>Sigma_u,<span class="at">Sigma_w=</span>Sigma_w,</span>
+<span id="cb857-11"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-11" aria-hidden="true" tabindex="-1"></a>                               <span class="at">sigma_e=</span>sig,<span class="at">nitem=</span><span class="dv">48</span>,</span>
+<span id="cb857-12"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-12" aria-hidden="true" tabindex="-1"></a>                               <span class="at">nsubj=</span><span class="dv">40</span>)</span>
+<span id="cb857-13"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb857-14"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-14" aria-hidden="true" tabindex="-1"></a>  m_fakelog<span class="ot">&lt;-</span><span class="fu">lmer</span>(<span class="fu">log</span>(rt)<span class="sc">~</span>Dep<span class="sc">+</span>Gram<span class="sc">+</span>DepxGram<span class="sc">+</span>Int_gram_refl<span class="sc">+</span>Int_gram_agr<span class="sc">+</span></span>
+<span id="cb857-15"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-15" aria-hidden="true" tabindex="-1"></a>                 Int_ungram_refl<span class="sc">+</span>Int_ungram_agr<span class="sc">+</span></span>
+<span id="cb857-16"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-16" aria-hidden="true" tabindex="-1"></a>                 (<span class="dv">1</span><span class="sc">+</span>Dep<span class="sc">+</span>Gram<span class="sc">+</span>DepxGram<span class="sc">+</span>Int_gram_refl<span class="sc">+</span>Int_gram_agr<span class="sc">+</span></span>
+<span id="cb857-17"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-17" aria-hidden="true" tabindex="-1"></a>                    Int_ungram_refl<span class="sc">+</span>Int_ungram_agr<span class="sc">||</span>subj)<span class="sc">+</span></span>
+<span id="cb857-18"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-18" aria-hidden="true" tabindex="-1"></a>                 (<span class="dv">1</span><span class="sc">+</span>Dep<span class="sc">+</span>Gram<span class="sc">+</span>DepxGram<span class="sc">+</span>Int_gram_refl<span class="sc">+</span>Int_gram_agr<span class="sc">+</span></span>
+<span id="cb857-19"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-19" aria-hidden="true" tabindex="-1"></a>                    Int_ungram_refl<span class="sc">+</span>Int_ungram_agr<span class="sc">||</span>item),simdat,</span>
+<span id="cb857-20"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">control=</span><span class="fu">lmerControl</span>(<span class="at">optimizer=</span><span class="st">&quot;nloptwrap&quot;</span>, <span class="at">calc.derivs =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb857-21"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb857-22"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-22" aria-hidden="true" tabindex="-1"></a>    m_fakeraw<span class="ot">&lt;-</span><span class="fu">lmer</span>(rt<span class="sc">~</span>Dep<span class="sc">+</span>Gram<span class="sc">+</span>DepxGram<span class="sc">+</span>Int_gram_refl<span class="sc">+</span>Int_gram_agr<span class="sc">+</span></span>
+<span id="cb857-23"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-23" aria-hidden="true" tabindex="-1"></a>                 Int_ungram_refl<span class="sc">+</span>Int_ungram_agr<span class="sc">+</span></span>
+<span id="cb857-24"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-24" aria-hidden="true" tabindex="-1"></a>                 (<span class="dv">1</span><span class="sc">+</span>Dep<span class="sc">+</span>Gram<span class="sc">+</span>DepxGram<span class="sc">+</span>Int_gram_refl<span class="sc">+</span>Int_gram_agr<span class="sc">+</span></span>
+<span id="cb857-25"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-25" aria-hidden="true" tabindex="-1"></a>                    Int_ungram_refl<span class="sc">+</span>Int_ungram_agr<span class="sc">||</span>subj)<span class="sc">+</span></span>
+<span id="cb857-26"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-26" aria-hidden="true" tabindex="-1"></a>                 (<span class="dv">1</span><span class="sc">+</span>Dep<span class="sc">+</span>Gram<span class="sc">+</span>DepxGram<span class="sc">+</span>Int_gram_refl<span class="sc">+</span>Int_gram_agr<span class="sc">+</span></span>
+<span id="cb857-27"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-27" aria-hidden="true" tabindex="-1"></a>                    Int_ungram_refl<span class="sc">+</span>Int_ungram_agr<span class="sc">||</span>item),simdat,</span>
+<span id="cb857-28"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-28" aria-hidden="true" tabindex="-1"></a>               <span class="at">control=</span><span class="fu">lmerControl</span>(<span class="at">optimizer=</span><span class="st">&quot;nloptwrap&quot;</span>, </span>
+<span id="cb857-29"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-29" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">calc.derivs =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb857-30"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb857-31"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-31" aria-hidden="true" tabindex="-1"></a>  <span class="do">## ignore failed trials (log rts model)</span></span>
+<span id="cb857-32"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">any</span>( <span class="fu">grepl</span>(<span class="st">&quot;failed to converge&quot;</span>, m_fakelog<span class="sc">@</span>optinfo<span class="sc">$</span>conv<span class="sc">$</span>lme4<span class="sc">$</span>messages) ) <span class="sc">||</span></span>
+<span id="cb857-33"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-33" aria-hidden="true" tabindex="-1"></a>       <span class="fu">any</span>( <span class="fu">grepl</span>(<span class="st">&quot;singular&quot;</span>, m_fakelog<span class="sc">@</span>optinfo<span class="sc">$</span>conv<span class="sc">$</span>lme4<span class="sc">$</span>messages) )){</span>
+<span id="cb857-34"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-34" aria-hidden="true" tabindex="-1"></a>      failedlog[i]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-35"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-35" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span>{</span>
+<span id="cb857-36"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-36" aria-hidden="true" tabindex="-1"></a>  <span class="do">## first slope:</span></span>
+<span id="cb857-37"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-37" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakelog)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-38"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-38" aria-hidden="true" tabindex="-1"></a>    significantlog[i,<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-39"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-39" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantlog[i,<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-40"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-40" aria-hidden="true" tabindex="-1"></a>  <span class="do">## second slope:</span></span>
+<span id="cb857-41"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-41" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakelog)<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="dv">4</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-42"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-42" aria-hidden="true" tabindex="-1"></a>    significant[i,<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-43"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-43" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantlog[i,<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-44"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-44" aria-hidden="true" tabindex="-1"></a>  <span class="do">## third slope:</span></span>
+<span id="cb857-45"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakelog)<span class="sc">$</span>coefficients[<span class="dv">4</span>,<span class="dv">4</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-46"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-46" aria-hidden="true" tabindex="-1"></a>    significantlog[i,<span class="dv">3</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-47"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-47" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantlog[i,<span class="dv">3</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-48"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-48" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fourth slope:</span></span>
+<span id="cb857-49"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-49" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakelog)<span class="sc">$</span>coefficients[<span class="dv">5</span>,<span class="dv">4</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-50"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-50" aria-hidden="true" tabindex="-1"></a>    significant[i,<span class="dv">4</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-51"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-51" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantlog[i,<span class="dv">4</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-52"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-52" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fifth slope:</span></span>
+<span id="cb857-53"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-53" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakelog)<span class="sc">$</span>coefficients[<span class="dv">6</span>,<span class="dv">4</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-54"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-54" aria-hidden="true" tabindex="-1"></a>    significantlog[i,<span class="dv">5</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-55"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-55" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantlog[i,<span class="dv">5</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-56"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-56" aria-hidden="true" tabindex="-1"></a>  <span class="do">## sixth slope:</span></span>
+<span id="cb857-57"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakelog)<span class="sc">$</span>coefficients[<span class="dv">7</span>,<span class="dv">4</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-58"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-58" aria-hidden="true" tabindex="-1"></a>    significantlog[i,<span class="dv">6</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-59"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-59" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantlog[i,<span class="dv">6</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-60"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-60" aria-hidden="true" tabindex="-1"></a>  <span class="do">## seventh slope:</span></span>
+<span id="cb857-61"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-61" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakelog)<span class="sc">$</span>coefficients[<span class="dv">8</span>,<span class="dv">4</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-62"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-62" aria-hidden="true" tabindex="-1"></a>    significantlog[i,<span class="dv">7</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-63"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-63" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantlog[i,<span class="dv">7</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-64"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-64" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb857-65"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-65" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb857-66"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-66" aria-hidden="true" tabindex="-1"></a>    <span class="do">## ignore failed trials (raw rts model)</span></span>
+<span id="cb857-67"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">any</span>( <span class="fu">grepl</span>(<span class="st">&quot;failed to converge&quot;</span>, m_fakeraw<span class="sc">@</span>optinfo<span class="sc">$</span>conv<span class="sc">$</span>lme4<span class="sc">$</span>messages) ) <span class="sc">||</span></span>
+<span id="cb857-68"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-68" aria-hidden="true" tabindex="-1"></a>       <span class="fu">any</span>( <span class="fu">grepl</span>(<span class="st">&quot;singular&quot;</span>, m_fakeraw<span class="sc">@</span>optinfo<span class="sc">$</span>conv<span class="sc">$</span>lme4<span class="sc">$</span>messages) )){</span>
+<span id="cb857-69"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-69" aria-hidden="true" tabindex="-1"></a>      failedraw[i]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-70"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-70" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span>{</span>
+<span id="cb857-71"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-71" aria-hidden="true" tabindex="-1"></a>  <span class="do">## first slope:</span></span>
+<span id="cb857-72"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-72" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakeraw)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-73"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-73" aria-hidden="true" tabindex="-1"></a>    significantraw[i,<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-74"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-74" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantraw[i,<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-75"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-75" aria-hidden="true" tabindex="-1"></a>  <span class="do">## second slope:</span></span>
+<span id="cb857-76"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-76" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakeraw)<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="dv">4</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-77"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-77" aria-hidden="true" tabindex="-1"></a>    significant[i,<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-78"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-78" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantraw[i,<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-79"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-79" aria-hidden="true" tabindex="-1"></a>  <span class="do">## third slope:</span></span>
+<span id="cb857-80"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-80" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakeraw)<span class="sc">$</span>coefficients[<span class="dv">4</span>,<span class="dv">4</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-81"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-81" aria-hidden="true" tabindex="-1"></a>    significantraw[i,<span class="dv">3</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-82"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-82" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantraw[i,<span class="dv">3</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-83"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-83" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fourth slope:</span></span>
+<span id="cb857-84"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-84" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakeraw)<span class="sc">$</span>coefficients[<span class="dv">5</span>,<span class="dv">4</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-85"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-85" aria-hidden="true" tabindex="-1"></a>    significant[i,<span class="dv">4</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-86"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-86" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantraw[i,<span class="dv">4</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-87"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-87" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fifth slope:</span></span>
+<span id="cb857-88"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-88" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakeraw)<span class="sc">$</span>coefficients[<span class="dv">6</span>,<span class="dv">4</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-89"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-89" aria-hidden="true" tabindex="-1"></a>    significantraw[i,<span class="dv">5</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-90"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-90" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantraw[i,<span class="dv">5</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-91"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-91" aria-hidden="true" tabindex="-1"></a>  <span class="do">## sixth slope:</span></span>
+<span id="cb857-92"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-92" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakeraw)<span class="sc">$</span>coefficients[<span class="dv">7</span>,<span class="dv">4</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-93"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-93" aria-hidden="true" tabindex="-1"></a>    significantraw[i,<span class="dv">6</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-94"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-94" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantraw[i,<span class="dv">6</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-95"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-95" aria-hidden="true" tabindex="-1"></a>  <span class="do">## seventh slope:</span></span>
+<span id="cb857-96"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-96" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m_fakeraw)<span class="sc">$</span>coefficients[<span class="dv">8</span>,<span class="dv">4</span>])<span class="sc">&gt;</span><span class="dv">2</span>){</span>
+<span id="cb857-97"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-97" aria-hidden="true" tabindex="-1"></a>    significantraw[i,<span class="dv">7</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb857-98"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-98" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {significantraw[i,<span class="dv">7</span>]<span class="ot">&lt;-</span><span class="dv">0</span>}</span>
+<span id="cb857-99"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-99" aria-hidden="true" tabindex="-1"></a>  }  </span>
+<span id="cb857-100"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-100" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb857-101"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb857-102"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-102" aria-hidden="true" tabindex="-1"></a><span class="do">## In 100 simulations, what is the proportion of times that *at least one* of the effects is significant?</span></span>
+<span id="cb857-103"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-103" aria-hidden="true" tabindex="-1"></a><span class="do">## Log rt model:</span></span>
+<span id="cb857-104"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-104" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(significantlog,<span class="at">file=</span><span class="st">&quot;maxmodelsiglog.rda&quot;</span>)</span>
+<span id="cb857-105"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-105" aria-hidden="true" tabindex="-1"></a>countslog<span class="ot">&lt;-</span><span class="fu">table</span>(<span class="fu">rowSums</span>(significantlog)<span class="sc">&gt;</span><span class="dv">0</span>)</span>
+<span id="cb857-106"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-106" aria-hidden="true" tabindex="-1"></a><span class="do">## Type I error under multiple comparisons:</span></span>
+<span id="cb857-107"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-107" aria-hidden="true" tabindex="-1"></a>countslog[<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(countslog)</span>
+<span id="cb857-108"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb857-109"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-109" aria-hidden="true" tabindex="-1"></a><span class="do">## Raw rt model:</span></span>
+<span id="cb857-110"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-110" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(significantraw,<span class="at">file=</span><span class="st">&quot;maxmodelsigraw.rda&quot;</span>)</span>
+<span id="cb857-111"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-111" aria-hidden="true" tabindex="-1"></a>countsraw<span class="ot">&lt;-</span><span class="fu">table</span>(<span class="fu">rowSums</span>(significantraw)<span class="sc">&gt;</span><span class="dv">0</span>)</span>
+<span id="cb857-112"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-112" aria-hidden="true" tabindex="-1"></a><span class="do">## Type I error under multiple comparisons:</span></span>
+<span id="cb857-113"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb857-113" aria-hidden="true" tabindex="-1"></a>countsraw[<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(countsraw)</span></code></pre></div>
+<p>What we see below is that (a) with the log reading time model, we get an inflation of Type I error when we compare multiple hypotheses, (b) model mis-specification (using a Normal likelihood when a log-normal should have been used) will further inflate Type I error.</p>
+<div class="sourceCode" id="cb858"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb858-1"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb858-1" aria-hidden="true" tabindex="-1"></a>countslog<span class="ot">&lt;-</span><span class="fu">table</span>(<span class="fu">rowSums</span>(significantlog)<span class="sc">&gt;</span><span class="dv">0</span>)</span>
+<span id="cb858-2"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb858-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Type I error under multiple comparisons:</span></span>
+<span id="cb858-3"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb858-3" aria-hidden="true" tabindex="-1"></a>countslog[<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(countslog)</span></code></pre></div>
+<pre><code>## TRUE 
+## 0.21</code></pre>
+<div class="sourceCode" id="cb860"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb860-1"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb860-1" aria-hidden="true" tabindex="-1"></a>countsraw<span class="ot">&lt;-</span><span class="fu">table</span>(<span class="fu">rowSums</span>(significantraw)<span class="sc">&gt;</span><span class="dv">0</span>)</span>
+<span id="cb860-2"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb860-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Type I error under multiple comparisons + model mis-specification:</span></span>
+<span id="cb860-3"><a href="type-i-error-inflation-due-to-multiple-comparisons.html#cb860-3" aria-hidden="true" tabindex="-1"></a>countsraw[<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(countsraw)</span></code></pre></div>
+<pre><code>## TRUE 
+##  0.3</code></pre>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Dillon-EtAl-2013" class="csl-entry">
+Dillon, Brian W., Alan Mishler, Shayne Sloggett, and Colin Phillips. 2013. <span>“Contrasting Intrusion Profiles for Agreement and Anaphora: <span>E</span>xperimental and Modeling Evidence.”</span> <em>Journal of Memory and Language</em> 69 (2): 85–103.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-practical-implications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown/edit/master/inst/examples/09-multiplecomparisons.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Freq_CogSci.pdf", "Freq_CogSci.epub", "Freq_CogSci.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
