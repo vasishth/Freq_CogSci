@@ -1,8 +1,10 @@
 # Linear models and linear mixed models
 
+The t-tests discussed in chapter 2 can be re-cast as linear models. The two-sample t-test corresponds to the simple linear model, and the paired t-test to the linear mixed model. This connection between the two seemingly different types of statistical models allows us to go beyond the narrow confines of the t-test and to investigate more sophisticated and more complicated research questions.
+
 ## From the t-test to the linear (mixed) model
 
-We begin with the @grodner self-paced reading data we saw in the previous chapter. Load the data and compute the means for the raw reading times by condition:
+We begin with the now-familiar @grodner self-paced reading data; this design was first presented in chapter 2. Load the data and compute the means for the raw reading times by condition:
 
 ```{r}
 library(lingpsych)
@@ -59,18 +61,20 @@ For now, consider only the by-subject analysis.
 Given the sample means shown above for the two conditions, 
 we can rewrite our best guess about how the object and subject relative clause reading time distributions were generated:
 
-- Object relative: $Normal(471,\hat\sigma)$
-- Subject relative: $Normal(369,\hat\sigma)$
+- Object relative reading time: $Normal(471,\hat\sigma)$
+- Subject relative reading time: $Normal(369,\hat\sigma)$
 
-This can also be rewritten with respect to the object relative mean and the difference between the two conditions (the reasons for this will become clear presently):
+Here, $\hat\sigma$ is the estimated standard deviation; it is assumed to be the same for the two relative clause conditions. Right now the focus is only on the two estimates mean reading times for the two conditions.
+
+The above two statements about the underlying pdf that produced the two relative clause conditions' reading times can also be rewritten with respect to the mean reading time of the object relative and the difference between the two conditions (the reasons for this will become clear presently):
 
 - Object relative: $Normal(471-102\times 0,\hat\sigma)$
 - Subject relative: $Normal(471-102\times 1,\hat\sigma)$
 
 
-Note that the two distributions for object and subject relative clauses (RCs) are assumed to be independent. This assumed independence is expressed by the fact that we define two separate Normal distributions, one for object relatives and the other for subject  relatives. We saw earlier that this assumption of independence does not hold in our data, because we have one data point for each RC type from the same subject. However, for now we will ignore this detail; we will fix this  shortcoming later.
+Note that the two distributions for object and subject relative clauses (RCs) are assumed to be independent. This assumed independence is expressed by the fact that we define two separate Normal distributions, one for object relatives and the other for subject  relatives. We saw earlier that this assumption of independence does not hold in our data because, in the aggregated data, each subject delivers a data point for subject relatives and another data point for object relatives. However, for now we will ignore this detail; we will fix this  shortcoming later.
 
-The interesting point to notice here is that the mean for the object and subject relatives' distributions can be rewritten as a sum of two terms. A completely equivalent way to express the fact that object relatives are coming from a $Normal(471,\hat\sigma)$ is to say that each object relative data-point can be described by the following equation:
+The interesting point to notice here is that the mean for the object and subject relatives' distributions can be rewritten as a sum of two terms. A completely equivalent way to express the fact that object relatives are coming from a $Normal(471,\hat\sigma)$ is to say that each object relative data point can be described by the following equation:
 
 \begin{equation}
 y = 471 + -102 \times 0 + \varepsilon \hfill \hbox{ where } \varepsilon \sim Normal(0,\hat\sigma)
@@ -82,7 +86,7 @@ Similarly, the subject relative's distribution can be written as being generated
 y = 471 - 102 \times 1 + \varepsilon \hbox{ where } \varepsilon \sim Normal(0,\hat\sigma)
 \end{equation}
 
-In these data,  the parameter $\hat\sigma$ is estimated to be $213$. How do we know what this estimate is? This parameter's estimate can be derived from the by-subjects t-test output above: The observed t-value is 
+In these data,  the parameter $\hat\sigma$ is estimated to be $213$ ms. How do we know what this estimate is? This parameter's estimate can be derived from the by-subject t-test output above: The observed t-value is 
 
 \begin{equation}
 t_obs= \frac{\bar{x}}{s/\sqrt{n}} 
@@ -94,7 +98,7 @@ Solving for $s$:
  s = \bar{x} \times \sqrt{n}/t_obs = -102 \times \sqrt{42}/-3.109  =  213
 \end{equation}
 
-So, our model for the relative clause data consists of two equations:
+So, based on the data, our model for the relative clause data consists of two equations:
 
 Object relatives:
 
@@ -110,7 +114,7 @@ y = 471 - 102\times 1 + \varepsilon \hbox{ where } \varepsilon \sim Normal(0,213
 
 The above statements describe a *generative process* for the data. 
 
-Given such a statement about the generative process, we can express the estimated mean reading times for each RC type as follows. We can  ignore the term $\varepsilon$ because it has mean 0 (we stipulate this when we specify that $\varepsilon \sim Normal(0,\sigma)$).
+Given such a statement about the generative process, we can express the estimated mean reading times for each RC type as follows. The term $\varepsilon$ has mean 0; we stipulate this when we specify that $\varepsilon \sim Normal(0,\sigma)$.
 
 Mean object relative reading times:
 
@@ -124,14 +128,14 @@ Mean subject relative reading times:
 \hbox{Mean SR RT} = 471 - 102\times 1 
 \end{equation}
 
-There is a function in R, the `lm()` function, which expresses the above statistical model, and prints out exactly the same numerical values that we used above:
+There is a function in R, the `lm()` function, which expresses the above statistical model, and prints out exactly the same numerical values that are shown above:
 
 ```{r}
 summary(m0 <- lm(rawRT ~ condition, bysubj))$coefficients
 ```
 
 
-The linear model function `lm()` prints out two coefficients, $471$ and  $-102$, that help express the mean reading times for object and subject relative data, using a simple coding scheme: object relatives are coded as 0, and subject relatives are coded as 1. This coding scheme is not visible to the user, but is represented internally in R.  The user can see the coding for each condition level by typing:
+The linear model function `lm()` prints out two coefficients, $471$ and  $-102$, that help express the mean reading times for object and subject relative data, using a simple coding scheme: object relatives are coded as 0, and subject relatives are coded as 1. This coding scheme is not visible to the user, but is represented internally in R.  However, the user can see the coding for each condition level by typing:
 
 ```{r}
 ## make sure that the condition column is of type factor:
@@ -141,7 +145,7 @@ contrasts(bysubj$condition)
 
 We will discuss contrast coding in  detail in a later chapter, but right now the simple 0,1 coding above---called treatment contrasts---is enough for our purposes.
 
-Thus, what the linear model above gives us is two numbers: the mean object relative reading time (471), and the *difference* between object and subject relative (-102). We can extract the two coefficients by typing:
+Thus, what the linear model above gives us is two numbers: the estimated mean object relative reading time (471), and the estimated *difference* between object and subject relative (-102). We can extract the two coefficients by typing:
 
 ```{r}
 round(coef(m0))
@@ -177,16 +181,16 @@ contrasts(bysubj$condition)
 In mathematical form, the model can now be stated as a single equation:
 
 \begin{equation}
-rawRT = \beta_0 + \beta_1 condition + \varepsilon
+rawRT = \hat\beta_0 + \hat\beta_1 condition + \varepsilon
 \end{equation}
 
 where 
 
 - condition is a 0,1 coded vector, with object relatives coded as 0, and subject relatives coded as 1.
-- $\beta_0$ is the mean for the object relative (which is coded as 0)
-- $\beta_1$ is the amount by which the object relative mean must be 
-changed to obtain the mean for the subject relative.
-- $\varepsilon$ is the noisy variation from trial to trial around the means for the two conditions, represented by $Normal(0,213)$.  
+- $\hat\beta_0$ is the estimated mean for the object relative (which is coded as 0)
+- $\hat\beta_1$ is the amount by which the object relative mean must be 
+changed to obtain the estimated mean for the subject relative.
+- $\varepsilon$ is the noisy variation from trial to trial around the means for the two conditions, represented by $Normal(0,213)$.  That is, $\hat\sigma$ is 213 ms.
 
 The null hypothesis of scientific interest here is always with reference to the slope, that the difference in means between the two relative clause types $\beta_1$ is:
 
@@ -195,13 +199,13 @@ $H_0: \beta_1 = 0$
 The t-test value printed out in the linear model is simply the familiar t-test formula in action:
 
 \begin{equation}
-t_obs = \frac{\beta_1 - 0}{SE}
+t_obs = \frac{\hat\beta_1 - 0}{SE}
 \end{equation}
 
 The  intercept also has a null hypothesis associated with it, namely that 
-$H_0: \beta_0 = 0$. However, this null hypothesis test is of absolutely no interest for us. This hypothesis test is reported by the lm() function only because the intercept is needed  for technical reasons, to be discussed later.
+$H_0: \beta_0 = 0$. However, this null hypothesis test is of absolutely no interest for us. This hypothesis test is reported by the `lm()` function only because the intercept is needed  for technical reasons, to be discussed later.
 
-The *contrast coding* mentioned above determines the meaning of the $\beta$ parameters:
+The *contrast coding* mentioned above determines the meaning of the $\beta_0$ and $\beta_1$ parameters:
 
 ```{r}
 bysubj$condition <- factor(bysubj$condition,
@@ -216,6 +220,16 @@ When discussing linear models, we will make a distinction between the unknown tr
 .
 - Estimated mean subject relative processing time: $\hat\beta_0+\hat\beta_1=`r round(coef(m0)[1])`+`r round(coef(m0)[2])`=`r round(coef(m0)[1])+(round(coef(m0)[2]))`$.
 
+The underlying statistical model expressed in terms of the unknown parameters is stated in terms of $\beta_0, \beta_1, \sigma$:
+
+\begin{equation}
+rawRT = \beta_0 + \beta_1 condition + \varepsilon
+\end{equation}
+
+where $\varepsilon \sim Normal(0,\sigma)$.
+
+The null hypotheses are always stated in terms of these unknown parameters. Thus, a careful distinction should be made between the true unknown parameters, and their estimates from the data; the latter are designated by a hat over the parameter: $\hat\cdot$.
+
 ## Sum coding
 
 We have established so far that the mathematical form of the model is:
@@ -224,31 +238,31 @@ We have established so far that the mathematical form of the model is:
 rawRT = \beta_0 + \beta_1 condition + \varepsilon
 \end{equation}
 
-We can change the contrast coding of the `condition` vector in the following way. First, recode the levels of the condition column as shown below.
+An important change that we will make now is to the contrast coding of the `condition` vector. First, recode the levels of the condition column as shown below.
 
 ```{r}
 ## new contrast coding:
 bysubj$cond <- ifelse(bysubj$condition == "objgap", 1, -1)
 ```
 
-Now, the two conditions  are coded not as 0, 1 but as -1 and +1:
+Now, the two conditions  are coded not as 0, 1 but as -1 and +1. This new coding is stored in a new column called `cond` (of course, one can call it anything one likes). It is always a good idea to quickly carry out a sanity check to ensure that the coding is correct. One way to do this is by comparing the `cond` column with the `condition` column. Many a data analysis has gone awry because the researcher neglected to check that their coding was set up the way they wanted it!
 
 ```{r}
 xtabs(~ cond + condition, bysubj)
 ```
 
-With  this coding, the model parameters have a different meaning:
+With  this coding, the $\beta$ parameters have a different meaning:
 
 ```{r}
 m1 <- lm(rawRT ~ cond, bysubj)
 round(coef(m1))
 ```
 
-- The intercept now represents the grand mean processing time: $\hat \beta_0=`r round(coef(m1)[1])`$.
-- The mean object relative processing time is now: $\hat\beta_0+\hat\beta_1\times 1=`r round(coef(m1)[1])`+`r round(coef(m1)[2])`=`r round(coef(m1)[1])+round(coef(m1)[2])`$.
-- The mean subject relative processing time is: $\hat\beta_0+\hat\beta_1\times (-1)=`r round(coef(m1)[1])`-`r round(coef(m1)[2])`=`r round(coef(m1)[1])-round(coef(m1)[2])`$.
+- The intercept now represents the grand mean processing time: the estimate from the data is $\hat \beta_0=`r round(coef(m1)[1])`$.
+- The estimated mean object relative processing time is now: $\hat\beta_0+\hat\beta_1\times 1=`r round(coef(m1)[1])`+`r round(coef(m1)[2])`=`r round(coef(m1)[1])+round(coef(m1)[2])`$.
+- The estimated mean subject relative processing time is: $\hat\beta_0+\hat\beta_1\times (-1)=`r round(coef(m1)[1])`-`r round(coef(m1)[2])`=`r round(coef(m1)[1])-round(coef(m1)[2])`$.
 
-This kind of parameterization is called *sum-to-zero contrast* or more simply *sum contrast* coding. This is the coding we will use most frequently in this book. We will elaborate on contrast coding in a later chapter; there, the advantages of sum coding over treatment coding will become clear. For now, it is sufficient to understand that one can *reparametrize* the model using different contrast codings, and that such a reparametrization impacts the interpretation of the parameters.
+This kind of parameterization is called *sum-to-zero contrast* or more simply *sum contrast* coding. This is the coding we will use most frequently in this book.  Contrast coding will be elaborated on in a later chapter; there, the advantages of sum coding over treatment coding will become clear. For now, it is sufficient to understand that one can *reparametrize* the model using different kinds of contrast coding, and that such a reparametrization impacts the interpretation of the parameters.
 
 With sum coding, the null hypothesis for the slope is
 
@@ -256,8 +270,8 @@ With sum coding, the null hypothesis for the slope is
 H_0: \mathbf{1\times} \mu_{obj} + (\mathbf{-1}) \times\mu_{subj} = 0   
 \end{equation}
 
-The sum contrast coding of +1 standing for object relatives and -1 standing for subject relatives in the linear model directly refer to the $\pm 1$ coefficients in the null hypothesis above.
-Now the model is as follows. 
+The sum contrast coding of $+1$ standing for object relatives and $-1$ standing for subject relatives in the linear model directly refer to the $\pm 1$ coefficients in the null hypothesis above.
+Now the model, using the estimates based on the data, is as follows. 
 
 Object relative reading times:
 
@@ -277,31 +291,38 @@ One could write it in a single line as:
 rt = 420 + 51\times condition + \varepsilon
 \end{equation}
 
-The term $\varepsilon$ is call the residuals; it is the amount by which the observed data deviate from the values predicted by the above model. For example, suppose that a data point for a subject relative condition is 400 ms. The model predicts a reading time of 420-51=369 ms. The residual for that data point would be 400-369= 31. Another example: suppose that a data point for an object relative condition is 200 ms. The model predicts the object relative to be 420+51=471. The residual for that data point would then be 200-471=-271. Thus, the residual is the amount of the discrepancy between the model's predicted reading time and the actually observed reading time.
+The numerical values in the vector $\varepsilon$ are called the residuals; these number represent the amount by which the observed data deviate from the numerical point values in the above model. 
+
+For example, suppose that a data point for a subject relative condition is 400 ms. The model predicts an average reading time of 420-51=369 ms for all subjects. The residual for that subject's data point would be 400-369= 31. Another example: suppose that a data point for an object relative condition is 200 ms. The model predicts the object relative to be 420+51=471. The residual for that data point would then be 200-471=-271. Thus, the residual is the amount of the discrepancy between the model's predicted reading time and the actually observed reading time.
 
 ## Checking model assumptions
 
 It is an assumption of the linear model that the residuals are (approximately) normally distributed, That is what the statement $\varepsilon\sim Normal(0,\sigma)$ implies. It is important to check that model assumptions are approximately satisfied; this is because the null hypothesis significance testing procedure requires approximate normality of residuals.
 
-Here is how we can check whether this normality assumption is met:
+Here is how we can check whether this normality assumption is met. First, extract the vector of residuals:
 
 ```{r}
 ## extract residuals:
-res.m1 <- residuals(m1)
+res_m1 <- residuals(m1)
 ```
 
-Compare the residuals to the quantiles of the standard normal distribution ($Normal(0,1)$): 
+Then, graphically compare the residuals to the quantiles of the standard normal distribution ($Normal(0,1)$); see Figure \@ref(fig:residualsplot1).
 
-```{r message=FALSE,warning=FALSE,results="asis",include=FALSE}
-qqnorm(res.m1)
+```{r residualsplot1,message=FALSE,warning=FALSE,results="asis",fig.cap="The residuals of the model `m1` plotted against the quantiles of a standard normal distribution."}
+qqnorm(res_m1)
 ```
 
-When the normality assumption is met, the residuals will align perfectly with the quantiles of the standard normal distribution, resulting in a straight diagonal line in the above plot. When the normality assumption is not met, the line will tend to curve away from the diagonal. 
+When the normality assumption is met, the residuals will align with the quantiles of the standard normal distribution, resulting in a straight diagonal line. When the normality assumption is not met, the line will tend to curve away from the diagonal. 
 
-In the above case, a log transform of the data improves the normality of residuals.  We will discuss transformation in detail later in this book; for now, it is sufficient to note that  for continuous data that consists of all-positive values (here, reading times), a log transform will often be the appropriate transform.
+There are formal statistical tests for checking whether a distribution is normal, but these tests are so stringent that even a sample from the standard normal might not pass this test. This is why statistics textbooks like @venablesripley suggest using a graphical comparison of quantiles to establish approximate normality. 
+
+In the above case, a log transform of the data improves the normality of residuals; see Figure \@ref(fig:residualsplot2).  We will discuss transformation in detail later in this book; for now, it is sufficient to note that  for continuous data that consists of all-positive values (here, reading times), a log transform will often be the appropriate transform.
 
 ```{r}
 m1log <- lm(log(rawRT) ~ cond, bysubj)
+```
+
+```{r residualsplot2,echo=FALSE,fig.cap="The residuals of the model `m1log` plotted against the quantiles of a standard normal distribution."}
 qqnorm(residuals(m1log))
 ```
 
@@ -318,8 +339,10 @@ The model does not change, only the scale does:
 \log rt = \beta_0 + \beta_1 condition  + \varepsilon 
 \end{equation}
 
+where $\varepsilon \sim Normal(0,\sigma)$.
+
 Now, the intercept and slope can be used to compute the reading time in the two conditions.
-Note that because $exp(log(rt))=rt$, to get the mean estimates on the raw ms scale, we just need to exponentiate both sides of the equation:
+Note that because $exp(log(rt))=rt$, to get the estimates on the raw ms scale, we just need to exponentiate both sides of the equation:
 
 \begin{equation}
 exp(\log rt) = exp( \beta_0 + \beta_1 condition)
@@ -327,8 +350,8 @@ exp(\log rt) = exp( \beta_0 + \beta_1 condition)
 
 This approach gives us the following estimates on the ms scale:
 
-- Estimated mean object relative reading time: $exp(\hat\beta_0+\hat\beta_1)=exp(`r round(coef(m1log)[1],4)`+`r round(coef(m1log)[2],4)`)=`r round(exp(round(coef(m1log)[1],4)+round(coef(m1log)[2],4)))`$.
-- Estimated mean subject relative reading time: $exp(\hat\beta_0-\hat\beta_1)=exp(`r round(coef(m1log)[1],4)`-`r round(coef(m1log)[2],4)`=`r round(exp(round(coef(m1log)[1],4)-round(coef(m1log)[2],4)))`$.
+- Estimated object relative reading time: $exp(\hat\beta_0+\hat\beta_1)=exp(`r round(coef(m1log)[1],4)`+`r round(coef(m1log)[2],4)`)=`r round(exp(round(coef(m1log)[1],4)+round(coef(m1log)[2],4)))`$.
+- Estimated subject relative reading time: $exp(\hat\beta_0-\hat\beta_1)=exp(`r round(coef(m1log)[1],4)`-`r round(coef(m1log)[2],4)`=`r round(exp(round(coef(m1log)[1],4)-round(coef(m1log)[2],4)))`$.
 
 The difference in reading time is 417-352=65 ms. If we had fit the model to raw reading times, the difference would have been:
 
@@ -348,7 +371,8 @@ The larger estimate based on the  raw scale is less realistic, and we will see l
 One important point to notice is that the observed t-value of the  paired t-test and the t-test printed out by the linear model don't match:
 
 ```{r}
-t.test(rawRT ~ condition, bysubj, paired = TRUE)$statistic
+summary_ttest(t.test(rawRT ~ condition, bysubj, 
+                     paired = TRUE))
 round(summary(m0)$coefficients, 2)[, c(1:3)]
 ```
 
@@ -357,22 +381,22 @@ This is because the linear model is equivalent to the unpaired (i.e., two sample
 ```{r}
 summary(lm(rawRT ~ condition, bysubj))
 
-round(t.test(rawRT ~ condition, bysubj,
+summary_ttest(t.test(rawRT ~ condition, bysubj,
   paired = FALSE
-)$statistic, 2)
+))
 ```
 
 
-The paired t-test has an equivalent in the linear modeling framework: the linear mixed model. We turn next to this extension of the simple linear model. The command corresponding to the   paired t-test in the  linear modeling framework is:
+The paired t-test has an equivalent in the linear modeling framework: the linear mixed model. We turn next to this extension of the simple linear model. The command corresponding to the   paired t-test in the  linear modeling framework is as follows. Notice that we are working with the aggregated data, as in the paired t-test. Later, we will abandon the aggregation.
 
 ```{r}
-m0.lmer <- lmer(rawRT ~ condition + (1 | subject), bysubj)
-summary(m0.lmer)$coefficients
+m0_lmer <- lmer(rawRT ~ condition + (1 | subject), bysubj)
+summary(m0_lmer)$coefficients
 ```
 
 To understand the connection between the paired t-test and the above command, it is necessary to consider how a paired t-test is assembled.  
 
-First, some background. If you have two random variables that have   correlation $\rho$, the variance of the difference between the two random variables is:
+First, some background knowledge from random variable theory. If you have two random variables that have   correlation $\rho$, the variance of the difference between the two random variables is:
 
 \begin{equation}
 Var(X_1-X_2)=Var(X_1) + Var(X_2) - 2\times Cov(X_1, X_2)
@@ -386,7 +410,7 @@ Cov(X_1, X_2) = \rho \sqrt{Var(X_1)}\sqrt{Var(X_2)}
 
 You can find the proofs of the above assertions in books like @rice1995mathematical.
 
-As discussed earlier, a paired t-test is used when you have paired data from subject $i=1,...,n$ in two conditions, say conditions 1 and 2. Let's write the data as two vectors $X_{1}, X_{2}$. Because the pairs of data points are coming from the same subject, they are correlated with some correlation $\rho$. Assume that both conditions 1 and 2 have standard deviation $\sigma$. 
+As discussed earlier, a paired t-test is used when you have paired data from subject $i=1,...,n$ in two conditions; call them conditions 1 and 2. Let's write the data as two vectors $X_{1}, X_{2}$. Because the pairs of data points are coming from the same subject, they are correlated with some correlation $\rho$; recall Figure \@ref(fig:averageorsr). Assume that both conditions 1 and 2 have standard deviation $\sigma$. 
 
 To make this discussion concrete, let's generate some simulated bivariate data that are correlated. Assume that $\sigma = 1$,
 $\rho=0.5$, and that the data are balanced. 
@@ -402,7 +426,8 @@ Sigma <- Sigma / 2
 Sigma
 
 ## simulated data:
-x <- mvrnorm(n = samplesize, mu = mu, Sigma = Sigma, empirical = TRUE)
+x <- mvrnorm(n = samplesize, mu = mu, Sigma = Sigma, 
+             empirical = TRUE)
 head(x)
 
 n <- samplesize
@@ -428,7 +453,7 @@ Var(X_1 - X_2) = \sigma^2 + \sigma^2 - 2 \rho \sigma\sigma = 2\sigma^2 (1-\rho)
 Now let's compute the t-statistic using the above formula. Let the actual data vectors be $x_1, x_2$.
 
 \begin{equation}
-t_{n-1} = \frac{mean(x_1) - mean(x_2)}{\sqrt{Var(X_1 - X_2)/n}}
+t_{n-1} = \frac{mean(x_1) - mean(x_2)}{\sqrt{Var(x_1 - x_2)/n}}
 \end{equation}
 
 This simplifies to:
@@ -440,22 +465,24 @@ t_{n-1} = \frac{mean(x_1) - mean(x_2)}{\sqrt{2\sigma^2(1-\rho)/n}}
 Now compare the paired t-test output and the by-hand calculation:
 
 ```{r}
-t.test(x1, x2, paired = TRUE)$statistic
+summary_ttest(t.test(x1, x2, paired = TRUE))
 
-(mean(x1) - mean(x2)) / sqrt((2 * stddev^2 * (1 - rho)) / n)
+round((mean(x1) - mean(x2)) / sqrt((2 * stddev^2 * (1 - rho)) / n),2)
 ```
 
-The linear mixed model we present next will fit exactly the same model as in the paired t-test above.  To  see this, suppose we have $i$ subjects and $j=1,2$ conditions. For simplicity, assume that each subject sees each condition once (e.g., the by-subjects aggregated English relative clause data), so we have two data points from each subject. In other words, the data are paired.
+The two t-values are identical.
+
+The linear mixed model we present next will fit exactly the same model as in the paired t-test above.  To  see this, suppose we have $i$ subjects and $j=1,2$ conditions. For now, assume that each subject sees each condition only once (e.g., the by-subjects aggregated English relative clause data), so we have two data points from each subject. In other words, the data are paired.
 
 Then, for condition 1, the dependent variable can be described by the equation:
 
-$y_{i1} = \beta_0 + u_i + \varepsilon_{i1}$
+$y_{i1} = \beta_0 + u0_i + \varepsilon_{i1}$
 
-Here, $\beta_0$ is the  mean  reading time, and $\varepsilon$ is the usual residual error term. The interesting new term is $u_i$. This is the adjustment to the mean reading time for subject $i$. That is, if some subject is slower than average, $u_i$ will be a positive number; if a subject is faster than average, then that subject's adjustment $u_i$ will be negative in sign; and if a subject has exactly the same reading time as the mean for all subjects, then $u_i$ for that subject will be 0. 
+Here, $\beta_0$ is the  mean  reading time, and $\varepsilon$ is the usual residual error term. The interesting new term is $u0_i$. This is the adjustment to the intercept $\beta_0$, for subject $i$. That is, if some subject is slower than $\beta_0$, $u0_i$ will be a positive number; if a subject is faster than $\beta_0$, then that subject's adjustment $u0_i$ will be negative in sign; and if a subject has exactly the same reading time as the intercept $\beta_0$, then $u0_i$ for that subject will be exactly 0. 
 
 Similarly, for condition 2, the dependent variable is described  by the equation:
 
-$y_{i2} = \beta_0 + \delta + u_i + \varepsilon_{i2}$
+$y_{i2} = \beta_0 + \delta + u0_i + \varepsilon_{i2}$
 
 Here, $\delta$ is the additional time taken to process condition 2 (thus, this is the treatment contrast coding we saw earlier in this chapter). 
 
@@ -463,7 +490,8 @@ If we subtract the equation for condition 2 from the equation for condition 1, t
 
 $d_i=y_{i1} - y_{i2}= \delta + (\varepsilon_{i1}-\varepsilon_{i2})$
 
-The expectation of $d_i$ is $\delta$ because the expectation of the  $\varepsilon$ terms  is 0 (we set up the model such that  $\varepsilon  \sim Normal(0,\sigma)$).
+The $u0_i$ terms cancel out.
+The expectation or mean value of $d_i$ is $\delta$ because the expectation of the  $\varepsilon$ terms  is 0 (we set up the model such that  $\varepsilon  \sim Normal(0,\sigma)$).
 
 Now, assuming that the error terms are correlated with correlation $\rho$, the result presented at the beginning of this section applies:
 
@@ -479,16 +507,19 @@ d \sim Normal(\delta, \sqrt{2\sigma^2(1-\rho)})
 
 But that is exactly the same  standard deviation as the one used in the paired t-test. 
 
-So, the paired t-test will deliver exactly the same t-score as the above linear mixed model. 
+The above result proves that the paired t-test will deliver exactly the same t-score as the linear mixed model with the additional term $u0_i$. It is called a linear *mixed* model because of the new adjustment to the intercept $\beta_0$, the term $u0_i$ for each subject. This term is called a varying intercept by subject. It is called a varying intercept because the $u0_i$ adjustment leads to the intercept becoming the sum of a fixed, unvarying term and a varying term, $\beta_0 + u0_i$. Compare this to the fixed intercept $\beta_0$ in the simple linear model that corresponds to the unpaired t-test. In the linear mixed model, the intercept term is different for each subject because of the $u0_i$.  
 
-Let's check that this is true using our simulated data. In the code below, the term  `(1|subj)` is the adjustment by subject to the intercepts---the term $u0_i$ above.
+Let's check that the linear mixed model delivers exactly the same t-value as our paired t-test above. We will use our simulated data. In the code below, the term  `(1|subj)` is the adjustment by subject to the intercepts---the term $u0_i$ above.
 
 ```{r}
 library(lme4)
-dat <- data.frame(y = c(x1, x2), cond = rep(letters[1:2], each = n), subj = rep(1:n, 2))
-dat$cond <- factor(dat$cond)
-contrasts(dat$cond) <- contr.sum(2)
-contrasts(dat$cond)
+dat <- data.frame(y = c(x1, x2), 
+                  condition = rep(letters[1:2], 
+                                  each = n), 
+                  subj = rep(1:n, 2))
+dat$condition <- factor(dat$condition)
+dat$cond<-ifelse(dat$condition=="a",1,-1)
+xtabs(~cond+condition,dat)
 
 summary(m <- lmer(y ~ cond + (1 | subj), dat))
 ```
@@ -512,9 +543,9 @@ Recall that these data have multiple measurements from each subject for each con
 t(xtabs(~ subject + condition, gg05e1))
 ```
 
-We can visualize the different responses of subjects:
+We can visualize the different reading times of each of the 42 subjects as in Figure \@ref(fig:bysubjrt).
 
-```{r echo=FALSE}
+```{r bysubjrt,echo=FALSE,message=FALSE,out.width='98%', fig.show = "hold", fig.cap = "The subject (coded -1) vs. object (coded +1) relative clause reading times for each subject. Also shown are linear models fit separately to the data for each subject."}
 library(ggplot2)
 gg_xyplot <- function(x, y, formula, shape, size, data) {
   ggplot(data = data, aes(
@@ -539,13 +570,11 @@ gg_xyplot(
 )
 ```
 
-It's clear that different subjects  have different effects of the  relative clause manipulation: some slopes are positive sloping, some are flat, and some are negatively sloping. There is between-subject variability in the relative clause effect.
+It's clear from this figure that different subjects  have different effects of the  relative clause manipulation: some slopes are positive sloping, some are flat, and some are negatively sloping. There is between-subject variability in the relative clause effect.
 
-Given these differences between subjects, you could fit a separate linear model for each subject, collect together the intercepts and slopes for each subject, and then check if the slopes are significantly different from zero. There is a function in the package \texttt{lme4} that computes separate linear models for each subject: *lmList*.
+Given these differences between subjects, you could fit a separate linear model for each subject, collect together the intercepts and slopes for each subject, and then check if the slopes are significantly different from zero. There is a function in the package \texttt{lme4} that computes separate linear models for each subject: `lmList`.
 
 ```{r}
-library(lme4)
-
 lmlist.fm1 <- lmList(logrt ~ so | subject, gg05e1)
 ```
 
@@ -555,12 +584,12 @@ One can extract the intercept and slope estimates for each subject. For example,
 lmlist.fm1$`1`$coefficients
 ```
 
-One can plot the individual lines for each subject, as well as the  fit of a simple linear model m0 for all the data taken together; this will show how each subject deviates in intercept and slope from the model m0's intercept and slope.
+Figure \@ref(fig:lmlistplot) shows the individual fitted linear models for each subject, as well as the  fit of a simple linear model `m0` for all the data taken together (thick gray line); this figure shows how each subject deviates in intercept and slope from the model `m0`'s intercept and slope.
 
-```{r echo=FALSE}
+```{r lmlistplot,echo=FALSE, fig.cap="The thick gray line represents the intercept and slope estimate from the simple linear model m0 fit at the beginning of the chapter. The black lines are the individual linear model estimates of the intercept and slope for each subject, where each linear model is fit separately for each subject using the lmList function in the lme4 package."}
 plot(gg05e1$so,
   gg05e1$logrt,
-  axes = F,
+  axes = FALSE,
   xlab = "condition",
   ylab = "log rt"
 )
@@ -584,11 +613,11 @@ To find out if there is an effect of relative clause type, we simply need to che
 
 
 ```{r}
-t.test(coef(lmlist.fm1)[2])
+summary_ttest(t.test(coef(lmlist.fm1)[2]))
 ```
 
 
-The above test is *exactly* the same as the paired t-test and the varying intercepts linear mixed model that we fit in the last chapter using the by-subject aggregated data:
+The above test is *exactly* the same as the paired t-test and the varying intercepts linear mixed model that we fit in the last chapter using the by-subject aggregated data. The only difference is that we are now using log reading times.
 
 ```{r}
 bysubj <- aggregate(log(rawRT) ~ subject + condition,
@@ -597,8 +626,12 @@ bysubj <- aggregate(log(rawRT) ~ subject + condition,
 )
 
 colnames(bysubj)[3] <- "logrt"
+```
 
-t.test(logrt ~ condition, bysubj, paired = TRUE)$statistic
+Compare the paired t-test and linear mixed model results (the t-values):
+
+```{r}
+summary_ttest(t.test(logrt ~ condition, bysubj, paired = TRUE))
 
 ## compare with linear mixed model:
 summary(lmer(
@@ -607,7 +640,7 @@ summary(lmer(
 ))$coefficients[2, ]
 ```
 
-The above lmList model we just fit is called *repeated measures regression*. We now look at how to model unaggregated data using the linear mixed model. Incidentally, this repeated measures regression model is now largely of historical interest, and useful only for understanding the linear mixed model, which is the modern standard approach.  
+The t-test we carried out using the slopes from the `lmList` function is called *repeated measures regression*. This repeated measures regression model is now largely of historical interest, and useful only for understanding the linear mixed model, which will be our  standard approach.  
 
 We turn next to three main types of linear mixed model; other variants will be introduced in later chapters.
 
@@ -624,12 +657,12 @@ adjusts the grand mean estimates of the intercept by a term (a number) for each 
 
 
 ```{r}
-m0.lmer <- lmer(logrt ~ so + (1 | subject), gg05e1)
+m0_lmer <- lmer(logrt ~ so + (1 | subject), gg05e1)
 ```
 
-Notice that we did not aggregate the data.
+Notice that we did not aggregate the data this time.
 
-Here is the abbreviated output:
+Here is the abbreviated output from model `m0_lmer`:
 
 ```
 Random effects:
@@ -644,27 +677,34 @@ Fixed effects:
 so           0.06202    0.01475   4.205
 ```
 
-One thing to notice in the present example is that the coefficients (intercept and slope) of the fixed effects of the above model are identical to those in the linear model `m0` above. What is different between  the linear model and the linear mixed model is the standard error. In the latter, the standard error is determined by more than one source of variance, as we explain below.
+One thing to notice in the present example is that the coefficients (intercept and slope) of the fixed effects of the above model are identical to those in the linear model:
+
+```{r}
+m0_lm <- lm(logrt ~ so, gg05e1)
+summary(m0_lm)
+```
+
+
+What is different between  the linear model and the linear mixed model is the standard error. In the latter, the standard error is determined by more than one source of variance, as we explain below.
 
 The intercept adjustments for each subject can be viewed by typing:
 
 ```{r}
 ## first 10 subjects' intercept adjustments:
-ranef(m0.lmer)$subject[, 1][1:10]
+ranef(m0_lmer)$subject[, 1][1:10]
 ```
+Figure \@ref(fig:latticeplotranefs) shows another way to summarize the adjustments to the grand mean intercept by subject. The error bars represent 95\% confidence intervals.
 
-Here is another way to summarize the adjustments to the grand mean intercept by subject. The error bars represent 95\% confidence intervals.
-
-```{r}
+```{r latticeplotranefs,fig.cap="The varying intercepts by subject plotted using the dotplot in the lattice library. Also shown are 95% confidence intervals of each estimate."}
 library(lattice)
-print(dotplot(ranef(m0.lmer, condVar = TRUE)))
+print(dotplot(ranef(m0_lmer, condVar = TRUE)))
 ```
 
 ### The formal statement of the varying intercepts model
 
-The model `m0.lmer` above prints out the following type of linear model.  $i$ indexes subject, and $j$ indexes items. 
+The model `m0_lmer` above prints out the following type of linear model.  $i$ indexes subject, and $j$ indexes items. 
 
-Once we know the subject id and the item id, we know which subject saw which condition:
+Because this is a Latin square design, once we know the subject id and the item id, we know which subject saw which condition:
 
 
 ```{r}
@@ -683,16 +723,16 @@ The *only* new thing here beyond the linear model we  saw earlier is the by-subj
 u_{0i} \sim Normal(0,\sigma_{u0})
 \end{equation}
 
-The ordinary linear model m0 has one intercept $\beta_0$ for all subjects, whereas this linear mixed model with varying intercepts `m0.lmer` has a different intercept ($\beta_0 + u_{0i}$) for each subject $i$.
+The ordinary linear model m0 has one intercept $\beta_0$ for all subjects, whereas this linear mixed model with varying intercepts `m0_lmer` has a different intercept ($\beta_0 + u_{0i}$) for each subject $i$.
 
-We can visualize the adjustments for each subject to the intercepts as shown below.
+Figure \@ref(fig:varyingintercepts) visualizes the adjustments for each subject to the intercepts as shown below.
 
 
-```{r echo=FALSE}
-a <- fixef(m0.lmer)[1]
-newa <- a + ranef(m0.lmer)$subj
+```{r varyingintercepts,echo=FALSE,fig.cap="A visualization of the linear mixed model with varying intercepts for each subject (black lines). The model is `m0_lmer`. Also shown as a gray line is the fitted line corresponding to the simple linear model `m0`, without varying intercepts."}
+a <- fixef(m0_lmer)[1]
+newa <- a + ranef(m0_lmer)$subj
 
-ab <- data.frame(newa = newa, b = fixef(m0.lmer)[2])
+ab <- data.frame(newa = newa, b = fixef(m0_lmer)[2])
 
 plot(gg05e1$so, gg05e1$logrt, xlab = "condition", ylab = "log rt", axes = F)
 axis(1, at = c(-1, 1), labels = c("SR", "OR"))
@@ -715,7 +755,7 @@ These two standard deviations  determine the standard error of the $\beta_1$ slo
 
 ### Model type 2: Varying intercepts and slopes, without a correlation
 
-Unlike the figure associated with the `lmlist.fm1` model above, which also involves fitting separate models for each subject, the model `m0.lmer` assumes *different intercepts* for each subject *but the same slope*. 
+Unlike the figure associated with the `lmlist.fm1` model above, which also involves fitting separate models for each subject, the model `m0_lmer` assumes *different intercepts* for each subject *but the same slope*. 
 
 We can choose to fit different intercepts as well as different slopes for each subject. To achieve this, assume now that each subject's slope is also adjusted:
 
@@ -726,16 +766,16 @@ y_{ij} = \beta_0 + u_{0i}+(\beta_1+u_{1i})\times so_{ij} + \varepsilon_{ij}
 That is, we additionally assume that $u_{1i} \sim Normal(0,\sigma_{u1})$. The `lmer` notation for fitting separate intercepts and slopes is `(1+so||subject)`. We will just explain what the double vertical bars represent.
 
 ```{r}
-m1.lmer <- lmer(logrt ~ so + (1 + so || subject), gg05e1)
+m1_lmer <- lmer(logrt ~ so + (1 + so || subject), gg05e1)
 ```
 
-The output of this model will now show that there are not two but three sources of variability. These are:
+The output of this model shows that now there are not two but three sources of variability. These are:
 
 - $u_0 \sim Normal(0,\sigma_{u0})$
 - $u_1 \sim Normal(0,\sigma_{u1})$
 - $\varepsilon \sim Normal(0,\sigma)$
 
-In particular, the model estimates the following standard deviations:
+The model estimates the following standard deviations:
 
 - $\hat\sigma_{u0}=0.317$
 - $\hat\sigma_{u1}=0.110$
@@ -755,14 +795,14 @@ Fixed effects:
 so            0.0620     0.0221    2.81
 ```
 
-These fits for each subject are visualized below (the gray line shows the model with a single intercept and slope, i.e., our old model `m0`):
+Figure \@ref(fig:varyinginterceptsslopes) visualizes these fits for each subject. As before, the gray line shows the model with a single intercept and slope, i.e., our old model `m0`):
 
-```{r echo=FALSE}
-a <- fixef(m1.lmer)[1]
-b <- fixef(m1.lmer)[2]
+```{r varyinginterceptsslopes,echo=FALSE,fig.cap="A visualization of the linear mixed model with varying intercepts as well as varying slopes for each subject (black lines). The model is `m1_lmer`. Also shown as a gray line is the fitted line corresponding to the simple linear model `m0`, without varying intercepts."}
+a <- fixef(m1_lmer)[1]
+b <- fixef(m1_lmer)[2]
 
-newa <- a + ranef(m1.lmer)$subject[1]
-newb <- b + ranef(m1.lmer)$subject[2]
+newa <- a + ranef(m1_lmer)$subject[1]
+newb <- b + ranef(m1_lmer)$subject[2]
 
 ab <- data.frame(newa = newa, b = newb)
 
@@ -783,9 +823,9 @@ abline(lm(logrt ~ so, gg05e1), lwd = 3, col = "gray")
 
 #### Comparing lmList model with the varying intercepts model
 
-Compare this model with the `lmlist.fm1` model we fitted earlier:
+Compare this `m1_lmer` model with the `lmlist.fm1` model we fitted earlier. Figure \@ref(fig:lmlistlmercomparison) visualizes the difference between the two models.
 
-```{r echo=FALSE}
+```{r lmlistlmercomparison,echo=FALSE,fig.cap="The lmList model (left) vs. the varying intercepts and varying slopes model (right)."}
 op <- par(mfrow = c(1, 2), pty = "s")
 
 plot(gg05e1$so, gg05e1$logrt,
@@ -807,11 +847,11 @@ for (i in subjects) {
 
 abline(lm(logrt ~ so, gg05e1), lwd = 3, col = "gray")
 
-a <- fixef(m1.lmer)[1]
-b <- fixef(m1.lmer)[2]
+a <- fixef(m1_lmer)[1]
+b <- fixef(m1_lmer)[2]
 
-newa <- a + ranef(m1.lmer)$subj[1]
-newb <- b + ranef(m1.lmer)$subj[2]
+newa <- a + ranef(m1_lmer)$subj[1]
+newb <- b + ranef(m1_lmer)$subj[2]
 
 ab <- data.frame(newa = newa, b = newb)
 
@@ -830,7 +870,7 @@ for (i in 1:42) {
 abline(lm(logrt ~ so, gg05e1), lwd = 3, col = "gray")
 ```
 
-What is striking is that each subject's estimated best fit line is "smoothed out" compared to the lmList fits. This aspect of the linear mixed model is called shrinkage; we return to this point shortly.
+What is striking in Figure \@ref(fig:lmlistlmercomparison) is that each subject's estimated best fit line is "smoothed out" compared to the `lmList` fits. This aspect of the linear mixed model is called shrinkage; we return to this point shortly.
 
 #### Visualizing random effects
 
@@ -838,7 +878,7 @@ As before, it is instructive to visualize the by-subjects adjustments to the int
 
 
 ```{r}
-print(dotplot(ranef(m1.lmer, condVar = TRUE)))
+print(dotplot(ranef(m1_lmer, condVar = TRUE)))
 ```
 
 What this is showing is wide variability in the mean reading times between subjects, but very little variation in the slope between subjects.
@@ -1043,11 +1083,11 @@ axis(2)
 ## no pooling estimate:
 abline(intercepts$intercept[28],slopes$so[28])
 ## partial pooling
-u<-ranef(m1.lmer)$subject
+u<-ranef(m1_lmer)$subject
 u0<-u$`(Intercept)`
 u1<-u$so
-b0<-summary(m1.lmer)$coefficients[1,1]
-b1<-summary(m1.lmer)$coefficients[2,1]
+b0<-summary(m1_lmer)$coefficients[1,1]
+b1<-summary(m1_lmer)$coefficients[2,1]
 
 abline(b0+u0[28],b1+u1[28],lty=2)
 ## complete pooling:
@@ -1162,10 +1202,10 @@ u1_old<-u1
 b0_old<-b0
 b1_old<-b1
 
-m1.lmer_deleteddata<-lmer(log(deletedRT)~so + (1+so||subject),gg05e1)
-b0<-summary(m1.lmer_deleteddata)$coefficients[1,1]
-b1<-summary(m1.lmer_deleteddata)$coefficients[2,1]
-u<-ranef(m1.lmer_deleteddata)$subject
+m1_lmer_deleteddata<-lmer(log(deletedRT)~so + (1+so||subject),gg05e1)
+b0<-summary(m1_lmer_deleteddata)$coefficients[1,1]
+b1<-summary(m1_lmer_deleteddata)$coefficients[2,1]
+u<-ranef(m1_lmer_deleteddata)$subject
 u0<-u$`(Intercept)`
 u1<-u$`so`
 
