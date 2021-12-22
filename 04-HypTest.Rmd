@@ -267,7 +267,7 @@ Incidentally, if we had rescaled the contrast coding to be not $\pm 1$ but $\pm 
 
 Let's load the data, set up the contrast coding, and fit the null versus the alternative models. We will fit varying intercept and varying slopes for subject and item, without correlations for items. We don't attempt to fit a model with by-items varying intercepts and slopes with a correlation  because we would get a singularity in the variance covariance matrix. 
 
-````{r}
+```{r}
 library(lingpsych)
 data("df_gg05e1")
 gg05e1 <- df_gg05e1
