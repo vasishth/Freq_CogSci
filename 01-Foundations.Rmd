@@ -387,55 +387,152 @@ var(y)
 
 As mentioned earlier, depending on the sample size, the sample mean and sample variance *from a particular sample* may or may not be close to the true values of the respective parameters, despite the fact that these are *maximum likelihood estimates*. The estimates of the mean and variance from a particular sample will be close to the true values of the parameters as the sample size goes to infinity.
 
-
-
 ## Other common distributions
 
 Here, we briefly present some of the distributions that we will need or use in this book. Throughout, we assume independent and identically distributed data.
 
+### The standard normal: $\mathit{normal}(\mu=0,\sigma=1)$
+
+Although we have already seen this distribution, the standard normal distribution is so important for us that it deserves its own section.
+
+The standard normal is a special case of the normal distribution and is written $\mathit{normal}(0,1)$.
+
+One important fact that is relevant for us in this book is that if $X_1, \dots, X_n$ are independent and identically distributed random variables from a distribution with mean $\mu$ and variance $\sigma^2$, then, as $n$ approaches infinity, the distribution of the transformed random variable $Z$ is:
+
+\begin{equation}
+Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}}
+\end{equation}
+
+$\bar{X}$ is the mean of the random variables $X_1,\dots, X_n$: $\bar{X}=\sum_{i=1}^n \frac{X_i}{n}$.
+
+The pdf of the standard normal is just like the $\mathit{normal}(\mu,\sigma)$ we saw above, with $\mu = 0$ and $\sigma = 1$.
+
+\begin{equation}
+f(z)= \frac{1}{\sqrt{2\pi}} \exp \left(-\frac{z^2}{2} \right)
+\end{equation}
+
+### The uniform distribution
+
+A continuous random variable $U$ has a uniform distribution if the pdf of $U$ is:
+
+\begin{equation}
+f(u; \alpha, \beta)=
+\begin{cases}
+\frac{1}{\beta-\alpha} &  for \alpha < u < \beta ,\\
+0 & \hbox{otherwise}
+\end{cases}
+\end{equation}
+
+
+
+The mean and variance of the $\mathit{uniform}(\alpha,\beta)$ are:
+
+\begin{equation}
+\mu = \frac{\alpha + \beta}{2} \hbox{  and  }  
+\sigma^2 = \frac{1}{12} (\beta-\alpha)^2
+\end{equation}
+
+Figure \@ref(fig:uniformdistrn) shows a $\mathit{uniform}(\alpha=0,\beta=1)$  distribution.
+
+```{r uniformdistrn,message="FALSE",warning=FALSE,results="asis",fig.cap="The pdf of the uniform(0,1) distribution."}
+u<-seq(0,1,by=0.001)
+plot(u,dunif(u,min=0,max=1),type="l",
+     ylab="density",main="uniform(0,1)")
+```
+
+The cdf $F(U<u)$ has the property that $F(U<u)=u$. For example:
+
+```{r}
+plot(u,punif(u,min=0,max=1),type="l",
+     ylab="probability",main="CDF of uniform(0,1)")
+```
+
+The cdf is visualized in Figure \@ref(fig:uniformcdf).
+
+```{r uniformcdf,message="FALSE",warning=FALSE,results="asis",fig.cap="The cdf of the uniform(0,1) distribution."}
+punif(0.25,min=0,max=1)
+punif(0.75,min=0,max=1)
+````
+
 ### The Chi-square distribution
+
+A random variable $X$ that has a chi-square distribution has the following pdf:
+
+\begin{equation}
+f(u; \nu)=
+\begin{cases}
+\frac{1}{2^{\nu/2} \Gamma(\nu/2)}x^{\frac{\nu-2}{2}\exp(-\frac{x}{2})} &  for x>0 ,\\
+0 & \hbox{otherwise}
+\end{cases}
+\end{equation}
+
+The parameter $\nu$ is referred to as the degrees of freedom. $\Gamma()$ is the Gamma function: $\Gamma(n)=(n-1)!$. 
+
+The mean and variance of $\chi^2_{\nu}$ are:
+
+\begin{equation}
+\mu = \nu \hbox{  and  }  
+\sigma^2 = \nu^2
+\end{equation}
+
+Figure \@ref(fig:chisqdistrn) shows a $\chi^2_{\nu=1}$  distribution.
+
+```{r chisqdistrn,message="FALSE",warning=FALSE,results="asis",fig.cap="The pdf of the Chi-square distribution with 1 degree of freedom."}
+x<-seq(0,4,by=0.001)
+plot(x,dchisq(x,df=1),type="l",
+     ylab="density",main="Chi-square(df=1)")
+```
+
+An important fact about the $\chi^2_{\nu=1}$ distribution that we will use in chapter 4 is that the quantile $x$ such that $F(X>x)=0.0.05$ is $x=3.84$.
+
+```{r}
+qchisq(0.05,df=1,lower.tail=FALSE)
+```
+
 
 ### The t-distribution
 
-This continuous distribution, written $t(n-1)$, take as a parameter the degrees of freedom (roughly, the sample size $n$) minus one.  As the degrees of freedom increase to infinity (as the sample size increases to infinity), the distribution approaches the Normal distribution with mean 0 and standard deviation 1.
-
-The pdf is: 
+A random variable $T$ that has a t-distribution has the pdf:
 
 \begin{equation}
-f(x) = \frac{\Gamma((n+1)/2)}{\sqrt{n\pi} \Gamma(n/2)} (1+x^2/n)^{-(n+1)/2} \hbox{  Support: } x \in (-\infty, \infty)
+f(t) = \frac{\Gamma(\frac{\nu+1}{2})}{\sqrt{\pi\nu}\Gamma(\frac{\nu}{2})}\left(1+\frac{t^2}{\nu}\right)^{-\frac{\nu + 1}{2}} \hbox{ for } -\infty < t < \infty
 \end{equation}
 
-$\Gamma()$ is the Gamma function: $\Gamma(n)=n-1!$. 
+This distribution is also called the Student's t-distribution; the creator of the t-distribution, Gosset, wrote papers under the name Student.
+
+This continuous distribution, often written $t(n-1)$, takes as a parameter the degrees of freedom $\nu=n-1$, where $n$ is the sample size (what constitutes sample size will be made more precise in the next chapter).  As the degrees of freedom approaches infinity (as the sample size approaches infinity), the distribution approaches the Normal distribution with mean 0 and standard deviation 1.
+
 The mean of the t-distribution is $0$ if $n>1$ and variance $\frac{n}{n-2}$ if $n>2$.
 
 The t-distribution becomes the Cauchy distribution if $n=2$. The Cauchy distribution has no mean or variance defined for it.
 
+The t-distribution is actually related to the chi-square and standard normal distributions.
+If $Y$ and $Z$ are independent random variables and $Y$ has a chi-square distribution with $\nu$ degrees of freedom and $Z$ has the standard normal, then the t-distribution with $\nu$ has the following form:
+
+\begin{equation}
+T = \frac{Z}{\sqrt{Y/\nu}}
+\end{equation}
+
 There are four functions in `R` that serve the same purpose as the `dnorm`, `pnorm`, `qnorm`, `rnorm` functions for the Normal:
-`dt`, `pt`, `qt`, `rt`.
+`dt`, `pt`, `qt`, `rt`. These functions, particularly `dt`, `pt`, `qt`, will play a very important role in chapter 2.
 
 ### The F distribution
 
-### The Gamma distribution
-
-The distribution is written $Gamma(a,b)$, and takes two parameters, $a$ and $b$. 
-
-The pdf is: 
+If $U$ and $V$ are independent random variables with a chi-square distribution having degrees of freedom $\nu_1$ and $\nu_2$ respectively, then the following pdf is called an F-distribution:
 
 \begin{equation}
-f(x) = \frac{1}{\Gamma(a)}(b x)^ae^{-b x}\frac{1}{x} \hbox{  Support: } x \in (0, \infty)
+F = \frac{U/\nu_1}{V/\nu_2}
 \end{equation}
 
-The mean is $\frac{a}{b}$  and the variance is $\frac{a}{b^2}$.
-
-### The Exponential distribution
-
-The Exponential, written $Exp(\lambda)$, takes the parameter $\lambda$ and has the PDF:
+The pdf of the F-distribution is:
 
 \begin{equation}
-f(x) = \lambda e^{-\lambda x} \hbox{  Support: } x \in (0, \infty)
+g(f) = \frac{\Gamma(\frac{\nu_1 + \nu_2}{2})}{\Gamma(\frac{\nu_1}{2}) \Gamma(\frac{\nu_2}{2}) } \left(\frac{\nu_1}{\nu_2}\right)^{\nu_1/2} f^{\nu_1/2 -1 } (1 + \frac{\nu_1}{\nu_2}f)^{-\frac{1}{2}(\nu_1 + \nu_2)}
 \end{equation}
 
-Its mean is $\frac{1}{\lambda}$ and variance $\frac{1}{\lambda^2}$.
+
+for $f>0$. The pdf $g(f)$ has value $0$ for all other values of $f$. 
+
 
 ## Bivariate and multivariate distributions
 
@@ -623,6 +720,12 @@ Returning to the bivariate example, the joint PDF is written with reference to t
 \end{equation}
 
 Here, the terms $dx$ and $dy$ express the fact that we are summing the area under the curve along the X axis and the Y axis.
+
+\begin{equation}
+f_{X,Y}(x,y) = \frac{\exp(-\frac{1}{2(1-\rho^2)}\left[(\frac{x-\mu_1}{\sigma_1})^2 -2 \rho(\frac{x-\mu_1}{\sigma_1})(\frac{y-\mu_2}{\sigma_2}) + (\frac{y-\mu_2}{\sigma_2})^2  \right])}{2\pi \sigma_1\sigma_2\sqrt{1-\rho^2} }
+\end{equation}
+
+where $-\infty < x < \infty$ and $-\infty < y < \infty$. The parameters are constrained as follows: $\sigma_1, \sigma_2 > 0$, and $-1 < \rho < 1$.  
 
 The joint CDF would be written as follows. The equation below gives us the probability of observing a value like $(u,v)$ or some value smaller than that (i.e., some $(u',v')$, such that $u'<u$ and $v'<v$.
 
