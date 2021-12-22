@@ -23,8 +23,8 @@ latsq <- data.frame(rbind(letters[1:2], letters[2:1]))
 colnames(latsq) <- c("Group 1", "Group 2")
 
 kableExtra::kable(latsq,
-  digits = 2, booktabs = TRUE,
-  vline = "", # format="latex",
+  digits = 2, #booktabs = TRUE,
+  vline = "", format="latex",
   caption = "The Latin Square with two conditions labeled a and b."
 )
 ```
@@ -43,7 +43,7 @@ colnames(latsq4) <- c("Group 1", "Group 2", "Group 3", "Group 4")
 
 kableExtra::kable(latsq4,
   digits = 2, booktabs = TRUE,
-  vline = "", # format="latex",
+  vline = "",  format="latex",
   caption = "A Latin Square design with four conditions labeled a, b, c, and d."
 )
 ```
@@ -64,7 +64,7 @@ colnames(latsq8) <- paste(rep("G", 8), 1:8, sep = "")
 
 kableExtra::kable(latsq8,
   digits = 2, booktabs = TRUE,
-  vline = "", # format="latex",
+  vline = "",  format="latex",
   caption = "A Latin Square design with eight conditions labeled a, b, c, d, e, f, g, and h. The column names representing the eight groups are abbreviated as G1-G8."
 )
 ```
@@ -82,7 +82,7 @@ colnames(latsqrep2) <- c("item", "Group 1", "Group 2")
 
 kableExtra::kable(latsqrep2,
   digits = 2, booktabs = TRUE,
-  vline = "", # format="latex",
+  vline = "",  format="latex",
   caption = "The Latin Square with two conditions labeled a and b, and four items."
 )
 ```
@@ -128,7 +128,9 @@ We now turn to the idea of hypothetical repeated sampling, and the central limit
 
 Suppose we collect some data, which can be represented by a vector $y$; this is a *single sample*. Given data $y$, and assuming for concreteness that the underlying likelihood is a $Normal(\mu=500,\sigma=100)$, the sample mean and standard deviation, $\bar{y}$ and $s$  give us an estimate of the unknown parameters mean $\mu$ and the standard deviation $\sigma$ of the distribution from which we assume that our data come from. Figure \@ref(fig:normalsample) shows the distribution of a particular sample, where the number of data points is $n=1000$. Note that in this example the parameters are specified by us, so they are not unknown; in a real data-collection situation, the sample mean and standard deviation are all we have as estimates of the parameters.
 
-```{r normalsample,out.width='75%', fig.show = "hold", fig.cap = "A sample of data y of size n=1000, from the distribution  Normal(500,100). The vertical line shows the true mean of the distribution we are sampling from.", tidy = FALSE}
+(ref:normalsample) A sample of data y of size n=1000, from the distribution  Normal(500,100). The vertical line shows the true mean of the distribution we are sampling from.
+
+```{r normalsample,out.width='75%', fig.cap = "(ref:normalsample)", fig.height = 2}
 ## sample size:
 n<-1000
 ##  independent and identically distributed sample:
@@ -1398,26 +1400,35 @@ This kind of design calls for a two-sample t-test. The two-sample t-test stands 
 Because the formatting of the t-test in R is somewhat verbose, here is a function that extracts the essential information from a t-test:
 
 ```{r}
-summary_ttest<-function(res,paired=TRUE){
-  obs_t<-round(res$statistic,2)
-  dfs<-round(res$parameter)
-  pval<-round(res$p.value,3)
-  ci<-round(res$conf.int,2)
-  est<-round(res$estimate,2)
-  if(paired==TRUE){
-  print(paste("t(",dfs,")=",
-              obs_t,sep=""))
-  print(paste("p=",pval,sep=""))
-  print(paste("estimate: ",est," [",ci[1],",",ci[2],"]",sep=""))
+summary_ttest <- function(res, paired = TRUE, units = "ms") {
+  obs_t <- round(res$statistic, 2)
+  dfs <- round(res$parameter)
+  pval <- round(res$p.value, 3)
+  ci <- round(res$conf.int, 2)
+  est <- round(res$estimate, 2)
+  if (paired == TRUE) {
+    print(paste(
+      paste("t(", dfs, ")=",
+        obs_t,
+        sep = ""
+      ),
+      paste("p=", pval, sep = "")))
+      print(paste("est.: ", est, " [", 
+                  ci[1], ",", ci[2], "] ", 
+                  units, sep = "")
+    )
   } else {
-    print(paste("t(",dfs,")=",
-              obs_t,sep=""))
-  print(paste("p=",pval,sep=""))
-  print(paste("estimate 1: ",est[1],sep=""))
-  print(paste("estimate 2: ",est[2],sep=""))
-  print(paste("CI of difference in means: [",ci[1],",",ci[2],"]",sep=""))
+    print(paste(
+      paste("t(", dfs, ")=",
+        obs_t,
+        sep = ""
+      ),
+      paste("p=", pval, sep = "")))
+      print(paste(paste("est. 1: ", est[1], sep = ""),
+      paste("est. 2: ", est[2], sep = ""),
+      paste("CI of diff. in means: [", ci[1], ",", ci[2], "]", sep = "")))
   }
-}  
+}
 ```
 
 The function call in R for a two-sample t-test is shown below. The assumption is that both the male and female F1 scores have equal variance.
@@ -1479,55 +1490,100 @@ res<-t.test(F1data$female, F1data$male, paired = TRUE)
 summary_ttest(res)
 ```
   
+Incidentally, if one flips the order in which the vectors are entered into the `t.test` function, the sign of the t-value and of the estimate will of course flip. 
+  
+```{r}
+res<-t.test(F1data$male, F1data$female, paired = TRUE)
+summary_ttest(res)
+```
+
+Generally, one should ensure that the order in which one enters the vectors leads to an estimate that has an easy-to-interpret sign. For example, if object relatives (ORs) are expected to take longer to read than subject relatives (SRs), it would be better to place the vectors of reading times in the order OR,vSR. Of course, no harm can come from reversing the orders; it's just that the meaning of the estimate could be misinterpreted by the reader. 
+  
 A crucial assumption in the above paired t-test is that all the vowel-and-language combinations are independent of each other. Whether this assumption is correct or not (or approximately correct) depends on domain knowledge.
   
 Incidentally, the p-value in the paired t-test is statistically significant, unlike the two-sample t-test above. The null hypothesis is the same in both tests, but the significance level leads to different conclusions. Which analysis is correct, the two-sample t-test or the paired t-test? It all depends on your assumptions about what the data represent. If you consider the data to be paired by vowel-and-language, for the reasons given above, then a paired test is called for. If it is more reasonable to assume that each data point from the 19 males is independent of the others and from the 19 females, we would treat this as unpaired data. Students are often tempted to choose the test that yields a significant effect, just because a p-value below 0.05 would render the analysis publishable. The reasoning should be based on what the model assumptions are, and whether the model makes sense, even in the simple case of the t-test.
 
-In the data sets we will encounter in the remainder of this book, we will never use one or two-sample or paired t-tests. Instead, we will be using linear models or linear mixed models. The different varieties of t-test are discussed here because they are frequently used (and misused) in published papers.
+In the data sets we will encounter in the remainder of this book, we will never use one or two-sample or paired t-tests. Instead, we will be using linear models or linear mixed models. The different varieties of t-test are discussed here because they are frequently used (and misused) in published papers, and because (as shown later) t-tests are in fact simplified linear mixed models in disguise.
 
-Next, we look at some applications of the t-test and some subtle points relating to this statistical test.
+Next, we look at some applications of the t-test in more complex settings than simple two-condition designs, and some subtle points relating to this statistical test. The essential point to take away from the following sections is that although the t-test has the wonderful property of simplicity, hidden dangers lurk which can mislead even highly experienced researchers.  
+
 
 ## Using paired t-tests in complex factorial designs
 
-In psychology and psycholinguistics, it is fairly common to run relatively complex factorial designs. An example is the $2\times 2$ repeated measures design in @levy2013expectation. Even more complex designs, like $2\times 2\times 2$ design, are widely used; an example is @fedorenko2006nature. We single out these two papers because the authors were exemplary in that they released their data on request.^[Research has repeatedly shown that relatively few researchers are willing to release their data. For example, @wicherts2011willingness report that ``Of the 49 corresponding authors, 21 (42.9%) had shared some data with Wicherts et al. Thirteen corresponding authors (26.5%) failed to respond to the request or any of the two reminders. Three corresponding authors (6.1%) refused to share data either because the data were lost or because they lacked time to retrieve the data and write a codebook. Twelve corresponding authors (24.5%) promised to share data at a later date, but have not done so in the past six years (we did not follow up on it). These authors commonly indicated that the data were not readily available or that they first needed to write a codebook.'' Interestingly, researchers refuse to release data even if the journal requires it; for example, after the *Journal of Memory and Language* instituted an obligatory data and code release policy, 10 out of 57 articles never released any data [@LaurinavichyuteVasishth2021].]
+In psychology and psycholinguistics, it is fairly common to run relatively complex factorial designs. An example is the $2\times 2$ repeated measures design in @levy2013expectation. Even more complex designs, like $2\times 2\times 2$ design, are widely used; an example is @fedorenko2006nature. The data from these two papers illustrate some of the more common problems with the use and abuse of the t-test.
 
 ### Analyzing a $2\times 2$ repeated measures design using paired t-tests
 
 The @levy2013expectation paper was a reading study on German that used eye-tracking and had two experiments, each with a $2\times 2$ design. In Experiment 1, the four conditions are as shown in Figure \@ref(fig:lk13E1). The four conditions can be described as follows:
 
-- Condition a: dative noun in main clause, adjunct in main clause.
-- Condition b: dative noun in main clause, adjunct in subordinate clause.
-- Condition c: dative noun in subordinate clause, adjunct in main clause.
-- Condition d: dative clause in subordinate clause, adjunct in subordinate clause.
+- Condition a: adjunct in subordinate clause, dative noun in subordinate clause.
+- Condition b: adjunct in main clause, dative noun in subordinate clause.
+- Condition c: adjunct in subordinate clause, dative noun in main clause.
+- Condition d: adjunct in main clause, dative clause in main clause.
 
-The research questions are: is there (i) a main effect of dative-noun location (main or subordinate clause), (ii) a main effect of adjunct location (main or subordinate clause), and (iii) is there an interaction between the two factors?
+The research questions in this paper can be characterized in terms of so-called main effects and interactions: Is there 
 
-(ref:lk13E1) The experiment design in Experiment 1 of @levy2013expectation. The figure is re-used with permission from @VasishthMertzenJaegerGelman2018.
+- a main effect of dative-noun location (main or subordinate clause)
+- a main effect of adjunct location (main or subordinate clause)
+- an interaction between the two factors?
+
+(ref:lk13E1) The experiment design in Experiment 1 of @levy2013expectation. The figure is re-used with permission from @VasishthMertzenJaegerGelman2018 (License number 5211790221849).
 
 ```{r lk13E1, fig.cap = "(ref:lk13E1)", out.width = "80%", echo = FALSE, fig.align = "center"}
 knitr::include_graphics("figures/lk13E1.png", dpi = 1000)
 ```
 
-Some pre-processing is needed to do the t-tests necessary to answer these questions. First, load the data, create a condition column, and then examine its structure:
+Some pre-processing has to be carried out to do the t-tests needed to answer these questions. First, load the data, create a condition column, and then examine the resulting structure of the data frame:
+
 ```{r}
 data("df_levykeller13E1")
 head(df_levykeller13E1)
-## create a condition column:
-df_levykeller13E1$cond<-factor(ifelse(df_levykeller13E1$dat=="main" & df_levykeller13E1$adj=="main","a",
-                               ifelse(df_levykeller13E1$dat=="main" & df_levykeller13E1$adj=="sub","b",
-                        ifelse(df_levykeller13E1$dat=="sub" & df_levykeller13E1$adj=="main","c",
-                               ifelse(df_levykeller13E1$dat=="sub" & df_levykeller13E1$adj=="sub","d","NA")))))
 ```
 
-Notice that each of the 28 subjects sees each condition six times:
+As will become clear below, it is convenient to recode the $2\times 2$ design in terms of the four conditions labeled a-d.
+
+```{r}
+## create a condition column:
+df_levykeller13E1$cond <-
+  factor(ifelse(df_levykeller13E1$dat == "sub" & 
+                  df_levykeller13E1$adj == "sub", "a",
+    ifelse(df_levykeller13E1$dat == "sub" & 
+             df_levykeller13E1$adj == "main", "b",
+      ifelse(df_levykeller13E1$dat == "main" & 
+               df_levykeller13E1$adj == "sub", "c",
+        ifelse(df_levykeller13E1$dat == "main" & 
+                 df_levykeller13E1$adj == "main", "d", "NA")
+      )
+    )
+  ))
+## sanity check:
+xtabs(~ cond + adj, df_levykeller13E1)
+xtabs(~ cond + dat, df_levykeller13E1)
+```
+
+Notice that each of the 28 subjects sees each condition six times. This is a Latin square design, which means that there should be $6\times 4=24$ items. You must check this!
 
 ```{r}
 t(xtabs(~subj+cond,df_levykeller13E1))
 ```
 
-This is problematic for the t-test because the t-test assumes that each subject delivers exactly one data point per condition. The t-test requires that the data be aggregated: we have to restructure the data so that each subject's response for each of the four conditions is the mean of the six repetitions. This is often called a by-subject analysis:
+The repeated measurements from each subject in each condition is problematic for the t-test: the t-test assumes that each subject delivers exactly one data point per condition. Mathematically, what's assumed in the t-test is that for $i=1,\dots,28$ subjects, we have four vectors of length 28, one for each condition: 
 
-```{r echo=FALSE}
+- $x_{a,1},\dots,x_{a,28}$
+- $x_{b,1},\dots,x_{b,28}$
+- $x_{c,1},\dots,x_{c,28}$
+- $x_{d,1},\dots,x_{d,28}$
+
+Instead, what we have is four vectors, each of length $28\times 6$. For example, look at condition a's data:
+
+```{r}
+length(subset(df_levykeller13E1,cond=="a")$TFT)
+28*6
+```
+
+What is necessary here is to force the data into the format that t-test expects. The data be aggregated: restructure the data so that each subject's response for each of the four conditions is the mean of the six repetitions. This is often called a by-subject analysis:
+
+```{r}
 bysubj <- aggregate(TFT ~ subj + cond,
   mean,
   data = df_levykeller13E1
@@ -1538,42 +1594,55 @@ head(bysubj)
 Now, each subject delivers exactly one data point per condition, as the t-test demands. 
 
 ```{r}
+length(subset(bysubj,cond=="a")$TFT)
+```
+
+Notice that now we have no column any more indicating which items the subjects saw---this information has disappeared because for each subject, we took the average over all the six items for each condition. We have lost information; as discussed later, this loss of information can have far-reaching, adverse consequences for statistical inference.
+
+```{r}
 t(xtabs(~subj+cond,bysubj))
 ```
 
-The research questions (main effects and interactions of the two factors) can be visualized as in Figure \@ref(fig:lk13E1plot). 
 
-```{r echo=FALSE, fig.cap="Visualizing the means from the four conditions in the Levy and Keller 2013 Experiment 1 design allows us to graphically summarize the statistical comparisons of interest: the main effects of the two factrs, and their interactions."}
+The main effects and interactions can be visualized as in Figure \@ref(fig:lk13E1plot). 
+
+```{r lk13E1plot,echo=FALSE, fig.cap="Visualizing the means from the four conditions in the Levy and Keller 2013 Experiment 1 design allows us to graphically summarize the statistical comparisons of interest: the main effects of the two factors, and their interactions."}
 meansE1<-with(bysubj,tapply(TFT,cond,mean))
-names(meansE1)<-c("dat:main, \n adj:main",
-                  "dat:main, \n adj:sub",
-                  "dat:sub, \n adj:main",
-                  "dat:sub, \n adj:sub")
+names(meansE1)<-c("adj:sub, \n dat:sub",
+                  "adj:main, \n dat:sub",
+                  "adj:sub, \n dat:main",
+                  "adj:main, \n dat:sub")
 barplot(meansE1,ylab="Total fixation time (ms)",xlab="conditions",main="Main effects and interactions\n Levy and Keller, 2013, Expt 1")
 
 ```
 
-The main effect of dative is asking whether the average of the two dat:main conditions is different from the average of the two dat:sub conditions. The null hypothesis is then:
+The main effect of dative is asking whether the average of the two dat:main conditions is different from the average of the two dat:sub conditions. In terms of the means of the four conditions labeled a-d, the null hypothesis is then:
 
 \begin{equation}
 H_{0,MEdat}: \frac{\mu_a + \mu_b}{2} = \frac{\mu_c + \mu_d}{2}
 \end{equation}
 
-The paired t-test can be used to test this main effect:
+The paired t-test can be used to test this main effect. It will be convenient to obtain the reading times for each condition, and just do paired t-tests. (Each of the main effects and the interaction are going to be paired t-tests.)
 
 ```{r}
 cond_a<-subset(bysubj,cond=="a")$TFT
 cond_b<-subset(bysubj,cond=="b")$TFT
 cond_c<-subset(bysubj,cond=="c")$TFT
 cond_d<-subset(bysubj,cond=="d")$TFT
+```
 
+Here is the computation for the main effect of the dative noun:
+
+```{r}
+## main effect of dative:
 mean_ab<-(cond_a+cond_b)/2
 mean_cd<-(cond_c+cond_d)/2
 
-res<-t.test(mean_ab,mean_cd,paired=TRUE)
-summary_ttest(res)
+MEdat_res<-t.test(mean_ab,mean_cd,paired=TRUE)
+summary_ttest(MEdat_res)
 ```
 
+@levy2013expectation report (their Table 6) a main effect of dative as having an estimate of $102.48$ ms (no confidence interval is reported), with a p-value below $0.01$. The small difference between their estimate and ours is because they analyzed unaggregated data with a linear mixed model. Their analysis is actually the better way to analyze these data, as we will discuss later in this book.
 
 The main effect of adjunct is asking whether the average of the two adj:main conditions is different from the average of the two adj:sub conditions. 
 
@@ -1586,63 +1655,167 @@ This main effect can be tested as follows:
 ```{r}
 mean_ac<-(cond_a+cond_c)/2
 mean_bd<-(cond_b+cond_d)/2
-res<-t.test(mean_ac,mean_bd,paired=TRUE)
-summary_ttest(res)
+MEadj_res<-t.test(mean_bd,mean_ac,paired=TRUE)
+summary_ttest(MEadj_res)
 ```
 
-Finally, the interaction of the two factors (call it $dat\times adj$) is asking whether the adjunct effect within dat:main is different from the adjunct effect in dat:sub; in other words, the interaction is a difference between two differences:
+@levy2013expectation also report a non-significant effect estimate of 16.28 ms, so this approximately matches our estimate. 
+
+Finally, the interaction of the two factors (call it $dat\times adj$) is asking whether the adjunct effect within dat:main has the same value as the adjunct effect in dat:sub. In other words, the interaction is testing for no difference between two differences:
 
 \begin{equation}
 H_{0,dat\times adj}: (\mu_a - \mu_b) = (\mu_c - \mu_d)
 \end{equation}
 
-The interaction is therefore testing a difference between two differences.  The implementation of the t-test works like this:
+Another way to write this null hypothesis is as testing whether the difference between the two differences  is 0:
+
+\begin{equation}
+H_{0,dat\times adj}: (\mu_a - \mu_b) - (\mu_c - \mu_d) = 0
+\end{equation}
+
+The implementation of the t-test works like this:
 
 ```{r}
 diff_ab<-cond_a-cond_b
 diff_cd<-cond_c-cond_d
-res<-t.test(diff_ab,diff_cd,paired=TRUE)
-summary_ttest(res)
+INTdatxadj_res<-t.test(diff_ab,diff_cd,paired=TRUE)
+summary_ttest(INTdatxadj_res)
 ```
 
+@levy2013expectation report a non-significant estimate of $-96.82$ ms for the interaction. This also approximately matches our calculations. 
 
+The broader lesson here is that one can break down a design with a factorial design to a series of paired t-tests. Although it is extremely easy to analyze factorial designs like these with paired t-tests, there is an important price to be paid. The price is inflation of Type I error probability. 
+
+### A complication with multiple t-tests: Inflation of Type I error probability 
+
+Each of the three hypothesis tests has a Type I error probability set at $0.05$. Once the three hypothesis tests are carried out, the probability space is as shown in Figure \@ref(fig:probtree). The way to interpret the probability space is as follows: Each time that a hypothesis is tested, if the null hypothesis is in fact true, we can reject it incorrectly with probability 0.05, and accept it correctly with probability 0.95. Each successive hypothesis test takes us further down the tree, and the binary branches represent all the possible paths that could be taken. Thus, if we want to compute the probability of correctly failing to reject the null in all three hypothesis tests assuming that the null is true, we simply multiply the three probabilities 0.95 to get `r 0.95^3`. Subtracting one from this quantity gives us the probability of rejecting *at least one* null hypothesis incorrectly.  
+
+```{r probtree, fig.cap = "The probability space representing three successive independent hypothesis tests when all null hypotheses are true, and Type I error probability is 0.05. Each hypothesis can either be rejected (rej.) or fail to be rejected (fail).", out.width = "80%", echo = FALSE, fig.align = "center"}
+knitr::include_graphics("figures/probtree.png", dpi = 1000)
+```
+
+The probability of rejecting *at least one* of the three hypotheses incorrectly is no longer $0.05$, but rather:
+
+\begin{equation}
+1-0.95^3 = 0.1426
+\end{equation}
+
+This inflated Type I error probability can become very serious; for example, @levy2013expectation carried out 32 hypothesis tests; this results in an inflated Type I error probability of 
+
+\begin{equation}
+1-0.95^{32} = 0.8063
+\end{equation}
+
+That is an 80% probability of incorrectly rejecting at least one of the hypotheses tested! It is not uncommon to run 250 or even more hypothesis tests in a single paper. That would be a Type I error probability of `r round(1-0.95^{250},3)` of rejecting at least one null hypothesis incorrectly; you are essentially sure to get something come out significant incorrectly.
+
+A standard approach to correcting this inflation is to use the Bonferroni correction: divide the standard Type I error by the number of tests, and use this corrected probability as the new Type I error. For example, in @levy2013expectation, the corrected $\alpha$ for 32 hypothesis tests would be 0.05/32=0.0016. One should use this corrected $\alpha$ to interpret multiple comparisons. 
 
 ### Analyzing a $2\times 2\times 2$ repeated measures design using paired t-tests
 
-@fedorenko2006nature report a self-paced reading study with eight conditions. 
+Even more complex designs can be analyzed using paired t-tests. For example, @fedorenko2006nature report a self-paced reading study with eight conditions. 
 
-1. Factor: One noun in memory set or three nouns
-
+- Factor: One noun in memory set or three nouns
 easy: Joel 
-
 hard: Joel-Greg-Andy 
-
-2. Factor: Noun type, either proper name or occupation
-
+- Factor: Noun type, either proper name or occupation
 name: Joel-Greg-Andy 
-
 occ: poet-cartoonist-voter
+- Factor: Relative clause type: subject vs. object relatives (in English)
 
-3. Factor: Relative clause type:
+The relative clause sentences are the following; the reading time is measured in the relative clause regions *who consulted the cardiologist* and *who the cardiologist consulted*. 
 
-(1) 
-a. Subject-extracted, version 1:
+(1)  Subject-extracted:
 The physician | who consulted the cardiologist | checked the files | in the office.
-b. Subject-extracted, version 2:
-The cardiologist | who consulted the physician | checked the files | in the office.
 
-(2)
-a. Object-extracted, version 1:
+(2) Object-extracted:
 The physician | who the cardiologist consulted | checked the files | in the office.
-b. Object-extracted, version 2:
-The cardiologist | who the physician consulted | checked the files | in the office.
 
+The authors had two versions of each of the two relative clause types, but we ignore that detail here. Another problem in the data is that subject 1 delivers twice as much data as the other subjects; this could be due to two subjects being misclassified as subject 1. But we ignore this problem in the data as well.
+
+First, load and examine the data:
+
+```{r}
+data("df_fedorenko06")
+head(df_fedorenko06)
+```
+
+As explained above, we have a $2\times 2\times 2$ design: rctype [obj,subj] $\times$ nountype [name, occupation] $\times$ load [hard,easy]. Region 2 is the critical region, the entire relative clause, and RT is the reading time for this region. Subject and item columns are self-explanatory.
+
+The paired t-test can be used repeatedly to compute the main effects and interactions. This will be assigned as an exercise at the end of this chapter. Here, we want to focus on one interesting analysis in the original paper. The result from that paper is summarized in the quote below (emphasis ours):
+
+"*The most interesting result presented here is **an interaction between syntactic complexity and the memory- noun/sentence-noun similarity during the critical region of the linguistic materials in the hard-load (three memory-nouns) conditions**: people processed object-extracted relative clauses more slowly when they had to maintain a set of nouns that were similar to the nouns in the sentence than when they had to maintain a set of nouns that were dissimilar from the nouns in the sentence; in contrast, for the less complex subject-extracted relative clauses, there was no reading time difference between the similar and dissimilar memory load conditions. In the easy-load (one memory-noun) conditions, no interaction between syntactic complexity and memory-noun/sentence-noun similarity was observed.
+**These results provide evidence against the hypothesis whereby there is a pool of domain-specific verbal working memory resources for sentence comprehension, contra Caplan and Waters (1999).**
+*"
+
+If the analyses described in the quote above are to be carried out using t-tests (or repeated measures ANOVA), the approach that must be taken is to subset the data such that there are two $2\times 2$ subsetted data sets: one for the hard memory conditions and the other for the easy memory conditions. Then, one can investigate the interaction between the relative clause type (syntactic complexity) and the noun type (proper name vs. occupation) by computing aggregated differences between (i) the relative clause type in Noun Type occupation, and (i) the relative clause type in Noun Type proper name.
+
+```{r}
+fed06hard<-subset(df_fedorenko06,load=="hard")
+
+## Compute difference between OR and SR 
+## in Noun Type occupation:
+RCocc<-aggregate(RT~subj+rctype,
+                 mean,data=subset(fed06hard,
+                                  nountype=="occ"))
+diff_occ_hard<-subset(RCocc,rctype=="obj")$RT-
+  subset(RCocc,rctype=="subj")$RT
+
+## Compute difference between OR and SR 
+## in Noun Type proper name:
+RCname<-aggregate(RT~subj+rctype,
+                  mean,data=subset(fed06hard,
+                                   nountype=="name"))
+diff_name_hard<-subset(RCname,rctype=="obj")$RT-
+  subset(RCname,rctype=="subj")$RT
+
+## by-subject interaction:
+hardINTres<-t.test(diff_name_hard,
+                   diff_occ_hard,paired=TRUE)
+summary_ttest(hardINTres)
+```
+
+One can also investigate the interaction between RC type and Noun Type in the easy conditions:
+
+```{r}
+fed06easy <- subset(df_fedorenko06, 
+                    load == "easy")
+
+## Compute difference between OR and SR 
+## in Noun Type occupation:
+RCocc <- aggregate(RT ~ subj + rctype, 
+                   mean, data = subset(fed06easy, 
+                                       nountype == "occ"))
+diff_occ_easy <- subset(RCocc, rctype == "obj")$RT - 
+  subset(RCocc, rctype == "subj")$RT
+
+## Compute difference between OR and SR 
+## in Noun Type proper name:
+RCname <- aggregate(RT ~ subj + rctype,
+                    mean, data = subset(fed06easy, 
+                                        nountype == "name"))
+diff_name_easy <- subset(RCname, 
+                         rctype == "obj")$RT - 
+  subset(RCname, rctype == "subj")$RT
+
+## by-subject interaction:
+easyINTres <- t.test(diff_name_easy, 
+                     diff_occ_easy, 
+                     paired = TRUE)
+summary_ttest(easyINTres)
+```
+
+Based on these aggregated by-subjects analyses, it would be tempting to conclude, as @fedorenko2006nature did, that there is a significant interaction in the hard conditions but not in the easy conditions. However, there are at least two problems here. First, 
+the paired t-test (or the identical test, the repeated measures ANOVA) has a serious limitation: it is ignoring the by-item variability (because that is averaged out); later we will see that once one takes all sources of variance into account simultaneously, the picture changes dramatically. Second, the authors implicitly assume that the difference between a significant effect in the hard conditions and the non-significant effect in the easy conditions is itself significant---we will see below that that this conclusion is not warranted in the present case.
+
+In summary, the (paired) t-test is a quick and easy tool for comparing means from two  conditions, and even relatively complex designs can be analyzed. In fact, a well-known mathematical psychologist once told the first author of this book: "If you need to run anything more complex than a t-test, you are asking the wrong question." Indeed, many scientists have had long and successful careers with just the t-test as their entire statistical tool. However, as they say, if all you have is a hammer, everything starts to look like a nail. As we show in this book, much important information is lost when one attempts to boil the data down to fit the constraints of the t-test. 
+
+A further point is that the t-test is often used incorrectly. Some of the most common mistakes are discussed next.
 
 ## Common mistakes involving the (paired) t-test
 
 ### Ignoring the independence assumption
 
-The paired t-test assumes that each pair of data points that goes into the t-test is independent of the other pairs of data points. This implies that the data-frame cannot have more than one row for a particular pair. In other words, the data-frame cannot have repeated measurements spread out across rows.  
+As also discussed above, the paired t-test assumes that each pair of data points that goes into the t-test is independent of the other pairs of data points. This implies that the data-frame cannot have more than one row for a particular pair. In other words, the data-frame cannot have repeated measurements spread out across rows.  
 
 For example, doing a paired t-test on this hypothetical data-frame would be incorrect:
   
@@ -1684,9 +1857,11 @@ The solution is to aggregate the data so that each subject (or item) has only *o
 This aggregation allows us to meet the independence assumption of the t-test, but it has a potentially huge drawback: it pretends we have one measurement from each subject for each condition. 
 Later on we will learn how to analyze unaggregated data, but if we want to do a paired t-test, we have no choice but to aggregate the data in this way.
 
-A fully worked example will make this clear. We have repeated measures data on subject versus object relative clauses in English. Subject relative clauses are sentences like *The man who was standing near the doorway laughed*. Here, the phrase (called a relative clause) *who was standing near the doorway* modifies the noun phrase *man*; it is called a subject relative because the noun phrase *man* is the subject of the relative clause. By contrast, object relative clauses are sentences like *The man who was the woman was talking to near the doorway laughed*; here, the *man* is the grammatical object object of the relative clause *who was the woman was talking to near the doorway*.
+Although an example of aggregation was already discussed above, it may be helpful to revisit the approach that is necessary using a fully worked example. Consider the following repeated measures data on subject versus object relative clauses in English; the data are from a self-paced reading study, Experiment 1 of @grodner. 
 
-The data are from a self-paced reading study reported in @grodner, their experiment 1. A theoretical prediction is that in English, object relatives are harder to read than subject relatives, in the relative clause verb region. We want to test this prediction.
+Subject relative clauses are sentences like *The man who was standing near the doorway laughed*. Here, the phrase (called a relative clause) *who was standing near the doorway* modifies the noun phrase *man*; it is called a subject relative because the noun phrase *man* is the subject of the relative clause. By contrast, object relative clauses are sentences like *The man who was the woman was talking to near the doorway laughed*; here, the *man* is the grammatical object object of the relative clause *who was the woman was talking to near the doorway*.
+
+A theoretical prediction is that in English, object relatives are harder to read than subject relatives, in the relative clause verb region. We want to test this prediction.
 
 First, load the data containing reading times from the region of interest (the relative clause verb):
 
@@ -1696,8 +1871,7 @@ data("df_gg05e1")
 head(df_gg05e1)
 ```
 
-We have repeated measurements for each condition from the subjects, and from items. You can establish this by using the `xtabs` command. 
-Notice that there are no missing data points:
+We have repeated measurements for each condition from 42 subjects, and from 16 items arranged in a Latin square design. You can establish this by using the `xtabs` command.  There are no missing data points:
 
 ```{r}
 t(xtabs(~ subject + condition, df_gg05e1))
@@ -1709,7 +1883,8 @@ It is important to stress once more that it is the researcher's responsibility t
 
 ```{r}
 ## incorrect t-test!
-t.test(rawRT ~ condition, df_gg05e1)
+gg05incorrectres1<-t.test(rawRT ~ condition, df_gg05e1)
+summary_ttest(gg05incorrectres1)
 ```
 
 This t-test is incorrect for several reasons, but the most egregious error here is that the data are paired (each  subject delivers data for both  conditions), and that property of the data is being ignored. 
@@ -1718,16 +1893,18 @@ Another common mistake is to do a paired t-test on the data without checking tha
   
 ```{r}
 ## Incorrect paired t-test!
-t.test(rawRT ~ condition, paired = TRUE, df_gg05e1)
+gg05incorrectres2<-t.test(rawRT ~ condition, 
+                          paired = TRUE, df_gg05e1)
+summary_ttest(gg05incorrectres2)
 ```
   
-Here, the degrees of freedom indicate that we have fit the incorrect model. There are 42 subjects and 16 items, and the presentation of items to subjects uses a Latin square design (each subject sees only one condition per item). The 335 degrees of freedom come from $42\times 8=336$ data points, minus one. Why do we say $42\times 8$ and not $42\times 16$? That is because each subject will return eight differences in reading time for each condition: each subject gives us eight subject-relative data points and eight object-relative data points.  
+Here, the degrees of freedom indicate that we have fit the incorrect model. As mentioned above, there are 42 subjects and 16 items, and the presentation of items to subjects uses a Latin square design (each subject sees only one condition per item). The 335 degrees of freedom come from $42\times 8=336$ data points, minus one. Why do we say $42\times 8$ and not $42\times 16$? That is because each subject will return eight differences in reading time for each condition: each subject gives us eight subject-relative data points and eight object-relative data points.  
 
 For each of the 42 subjects, the t-test function internally creates a vector of eight data points of subject relatives and subtracts the vector of eight data points of object relatives. That is how we end up with  $42\times 8=336$ data points. 
 
-These 336 data points are assumed by the t-test to be independent of each other; but this cannot be the case because each subject delivers eight data points for each condition; these are obviously dependent (correlated) because they come from the same subject. 
+The 336/2=168 data points in each condition are assumed by the t-test to be independent of each other; but this cannot be the case because each subject delivers eight data points for each condition; these are obviously dependent (correlated) because they come from the same subject. 
 
-What is needed is a single data point, the mean reading time for each subject and condition. That is called a by-subjects t-test because the averaging is done over the items for each subject. Analogously, it is also common to compute a by-items t-test; this time, the averaging is done over the subjects for each item. In order to conduct the t-test correctly, aggregation of the data by subjects and by items is necessary. This necessity of analyzing data both by subjects and by items is discussed by @clark73 in a famous article.
+What is needed is a single data point, the mean reading time for each subject and condition. That is the by-subjects t-test: the averaging is done over the items for each subject. Analogously, it is also common to compute a by-items t-test; this time, the averaging is done over the subjects for each item. In order to conduct the t-test correctly, aggregation of the data by subjects and by items is necessary. This necessity of analyzing data both by subjects and by items is discussed by @clark73 in a famous article, and more recently by @yarkonigeneralizability and @westfall2017.
 
 Consider the by-subjects aggregation procedure below. Once the code below is run, we have only one data point for each condition and subject:
 
@@ -1742,7 +1919,9 @@ t(xtabs(~ subject + condition, bysubj))
 Returning to the t-test, by aggregating the data the  independence assumption of the t-test is met, and the degrees of freedom for this by-subjects analysis are now correct ($42-1=41$):
 
 ```{r}
-t.test(rawRT ~ condition, bysubj, paired = TRUE)
+gg05res<-t.test(rawRT ~ condition, bysubj, 
+                paired = TRUE)
+summary_ttest(gg05res)
 ```
 
 One unsurprising property of the averaged data is that the longer the average subject relative clause reading time for a particular subject, the longer that subject's average object relative clause reading time (Figure \@ref(fig:averageorsr)). This is not surprising because the mean reading times for each condition are coming from the same subject.
@@ -1752,6 +1931,11 @@ SRdata <- subset(bysubj, condition == "subjgap")$rawRT
 ORdata <- subset(bysubj, condition == "objgap")$rawRT
 plot(SRdata, ORdata)
 abline(lm(ORdata ~ SRdata))
+```
+
+The correlation is:
+
+```{r}
 cor(SRdata, ORdata)
 ```
 
@@ -1764,7 +1948,9 @@ byitem <- aggregate(rawRT ~ item + condition,
 )
 t(xtabs(~ item + condition, byitem))
 
-t.test(rawRT ~ condition, byitem, paired = TRUE)
+gg05itemres<-t.test(rawRT ~ condition, 
+                    byitem, paired = TRUE)
+summary_ttest(gg05itemres)
 ```
 
 As in the by-subjects analysis, there seems to be a slight correlation between the average object and subject reading times among the items, but the sparse data (16 items) leads to a lot of variability around the fitted line (Figure \@ref(fig:averageorsritems)).
@@ -1779,7 +1965,7 @@ ORdatabyitem <- subset(
   condition == "objgap"
 )$rawRT
 plot(SRdatabyitem, ORdatabyitem)
-abline(lm(ORdatabyitem) ~ log(SRdatabyitem))
+abline(lm(ORdatabyitem ~ SRdatabyitem))
 cor(SRdatabyitem, ORdatabyitem)
 ```
 
@@ -1787,19 +1973,91 @@ cor(SRdatabyitem, ORdatabyitem)
 
 The paired t-test illustrated above is in general quite a dangerous way to analyze this data-set, because it ignores the fact that each subject  delivers not one but eight data points per condition. Each subject's repeated measurements will introduce a source of variance, but this source of variance is being suppressed in the by-subjects t-test, leading to a possibly over-enthusiastic t-value. Similarly, each item also delivers multiple data points, and therefore introduce a potential source of variance within each item that will be artificially ignored when we aggregate data.
 
-In order to take this variability into account, we must switch to the linear mixed model. The next chapter develops this more general framework.
+```{r echo=FALSE,message=FALSE}
+## set up contrast coding:
+df_fedorenko06$ld<-ifelse(df_fedorenko06$load=="hard",1,-1)
+df_fedorenko06$nn_easy<-ifelse(df_fedorenko06$load=="easy" & df_fedorenko06$nountype=="occ",-1,
+                               ifelse(df_fedorenko06$load=="easy" & df_fedorenko06$nountype=="name",1,0))
+df_fedorenko06$nn_hard<-ifelse(df_fedorenko06$load=="hard" & df_fedorenko06$nountype=="occ",-1,
+                               ifelse(df_fedorenko06$load=="hard" & df_fedorenko06$nountype=="name",1,0))
 
+df_fedorenko06$rc_easy<-ifelse(df_fedorenko06$load=="easy" & df_fedorenko06$rctype=="subj",-1,
+                               ifelse(df_fedorenko06$load=="easy" & df_fedorenko06$rctype=="obj",1,0))
+df_fedorenko06$rc_hard<-ifelse(df_fedorenko06$load=="hard" & df_fedorenko06$rctype=="subj",-1,
+                               ifelse(df_fedorenko06$load=="hard" & df_fedorenko06$rctype=="obj",1,0))
+library(lme4)
+m1<-lmer(RT~ld + nn_hard*rc_hard + nn_easy*rc_easy +
+           (1+ld + nn_hard:rc_hard ||subj) + 
+           (1+ld + nn_hard:rc_hard + nn_easy||item),df_fedorenko06)
+#summary(m1)
+lmer_tval_INThard<-round(summary(m1)$coefficients[7,3],3)
+est_INThard<-round(summary(m1)$coefficients[7,1],3)
+SE_INThard<-round(summary(m1)$coefficients[7,2],3)
+
+```
+
+In order to take this variability into account simultaneously, we must switch to the linear mixed model.  For example, in the @fedorenko2006nature data, the interaction between Noun Type and RC type is significant when we aggregate over items; a linear mixed model that takes the item level variability into account yields a smaller t-value of `r lmer_tval_INThard`, with estimate `r est_INThard`, 95% CIs [`r est_INThard - 2*SE_INThard`, `r est_INThard + 2*SE_INThard`] ms. Compare this with the t-value we obtained with the paired t-test earlier:
+
+```{r}
+summary_ttest(hardINTres)
+```
+
+Thus, the conclusion can change quite dramatically depending on whether one ignores sources of variance in one's analysis or not.
+
+The next chapter explains how to obtain the more realistic estimates from the linear mixed model by taking both subject and item variability into account simultaneously.
 
 ### The difference between a significant and a non-significant result need not itself be significant
 
-A very common error in psychology and psycholinguistics is to find a significant effect in one study, then find a non-significant effect in another study that changes one variable from the first study. The conclusion then drawn is that the variable that differs between the two studies is  ``significant.''  @gelmanhill07 summarize this mistake as ``the difference between significant and non-significant is itself not significant.'' Indeed, @nieuwenhuis2011erroneous shows that this mistake is widespread in areas like neuroscience. A real-live example will illustrate the problem.
+A very common error in psychology and psycholinguistics is to find a significant effect in one study, then find a non-significant effect in another study that changes one variable from the first study. The conclusion then drawn is that the variable that differs between the two studies is  "significant."  @gelmanhill07 summarize this mistake as follows: "the difference between significant and non-significant is itself not significant." Indeed, @nieuwenhuis2011erroneous show that this mistake is widespread in areas like neuroscience. 
 
-@levy2013expectation published a paper in the *Journal of Memory and Language* in which they carried out two experiments. Experiment 1, which had a relatively simple syntactic structure, they had a $2\times 2$ repeated measures design in which a significant interaction was found, but in Experiment 2, which had a more complex syntactic structure, the interact was not significant. The conclusion was that the syntactic complexity in Experiment 2 was responsible for the switch from a significant effect in Experiment 1 vs. the non-significant effect in Experiment 2. Such a claim can be made only if the difference in the interaction between Experiments 1 and 2 is tested for.
+A real-life example will illustrate the problem. Recall that in the @fedorenko2006nature design, the hard conditions showed a significant interaction but the easy conditions showed a non-significant interaction:
+
+```{r}
+summary_ttest(hardINTres)
+summary_ttest(easyINTres)
+```
+
+Is this difference between the easy and hard conditions itself significant? Not necessarily; one has to test for that by carrying out a higher-order interaction: the difference between (i) the RC vs. Noun-Type interaction in the hard condition, and (ii)  the RC vs. Noun-Type interaction in the easy condition. 
+In the present case, the higher-order interaction is not even remotely significant---the main claim in the @fedorenko2006nature is not warranted.
+
+```{r}
+diff_hard<-diff_name_hard-diff_occ_hard
+diff_easy<-diff_name_easy-diff_occ_easy
+RCxNTxLD_INTres<-t.test(diff_hard,diff_easy,paired=TRUE)
+summary_ttest(RCxNTxLD_INTres)
+```
+
+
+```{r echo=FALSE}
+df_fedorenko06$noun<-ifelse(df_fedorenko06$nountype=="name",1/2,-1/2)
+df_fedorenko06$ld<-ifelse(df_fedorenko06$load=="hard",1/2,-1/2)
+df_fedorenko06$rc<-ifelse(df_fedorenko06$rctype=="obj",1/2,-1/2)
+df_fedorenko06$nounxld<-df_fedorenko06$noun*df_fedorenko06$ld*2
+df_fedorenko06$nounxrc<-df_fedorenko06$noun*df_fedorenko06$rc*2
+df_fedorenko06$ldxrc<-df_fedorenko06$ld*df_fedorenko06$rc*2
+df_fedorenko06$nounxldxrc<-df_fedorenko06$noun*df_fedorenko06$ld*df_fedorenko06$rc*4
+m2<-lmer(RT~noun+ld+rc+nounxld + nounxrc + ldxrc + nounxldxrc+(1+ld+rc+ nounxrc + nounxldxrc||subj) + (1+ld+rc+ nounxrc + nounxldxrc||item),df_fedorenko06,
+         control = lmerControl(calc.derivs = FALSE))
+est_3wayint<-round(summary(m2)$coefficients[8,1],3)
+SE_3wayint<-round(summary(m2)$coefficients[8,2],3)
+t_3wayint<-round(summary(m2)$coefficients[8,3],3)
+```
+
+Incidentally, as shown in later chapters, the above analysis can be done with a linear mixed model as well. Such an analysis shows that the t-value is `r t_3wayint`, with estimate `r est_3wayint`, [`r est_3wayint-2*SE_3wayint`, `r est_3wayint+2*SE_3wayint`] ms.
+This mistake---not explicitly checking for the interaction---is very common in psychology and psycholinguistics.
+
+## Summary
+
+This chapter explained the basis for the hypothesis testing in frequentist statistics: the central limit theorem. This led to the t-test, specifically, the one-sample t-test (equivalent to the paired t-test) and the two-sample t-test (for unpaired data). The key summary statistics, the t-test and the p-value were discussed, along with the limitations of these statisics in determining whether an effect is significant or not. Specifically, under low statistical power, Type M and S error have the consequence that neither significant nor non-significant results are interpretable. We learned how to compute statistical power using the ` power.t.test` function and using simulation. Important applications of the t-test in factorial designs was discussed, along with the limitations imposed by the t-test; these limitations can lead to misleading conclusions. Finally, some common mistakes in the usage of t-tests were exemplified.
+
+## Further readings
+
+The logic of the hypothesis test and the t-test are discussed in every introductory textbook in statistics. Because there is so much confusion about the basic logic of the hypothesis test, we suggest generally avoiding textbooks written by non-statisticians. We especially recommend @millermiller and @casellaberger.  
 
 ## Exercises {#sec:SamplingDistrnexercises}
 
 ```{exercise, SamplingDistrnexercisesqt}
-Practice using the ```qt`` function
+Practice using the `qt` function
 ```
 
 ```{r echo=FALSE}
@@ -1860,6 +2118,51 @@ df_gge1crit <- subset(
 )
 ```
 
+```{exercise, SamplingDistrnexercisespairedttestfedorenko}
+Using the paired t-test to test for main effects and interactions
+```
+
+Using the data from @fedorenko2006nature discussed in this chapter, carry out all seven paired t-tests to investigate all main effects and interactions.
+
+```{exercise, SamplingDistrnexercisesinteraction}
+Explicitly testing for a claimed interaction
+```
+
+```{r echo=FALSE}
+minf <- function(f1,f2,n1,n2){
+fprime <- (f1*f2)/(f1+f2)
+n <- round(((f1+f2)*(f1+f2))/(((f1*f1)/n2)+((f2*f2)/n1)))
+pval<-pf(fprime,1,n,lower.tail=FALSE)
+return(paste("minF(1,",n,")=",round(fprime,digits=2),"p-value=",round(pval,2),"crit=",round(qf(.95,1,n))))
+}
+
+#E2 F1(1,54) = 6.36, p = 0.02; F2(1,23) = 4.86, p = 0.04)
+#F2(1,23) = 0.10, p = 0.8).
+minf(f1=6.36,f2=4.86,n1=54,n2=23)
+## t-value from minF':
+tE2<-sqrt(2.74)
+## approx diff in means (from figs)
+dE2<-200
+dfE2<-57
+
+#E3 F1(1,43) = 0.16, p = 0.7; F2(1,23) = 0.10, p = 0.8). 
+# F2(1,23) = 4.86, p = 0.04). `{r}
+minf(f1=0.16,f2=0.10,n1=43,n2=23)
+tE3<-sqrt(0.06)
+dE3<-100
+SE1<-200/tE2
+SE2<-100/tE3
+dfE3<-50
+
+BetwSE<-sqrt(SE1^2/(dfE2+1) + SE2^2/(dfE3+1))
+t_between<-(200-100)/BetwSE
+```
+
+@vasishthlewisLanguage05 present two self-paced reading experiments in Hindi, their Experiments 2 and 3. In Experiment 2, the distance  between a grammatical subject and a verb was manipulated by inserting an intervening inanimate noun between the two words; the expectation was that the intervener would slow  processing at the verb. Surprisingly, a faster reading time was seen at the verb when the intervener was present. What was reported in the paper was a linear mixed-effects model-based ANOVA (analysis of variance), which translates to 
+a near-significant speedup effect of the distance manipulation. The approximate statistics extracted from the paper are  $t(`r dfE2`) = `r round(-tE2,3)`$. The approximate difference in means, guessed at from their Figures 7 and 8, is about $200$ ms. By contrast, in Experiment 3, new subjects who hadn't participated in Experiment 2 were shown sentences with the same distance manipulation as in Experiment 2 but with the difference that the intervening noun was animate. The hypothesis was that the animacy status of the intervening noun would either reduce or neutralize the speedup, leading to a smaller speedup effect. Rhe reported statistics show that the distance manipulation was not statistically significant.  The approximate t-value is $t(`r dfE3`) = `r round(-tE3,3)`$. Figures 12 and 13 in the paper suggest that the approximate difference between the conditions is about $100$ ms. 
+
+Based on these t-values and the estimates of the differences in means, the authors effectively claim that there is a significant difference between the two experiments. Given the above information, is the conclusion justified? Show the results of an appropriate statistical test and use these to argue whether there is support or no support for their conclusion. (Hint: the two-sample t-test will be useful here.)
+
 ```{exercise, SamplingDistrnexercisespowerttest}
 Using the power.t.test function
 ```
@@ -1883,10 +2186,6 @@ Then, redo the power analysis using simulation instead of the t-test. Do the fol
 
 Now answer the following questions:
 
-\begin{enumerate}
-\item
-What will be the statistical power if the effect size is `r mu`, sample size is `r n` and standard deviation is `r uppersigma`?
-\item
-What sample size is needed to obtain a statistical power of 0.80 when the effect size is `r mu`,  and standard deviation is `r uppersigma`? 
-\item Suppose now that Type I error probability is changed to 0.005. What sample size is needed to obtain a statistical power of 0.80 when the effect size is `r mu`, and standard deviation is `r uppersigma`? 
-\end{enumerate}
+1. What will be the statistical power if the effect size is `r mu`, sample size is `r n` and standard deviation is `r uppersigma`?
+2. What sample size is needed to obtain a statistical power of 0.80 when the effect size is `r mu`,  and standard deviation is `r uppersigma`? 
+3. Suppose now that Type I error probability is changed to 0.005. What sample size is needed to obtain a statistical power of 0.80 when the effect size is `r mu`, and standard deviation is `r uppersigma`? 
