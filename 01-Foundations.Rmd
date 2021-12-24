@@ -452,7 +452,7 @@ The cdf is visualized in Figure \@ref(fig:uniformcdf).
 ```{r uniformcdf,message="FALSE",warning=FALSE,results="asis",fig.cap="The cdf of the uniform(0,1) distribution."}
 punif(0.25,min=0,max=1)
 punif(0.75,min=0,max=1)
-````
+```
 
 ### The Chi-square distribution
 
