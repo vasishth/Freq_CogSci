@@ -1094,7 +1094,7 @@ We have been talking about a continuous random variable as a dependent measure, 
 
 Sometimes, you will hear  statisticians (e.g., Andrew Gelman on his blog) criticize p-values by saying that the null hypothesis significance test is a "specific random number generator".  For example, a blog post from May 5, 2016 (shorturl.at/irHS9) quotes Daniel Lakeland: ``A p-value is the probability of seeing data as extreme or more extreme than the result, under the assumption that the result was produced by a specific random number generator (called the null hypothesis).''
 
-What does that sentence mean? We explain this point here because it is very helpful in understanding the absurdity of the p-value.
+What does that sentence mean? We explain this point here because it is very helpful in understanding the p-value.
 
 Suppose that the null hypothesis is in fact true. We will now simulate the distribution of the p-value under repeated sampling, given this assumption. See Figure \@ref(fig:pvalnulltrue).
 
@@ -1115,18 +1115,7 @@ hist(pvals,
 )
 ```
 
-The distribution of the p-value is uniform---every value between 0 and 1 is equally likely. The practical implication of this criticism of p-values is that when we do a single experiment and obtain a p-value under the assumption that the null is true, if the null were in fact true, then we are just using a random number generator (generating a random number between 0 and 1, $Z\sim uniform(0,1)$) to make a decision that the effect is present or absent. Using the output of a $uniform(0,1)$ distribution to decide to reject the null hypothesis makes no sense at all. 
-
-Here is the scientific procedure in R code, in the case where the null hypothesis is in fact true:
-
-```{r}
-pval <- runif(1, min = 0, max = 1)
-if (pval < 0.05) {
-  print("reject")
-} else {
-  "fail to reject"
-}
-```
+When the null hypothesis is actually true, the distribution of the p-value is uniform---every value between 0 and 1 is equally likely. The practical implication of this criticism of p-values is that when we do a single experiment and obtain a p-value under the assumption that the null is true, if the null were in fact true, then we are just using a random number generator (generating a random number between 0 and 1, $Z\sim uniform(0,1)$) to make a decision that the effect is present or absent. 
 
 A broader implication is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are more important than the p-value.
 
