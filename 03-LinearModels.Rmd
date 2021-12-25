@@ -1108,7 +1108,6 @@ summary(m4_lmer)
 b0<-round(summary(m4_lmer)$coefficients[1,1],2)
 b1<-round(summary(m4_lmer)$coefficients[2,1],2)
 tval<-round(summary(m4_lmer)$coefficients[2,3],2)
-
 ```
 
 The double vertical bar for the item random effects is the syntax in `lme4` for removing the correlation term that the model was unable to estimate. For the @grodner data, model `m4_lmer` is the one we would report in a paper. Specifically, the wording that would be appropriate is the following: "The estimate of the relative clause effect was `r round(exp(b0+b1)-exp(b0-b1))` ms, with a t-value of `r tval`. We can therefore reject the null hypothesis of no difference between the two relative clause types." 
@@ -1119,9 +1118,93 @@ In a balanced data set like this one (i.e., with no missing data), the t-test on
 
 The estimate of the effect for each participant computed from a linear mixed model "gravitates" towards the grand mean effect compared to when we fit a separate linear model to each subject's data. 
 This is called shrinkage in linear mixed models. We say that the individual-level estimates are shrunk towards the mean estimates over the entire data (the intercept and slope parameter estimates for $\beta_0$ and $\beta_1$).
-The less data we have from a given subject, or the more extreme the data from a given subject relative to the entire data set, the greater the shrinkage. Figure \@ref(fig:shrinkage) illustrates this. 
+The more extreme the data from a given subject relative to the mean estimates from the data set, or the less data we have from a given subject, the greater the shrinkage. Let's think about these two situations next.
 
-```{r shrinkage,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "The figures show linear model fits (the grand mean estimates) for three subjects with unusually large intercepts and slopes; shown are the simple linear model fit on all the data (gray line), the `lmList` model fit to the individual subject's data (black line), and the linear mixed model fit (the broken line). In all three subjects' models, the linear mixed model estimates are shrunk towards the grand mean (gray line) estimates.", tidy = FALSE}
+### Shrinkage of extreme estimates from individual subjects
+
+Figure \@ref(fig:shrinkage) shows the data from three subjects who exhibit implausibly large effects of the OR-SR effect in the data. Subjects 28, 36, and 37's estimates from the `lmList` model are as follows. These three subjects' intercept and slope estimates are both in the upper third quantile of the respective distributions.
+
+```{r}
+lmlist_m1 <- lmList(logrt ~ so | subject, gg05e1)
+coefs <- coef(lmlist_m1)
+intercepts <- coefs[1]
+summary(intercepts)
+intercepts$`(Intercept)`[28];
+intercepts$`(Intercept)`[36];
+intercepts$`(Intercept)`[37]
+
+slopes <- coefs[2]
+summary(slopes)
+slopes$so[28];slopes$so[36];slopes$so[37]
+```
+
+  On the millisecond scale, the median reading times are implausibly large:
+
+```{r}
+## subject 28's RC effect estimate:
+exp(intercepts$`(Intercept)`[28]+
+      slopes$so[28])-
+  exp(intercepts$`(Intercept)`[28]-
+        slopes$so[28])
+## subject 36's RC effect estimate:
+exp(intercepts$`(Intercept)`[36]+
+      slopes$so[36])-
+  exp(intercepts$`(Intercept)`[36]-
+        slopes$so[36])
+## subject 37's RC effect estimate:
+exp(intercepts$`(Intercept)`[37]+
+      slopes$so[37])-
+  exp(intercepts$`(Intercept)`[37]-
+        slopes$so[37])
+```
+
+```{r echo=FALSE}
+subj37int<-round(exp(intercepts$`(Intercept)`[37]))
+```
+
+Subject 37's estimate is the largest of all on the millisecond scale because that subject has the slowest average reading time of all the 42 subjects: a median of `r round(subj37int)` ms. When we back-transform the estimates from the log ms to the ms scale, the non-linearity of the log scale has the effect that larger intercepts will translate to much larger mean effects of the OR-SR difference. For example, a slope of 0.3 on the log ms scale will translate to a much largers effect on the ms scale if the intercept is larger:
+
+```{r}
+exp(5+0.3)-exp(5-0.3)
+exp(6+0.3)-exp(6-0.3)
+```
+
+Interestingly, if these three extreme subjects' data are removed and a one-sample t-test is done on the slopes (the repeated measures regression), the t-value is just on the border of being significant. Compare the t-test on the full data vs. data without these unusual subjects:
+
+```{r}
+## full data:
+summary_ttest(t.test(slopes$so))
+## without subjects 28, 36, and 37:
+summary_ttest(t.test(slopes$so[-c(28,36,37)]))
+```
+
+The linear mixed model even shows that the relative clause effect *disappears* if the data from these three subjects are removed:
+
+```{r}
+gg05e1_a<-subset(gg05e1,
+                 subject!=28 & 
+                 subject!=36 & 
+                 subject!=37)
+m4_lmer_a<-lmer(logrt~so +
+                  (1+so|subject)+
+                  (1+so||item),gg05e1_a)
+summary(m4_lmer_a)$coefficients
+```
+
+The advantage of shrinkage is that these extreme subjects' estimates are shrunk towards the grand mean in the linear mixed model. Compare the estimates from the `lmList` model (the repeated measures regression that analyzes each subject separately) with those from the linear mixed model:
+
+```{r}
+## slope estimates from lmList:
+slopes$so[28];slopes$so[36];slopes$so[37]
+## extract slope estimates from m4_lmer:
+b1<-fixef(m4_lmer)[2]
+lmerslopes<-b1+ranef(m4_lmer)$subject[,2]
+lmerslopes[28];lmerslopes[36];lmerslopes[37]
+```
+
+The above example illustrates one important achievement of the linear mixed model: it conservatively down-weights estimates of extreme subjects' estimates towards the grand mean slope. This down-weighting is sometimes referred to as "borrowing strength from the mean". Figure \@ref(fig:shrinkage) illustrates the above discussion graphically.
+
+```{r shrinkage,echo=FALSE,out.width='99%', fig.show = "hold", fig.cap = "The figures show linear model fits (the grand mean estimates) for three subjects with unusually large intercepts and slopes; shown are the simple linear model fit on all the data (gray line), the `lmList` model fit to the individual subject's data (black line), and the linear mixed model fit (the broken line). In all three subjects' models, the linear mixed model estimates are shrunk towards the grand mean (gray line) estimates.", tidy = FALSE}
 op<-par(mfrow=c(1,3),pty="s")
 coefs<-coef(lmlist_m1)
 intercepts<-coefs[1]
@@ -1177,7 +1260,7 @@ abline(lm(log(rawRT)~so,gg05e1),lwd=3,col="gray")
 ```
 
 
-#### Shrinkage in action: when data are missing
+### Shrinkage when data are missing
 
 The importance and value of shrinkage becomes clear once we simulate a situation where there is some missing data. Missingness can happen in experiments, either due to lost measurements (arising from computer error or programming errors), or some other reason.  To see what happens when we have missing data, let's randomly delete some data from one subject. We will randomly delete 50% of subject 37's data:
 
@@ -1211,19 +1294,16 @@ Now subject 37's estimates are going to be even more inaccurate than with 16 dat
 subset(gg05e1, subject == 37)$deletedRT
 ```
 
-```{r echo=FALSE}
-## original no pooling estimate:
-lmlist_m1_old <- lmList(log(rawRT) ~ so | subject, gg05e1)
-coefs_old <- coef(lmlist_m1_old)
-intercepts_old <- coefs_old[1]
-colnames(intercepts_old) <- "intercept"
-slopes_old <- coefs_old[2]
-## subject 37's original estimates:
-intercepts_old$intercept[37]
-slopes_old$so[37]
+Here are the original estimates of the intercept and slope for subject 37:
+
+```{r}
+(intercept_orig<-intercepts$`(Intercept)`[37])
+(slope_orig<-slopes$so[37])
 ```
 
-```{r echo=FALSE}
+Now look at the estimates based on the deleted data:
+
+```{r}
 ## on deleted data:
 lmlist_m1_deleted <- lmList(log(deletedRT) ~ so | subject, gg05e1)
 coefs <- coef(lmlist_m1_deleted)
@@ -1235,9 +1315,11 @@ intercepts$intercept[37]
 slopes$so[37]
 ```
 
-Now fit the hierarchical model and examine subject 37's estimates on undeleted vs. deleted data. Figure \@ref(fig:shrinkage2) illustrates the difference between the different models.
+The estimates from subject 37 have become even more extreme once half the data from this subject have been deleted.
 
-```{r shrinkage2,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "The figure shows linear model fits (the grand mean estimates) for subject 37. When using `lmList`, deleting data leads to very different estimates; but using `lmer`, deleting half the data from this subject hardly affects the individual subject's estimates.", tidy = FALSE}
+Now fit the linear mixed model and examine subject 37's estimates on undeleted vs. deleted data. Figure \@ref(fig:shrinkage2) illustrates the difference between the different models: there is hardly any difference.
+
+```{r shrinkage2,echo=FALSE,out.width='99%', fig.show = "hold", fig.cap = "The figure shows linear model fits (the grand mean estimates) for subject 37. When using `lmList`, deleting data leads to very different estimates; but using `lmer`, deleting half the data from this subject hardly affects the individual subject's estimates.", tidy = FALSE}
 plot(jitter(gg05e1$so,.5),
         log(gg05e1$rawRT),axes=FALSE,
         xlab="Condition",ylab="rt (log ms)",
@@ -1249,7 +1331,7 @@ axis(2)
 ## deleted data estimate lmList:
 abline(intercepts$intercept[37],slopes$so[37])
 ## original data estimate lmList:
-abline(intercepts_old$intercept[37],slopes_old$so[37],lwd=4)
+abline(intercept_orig,slope_orig,lwd=4)
 
 ## partial pooling, original data:
 u0_old<-u0
@@ -1267,7 +1349,14 @@ u1<-u$`so`
 ## LMM on deleted data:
 abline(b0+u0[37],b1+u1[37],lty=2,col="gray",lwd=1)
 ## LMM on original data:
-abline(b0_old+u0_old[37],b1_old+u1_old[37],lty=2,col="gray",lwd=3)
+m1_lmer <- lmer(logrt ~ so + (1 + so || subject), gg05e1)
+b0_orig<-summary(m1_lmer)$coefficients[1,1]
+b1_orig<-summary(m1_lmer)$coefficients[2,1]
+u<-ranef(m1_lmer)$subject
+u0_orig<-u$`(Intercept)`
+u1_orig<-u$so
+
+abline(b0_orig+u0_orig[37],b1_orig+u1_orig[37],lty=2,col="gray",lwd=3)
 
 ## complete pooling:
 abline(lm(log(rawRT)~so,gg05e1),lwd=3,col="gray")
@@ -1281,18 +1370,19 @@ legend(x=-1,y=10,
                 "lmer  deleted data",
                 "lmer  original data",
                 "linear model original data"))
-
 ```
 
-What we see in Figure \@ref(fig:shrinkage2) is that the estimates from the hierarchical model are barely affected by the missingness, but the estimates from the `lmList` model are heavily affected by the missingness.
+The conclusion to take away from Figure \@ref(fig:shrinkage2) is that the estimates from the hierarchical model are almost unaffected by the missing data, but the estimates from the `lmList` model are heavily affected by the misestimation due to less data.
 
-The upshot of shrinkage i that linear mixed models will give you more robust estimates (think Type M error!) compared to models which fit data separately for each subject. This property of shrinkage is one reason why linear mixed models are so important in cognitive science, and why they should be the standard workhorse for data analysis. 
+Thus, shrinkage in linear mixed models has the beneficial effect that it yields more robust estimates (think Type M error!) compared to models which fit data separately for each subject. This property of shrinkage is one reason why linear mixed models are so important in cognitive science, and why they should be the standard workhorse for data analysis. 
 
 ## Summary 
 
-
+This chapter began by drawing a connection between the t-test and linear models; one important insight was that the paired t-test is identical to the linear mixed model with varying intercepts (assuming aggregated data). We learned about two kinds of contrast coding, treatment and sum contrasts, and we encountered the log transformation in the context of reading time data. Then, three types of increasingly complex linear mixed models were introduced, culminating in the model with varying intercepts and varying slopes both subjects and items, with correlation parameters estimated for the varying intercepts and slopes. The final topic covered in this chapter was about shrinkage in linear mixed models; an example analysis was used to show that one of the great advantages of the linear mixed model is that when data from an individual subject (or item) are sparse, or when a subject/item exhibits unusual behavior, the model conservatively shrinks that subject/item's estimates towards the grand mean estimates (the fixed intercept and slope estimates), a phenomeon known as "borrowing strength from the mean".
 
 ## Further reading
+
+Linear mixed models as discussed in this chapter have been around for a long time [e.g., @henderson1959estimation]. Good introductions addressed to statisticians are @pinheirobates and @WoodGAMMs. There seem to be no good textbooks intended for non-statisticians, but interesting practical examples are in @faraway2016extending.
 
 ## Exercises {#sec:LMExercises1}
 
