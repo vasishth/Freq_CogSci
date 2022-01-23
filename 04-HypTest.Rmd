@@ -1,12 +1,14 @@
 # Hypothesis testing using the likelihood ratio test
 
-We started the book with the one-sample t-test. There, we had the following procedure:
+We started the book with the t-test. There, we had the following general procedure:
 
-- Given independent and identically distributed data $y$, define a null hypothesis: $H_0:  \mu=\mu_0$
-- Compute the sample mean $\bar{y}$ and the standard error SE 
-- Reject the null hypothesis if the absolute value of $\bar{y}/SE$ is larger than $2$.
+- Given independent and identically distributed data $y$, define a null hypothesis: $H_0:  \mu=\mu_0$.
+- Compute the sample mean $\bar{y}$ and the standard error SE. 
+- Reject the null hypothesis if the absolute value of $(\bar{y}-\mu_0)/SE$ is larger than the critical t-value (approximately $2$ for sample sizes larger than 20).
 
-Here, we turn to a closely related test: the *likelihood ratio test statistic*. 
+The two main classes of t-test discussed in chapter 2, paired and unpaired, are basically just the same t-test. The paired/unpaired nature of the t-test affects the way the standard error is computed in paired vs. unpaired data.
+
+Here, we turn to a closely related test: the *likelihood ratio test statistic*. The reason for considering this alternative test is that in reality we will almost never use the t-test as described above.
 
 ## The likelihood ratio test: The theory
 
