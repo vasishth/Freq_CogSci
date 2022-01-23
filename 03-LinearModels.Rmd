@@ -106,7 +106,7 @@ The above two statements about the underlying pdf that produced the two relative
 
 Note that the two distributions for object and subject relative clauses (RCs) are assumed to be independent. This assumed independence is expressed by the fact that we define two separate Normal distributions, one for object relatives and the other for subject  relatives. We saw earlier that this assumption of independence does not hold in our data because, in the aggregated data, each subject delivers a data point for subject relatives and another data point for object relatives. However, for now we will ignore this detail; we will fix this  shortcoming later.
 
-The interesting point to notice here is that the mean for the object and subject relatives' distributions can be rewritten as a sum of two terms. A completely equivalent way to express the fact that object relatives are coming from a $Normal(471,\hat\sigma)$ is to say that each object relative data point can be described by the following equation:
+The interesting point to notice here is that the mean for the object and subject relatives' distributions can be rewritten as a sum of two terms. An equivalent way to express the fact that object relatives are coming from a $Normal(471,\hat\sigma)$ is to say that each object relative data point can be described by the following equation:
 
 \begin{equation}
 y = 471 + -102 \times 0 + \varepsilon \hfill \hbox{ where } \varepsilon \sim Normal(0,\hat\sigma)
@@ -118,16 +118,16 @@ Similarly, the subject relative's distribution can be written as being generated
 y = 471 - 102 \times 1 + \varepsilon \hbox{ where } \varepsilon \sim Normal(0,\hat\sigma)
 \end{equation}
 
-In these data,  the parameter $\hat\sigma$ is estimated to be $213$ ms. How do we know what this estimate is? This parameter's estimate can be derived from the by-subject t-test output above: The observed t-value is 
+In these data,  the parameter $\hat\sigma$ is estimated to be $213$ ms. How do we know what this estimate is? This parameter's estimate can be derived from the by-subject t-test output above. Let the mean difference between the means of the object and subject relative conditions be $\bar{d}$. The observed t-value is 
 
 \begin{equation}
-t_{obs}= \frac{\bar{y}-0}{s/\sqrt{n}} 
+t_{obs}= \frac{\bar{d}-0}{s/\sqrt{n}} 
 \end{equation}
 
 Solving for $s$:
 
 \begin{equation}
- s = \bar{y} \times \sqrt{n}/t_{obs} = -102 \times \sqrt{42}/-3.109  =  213
+ s = \bar{d} \times \sqrt{n}/t_{obs} = -102 \times \sqrt{42}/-3.109  =  213
 \end{equation}
 
 So, based on the data, our model for the relative clause data consists of two equations:
@@ -325,13 +325,33 @@ One could write it in a single line as:
 rt = 420 + 51\times condition + \varepsilon
 \end{equation}
 
-The numerical values in the vector $\varepsilon$ are called the residuals; these number represent the amount by which the observed data deviate from the numerical point values in the above model. 
+The numerical values in the vector $\varepsilon$ are called the residuals; these numbers represent the amount by which the observed data (the column `rawRT` in the data) deviate from the predicted values in the above model. 
 
-For example, suppose that a data point for a subject relative condition is 400 ms. The model predicts an average reading time of 420-51=369 ms for all subjects. The residual for that subject's data point would be 400-369= 31. Another example: suppose that a data point for an object relative condition is 200 ms. The model predicts the object relative to be 420+51=471. The residual for that data point would then be 200-471=-271. Thus, the residual is the amount of the discrepancy between the model's predicted reading time and the actually observed reading time.
+To see what the residuals are, first compute the reading times predicted by the intercept and slope estimates from the model output:
+
+```{r}
+b0<-coef(m1raw)[1]
+b1<-coef(m1raw)[2]
+bysubj$predicted<-b0 + b1*bysubj$cond
+```
+
+Now compute the difference between the predicted and observed values. These are the residuals.
+
+```{r}
+head(bysubj$rawRT-bysubj$predicted,n=6)
+```
+
+Notice that the fitted model's residuals are identical to the values we computed above:
+
+```{r}
+residuals(m1raw)[1:6]
+```
+
+Whenever a residual is negative in sign, this means that the corresponding observed data point in the `rawRT` column is faster than the predicted value from the linear model.
 
 ## Checking model assumptions
 
-It is an assumption of the linear model that the residuals are (approximately) normally distributed, That is what the statement $\varepsilon\sim Normal(0,\sigma)$ implies. When carrying out hypothesis testing, it is important to check that model assumptions are approximately satisfied; this is because the null hypothesis significance testing procedure requires approximate normality of residuals.
+It is an assumption of the linear model that the residuals are (approximately) normally distributed, That is what the statement $\varepsilon\sim Normal(0,\sigma)$ implies. When carrying out hypothesis testing, it is important to check that model assumptions are approximately satisfied; this is because the null hypothesis significance testing procedure crucially assumes that the residuals are normal.
 
 Here is how we can check whether this normality assumption is met. First, extract the vector of residuals:
 
@@ -401,7 +421,6 @@ summary(m1raw)$coefficients
 
 The difference in the means on the raw scale is 102 ms.
 The larger estimate based on the  raw scale is less realistic, and we will see later that the large difference between the two conditions is driven by a few extreme, influential values.
-
 
 ## From the paired t-test to the linear  mixed  model
 
@@ -1297,8 +1316,11 @@ subset(gg05e1, subject == 37)$deletedRT
 Here are the original estimates of the intercept and slope for subject 37:
 
 ```{r}
-(intercept_orig<-intercepts$`(Intercept)`[37])
-(slope_orig<-slopes$so[37])
+lmlist_m1_orig <- lmList(log(rawRT) ~ so | subject, gg05e1)
+intercepts_orig<-coef(lmlist_m1_orig)[1]
+slopes_orig<-coef(lmlist_m1_orig)[2]
+(intercept_orig37<-intercepts_orig$`(Intercept)`[37])
+(slope_orig37<-slopes_orig$so[37])
 ```
 
 Now look at the estimates based on the deleted data:
@@ -1306,18 +1328,47 @@ Now look at the estimates based on the deleted data:
 ```{r}
 ## on deleted data:
 lmlist_m1_deleted <- lmList(log(deletedRT) ~ so | subject, gg05e1)
-coefs <- coef(lmlist_m1_deleted)
-intercepts <- coefs[1]
-colnames(intercepts) <- "intercept"
-slopes <- coefs[2]
+intercepts_del <- coef(lmlist_m1_deleted)[1]
+slopes_del <- coef(lmlist_m1_deleted)[2]
 ## subject 37's new estimates on deleted data:
-intercepts$intercept[37]
-slopes$so[37]
+(intercept_del37<-intercepts_del$`(Intercept)`[37])
+(slope_del37<-slopes_del$so[37])
 ```
 
-The estimates from subject 37 have become even more extreme once half the data from this subject have been deleted.
+The estimates from subject 37 have become even more extreme once half the data from this subject have been deleted. The intercept goes from `r round(intercept_orig37,2)` in the original data to 
+`r round(intercept_del37,2)` in the deleted data; and the slope  from `r round(slope_orig37,2)` in the original data to 
+`r round(slope_del37,2)` in the deleted data.
 
-Now fit the linear mixed model and examine subject 37's estimates on undeleted vs. deleted data. Figure \@ref(fig:shrinkage2) illustrates the difference between the different models: there is hardly any difference.
+Now fit two linear mixed models (`m4_lmer`), one with the original data, and another with the deleted data, and examine subject 37's estimates on undeleted vs. deleted data.
+
+```{r}
+m1_lmer_orig<-lmer(log(rawRT)~so + (1+so|subject)+(1+so||item),gg05e1)
+b0_orig<-summary(m1_lmer_orig)$coefficients[1,1]
+b1_orig<-summary(m1_lmer_orig)$coefficients[2,1]
+u_orig<-ranef(m1_lmer_orig)$subject
+u0_orig<-u_orig$`(Intercept)`
+u1_orig<-u_orig$`so`
+
+## subject 37's estimates:
+b0_orig + u0_orig[37]
+b1_orig + u1_orig[37]
+
+## LMM on the deleted data:
+m4_lmer_del<-lmer(log(deletedRT)~so + (1+so|subject)+(1+so||item),gg05e1)
+b0_del<-summary(m4_lmer_del)$coefficients[1,1]
+b1_del<-summary(m4_lmer_del)$coefficients[2,1]
+u_del<-ranef(m4_lmer_del)$subject
+u0_del<-u_del$`(Intercept)`
+u1_del<-u_del$`so`
+
+## subject 37's estimates:
+b0_del + u0_del[37] 
+b1_del + u1_del[37]
+```
+
+The two intercept and slope estimates for subject 37 are pretty similar despite half the data from that subject being missing in the second analysis.
+
+Figure \@ref(fig:shrinkage2) illustrates the difference between the different models: there is hardly any difference between the two linear mixed model estimates; by contrast, the `lmList` estimates on the full vs. missing data differ quite a bit.
 
 ```{r shrinkage2,echo=FALSE,out.width='99%', fig.show = "hold", fig.cap = "The figure shows linear model fits (the grand mean estimates) for subject 37. When using `lmList`, deleting data leads to very different estimates; but using `lmer`, deleting half the data from this subject hardly affects the individual subject's estimates.", tidy = FALSE}
 plot(jitter(gg05e1$so,.5),
@@ -1329,34 +1380,17 @@ axis(1,at=c(-1,1),labels=c("SR","OR"))
 axis(2)
 
 ## deleted data estimate lmList:
-abline(intercepts$intercept[37],slopes$so[37])
+abline(intercept_del37,slope_del37)
 ## original data estimate lmList:
-abline(intercept_orig,slope_orig,lwd=4)
+abline(intercept_orig37,slope_orig37,lwd=4)
 
-## partial pooling, original data:
-u0_old<-u0
-u1_old<-u1
-b0_old<-b0
-b1_old<-b1
-
-m1_lmer_deleteddata<-lmer(log(deletedRT)~so + (1+so||subject),gg05e1)
-b0<-summary(m1_lmer_deleteddata)$coefficients[1,1]
-b1<-summary(m1_lmer_deleteddata)$coefficients[2,1]
-u<-ranef(m1_lmer_deleteddata)$subject
-u0<-u$`(Intercept)`
-u1<-u$`so`
 
 ## LMM on deleted data:
-abline(b0+u0[37],b1+u1[37],lty=2,col="gray",lwd=1)
-## LMM on original data:
-m1_lmer <- lmer(logrt ~ so + (1 + so || subject), gg05e1)
-b0_orig<-summary(m1_lmer)$coefficients[1,1]
-b1_orig<-summary(m1_lmer)$coefficients[2,1]
-u<-ranef(m1_lmer)$subject
-u0_orig<-u$`(Intercept)`
-u1_orig<-u$so
-
-abline(b0_orig+u0_orig[37],b1_orig+u1_orig[37],lty=2,col="gray",lwd=3)
+abline(b0_del+u0_del[37],b1_del+u1_del[37],
+       lty=2,col="gray",lwd=1)
+## LMM on full data:
+abline(b0_orig+u0_orig[37],b1_orig+u1_orig[37],
+       lty=2,col="gray",lwd=1)
 
 ## complete pooling:
 abline(lm(log(rawRT)~so,gg05e1),lwd=3,col="gray")
@@ -1372,17 +1406,16 @@ legend(x=-1,y=10,
                 "linear model original data"))
 ```
 
-The conclusion to take away from Figure \@ref(fig:shrinkage2) is that the estimates from the hierarchical model are almost unaffected by the missing data, but the estimates from the `lmList` model are heavily affected by the misestimation due to less data.
+The conclusion to take away from Figure \@ref(fig:shrinkage2) is that the estimates from the hierarchical model are almost unaffected by the missing data, but the estimates from the `lmList` model are heavily affected by the mis-estimation due to less data.
 
 Thus, shrinkage in linear mixed models has the beneficial effect that it yields more robust estimates (think Type M error!) compared to models which fit data separately for each subject. This property of shrinkage is one reason why linear mixed models are so important in cognitive science, and why they should be the standard workhorse for data analysis. 
-
 ## Summary 
 
 This chapter began by drawing a connection between the t-test and linear models; one important insight was that the paired t-test is identical to the linear mixed model with varying intercepts (assuming aggregated data). We learned about two kinds of contrast coding, treatment and sum contrasts, and we encountered the log transformation in the context of reading time data. Then, three types of increasingly complex linear mixed models were introduced, culminating in the model with varying intercepts and varying slopes both subjects and items, with correlation parameters estimated for the varying intercepts and slopes. The final topic covered in this chapter was about shrinkage in linear mixed models; an example analysis was used to show that one of the great advantages of the linear mixed model is that when data from an individual subject (or item) are sparse, or when a subject/item exhibits unusual behavior, the model conservatively shrinks that subject/item's estimates towards the grand mean estimates (the fixed intercept and slope estimates), a phenomeon known as "borrowing strength from the mean".
 
 ## Further reading
 
-Linear mixed models as discussed in this chapter have been around for a long time [e.g., @henderson1959estimation]. Good introductions addressed to statisticians are @pinheirobates and @WoodGAMMs. There seem to be no good textbooks intended for non-statisticians, but interesting practical examples are in @faraway2016extending.
+Linear mixed models as discussed in this chapter have been around since 1861 [@west2006linear]; thus, they were in use even before the t-test. Good introductions addressed to statisticians are @pinheirobates and @WoodGAMMs. There seem to be no good textbooks intended for non-statisticians, but interesting practical examples are in @faraway2016extending. @west2006linear strikes an excellent middle ground between practical examples and theoretical rigor, and will be accessible to non-statisticians who are comfortable with high-school level mathematics, and a passive familiarity of basic matrix algebra relevant for statistics [@fieller].
 
 ## Exercises {#sec:LMExercises1}
 
