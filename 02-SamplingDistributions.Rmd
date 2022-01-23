@@ -10,13 +10,13 @@ Active sentence: The man threw the ball.
 
 Passive sentence: The ball was thrown by the man.
 
-One claim in the literature is that, due to their simpler structure, active sentences are easier to process than passive sentences. So this is an example of a simpler vs. complex sentence. If we want to investigate whether actives are easier to process than passives, we can, as an example, compare the total reading times for each sentence type (there are some problems that arise here because the sentences don't have the same length, so the comparison is not really fair; these issues we will discuss later). 
+One claim in the literature is that, due to their simpler structure, active sentences are easier to process than passive sentences. So this is an example of a simpler vs. complex sentence. If we want to investigate whether actives are easier to process than passives, we can, as an example, compare the total reading times for each sentence type (there are some problems that arise here because the sentences don't have the same length, so the comparison is not really fair; these issues will be discussed later). 
 
-Technically, we are supposed to randomly choose participants; in practice, this randomization rarely happens. Instead we take whatever participants we get,  such as university students who happen to apply to participate in an experiment! So, random sampling is an assumption in all the discussions in this chapter, but in practice this assumption may or may not be perfectly met.
+Technically, we are supposed to randomly choose participants because randomization allows us to generalize beyond the sample we have to the population we are interested in studying. In practice, this randomization is imperfectly implemented at best. Instead we take whatever participants we get,  such as university students who happen to apply to participate in an experiment! So, random sampling is an assumption in all the discussions in this chapter, but in practice this assumption may or may not be perfectly met.
 
-One design decision that the researcher must take is whether to collect only one response from each participant in each condition, or whether we collect multiple measures from each participant. If we collect only one data point from each participant, we will say that the data points are *independent* of each other. When we collect multiple measurements from each participant, we will say that we have *dependent* data; such multiple measurements are also called *repeated measures*. With repeated measures, there will be some correlation between the data-points because there are  multiple measurements from a common source.
+One design decision that the researcher must take is whether to collect only one response from each participant in each condition, or whether we collect multiple measures from each participant. If we collect only one data point from each participant, we will say that the data points are *independent* of each other. When we collect multiple measurements from each participant, we will say that we have *dependent* data; such multiple measurements are also called *repeated measures*. With repeated measures coming from the same subject, there will be some dependency between the data-points because the multiple measurements are coming from a common source.
 
-In psycholinguistics, repeated measures experiments are the norm. Furthermore, it is common to use a so-called *Latin Square* design. The term Latin Square refers to the fact that the ordering of the conditions forms a square (Table \@ref(tab:LatinSquare)); the word Latin apparently only refers to the fact the symbols for each condition were from the Latin script.
+In psycholinguistics, repeated measures experiments are the norm. Furthermore, it is common to use what is called a *Latin Square* design. The term Latin Square refers to the fact that the ordering of the conditions forms a square (Table \@ref(tab:LatinSquare)); the word Latin apparently only refers to the fact the symbols for each condition were from the Latin script.
 
 ```{r LatinSquare,echo=FALSE,results="asis"}
 latsq <- data.frame(rbind(letters[1:2], letters[2:1]))
@@ -87,7 +87,7 @@ kableExtra::kable(latsqrep2,
 )
 ```
 
-Now, when each incoming participants is randomly assigned to Group 1 or Group 2, they will see two instances of each condition, but---crucially--each instance of each item will be seen only once. This has the advantage that we obtain repeated measures from each participant for each condition, leading to more accurate estimates from each participant for each condition; and we obtain measurements from multiple items as well. However, each participant sees each item only once; this can be important in cases where showing the same item to the participant more than once could bias their response. For example, if we show the same word twice to a participant, they might process the second instance of that word more easily, biasing the average response to that word. There can however be situations where it is appropriate/necessary to show the same item multiple times to a participant. In most of the designs considered in this book, participants will see one item only once.
+Now, when each incoming participant is randomly assigned to Group 1 or Group 2, they will see two instances of each condition, but---crucially--each instance of each item will be seen only once. This has the advantage that we obtain repeated measures from each participant for each condition, leading to more accurate estimates from each participant for each condition; and we obtain measurements from multiple items as well. However, each participant sees each item only once; this can be important in cases where showing the same item to the participant more than once could bias their response. For example, if we show the same word twice to a participant, they might process the second instance of that word more easily, biasing the average response to that word. There can however be situations where it is appropriate/necessary to show the same item multiple times to a participant. In most of the designs considered in this book, participants will see one item only once.
 
 Having repeated measurements from participants and from items allows us to generalize beyond the specific participants and items that we have in the experiment.
 
@@ -193,14 +193,16 @@ lines(seq(490,510,by=0.01),
             mean(y_means),sd(y_means)))
 ```
 
-The sampling distribution of means has a  normal distribution provided two conditions are met: (a) the sample size should be ``large enough'', and (b)  $\mu$ and $\sigma$ are defined for the probability density or mass function that generated the data. This fact is called the **central limit theorem** (CLT). The significance of the CLT for us as researchers is that from the summary statistics computed from a *single* sample, we can obtain an estimate of this distribution of means: $Normal(\bar{y},s/\sqrt{n})$.  
+The sampling distribution of means has a  normal distribution provided two conditions are met: (a) the sample size should be "large enough", and (b)  $\mu$ and $\sigma$ are defined for the probability density or mass function that generated the data. 
+
+The statement in the preceding sentence is called the **central limit theorem** (CLT). The significance of the CLT for us as researchers is that from the summary statistics computed from a *single* sample, we can obtain an estimate of the sampling distribution of the sample mean: $Normal(\bar{y},s/\sqrt{n})$.  
 
 
 
 :::: {.blackbox data-latex=""}
 
 ::: {data-latex=""}
-**Derivation of the sampling distribution of the mean**
+**Derivation of the sampling distribution of the sample mean**
 :::
 
 The statement that the sampling distribution of the meas will be normal, with mean $\mu$  and standard deviation $\sigma/\sqrt{n}$, can be derived  formally through a simple application of random variable theory. Suppose that we gather independent and identically distributed data $y_1, \dots, y_n$, each of which is assumed to be generated by a random variable $Y\sim Normal(\mu,\sigma)$.
@@ -254,8 +256,8 @@ E[\bar{Y}] = \mu \quad Var(\bar{Y}) = \frac{\sigma^2}{n}
 
 The above means that we can estimate the expectation $\bar{Y}$ and the variance  of $\bar{Y}$ from a *single* sample. (Of course, whether these estimates are accurate or not is subject to variation, as we will see below).
 
-**Central Limit Theorem**
 
+One way to state the central limit theorem is as follows. 
 Let $f(Y)$ be the pdf of a random variable $Y$, and assume that the pdf has mean $\mu$ and variance $\sigma^2$. Then, the distribution of the mean $\bar{Y}$ has the following form when the sample size $n$ is large:
 
 \begin{equation}
@@ -352,7 +354,7 @@ lines(seq(.9,1.1,by=0.01),
       dnorm(seq(.9,1.1,by=0.01),mean(y_means),sd(y_means)))
 ```
 
-As a final example, consider what happens if sample from a distribution, the Cauchy, that doesn't have any mean or variance defined for it. 
+As a final example, consider what happens if we sample from a distribution, the Cauchy, that doesn't have any mean or variance defined for it. 
 
 ```{r sdsmcauchy,echo=FALSE,out.width='75%', fig.show = "hold", fig.cap = "Sampling from a Cauchy distribution.", tidy = FALSE}
 ## Sampling from a Cauchy:
@@ -385,7 +387,7 @@ As Figure \@ref(fig:sdsmcauchy) illustrates, when the mean and variance for the 
 
 ## The confidence interval, and what it's good for
 
-Once we have sample of data $y$, and once the sample mean $\bar{y}$ and the $SE = s/\sqrt{n}$ have been computed, it is common to define a so-called 95% confidence interval:
+Once we have sample of data $y$, and once the sample mean $\bar{y}$ and the $SE = s/\sqrt{n}$ have been computed, it is common to define what is called a 95% confidence interval:
 
 \begin{equation}
 \bar{y} \pm 2 SE
@@ -483,7 +485,7 @@ We turn next to the central ideas behind the hypothesis test. We begin with the 
 
 With the central limit theorem and the idea of hypothetical repeated sampling behind us, we turn  now to one of the simplest statistical tests that one  can do with continuous data: the t-test. 
 
-Due to its simplicity, it is tempting to take only a cursory look at the t-test and move on immediately to the linear (mixed) model. This would be a mistake. The humble t-test is surprising in many ways, and holds several important lessons for us. There  are subtleties in this test, and a close connection to the linear mixed model. For these reasons, it is worth slowing down and spending some time understanding this test. Once the t-test is clear, more complex statistical tests will be easier to follow, because the logic of these more complex tests will essentially be more of the same, or variations on this general theme. You will see later that t-test can be seen as an analysis of variance or ANOVA; and the paired t-test is exactly the linear mixed model with varying intercepts.
+Due to its simplicity, it is tempting to take only a cursory look at the t-test and move on immediately to the linear (mixed) model. This would be a mistake. The humble t-test is surprising in many ways, and holds several important lessons for us. There  are subtleties in this test, and a close connection to the linear mixed model. For these reasons, it is worth slowing down and spending some time understanding this test. Once the t-test is clear, more complex statistical tests will be easier to follow, because the logic of these more complex tests will essentially be more of the same, or variations on this general theme. You will see later that t-test can be seen as an analysis of variance or ANOVA; and the paired t-test has an exact analog in the linear mixed model with varying intercepts.
 
 ### The one-sample t-test
 
@@ -496,7 +498,7 @@ N(\hat\mu,\frac{\hat \sigma}{\sqrt{n}})
 
 It is important to realize here that the above sampling distribution is only as realistic as the estimates of the mean and standard deviation parameters---if those happen to be inaccurately estimated, then the sampling distribution is not realistic either.
 
-Assume as before that we take an independent random sample of size $1000$ from a random variable $Y$ that is normally distributed, with mean 500 and standard deviation 100. As usual, begin by estimating the mean and SE:
+Assume as before that we take an independent random sample of size $1000$ from a random variable $Y$ that is normally distributed, with mean 500 and standard deviation 100. As usual, we begin by estimating the mean and SE:
 
 ```{r}
 n <- 1000
@@ -544,10 +546,10 @@ The distance between the sample mean and the hypothesized mean can be written in
 t \times SE = \bar{x} - \mu 
 \end{equation}
 
-If we divide both sides with the standard error, we obtain the so-called observed t-statistic:
+If we divide both sides with the standard error, we obtain something that is referred to as the observed t-statistic:
 
 \begin{equation}
-t  = \frac{\bar{x} - \mu}{SE}
+t_{obs}  = \frac{\bar{x} - \mu}{SE}
 \end{equation}
 
 This observed t-value, an expression of the distance between  the sample mean and  the hypothesized mean, becomes the basis for the statistical test. 
@@ -665,7 +667,7 @@ text(-3.5, .2, "rejection \n region")
 text(3.5, .2, "rejection \n region")
 ```
 
-The location of the vertical lines is determined by the so-called *absolute critical t-value* along the x-axis of the t-distribution.  This is the value such that the area under the curve in the tails to the left or right of the tails is 0.025. As discussed in chapter 1, this area under the curve represents the probability of observing a value as extreme as the critical t-value, or some value that is more extreme. Notice that if we ask ourselves what the probability is of observing some particular t-value (a point value), the answer must necessarily be $0$ (if you are unclear about why, re-read chapter 1). But we can ask the question: what is the absolute t-value, written $|t|$, such that $P(T>|t|)=0.05$?  That's the critical t-value. We call it the critical t-value because it demarcates the rejection region shown in Figure \@ref(fig:tails): we are adopting the convention that any observed t-value larger than this critical t-value allows us to reject the null hypothesis.
+The location of the vertical lines is determined by the *absolute critical t-value* along the x-axis of the t-distribution.  This is the value such that the area under the curve in the tails to the left or right of the tails is 0.025. As discussed in chapter 1, this area under the curve represents the probability of observing a value as extreme as the critical t-value, or some value that is more extreme. Notice that if we ask ourselves what the probability is of observing some particular t-value (a point value), the answer must necessarily be $0$ (if you are unclear about why, re-read chapter 1). But we can ask the question: what is the absolute t-value, written $|t|$, such that $P(T>|t|)=0.05$?  That's the critical t-value. We call it the critical t-value because it demarcates the rejection region shown in Figure \@ref(fig:tails): we are adopting the convention that any observed t-value larger than this critical t-value allows us to reject the null hypothesis.
 
 For a given sample size $n$, we can identify the rejection region by using the `qt` function, whose usage is analogous to the `qnorm` function discussed in chapter 1.
 
@@ -763,7 +765,7 @@ plot(density(tvals),
 )
 ```
 
-This implicit idea of the experiment's repeatability leads to an important aspect of the t-test: once certain assumptions about the null hypothesis and the alternative hypothesis are fixed, we can using simulation to compute the proportion of times that the null hypothesis would be rejected under repeated sampling. One has to consider two alternative possible scenarios: the null is either true, or it is  false. In other words, this simulation-based approach allows us to study the t-test's ability (at least in theory) to lead the researchers to the correct decision under (hypothetical) repeated sampling. We turn to this issue next.
+This implicit idea of the experiment's repeatability leads to an important aspect of the t-test: once certain assumptions about the null hypothesis and the alternative hypothesis are fixed, we can use simulation to compute the proportion of times that the null hypothesis would be rejected under repeated sampling. One has to consider two alternative possible scenarios: the null is either true, or it is  false. In other words, this simulation-based approach allows us to study the t-test's ability (at least in theory) to lead the researchers to the correct decision under (hypothetical) repeated sampling. We turn to this issue next.
 
 ### Type I, II error, and power
 
@@ -876,13 +878,13 @@ polygon(c(x1, rev(x1)),
 )
 ```
 
-To understand Figure \@ref(fig:type12), one has to consider two distributions side by side. First, consider the null hypothesis distribution, centered at 0. Under the null hypothesis distribution, the rejection region lies below the dark colored tails of the distributions. The area under the curve in these dark-colored tails is the Type I error (conventionally set at 0.05) that we decide on even before we conduct the experiment and collect the data. Because the Type I error is set at 0.05, and because the t-distribution is symmetric, the area under the curve in each tail is 0.025. The absolute critical t-value helps us demarcate the boundaries of the rejection regions through the vertical lines shown in the figure. These vertical lines play a crucial role in helping us understand Type II error and power. This becomes clear when we consider the distribution representing the alternative possible value of $\mu$, the distribution centered around 2. In this second distribution,  consider now the area under the curve  between the vertical lines demarcating the rejection region  under the  null. This area under the curve is the probability of accepting the null hypothesis when  the null hypothesis is false with some specific value (here, when $\mu$ has value 2). 
+To understand Figure \@ref(fig:type12), one has to consider two distributions side by side. First, consider the null hypothesis distribution, centered at 0. Under the null hypothesis distribution, the rejection region lies below the dark colored tails of the distribution. The area under the curve in these dark-colored tails is the Type I error (conventionally set at 0.05) that we decide on even before we conduct the experiment and collect the data. Because the Type I error is set at 0.05, and because the t-distribution is symmetric, the area under the curve in each tail is 0.025. The absolute critical t-value helps us demarcate the boundaries of the rejection regions through the vertical lines shown in the figure. These vertical lines play a crucial role in helping us understand Type II error and power. This becomes clear when we consider the distribution representing the alternative possible value of $\mu$, the distribution centered around 2. In this second distribution,  consider now the area under the curve  between the vertical lines demarcating the rejection region  under the  null. This area under the curve is the probability of accepting the null hypothesis when  the null hypothesis is false with some specific value (here, when $\mu$ has value 2). 
 
 Some interesting observations follow. Suppose that the true mean is in fact $\mu=2$, as in the above illustration. Then,
 
 - Simply decreasing Type I error to a smaller value like 0.005 will increase Type II error, which means that power (1-Type II error) will fall.
 - Increasing sample size will squeeze the vertical lines closer to  each other because standard error will go down with increasing sample size. This will reduce Type II error, and therefore increase power. Decreasing sample size will have the opposite effect.
-- If we design an experiment with a larger effect size, e.g., by setting up a stronger manipulation (concete examples will be discussed in this book later on), our Type II error will go down, and therefore power will go up. Figure \@ref(fig:highpower) shows a graphical visualization of a situation where the true mean is $\mu=4$. Here, Type II error is much smaller compared to Figure \@ref(fig:type12), where $\mu=2$.
+- If we design an experiment with a larger effect size, e.g., by setting up a stronger manipulation (concrete examples will be discussed in this book later on), our Type II error will go down, and therefore power will go up. Figure \@ref(fig:highpower) shows a graphical visualization of a situation where the true mean is $\mu=4$. Here, Type II error is much smaller compared to Figure \@ref(fig:type12), where $\mu=2$.
 
 
 ```{r highpower,echo=FALSE,fig.cap="The change in Type II error if the true mean is 4."}
@@ -1067,7 +1069,7 @@ lines(sds, lowess(power_meanval)$y, lty = 1)
 
 In the above example, simulation-based power calculation is overkill, and completely unnecessary because we have `power.t.test`. However, the technique shown above will be extended and will become our bread-and-butter method once we switch to power calculations for complicated linear mixed models. There, no closed form calculation can be done to compute power, at least not without oversimplifying the model; simulation will be the only practical way to calculate power.
 
-It is important to appreciate the fact that power is a *function*; it isn't a single number. Because we can never be sure what the true effect size is, or what the true standard deviation is, power functions (power as a function of plausible values for the relevant parameters) are much more useful than single numbers.  
+It is important to appreciate the fact that power is a *function* of the effect size, sample size, and standard deviation. As these three variables change, power will change. Because we can never be sure what the true effect size is, or what the true standard deviation is, power functions (power as a function of plausible values for the relevant parameters) are much more useful than single numbers.  
 
 ### The p-value
 
@@ -1081,7 +1083,7 @@ We can compute the p-value "by hand". This can be computed, as done earlier, sim
 2 * pt(abs_t_value, df = n - 1, lower.tail = FALSE)
 ```
 
-The area from both sides of the tail is taken because it is conventional to do a so-called *two-sided t-test*: our null hypothesis is that $\mu=450$, and our alternative hypothesis is two-sided: $\mu$ is either less than $450$ or $\mu$ is larger than $450$. When we reject the null hypothesis, we are accepting this alternative, that  $\mu$ could be some value other than $450$. Notice that this alternative hypothesis is remarkably vague; we would reject the null hypothesis regardless of whether the sample mean turns out to be $600$ or $-600$, for example. The  practical implication is that the p-value gives us  the  strength of the evidence against the null hypothesis; it doesn't give us  evidence in favor of  a specific alternative. The p-value will reject the null hypothesis regardless of whether our sample mean is positive or negative in sign. In psychology and allied disciplines, whenever the p-value falls below $0.05$, it is common practice to write something along the lines that "there was reliable evidence for the predicted effect." This statement  is incorrect! We only ever have evidence against the null. By looking at the sample mean and its sign, we are making a very big leap that we  have evidence for the specific sample mean we happened to get. As we will see below, when power is low, the sample mean can be wildly far from the true mean that produced the data. 
+The area from both sides of the tail is taken because it is conventional to do what is called a  *two-sided t-test*: our null hypothesis is that $\mu=450$, and our alternative hypothesis is two-sided: $\mu$ is either less than $450$ or $\mu$ is larger than $450$. When we reject the null hypothesis, we are accepting this alternative, that  $\mu$ could be some value other than $450$. Notice that this alternative hypothesis is remarkably vague; we would reject the null hypothesis regardless of whether the sample mean turns out to be $600$ or $-600$, for example. The  practical implication is that the p-value gives us  the  strength of the evidence against the null hypothesis; it doesn't give us  evidence in favor of  a specific alternative. The p-value will reject the null hypothesis regardless of whether our sample mean is positive or negative in sign. In psychology and allied disciplines, whenever the p-value falls below $0.05$, it is common practice to write something along the lines that "there was reliable evidence for the predicted effect." This statement  is incorrect! We only ever have evidence against the null. By looking at the sample mean and its sign, we are making a very big leap that we  have evidence for the specific sample mean we happened to get. As we will see below, when power is low, the sample mean can be wildly far from the true mean that produced the data. 
 
 One need not have a two-sided alternative; one could have defined the alternative to be one-sided (for example, that $mu>450$). In that case, one would compute only one side of the area under the curve. This kind of one-sided test is not normally done, but one can imagine a situation where a one-sided test is justified (for example, when only one sign of the effect is possible, or if there is a strong theoretical reason to expect only one particular sign---positive or negative---on an effect). That said, in their scientific career, only one of the authors of this book has ever had occasion to use a one-sided test. In this book, we will not use one-sided t-tests.
 
@@ -1092,7 +1094,7 @@ The Type I error probability is the probability of your incorrectly rejecting th
 
 We have been talking about a continuous random variable as a dependent measure, and have learnt about the standard two-sided t-test, with a point null hypothesis. When we do such a test, we usually use the p-value to decide whether to reject the null hypothesis or not.
 
-Sometimes, you will hear  statisticians (e.g., Andrew Gelman on his blog) criticize p-values by saying that the null hypothesis significance test is a "specific random number generator".  For example, a blog post from May 5, 2016 (shorturl.at/irHS9) quotes Daniel Lakeland: ``A p-value is the probability of seeing data as extreme or more extreme than the result, under the assumption that the result was produced by a specific random number generator (called the null hypothesis).''
+Sometimes, you will hear  statisticians (e.g., Andrew Gelman on his blog) criticize p-values by saying that the null hypothesis significance test is a "specific random number generator".  For example, a blog post from May 5, 2016 (shorturl.at/irHS9) quotes Daniel Lakeland: "A p-value is the probability of seeing data as extreme or more extreme than the result, under the assumption that the result was produced by a specific random number generator (called the null hypothesis)."
 
 What does that sentence mean? We explain this point here because it is very helpful in understanding the p-value.
 
@@ -1117,7 +1119,7 @@ hist(pvals,
 
 When the null hypothesis is actually true, the distribution of the p-value is uniform---every value between 0 and 1 is equally likely. The practical implication of this criticism of p-values is that when we do a single experiment and obtain a p-value under the assumption that the null is true, if the null were in fact true, then we are just using a random number generator (generating a random number between 0 and 1, $Z\sim uniform(0,1)$) to make a decision that the effect is present or absent. 
 
-A broader implication is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as replicability, uncertainty of the estimates, and power) are more important than the p-value.
+A broader implication is that we should not place our theory development exclusively at the feet of the p-value. As we discuss in this book, other considerations (such as carrying out replication attempts that yield similar estimates; the uncertainty of the estimates, and power) are more important than just looking at the p-value to make a binary decision about the null hypothesis.
 
 
 :::: {.blackbox data-latex=""}
@@ -1235,7 +1237,7 @@ In this scenario, when power is approximately 6%, whenever we get a significant 
 
 When power is low, relying on the p-value (statistical significance) to declare an effect as being present will be misleading **even if the result is statistically significant**. This is because the significant effect will be  based on an overestimate of the effect (Type M error), and even the sign of the effect could be wrong. This isn't just a theoretical point; it has real-world  consequences for theory  development. For an  example from psycholinguistics regarding this point, see @VasishthMertzenJaegerGelman2018, @JaegerMertzenVanDykeVasishth2019, and @MertzenEtAl2021. In all these studies, an attempt was made to re-estimate published estimates of effects using larger sample sizes; in all cases, the larger sample sizes showed smaller estimates. In other words, the original published estimates, which were all based on low-powered studies, were over-estimates that did not replicate. A practical implication of Type M error is that "statistically significant effects" will not be "reliable" in any meaningful sense if power is low. 
 
-Another useful way to  visualize Type M and S error  is through the so-called funnel plot. As shown in Figure \@ref(fig:funnel), estimates obtained from low-powered studies will tend to be exaggerated (the lower part of the funnel), and as power goes up, the effect estimates start to cluster tightly around the true value of the effect. 
+Another useful way to  visualize Type M and S error  is through a visualization that is referred to as a  *funnel plot*. As shown in Figure \@ref(fig:funnel), estimates obtained from low-powered studies will tend to be exaggerated (the lower part of the funnel), and as power goes up, the effect estimates start to cluster tightly around the true value of the effect. 
 
 ```{r funnel,echo=FALSE,fig.cap="An illustration of a funnel plot. Shown are repeated samples of an effect estimate under different values of power, where the true value  of the effect is 15 (marked by the vertical line). Significant effects are shaded gray. The lower the power, the wider the fluctuation of the effect; under low power, it is the exaggerated effects that end up statistically significant, even though they are very biased relative to the true value. As power goes up, the effect estimates start to cluster around the true value, and significant effects are also accurate estimates of the effect. Thus, low power leads to exaggerated estimates of the effect, especially if the data are filtered by statistical significance."}
 ## funnel plot:
@@ -1282,11 +1284,11 @@ In many fields, it is practically impossible to conduct a high-powered study. Wh
 
 One can focus on reporting estimates in a paper as follows. For example, one can state that "the estimate of the mean effect was 50 ms, with 95% confidence interval [-10,110] ms. This estimate is consistent with the effect being present." Such a wording does not make any discovery claim; it just reports that the estimate is consistent with the predicted direction. Such a reported estimate can be used in meta-analyses, facilitating cumulative acquisition of knowledge.
 
-By direct replication, we mean that the study should be run multiple times with the same materials and design but new participants, to establish whether effect estimates in the original study and the replication study are consistent with each other. Direct replications stand in contrast to so-called conceptual replications, which are not exact repetitions of the original design, but involve some further or slightly different but related experimental manipulations. Conceptual replications are also a very useful tool for cross-validating the existence of an effect, but direct replications should be a standard way to validate the consistency of an effect.
+By direct replication, we mean that the study should be run multiple times with the same materials and design but new participants, to establish whether effect estimates in the original study and the replication study are consistent with each other. Direct replications stand in contrast to conceptual replications, which are not exact repetitions of the original design, but involve some further or slightly different but related experimental manipulations. Conceptual replications are also a very useful tool for cross-validating the existence of an effect, but direct replications should be a standard way to validate the consistency of an effect.
 
 Of course, truly direct  replications are impossible to conduct because repeating a study will always differ from the original one in some way or another---the lab may differ, the protocols might differ slightly, the experimenter may be different, etc. Such between-study variability is obviously unavoidable in direct-replication attempts, but they are still worthwhile for establishing the existence of an effect. To make clearer the idea of establishing robustness through replication attempts, detailed examples of different kinds of replication  attempts of published studies will be presented in this book's example data sets.
 
-Finally, meta-analysis is a very important tool for developing a good understanding of what has been learned in a field about a particular phenomenon. Meta-analysis has been largely neglected in psycholinguistics, with researchers classifying previous work using a voting method: researchers routinely count the number of studies that showed a significant vs. non-significant effect.  As an example, @hammerly2019grammaticality summarize the literature on a particular psycholinguistic phenomenon in this binary manner: "In our review, only 11 of the 22 studies that tested for the interaction indicative of the grammaticality asymmetry found a significant effect. Of the studies that ran contrasts to test for an effect of attractor number in grammatical sentences, 7 of the 20 studies found a significant effect, while all of the 16 studies that tested for effects of attractor number in ungrammatical sentences found a significant effect." As discussed above, this kind of summary is quite meaningless if the power of the experiments is not known to be high. It is much better to summarize the literatuee using a meta-analysis, which reports an estimate based on all existing studies, along with an uncertainty interval. Later in the book, concrete examples of meta-analyses will be discussed.
+Finally, meta-analysis is a very important tool for developing a good understanding of what has been learned in a field about a particular phenomenon. Meta-analysis has been largely neglected in psycholinguistics, with researchers classifying previous work using a voting method: researchers routinely count the number of studies that showed a significant vs. non-significant effect.  As an example, @hammerly2019grammaticality summarize the literature on a particular psycholinguistic phenomenon in this binary manner: "In our review, only 11 of the 22 studies that tested for the interaction indicative of the grammaticality asymmetry found a significant effect. Of the studies that ran contrasts to test for an effect of attractor number in grammatical sentences, 7 of the 20 studies found a significant effect, while all of the 16 studies that tested for effects of attractor number in ungrammatical sentences found a significant effect." As discussed above, this kind of summary is quite meaningless if the power of the experiments is not known to be high. It is much better to summarize the literature using a meta-analysis, which reports an estimate based on all existing studies, along with an uncertainty interval. Later in the book, concrete examples of meta-analyses will be discussed.
 
 ### Searching for significance
 
@@ -1462,9 +1464,9 @@ d <- mean(F1data$female) - mean(F1data$male)
   
 The output of the two-sample t-test and the hand-calculation above match up.
 
-Now consider what will change once we analyze the data focusing this time on the paired nature of the data (same vowel and same language). The two-sample  t-test now becomes a so-called paired t-test. 
+Now consider what will change once we analyze the data focusing this time on the paired nature of the data (same vowel and same language). The two-sample  t-test now becomes a paired t-test. 
 
-For such  paired data,  the null hypothesis is that the F1 format value produced for a given vowel-and-language combination is the same for males and females: $H_0: \mu_f-\mu_m=\delta=0$. But since each row in the data-frame is paired (from the same vowel+language), we subtract the vector row-wise, and get a new *vector* $d$ (not a single number $d$ as in the two-sample t-test) with the row-wise differences. Then, we just do the familiar one-sample test we saw earlier:
+For such  paired data,  the null hypothesis is that the F1 formant value produced for a given vowel-and-language combination is the same for males and females: $H_0: \mu_f-\mu_m=\delta=0$. But since each row in the data-frame is paired (from the same vowel+language), we subtract the vector row-wise, and get a new *vector* $d$ (not a single number $d$ as in the two-sample t-test) with the row-wise differences. Then, we just do the familiar one-sample test we saw earlier:
   
 ```{r}
 d <- F1data$female - F1data$male
@@ -1486,7 +1488,7 @@ res<-t.test(F1data$male, F1data$female, paired = TRUE)
 summary_ttest(res)
 ```
 
-Generally, one should ensure that the order in which one enters the vectors leads to an estimate that has an easy-to-interpret sign. For example, if object relatives (ORs) are expected to take longer to read than subject relatives (SRs), it would be better to place the vectors of reading times in the order OR,vSR. Of course, no harm can come from reversing the orders; it's just that the meaning of the estimate could be misinterpreted by the reader. 
+Generally, one should ensure that the order in which one enters the vectors leads to an estimate that has an easy-to-interpret sign. For example, if object relatives (ORs) are expected to take longer to read than subject relatives (SRs), it would be better to place the vectors of reading times in the order OR,SR. Of course, no harm can come from reversing the orders; it's just that the meaning of the estimate could be misinterpreted by the reader. 
   
 A crucial assumption in the above paired t-test is that all the vowel-and-language combinations are independent of each other. Whether this assumption is correct or not (or approximately correct) depends on domain knowledge.
   
@@ -1503,22 +1505,75 @@ In psychology and psycholinguistics, it is fairly common to run relatively compl
 
 ### Analyzing a $2\times 2$ repeated measures design using paired t-tests
 
-The @levy2013expectation paper was a reading study on German that used eye-tracking and had two experiments, each with a $2\times 2$ design. In Experiment 1, the four conditions are as shown in Figure \@ref(fig:lk13E1). The four conditions can be described as follows:
+The @levy2013expectation paper was a reading study on German that used eye-tracking and had two experiments, each with a $2\times 2$ design. In Experiment 1, participants were asked to read four types of sentences, which are shown in Figure \@ref(fig:lk13E1). The four conditions can be described as follows.
 
-- Condition a: adjunct in subordinate clause, dative noun in subordinate clause.
-- Condition b: adjunct in main clause, dative noun in subordinate clause.
-- Condition c: adjunct in subordinate clause, dative noun in main clause.
-- Condition d: adjunct in main clause, dative clause in main clause.
+The syntactic structure (which is shown in the German word order below) involves a main clause that is preceded by a subordinate clause. An important aspect of German syntax here is that the verb in the main clause appears first if it is preceded by a subordinate clause. For example, if the English sentence is: "After the teacher explained the exercise, Hans Gertner had a go at it", in German the word order would be "After \dots, had Hans Gertner \dots."
 
-The research questions in this paper can be characterized in terms of so-called main effects and interactions: Is there 
+So, the syntactic frame looks like this:
+
+[$_{\hbox{subordinate}}$ After the teacher \dots]
+had Hans Gertner the football hidden,\dots 
+
+The experiment design involves having a prepositional phrase (PP) adjunct phrase that is either inside the subordinate clause, or inside the main clause:
+
+- PP adjunct (in bold) inside the subordinate clause: 
+[$_{\hbox{subordinate}}$ After the teacher **as payback** \dots] had Hans Gertner the football hidden,\dots 
+- PP adjunct (in bold) inside the subordinate clause: 
+[$_{\hbox{subordinate}}$ After the teacher  \dots] had Hans Gertner **as payback** the football hidden,\dots
+
+In addition, the design involves having a dative noun phrase either inside the subordinate clause or the main clause:
+
+- Dative noun (in bold) inside the subordinate clause: 
+[$_{\hbox{subordinate}}$ After the teacher **to the son** \dots] had Hans Gertner the football hidden,\dots 
+- Dative noun (in bold) inside the subordinate clause: 
+[$_{\hbox{subordinate}}$ After the teacher  \dots] had Hans Gertner **to the son** the football hidden,\dots
+
+The positioning of the PP adjunct and the noun can be independently chosen, so that both the PP adjunct and the noun can independently appear in the subordinate or main clause. This leads to four possible positions for these two elements:
+
+- PP adjunct in subordinate clause, noun in subordinate clause
+- PP adjunct in main clause, noun in subordinate clause
+- PP adjunct in subordinate clause, noun in main clause
+- PP adjunct in main clause, noun in main clause
+
+The authors explain their predictions as follows:
+
+"*As we add more phrases to the main clause, processing becomes easier, as the main clause verb becomes more and more expected. Hence [condition a] (neither dative nor adjunct in the main clause) should be hardest to process, while [condition d] should be easiest (both dative and adjunct in the main clause). [Conditions b and c] should be in between (one phrase in the main clause). To the extent that dative NPs and PP adjuncts turn out to have different predictive strength for the clause-final verbs in our materials, however, adding each may have a facilitative main effect of different strength.*"
+
+Simplifying somewhat, the predictions can be restated as follows: 
+
+- whenever the dative noun is in the main clause, processing the verb *hidden* should be easier than when the noun is in the subordinate clause.  This is because the dative noun preceding the verb already tells the reader that a ditransitive verb is coming up, making *hidden* (this verb is optionally distransitive in German: one hides something accusative from someone) more predictable compared to the case where the dative noun is not in the main clause.
+- whenever the PP adjunct is in the main clause, the processing the verb *hidden* should not be easier (or at least not as easy as when the noun is in the main clause) compared to when the PP adjunct is in the subordinate clause. This is because the PP adjunct possibly does not inform us about the type of verb coming up as much as the dative noun does. As a consequence, when the PP adjunct is in the main clause, the surprise one experiences when reading the verb *hidden* should not be reduced as much as when the dative noun appears in the main clause.
+
+The above research questions can be characterized in terms of *main effects* and *interactions*. To understand what main effects and interactions are, it is useful to summarize the design in the following way:
+
+```{r}
+conditions<-letters[1:4]
+dat<-rep(c("subordinate","main"),each=2)
+adj<-rep(c("subordinate","main"),2)
+expt_design<-data.frame(rbind(conditions,
+      dat,
+      adj))
+
+## remove column names:
+colnames(expt_design)<-NULL
+expt_design
+```
+
+As the experiment design above shows, we expect the following:
+
+- the mean of conditions a and b should be slower than the mean of conditions c and d. This is called the **main effect of noun position**. We will just call it the main effect of the factor dat.
+- the mean of conditions a and c should be slower than the mean of conditions b and d. This is called the **main effect of PP adjunct position**. We will just call it the main effect of the factor adj.
+- the main effect of noun should be larger than the main effect of adjunct. This is called an **interaction**. Such an interaction is often written as adj $\times$ dat.
+
+So, we will investigate whether there is: 
 
 - a main effect of dative-noun location (main or subordinate clause)
 - a main effect of adjunct location (main or subordinate clause)
-- an interaction between the two factors?
+- an interaction between the two factors
 
 (ref:lk13E1) The experiment design in Experiment 1 of @levy2013expectation. The figure is re-used with permission from @VasishthMertzenJaegerGelman2018 (License number 5211790221849).
 
-```{r lk13E1, fig.cap = "(ref:lk13E1)", out.width = "80%", echo = FALSE, fig.align = "center"}
+```{r lk13E1, fig.cap = "(ref:lk13E1)", out.width = "99%", echo = FALSE, fig.align = "center"}
 knitr::include_graphics("figures/lk13E1.png", dpi = 1000)
 ```
 
@@ -1570,7 +1625,7 @@ length(subset(df_levykeller13E1,cond=="a")$TFT)
 28*6
 ```
 
-What is necessary here is to force the data into the format that t-test expects. The data be aggregated: restructure the data so that each subject's response for each of the four conditions is the mean of the six repetitions. This is often called a by-subject analysis:
+What is necessary here is to modify the data so as to get one single value for each participant in each condition. To achieve this format, the data must be aggregated: restructure the data so that each subject's response for each of the four conditions is the mean of the six repetitions. An analysis using data aggregated by participant is often called a by-participant (or by-subject) analysis:
 
 ```{r}
 bysubj <- aggregate(TFT ~ subj + cond,
@@ -1586,7 +1641,7 @@ Now, each subject delivers exactly one data point per condition, as the t-test d
 length(subset(bysubj,cond=="a")$TFT)
 ```
 
-Notice that now we have no column any more indicating which items the subjects saw---this information has disappeared because for each subject, we took the average over all the six items for each condition. We have lost information; as discussed later, this loss of information can have far-reaching, adverse consequences for statistical inference.
+Notice that now we have no column any more indicating which items the subjects saw---this information has disappeared because for each subject, we took the average over all the six items for each condition. We have lost information; as will be discussed in later chapters, this loss of information can have far-reaching, adverse consequences for statistical inference.
 
 ```{r}
 t(xtabs(~subj+cond,bysubj))
@@ -1595,17 +1650,21 @@ t(xtabs(~subj+cond,bysubj))
 
 The main effects and interactions can be visualized as in Figure \@ref(fig:lk13E1plot). 
 
-```{r lk13E1plot,echo=FALSE, fig.cap="Visualizing the means from the four conditions in the Levy and Keller 2013 Experiment 1 design allows us to graphically summarize the statistical comparisons of interest: the main effects of the two factors, and their interactions."}
+```{r lk13E1plot,message=FALSE,echo=FALSE, fig.cap="Visualizing the aggregated data from the four conditions in the Levy and Keller (2013) Experiment 1 design allows us to graphically summarize the statistical comparisons of interest: the main effects of the two factors, and their interactions."}
 meansE1<-with(bysubj,tapply(TFT,cond,mean))
 names(meansE1)<-c("adj:sub, \n dat:sub",
                   "adj:main, \n dat:sub",
                   "adj:sub, \n dat:main",
-                  "adj:main, \n dat:sub")
-barplot(meansE1,ylab="Total fixation time (ms)",xlab="conditions",main="Main effects and interactions\n Levy and Keller, 2013, Expt 1")
+                  "adj:main, \n dat:main")
 
+
+ggplot(bysubj, aes(x=cond, y=TFT)) + geom_boxplot(outlier.colour=NA, width=.4) + 
+  geom_dotplot(binaxis="y", stackdir="center",fill=NA)+
+  xlab("The four conditions in Levy and Keller 2013")+
+  ylab("Total fixation time (ms)")+theme_bw()
 ```
 
-The main effect of dative is asking whether the average of the two dat:main conditions is different from the average of the two dat:sub conditions. In terms of the means of the four conditions labeled a-d, the null hypothesis is then:
+The main effect of dative is asking whether the average of the two dat:main conditions (the dative nouns appearing in the main clause) is different from the average of the two dat:sub conditions (dative appearing in the subordinate clause). In terms of the means of the four conditions labeled a-d, the null hypothesis is then:
 
 \begin{equation}
 H_{0,MEdat}: \frac{\mu_a + \mu_b}{2} = \frac{\mu_c + \mu_d}{2}
@@ -1673,6 +1732,31 @@ summary_ttest(INTdatxadj_res)
 
 @levy2013expectation report a non-significant estimate of $-96.82$ ms for the interaction. This also approximately matches our calculations. 
 
+To summarize, the three tests showed the following estimates:
+
+- main effect of dative: 107.98 [37.36,178.61] ms. t(27)=3.14
+- main effect of adjunct: -18.38 [-71.88,35.13] ms. t(27)= -0.7
+- interaction: -88.61 [-232,54.78] ms. t(27)= -1.27
+
+The above estimates and t-values suggest that we do have estimates that are consistent with a main effect of dat. Regarding the main effect of adj, there is no evidence against the null hypothesis of no difference.
+The interaction t-test also shows no evidence against the null hypothesis of no difference. So the data are only partly consistent with the authors' predictions. 
+
+As an aside, notice that a repeated measures ANOVA could alternatively be used (instead of the three paired t-tests). An interesting point to notice here is that the F-scores that the repeated measures ANOVA returns below are the squares of the t-values we found above. This is because the paired t-tests we carried out above are identical to the ANOVA. 
+
+```{r}
+library(rstatix)
+bysubj2 <- aggregate(TFT ~ subj + adj + dat,
+  mean,
+  data = df_levykeller13E1
+)
+subj_anova<-anova_test(data = bysubj2, 
+           dv = TFT, 
+           wid = subj,
+           within = c(adj,dat)
+  )
+get_anova_table(subj_anova)
+```
+
 The broader lesson here is that one can break down a design with a factorial design to a series of paired t-tests. Although it is extremely easy to analyze factorial designs like these with paired t-tests, there is an important price to be paid. The price is inflation of Type I error probability. 
 
 ### A complication with multiple t-tests: Inflation of Type I error probability 
@@ -1695,21 +1779,24 @@ This inflated Type I error probability can become very serious; for example, @le
 1-0.95^{32} = 0.8063
 \end{equation}
 
-That is an 80% probability of incorrectly rejecting at least one of the hypotheses tested! It is not uncommon to run 250 or even more hypothesis tests in a single paper. That would be a Type I error probability of `r round(1-0.95^{250},3)` of rejecting at least one null hypothesis incorrectly; you are essentially sure to get something come out significant incorrectly.
+That is an 80% probability of incorrectly rejecting at least one of the hypotheses tested! It is not unheard of to run 120 hypothesis tests in a single paper [e.g., @dillon2012syntactic]. That would be a Type I error probability of `r round(1-0.95^{120},3)` of rejecting at least one null hypothesis incorrectly. One is essentially sure to claim a significant effect incorrectly.
 
-A standard approach to correcting this inflation is to use the Bonferroni correction: divide the standard Type I error by the number of tests, and use this corrected probability as the new Type I error. For example, in @levy2013expectation, the corrected $\alpha$ for 32 hypothesis tests would be 0.05/32=0.0016. One should use this corrected $\alpha$ to interpret multiple comparisons. 
+A standard approach to adjusting to this inflation is to use the Bonferroni correction: divide the standard Type I error by the number of tests, and use this corrected probability as the new Type I error. For example, in @levy2013expectation, the corrected $\alpha$ for 32 hypothesis tests would be 0.05/32=0.0016. In @dillon2012syntactic, the corrected $\alpha$ value would be 0.05/120=0.0004; under the corrected $\alpha$, only one of the $120$ tests comes out significant.
+When carrying out multiple statistical tests, a corrected $\alpha$ to interpret multiple comparisons. 
 
 ### Analyzing a $2\times 2\times 2$ repeated measures design using paired t-tests
 
-Even more complex designs can be analyzed using paired t-tests. For example, @fedorenko2006nature report a self-paced reading study with eight conditions. 
+Even more complex designs can be analyzed using paired t-tests. For example, @fedorenko2006nature report a self-paced reading study with eight conditions. There are free factors:
 
-- Factor: One noun in memory set or three nouns
-easy: Joel 
-hard: Joel-Greg-Andy 
-- Factor: Noun type, either proper name or occupation
-name: Joel-Greg-Andy 
-occ: poet-cartoonist-voter
-- Factor: Relative clause type: subject vs. object relatives (in English)
+- Memory load: One noun in memory set or three nouns: 
+   - easy: Joel 
+   - hard: Joel-Greg-Andy 
+- Noun type: either proper name or occupation:
+  - name: Joel-Greg-Andy 
+  - occ: poet-cartoonist-voter
+- Relative clause type: 
+  - subject relative
+  - object relative
 
 The relative clause sentences are the following; the reading time is measured in the relative clause regions *who consulted the cardiologist* and *who the cardiologist consulted*. 
 
@@ -1741,7 +1828,8 @@ If the analyses described in the quote above are to be carried out using t-tests
 ```{r}
 fed06hard<-subset(df_fedorenko06,load=="hard")
 
-## Compute difference between OR and SR 
+## Compute difference between 
+## object relative (obj) and subject relative (subj) 
 ## in Noun Type occupation:
 RCocc<-aggregate(RT~subj+rctype,
                  mean,data=subset(fed06hard,
@@ -1794,7 +1882,7 @@ summary_ttest(easyINTres)
 ```
 
 Based on these aggregated by-subjects analyses, it would be tempting to conclude, as @fedorenko2006nature did, that there is a significant interaction in the hard conditions but not in the easy conditions. However, there are at least two problems here. First, 
-the paired t-test (or the identical test, the repeated measures ANOVA) has a serious limitation: it is ignoring the by-item variability (because that is averaged out); later we will see that once one takes all sources of variance into account simultaneously, the picture changes dramatically. Second, the authors implicitly assume that the difference between a significant effect in the hard conditions and the non-significant effect in the easy conditions is itself significant---we will see below that that this conclusion is not warranted in the present case.
+the paired t-test (or the identical test, the repeated measures ANOVA) has a serious limitation: it is ignoring the by-item variability (because that is averaged out); later we will see that once one takes all sources of variance into account simultaneously, the picture changes dramatically. Second, the authors implicitly assume that the difference between a significant effect in the hard conditions and the non-significant effect in the easy conditions is itself significant---we will see below that this conclusion is not warranted in the present case.
 
 In summary, the (paired) t-test is a quick and easy tool for comparing means from two  conditions, and even relatively complex designs can be analyzed. In fact, a well-known mathematical psychologist once told the first author of this book: "If you need to run anything more complex than a t-test, you are asking the wrong question." Indeed, many scientists have had long and successful careers with just the t-test as their entire statistical tool. However, as they say, if all you have is a hammer, everything starts to look like a nail. As we show in this book, much important information is lost when one attempts to boil the data down to fit the constraints of the t-test. 
 
@@ -1804,26 +1892,9 @@ A further point is that the t-test is often used incorrectly. Some of the most c
 
 ### Ignoring the independence assumption
 
-As also discussed above, the paired t-test assumes that each pair of data points that goes into the t-test is independent of the other pairs of data points. This implies that the data-frame cannot have more than one row for a particular pair. In other words, the data-frame cannot have repeated measurements spread out across rows.  
+As also discussed above, the paired t-test assumes that each pair of data points that goes into the t-test is independent of the other pairs of data points. This implies that the data-frame cannot have more than one row for a particular pair. In other words, the data-frame cannot have repeated measurements.  Why not? Because the assumption is that in each condition, each row is independent of the others. 
 
-For example, doing a paired t-test on this hypothetical data-frame would be incorrect:
-  
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrll}
-\hline
-female & male & vowel & language \\ 
-\hline
-391 & 339 & i & W.Apache \\ 
-400 & 320 & i & W.Apache \\ 
-$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$\\
-\hline
-\end{tabular}
-\end{table}
-
-Why? Because the assumption is that each row is independent of the others. This assumption is violated here (this is assuming that repeating the vowel from the same language will lead to some commonalities between the two repetitions).
-
-Consider another hypothetical example. In the table below, from subject 1 we see two  data points each for condition a and for condition b. 
+Consider a hypothetical example. In the table below, from subject 1 we see two  data points each for condition a and for condition b. 
   
   \begin{table}[ht]
 \centering
@@ -1838,19 +1909,19 @@ $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$\\
 \end{tabular}
 \end{table}
 
-Here, we again have repeated measurements from subject 1. The independence assumption is violated. Erroneous analyses using t-tests abound in experimental science; for examples of these kinds of misuse of the t-test in phonetics, see @NicenboimRoettgeretal and the references cited there.
+Here, we have repeated measurements from subject 1 for condition a and condition b. The independence assumption is violated. Erroneous analyses using t-tests abound in experimental science; for examples of these kinds of misuse of the t-test in phonetics, see @NicenboimRoettgeretal and the references cited there.
 
 How to proceed when we have repeated measurements from each subject or each item?
 The solution is to aggregate the data so that each subject (or item) has only *one* value for each condition.
 
-This aggregation allows us to meet the independence assumption of the t-test, but it has a potentially huge drawback: it pretends we have one measurement from each subject for each condition. 
+A by-subject aggregation allows us to meet the independence assumption of the t-test, but it has a potentially huge drawback: it pretends we have one measurement from each subject for each condition. 
 Later on we will learn how to analyze unaggregated data, but if we want to do a paired t-test, we have no choice but to aggregate the data in this way.
 
 Although an example of aggregation was already discussed above, it may be helpful to revisit the approach that is necessary using a fully worked example. Consider the following repeated measures data on subject versus object relative clauses in English; the data are from a self-paced reading study, Experiment 1 of @grodner. 
 
-Subject relative clauses are sentences like *The man who was standing near the doorway laughed*. Here, the phrase (called a relative clause) *who was standing near the doorway* modifies the noun phrase *man*; it is called a subject relative because the noun phrase *man* is the subject of the relative clause. By contrast, object relative clauses are sentences like *The man who was the woman was talking to near the doorway laughed*; here, the *man* is the grammatical object object of the relative clause *who was the woman was talking to near the doorway*.
+Subject relative clauses are sentences like *The man who was standing near the doorway laughed*. Here, the phrase (called a relative clause) *who was standing near the doorway* modifies the noun phrase *man*; it is called a subject relative because the noun phrase *man* is the subject of the relative clause. By contrast, object relative clauses are sentences like *The man who was the woman was talking to near the doorway laughed*; here, the *man* is the grammatical object of the relative clause *who was the woman was talking to near the doorway*.
 
-A theoretical prediction is that in English, object relatives are harder to read than subject relatives, in the relative clause verb region. We want to test this prediction.
+A theoretical prediction is that in English, object relatives are harder to read than subject relatives, in the relative clause verb region. We want to test this prediction. Reading time  at the region of interest (i.e., the time participants spent reading the relative clause verb)  is used to index processing difficulty.
 
 First, load the data containing reading times from the region of interest (the relative clause verb):
 
@@ -1893,7 +1964,7 @@ For each of the 42 subjects, the t-test function internally creates a vector of 
 
 The 336/2=168 data points in each condition are assumed by the t-test to be independent of each other; but this cannot be the case because each subject delivers eight data points for each condition; these are obviously dependent (correlated) because they come from the same subject. 
 
-What is needed is a single data point, the mean reading time for each subject and condition. That is the by-subjects t-test: the averaging is done over the items for each subject. Analogously, it is also common to compute a by-items t-test; this time, the averaging is done over the subjects for each item. In order to conduct the t-test correctly, aggregation of the data by subjects and by items is necessary. This necessity of analyzing data both by subjects and by items is discussed by @clark73 in a famous article, and more recently by @yarkonigeneralizability and @westfall2017.
+What is needed is a single data point, the mean reading time for each subject and condition. That is the by-subjects t-test: the averaging is done over the items for each subject. Analogously, it is also common to compute a by-items t-test; this time, the averaging is done over the subjects for each item. If we want to use t-tests to analyze our data, two t-tests are necessary: by subjects and by items. This necessity of analyzing data both by subjects and by items is discussed by @clark73 in a famous article, and more recently by @yarkonigeneralizability and @westfall2017.
 
 Consider the by-subjects aggregation procedure below. Once the code below is run, we have only one data point for each condition and subject:
 
@@ -1944,7 +2015,7 @@ summary_ttest(gg05itemres)
 
 As in the by-subjects analysis, there seems to be a slight correlation between the average object and subject reading times among the items, but the sparse data (16 items) leads to a lot of variability around the fitted line (Figure \@ref(fig:averageorsritems)).
 
-```{r averageorsritems,fig.cap="The correlation between average object and subject relative clause reading times for the 42 subjects in the Grodner and Gibson (2005) experiment."}
+```{r averageorsritems,fig.cap="The correlation between average object and subject relative clause reading times for the 16 items in the Grodner and Gibson (2005) experiment."}
 SRdatabyitem <- subset(
   byitem,
   condition == "subjgap"
@@ -1991,7 +2062,7 @@ In order to take this variability into account simultaneously, we must switch to
 summary_ttest(hardINTres)
 ```
 
-Thus, the conclusion can change quite dramatically depending on whether one ignores sources of variance in one's analysis or not.
+Thus, if we use the p-value to check whether the effect is "significant" ($p<0.05$) or not ($p>0.05$), the conclusion can change quite dramatically depending on whether one ignores sources of variance in one's analysis or not.
 
 The next chapter explains how to obtain the more realistic estimates from the linear mixed model by taking both subject and item variability into account simultaneously.
 
@@ -2007,7 +2078,7 @@ summary_ttest(easyINTres)
 ```
 
 Is this difference between the easy and hard conditions itself significant? Not necessarily; one has to test for that by carrying out a higher-order interaction: the difference between (i) the RC vs. Noun-Type interaction in the hard condition, and (ii)  the RC vs. Noun-Type interaction in the easy condition. 
-In the present case, the higher-order interaction is not even remotely significant---the main claim in the @fedorenko2006nature is not warranted.
+In the present case, the higher-order interaction is not even remotely significant. If we base our conclusion on the p-value, as is the norm, the main claim in the @fedorenko2006nature study is not warranted.
 
 ```{r}
 diff_hard<-diff_name_hard-diff_occ_hard
@@ -2015,7 +2086,6 @@ diff_easy<-diff_name_easy-diff_occ_easy
 RCxNTxLD_INTres<-t.test(diff_hard,diff_easy,paired=TRUE)
 summary_ttest(RCxNTxLD_INTres)
 ```
-
 
 ```{r echo=FALSE}
 df_fedorenko06$noun<-ifelse(df_fedorenko06$nountype=="name",1/2,-1/2)
@@ -2032,12 +2102,36 @@ SE_3wayint<-round(summary(m2)$coefficients[8,2],3)
 t_3wayint<-round(summary(m2)$coefficients[8,3],3)
 ```
 
-Incidentally, as shown in later chapters, the above analysis can be done with a linear mixed model as well. Such an analysis shows that the t-value is `r t_3wayint`, with estimate `r est_3wayint`, [`r est_3wayint-2*SE_3wayint`, `r est_3wayint+2*SE_3wayint`] ms.
+Incidentally, the above analysis can be done with repeated measures ANOVA, or a linear mixed model (we will discuss the linear mixed model in detail). 
+
+
+The repeated measures ANOVA yields the following:
+
+```{r}
+bysubj2 <- aggregate(RT ~ subj + rctype + nountype + load,
+  mean,
+  data = df_fedorenko06
+)
+subj_anova<-anova_test(data = bysubj2, 
+           dv = RT, 
+           wid = subj,
+           within = c(rctype,nountype,load)
+  )
+get_anova_table(subj_anova)
+```
+
+Notice that the square of the t-value above is the same as the F-score (up to rounding error) in the ANOVA output: $(-1.59)^2 = 2.53$.
+
+The linear mixed models analysis shows a slightly different t-value for the three-way interaction: `r t_3wayint`, with estimate `r est_3wayint`, [`r est_3wayint-2*SE_3wayint`, `r est_3wayint+2*SE_3wayint`] ms. But it is quite close to the statistics computed using the paired t-test.
+
+
+
 This mistake---not explicitly checking for the interaction---is very common in psychology and psycholinguistics.
 
 ## Summary
 
-This chapter explained the basis for the hypothesis testing in frequentist statistics: the central limit theorem. This led to the t-test, specifically, the one-sample t-test (equivalent to the paired t-test) and the two-sample t-test (for unpaired data). The key summary statistics, the t-test and the p-value were discussed, along with the limitations of these statisics in determining whether an effect is significant or not. Specifically, under low statistical power, Type M and S error have the consequence that neither significant nor non-significant results are interpretable. We learned how to compute statistical power using the ` power.t.test` function and using simulation. Important applications of the t-test in factorial designs was discussed, along with the limitations imposed by the t-test; these limitations can lead to misleading conclusions. Finally, some common mistakes in the usage of t-tests were exemplified.
+This chapter explained the basis for the hypothesis testing in frequentist statistics: the central limit theorem. This led to the t-test, specifically, the one-sample t-test (equivalent to the paired t-test) and the two-sample t-test (for unpaired data). The key summary statistics, the t-test and the p-value were discussed, 
+along with the limitations of these statistics for arriving at conclusions about the existence/absence of an effect. Specifically, under low statistical power, Type M and S error have the consequence that neither significant nor non-significant results are interpretable. We learned how to compute statistical power using the ` power.t.test` function and using simulation. Important applications of the t-test in factorial designs was discussed, along with the limitations imposed by the t-test; these limitations can lead to misleading conclusions. Finally, some common mistakes in the usage of t-tests were exemplified.
 
 ## Further readings
 
