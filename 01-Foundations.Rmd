@@ -440,19 +440,20 @@ plot(u,dunif(u,min=0,max=1),type="l",
      ylab="density",main="uniform(0,1)")
 ```
 
-The cdf $F(U<u)$ has the property that $F(U<u)=u$. For example:
+The cdf $F(U<u)$ has the property that $F(U<u)=u$:
 
-```{r}
+```{r uniformcdf2}
+punif(0.25,min=0,max=1)
+punif(0.75,min=0,max=1)
+```
+
+Figure \@ref(fig:uniformcdf1) shows the cdf for the distribution uniform(0,1).
+
+```{r uniformcdf1,echo=FALSE,fig.cap="The cumulative distribution function of the uniform distribution uniform(0,1)."}
 plot(u,punif(u,min=0,max=1),type="l",
      ylab="probability",main="CDF of uniform(0,1)")
 ```
 
-The cdf is visualized in Figure \@ref(fig:uniformcdf).
-
-```{r uniformcdf,message="FALSE",warning=FALSE,results="asis",fig.cap="The cdf of the uniform(0,1) distribution."}
-punif(0.25,min=0,max=1)
-punif(0.75,min=0,max=1)
-```
 
 ### The Chi-square distribution
 
