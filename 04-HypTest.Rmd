@@ -2,13 +2,13 @@
 
 We started the book with the t-test. There, we had the following general procedure:
 
-- Given independent and identically distributed data $y$, define a null hypothesis: $H_0:  \mu=\mu_0$.
+- Given independent and identically distributed data $y$, define a null hypothesis relating to the parameter $\mu$, which represents the: $H_0:  \mu=\mu_0$.
 - Compute the sample mean $\bar{y}$ and the standard error SE. 
 - Reject the null hypothesis if the absolute value of $(\bar{y}-\mu_0)/SE$ is larger than the critical t-value (approximately $2$ for sample sizes larger than 20).
 
 The two main classes of t-test discussed in chapter 2, paired and unpaired, are basically just the same t-test. The paired/unpaired nature of the t-test affects the way the standard error is computed in paired vs. unpaired data.
 
-Here, we turn to a closely related test: the *likelihood ratio test statistic*. The reason for considering this alternative test is that in reality we will almost never use the t-test as described above.
+Here, we turn to a closely related test: the *likelihood ratio test statistic*. The reason for considering this alternative test is that in reality we will almost never use the t-test, due to its many limitations.
 
 ## The likelihood ratio test: The theory
 
@@ -48,12 +48,12 @@ Essentially, the likelihood ratio test compares the ratio of likelihoods of the 
 One can specify the test in general terms as follows. Suppose that the likelihood is with respect to some parameter $\theta$. We can evaluate the likelihood at  $\mu_0$, the null hypothesis value of the parameter, and evaluate the likelihood using the maximum likelihood estimate $\hat\theta$ of the parameter, as we did above. The likelihood ratio can then be written as follows:
 
 \begin{equation}
-\Lambda = \frac{max_{\theta\in \omega_0}(lik(\theta))}{max_{\theta\in \omega_1)}(lik(\theta))}
+\Lambda = \frac{max_{\theta\in \omega_0}(lik(\theta))}{max_{\theta\in \omega_1}(lik(\theta))}
 \end{equation}
 
 where, $\omega_0=\{\mu_0\}$ and $\omega_1=\{\forall \mu \mid \mu\neq \mu_0\}$. The function max just selects the maximum value of  any choices of parameter values; in the case of the null hypothesis there is only one value, $\mu_0$. In the case of the alternative model, the maximum likelihood estimate $\hat\theta$ is the maximum value.
 
-Now, assuming that the data are coming from a normal distribution, the numerator of the likelihood ratio statistic is:
+Now, assuming for simplicity that the data are coming from a normal distribution, the numerator of the likelihood ratio statistic is:
 
 \begin{equation}
 lik(\theta=\mu_0) = \frac{1}{(\sigma\sqrt{2\pi})^n} 
@@ -84,7 +84,7 @@ Canceling out common terms:
 \end{equation}
 
 
-Taking logs:
+Taking logs and pulling out the common term:
 
 \begin{equation}
 \begin{split}
@@ -94,37 +94,112 @@ Taking logs:
 \end{split}
 \end{equation}
 
-Now, it is a standard algebraic trick to  rewrite  $\sum_{i=1}^n (X_i -\mu_0)^2$ as a sum of two terms:
+Now, it is a standard algebraic trick (see Box 4.1.1) to  rewrite  $\sum_{i=1}^n (X_i -\mu_0)^2$ as a sum of two terms:
+
+\begin{equation}
+\sum_{i=1}^n (X_i -\mu_0)^2 = \sum_{i=1}^n (X_i - \bar{X})^2 + n(\bar{X} - \mu_0)^2 
+(\#eq:simplification)
+\end{equation}
+
+:::: {.blackbox data-latex=""}
+::: {data-latex=""}
+**An algebraic trick**
+:::
+
+We are going to establish that equality \@ref(eq:simplification) holds.
+
+Consider this expression: $\sum_{i=1}^n (X_i -\mu_0)^2$. 
+
+We can rewrite the terms inside the brackets in the following way:
+
+\begin{equation}
+\sum_{i=1}^n (X_i - \bar{X} + \bar{X} -\mu_0)^2
+\end{equation}
+
+Notice that $-\bar{X} + \bar{X}$ sums to 0, so the expression remains unchanged!
+
+Now, collect together the two pairs of terms inside the brackets as follows:
+
+\begin{equation}
+\sum_{i=1}^n ((X_i - \bar{X}) + (\bar{X} -\mu_0))^2
+\end{equation}
+
+What we are doing here is that we are treating $X_i - \bar{X}$ as one term, say $a_i$ (we have to use the index $i$ because of the index inside the brackets), and $\bar{X} -\mu_0$ as another term, say $b$. So the above equation can be written simply as:
+
+\begin{equation}
+\sum_{i=1}^n (a_i + b)^2 = \sum_{i=1}^n (a_i^2 + b^2 + 2a_i b)
+\end{equation}
+
+Opening the brackets, we would rewrite this as:
+
+\begin{equation}
+\sum_{i=1}^n a_i^2 + \sum_{i=1}^nb^2 + 2\sum_{i=1}^n a_i b
+\end{equation}
+
+Instead of using $a_i$ and $b$, we use the full expressions now:
+
+\begin{equation}
+\sum_{i=1}^n ((X_i - \bar{X})^2 + (\bar{X} -\mu_0)^2 + 2 (X_i - \bar{X})(\bar{X} -\mu_0) )
+\end{equation}
+
+If we remove the outside-most brackets, we have to move the summation term $\sum_{i=1}^n$ to each of the expressions inside the brackets:
+
+\begin{equation}
+\sum_{i=1}^n (X_i - \bar{X})^2 +\sum_{i=1}^n (\bar{X} -\mu_0)^2 + 
+2\sum_{i=1}^n (X_i - \bar{X})(\bar{X} -\mu_0) )
+\end{equation}
+
+But $\sum_{i=1}^n (\bar{X} -\mu_0)^2=n (\bar{X} -\mu_0)^2$, so we can rewrite the equation as:
+
+
+\begin{equation}
+\sum_{i=1}^n (X_i - \bar{X})^2 +n(\bar{X} -\mu_0)^2 + 
+2\sum_{i=1}^n \times (X_i - \bar{X})(\bar{X} -\mu_0) )
+\end{equation}
+
+Also, $\sum_{i=1}^n 2 (X_i - \bar{X}) = 0$, because the sum of all the deviations of the data $x_i$ from the mean has to sum to 0. This follows because the definition of the mean is $\frac{\sum_i^n X_i}{n} = \bar{X}$, and that means that $\sum_i^n X_i = n\bar{X}$, or $X_1-\bar{X} + X_2 - \bar{X} \dots + X_n -\bar{X}=0$.
+
+The fact that  $2 \sum_{i=1}^n  (X_i - \bar{X}) = 0$ allows us to simplify 
+
+\begin{equation}
+\sum_{i=1}^n (X_i - \bar{X})^2 +n(\bar{X} -\mu_0)^2)
+\end{equation}
+
+This proves that 
 
 \begin{equation}
 \sum_{i=1}^n (X_i -\mu_0)^2 = \sum_{i=1}^n (X_i - \bar{X})^2 + n(\bar{X} - \mu_0)^2 
 \end{equation}
 
-If we rearrange terms, we obtain:
+::::
+
+Returning to equation \@ref(eq:simplification), if we rearrange the terms, we obtain:
 
 \begin{equation}
 \sum_{i=1}^n (X_i -\mu_0)^2 - \sum_{i=1}^n (X_i - \bar{X})^2 = n(\bar{X} - \mu_0)^2 
+(\#eq:rearrange)
 \end{equation}
 
 Now, we just established above that $\log \Lambda$ is:
 
 \begin{equation}
 \log \Lambda= -\frac{1}{2\sigma^2} \left( \sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2 \right)
+(\#eq:loglambda)
 \end{equation}
 
 Consider the term in the brackets:
 
 \begin{equation}
-(\sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2)
+\left(\sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2\right)
 \end{equation}
 
-This can be rewritten as:
+Given equation \@ref(eq:rearrange), this can be rewritten as:
 
 \begin{equation}
 n(\bar{X} - \mu_0)^2
 \end{equation}
 
-Rewriting in this way gives us:
+Rewriting equation \@ref(#eq:loglambda) in this way gives us:
 
 \begin{equation}
 \log \Lambda = -\frac{1}{2\sigma^2}   n(\bar{X} - \mu_0)^2 
@@ -143,7 +218,9 @@ Or even more transparently:
 -2 \log \Lambda =    \frac{(\bar{X} - \mu_0)^2 }{\frac{\sigma^2}{n}}
 \end{equation}
 
-This should remind you of the t-test! Basically, just like in the t-test, what this is saying is that we reject the null when $\mid \bar{X} - \mu_0\mid$, or negative two  times the difference in log likelihood, is large!
+This should remind you of the t-test; the above equation is the square of the formula for the t-distribution.
+
+Basically, just like in the t-test, what this is saying is that we reject the null when the distance between $\bar{X}$ and  $\mu_0$ (normalized by the square of the standard error) is large.  In other words, we reject the null hypothesis when negative two times the difference in log likelihood, is large.
 
 Now we will  define what it means for $-2\log \Lambda$ to be large. There is a theorem in statistics that states that for large $n$, the distribution of $-2\log \Lambda$ approaches the chi-squared distribution, with degrees of freedom corresponding to the difference in the number of parameters between the two models being compared.
 
@@ -258,8 +335,9 @@ Removing the brackets gives us:
 
 This yields the equation:
 
-\begin{equation} \label{eq:nullhypsumcontrast}
+\begin{equation}
 2\beta_1= 0
+(\#eq:nullhypsumcontrast)
 \end{equation}
 
 
