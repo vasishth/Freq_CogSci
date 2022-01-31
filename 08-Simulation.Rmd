@@ -447,11 +447,6 @@ for (i in 1:nsim) {
 }
 
 pow <- mean(abs(sotval) > 2)
-## save(pow,file="data/powerbeta1mean.Rda")
-```
-
-```{r echo=FALSE}
-load("data/powerbeta1mean.Rda")
 ```
 
 The power estimate from the above code is `r round(pow,2)`.
@@ -472,7 +467,7 @@ We will run two for-loops now: the first for-loop selects one of the plausible v
 
 This time, instead of ignoring convergence problems, we can record the proportion of times that we get a convergence failure or problem, and we can discard that result:
 
-```{r eval=FALSE}
+```{r cache=TRUE}
 nsim <- 100
 ## effect size possibilities:
 b1_est <- c(0.02, 0.12, 0.22)
@@ -511,24 +506,18 @@ for (j in 1:length(b1_est)) {
 
 You can examine the proportion of failed convergences:
 
-```{r eval=FALSE}
+```{r}
 ## proportion of convergence failures:
 rowMeans(failed)
 ```
 
 Power can now be computed for each effect size:
 
-```{r eval=FALSE}
+```{r cache=TRUE}
 pow <- rep(NA, length(b1_est))
 for (k in 1:length(b1_est)) {
   pow[k] <- mean(abs(sotvals[k, ]) > 2, na.rm = TRUE)
 }
-
-## save(pow,file="data/powerbeta1meanlowerupper.Rda")
-```
-
-```{r echo=FALSE}
-load("data/powerbeta1meanlowerupper.Rda")
 ```
 
 The power estimate for the lower bound of the $\beta_1$ estimate is `r round(pow[1],2)`,  and for the upper bound is `r round(pow[3],2)`. The power estimate for the mean estimate of $\beta_1$ is `r round(pow[2],2)`.
