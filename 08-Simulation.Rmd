@@ -421,9 +421,9 @@ Everything checks out.
 
 ## Repeated generation of data to compute power
 
-With the function for simulating data ready, we are now able to repeatedly generated simulated data. Next, we generate data 100 times, fit a linear mixed model each time, and extract the t-value from each linear mixed model fit. The vector t-values is then used to compute power: we simply look at the proportion of absolute t-values that exceed the value 2. 
+With the function for simulating data ready, we are now able to repeatedly generate simulated data. Next, we generate data 100 times, fit a linear mixed model each time, and extract the t-value from each linear mixed model fit. The vector t-values is then used to compute power: we simply look at the proportion of absolute t-values that exceed the value 2. 
 
-```{r eval=FALSE}
+```{r cache=TRUE}
 nsim <- 100
 sotval <- rep(NA, nsim)
 
