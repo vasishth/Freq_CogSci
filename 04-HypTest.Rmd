@@ -184,7 +184,7 @@ Now, we just established above that $\log \Lambda$ is:
 
 \begin{equation}
 \log \Lambda= -\frac{1}{2\sigma^2} \left( \sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2 \right)
-(\#eq:loglambda)
+(\#eq:loglambda2)
 \end{equation}
 
 Consider the term in the brackets:
