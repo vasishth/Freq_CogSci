@@ -108,6 +108,7 @@ library(kableExtra)
 library(tidyverse)
 library(hypr)
 library(designr)
+library(lme4)
 ```
 
 
