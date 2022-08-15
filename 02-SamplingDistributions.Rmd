@@ -24,7 +24,7 @@ colnames(latsq) <- c("Group 1", "Group 2")
 
 kableExtra::kable(latsq,
   digits = 2, #booktabs = TRUE,
-  vline = "", format="latex",
+  vline = "", #format="latex",
   caption = "The Latin Square with two conditions labeled a and b."
 )
 ```
@@ -43,7 +43,7 @@ colnames(latsq4) <- c("Group 1", "Group 2", "Group 3", "Group 4")
 
 kableExtra::kable(latsq4,
   digits = 2, booktabs = TRUE,
-  vline = "",  format="latex",
+  vline = "",  #format="latex",
   caption = "A Latin Square design with four conditions labeled a, b, c, and d."
 )
 ```
@@ -64,7 +64,7 @@ colnames(latsq8) <- paste(rep("G", 8), 1:8, sep = "")
 
 kableExtra::kable(latsq8,
   digits = 2, booktabs = TRUE,
-  vline = "",  format="latex",
+  vline = "",  #format="latex",
   caption = "A Latin Square design with eight conditions labeled a, b, c, d, e, f, g, and h. The column names representing the eight groups are abbreviated as G1-G8."
 )
 ```
@@ -82,7 +82,7 @@ colnames(latsqrep2) <- c("item", "Group 1", "Group 2")
 
 kableExtra::kable(latsqrep2,
   digits = 2, booktabs = TRUE,
-  vline = "",  format="latex",
+  vline = "",  #format="latex",
   caption = "The Latin Square with two conditions labeled a and b, and four items."
 )
 ```
