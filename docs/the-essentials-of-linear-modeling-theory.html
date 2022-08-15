@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.2 The essentials of linear modeling theory | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.2 The essentials of linear modeling theory | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html"/>
 <link rel="next" href="summary-4.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,8 +391,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-essentials-of-linear-modeling-theory" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> The essentials of linear modeling theory</h2>
+<div id="the-essentials-of-linear-modeling-theory" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> The essentials of linear modeling theory<a href="the-essentials-of-linear-modeling-theory.html#the-essentials-of-linear-modeling-theory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Consider a deterministic function <span class="math inline">\(\phi(\mathbf{x},\beta)\)</span> which takes as input some variable values <span class="math inline">\(x\)</span> and some fixed values <span class="math inline">\(\beta\)</span>. A simple example would be some variable <span class="math inline">\(x\)</span> determining the value of another variable <span class="math inline">\(y\)</span> by multiplying <span class="math inline">\(x\)</span> with <span class="math inline">\(\beta\)</span>.</p>
 <p><span class="math display">\[\begin{equation}
 y = \beta x
@@ -423,16 +425,16 @@ equation that, given a word’s frequency, gives a prediction regarding that wor
 \hbox{predicted reaction time} = \beta_0 + \beta_1 \hbox{frequency}
 \end{equation}\]</span></p>
 <p>Given any single value of the frequency of a word, we will not get a perfectly correct prediction of the reaction time for that word. As a concrete example, see this data-set from the <code>languageR</code> library, which allows us to visualize the effect of (log) word frequency on (log) reaction times. This model is technically incorrect, because we have repeated measures; a linear mixed model would be more appropriate. But a simple linear model is sufficient to make the point here:</p>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="the-essentials-of-linear-modeling-theory.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(languageR)</span></code></pre></div>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="the-essentials-of-linear-modeling-theory.html#cb454-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;lexdec&quot;</span>)</span>
-<span id="cb454-2"><a href="the-essentials-of-linear-modeling-theory.html#cb454-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(RT <span class="sc">~</span> Frequency, lexdec)</span>
-<span id="cb454-3"><a href="the-essentials-of-linear-modeling-theory.html#cb454-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)<span class="sc">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="the-essentials-of-linear-modeling-theory.html#cb525-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(languageR)</span></code></pre></div>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="the-essentials-of-linear-modeling-theory.html#cb526-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;lexdec&quot;</span>)</span>
+<span id="cb526-2"><a href="the-essentials-of-linear-modeling-theory.html#cb526-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(RT <span class="sc">~</span> Frequency, lexdec)</span>
+<span id="cb526-3"><a href="the-essentials-of-linear-modeling-theory.html#cb526-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)<span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value  Pr(&gt;|t|)
 ## (Intercept)  6.58878   0.022296 295.515 0.000e+00
 ## Frequency   -0.04287   0.004533  -9.459 1.027e-20</code></pre>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="the-essentials-of-linear-modeling-theory.html#cb456-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(RT <span class="sc">~</span> Frequency, lexdec)</span>
-<span id="cb456-2"><a href="the-essentials-of-linear-modeling-theory.html#cb456-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(m)</span></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-194-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="the-essentials-of-linear-modeling-theory.html#cb528-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(RT <span class="sc">~</span> Frequency, lexdec)</span>
+<span id="cb528-2"><a href="the-essentials-of-linear-modeling-theory.html#cb528-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(m)</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-203-1.svg" width="672" /></p>
 <p>Because the predicted values from the linear model don’t exactly predict the observed vlues, we express the dependent variable <span class="math inline">\(y\)</span> as a non-deterministic function:</p>
 <p><span class="math display">\[\begin{equation}
 y=\phi(x,\beta,\epsilon)=\beta_0+\beta_1x+\epsilon
@@ -442,7 +444,7 @@ It is assumed to have expectation (mean) 0, and some standard deviation (to be e
 We can write this statement in compact form as <span class="math inline">\(\epsilon \sim N(0,\sigma)\)</span>.</p>
 <p>The <strong>general linear model</strong> is a non-deterministic function like the one above:</p>
 <p><span class="math display">\[\begin{equation}
-Y=f(x)^T\beta +\epsilon 
+Y=f(x)^T\beta +\epsilon
 \end{equation}\]</span></p>
 <p>The matrix formulation will be written as below. <span class="math inline">\(n\)</span> refers to the number of data points (that is, <span class="math inline">\(Y_1,\dots,Y_n\)</span>), and the index <span class="math inline">\(j\)</span> ranges from <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span>.</p>
 <p><span class="math display">\[\begin{equation}
@@ -465,7 +467,7 @@ Y_3 \\
 \begin{pmatrix}
 \beta_0 \\
 \beta_1 \\
-\end{pmatrix}+ 
+\end{pmatrix}+
 \begin{pmatrix}
 \epsilon_1 \\
 \epsilon_2 \\
@@ -482,27 +484,27 @@ Y = X \beta + \epsilon
 <span class="math inline">\(f(x_2)^T = (1~x_2)\)</span> is the second row, and
 <span class="math inline">\(f(x_3)^T = (1~x_3)\)</span> is the third row.</p>
 <p>Note that the expectation or mean of Y, written <span class="math inline">\(E[Y]\)</span>, is <span class="math inline">\(X\beta\)</span>. In a data-set with <span class="math inline">\(n\)</span> data points, when there are <span class="math inline">\(p\)</span> parameters, <span class="math inline">\(\beta\)</span> is a <span class="math inline">\(p\times 1\)</span> matrix, and <span class="math inline">\(X\)</span>, which is called the <strong>design matrix</strong> or <strong>model matrix</strong>, is <span class="math inline">\(n\times p\)</span>.</p>
-<div id="least-squares-estimation-geometric-argument" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Least squares estimation: Geometric argument</h3>
+<div id="least-squares-estimation-geometric-argument" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Least squares estimation: Geometric argument<a href="the-essentials-of-linear-modeling-theory.html#least-squares-estimation-geometric-argument" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The above excursion into the matrix formulation of the linear model gives us the ability to understand how the <span class="math inline">\(\beta\)</span> parameters are estimated.</p>
 <p>When we have a deterministic model <span class="math inline">\(y=\phi(f(x)^T,\beta)=\beta_0+\beta_1x\)</span>, this implies a perfect fit to all data points.
 This is like solving the equation <span class="math inline">\(Ax=b\)</span> in linear algebra: we solve for <span class="math inline">\(\beta\)</span> in <span class="math inline">\(X\beta=y\)</span> e.g., by pre-multiplying by <span class="math inline">\(X^{-1}\)</span>: <span class="math inline">\(X^{-1}X\beta=X^{-1}y\)</span>. For example, if we have:</p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="the-essentials-of-linear-modeling-theory.html#cb457-1" aria-hidden="true" tabindex="-1"></a>(X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="the-essentials-of-linear-modeling-theory.html#cb529-1" aria-hidden="true" tabindex="-1"></a>(X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    2    2    2
 ## [2,]    2    4    6    8
 ## [3,]    3    6    8   10</code></pre>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="the-essentials-of-linear-modeling-theory.html#cb459-1" aria-hidden="true" tabindex="-1"></a>(y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">6</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="the-essentials-of-linear-modeling-theory.html#cb531-1" aria-hidden="true" tabindex="-1"></a>(y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">6</span>)))</span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    1
 ## [2,]    5
 ## [3,]    6</code></pre>
 <p>We can solve for <span class="math inline">\(x\)</span> as follows (ginv is a function that computed a so-called generalized inverse for non-square matrices):</p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="the-essentials-of-linear-modeling-theory.html#cb461-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb461-2"><a href="the-essentials-of-linear-modeling-theory.html#cb461-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Solve for x in Ax=y:</span></span>
-<span id="cb461-3"><a href="the-essentials-of-linear-modeling-theory.html#cb461-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">ginv</span>(X) <span class="sc">%*%</span> y</span>
-<span id="cb461-4"><a href="the-essentials-of-linear-modeling-theory.html#cb461-4" aria-hidden="true" tabindex="-1"></a><span class="do">## confirm:</span></span>
-<span id="cb461-5"><a href="the-essentials-of-linear-modeling-theory.html#cb461-5" aria-hidden="true" tabindex="-1"></a>X <span class="sc">%*%</span> x</span></code></pre></div>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="the-essentials-of-linear-modeling-theory.html#cb533-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb533-2"><a href="the-essentials-of-linear-modeling-theory.html#cb533-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Solve for x in Ax=y:</span></span>
+<span id="cb533-3"><a href="the-essentials-of-linear-modeling-theory.html#cb533-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">ginv</span>(X) <span class="sc">%*%</span> y</span>
+<span id="cb533-4"><a href="the-essentials-of-linear-modeling-theory.html#cb533-4" aria-hidden="true" tabindex="-1"></a><span class="do">## confirm:</span></span>
+<span id="cb533-5"><a href="the-essentials-of-linear-modeling-theory.html#cb533-5" aria-hidden="true" tabindex="-1"></a>X <span class="sc">%*%</span> x</span></code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    1
 ## [2,]    5
@@ -521,7 +523,7 @@ FIGURE 5.1: Geometric visualization of the distance minimization procedure for e
 </div>
 <p>Notice that <span class="math inline">\(\epsilon=(Y - X\hat\beta)\)</span> and <span class="math inline">\(X\beta\)</span> are perpendicular to each other. Because the dot product of two perpendicular (orthogonal) vectors is 0, we get the result:</p>
 <p><span class="math display">\[\begin{equation}
-(Y- X\hat\beta)^T X \beta = 0 \Leftrightarrow (Y- X\hat\beta)^T X = 0 
+(Y- X\hat\beta)^T X \beta = 0 \Leftrightarrow (Y- X\hat\beta)^T X = 0
 \end{equation}\]</span></p>
 <p>Multiplying out the terms, we proceed as follows. One result that we use here is that <span class="math inline">\((AB)^T = B^T A^T\)</span>.</p>
 <p><span class="math display">\[\begin{equation}
@@ -540,10 +542,10 @@ FIGURE 5.1: Geometric visualization of the distance minimization procedure for e
 \end{equation}\]</span></p>
 <p>X is of full rank, therefore <span class="math inline">\(X^TX\)</span> is invertible. One crucial detail, whose significance will only become clear in the chapter on contrast coding, is that the matrix <span class="math inline">\((X^TX)^{-1}X^T\)</span>—the generalized matrix inverse—is closely related to the design matrix, which in turn determines what comparisons are implied by the <span class="math inline">\(\beta\)</span> parameters.</p>
 <p>Let’s look at a concrete example:</p>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="the-essentials-of-linear-modeling-theory.html#cb463-1" aria-hidden="true" tabindex="-1"></a>(X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
-<span id="cb463-2"><a href="the-essentials-of-linear-modeling-theory.html#cb463-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">8</span>), <span class="fu">rep</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">4</span>),</span>
-<span id="cb463-3"><a href="the-essentials-of-linear-modeling-theory.html#cb463-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb463-4"><a href="the-essentials-of-linear-modeling-theory.html#cb463-4" aria-hidden="true" tabindex="-1"></a>), <span class="at">ncol =</span> <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="the-essentials-of-linear-modeling-theory.html#cb535-1" aria-hidden="true" tabindex="-1"></a>(X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
+<span id="cb535-2"><a href="the-essentials-of-linear-modeling-theory.html#cb535-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">8</span>), <span class="fu">rep</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">4</span>),</span>
+<span id="cb535-3"><a href="the-essentials-of-linear-modeling-theory.html#cb535-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb535-4"><a href="the-essentials-of-linear-modeling-theory.html#cb535-4" aria-hidden="true" tabindex="-1"></a>), <span class="at">ncol =</span> <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1   -1   -1
 ## [2,]    1   -1   -1
@@ -553,9 +555,9 @@ FIGURE 5.1: Geometric visualization of the distance minimization procedure for e
 ## [6,]    1    1   -1
 ## [7,]    1    1    1
 ## [8,]    1    1    1</code></pre>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="the-essentials-of-linear-modeling-theory.html#cb465-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Matrix)</span>
-<span id="cb465-2"><a href="the-essentials-of-linear-modeling-theory.html#cb465-2" aria-hidden="true" tabindex="-1"></a><span class="do">## full rank:</span></span>
-<span id="cb465-3"><a href="the-essentials-of-linear-modeling-theory.html#cb465-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rankMatrix</span>(X)</span></code></pre></div>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="the-essentials-of-linear-modeling-theory.html#cb537-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Matrix)</span>
+<span id="cb537-2"><a href="the-essentials-of-linear-modeling-theory.html#cb537-2" aria-hidden="true" tabindex="-1"></a><span class="do">## full rank:</span></span>
+<span id="cb537-3"><a href="the-essentials-of-linear-modeling-theory.html#cb537-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rankMatrix</span>(X)</span></code></pre></div>
 <pre><code>## [1] 3
 ## attr(,&quot;method&quot;)
 ## [1] &quot;tolNorm2&quot;
@@ -566,8 +568,8 @@ FIGURE 5.1: Geometric visualization of the distance minimization procedure for e
 <p>Notice that the inverted matrix is also symmetric. We will use this fact soon.</p>
 <p>The matrix <span class="math inline">\(V=X^T X\)</span> is a symmetric matrix, which means that <span class="math inline">\(V^T=V\)</span>.</p>
 </div>
-<div id="the-expectation-and-variance-of-the-parameters-beta" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> The expectation and variance of the parameters beta</h3>
+<div id="the-expectation-and-variance-of-the-parameters-beta" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> The expectation and variance of the parameters beta<a href="the-essentials-of-linear-modeling-theory.html#the-expectation-and-variance-of-the-parameters-beta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Our model now is:</p>
 <p><span class="math display">\[\begin{equation}
 Y = X\beta + \epsilon
@@ -599,45 +601,45 @@ Var([(X^TX)^{-1}X^T] Y) = [(X^TX)^{-1}X^T] Var(Y)  [(X^TX)^{-1}X^T]^{T}
 \end{equation}\]</span></p>
 <p>Replacing Var(Y) with its variance written in matrix form <span class="math inline">\(\sigma^2 I\)</span>, and unpacking the transpose on the right-most expression <span class="math inline">\([(X^TX)^{-1}X^T]^{T}\)</span>:</p>
 <p><span class="math display">\[\begin{equation}
-Var(\hat\beta)= [(X^TX)^{-1}X^T] \sigma^2 I  X[(X^TX)^{-1}]^{T} 
+Var(\hat\beta)= [(X^TX)^{-1}X^T] \sigma^2 I  X[(X^TX)^{-1}]^{T}
 \end{equation}\]</span></p>
 <p>Since <span class="math inline">\(\sigma^2\)</span> is a scalar we can move it to the left, and any matrix multiplied by I is the matrix itself, so we ignore I, getting:</p>
 <p><span class="math display">\[\begin{equation}
-Var(\hat\beta)= \sigma^2 [(X^TX)^{-1}X^T X[(X^TX)^{-1}]^{T} 
+Var(\hat\beta)= \sigma^2 [(X^TX)^{-1}X^T X[(X^TX)^{-1}]^{T}
 \end{equation}\]</span></p>
 <p>Since <span class="math inline">\((X^TX)^{-1}X^T X = I\)</span>, we can simplify to</p>
 <p><span class="math display">\[\begin{equation}
-Var(\hat\beta)= \sigma^2 [(X^TX)^{-1}]^{T} 
+Var(\hat\beta)= \sigma^2 [(X^TX)^{-1}]^{T}
 \end{equation}\]</span></p>
 <p>Now, <span class="math inline">\((X^TX)^{-1}\)</span> is symmetric, so
 <span class="math inline">\([(X^TX)^{-1}]^T=(X^TX)^{-1}\)</span>. This gives us:</p>
 <p><span class="math display">\[\begin{equation}
-Var(\hat\beta)= \sigma^2 (X^TX)^{-1} 
+Var(\hat\beta)= \sigma^2 (X^TX)^{-1}
 \end{equation}\]</span></p>
 <p>Let’s make this concrete using the <code>lexdec</code> data-set as an example:</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="the-essentials-of-linear-modeling-theory.html#cb467-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> lexdec<span class="sc">$</span>RT</span>
-<span id="cb467-2"><a href="the-essentials-of-linear-modeling-theory.html#cb467-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> lexdec<span class="sc">$</span>Frequency</span>
-<span id="cb467-3"><a href="the-essentials-of-linear-modeling-theory.html#cb467-3" aria-hidden="true" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
-<span id="cb467-4"><a href="the-essentials-of-linear-modeling-theory.html#cb467-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb467-5"><a href="the-essentials-of-linear-modeling-theory.html#cb467-5" aria-hidden="true" tabindex="-1"></a><span class="do">## design matrix:</span></span>
-<span id="cb467-6"><a href="the-essentials-of-linear-modeling-theory.html#cb467-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(m0)</span>
-<span id="cb467-7"><a href="the-essentials-of-linear-modeling-theory.html#cb467-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X, <span class="at">n =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="the-essentials-of-linear-modeling-theory.html#cb539-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> lexdec<span class="sc">$</span>RT</span>
+<span id="cb539-2"><a href="the-essentials-of-linear-modeling-theory.html#cb539-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> lexdec<span class="sc">$</span>Frequency</span>
+<span id="cb539-3"><a href="the-essentials-of-linear-modeling-theory.html#cb539-3" aria-hidden="true" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb539-4"><a href="the-essentials-of-linear-modeling-theory.html#cb539-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb539-5"><a href="the-essentials-of-linear-modeling-theory.html#cb539-5" aria-hidden="true" tabindex="-1"></a><span class="do">## design matrix:</span></span>
+<span id="cb539-6"><a href="the-essentials-of-linear-modeling-theory.html#cb539-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(m0)</span>
+<span id="cb539-7"><a href="the-essentials-of-linear-modeling-theory.html#cb539-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X, <span class="at">n =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##   (Intercept)     x
 ## 1           1 4.860
 ## 2           1 4.605
 ## 3           1 4.997
 ## 4           1 4.727</code></pre>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="the-essentials-of-linear-modeling-theory.html#cb469-1" aria-hidden="true" tabindex="-1"></a><span class="do">## (X^TX)^{-1}</span></span>
-<span id="cb469-2"><a href="the-essentials-of-linear-modeling-theory.html#cb469-2" aria-hidden="true" tabindex="-1"></a>invXTX <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X)</span>
-<span id="cb469-3"><a href="the-essentials-of-linear-modeling-theory.html#cb469-3" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate of beta:</span></span>
-<span id="cb469-4"><a href="the-essentials-of-linear-modeling-theory.html#cb469-4" aria-hidden="true" tabindex="-1"></a>(hat_beta <span class="ot">&lt;-</span> invXTX <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> y)</span></code></pre></div>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="the-essentials-of-linear-modeling-theory.html#cb541-1" aria-hidden="true" tabindex="-1"></a><span class="do">## (X^TX)^{-1}</span></span>
+<span id="cb541-2"><a href="the-essentials-of-linear-modeling-theory.html#cb541-2" aria-hidden="true" tabindex="-1"></a>invXTX <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X)</span>
+<span id="cb541-3"><a href="the-essentials-of-linear-modeling-theory.html#cb541-3" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate of beta:</span></span>
+<span id="cb541-4"><a href="the-essentials-of-linear-modeling-theory.html#cb541-4" aria-hidden="true" tabindex="-1"></a>(hat_beta <span class="ot">&lt;-</span> invXTX <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> y)</span></code></pre></div>
 <pre><code>##                 [,1]
 ## (Intercept)  6.58878
 ## x           -0.04287</code></pre>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="the-essentials-of-linear-modeling-theory.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="do">## estimated variance (se^2) of the estimate of beta:</span></span>
-<span id="cb471-2"><a href="the-essentials-of-linear-modeling-theory.html#cb471-2" aria-hidden="true" tabindex="-1"></a>(hat_sigma <span class="ot">&lt;-</span> <span class="fu">summary</span>(m0)<span class="sc">$</span>sigma)</span></code></pre></div>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="the-essentials-of-linear-modeling-theory.html#cb543-1" aria-hidden="true" tabindex="-1"></a><span class="do">## estimated variance (se^2) of the estimate of beta:</span></span>
+<span id="cb543-2"><a href="the-essentials-of-linear-modeling-theory.html#cb543-2" aria-hidden="true" tabindex="-1"></a>(hat_sigma <span class="ot">&lt;-</span> <span class="fu">summary</span>(m0)<span class="sc">$</span>sigma)</span></code></pre></div>
 <pre><code>## [1] 0.2353</code></pre>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="the-essentials-of-linear-modeling-theory.html#cb473-1" aria-hidden="true" tabindex="-1"></a>(hat_var <span class="ot">&lt;-</span> hat_sigma<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> invXTX)</span></code></pre></div>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="the-essentials-of-linear-modeling-theory.html#cb545-1" aria-hidden="true" tabindex="-1"></a>(hat_var <span class="ot">&lt;-</span> hat_sigma<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> invXTX)</span></code></pre></div>
 <pre><code>##             (Intercept)          x
 ## (Intercept)   0.0004971 -9.760e-05
 ## x            -0.0000976  2.054e-05</code></pre>
@@ -647,13 +649,13 @@ Var(\hat\beta)= \sigma^2 (X^TX)^{-1}
 \hat\beta_0\\
 \hat\beta_1\\
 \end{pmatrix}
-\sim 
+\sim
 N(\begin{pmatrix}
 6.58878\\
 -0.04287\\
 \end{pmatrix},
 \begin{pmatrix}
- 0.000497 &amp; -0.0000976\\
+0.000497 &amp; -0.0000976\\
 -0.0000976 &amp; 2.054e-05\\
 \end{pmatrix})
 \end{equation}\]</span></p>
@@ -669,39 +671,39 @@ Cov(\hat\beta_0,\hat\beta_1)=\hat\rho \hat\sigma_{\hat\beta_0}\hat\sigma_{\hat\b
 <li><span class="math inline">\(\hat\beta_1 \sim N(-0.042872,0.0045325)\)</span>, and - <span class="math inline">\(Cov(\hat\beta_0,\hat\beta_1)=-9.76\times 10^{-05}\)</span>.</li>
 </ul>
 <p>So the correlation between the <span class="math inline">\(\hat\beta\)</span> is</p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="the-essentials-of-linear-modeling-theory.html#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="do">## hat rho:</span></span>
-<span id="cb475-2"><a href="the-essentials-of-linear-modeling-theory.html#cb475-2" aria-hidden="true" tabindex="-1"></a>hat_var[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">/</span> (<span class="fu">sqrt</span>(hat_var[<span class="dv">1</span>, <span class="dv">1</span>]) <span class="sc">*</span> <span class="fu">sqrt</span>(hat_var[<span class="dv">2</span>, <span class="dv">2</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="the-essentials-of-linear-modeling-theory.html#cb547-1" aria-hidden="true" tabindex="-1"></a><span class="do">## hat rho:</span></span>
+<span id="cb547-2"><a href="the-essentials-of-linear-modeling-theory.html#cb547-2" aria-hidden="true" tabindex="-1"></a>hat_var[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">/</span> (<span class="fu">sqrt</span>(hat_var[<span class="dv">1</span>, <span class="dv">1</span>]) <span class="sc">*</span> <span class="fu">sqrt</span>(hat_var[<span class="dv">2</span>, <span class="dv">2</span>]))</span></code></pre></div>
 <pre><code>## [1] -0.9658</code></pre>
 <p>Notice what happens to this correlation when we center the predictor:</p>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="the-essentials-of-linear-modeling-theory.html#cb477-1" aria-hidden="true" tabindex="-1"></a>x_c <span class="ot">&lt;-</span> <span class="fu">scale</span>(x, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb477-2"><a href="the-essentials-of-linear-modeling-theory.html#cb477-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x_c)</span>
-<span id="cb477-3"><a href="the-essentials-of-linear-modeling-theory.html#cb477-3" aria-hidden="true" tabindex="-1"></a><span class="do">## design matrix:</span></span>
-<span id="cb477-4"><a href="the-essentials-of-linear-modeling-theory.html#cb477-4" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(m)</span>
-<span id="cb477-5"><a href="the-essentials-of-linear-modeling-theory.html#cb477-5" aria-hidden="true" tabindex="-1"></a><span class="do">## (X^TX)^{-1}</span></span>
-<span id="cb477-6"><a href="the-essentials-of-linear-modeling-theory.html#cb477-6" aria-hidden="true" tabindex="-1"></a>invXTX <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X)</span>
-<span id="cb477-7"><a href="the-essentials-of-linear-modeling-theory.html#cb477-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate of beta:</span></span>
-<span id="cb477-8"><a href="the-essentials-of-linear-modeling-theory.html#cb477-8" aria-hidden="true" tabindex="-1"></a>(hat_beta <span class="ot">&lt;-</span> invXTX <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> y)</span></code></pre></div>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="the-essentials-of-linear-modeling-theory.html#cb549-1" aria-hidden="true" tabindex="-1"></a>x_c <span class="ot">&lt;-</span> <span class="fu">scale</span>(x, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb549-2"><a href="the-essentials-of-linear-modeling-theory.html#cb549-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x_c)</span>
+<span id="cb549-3"><a href="the-essentials-of-linear-modeling-theory.html#cb549-3" aria-hidden="true" tabindex="-1"></a><span class="do">## design matrix:</span></span>
+<span id="cb549-4"><a href="the-essentials-of-linear-modeling-theory.html#cb549-4" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(m)</span>
+<span id="cb549-5"><a href="the-essentials-of-linear-modeling-theory.html#cb549-5" aria-hidden="true" tabindex="-1"></a><span class="do">## (X^TX)^{-1}</span></span>
+<span id="cb549-6"><a href="the-essentials-of-linear-modeling-theory.html#cb549-6" aria-hidden="true" tabindex="-1"></a>invXTX <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X)</span>
+<span id="cb549-7"><a href="the-essentials-of-linear-modeling-theory.html#cb549-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate of beta:</span></span>
+<span id="cb549-8"><a href="the-essentials-of-linear-modeling-theory.html#cb549-8" aria-hidden="true" tabindex="-1"></a>(hat_beta <span class="ot">&lt;-</span> invXTX <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> y)</span></code></pre></div>
 <pre><code>##                 [,1]
 ## (Intercept)  6.38509
 ## x_c         -0.04287</code></pre>
-<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="the-essentials-of-linear-modeling-theory.html#cb479-1" aria-hidden="true" tabindex="-1"></a><span class="do">## estimated variance (se^2) of the estimate of beta:</span></span>
-<span id="cb479-2"><a href="the-essentials-of-linear-modeling-theory.html#cb479-2" aria-hidden="true" tabindex="-1"></a>(hat_sigma <span class="ot">&lt;-</span> <span class="fu">summary</span>(m0)<span class="sc">$</span>sigma)</span></code></pre></div>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="the-essentials-of-linear-modeling-theory.html#cb551-1" aria-hidden="true" tabindex="-1"></a><span class="do">## estimated variance (se^2) of the estimate of beta:</span></span>
+<span id="cb551-2"><a href="the-essentials-of-linear-modeling-theory.html#cb551-2" aria-hidden="true" tabindex="-1"></a>(hat_sigma <span class="ot">&lt;-</span> <span class="fu">summary</span>(m0)<span class="sc">$</span>sigma)</span></code></pre></div>
 <pre><code>## [1] 0.2353</code></pre>
-<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="the-essentials-of-linear-modeling-theory.html#cb481-1" aria-hidden="true" tabindex="-1"></a>(hat_var <span class="ot">&lt;-</span> hat_sigma<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> invXTX)</span></code></pre></div>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="the-essentials-of-linear-modeling-theory.html#cb553-1" aria-hidden="true" tabindex="-1"></a>(hat_var <span class="ot">&lt;-</span> hat_sigma<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> invXTX)</span></code></pre></div>
 <pre><code>##             (Intercept)       x_c
 ## (Intercept)   3.338e-05 7.204e-21
 ## x_c           7.204e-21 2.054e-05</code></pre>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="the-essentials-of-linear-modeling-theory.html#cb483-1" aria-hidden="true" tabindex="-1"></a><span class="do">## correlation:</span></span>
-<span id="cb483-2"><a href="the-essentials-of-linear-modeling-theory.html#cb483-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(hat_var[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">/</span> (<span class="fu">sqrt</span>(hat_var[<span class="dv">1</span>, <span class="dv">1</span>]) <span class="sc">*</span> <span class="fu">sqrt</span>(hat_var[<span class="dv">2</span>, <span class="dv">2</span>])), <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="the-essentials-of-linear-modeling-theory.html#cb555-1" aria-hidden="true" tabindex="-1"></a><span class="do">## correlation:</span></span>
+<span id="cb555-2"><a href="the-essentials-of-linear-modeling-theory.html#cb555-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(hat_var[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">/</span> (<span class="fu">sqrt</span>(hat_var[<span class="dv">1</span>, <span class="dv">1</span>]) <span class="sc">*</span> <span class="fu">sqrt</span>(hat_var[<span class="dv">2</span>, <span class="dv">2</span>])), <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>The correlation now is (effectively) zero. This is one of the consequences of centering your predictor: the intercept-slope sampling distributions become independent. The relevance of this fact will be discussed in the chapters on contrast coding.</p>
 </div>
-<div id="hypothesis-testing-using-analysis-of-variance-anova" class="section level3" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> Hypothesis testing using Analysis of variance (ANOVA)</h3>
+<div id="hypothesis-testing-using-analysis-of-variance-anova" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Hypothesis testing using Analysis of variance (ANOVA)<a href="the-essentials-of-linear-modeling-theory.html#hypothesis-testing-using-analysis-of-variance-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can compare two models, one nested inside another, as follows:</p>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="the-essentials-of-linear-modeling-theory.html#cb485-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x_c)</span>
-<span id="cb485-2"><a href="the-essentials-of-linear-modeling-theory.html#cb485-2" aria-hidden="true" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">1</span>)</span>
-<span id="cb485-3"><a href="the-essentials-of-linear-modeling-theory.html#cb485-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m0, m1)</span></code></pre></div>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="the-essentials-of-linear-modeling-theory.html#cb557-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x_c)</span>
+<span id="cb557-2"><a href="the-essentials-of-linear-modeling-theory.html#cb557-2" aria-hidden="true" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">1</span>)</span>
+<span id="cb557-3"><a href="the-essentials-of-linear-modeling-theory.html#cb557-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m0, m1)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: y ~ 1
@@ -713,9 +715,9 @@ Cov(\hat\beta_0,\hat\beta_1)=\hat\rho \hat\sigma_{\hat\beta_0}\hat\sigma_{\hat\b
 ## Signif. codes:  
 ## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The F-score you get here is actually the square of the t-value you get in the linear model summary:</p>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="the-essentials-of-linear-modeling-theory.html#cb487-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">anova</span>(m0, m1)<span class="sc">$</span>F[<span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="the-essentials-of-linear-modeling-theory.html#cb559-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">anova</span>(m0, m1)<span class="sc">$</span>F[<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## [1] 9.459</code></pre>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="the-essentials-of-linear-modeling-theory.html#cb489-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="the-essentials-of-linear-modeling-theory.html#cb561-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] -9.459</code></pre>
 <p>This is because <span class="math inline">\(t^2 = F\)</span>. The proof is discussed on page 9 of the Dobson and Barnett book, but we also briefly alluded to this in the likelihood ratio test chapter.</p>
 <p>The ANOVA works as follows. We will use the matrix formulation throughout. First define the residual as:</p>
@@ -737,7 +739,7 @@ D =&amp; \frac{1}{\sigma^2} (Y - X\hat \beta)^T (Y - X\hat \beta)\\
 \end{equation}\]</span></p>
 <p>Now, recall that <span class="math inline">\(\hat \beta = (X^T X)^{-1} X^T Y\)</span>. Premultiplying both sides with <span class="math inline">\((X^T X)\)</span>, we get</p>
 <p><span class="math inline">\((X^T X)\hat \beta = X^T Y\)</span></p>
-<p>It follows that we can rewrite the last line in equation  as follows: We can replace <span class="math inline">\((X^T X)\hat \beta\)</span> with
+<p>It follows that we can rewrite the last line in equation <span class="math inline">\(\ref{eq:deviance}\)</span> as follows: We can replace <span class="math inline">\((X^T X)\hat \beta\)</span> with
 <span class="math inline">\(X^T Y\)</span>.</p>
 <p><span class="math display">\[\begin{equation}
 \begin{split}
@@ -771,15 +773,15 @@ F=&amp;\frac{\Delta D/(p-q)}{D_1/(n-p)} \\
 \frac{Y^T Y - \hat \beta_1^T X_1^TY}{n-p}\\
 \end{split}
 \end{equation}\]</span></p>
-<p>Traditionally, the way the F-test is summarized is shown in Table .</p>
+<p>Traditionally, the way the F-test is summarized is shown in Table <span class="math inline">\(\ref{tab:anovasummary}\)</span>.</p>
 </div>
-<div id="some-further-important-topics-in-linear-modeling" class="section level3" number="5.2.4">
-<h3><span class="header-section-number">5.2.4</span> Some further important topics in linear modeling</h3>
-<div id="the-variance-inflation-factor-checking-for-multicollinearity" class="section level4" number="5.2.4.1">
-<h4><span class="header-section-number">5.2.4.1</span> The variance inflation factor: Checking for multicollinearity</h4>
+<div id="some-further-important-topics-in-linear-modeling" class="section level3 hasAnchor" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> Some further important topics in linear modeling<a href="the-essentials-of-linear-modeling-theory.html#some-further-important-topics-in-linear-modeling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-variance-inflation-factor-checking-for-multicollinearity" class="section level4 hasAnchor" number="5.2.4.1">
+<h4><span class="header-section-number">5.2.4.1</span> The variance inflation factor: Checking for multicollinearity<a href="the-essentials-of-linear-modeling-theory.html#the-variance-inflation-factor-checking-for-multicollinearity" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The linear modeling framework is very flexible, and allows us to add multiple predictors at the same time. For example, in the lexical decision data set, we could look at the effect of Frequency and FamilySize:</p>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="the-essentials-of-linear-modeling-theory.html#cb491-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(RT <span class="sc">~</span> Frequency <span class="sc">+</span> FamilySize, lexdec)</span>
-<span id="cb491-2"><a href="the-essentials-of-linear-modeling-theory.html#cb491-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="the-essentials-of-linear-modeling-theory.html#cb563-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(RT <span class="sc">~</span> Frequency <span class="sc">+</span> FamilySize, lexdec)</span>
+<span id="cb563-2"><a href="the-essentials-of-linear-modeling-theory.html#cb563-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = RT ~ Frequency + FamilySize, data = lexdec)
@@ -802,7 +804,7 @@ F=&amp;\frac{\Delta D/(p-q)}{D_1/(n-p)} \\
 ## F-statistic: 46.2 on 2 and 1656 DF,  p-value: &lt;2e-16</code></pre>
 <p>An important issue here is <strong>multicollinearity</strong>. This occurs when multiple predictors are highly correlated. The consequence of this is that <span class="math inline">\(X^T X\)</span> can be nearly singular and the estimation equation</p>
 <p><span class="math display">\[\begin{equation}
-X^TX \beta = X^T Y 
+X^TX \beta = X^T Y
 \end{equation}\]</span></p>
 <p>is ill-conditioned: small changes in the data can cause large changes in <span class="math inline">\(\beta\)</span> (signs will flip for example). Also, some of the elements of <span class="math inline">\(\sigma^2 (X^TX)^{-1}\)</span> will be large–standard errors and covariances can be large.</p>
 <p>We can check for multicollinearity using the Variance Inflation Factor, VIF.</p>
@@ -818,58 +820,75 @@ If a predictor j is uncorrelated with all other predictors, then <span class="ma
 if it is highly correlated with (some of) other predictors, the VIF will be high.</p>
 <p>Here is a practical example.
 Consider frequency and family size in the lexdec data:</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="the-essentials-of-linear-modeling-theory.html#cb493-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb493-2"><a href="the-essentials-of-linear-modeling-theory.html#cb493-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(RT <span class="sc">~</span> Frequency <span class="sc">+</span> FamilySize, lexdec)</span>
-<span id="cb493-3"><a href="the-essentials-of-linear-modeling-theory.html#cb493-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(m)</span></code></pre></div>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="the-essentials-of-linear-modeling-theory.html#cb565-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<pre><code>## Lade nötiges Paket: carData</code></pre>
+<pre><code>## 
+## Attache Paket: &#39;car&#39;</code></pre>
+<pre><code>## Das folgende Objekt ist maskiert &#39;package:purrr&#39;:
+## 
+##     some</code></pre>
+<pre><code>## Das folgende Objekt ist maskiert &#39;package:dplyr&#39;:
+## 
+##     recode</code></pre>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="the-essentials-of-linear-modeling-theory.html#cb570-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(RT <span class="sc">~</span> Frequency <span class="sc">+</span> FamilySize, lexdec)</span>
+<span id="cb570-2"><a href="the-essentials-of-linear-modeling-theory.html#cb570-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(m)</span></code></pre></div>
 <pre><code>##  Frequency FamilySize 
 ##          2          2</code></pre>
 <p>Here is a somewhat worse situation:</p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="the-essentials-of-linear-modeling-theory.html#cb495-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(RT <span class="sc">~</span> FreqSingular <span class="sc">+</span> FreqPlural, lexdec)</span>
-<span id="cb495-2"><a href="the-essentials-of-linear-modeling-theory.html#cb495-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(m)</span></code></pre></div>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="the-essentials-of-linear-modeling-theory.html#cb572-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(RT <span class="sc">~</span> FreqSingular <span class="sc">+</span> FreqPlural, lexdec)</span>
+<span id="cb572-2"><a href="the-essentials-of-linear-modeling-theory.html#cb572-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(m)</span></code></pre></div>
 <pre><code>## FreqSingular   FreqPlural 
 ##        4.681        4.681</code></pre>
 <p>If the predictors are uncorrelated, VIF will be near 1 in each case. Dobson et al mention that VIF of greater than 5 is cause for worry.</p>
 </div>
-<div id="checking-model-assumptions-1" class="section level4" number="5.2.4.2">
-<h4><span class="header-section-number">5.2.4.2</span> Checking model assumptions</h4>
+<div id="checking-model-assumptions-1" class="section level4 hasAnchor" number="5.2.4.2">
+<h4><span class="header-section-number">5.2.4.2</span> Checking model assumptions<a href="the-essentials-of-linear-modeling-theory.html#checking-model-assumptions-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In practical terms, when doing hypothesis testing with the linear model, the first thing you need to check is whether
 the residuals are normally distributed. This is because the normality assumption is a crucial part of the assumptions in the hypothesis test (if the goal is only estimation of the parameters, the normality assumption is less important; however, there are subtleties even in this case, which we will discuss in the simulation chapter).
 One common way to check for (approximate) normality is to plot the residuals against the quantiles of the normal distribution:</p>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="the-essentials-of-linear-modeling-theory.html#cb497-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb497-2"><a href="the-essentials-of-linear-modeling-theory.html#cb497-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(<span class="fu">residuals</span>(m))</span></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-206-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="the-essentials-of-linear-modeling-theory.html#cb574-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb574-2"><a href="the-essentials-of-linear-modeling-theory.html#cb574-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(<span class="fu">residuals</span>(m))</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-215-1.svg" width="672" /></p>
 <pre><code>## 1194 1619 
 ## 1273  750</code></pre>
 <p>How to test for normality of residuals?
 Kolmogorov-Smirnov and Shapiro-Wilk are formal tests of normality and are only useful for large samples; they not very powerful and not much better than diagnostic plots like the qq-plot shown above.</p>
 <p>Apart from normality, we should also check the independence assumption (the errors are assumed to be independent). Index-plots display residuals against observation number; note that they are not useful for small samples. An alternative is to compute the correlation between <span class="math inline">\(e_i, e_{i+1}\)</span> pairs of residuals. The auto-correlation function is not normally used in linear modeling (it’s used more in time-series analyses), but can be used to check for this correlation:</p>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="the-essentials-of-linear-modeling-theory.html#cb499-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(<span class="fu">residuals</span>(m))</span></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-207-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="the-essentials-of-linear-modeling-theory.html#cb576-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(<span class="fu">residuals</span>(m))</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-216-1.svg" width="672" /></p>
 <p>In our model (which is the multiple regression we did in connection with the collinearity issue), we have a serious violation of independence. This is because in this model we are not taking into account the fact that we have repeated measures. The repeated measures create a dependency in the residuals, violating the independence assumption. This problem can be largely solved by fitting a linear mixed model:</p>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="the-essentials-of-linear-modeling-theory.html#cb500-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb500-2"><a href="the-essentials-of-linear-modeling-theory.html#cb500-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span> FreqSingular <span class="sc">+</span> FreqPlural <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject), lexdec)</span>
-<span id="cb500-3"><a href="the-essentials-of-linear-modeling-theory.html#cb500-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(<span class="fu">residuals</span>(m))</span></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-208-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="the-essentials-of-linear-modeling-theory.html#cb577-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb577-2"><a href="the-essentials-of-linear-modeling-theory.html#cb577-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RT <span class="sc">~</span> FreqSingular <span class="sc">+</span> FreqPlural <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject), lexdec)</span>
+<span id="cb577-3"><a href="the-essentials-of-linear-modeling-theory.html#cb577-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(<span class="fu">residuals</span>(m))</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-217-1.svg" width="672" /></p>
 <p>The linear mixed model is taking the repeated measurements property into account.</p>
 <p>Finally, we should check for homoscedasticity (equality of variance).
 For checking this, plot residuals against fitted values. A fanning-out suggests violation. A quadratic trend in a plot of residuals against predictor x could suggest that a quadratic predictor term is needed; note that we will never have a perfect straight line in such a plot.</p>
 <p>R also provides a diagnostics plot, which is generated using the model fit:</p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="the-essentials-of-linear-modeling-theory.html#cb501-1" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">pty =</span> <span class="st">&quot;s&quot;</span>)</span>
-<span id="cb501-2"><a href="the-essentials-of-linear-modeling-theory.html#cb501-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m)</span></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-209-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="the-essentials-of-linear-modeling-theory.html#cb578-1" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">pty =</span> <span class="st">&quot;s&quot;</span>)</span>
+<span id="cb578-2"><a href="the-essentials-of-linear-modeling-theory.html#cb578-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m)</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-218-1.svg" width="672" /></p>
 <p>In linear mixed models, there is a package called <code>influence.ME</code> <span class="citation">(<a href="#ref-influenceme" role="doc-biblioref">R. Nieuwenhuis, Te Grotenhuis, and Pelzer 2012</a>)</span> that allows one to check model assumptions.</p>
 </div>
 </div>
-<div id="generalized-linear-models" class="section level3" number="5.2.5">
-<h3><span class="header-section-number">5.2.5</span> Generalized linear models</h3>
-<div id="introduction-logistic-regression" class="section level4" number="5.2.5.1">
-<h4><span class="header-section-number">5.2.5.1</span> Introduction: Logistic regression</h4>
-<p>We start with an example data-set that appears in the <span class="citation"><a href="#ref-dobson2011introduction" role="doc-biblioref">Dobson and Barnett</a> (<a href="#ref-dobson2011introduction" role="doc-biblioref">2011</a>)</span> book: the Beetle data-set. Although not a linguistic or psychological data-set, it is a good entry point into generalized linear models. Later we will apply the theory to psycholinguistic data.</p>
-<p>The Beetle data-set shows the number of beetles killed after five hours’ exposure to gaseous carbon disulphide at various concentrations (<span class="math inline">\(\log_{10}CS_2 mg^{-1}\)</span>). The source for the data is <span class="citation"><a href="#ref-bliss1935calculation" role="doc-biblioref">Bliss</a> (<a href="#ref-bliss1935calculation" role="doc-biblioref">1935</a>)</span>.</p>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="the-essentials-of-linear-modeling-theory.html#cb502-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dobson)</span>
-<span id="cb502-2"><a href="the-essentials-of-linear-modeling-theory.html#cb502-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(beetle)</span>
-<span id="cb502-3"><a href="the-essentials-of-linear-modeling-theory.html#cb502-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(beetle) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;dose&quot;</span>, <span class="st">&quot;number&quot;</span>, <span class="st">&quot;killed&quot;</span>)</span>
-<span id="cb502-4"><a href="the-essentials-of-linear-modeling-theory.html#cb502-4" aria-hidden="true" tabindex="-1"></a>beetle</span></code></pre></div>
+<div id="generalized-linear-models" class="section level3 hasAnchor" number="5.2.5">
+<h3><span class="header-section-number">5.2.5</span> Generalized linear models<a href="the-essentials-of-linear-modeling-theory.html#generalized-linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="introduction-logistic-regression" class="section level4 hasAnchor" number="5.2.5.1">
+<h4><span class="header-section-number">5.2.5.1</span> Introduction: Logistic regression<a href="the-essentials-of-linear-modeling-theory.html#introduction-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We start with an example data-set that appears in the <span class="citation">Dobson and Barnett (<a href="#ref-dobson2011introduction" role="doc-biblioref">2011</a>)</span> book: the Beetle data-set. Although not a linguistic or psychological data-set, it is a good entry point into generalized linear models. Later we will apply the theory to psycholinguistic data.</p>
+<p>The Beetle data-set shows the number of beetles killed after five hours’ exposure to gaseous carbon disulphide at various concentrations (<span class="math inline">\(\log_{10}CS_2 mg^{-1}\)</span>). The source for the data is <span class="citation">Bliss (<a href="#ref-bliss1935calculation" role="doc-biblioref">1935</a>)</span>.</p>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="the-essentials-of-linear-modeling-theory.html#cb579-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dobson)</span></code></pre></div>
+<pre><code>## 
+## Attache Paket: &#39;dobson&#39;</code></pre>
+<pre><code>## Das folgende Objekt ist maskiert &#39;package:lattice&#39;:
+## 
+##     melanoma</code></pre>
+<pre><code>## Das folgende Objekt ist maskiert &#39;package:MASS&#39;:
+## 
+##     housing</code></pre>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="the-essentials-of-linear-modeling-theory.html#cb583-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(beetle)</span>
+<span id="cb583-2"><a href="the-essentials-of-linear-modeling-theory.html#cb583-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(beetle) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;dose&quot;</span>, <span class="st">&quot;number&quot;</span>, <span class="st">&quot;killed&quot;</span>)</span>
+<span id="cb583-3"><a href="the-essentials-of-linear-modeling-theory.html#cb583-3" aria-hidden="true" tabindex="-1"></a>beetle</span></code></pre></div>
 <pre><code>## # A tibble: 8 × 3
 ##    dose number killed
 ##   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -882,16 +901,16 @@ For checking this, plot residuals against fitted values. A fanning-out suggests 
 ## 7  1.86     62     61
 ## 8  1.88     60     60</code></pre>
 <p>The research question is: does dose affect probability of killing insects? The first thing we probably want to do is calculate the proportions:</p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="the-essentials-of-linear-modeling-theory.html#cb504-1" aria-hidden="true" tabindex="-1"></a>(beetle<span class="sc">$</span>propn.dead <span class="ot">&lt;-</span> beetle<span class="sc">$</span>killed <span class="sc">/</span> beetle<span class="sc">$</span>number)</span></code></pre></div>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="the-essentials-of-linear-modeling-theory.html#cb585-1" aria-hidden="true" tabindex="-1"></a>(beetle<span class="sc">$</span>propn.dead <span class="ot">&lt;-</span> beetle<span class="sc">$</span>killed <span class="sc">/</span> beetle<span class="sc">$</span>number)</span></code></pre></div>
 <pre><code>## [1] 0.1017 0.2167 0.2903 0.5000 0.8254 0.8983 0.9839
 ## [8] 1.0000</code></pre>
 <p>It’s also reasonable to just plot the relationship between dose and proportion of deaths.</p>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="the-essentials-of-linear-modeling-theory.html#cb506-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(beetle, <span class="fu">plot</span>(dose, propn.dead))</span></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-212-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="the-essentials-of-linear-modeling-theory.html#cb587-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(beetle, <span class="fu">plot</span>(dose, propn.dead))</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-221-1.svg" width="672" /></p>
 <p>Notice that the y-axis is by definition bounded between 0 and 1.</p>
 <p>We could easily fit a linear model to this data-set. We may want to center the predictor, for reasons discussed earlier:</p>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="the-essentials-of-linear-modeling-theory.html#cb507-1" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(propn.dead <span class="sc">~</span> <span class="fu">scale</span>(dose, <span class="at">scale =</span> <span class="cn">FALSE</span>), beetle)</span>
-<span id="cb507-2"><a href="the-essentials-of-linear-modeling-theory.html#cb507-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)<span class="sc">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="the-essentials-of-linear-modeling-theory.html#cb588-1" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(propn.dead <span class="sc">~</span> <span class="fu">scale</span>(dose, <span class="at">scale =</span> <span class="cn">FALSE</span>), beetle)</span>
+<span id="cb588-2"><a href="the-essentials-of-linear-modeling-theory.html#cb588-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)<span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>##                            Estimate Std. Error t value
 ## (Intercept)                   0.602    0.03065   19.64
 ## scale(dose, scale = FALSE)    5.325    0.48573   10.96
@@ -899,12 +918,12 @@ For checking this, plot residuals against fitted values. A fanning-out suggests 
 ## (Intercept)                1.129e-06
 ## scale(dose, scale = FALSE) 3.422e-05</code></pre>
 <p>Next, add the best-fit (linear model) line to the plot:</p>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="the-essentials-of-linear-modeling-theory.html#cb509-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(beetle, <span class="fu">plot</span>(</span>
-<span id="cb509-2"><a href="the-essentials-of-linear-modeling-theory.html#cb509-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>(dose, <span class="at">scale =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb509-3"><a href="the-essentials-of-linear-modeling-theory.html#cb509-3" aria-hidden="true" tabindex="-1"></a>  propn.dead</span>
-<span id="cb509-4"><a href="the-essentials-of-linear-modeling-theory.html#cb509-4" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb509-5"><a href="the-essentials-of-linear-modeling-theory.html#cb509-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">coef</span>(fm))</span></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-214-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="the-essentials-of-linear-modeling-theory.html#cb590-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(beetle, <span class="fu">plot</span>(</span>
+<span id="cb590-2"><a href="the-essentials-of-linear-modeling-theory.html#cb590-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>(dose, <span class="at">scale =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb590-3"><a href="the-essentials-of-linear-modeling-theory.html#cb590-3" aria-hidden="true" tabindex="-1"></a>  propn.dead</span>
+<span id="cb590-4"><a href="the-essentials-of-linear-modeling-theory.html#cb590-4" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb590-5"><a href="the-essentials-of-linear-modeling-theory.html#cb590-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">coef</span>(fm))</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-223-1.svg" width="672" /></p>
 <p>What’s the interpretation of the coefficients? Since the predictor is centered, the intercept represents the mean proportion of beetles killed (0.62), and the slope represents the increase in the proportion of beetles killed when the dose is increased by one unit, from an initial dose of 0. The proportion of beetles killed with one unit increase in dose is larger than 1, which is obviously impossible for a proportion. It is because of problems like these that a simple linear model does not suffice for such data.</p>
 <p>Instead of using the linear model, we model log odds instead of proportions as a function of dose. Odds are defined as the ratio of the probability of success and the probability of failure (here, success is operationalized as the beetles being killed):</p>
 <p><span class="math display">\[\begin{equation}
@@ -931,12 +950,12 @@ we can move back from log odds space to probability space using simple algebra.<
 p = \frac{\exp( \beta_0 + \beta_1 \hbox{dose})}{1+\exp( \beta_0 + \beta_1 \hbox{dose})}
 \end{equation}\]</span></p>
 <p>We fit the model in R as follows. Note that as long as we are willing to avoid interpreting the intercept and just interpret the estimate of <span class="math inline">\(\beta_1\)</span>, there is no need to center the predictor here:</p>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="the-essentials-of-linear-modeling-theory.html#cb510-1" aria-hidden="true" tabindex="-1"></a>fm1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(propn.dead <span class="sc">~</span> dose,</span>
-<span id="cb510-2"><a href="the-essentials-of-linear-modeling-theory.html#cb510-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(logit),</span>
-<span id="cb510-3"><a href="the-essentials-of-linear-modeling-theory.html#cb510-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> number,</span>
-<span id="cb510-4"><a href="the-essentials-of-linear-modeling-theory.html#cb510-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> beetle</span>
-<span id="cb510-5"><a href="the-essentials-of-linear-modeling-theory.html#cb510-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb510-6"><a href="the-essentials-of-linear-modeling-theory.html#cb510-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm1)</span></code></pre></div>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="the-essentials-of-linear-modeling-theory.html#cb591-1" aria-hidden="true" tabindex="-1"></a>fm1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(propn.dead <span class="sc">~</span> dose,</span>
+<span id="cb591-2"><a href="the-essentials-of-linear-modeling-theory.html#cb591-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(logit),</span>
+<span id="cb591-3"><a href="the-essentials-of-linear-modeling-theory.html#cb591-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> number,</span>
+<span id="cb591-4"><a href="the-essentials-of-linear-modeling-theory.html#cb591-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> beetle</span>
+<span id="cb591-5"><a href="the-essentials-of-linear-modeling-theory.html#cb591-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb591-6"><a href="the-essentials-of-linear-modeling-theory.html#cb591-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = propn.dead ~ dose, family = binomial(logit), data = beetle, 
@@ -963,48 +982,48 @@ p = \frac{\exp( \beta_0 + \beta_1 \hbox{dose})}{1+\exp( \beta_0 + \beta_1 \hbox{
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>In the glm function call, <code>binomial(logit)</code> can be written simply as <code>binomial()</code>, as the logit link is the default. Other possible links are probit, cauchit, log, and cloglog—see the documentation in R for <code>family</code> for details.</p>
 <p>We can also plot the observed proportions and the fitted values together; the fit looks pretty good.</p>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="the-essentials-of-linear-modeling-theory.html#cb512-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(propn.dead <span class="sc">~</span> dose, beetle)</span>
-<span id="cb512-2"><a href="the-essentials-of-linear-modeling-theory.html#cb512-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(fm1<span class="sc">$</span>fitted <span class="sc">~</span> dose, beetle, <span class="at">pch =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="the-essentials-of-linear-modeling-theory.html#cb593-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(propn.dead <span class="sc">~</span> dose, beetle)</span>
+<span id="cb593-2"><a href="the-essentials-of-linear-modeling-theory.html#cb593-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(fm1<span class="sc">$</span>fitted <span class="sc">~</span> dose, beetle, <span class="at">pch =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p><img src="Freq_CogSci_files/figure-html/propndeadplot-1.svg" width="576" /></p>
 <p>We can now compute the log odds of death for concentration 1.7552 (for example):</p>
-<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="the-essentials-of-linear-modeling-theory.html#cb513-1" aria-hidden="true" tabindex="-1"></a><span class="do">## compute log odds of death for</span></span>
-<span id="cb513-2"><a href="the-essentials-of-linear-modeling-theory.html#cb513-2" aria-hidden="true" tabindex="-1"></a><span class="do">## concentration 1.7552:</span></span>
-<span id="cb513-3"><a href="the-essentials-of-linear-modeling-theory.html#cb513-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.7552</span>))</span>
-<span id="cb513-4"><a href="the-essentials-of-linear-modeling-theory.html#cb513-4" aria-hidden="true" tabindex="-1"></a><span class="co"># log odds:</span></span>
-<span id="cb513-5"><a href="the-essentials-of-linear-modeling-theory.html#cb513-5" aria-hidden="true" tabindex="-1"></a>(log.odds <span class="ot">&lt;-</span> <span class="fu">t</span>(x) <span class="sc">%*%</span> <span class="fu">coef</span>(fm1))</span></code></pre></div>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="the-essentials-of-linear-modeling-theory.html#cb594-1" aria-hidden="true" tabindex="-1"></a><span class="do">## compute log odds of death for</span></span>
+<span id="cb594-2"><a href="the-essentials-of-linear-modeling-theory.html#cb594-2" aria-hidden="true" tabindex="-1"></a><span class="do">## concentration 1.7552:</span></span>
+<span id="cb594-3"><a href="the-essentials-of-linear-modeling-theory.html#cb594-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.7552</span>))</span>
+<span id="cb594-4"><a href="the-essentials-of-linear-modeling-theory.html#cb594-4" aria-hidden="true" tabindex="-1"></a><span class="co"># log odds:</span></span>
+<span id="cb594-5"><a href="the-essentials-of-linear-modeling-theory.html#cb594-5" aria-hidden="true" tabindex="-1"></a>(log.odds <span class="ot">&lt;-</span> <span class="fu">t</span>(x) <span class="sc">%*%</span> <span class="fu">coef</span>(fm1))</span></code></pre></div>
 <pre><code>##         [,1]
 ## [1,] -0.5662</code></pre>
 <p>We can also obtain the variance-covariance matrix of the fitted coefficients, and use it to compute the variance-covariance matrix for the does 1.7552:</p>
-<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="the-essentials-of-linear-modeling-theory.html#cb515-1" aria-hidden="true" tabindex="-1"></a><span class="do">### compute CI for log odds:</span></span>
-<span id="cb515-2"><a href="the-essentials-of-linear-modeling-theory.html#cb515-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Get vcov matrix:</span></span>
-<span id="cb515-3"><a href="the-essentials-of-linear-modeling-theory.html#cb515-3" aria-hidden="true" tabindex="-1"></a>(vcovmat <span class="ot">&lt;-</span> <span class="fu">vcov</span>(fm1))</span></code></pre></div>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="the-essentials-of-linear-modeling-theory.html#cb596-1" aria-hidden="true" tabindex="-1"></a><span class="do">### compute CI for log odds:</span></span>
+<span id="cb596-2"><a href="the-essentials-of-linear-modeling-theory.html#cb596-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Get vcov matrix:</span></span>
+<span id="cb596-3"><a href="the-essentials-of-linear-modeling-theory.html#cb596-3" aria-hidden="true" tabindex="-1"></a>(vcovmat <span class="ot">&lt;-</span> <span class="fu">vcov</span>(fm1))</span></code></pre></div>
 <pre><code>##             (Intercept)    dose
 ## (Intercept)       26.84 -15.082
 ## dose             -15.08   8.481</code></pre>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="the-essentials-of-linear-modeling-theory.html#cb517-1" aria-hidden="true" tabindex="-1"></a><span class="do">## x^T VCOV x for dose 1.7552:</span></span>
-<span id="cb517-2"><a href="the-essentials-of-linear-modeling-theory.html#cb517-2" aria-hidden="true" tabindex="-1"></a>(var.log.odds <span class="ot">&lt;-</span> <span class="fu">t</span>(x) <span class="sc">%*%</span> vcovmat <span class="sc">%*%</span> x)</span></code></pre></div>
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="the-essentials-of-linear-modeling-theory.html#cb598-1" aria-hidden="true" tabindex="-1"></a><span class="do">## x^T VCOV x for dose 1.7552:</span></span>
+<span id="cb598-2"><a href="the-essentials-of-linear-modeling-theory.html#cb598-2" aria-hidden="true" tabindex="-1"></a>(var.log.odds <span class="ot">&lt;-</span> <span class="fu">t</span>(x) <span class="sc">%*%</span> vcovmat <span class="sc">%*%</span> x)</span></code></pre></div>
 <pre><code>##         [,1]
 ## [1,] 0.02168</code></pre>
 <p>Assuming that the log odds have a distribution that is approximately normal, we can compute the confidence interval for the log odds
 of death given dose 1.7552:</p>
-<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="the-essentials-of-linear-modeling-theory.html#cb519-1" aria-hidden="true" tabindex="-1"></a><span class="do">## lower</span></span>
-<span id="cb519-2"><a href="the-essentials-of-linear-modeling-theory.html#cb519-2" aria-hidden="true" tabindex="-1"></a>(lower <span class="ot">&lt;-</span> log.odds <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> <span class="fu">sqrt</span>(var.log.odds))</span></code></pre></div>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="the-essentials-of-linear-modeling-theory.html#cb600-1" aria-hidden="true" tabindex="-1"></a><span class="do">## lower</span></span>
+<span id="cb600-2"><a href="the-essentials-of-linear-modeling-theory.html#cb600-2" aria-hidden="true" tabindex="-1"></a>(lower <span class="ot">&lt;-</span> log.odds <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> <span class="fu">sqrt</span>(var.log.odds))</span></code></pre></div>
 <pre><code>##         [,1]
 ## [1,] -0.8548</code></pre>
-<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="the-essentials-of-linear-modeling-theory.html#cb521-1" aria-hidden="true" tabindex="-1"></a><span class="do">## upper</span></span>
-<span id="cb521-2"><a href="the-essentials-of-linear-modeling-theory.html#cb521-2" aria-hidden="true" tabindex="-1"></a>(upper <span class="ot">&lt;-</span> log.odds <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> <span class="fu">sqrt</span>(var.log.odds))</span></code></pre></div>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="the-essentials-of-linear-modeling-theory.html#cb602-1" aria-hidden="true" tabindex="-1"></a><span class="do">## upper</span></span>
+<span id="cb602-2"><a href="the-essentials-of-linear-modeling-theory.html#cb602-2" aria-hidden="true" tabindex="-1"></a>(upper <span class="ot">&lt;-</span> log.odds <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> <span class="fu">sqrt</span>(var.log.odds))</span></code></pre></div>
 <pre><code>##         [,1]
 ## [1,] -0.2776</code></pre>
 <p>The lower and upper confidence interval bounds on the
 probability scale can be computed by
-using equation .</p>
-<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="the-essentials-of-linear-modeling-theory.html#cb523-1" aria-hidden="true" tabindex="-1"></a>(meanprob <span class="ot">&lt;-</span> <span class="fu">exp</span>(log.odds) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(log.odds)))</span></code></pre></div>
+using equation <span class="math inline">\(\ref{problogisticregression}\)</span>.</p>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="the-essentials-of-linear-modeling-theory.html#cb604-1" aria-hidden="true" tabindex="-1"></a>(meanprob <span class="ot">&lt;-</span> <span class="fu">exp</span>(log.odds) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(log.odds)))</span></code></pre></div>
 <pre><code>##        [,1]
 ## [1,] 0.3621</code></pre>
-<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="the-essentials-of-linear-modeling-theory.html#cb525-1" aria-hidden="true" tabindex="-1"></a>(lowerprob <span class="ot">&lt;-</span> <span class="fu">exp</span>(lower) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(lower)))</span></code></pre></div>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="the-essentials-of-linear-modeling-theory.html#cb606-1" aria-hidden="true" tabindex="-1"></a>(lowerprob <span class="ot">&lt;-</span> <span class="fu">exp</span>(lower) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(lower)))</span></code></pre></div>
 <pre><code>##        [,1]
 ## [1,] 0.2984</code></pre>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="the-essentials-of-linear-modeling-theory.html#cb527-1" aria-hidden="true" tabindex="-1"></a>(upperprob <span class="ot">&lt;-</span> <span class="fu">exp</span>(upper) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(upper)))</span></code></pre></div>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="the-essentials-of-linear-modeling-theory.html#cb608-1" aria-hidden="true" tabindex="-1"></a>(upperprob <span class="ot">&lt;-</span> <span class="fu">exp</span>(upper) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(upper)))</span></code></pre></div>
 <pre><code>##       [,1]
 ## [1,] 0.431</code></pre>
 <p>So for dose 1.7552, the probability of death is 0.36,
@@ -1012,16 +1031,16 @@ with 95% confidence intervals 0.30 and
 0.43.</p>
 <p>Note that one should not try to predict outside the range of the design matrix. For example, in the beetle data, the dose ranges from 1.69 to 1.88. We should not try to compute probabilities for dose 2.5, say, since we have no knowledge about whether the relationship remains unchanged beyond the upper bound of our design matrix.</p>
 </div>
-<div id="multiple-logistic-regression-example-from-hindi-data" class="section level4" number="5.2.5.2">
-<h4><span class="header-section-number">5.2.5.2</span> Multiple logistic regression: Example from Hindi data}</h4>
-<p>We have eyetracking data from 10 participants reading Hindi sentences. The data come from <span class="citation"><a href="#ref-HusainVasishthNarayanan2015" role="doc-biblioref">Husain, Vasishth, and Srinivasan</a> (<a href="#ref-HusainVasishthNarayanan2015" role="doc-biblioref">2015</a>)</span>. We can compute skipping probability, the probability of skipping a word entirely (i.e., never fixating it). We first have to create a vector that has value 1 if the word has 0~ms total reading time, and 0 otherwise.</p>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="the-essentials-of-linear-modeling-theory.html#cb529-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lingpsych)</span>
-<span id="cb529-2"><a href="the-essentials-of-linear-modeling-theory.html#cb529-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_hindi&quot;</span>)</span>
-<span id="cb529-3"><a href="the-essentials-of-linear-modeling-theory.html#cb529-3" aria-hidden="true" tabindex="-1"></a>hindi10 <span class="ot">&lt;-</span> df_hindi</span>
-<span id="cb529-4"><a href="the-essentials-of-linear-modeling-theory.html#cb529-4" aria-hidden="true" tabindex="-1"></a>skip <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(hindi10<span class="sc">$</span>TFT <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb529-5"><a href="the-essentials-of-linear-modeling-theory.html#cb529-5" aria-hidden="true" tabindex="-1"></a>hindi10<span class="sc">$</span>skip <span class="ot">&lt;-</span> skip</span>
-<span id="cb529-6"><a href="the-essentials-of-linear-modeling-theory.html#cb529-6" aria-hidden="true" tabindex="-1"></a><span class="do">## display relevant columns:</span></span>
-<span id="cb529-7"><a href="the-essentials-of-linear-modeling-theory.html#cb529-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(hindi10[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">24</span>, <span class="dv">33</span>, <span class="dv">34</span>)])</span></code></pre></div>
+<div id="multiple-logistic-regression-example-from-hindi-data" class="section level4 hasAnchor" number="5.2.5.2">
+<h4><span class="header-section-number">5.2.5.2</span> Multiple logistic regression: Example from Hindi data}<a href="the-essentials-of-linear-modeling-theory.html#multiple-logistic-regression-example-from-hindi-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We have eyetracking data from 10 participants reading Hindi sentences. The data come from <span class="citation">Husain, Vasishth, and Srinivasan (<a href="#ref-HusainVasishthNarayanan2015" role="doc-biblioref">2015</a>)</span>. We can compute skipping probability, the probability of skipping a word entirely (i.e., never fixating it). We first have to create a vector that has value 1 if the word has 0~ms total reading time, and 0 otherwise.</p>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="the-essentials-of-linear-modeling-theory.html#cb610-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lingpsych)</span>
+<span id="cb610-2"><a href="the-essentials-of-linear-modeling-theory.html#cb610-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_hindi&quot;</span>)</span>
+<span id="cb610-3"><a href="the-essentials-of-linear-modeling-theory.html#cb610-3" aria-hidden="true" tabindex="-1"></a>hindi10 <span class="ot">&lt;-</span> df_hindi</span>
+<span id="cb610-4"><a href="the-essentials-of-linear-modeling-theory.html#cb610-4" aria-hidden="true" tabindex="-1"></a>skip <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(hindi10<span class="sc">$</span>TFT <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb610-5"><a href="the-essentials-of-linear-modeling-theory.html#cb610-5" aria-hidden="true" tabindex="-1"></a>hindi10<span class="sc">$</span>skip <span class="ot">&lt;-</span> skip</span>
+<span id="cb610-6"><a href="the-essentials-of-linear-modeling-theory.html#cb610-6" aria-hidden="true" tabindex="-1"></a><span class="do">## display relevant columns:</span></span>
+<span id="cb610-7"><a href="the-essentials-of-linear-modeling-theory.html#cb610-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(hindi10[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">24</span>, <span class="dv">33</span>, <span class="dv">34</span>)])</span></code></pre></div>
 <pre><code>##   subj expt item word_complex SC skip
 ## 1   10 hnd1    6          0.0  1    1
 ## 2   10 hnd1    6          0.0  1    1
@@ -1029,8 +1048,8 @@ with 95% confidence intervals 0.30 and
 ## 4   10 hnd1    6          1.5  1    1
 ## 5   10 hnd1    6          0.0  1    1
 ## 6   10 hnd1    6          0.5  1    0</code></pre>
-<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="the-essentials-of-linear-modeling-theory.html#cb531-1" aria-hidden="true" tabindex="-1"></a>fm_skip <span class="ot">&lt;-</span> <span class="fu">glm</span>(skip <span class="sc">~</span> word_complex <span class="sc">+</span> SC, <span class="at">family =</span> <span class="fu">binomial</span>(), hindi10)</span>
-<span id="cb531-2"><a href="the-essentials-of-linear-modeling-theory.html#cb531-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm_skip)</span></code></pre></div>
+<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="the-essentials-of-linear-modeling-theory.html#cb612-1" aria-hidden="true" tabindex="-1"></a>fm_skip <span class="ot">&lt;-</span> <span class="fu">glm</span>(skip <span class="sc">~</span> word_complex <span class="sc">+</span> SC, <span class="at">family =</span> <span class="fu">binomial</span>(), hindi10)</span>
+<span id="cb612-2"><a href="the-essentials-of-linear-modeling-theory.html#cb612-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm_skip)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = skip ~ word_complex + SC, family = binomial(), 
@@ -1059,8 +1078,8 @@ with 95% confidence intervals 0.30 and
 <p>The above example also illustrates the second way to set up the data for logistic (multiple) regression: the dependent variable can simply be a 1,0 value instead of proportions. So, in the beetle data, you could recode the data to have 1s and 0s instead of proportions. Assuming that you have recoded the column for status (dead or alive after exposure), the glm function call for the Beetle data-set would be:</p>
 <p>Note that logistic regression assumes independence of each data point; this assumption is violated in the Hindi data, because it has repeated measures data.</p>
 </div>
-<div id="deviance" class="section level4" number="5.2.5.3">
-<h4><span class="header-section-number">5.2.5.3</span> Deviance</h4>
+<div id="deviance" class="section level4 hasAnchor" number="5.2.5.3">
+<h4><span class="header-section-number">5.2.5.3</span> Deviance<a href="the-essentials-of-linear-modeling-theory.html#deviance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We saw encountered deviance earlier in connection with ANOVA.</p>
 <p>The deviance is more generally defined as</p>
 <p><span class="math display">\[\begin{equation}
@@ -1083,14 +1102,14 @@ So that is what we will use for assessing model fit.</p>
 <p>We will also use deviance for hypothesis testing.
 The difference in deviance (confusingly called residual deviance) between two models also has a <span class="math inline">\(\chi^2\)</span> distribution (this should remind you of ANOVA), with dfs being <span class="math inline">\(p-q\)</span>, where <span class="math inline">\(q\)</span> is the number of parameters in the nukk model, and <span class="math inline">\(p\)</span> the number of parameters in the full model.</p>
 <p>We discuss hypothesis testing first, then evaluating goodness of fit using deviance.</p>
-<div id="hypothesis-testing-residual-deviance" class="section level5" number="5.2.5.3.1">
-<h5><span class="header-section-number">5.2.5.3.1</span> Hypothesis testing: Residual deviance</h5>
+<div id="hypothesis-testing-residual-deviance" class="section level5 hasAnchor" number="5.2.5.3.1">
+<h5><span class="header-section-number">5.2.5.3.1</span> Hypothesis testing: Residual deviance<a href="the-essentials-of-linear-modeling-theory.html#hypothesis-testing-residual-deviance" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Returning to our beetle data, let’s say we fit our model:</p>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="the-essentials-of-linear-modeling-theory.html#cb533-1" aria-hidden="true" tabindex="-1"></a>glm1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(propn.dead <span class="sc">~</span> dose, <span class="fu">binomial</span>(logit),</span>
-<span id="cb533-2"><a href="the-essentials-of-linear-modeling-theory.html#cb533-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> number, <span class="at">data =</span> beetle</span>
-<span id="cb533-3"><a href="the-essentials-of-linear-modeling-theory.html#cb533-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="the-essentials-of-linear-modeling-theory.html#cb614-1" aria-hidden="true" tabindex="-1"></a>glm1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(propn.dead <span class="sc">~</span> dose, <span class="fu">binomial</span>(logit),</span>
+<span id="cb614-2"><a href="the-essentials-of-linear-modeling-theory.html#cb614-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> number, <span class="at">data =</span> beetle</span>
+<span id="cb614-3"><a href="the-essentials-of-linear-modeling-theory.html#cb614-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>The summary output shows us the number of iterations that led to the parameter estimates:</p>
-<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="the-essentials-of-linear-modeling-theory.html#cb534-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm1)</span></code></pre></div>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="the-essentials-of-linear-modeling-theory.html#cb615-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = propn.dead ~ dose, family = binomial(logit), data = beetle, 
@@ -1116,22 +1135,22 @@ The difference in deviance (confusingly called residual deviance) between two mo
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>But we also see something called <strong>Null deviance</strong> and <strong>Residual deviance</strong>. These are used to evaluate quality of model fit. Recall that we can compute the fitted values and compare them to the observed values:</p>
-<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="the-essentials-of-linear-modeling-theory.html#cb536-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta.hat is (-60.71745 ,   34.27033)</span></span>
-<span id="cb536-2"><a href="the-essentials-of-linear-modeling-theory.html#cb536-2" aria-hidden="true" tabindex="-1"></a>(eta.hat <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">60.71745</span> <span class="sc">+</span> <span class="fl">34.27033</span> <span class="sc">*</span> beetle<span class="sc">$</span>dose)</span></code></pre></div>
+<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="the-essentials-of-linear-modeling-theory.html#cb617-1" aria-hidden="true" tabindex="-1"></a><span class="co"># beta.hat is (-60.71745 ,   34.27033)</span></span>
+<span id="cb617-2"><a href="the-essentials-of-linear-modeling-theory.html#cb617-2" aria-hidden="true" tabindex="-1"></a>(eta.hat <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">60.71745</span> <span class="sc">+</span> <span class="fl">34.27033</span> <span class="sc">*</span> beetle<span class="sc">$</span>dose)</span></code></pre></div>
 <pre><code>## [1] -2.7766 -1.6285 -0.5662  0.4277  1.3564  2.2337
 ## [7]  3.0596  3.8444</code></pre>
-<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="the-essentials-of-linear-modeling-theory.html#cb538-1" aria-hidden="true" tabindex="-1"></a>(mu.hat <span class="ot">&lt;-</span> <span class="fu">exp</span>(eta.hat) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(eta.hat)))</span></code></pre></div>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="the-essentials-of-linear-modeling-theory.html#cb619-1" aria-hidden="true" tabindex="-1"></a>(mu.hat <span class="ot">&lt;-</span> <span class="fu">exp</span>(eta.hat) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(eta.hat)))</span></code></pre></div>
 <pre><code>## [1] 0.0586 0.1640 0.3621 0.6053 0.7952 0.9032 0.9552
 ## [8] 0.9790</code></pre>
-<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="the-essentials-of-linear-modeling-theory.html#cb540-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compare mu.hat with observed proportions</span></span>
-<span id="cb540-2"><a href="the-essentials-of-linear-modeling-theory.html#cb540-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mu.hat, beetle<span class="sc">$</span>propn.dead)</span>
-<span id="cb540-3"><a href="the-essentials-of-linear-modeling-theory.html#cb540-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="the-essentials-of-linear-modeling-theory.html#cb621-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compare mu.hat with observed proportions</span></span>
+<span id="cb621-2"><a href="the-essentials-of-linear-modeling-theory.html#cb621-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mu.hat, beetle<span class="sc">$</span>propn.dead)</span>
+<span id="cb621-3"><a href="the-essentials-of-linear-modeling-theory.html#cb621-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="Freq_CogSci_files/figure-html/propndead2-1.svg" width="576" /></p>
 <p>To evaluate whether dose has an effect, we will do something analogous to the model comparison methods we saw earlier. First, fit a model with only an intercept. Notice that the null deviance is 284 on 7 degrees of freedom.</p>
-<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="the-essentials-of-linear-modeling-theory.html#cb541-1" aria-hidden="true" tabindex="-1"></a>null.glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(propn.dead <span class="sc">~</span> <span class="dv">1</span>, <span class="fu">binomial</span>(logit),</span>
-<span id="cb541-2"><a href="the-essentials-of-linear-modeling-theory.html#cb541-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> number, <span class="at">data =</span> beetle</span>
-<span id="cb541-3"><a href="the-essentials-of-linear-modeling-theory.html#cb541-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb541-4"><a href="the-essentials-of-linear-modeling-theory.html#cb541-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null.glm)</span></code></pre></div>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="the-essentials-of-linear-modeling-theory.html#cb622-1" aria-hidden="true" tabindex="-1"></a>null.glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(propn.dead <span class="sc">~</span> <span class="dv">1</span>, <span class="fu">binomial</span>(logit),</span>
+<span id="cb622-2"><a href="the-essentials-of-linear-modeling-theory.html#cb622-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> number, <span class="at">data =</span> beetle</span>
+<span id="cb622-3"><a href="the-essentials-of-linear-modeling-theory.html#cb622-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb622-4"><a href="the-essentials-of-linear-modeling-theory.html#cb622-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null.glm)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = propn.dead ~ 1, family = binomial(logit), data = beetle, 
@@ -1155,17 +1174,17 @@ The difference in deviance (confusingly called residual deviance) between two mo
 ## AIC: 312.4
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
-<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="the-essentials-of-linear-modeling-theory.html#cb543-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(beetle<span class="sc">$</span>dose, beetle<span class="sc">$</span>propn.dead,</span>
-<span id="cb543-2"><a href="the-essentials-of-linear-modeling-theory.html#cb543-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;log concentration&quot;</span>,</span>
-<span id="cb543-3"><a href="the-essentials-of-linear-modeling-theory.html#cb543-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;proportion dead&quot;</span>, <span class="at">main =</span> <span class="st">&quot;minimal model&quot;</span></span>
-<span id="cb543-4"><a href="the-essentials-of-linear-modeling-theory.html#cb543-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb543-5"><a href="the-essentials-of-linear-modeling-theory.html#cb543-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(beetle<span class="sc">$</span>dose, null.glm<span class="sc">$</span>fitted, <span class="at">pch =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="the-essentials-of-linear-modeling-theory.html#cb624-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(beetle<span class="sc">$</span>dose, beetle<span class="sc">$</span>propn.dead,</span>
+<span id="cb624-2"><a href="the-essentials-of-linear-modeling-theory.html#cb624-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;log concentration&quot;</span>,</span>
+<span id="cb624-3"><a href="the-essentials-of-linear-modeling-theory.html#cb624-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;proportion dead&quot;</span>, <span class="at">main =</span> <span class="st">&quot;minimal model&quot;</span></span>
+<span id="cb624-4"><a href="the-essentials-of-linear-modeling-theory.html#cb624-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb624-5"><a href="the-essentials-of-linear-modeling-theory.html#cb624-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(beetle<span class="sc">$</span>dose, null.glm<span class="sc">$</span>fitted, <span class="at">pch =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p><img src="Freq_CogSci_files/figure-html/propndead3-1.svg" width="576" /></p>
 <p>Add a term for dose. Now, the residual deviance is 11.2 on 6 dfs:</p>
-<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="the-essentials-of-linear-modeling-theory.html#cb544-1" aria-hidden="true" tabindex="-1"></a>dose.glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(propn.dead <span class="sc">~</span> dose, <span class="fu">binomial</span>(logit),</span>
-<span id="cb544-2"><a href="the-essentials-of-linear-modeling-theory.html#cb544-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> number, <span class="at">data =</span> beetle</span>
-<span id="cb544-3"><a href="the-essentials-of-linear-modeling-theory.html#cb544-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb544-4"><a href="the-essentials-of-linear-modeling-theory.html#cb544-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dose.glm)</span></code></pre></div>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="the-essentials-of-linear-modeling-theory.html#cb625-1" aria-hidden="true" tabindex="-1"></a>dose.glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(propn.dead <span class="sc">~</span> dose, <span class="fu">binomial</span>(logit),</span>
+<span id="cb625-2"><a href="the-essentials-of-linear-modeling-theory.html#cb625-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> number, <span class="at">data =</span> beetle</span>
+<span id="cb625-3"><a href="the-essentials-of-linear-modeling-theory.html#cb625-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb625-4"><a href="the-essentials-of-linear-modeling-theory.html#cb625-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dose.glm)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = propn.dead ~ dose, family = binomial(logit), data = beetle, 
@@ -1190,15 +1209,15 @@ The difference in deviance (confusingly called residual deviance) between two mo
 ## AIC: 41.43
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
-<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="the-essentials-of-linear-modeling-theory.html#cb546-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(beetle<span class="sc">$</span>dose, beetle<span class="sc">$</span>propn.dead,</span>
-<span id="cb546-2"><a href="the-essentials-of-linear-modeling-theory.html#cb546-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;log concentration&quot;</span>,</span>
-<span id="cb546-3"><a href="the-essentials-of-linear-modeling-theory.html#cb546-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;proportion dead&quot;</span>, <span class="at">main =</span> <span class="st">&quot;dose model&quot;</span></span>
-<span id="cb546-4"><a href="the-essentials-of-linear-modeling-theory.html#cb546-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb546-5"><a href="the-essentials-of-linear-modeling-theory.html#cb546-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(beetle<span class="sc">$</span>dose, dose.glm<span class="sc">$</span>fitted, <span class="at">pch =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="the-essentials-of-linear-modeling-theory.html#cb627-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(beetle<span class="sc">$</span>dose, beetle<span class="sc">$</span>propn.dead,</span>
+<span id="cb627-2"><a href="the-essentials-of-linear-modeling-theory.html#cb627-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;log concentration&quot;</span>,</span>
+<span id="cb627-3"><a href="the-essentials-of-linear-modeling-theory.html#cb627-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;proportion dead&quot;</span>, <span class="at">main =</span> <span class="st">&quot;dose model&quot;</span></span>
+<span id="cb627-4"><a href="the-essentials-of-linear-modeling-theory.html#cb627-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb627-5"><a href="the-essentials-of-linear-modeling-theory.html#cb627-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(beetle<span class="sc">$</span>dose, dose.glm<span class="sc">$</span>fitted, <span class="at">pch =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p><img src="Freq_CogSci_files/figure-html/propndead4-1.svg" width="576" /></p>
 <p>The change in deviance from the null model is 284.2-11.2=273 on 1 df. Since the critical <span class="math inline">\(\chi_1^2 = 3.84\)</span>, we reject the null hypothesis that <span class="math inline">\(\beta_1 = 0\)</span>.</p>
 <p>You can do the model comparison using the anova function. Note that no statistical test is calculated; you need to do that yourself.</p>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="the-essentials-of-linear-modeling-theory.html#cb547-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(null.glm, dose.glm)</span></code></pre></div>
+<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="the-essentials-of-linear-modeling-theory.html#cb628-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(null.glm, dose.glm)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model 1: propn.dead ~ 1
@@ -1207,7 +1226,7 @@ The difference in deviance (confusingly called residual deviance) between two mo
 ## 1         7      284.2            
 ## 2         6       11.2  1      273</code></pre>
 <p>Actually, you don’t even need to define the null model; the anova function automatically compares the fitted model to the null model:</p>
-<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="the-essentials-of-linear-modeling-theory.html#cb549-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(dose.glm)</span></code></pre></div>
+<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="the-essentials-of-linear-modeling-theory.html#cb630-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(dose.glm)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model: binomial, link: logit
@@ -1221,22 +1240,22 @@ The difference in deviance (confusingly called residual deviance) between two mo
 ## NULL                     7      284.2
 ## dose  1      273         6       11.2</code></pre>
 </div>
-<div id="assessing-goodness-of-fit-of-a-fitted-model" class="section level5" number="5.2.5.3.2">
-<h5><span class="header-section-number">5.2.5.3.2</span> Assessing goodness of fit of a fitted model</h5>
+<div id="assessing-goodness-of-fit-of-a-fitted-model" class="section level5 hasAnchor" number="5.2.5.3.2">
+<h5><span class="header-section-number">5.2.5.3.2</span> Assessing goodness of fit of a fitted model<a href="the-essentials-of-linear-modeling-theory.html#assessing-goodness-of-fit-of-a-fitted-model" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>The deviance for a given degrees of freedom <span class="math inline">\(v\)</span> should have a <span class="math inline">\(\chi_v^2\)</span> distribution for the model to be adequate. As an example, consider the null model above. The deviance is clearly much larger than the 95th percentile cutoff point of the chi-squared distribution with 7 dfs, so the model is not adequate.</p>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="the-essentials-of-linear-modeling-theory.html#cb551-1" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(null.glm)</span></code></pre></div>
+<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="the-essentials-of-linear-modeling-theory.html#cb632-1" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(null.glm)</span></code></pre></div>
 <pre><code>## [1] 284.2</code></pre>
-<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="the-essentials-of-linear-modeling-theory.html#cb553-1" aria-hidden="true" tabindex="-1"></a><span class="do">## critical value:</span></span>
-<span id="cb553-2"><a href="the-essentials-of-linear-modeling-theory.html#cb553-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="the-essentials-of-linear-modeling-theory.html#cb634-1" aria-hidden="true" tabindex="-1"></a><span class="do">## critical value:</span></span>
+<span id="cb634-2"><a href="the-essentials-of-linear-modeling-theory.html#cb634-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">7</span>)</span></code></pre></div>
 <pre><code>## [1] 14.07</code></pre>
 <p>Now consider the model with dose as predictor. The deviance is less than the 95th percentile, so the fit is adequate.</p>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="the-essentials-of-linear-modeling-theory.html#cb555-1" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(dose.glm)</span></code></pre></div>
+<div class="sourceCode" id="cb636"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb636-1"><a href="the-essentials-of-linear-modeling-theory.html#cb636-1" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(dose.glm)</span></code></pre></div>
 <pre><code>## [1] 11.23</code></pre>
-<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="the-essentials-of-linear-modeling-theory.html#cb557-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb638-1"><a href="the-essentials-of-linear-modeling-theory.html#cb638-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">6</span>)</span></code></pre></div>
 <pre><code>## [1] 12.59</code></pre>
 </div>
-<div id="residuals-in-glms" class="section level5" number="5.2.5.3.3">
-<h5><span class="header-section-number">5.2.5.3.3</span> Residuals in GLMs</h5>
+<div id="residuals-in-glms" class="section level5 hasAnchor" number="5.2.5.3.3">
+<h5><span class="header-section-number">5.2.5.3.3</span> Residuals in GLMs<a href="the-essentials-of-linear-modeling-theory.html#residuals-in-glms" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>In the binomial distribution, Deviance <span class="math inline">\(D=\sum d_i\)</span>, where:</p>
 <p><span class="math display">\[\begin{equation}
 d_i = -2 \times n_i [ y_i \log(\frac{\hat{\mu}_i}{y_i}) + (1-y_i) \log (\frac{1-\hat{\mu}_i}{1-y_i}) ]  
@@ -1247,27 +1266,27 @@ d_i = -2 \times n_i [ y_i \log(\frac{\hat{\mu}_i}{y_i}) + (1-y_i) \log (\frac{1-
 \end{equation}\]</span></p>
 <p>These can be used to check for model adequacy as discussed earlier in the context of linear models.
 One can just use the plot function inspect the residuals:</p>
-<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="the-essentials-of-linear-modeling-theory.html#cb559-1" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">pty =</span> <span class="st">&quot;s&quot;</span>)</span>
-<span id="cb559-2"><a href="the-essentials-of-linear-modeling-theory.html#cb559-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dose.glm)</span></code></pre></div>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="the-essentials-of-linear-modeling-theory.html#cb640-1" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">pty =</span> <span class="st">&quot;s&quot;</span>)</span>
+<span id="cb640-2"><a href="the-essentials-of-linear-modeling-theory.html#cb640-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dose.glm)</span></code></pre></div>
 <p><img src="Freq_CogSci_files/figure-html/residualsglm-1.svg" width="576" /></p>
 <p>Alternatively, one can do this by hand:</p>
-<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="the-essentials-of-linear-modeling-theory.html#cb560-1" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">pty =</span> <span class="st">&quot;s&quot;</span>)</span>
-<span id="cb560-2"><a href="the-essentials-of-linear-modeling-theory.html#cb560-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dose.glm<span class="sc">$</span>resid,</span>
-<span id="cb560-3"><a href="the-essentials-of-linear-modeling-theory.html#cb560-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;index&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;residuals&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Index plot&quot;</span></span>
-<span id="cb560-4"><a href="the-essentials-of-linear-modeling-theory.html#cb560-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb560-5"><a href="the-essentials-of-linear-modeling-theory.html#cb560-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(dose.glm<span class="sc">$</span>resid, <span class="at">main =</span> <span class="st">&quot;QQ-plot&quot;</span>)</span>
-<span id="cb560-6"><a href="the-essentials-of-linear-modeling-theory.html#cb560-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dose.glm<span class="sc">$</span>resid, <span class="at">xlab =</span> <span class="st">&quot;Residuals&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Histogram&quot;</span>)</span>
-<span id="cb560-7"><a href="the-essentials-of-linear-modeling-theory.html#cb560-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dose.glm<span class="sc">$</span>fit, dose.glm<span class="sc">$</span>resid,</span>
-<span id="cb560-8"><a href="the-essentials-of-linear-modeling-theory.html#cb560-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Fitted values&quot;</span>,</span>
-<span id="cb560-9"><a href="the-essentials-of-linear-modeling-theory.html#cb560-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Residuals&quot;</span>,</span>
-<span id="cb560-10"><a href="the-essentials-of-linear-modeling-theory.html#cb560-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Residuals versus fitted values&quot;</span></span>
-<span id="cb560-11"><a href="the-essentials-of-linear-modeling-theory.html#cb560-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="the-essentials-of-linear-modeling-theory.html#cb641-1" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">pty =</span> <span class="st">&quot;s&quot;</span>)</span>
+<span id="cb641-2"><a href="the-essentials-of-linear-modeling-theory.html#cb641-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dose.glm<span class="sc">$</span>resid,</span>
+<span id="cb641-3"><a href="the-essentials-of-linear-modeling-theory.html#cb641-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;index&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;residuals&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Index plot&quot;</span></span>
+<span id="cb641-4"><a href="the-essentials-of-linear-modeling-theory.html#cb641-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb641-5"><a href="the-essentials-of-linear-modeling-theory.html#cb641-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(dose.glm<span class="sc">$</span>resid, <span class="at">main =</span> <span class="st">&quot;QQ-plot&quot;</span>)</span>
+<span id="cb641-6"><a href="the-essentials-of-linear-modeling-theory.html#cb641-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dose.glm<span class="sc">$</span>resid, <span class="at">xlab =</span> <span class="st">&quot;Residuals&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Histogram&quot;</span>)</span>
+<span id="cb641-7"><a href="the-essentials-of-linear-modeling-theory.html#cb641-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dose.glm<span class="sc">$</span>fit, dose.glm<span class="sc">$</span>resid,</span>
+<span id="cb641-8"><a href="the-essentials-of-linear-modeling-theory.html#cb641-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Fitted values&quot;</span>,</span>
+<span id="cb641-9"><a href="the-essentials-of-linear-modeling-theory.html#cb641-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Residuals&quot;</span>,</span>
+<span id="cb641-10"><a href="the-essentials-of-linear-modeling-theory.html#cb641-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Residuals versus fitted values&quot;</span></span>
+<span id="cb641-11"><a href="the-essentials-of-linear-modeling-theory.html#cb641-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="Freq_CogSci_files/figure-html/qqnormglm-1.svg" width="576" /></p>
 </div>
 </div>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-bliss1935calculation" class="csl-entry">
 Bliss, Chester Ittner. 1935. <span>“The Calculation of the Dosage-Mortality Curve.”</span> <em>Annals of Applied Biology</em> 22 (1): 134–67.
@@ -1348,7 +1367,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

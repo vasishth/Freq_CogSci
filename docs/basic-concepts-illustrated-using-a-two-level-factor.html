@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.1 Basic concepts illustrated using a two-level factor | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.1 Basic concepts illustrated using a two-level factor | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="ch:contr.html"/>
 <link rel="next" href="the-hypothesis-matrix-illustrated-with-a-three-level-factor.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,12 +391,12 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="basic-concepts-illustrated-using-a-two-level-factor" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> Basic concepts illustrated using a two-level factor</h2>
+<div id="basic-concepts-illustrated-using-a-two-level-factor" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Basic concepts illustrated using a two-level factor<a href="basic-concepts-illustrated-using-a-two-level-factor.html#basic-concepts-illustrated-using-a-two-level-factor" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We first consider the simplest case: suppose we want to compare the means of a dependent variable (DV) such as response times between two groups of subjects. R can be used to simulate data for such an example. Such simulated data is available in the R package <code>lingpsych</code> accompanying this book as the data set <code>df_contrasts1</code>. The simulations assumed longer response times in condition F1 (<span class="math inline">\(\mu_1 = 0.8\)</span> sec) than F2 (<span class="math inline">\(\mu_2 = 0.4\)</span> sec). The data from the <span class="math inline">\(10\)</span> simulated subjects are aggregated and summary statistics are computed for the two groups.</p>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb567-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lingpsych)</span>
-<span id="cb567-2"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb567-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_contrasts1&quot;</span>)</span>
-<span id="cb567-3"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb567-3" aria-hidden="true" tabindex="-1"></a>df_contrasts1</span></code></pre></div>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb648-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lingpsych)</span>
+<span id="cb648-2"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb648-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_contrasts1&quot;</span>)</span>
+<span id="cb648-3"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb648-3" aria-hidden="true" tabindex="-1"></a>df_contrasts1</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 3
 ##    F        DV    id
 ##    &lt;fct&gt; &lt;dbl&gt; &lt;int&gt;
@@ -408,7 +410,7 @@ div.csl-indent {
 ##  8 F2    0.659     8
 ##  9 F2    0.469     9
 ## 10 F2    0.444    10</code></pre>
-<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb569-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df_contrasts1)</span></code></pre></div>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb650-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df_contrasts1)</span></code></pre></div>
 <pre><code>## tibble [10 × 3] (S3: tbl_df/tbl/data.frame)
 ##  $ F : Factor w/ 2 levels &quot;F1&quot;,&quot;F2&quot;: 1 1 1 1 1 2 2 2 2 2
 ##  $ DV: num [1:10] 0.636 0.841 0.555 1.029 0.938 ...
@@ -482,10 +484,10 @@ FIGURE 6.1: Means and standard errors of the simulated dependent variable (e.g.,
 </div>
 <p>The results, displayed in Figure <a href="basic-concepts-illustrated-using-a-two-level-factor.html#fig:cFig1Means">6.1</a> and shown in Table <a href="basic-concepts-illustrated-using-a-two-level-factor.html#tab:cTab1Means">6.1</a>, show that the assumed true condition means are exactly realized with the simulated data. The numbers are exact because the used <code>mvrnorm()</code> function (see the documentation for <code>df_contrasts1</code>) ensures that the data are generated so that the sample mean yields the true means for each level. In real data-sets, of course, the sample means will vary from experiment to experiment.</p>
 <p>A simple Bayesian linear model of <code>DV</code> on <code>F</code> using the function <code>brm</code> yields a straightforward estimate of the difference between the group means. We use rather vague priors. The estimates for the fixed effects are presented below:</p>
-<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb572-1" aria-hidden="true" tabindex="-1"></a>fit_F <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
-<span id="cb572-2"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb572-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts1</span>
-<span id="cb572-3"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb572-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb573-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_F)<span class="sc">$</span>coefficients, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb653-1" aria-hidden="true" tabindex="-1"></a>fit_F <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
+<span id="cb653-2"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb653-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts1</span>
+<span id="cb653-3"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb653-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb654-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_F)<span class="sc">$</span>coefficients, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
 ## (Intercept)      0.8      0.089   8.944    0.000
 ## FF2             -0.4      0.126  -3.162    0.013</code></pre>
@@ -493,15 +495,15 @@ FIGURE 6.1: Means and standard errors of the simulated dependent variable (e.g.,
 <p><span class="math display">\[\begin{equation}
 \begin{array}{lcl}
 \text{Intercept} = &amp; \hat{\mu}_1 &amp; = \text{estimated mean for F1} \\
-\text{Slope (FF2)} = &amp; \hat{\mu}_2 - \hat{\mu}_1 &amp; = \text{estim. mean for F2} - \text{estim. mean for F1} 
+\text{Slope (FF2)} = &amp; \hat{\mu}_2 - \hat{\mu}_1 &amp; = \text{estim. mean for F2} - \text{estim. mean for F1}
 \end{array}
 \label{def:beta}
 \end{equation}\]</span></p>
 <p>The new information is the standard error for the difference between the two groups, and the t- and p-values corresponding to the null hypothesis test of no difference.</p>
-<div id="treatmentcontrasts" class="section level3" number="6.1.1">
-<h3><span class="header-section-number">6.1.1</span> Default contrast coding: Treatment contrasts</h3>
+<div id="treatmentcontrasts" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Default contrast coding: Treatment contrasts<a href="basic-concepts-illustrated-using-a-two-level-factor.html#treatmentcontrasts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>How does the function <code>lm</code> arrive at these particular values for the intercept and slope? That is, why does the intercept assess the mean of condition <code>F1</code> and how do we know the slope measures the difference in means between <code>F2</code><span class="math inline">\(-\)</span><code>F1</code>? This result is a consequence of the default contrast coding of the factor <code>F</code>. R assigns treatment contrasts to factors and orders their levels alphabetically. The first factor level (here: <code>F1</code>) is coded as <span class="math inline">\(0\)</span> and the second level (here: <code>F2</code>) is coded as <span class="math inline">\(1\)</span>. This becomes clear when we inspect the current contrast attribute of the factor using the <code>contrasts</code> command:</p>
-<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb575-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts1<span class="sc">$</span>F)</span></code></pre></div>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb656-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts1<span class="sc">$</span>F)</span></code></pre></div>
 <pre><code>##    F2
 ## F1  0
 ## F2  1</code></pre>
@@ -523,8 +525,8 @@ So, if <span class="math inline">\(x = 0\)</span> (condition <code>F1</code>), <
 \end{equation}\]</span></p>
 <p>It is useful to think of such unstandardized regression coefficients as difference scores; they express the increase in the dependent variable <span class="math inline">\(y\)</span> associated with a change in the independent variable <span class="math inline">\(x\)</span> of <span class="math inline">\(1\)</span> unit, such as going from <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span> in this example. The difference between condition means is <span class="math inline">\(0.4 - 0.8 = -0.4\)</span>, which is the estimated regression coefficient <span class="math inline">\(\hat{\beta}_1\)</span>. The sign of the slope is negative because we have chosen to subtract the larger mean <code>F1</code> score from the smaller mean <code>F2</code> score.</p>
 </div>
-<div id="inverseMatrix" class="section level3" number="6.1.2">
-<h3><span class="header-section-number">6.1.2</span> Defining hypotheses</h3>
+<div id="inverseMatrix" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Defining hypotheses<a href="basic-concepts-illustrated-using-a-two-level-factor.html#inverseMatrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The analysis of the regression equation demonstrates that in the treatment contrast the intercept assesses the average response in the baseline condition, whereas the slope estimates the difference between condition means. However, these are just verbal descriptions of what each coefficient assesses. Is it also possible to formally write down what each coefficient assesses? Moreover, is it possible to relate this to formal null hypotheses that are encoded in each of these two coefficients? The relation to null hypothesis tests is directly possible in frequentist statistics.</p>
 <p>From the perspective of parameter estimation and formal hypothesis tests, the slope represents the main test of interest, so we consider this first. The treatment contrast specifies that the slope <span class="math inline">\(\beta_1\)</span> estimates the difference in means between the two levels of the factor F. This can formally be written as:</p>
 <p><span class="math display">\[\begin{equation}
@@ -565,33 +567,33 @@ H_0: \alpha = 1 \cdot \mu_{F1} + 0 \cdot \mu_{F2} = 0 .
 <p>
 The fact that the intercept term formally tests the null hypothesis that the mean of condition <code>F1</code> is zero is in line with our previous derivation (see equation <a href="#def:beta"><strong>??</strong></a>).</p>
 <p>In R, factor levels are ordered alphabetically and by default the first level is used as the baseline in treatment contrasts. Obviously, this default mapping will only be correct for a given data-set if the levels’ alphabetical ordering matches the desired contrast coding. When it does not, it is possible to re-order the levels. Here is one way of re-ordering the levels in R:</p>
-<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb577-1" aria-hidden="true" tabindex="-1"></a>df_contrasts1<span class="sc">$</span>Fb <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_contrasts1<span class="sc">$</span>F,</span>
-<span id="cb577-2"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb577-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;F2&quot;</span>, <span class="st">&quot;F1&quot;</span>)</span>
-<span id="cb577-3"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb577-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb577-4"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb577-4" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts1<span class="sc">$</span>Fb)</span></code></pre></div>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb658-1" aria-hidden="true" tabindex="-1"></a>df_contrasts1<span class="sc">$</span>Fb <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_contrasts1<span class="sc">$</span>F,</span>
+<span id="cb658-2"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb658-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;F2&quot;</span>, <span class="st">&quot;F1&quot;</span>)</span>
+<span id="cb658-3"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb658-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb658-4"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb658-4" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts1<span class="sc">$</span>Fb)</span></code></pre></div>
 <pre><code>##    F1
 ## F2  0
 ## F1  1</code></pre>
 <p>
 This re-ordering did not change any data associated with the factor, only one of its attributes. With this new contrast attribute a simple linear model yields the following result.</p>
-<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb579-1" aria-hidden="true" tabindex="-1"></a>fit_Fb <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Fb,</span>
-<span id="cb579-2"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb579-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts1</span>
-<span id="cb579-3"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb579-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb580-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_Fb)<span class="sc">$</span>coefficients, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb660-1" aria-hidden="true" tabindex="-1"></a>fit_Fb <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Fb,</span>
+<span id="cb660-2"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb660-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts1</span>
+<span id="cb660-3"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb660-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb661-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_Fb)<span class="sc">$</span>coefficients, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
 ## (Intercept)      0.4      0.089   4.472    0.002
 ## FbF1             0.4      0.126   3.162    0.013</code></pre>
 <p>The model now estimates different quantities. The intercept now codes the mean of condition <code>F2</code>, and the slope measures the difference in means between <code>F1</code> minus <code>F2</code>. This represents an alternative coding of the treatment contrast.</p>
 </div>
-<div id="effectcoding" class="section level3" number="6.1.3">
-<h3><span class="header-section-number">6.1.3</span> Sum contrasts</h3>
+<div id="effectcoding" class="section level3 hasAnchor" number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> Sum contrasts<a href="basic-concepts-illustrated-using-a-two-level-factor.html#effectcoding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Treatment contrasts are only one of many options. It is also possible to use sum contrasts, which code one of the conditions as <span class="math inline">\(-1\)</span> and the other as <span class="math inline">\(+1\)</span>, effectively `centering’ the effects at the grand mean (GM, i.e., the mean of the two group means). Here, we rescale the contrast to values of <span class="math inline">\(-0.5\)</span> and <span class="math inline">\(+0.5\)</span>, which makes the estimated treatment effect the same as for treatment coding and easier to interpret.</p>
 <p>To use this contrast in a linear regression, use the <code>contrasts</code> function:</p>
-<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb582-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">contrasts</span>(df_contrasts1<span class="sc">$</span>F) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">+</span><span class="fl">0.5</span>))</span>
-<span id="cb582-2"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb582-2" aria-hidden="true" tabindex="-1"></a>fit_mSum <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
-<span id="cb582-3"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb582-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts1</span>
-<span id="cb582-4"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb582-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb583-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_mSum)<span class="sc">$</span>coefficients, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb663-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">contrasts</span>(df_contrasts1<span class="sc">$</span>F) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">+</span><span class="fl">0.5</span>))</span>
+<span id="cb663-2"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb663-2" aria-hidden="true" tabindex="-1"></a>fit_mSum <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
+<span id="cb663-3"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb663-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts1</span>
+<span id="cb663-4"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb663-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb664-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_mSum)<span class="sc">$</span>coefficients, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
 ## (Intercept)      0.6      0.063   9.487    0.000
 ## F1              -0.4      0.126  -3.162    0.013</code></pre>
@@ -600,12 +602,12 @@ However, the intercept now represents the estimate of the average of condition m
 <p><span class="math display">\[\begin{equation}
 \begin{array}{lcl}
 \text{Intercept} = &amp; (\hat{\mu}_1 + \hat{\mu}_2)/2 &amp; = \text{estimated mean of F1 and F2} \\
-\text{Slope (F1)} = &amp; \hat{\mu}_2 - \hat{\mu}_1 &amp; = \text{estim. mean for F2} - \text{estim. mean for F1} 
+\text{Slope (F1)} = &amp; \hat{\mu}_2 - \hat{\mu}_1 &amp; = \text{estim. mean for F2} - \text{estim. mean for F1}
 \end{array}
 \label{def:beta2}
 \end{equation}\]</span></p>
 <p>Why does the intercept assess the GM and why does the slope test the group difference? This is the result of rescaling the sum contrast. The first factor level (<code>F1</code>) was coded as <span class="math inline">\(-0.5\)</span>, and the second factor level (<code>F1</code>) as <span class="math inline">\(+0.5\)</span>:</p>
-<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb585-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts1<span class="sc">$</span>F)</span></code></pre></div>
+<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb666-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb666-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts1<span class="sc">$</span>F)</span></code></pre></div>
 <pre><code>##    [,1]
 ## F1 -0.5
 ## F2  0.5</code></pre>
@@ -650,20 +652,20 @@ In balanced data, i.e., in data-sets where there are no missing data points, the
 To illustrate this point, consider an example with fully balanced data and two equal group sizes of <span class="math inline">\(5\)</span> subjects for each group F1 and F2. Here, the GM is also the mean across all subjects. Next, consider a highly simplified unbalanced data-set, where in condition F1 two observations of the dependent variable are available with values of <span class="math inline">\(2\)</span> and <span class="math inline">\(3\)</span>, and where in condition F2 only one observation of the dependent variables is available with a value of <span class="math inline">\(4\)</span>. In this data-set, the mean across all subjects is <span class="math inline">\(\frac{2 + 3 + 4}{3} = \frac{9}{3} = 3\)</span>. However, the (weighted) GM as assessed in the intercept in a model using sum contrasts for factor F would first compute the mean for each group separately (i.e., <span class="math inline">\(\frac{2 + 3}{2} = 2.5\)</span>, and <span class="math inline">\(4\)</span>), and then compute the mean across conditions <span class="math inline">\(\frac{2.5 + 4}{2} = \frac{6.5}{2} = 3.25\)</span>. The GM of <span class="math inline">\(3.25\)</span> is different from the mean across subjects of <span class="math inline">\(3\)</span>.</p>
 <p>To summarize, treatment contrasts and sum contrasts are two possible ways to parameterize the difference between two groups; they estimate different quantities and test different hypotheses (there are cases, however, where the estimates / hypotheses are equivalent). Treatment contrasts compare one or more means against a baseline condition, whereas sum contrasts allow us to determine whether we can reject the null hypothesis that a condition’s mean is the same as the GM (which in the two-group case also implies a hypothesis test that the two group means are the same). One question that comes up here is how one knows or formally derives what quantities are estimated by a given set of contrasts, and what hypotheses it can be used to test. This question will be discussed in detail below for the general case of any arbitrary contrasts.</p>
 </div>
-<div id="sec:cellMeans" class="section level3" number="6.1.4">
-<h3><span class="header-section-number">6.1.4</span> Cell means parameterization and posterior comparisons</h3>
+<div id="sec:cellMeans" class="section level3 hasAnchor" number="6.1.4">
+<h3><span class="header-section-number">6.1.4</span> Cell means parameterization and posterior comparisons<a href="basic-concepts-illustrated-using-a-two-level-factor.html#sec:cellMeans" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One alternative option is to use the so-called cell means parameterization. In this approach, one does not estimate an intercept term, and then differences between factor levels. Instead, each degree of freedom in a design is used to simply estimate the mean of one of the factor levels. As a consequence, no comparisons between condition means are estimated, but simply the mean of each experimental condition is estimated. Cell means parameterization is specified by explicitly removing the intercept term (which is added automatically in R by default) by adding a <span class="math inline">\(-1\)</span> in the regression formula:</p>
-<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb587-1" aria-hidden="true" tabindex="-1"></a>fit_mCM <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> F,</span>
-<span id="cb587-2"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb587-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts1</span>
-<span id="cb587-3"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb587-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb588-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_mCM)<span class="sc">$</span>coefficients, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb668-1" aria-hidden="true" tabindex="-1"></a>fit_mCM <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> F,</span>
+<span id="cb668-2"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb668-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts1</span>
+<span id="cb668-3"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb668-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="basic-concepts-illustrated-using-a-two-level-factor.html#cb669-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_mCM)<span class="sc">$</span>coefficients, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##     Estimate Std. Error t value Pr(&gt;|t|)
 ## FF1      0.8      0.089   8.944    0.000
 ## FF2      0.4      0.089   4.472    0.002</code></pre>
 <p>Now, the regression coefficients (see the column labeled ‘Estimate’) estimate the mean of the first factor level (<span class="math inline">\(0.8\)</span>) and the mean of the second factor level (<span class="math inline">\(0.4\)</span>). This cell means parameterization usually does not allow a test of the hypotheses of interest, as these hypotheses usually relate to differences between conditions rather than to whether each condition differs from zero.</p>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Bolker2018" class="csl-entry">
 Bolker, Ben. 2018. <span>“Https://Github.com/Bbolker/Mixedmodels-Misc/Blob/Master/Notes/Contrasts.rmd.”</span>
@@ -735,7 +737,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.8 Using the package designr to simulate data and compute power | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.8 Using the package designr to simulate data and compute power | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="what-you-can-now-do.html"/>
 <link rel="next" href="sec:Simulationexercises.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,23 +391,24 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="using-the-package-designr-to-simulate-data-and-compute-power" class="section level2" number="8.8">
-<h2><span class="header-section-number">8.8</span> Using the package <code>designr</code> to simulate data and compute power</h2>
+<div id="using-the-package-designr-to-simulate-data-and-compute-power" class="section level2 hasAnchor" number="8.8">
+<h2><span class="header-section-number">8.8</span> Using the package <code>designr</code> to simulate data and compute power<a href="using-the-package-designr-to-simulate-data-and-compute-power.html#using-the-package-designr-to-simulate-data-and-compute-power" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>There are major advantages to writing one’s own code for generating repeated measures data: one can control exactly what one considers to be the generative process, and one can obtain a deeper understanding of how the linear mixed model is set up. However, for certain standard experimental designs, one can use pre-defined functions for simulating data. The advantage of using such packages is that one can abstract away from the implementation details; but this can also be a disadvantage because one might end up simulating data without really understanding the assumptions behind the data-generative process.</p>
 <p>An R package, <code>designr</code>, provides some built-in functions that can simplify the process of computing power for standard repeated measures designs. For example, consider again the two-condition design involving English relative clauses that we saw earlier <span class="citation">(<a href="#ref-grodner" role="doc-biblioref">Grodner and Gibson 2005</a>)</span>.</p>
-<div id="simulating-data-with-two-conditions" class="section level3" number="8.8.1">
-<h3><span class="header-section-number">8.8.1</span> Simulating data with two conditions</h3>
+<div id="simulating-data-with-two-conditions" class="section level3 hasAnchor" number="8.8.1">
+<h3><span class="header-section-number">8.8.1</span> Simulating data with two conditions<a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-with-two-conditions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First, load the data, and prepare the contrast coding and log-transform the reading times.</p>
-<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb808-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb808-1" aria-hidden="true" tabindex="-1"></a>gg05e1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data/grodnergibsonE1crit.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb808-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb808-2" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>so <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(gg05e1<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb808-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb808-3" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>logrt <span class="ot">&lt;-</span> <span class="fu">log</span>(gg05e1<span class="sc">$</span>rawRT)</span></code></pre></div>
+<div class="sourceCode" id="cb910"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb910-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb910-1" aria-hidden="true" tabindex="-1"></a>gg05e1 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data/grodnergibsonE1crit.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb910-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb910-2" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>so <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(gg05e1<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb910-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb910-3" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>logrt <span class="ot">&lt;-</span> <span class="fu">log</span>(gg05e1<span class="sc">$</span>rawRT)</span></code></pre></div>
 <p>Next, we fit a linear mixed model to the data. As an example, we use raw reading times on the millisecond scale.</p>
-<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb809-1" aria-hidden="true" tabindex="-1"></a><span class="do">## frequentist analysis:</span></span>
-<span id="cb809-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb809-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb809-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb809-3" aria-hidden="true" tabindex="-1"></a>m_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rawRT <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item), gg05e1,</span>
-<span id="cb809-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb809-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb809-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb809-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb809-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb809-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_lmer)</span></code></pre></div>
+<div class="sourceCode" id="cb911"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb911-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb911-1" aria-hidden="true" tabindex="-1"></a><span class="do">## frequentist analysis:</span></span>
+<span id="cb911-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb911-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb911-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb911-3" aria-hidden="true" tabindex="-1"></a>m_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rawRT <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item), gg05e1,</span>
+<span id="cb911-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb911-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb911-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb911-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb913"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb913-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb913-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_lmer)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: 
 ## rawRT ~ so + (1 + so | subject) + (1 + so | item)
@@ -434,10 +437,12 @@ div.csl-indent {
 ## 
 ## Correlation of Fixed Effects:
 ##    (Intr)
-## so 0.734</code></pre>
+## so 0.734 
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>The correlations between the varying intercepts and slopes could not be estimated, so the model is over-parameterized. We can refit the model without correlations:</p>
-<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb811-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb811-1" aria-hidden="true" tabindex="-1"></a>m_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rawRT <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> item), gg05e1)</span>
-<span id="cb811-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb811-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_lmer)</span></code></pre></div>
+<div class="sourceCode" id="cb915"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb915-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb915-1" aria-hidden="true" tabindex="-1"></a>m_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rawRT <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> item), gg05e1)</span>
+<span id="cb915-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb915-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_lmer)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: 
 ## rawRT ~ so + ((1 | subject) + (0 + so | subject)) + ((1 | item) +  
@@ -468,16 +473,16 @@ div.csl-indent {
 ##    (Intr)
 ## so 0.000</code></pre>
 <p>Next, we generate a data-frame through the <code>designr</code> package, with the same design as the data used above:</p>
-<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb813-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(designr)</span>
-<span id="cb813-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb813-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-3" aria-hidden="true" tabindex="-1"></a><span class="do">## example</span></span>
-<span id="cb813-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-4" aria-hidden="true" tabindex="-1"></a><span class="do">## define data frame:</span></span>
-<span id="cb813-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-5" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">fixed.factor</span>(<span class="st">&quot;so&quot;</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;subjgap&quot;</span>, <span class="st">&quot;objgap&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb813-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="st">&quot;subject&quot;</span>, <span class="at">instances =</span> <span class="dv">42</span>) <span class="sc">+</span></span>
-<span id="cb813-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="st">&quot;item&quot;</span>, <span class="at">instances =</span> <span class="dv">16</span>)</span>
-<span id="cb813-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-8" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">design.codes</span>(design)</span>
-<span id="cb813-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-9" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>so <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dat<span class="sc">$</span>so <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb813-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb813-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
+<div class="sourceCode" id="cb917"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb917-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb917-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(designr)</span>
+<span id="cb917-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb917-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb917-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb917-3" aria-hidden="true" tabindex="-1"></a><span class="do">## example</span></span>
+<span id="cb917-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb917-4" aria-hidden="true" tabindex="-1"></a><span class="do">## define data frame:</span></span>
+<span id="cb917-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb917-5" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">fixed.factor</span>(<span class="st">&quot;so&quot;</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;subjgap&quot;</span>, <span class="st">&quot;objgap&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb917-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb917-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="st">&quot;subject&quot;</span>, <span class="at">instances =</span> <span class="dv">42</span>) <span class="sc">+</span></span>
+<span id="cb917-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb917-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="st">&quot;item&quot;</span>, <span class="at">instances =</span> <span class="dv">16</span>)</span>
+<span id="cb917-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb917-8" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">design.codes</span>(design)</span>
+<span id="cb917-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb917-9" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>so <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dat<span class="sc">$</span>so <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span>, <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb917-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb917-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ##   subject   item      so
 ##   &lt;fct&gt;     &lt;fct&gt;  &lt;dbl&gt;
@@ -488,76 +493,96 @@ div.csl-indent {
 ## 5 subject01 item03  -0.5
 ## 6 subject01 item03   0.5</code></pre>
 <p>To compute prospective power based on the estimates from the English relative clause data, the following for-loop is run. In each iteration, data is first generated using the design set up above; this is done using the <code>simLMM</code> function from the <code>designr</code> package. Notice here that a “maximal” model is specified, but the correlations are set to zero (CP=0.0); this has the effect that the data generated assume no correlation between the intercept and slope for subjects and items. Having generated the data, the <code>lmer</code> function is used to fit the model to the simulated data, and then the t-value of the slope is saved. This t-value can then be used to compute power in the usual way.</p>
-<div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb815-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-1" aria-hidden="true" tabindex="-1"></a>tvals <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb815-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb815-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
-<span id="cb815-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data:</span></span>
-<span id="cb815-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-5" aria-hidden="true" tabindex="-1"></a>  dat<span class="sc">$</span>ysim <span class="ot">&lt;-</span> <span class="fu">simLMM</span>(</span>
-<span id="cb815-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span></span>
-<span id="cb815-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-7" aria-hidden="true" tabindex="-1"></a>      (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
-<span id="cb815-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
-<span id="cb815-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">LMM =</span> m_lmer,</span>
-<span id="cb815-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">CP =</span> <span class="fl">0.0</span>,</span>
-<span id="cb815-11"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb815-12"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span></span>
-<span id="cb815-13"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-13" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb815-14"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb815-15"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-15" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to simulated data:</span></span>
-<span id="cb815-16"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-16" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(ysim <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subject) <span class="sc">+</span> (so <span class="sc">||</span> item),</span>
-<span id="cb815-17"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
-<span id="cb815-18"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb815-19"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-19" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb815-20"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">## save t-value</span></span>
-<span id="cb815-21"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-21" aria-hidden="true" tabindex="-1"></a>  tvals[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb815-22"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb815-23"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb815-24"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb815-24" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tvals) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 0.91</code></pre>
+<div class="sourceCode" id="cb919"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb919-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-1" aria-hidden="true" tabindex="-1"></a>tvals <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb919-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb919-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb919-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data:</span></span>
+<span id="cb919-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-5" aria-hidden="true" tabindex="-1"></a>  dat<span class="sc">$</span>ysim <span class="ot">&lt;-</span> <span class="fu">simLMM</span>(</span>
+<span id="cb919-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span></span>
+<span id="cb919-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-7" aria-hidden="true" tabindex="-1"></a>      (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
+<span id="cb919-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb919-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">LMM =</span> m_lmer,</span>
+<span id="cb919-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">CP =</span> <span class="fl">0.0</span>,</span>
+<span id="cb919-11"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb919-12"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span></span>
+<span id="cb919-13"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb919-14"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb919-15"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-15" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to simulated data:</span></span>
+<span id="cb919-16"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-16" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(ysim <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subject) <span class="sc">+</span> (so <span class="sc">||</span> item),</span>
+<span id="cb919-17"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb919-18"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb919-19"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb919-20"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">## save t-value</span></span>
+<span id="cb919-21"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-21" aria-hidden="true" tabindex="-1"></a>  tvals[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb919-22"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb919-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb921"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb921-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb921-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tvals) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.93</code></pre>
 <p>If we also want to examine the distribution of the data generated, and the distribution of the parameters under repeated sampling, we can easily record that information within the for-loop:</p>
-<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(dat)[<span class="dv">1</span>]</span>
-<span id="cb817-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb817-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-3" aria-hidden="true" tabindex="-1"></a>ysims <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n <span class="sc">*</span> nsim), <span class="at">ncol =</span> nsim)</span>
-<span id="cb817-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb817-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
-<span id="cb817-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data:</span></span>
-<span id="cb817-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-7" aria-hidden="true" tabindex="-1"></a>  ysim <span class="ot">&lt;-</span> <span class="fu">simLMM</span>(</span>
-<span id="cb817-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
-<span id="cb817-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
-<span id="cb817-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">LMM =</span> m_lmer,</span>
-<span id="cb817-11"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">CP =</span> <span class="fl">0.0</span>,</span>
-<span id="cb817-12"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb817-13"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span></span>
-<span id="cb817-14"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb817-15"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-15" aria-hidden="true" tabindex="-1"></a>  <span class="do">## store simulated data:</span></span>
-<span id="cb817-16"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-16" aria-hidden="true" tabindex="-1"></a>  ysims[, i] <span class="ot">&lt;-</span> ysim</span>
-<span id="cb817-17"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-17" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add current simulated data to data-frame:</span></span>
-<span id="cb817-18"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-18" aria-hidden="true" tabindex="-1"></a>  dat<span class="sc">$</span>ysim <span class="ot">&lt;-</span> ysim</span>
-<span id="cb817-19"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb817-20"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to simulated data:</span></span>
-<span id="cb817-21"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-21" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(ysim <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subject) <span class="sc">+</span> (so <span class="sc">||</span> item),</span>
-<span id="cb817-22"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
-<span id="cb817-23"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb817-24"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-24" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb817-25"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-25" aria-hidden="true" tabindex="-1"></a>  <span class="do">## save t-value</span></span>
-<span id="cb817-26"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-26" aria-hidden="true" tabindex="-1"></a>  tvals[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb817-27"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-27" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb817-28"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb817-29"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb817-29" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tvals) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 0.9</code></pre>
-<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(gg05e1<span class="sc">$</span>rawRT,</span>
-<span id="cb819-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">ylab =</span> <span class="st">&quot;density&quot;</span>,</span>
-<span id="cb819-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>, <span class="dv">5000</span>),</span>
-<span id="cb819-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;reading times (ms)&quot;</span></span>
-<span id="cb819-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb819-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
-<span id="cb819-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">density</span>(ysims[, i]))</span>
-<span id="cb819-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb819-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-360-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb923"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb923-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(dat)[<span class="dv">1</span>]</span>
+<span id="cb923-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb923-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-3" aria-hidden="true" tabindex="-1"></a>ysims <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n <span class="sc">*</span> nsim), <span class="at">ncol =</span> nsim)</span>
+<span id="cb923-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb923-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb923-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data:</span></span>
+<span id="cb923-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-7" aria-hidden="true" tabindex="-1"></a>  ysim <span class="ot">&lt;-</span> <span class="fu">simLMM</span>(</span>
+<span id="cb923-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
+<span id="cb923-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb923-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">LMM =</span> m_lmer,</span>
+<span id="cb923-11"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">CP =</span> <span class="fl">0.0</span>,</span>
+<span id="cb923-12"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb923-13"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span></span>
+<span id="cb923-14"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb923-15"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-15" aria-hidden="true" tabindex="-1"></a>  <span class="do">## store simulated data:</span></span>
+<span id="cb923-16"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-16" aria-hidden="true" tabindex="-1"></a>  ysims[, i] <span class="ot">&lt;-</span> ysim</span>
+<span id="cb923-17"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-17" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add current simulated data to data-frame:</span></span>
+<span id="cb923-18"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-18" aria-hidden="true" tabindex="-1"></a>  dat<span class="sc">$</span>ysim <span class="ot">&lt;-</span> ysim</span>
+<span id="cb923-19"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb923-20"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to simulated data:</span></span>
+<span id="cb923-21"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-21" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(ysim <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subject) <span class="sc">+</span> (so <span class="sc">||</span> item),</span>
+<span id="cb923-22"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb923-23"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb923-24"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-24" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb923-25"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-25" aria-hidden="true" tabindex="-1"></a>  <span class="do">## save t-value</span></span>
+<span id="cb923-26"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-26" aria-hidden="true" tabindex="-1"></a>  tvals[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb923-27"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb923-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb925"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb925-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb925-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tvals) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.92</code></pre>
+<div class="sourceCode" id="cb927"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb927-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb927-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(gg05e1<span class="sc">$</span>rawRT,</span>
+<span id="cb927-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb927-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">ylab =</span> <span class="st">&quot;density&quot;</span>,</span>
+<span id="cb927-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb927-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>, <span class="dv">5000</span>),</span>
+<span id="cb927-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb927-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;reading times (ms)&quot;</span></span>
+<span id="cb927-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb927-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb927-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb927-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb927-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb927-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">density</span>(ysims[, i]))</span>
+<span id="cb927-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb927-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-367-1.svg" width="672" /></p>
 <p>As the above plot shows, a model using raw readings times lead to predicted reading times including negative values, which is obviously implausible.</p>
 <p>If we want to fit the model on log RTs, the code changes as follows.
 First, the model is fit to the data on the log ms scale:</p>
-<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb820-1" aria-hidden="true" tabindex="-1"></a>m_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> item), gg05e1)</span>
-<span id="cb820-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb820-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_lmer)</span></code></pre></div>
+<div class="sourceCode" id="cb928"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb928-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb928-1" aria-hidden="true" tabindex="-1"></a>m_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">||</span> item), gg05e1)</span>
+<span id="cb928-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb928-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_lmer)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: 
 ## logrt ~ so + ((1 | subject) + (0 + so | subject)) + ((1 | item) +  
@@ -588,85 +613,111 @@ First, the model is fit to the data on the log ms scale:</p>
 ##    (Intr)
 ## so 0.000</code></pre>
 <p>The design remains unchanged; only the for-loop changes: the <code>simLMM</code> function is passed through the <code>exp()</code> function, to exponentiate the data generated on the log scale.</p>
-<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb822-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-1" aria-hidden="true" tabindex="-1"></a>tvals <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb822-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb822-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
-<span id="cb822-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data:</span></span>
-<span id="cb822-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-5" aria-hidden="true" tabindex="-1"></a>  dat<span class="sc">$</span>ysim <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">simLMM</span>(</span>
-<span id="cb822-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
-<span id="cb822-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
-<span id="cb822-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">LMM =</span> m_lmer,</span>
-<span id="cb822-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">CP =</span> <span class="fl">0.0</span>,</span>
-<span id="cb822-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb822-11"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span></span>
-<span id="cb822-12"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-12" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb822-13"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb822-14"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-14" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to simulated data:</span></span>
-<span id="cb822-15"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-15" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(<span class="fu">log</span>(ysim) <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subject) <span class="sc">+</span> (so <span class="sc">||</span> item),</span>
-<span id="cb822-16"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
-<span id="cb822-17"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb822-18"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-18" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb822-19"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-19" aria-hidden="true" tabindex="-1"></a>  <span class="do">## save t-value</span></span>
-<span id="cb822-20"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-20" aria-hidden="true" tabindex="-1"></a>  tvals[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb822-21"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb822-22"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb822-23"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb822-23" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tvals) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 0.75</code></pre>
+<div class="sourceCode" id="cb930"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb930-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-1" aria-hidden="true" tabindex="-1"></a>tvals <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb930-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb930-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb930-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data:</span></span>
+<span id="cb930-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-5" aria-hidden="true" tabindex="-1"></a>  dat<span class="sc">$</span>ysim <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">simLMM</span>(</span>
+<span id="cb930-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
+<span id="cb930-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb930-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">LMM =</span> m_lmer,</span>
+<span id="cb930-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">CP =</span> <span class="fl">0.0</span>,</span>
+<span id="cb930-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb930-11"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span></span>
+<span id="cb930-12"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-12" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb930-13"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb930-14"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-14" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to simulated data:</span></span>
+<span id="cb930-15"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-15" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(<span class="fu">log</span>(ysim) <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subject) <span class="sc">+</span> (so <span class="sc">||</span> item),</span>
+<span id="cb930-16"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb930-17"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb930-18"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb930-19"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-19" aria-hidden="true" tabindex="-1"></a>  <span class="do">## save t-value</span></span>
+<span id="cb930-20"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-20" aria-hidden="true" tabindex="-1"></a>  tvals[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb930-21"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb930-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb932"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb932-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb932-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tvals) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.73</code></pre>
 <p>The model fit on log RTs produces much more realistic data:</p>
-<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(dat)[<span class="dv">1</span>]</span>
-<span id="cb824-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb824-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-3" aria-hidden="true" tabindex="-1"></a>ysims <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n <span class="sc">*</span> nsim), <span class="at">ncol =</span> nsim)</span>
-<span id="cb824-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb824-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
-<span id="cb824-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data:</span></span>
-<span id="cb824-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-7" aria-hidden="true" tabindex="-1"></a>  ysim <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">simLMM</span>(</span>
-<span id="cb824-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span></span>
-<span id="cb824-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-9" aria-hidden="true" tabindex="-1"></a>      (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
-<span id="cb824-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
-<span id="cb824-11"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">LMM =</span> m_lmer,</span>
-<span id="cb824-12"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">CP =</span> <span class="fl">0.0</span>,</span>
-<span id="cb824-13"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb824-14"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span></span>
-<span id="cb824-15"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-15" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb824-16"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-16" aria-hidden="true" tabindex="-1"></a>  <span class="do">## store simulated data:</span></span>
-<span id="cb824-17"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-17" aria-hidden="true" tabindex="-1"></a>  ysims[, i] <span class="ot">&lt;-</span> ysim</span>
-<span id="cb824-18"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-18" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add current simulated data to data-frame:</span></span>
-<span id="cb824-19"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-19" aria-hidden="true" tabindex="-1"></a>  dat<span class="sc">$</span>ysim <span class="ot">&lt;-</span> ysim</span>
-<span id="cb824-20"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb824-21"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-21" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to simulated data:</span></span>
-<span id="cb824-22"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-22" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(<span class="fu">log</span>(ysim) <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subject) <span class="sc">+</span> (so <span class="sc">||</span> item),</span>
-<span id="cb824-23"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
-<span id="cb824-24"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb824-25"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-25" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb824-26"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-26" aria-hidden="true" tabindex="-1"></a>  <span class="do">## save t-value</span></span>
-<span id="cb824-27"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-27" aria-hidden="true" tabindex="-1"></a>  tvals[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb824-28"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-28" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb824-29"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb824-30"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb824-30" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tvals) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 0.76</code></pre>
-<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(gg05e1<span class="sc">$</span>rawRT,</span>
-<span id="cb826-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">ylab =</span> <span class="st">&quot;density&quot;</span>,</span>
-<span id="cb826-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>, <span class="dv">5000</span>),</span>
-<span id="cb826-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;reading times (ms)&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.003</span>)</span>
-<span id="cb826-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb826-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
-<span id="cb826-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">density</span>(ysims[, i]))</span>
-<span id="cb826-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb826-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-364-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb934"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb934-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(dat)[<span class="dv">1</span>]</span>
+<span id="cb934-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-2" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb934-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-3" aria-hidden="true" tabindex="-1"></a>ysims <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n <span class="sc">*</span> nsim), <span class="at">ncol =</span> nsim)</span>
+<span id="cb934-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb934-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb934-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-6" aria-hidden="true" tabindex="-1"></a>  <span class="do">## generate data:</span></span>
+<span id="cb934-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-7" aria-hidden="true" tabindex="-1"></a>  ysim <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">simLMM</span>(</span>
+<span id="cb934-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span></span>
+<span id="cb934-9"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-9" aria-hidden="true" tabindex="-1"></a>      (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
+<span id="cb934-10"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb934-11"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">LMM =</span> m_lmer,</span>
+<span id="cb934-12"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">CP =</span> <span class="fl">0.0</span>,</span>
+<span id="cb934-13"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">empirical =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb934-14"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span></span>
+<span id="cb934-15"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-15" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb934-16"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-16" aria-hidden="true" tabindex="-1"></a>  <span class="do">## store simulated data:</span></span>
+<span id="cb934-17"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-17" aria-hidden="true" tabindex="-1"></a>  ysims[, i] <span class="ot">&lt;-</span> ysim</span>
+<span id="cb934-18"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-18" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add current simulated data to data-frame:</span></span>
+<span id="cb934-19"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-19" aria-hidden="true" tabindex="-1"></a>  dat<span class="sc">$</span>ysim <span class="ot">&lt;-</span> ysim</span>
+<span id="cb934-20"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb934-21"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-21" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to simulated data:</span></span>
+<span id="cb934-22"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-22" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> lme4<span class="sc">::</span><span class="fu">lmer</span>(<span class="fu">log</span>(ysim) <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subject) <span class="sc">+</span> (so <span class="sc">||</span> item),</span>
+<span id="cb934-23"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb934-24"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb934-25"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb934-26"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-26" aria-hidden="true" tabindex="-1"></a>  <span class="do">## save t-value</span></span>
+<span id="cb934-27"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-27" aria-hidden="true" tabindex="-1"></a>  tvals[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb934-28"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb934-28" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb936"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb936-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb936-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tvals) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.79</code></pre>
+<div class="sourceCode" id="cb938"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb938-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb938-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(gg05e1<span class="sc">$</span>rawRT,</span>
+<span id="cb938-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb938-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">ylab =</span> <span class="st">&quot;density&quot;</span>,</span>
+<span id="cb938-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb938-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>, <span class="dv">5000</span>),</span>
+<span id="cb938-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb938-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;reading times (ms)&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.003</span>)</span>
+<span id="cb938-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb938-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb938-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb938-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb938-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb938-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">density</span>(ysims[, i]))</span>
+<span id="cb938-8"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb938-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-371-1.svg" width="672" /></p>
 </div>
-<div id="simulating-data-in-factorial-designs" class="section level3" number="8.8.2">
-<h3><span class="header-section-number">8.8.2</span> Simulating data in factorial designs</h3>
+<div id="simulating-data-in-factorial-designs" class="section level3 hasAnchor" number="8.8.2">
+<h3><span class="header-section-number">8.8.2</span> Simulating data in factorial designs<a href="using-the-package-designr-to-simulate-data-and-compute-power.html#simulating-data-in-factorial-designs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>designr</code> library can be used to generate data from typical factorial designs used in psychology and linguistics. For example, suppose we have a <span class="math inline">\(2\times 2\)</span> design</p>
-<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb827-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">fixed.factor</span>(<span class="st">&quot;distance&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;long&quot;</span>, <span class="st">&quot;short&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb827-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fixed.factor</span>(<span class="st">&quot;predictability&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb827-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="st">&quot;Subject&quot;</span>, <span class="at">instances =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="do">## 4x4 = 16 subjects</span></span>
-<span id="cb827-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="st">&quot;Item&quot;</span>, <span class="at">instances =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="do">## 4x4=16 items</span></span>
-<span id="cb827-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="fu">c</span>(<span class="st">&quot;Subject&quot;</span>, <span class="st">&quot;Item&quot;</span>), <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;distance&quot;</span>, <span class="st">&quot;predictability&quot;</span>))</span>
-<span id="cb827-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb827-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb827-7" aria-hidden="true" tabindex="-1"></a>simdat <span class="ot">&lt;-</span> <span class="fu">design.codes</span>(design)</span></code></pre></div>
+<div class="sourceCode" id="cb939"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb939-1"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb939-1" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">fixed.factor</span>(<span class="st">&quot;distance&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;long&quot;</span>, <span class="st">&quot;short&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb939-2"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb939-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fixed.factor</span>(<span class="st">&quot;predictability&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb939-3"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb939-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="st">&quot;Subject&quot;</span>, <span class="at">instances =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="do">## 4x4 = 16 subjects</span></span>
+<span id="cb939-4"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb939-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="st">&quot;Item&quot;</span>, <span class="at">instances =</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="do">## 4x4=16 items</span></span>
+<span id="cb939-5"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb939-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">random.factor</span>(<span class="fu">c</span>(<span class="st">&quot;Subject&quot;</span>, <span class="st">&quot;Item&quot;</span>), <span class="at">groups =</span> <span class="fu">c</span>(<span class="st">&quot;distance&quot;</span>, <span class="st">&quot;predictability&quot;</span>))</span>
+<span id="cb939-6"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb939-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb939-7"><a href="using-the-package-designr-to-simulate-data-and-compute-power.html#cb939-7" aria-hidden="true" tabindex="-1"></a>simdat <span class="ot">&lt;-</span> <span class="fu">design.codes</span>(design)</span></code></pre></div>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-grodner" class="csl-entry">
 Grodner, Daniel, and Edward Gibson. 2005. <span>“Consequences of the Serial Nature of Linguistic Input.”</span> <em>Cognitive Science</em> 29: 261–90.
@@ -738,7 +789,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

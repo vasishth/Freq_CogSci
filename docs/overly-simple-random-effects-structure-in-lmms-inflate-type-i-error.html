@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.1 Overly simple random effects structure in LMMs inflate Type I error | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.1 Overly simple random effects structure in LMMs inflate Type I error | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="ch:MultComp.html"/>
 <link rel="next" href="type-i-error-inflation-due-to-multiple-comparisons.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,16 +391,16 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error" class="section level2" number="9.1">
-<h2><span class="header-section-number">9.1</span> Overly simple random effects structure in LMMs inflate Type I error</h2>
-<p>We return here to the data-set we saw earlier, the <span class="citation"><a href="#ref-grodner" role="doc-biblioref">Grodner and Gibson</a> (<a href="#ref-grodner" role="doc-biblioref">2005</a>)</span> self-paced reading study (their Experiment 1) on English relative clauses.
+<div id="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Overly simple random effects structure in LMMs inflate Type I error<a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#overly-simple-random-effects-structure-in-lmms-inflate-type-i-error" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We return here to the data-set we saw earlier, the <span class="citation">Grodner and Gibson (<a href="#ref-grodner" role="doc-biblioref">2005</a>)</span> self-paced reading study (their Experiment 1) on English relative clauses.
 First, load the data, fit a model with a full variance-covariance matrix for subjects and items, and then extract the parameters from the fitted model, just like we did in the simulation chapter.</p>
-<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb830-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lingpsych)</span>
-<span id="cb830-2"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb830-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Grodner and Gibson 2005 Expt 1 data:</span></span>
-<span id="cb830-3"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb830-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_gg05e1&quot;</span>)</span>
-<span id="cb830-4"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb830-4" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="ot">&lt;-</span>df_gg05e1</span>
-<span id="cb830-5"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb830-5" aria-hidden="true" tabindex="-1"></a><span class="do">## look at the data frame:</span></span>
-<span id="cb830-6"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb830-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gg05e1)</span></code></pre></div>
+<div class="sourceCode" id="cb942"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb942-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb942-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lingpsych)</span>
+<span id="cb942-2"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb942-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Grodner and Gibson 2005 Expt 1 data:</span></span>
+<span id="cb942-3"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb942-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_gg05e1&quot;</span>)</span>
+<span id="cb942-4"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb942-4" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="ot">&lt;-</span>df_gg05e1</span>
+<span id="cb942-5"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb942-5" aria-hidden="true" tabindex="-1"></a><span class="do">## look at the data frame:</span></span>
+<span id="cb942-6"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb942-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gg05e1)</span></code></pre></div>
 <pre><code>##    subject item condition rawRT
 ## 6        1    1    objgap   320
 ## 19       1    2   subjgap   424
@@ -406,116 +408,138 @@ First, load the data, fit a model with a full variance-covariance matrix for sub
 ## 49       1    4   subjgap   274
 ## 68       1    5    objgap   333
 ## 80       1    6   subjgap   266</code></pre>
-<div class="sourceCode" id="cb832"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb832-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-1" aria-hidden="true" tabindex="-1"></a><span class="do">## convert raw RTs to log RTs:</span></span>
-<span id="cb832-2"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-2" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>logrt<span class="ot">&lt;-</span><span class="fu">log</span>(gg05e1<span class="sc">$</span>rawRT)</span>
-<span id="cb832-3"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-3" aria-hidden="true" tabindex="-1"></a><span class="do">## sum-coding of predictor:</span></span>
-<span id="cb832-4"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-4" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>so<span class="ot">&lt;-</span><span class="fu">ifelse</span>(gg05e1<span class="sc">$</span>condition<span class="sc">==</span><span class="st">&quot;objgap&quot;</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb832-5"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-5" aria-hidden="true" tabindex="-1"></a><span class="do">## fit model to log RTs:</span></span>
-<span id="cb832-6"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-6" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="fu">lmer</span>(logrt <span class="sc">~</span> so <span class="sc">+</span> </span>
-<span id="cb832-7"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-7" aria-hidden="true" tabindex="-1"></a>          (<span class="dv">1</span><span class="sc">+</span>so<span class="sc">|</span>subject) <span class="sc">+</span> </span>
-<span id="cb832-8"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-8" aria-hidden="true" tabindex="-1"></a>          (<span class="dv">1</span><span class="sc">+</span>so<span class="sc">|</span>item), </span>
-<span id="cb832-9"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">data=</span>gg05e1,</span>
-<span id="cb832-10"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-10" aria-hidden="true" tabindex="-1"></a>        <span class="do">## &quot;switch off&quot; warnings:</span></span>
-<span id="cb832-11"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">control=</span><span class="fu">lmerControl</span>(<span class="at">calc.derivs=</span><span class="cn">FALSE</span>))</span>
-<span id="cb832-12"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb832-13"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-13" aria-hidden="true" tabindex="-1"></a><span class="do">## extract parameter estimates:</span></span>
-<span id="cb832-14"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-14" aria-hidden="true" tabindex="-1"></a>beta<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[,<span class="dv">1</span>],<span class="dv">4</span>)</span>
-<span id="cb832-15"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-15" aria-hidden="true" tabindex="-1"></a>sigma_e<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m),<span class="st">&quot;sc&quot;</span>),<span class="dv">2</span>)</span>
-<span id="cb832-16"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-16" aria-hidden="true" tabindex="-1"></a>subj_ranefsd<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>subject,<span class="st">&quot;stddev&quot;</span>),<span class="dv">4</span>)</span>
-<span id="cb832-17"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-17" aria-hidden="true" tabindex="-1"></a>subj_ranefcorr<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>subject,<span class="st">&quot;corr&quot;</span>),<span class="dv">1</span>)</span>
-<span id="cb832-18"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb832-19"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-19" aria-hidden="true" tabindex="-1"></a><span class="do">## assemble variance-covariance matrix for subjects:</span></span>
-<span id="cb832-20"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-20" aria-hidden="true" tabindex="-1"></a>Sigma_u<span class="ot">&lt;-</span>SIN<span class="sc">::</span><span class="fu">sdcor2cov</span>(<span class="at">stddev=</span>subj_ranefsd,</span>
-<span id="cb832-21"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-21" aria-hidden="true" tabindex="-1"></a>                        <span class="at">corr=</span>subj_ranefcorr)</span>
-<span id="cb832-22"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb832-23"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-23" aria-hidden="true" tabindex="-1"></a>item_ranefsd<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>item,<span class="st">&quot;stddev&quot;</span>),<span class="dv">4</span>)</span>
-<span id="cb832-24"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-24" aria-hidden="true" tabindex="-1"></a>item_ranefcorr<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>item,<span class="st">&quot;corr&quot;</span>),<span class="dv">1</span>)</span>
-<span id="cb832-25"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb832-26"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-26" aria-hidden="true" tabindex="-1"></a><span class="do">## assemble variance matrix for items:</span></span>
-<span id="cb832-27"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb832-28"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-28" aria-hidden="true" tabindex="-1"></a><span class="do">## choose some intermediate values for correlations:</span></span>
-<span id="cb832-29"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-29" aria-hidden="true" tabindex="-1"></a>corr_matrix<span class="ot">&lt;-</span>(<span class="fu">diag</span>(<span class="dv">2</span>) <span class="sc">+</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">4</span>),<span class="at">ncol=</span><span class="dv">2</span>))<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb832-30"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb832-31"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-31" aria-hidden="true" tabindex="-1"></a>Sigma_w<span class="ot">&lt;-</span>SIN<span class="sc">::</span><span class="fu">sdcor2cov</span>(<span class="at">stddev=</span>item_ranefsd,</span>
-<span id="cb832-32"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb832-32" aria-hidden="true" tabindex="-1"></a>                        <span class="at">corr=</span>corr_matrix)</span></code></pre></div>
+<div class="sourceCode" id="cb944"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb944-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb944-1" aria-hidden="true" tabindex="-1"></a><span class="do">## convert raw RTs to log RTs:</span></span>
+<span id="cb944-2"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb944-2" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>logrt<span class="ot">&lt;-</span><span class="fu">log</span>(gg05e1<span class="sc">$</span>rawRT)</span>
+<span id="cb944-3"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb944-3" aria-hidden="true" tabindex="-1"></a><span class="do">## sum-coding of predictor:</span></span>
+<span id="cb944-4"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb944-4" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>so<span class="ot">&lt;-</span><span class="fu">ifelse</span>(gg05e1<span class="sc">$</span>condition<span class="sc">==</span><span class="st">&quot;objgap&quot;</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb944-5"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb944-5" aria-hidden="true" tabindex="-1"></a><span class="do">## fit model to log RTs:</span></span>
+<span id="cb944-6"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb944-6" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="fu">lmer</span>(logrt <span class="sc">~</span> so <span class="sc">+</span> </span>
+<span id="cb944-7"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb944-7" aria-hidden="true" tabindex="-1"></a>          (<span class="dv">1</span><span class="sc">+</span>so<span class="sc">|</span>subject) <span class="sc">+</span> </span>
+<span id="cb944-8"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb944-8" aria-hidden="true" tabindex="-1"></a>          (<span class="dv">1</span><span class="sc">+</span>so<span class="sc">|</span>item), </span>
+<span id="cb944-9"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb944-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">data=</span>gg05e1,</span>
+<span id="cb944-10"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb944-10" aria-hidden="true" tabindex="-1"></a>        <span class="do">## &quot;switch off&quot; warnings:</span></span>
+<span id="cb944-11"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb944-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">control=</span><span class="fu">lmerControl</span>(<span class="at">calc.derivs=</span><span class="cn">FALSE</span>))</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb946"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb946-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-1" aria-hidden="true" tabindex="-1"></a><span class="do">## extract parameter estimates:</span></span>
+<span id="cb946-2"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-2" aria-hidden="true" tabindex="-1"></a>beta<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[,<span class="dv">1</span>],<span class="dv">4</span>)</span>
+<span id="cb946-3"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-3" aria-hidden="true" tabindex="-1"></a>sigma_e<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m),<span class="st">&quot;sc&quot;</span>),<span class="dv">2</span>)</span>
+<span id="cb946-4"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-4" aria-hidden="true" tabindex="-1"></a>subj_ranefsd<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>subject,<span class="st">&quot;stddev&quot;</span>),<span class="dv">4</span>)</span>
+<span id="cb946-5"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-5" aria-hidden="true" tabindex="-1"></a>subj_ranefcorr<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>subject,<span class="st">&quot;corr&quot;</span>),<span class="dv">1</span>)</span>
+<span id="cb946-6"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb946-7"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-7" aria-hidden="true" tabindex="-1"></a><span class="do">## assemble variance-covariance matrix for subjects:</span></span>
+<span id="cb946-8"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-8" aria-hidden="true" tabindex="-1"></a>Sigma_u<span class="ot">&lt;-</span>SIN<span class="sc">::</span><span class="fu">sdcor2cov</span>(<span class="at">stddev=</span>subj_ranefsd,</span>
+<span id="cb946-9"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">corr=</span>subj_ranefcorr)</span>
+<span id="cb946-10"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb946-11"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-11" aria-hidden="true" tabindex="-1"></a>item_ranefsd<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>item,<span class="st">&quot;stddev&quot;</span>),<span class="dv">4</span>)</span>
+<span id="cb946-12"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-12" aria-hidden="true" tabindex="-1"></a>item_ranefcorr<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>item,<span class="st">&quot;corr&quot;</span>),<span class="dv">1</span>)</span>
+<span id="cb946-13"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb946-14"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-14" aria-hidden="true" tabindex="-1"></a><span class="do">## assemble variance matrix for items:</span></span>
+<span id="cb946-15"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb946-16"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-16" aria-hidden="true" tabindex="-1"></a><span class="do">## choose some intermediate values for correlations:</span></span>
+<span id="cb946-17"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-17" aria-hidden="true" tabindex="-1"></a>corr_matrix<span class="ot">&lt;-</span>(<span class="fu">diag</span>(<span class="dv">2</span>) <span class="sc">+</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">4</span>),<span class="at">ncol=</span><span class="dv">2</span>))<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb946-18"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb946-19"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-19" aria-hidden="true" tabindex="-1"></a>Sigma_w<span class="ot">&lt;-</span>SIN<span class="sc">::</span><span class="fu">sdcor2cov</span>(<span class="at">stddev=</span>item_ranefsd,</span>
+<span id="cb946-20"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb946-20" aria-hidden="true" tabindex="-1"></a>                        <span class="at">corr=</span>corr_matrix)</span></code></pre></div>
 <p>We are now ready to compute Type I error using simulation.</p>
-<div id="type-i-error-with-a-varying-intercepts-only-model" class="section level3" number="9.1.1">
-<h3><span class="header-section-number">9.1.1</span> Type I error with a varying intercepts-only model</h3>
+<div id="type-i-error-with-a-varying-intercepts-only-model" class="section level3 hasAnchor" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Type I error with a varying intercepts-only model<a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-only-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Compute Type I error for a varying intercepts model using log reading times:</p>
-<div class="sourceCode" id="cb833"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb833-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-1" aria-hidden="true" tabindex="-1"></a><span class="do">## null is true:</span></span>
-<span id="cb833-2"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-2" aria-hidden="true" tabindex="-1"></a>beta[<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="dv">0</span></span>
-<span id="cb833-3"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-3" aria-hidden="true" tabindex="-1"></a>nsim<span class="ot">&lt;-</span><span class="dv">100</span></span>
-<span id="cb833-4"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-4" aria-hidden="true" tabindex="-1"></a>significant<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim)</span>
-<span id="cb833-5"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb833-6"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
-<span id="cb833-7"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-7" aria-hidden="true" tabindex="-1"></a><span class="co">#generate sim data:</span></span>
-<span id="cb833-8"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-8" aria-hidden="true" tabindex="-1"></a>simdat<span class="ot">&lt;-</span><span class="fu">gen_sim_lnorm2</span>(<span class="at">nitem=</span><span class="dv">16</span>,</span>
-<span id="cb833-9"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">nsubj=</span><span class="dv">42</span>,</span>
-<span id="cb833-10"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">beta=</span>beta,</span>
-<span id="cb833-11"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Sigma_u=</span>Sigma_u,</span>
-<span id="cb833-12"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Sigma_w=</span>Sigma_w,</span>
-<span id="cb833-13"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sigma_e=</span>sigma_e)</span>
-<span id="cb833-14"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb833-15"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-15" aria-hidden="true" tabindex="-1"></a><span class="do">## fit model to sim data:</span></span>
-<span id="cb833-16"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-16" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="fu">lmer</span>(<span class="fu">log</span>(rt)<span class="sc">~</span>so<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>subj)<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>item),simdat,</span>
-<span id="cb833-17"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">control=</span><span class="fu">lmerControl</span>(<span class="at">calc.derivs=</span><span class="cn">FALSE</span>))</span>
-<span id="cb833-18"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-18" aria-hidden="true" tabindex="-1"></a><span class="do">## record whether t-value is significant:</span></span>
-<span id="cb833-19"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-19" aria-hidden="true" tabindex="-1"></a>significant[i]<span class="ot">&lt;-</span><span class="fu">ifelse</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>])<span class="sc">&gt;</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
-<span id="cb833-20"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb833-21"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb833-22"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Type I error is quite high:</span></span>
-<span id="cb833-23"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb833-23" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(significant)</span></code></pre></div>
-<pre><code>## [1] 0.2</code></pre>
-<p>We find that Type I error is quite high. This is the problem with fitting varying intercepts-only models that <span class="citation"><a href="#ref-barr2013" role="doc-biblioref">Barr et al.</a> (<a href="#ref-barr2013" role="doc-biblioref">2013</a>)</span> point out: if the data-generative process is such that varying slopes should have been included in the model, fitting a varying intercepts-only model generally will lead to Type I error inflation. Of course, the extent of the inflation will vary from data-set to data-set; no simulation can give us a general answer to the question of how much inflation will happen.</p>
+<div class="sourceCode" id="cb947"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb947-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-1" aria-hidden="true" tabindex="-1"></a><span class="do">## null is true:</span></span>
+<span id="cb947-2"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-2" aria-hidden="true" tabindex="-1"></a>beta[<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb947-3"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-3" aria-hidden="true" tabindex="-1"></a>nsim<span class="ot">&lt;-</span><span class="dv">100</span></span>
+<span id="cb947-4"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-4" aria-hidden="true" tabindex="-1"></a>significant<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim)</span>
+<span id="cb947-5"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb947-6"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb947-7"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-7" aria-hidden="true" tabindex="-1"></a><span class="co">#generate sim data:</span></span>
+<span id="cb947-8"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-8" aria-hidden="true" tabindex="-1"></a>simdat<span class="ot">&lt;-</span><span class="fu">gen_sim_lnorm2</span>(<span class="at">nitem=</span><span class="dv">16</span>,</span>
+<span id="cb947-9"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">nsubj=</span><span class="dv">42</span>,</span>
+<span id="cb947-10"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">beta=</span>beta,</span>
+<span id="cb947-11"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Sigma_u=</span>Sigma_u,</span>
+<span id="cb947-12"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Sigma_w=</span>Sigma_w,</span>
+<span id="cb947-13"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sigma_e=</span>sigma_e)</span>
+<span id="cb947-14"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb947-15"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-15" aria-hidden="true" tabindex="-1"></a><span class="do">## fit model to sim data:</span></span>
+<span id="cb947-16"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-16" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="fu">lmer</span>(<span class="fu">log</span>(rt)<span class="sc">~</span>so<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>subj)<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>item),simdat,</span>
+<span id="cb947-17"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">control=</span><span class="fu">lmerControl</span>(<span class="at">calc.derivs=</span><span class="cn">FALSE</span>))</span>
+<span id="cb947-18"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-18" aria-hidden="true" tabindex="-1"></a><span class="do">## record whether t-value is significant:</span></span>
+<span id="cb947-19"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-19" aria-hidden="true" tabindex="-1"></a>significant[i]<span class="ot">&lt;-</span><span class="fu">ifelse</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>])<span class="sc">&gt;</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb947-20"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb947-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb949"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb949-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb949-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Type I error is quite high:</span></span>
+<span id="cb949-2"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb949-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(significant)</span></code></pre></div>
+<pre><code>## [1] 0.31</code></pre>
+<p>We find that Type I error is quite high. This is the problem with fitting varying intercepts-only models that <span class="citation">Barr et al. (<a href="#ref-barr2013" role="doc-biblioref">2013</a>)</span> point out: if the data-generative process is such that varying slopes should have been included in the model, fitting a varying intercepts-only model generally will lead to Type I error inflation. Of course, the extent of the inflation will vary from data-set to data-set; no simulation can give us a general answer to the question of how much inflation will happen.</p>
 </div>
-<div id="type-i-error-with-a-varying-intercepts-and-varying-slopes-model" class="section level3" number="9.1.2">
-<h3><span class="header-section-number">9.1.2</span> Type I error with a varying intercepts and varying slopes model</h3>
-<p>Next, let’s compute Type I error for a model with varying intercepts and varying slopes, but without correlations for the random effects (because these would be difficult to estimate with the number of subjects (42) and items (16) used in <span class="citation"><a href="#ref-grodner" role="doc-biblioref">Grodner and Gibson</a> (<a href="#ref-grodner" role="doc-biblioref">2005</a>)</span>). The dependent measure is still log rt.</p>
-<div class="sourceCode" id="cb835"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb835-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-1" aria-hidden="true" tabindex="-1"></a>significant<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim)</span>
-<span id="cb835-2"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb835-3"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
-<span id="cb835-4"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-4" aria-hidden="true" tabindex="-1"></a><span class="co">#generate sim data:</span></span>
-<span id="cb835-5"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-5" aria-hidden="true" tabindex="-1"></a>simdat<span class="ot">&lt;-</span><span class="fu">gen_sim_lnorm2</span>(<span class="at">nitem=</span><span class="dv">16</span>,</span>
-<span id="cb835-6"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">nsubj=</span><span class="dv">42</span>,</span>
-<span id="cb835-7"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">beta=</span>beta,</span>
-<span id="cb835-8"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Sigma_u=</span>Sigma_u,</span>
-<span id="cb835-9"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Sigma_w=</span>Sigma_w,</span>
-<span id="cb835-10"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-10" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sigma_e=</span>sigma_e)</span>
-<span id="cb835-11"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb835-12"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-12" aria-hidden="true" tabindex="-1"></a><span class="do">## fit model to sim data:</span></span>
-<span id="cb835-13"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-13" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="fu">lmer</span>(<span class="fu">log</span>(rt)<span class="sc">~</span>so<span class="sc">+</span>(<span class="dv">1</span><span class="sc">+</span>so<span class="sc">|</span>subj)<span class="sc">+</span>(<span class="dv">1</span><span class="sc">+</span>so<span class="sc">|</span>item),simdat,</span>
-<span id="cb835-14"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">control=</span><span class="fu">lmerControl</span>(<span class="at">calc.derivs=</span><span class="cn">FALSE</span>))</span>
-<span id="cb835-15"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-15" aria-hidden="true" tabindex="-1"></a><span class="do">## is the t-value significant?</span></span>
-<span id="cb835-16"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-16" aria-hidden="true" tabindex="-1"></a>significant[i]<span class="ot">&lt;-</span><span class="fu">ifelse</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>])</span>
-<span id="cb835-17"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-17" aria-hidden="true" tabindex="-1"></a>                       <span class="sc">&gt;</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
-<span id="cb835-18"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb835-19"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb835-20"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Type I error is the expected value:</span></span>
-<span id="cb835-21"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb835-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(significant)</span></code></pre></div>
-<p>[1] 0.03</p>
-<p>Now we find that Type I error is near the expected 5%. As <span class="citation"><a href="#ref-barr2013" role="doc-biblioref">Barr et al.</a> (<a href="#ref-barr2013" role="doc-biblioref">2013</a>)</span> pointed out in their paper, when varying slopes are included, Type I error will have the expected value.</p>
+<div id="type-i-error-with-a-varying-intercepts-and-varying-slopes-model" class="section level3 hasAnchor" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Type I error with a varying intercepts and varying slopes model<a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-with-a-varying-intercepts-and-varying-slopes-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, let’s compute Type I error for a model with varying intercepts and varying slopes, but without correlations for the random effects (because these would be difficult to estimate with the number of subjects (42) and items (16) used in <span class="citation">Grodner and Gibson (<a href="#ref-grodner" role="doc-biblioref">2005</a>)</span>). The dependent measure is still log rt.</p>
+<div class="sourceCode" id="cb951"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb951-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-1" aria-hidden="true" tabindex="-1"></a>significant<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim)</span>
+<span id="cb951-2"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb951-3"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb951-4"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-4" aria-hidden="true" tabindex="-1"></a><span class="co">#generate sim data:</span></span>
+<span id="cb951-5"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-5" aria-hidden="true" tabindex="-1"></a>simdat<span class="ot">&lt;-</span><span class="fu">gen_sim_lnorm2</span>(<span class="at">nitem=</span><span class="dv">16</span>,</span>
+<span id="cb951-6"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">nsubj=</span><span class="dv">42</span>,</span>
+<span id="cb951-7"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">beta=</span>beta,</span>
+<span id="cb951-8"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Sigma_u=</span>Sigma_u,</span>
+<span id="cb951-9"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Sigma_w=</span>Sigma_w,</span>
+<span id="cb951-10"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-10" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sigma_e=</span>sigma_e)</span>
+<span id="cb951-11"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb951-12"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-12" aria-hidden="true" tabindex="-1"></a><span class="do">## fit model to sim data:</span></span>
+<span id="cb951-13"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-13" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="fu">lmer</span>(<span class="fu">log</span>(rt)<span class="sc">~</span>so<span class="sc">+</span>(<span class="dv">1</span><span class="sc">+</span>so<span class="sc">|</span>subj)<span class="sc">+</span>(<span class="dv">1</span><span class="sc">+</span>so<span class="sc">|</span>item),simdat,</span>
+<span id="cb951-14"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">control=</span><span class="fu">lmerControl</span>(<span class="at">calc.derivs=</span><span class="cn">FALSE</span>))</span>
+<span id="cb951-15"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-15" aria-hidden="true" tabindex="-1"></a><span class="do">## is the t-value significant?</span></span>
+<span id="cb951-16"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-16" aria-hidden="true" tabindex="-1"></a>significant[i]<span class="ot">&lt;-</span><span class="fu">ifelse</span>(<span class="fu">abs</span>(<span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">3</span>])</span>
+<span id="cb951-17"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-17" aria-hidden="true" tabindex="-1"></a>                       <span class="sc">&gt;</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb951-18"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb951-19"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb951-20"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Type I error is the expected value:</span></span>
+<span id="cb951-21"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb951-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(significant)</span></code></pre></div>
+<p>[1] 0.06</p>
+<p>Now we find that Type I error is near the expected 5%. As <span class="citation">Barr et al. (<a href="#ref-barr2013" role="doc-biblioref">2013</a>)</span> pointed out in their paper, when varying slopes are included, Type I error will have the expected value.</p>
 </div>
-<div id="type-i-error-inflation-due-to-model-mis-specification" class="section level3" number="9.1.3">
-<h3><span class="header-section-number">9.1.3</span> Type I error inflation due to model mis-specification</h3>
-<p>Although this point is not discussed in <span class="citation"><a href="#ref-barr2013" role="doc-biblioref">Barr et al.</a> (<a href="#ref-barr2013" role="doc-biblioref">2013</a>)</span>, an inappropriate likelihood function, like the Normal likelihood in the case where the true generative process involves a log-normal distribution, can also lead to inflated Type I error. This can happen even if the model has a full variance-covariance matrix specified for it. This is because of extreme values generated by the log-normal distribution being excessively influential in generating Type I errors.</p>
+<div id="type-i-error-inflation-due-to-model-mis-specification" class="section level3 hasAnchor" number="9.1.3">
+<h3><span class="header-section-number">9.1.3</span> Type I error inflation due to model mis-specification<a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#type-i-error-inflation-due-to-model-mis-specification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Although this point is not discussed in <span class="citation">Barr et al. (<a href="#ref-barr2013" role="doc-biblioref">2013</a>)</span>, an inappropriate likelihood function, like the Normal likelihood in the case where the true generative process involves a log-normal distribution, can also lead to inflated Type I error. This can happen even if the model has a full variance-covariance matrix specified for it. This is because of extreme values generated by the log-normal distribution being excessively influential in generating Type I errors.</p>
 <p>Type I error is inflated even with a maximal model if the likelihood is mis-specified:</p>
-<div class="sourceCode" id="cb836"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb836-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb836-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(significantlog)</span></code></pre></div>
-<pre><code>## [1] 0.08</code></pre>
-<div class="sourceCode" id="cb838"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb838-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb838-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(significantraw)</span></code></pre></div>
-<pre><code>## [1] 0.11</code></pre>
+<div class="sourceCode" id="cb952"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb952-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb952-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(significantlog)</span></code></pre></div>
+<pre><code>## [1] 0.04</code></pre>
+<div class="sourceCode" id="cb954"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb954-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb954-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(significantraw)</span></code></pre></div>
+<pre><code>## [1] 0.12</code></pre>
 <p>One can also compare the estimates (along with their 95% confidence intervals) that were significant in the raw and log ms scales:</p>
-<div class="sourceCode" id="cb840"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb840-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb840-1" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(.<span class="dv">3</span>)</span>
-<span id="cb840-2"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb840-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ests, <span class="fu">aes</span>(<span class="at">x=</span>n, <span class="at">y=</span>mn, <span class="at">colour=</span>transform, <span class="at">group=</span>transform)) <span class="sc">+</span> <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>lower, <span class="at">ymax=</span>upper),</span>
-<span id="cb840-3"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb840-3" aria-hidden="true" tabindex="-1"></a><span class="at">width=</span>.<span class="dv">2</span>, <span class="at">size=</span><span class="fl">0.25</span>, <span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">position=</span>pd) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">position=</span>pd) <span class="sc">+</span></span>
-<span id="cb840-4"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb840-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="at">position=</span>pd, <span class="at">size=</span><span class="fl">2.5</span>)<span class="sc">+</span><span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
-<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-374-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb841"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb841-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb841-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(ests,<span class="fu">tapply</span>(width,transform,mean))</span></code></pre></div>
+<div class="sourceCode" id="cb956"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb956-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb956-1" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(.<span class="dv">3</span>)</span>
+<span id="cb956-2"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb956-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ests, <span class="fu">aes</span>(<span class="at">x=</span>n, <span class="at">y=</span>mn, <span class="at">colour=</span>transform, <span class="at">group=</span>transform)) <span class="sc">+</span> <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>lower, <span class="at">ymax=</span>upper),</span>
+<span id="cb956-3"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb956-3" aria-hidden="true" tabindex="-1"></a><span class="at">width=</span>.<span class="dv">2</span>, <span class="at">size=</span><span class="fl">0.25</span>, <span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">position=</span>pd) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">position=</span>pd) <span class="sc">+</span></span>
+<span id="cb956-4"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb956-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="at">position=</span>pd, <span class="at">size=</span><span class="fl">2.5</span>)<span class="sc">+</span><span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="Freq_CogSci_files/figure-html/unnamed-chunk-381-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb957"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb957-1"><a href="overly-simple-random-effects-structure-in-lmms-inflate-type-i-error.html#cb957-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(ests,<span class="fu">tapply</span>(width,transform,mean))</span></code></pre></div>
 <pre><code>##   log   raw 
-## 65.43 85.39</code></pre>
+## 71.59 94.42</code></pre>
 <p>We see that the effect estimates that were significant were based on over-/mis-estimates on the raw scale (the true effect is 0 ms).</p>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-barr2013" class="csl-entry">
 Barr, Dale J, Roger Levy, Christoph Scheepers, and Harry J Tily. 2013. <span>“Random Effects Structure for Confirmatory Hypothesis Testing: <span>K</span>eep It Maximal.”</span> <em>Journal of Memory and Language</em> 68 (3): 255–78.
@@ -590,7 +614,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

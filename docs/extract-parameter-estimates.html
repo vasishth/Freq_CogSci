@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.4 Extract parameter estimates | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.4 Extract parameter estimates | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="decide-on-a-range-of-plausible-values-of-the-effect-size.html"/>
 <link rel="next" href="define-a-function-for-generating-data.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,8 +391,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="extract-parameter-estimates" class="section level2" number="8.4">
-<h2><span class="header-section-number">8.4</span> Extract parameter estimates</h2>
+<div id="extract-parameter-estimates" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Extract parameter estimates<a href="extract-parameter-estimates.html#extract-parameter-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Next, in preparation for the power analysis, we extract all the parameter estimates from the model we have fit above. The parameters are:</p>
 <ul>
 <li>The two fixed effects (the <span class="math inline">\(\beta\)</span> parameters)</li>
@@ -399,38 +401,38 @@ div.csl-indent {
 <li>The standard deviations of the item intercept and slope adjustments, and the corresponding correlation matrix.</li>
 </ul>
 <p>The correlation matrices and the subject/item random effects standard deviations are used to assemble the variance covariance matrix; this is done using the <code>sdcor2cov</code> function from the <code>SIN</code> package; recall the discussion in chapter 1. For the variance covariance matrix for items random effects, we use an intermediate value of 0.5 for the correlation parameter because the linear mixed model was unable to estimate the parameter.</p>
-<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="extract-parameter-estimates.html#cb759-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> so <span class="sc">+</span></span>
-<span id="cb759-2"><a href="extract-parameter-estimates.html#cb759-2" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span></span>
-<span id="cb759-3"><a href="extract-parameter-estimates.html#cb759-3" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
-<span id="cb759-4"><a href="extract-parameter-estimates.html#cb759-4" aria-hidden="true" tabindex="-1"></a><span class="at">data =</span> gg05e1,</span>
-<span id="cb759-5"><a href="extract-parameter-estimates.html#cb759-5" aria-hidden="true" tabindex="-1"></a><span class="do">## &quot;switch off&quot; warnings:</span></span>
-<span id="cb759-6"><a href="extract-parameter-estimates.html#cb759-6" aria-hidden="true" tabindex="-1"></a><span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb759-7"><a href="extract-parameter-estimates.html#cb759-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb759-8"><a href="extract-parameter-estimates.html#cb759-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb759-9"><a href="extract-parameter-estimates.html#cb759-9" aria-hidden="true" tabindex="-1"></a><span class="do">## extract parameter estimates:</span></span>
-<span id="cb759-10"><a href="extract-parameter-estimates.html#cb759-10" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[, <span class="dv">1</span>], <span class="dv">4</span>)</span>
-<span id="cb759-11"><a href="extract-parameter-estimates.html#cb759-11" aria-hidden="true" tabindex="-1"></a>sigma_e <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m), <span class="st">&quot;sc&quot;</span>), <span class="dv">2</span>)</span>
-<span id="cb759-12"><a href="extract-parameter-estimates.html#cb759-12" aria-hidden="true" tabindex="-1"></a>subj_ranefsd <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>subject, <span class="st">&quot;stddev&quot;</span>), <span class="dv">4</span>)</span>
-<span id="cb759-13"><a href="extract-parameter-estimates.html#cb759-13" aria-hidden="true" tabindex="-1"></a>subj_ranefcorr <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>subject, <span class="st">&quot;corr&quot;</span>), <span class="dv">1</span>)</span>
-<span id="cb759-14"><a href="extract-parameter-estimates.html#cb759-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb759-15"><a href="extract-parameter-estimates.html#cb759-15" aria-hidden="true" tabindex="-1"></a><span class="do">## assemble variance-covariance matrix for subjects:</span></span>
-<span id="cb759-16"><a href="extract-parameter-estimates.html#cb759-16" aria-hidden="true" tabindex="-1"></a>Sigma_u <span class="ot">&lt;-</span> SIN<span class="sc">::</span><span class="fu">sdcor2cov</span>(</span>
-<span id="cb759-17"><a href="extract-parameter-estimates.html#cb759-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">stddev =</span> subj_ranefsd,</span>
-<span id="cb759-18"><a href="extract-parameter-estimates.html#cb759-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">corr =</span> subj_ranefcorr</span>
-<span id="cb759-19"><a href="extract-parameter-estimates.html#cb759-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb759-20"><a href="extract-parameter-estimates.html#cb759-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb759-21"><a href="extract-parameter-estimates.html#cb759-21" aria-hidden="true" tabindex="-1"></a>item_ranefsd <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>item, <span class="st">&quot;stddev&quot;</span>), <span class="dv">4</span>)</span>
-<span id="cb759-22"><a href="extract-parameter-estimates.html#cb759-22" aria-hidden="true" tabindex="-1"></a>item_ranefcorr <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>item, <span class="st">&quot;corr&quot;</span>), <span class="dv">1</span>)</span>
-<span id="cb759-23"><a href="extract-parameter-estimates.html#cb759-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb759-24"><a href="extract-parameter-estimates.html#cb759-24" aria-hidden="true" tabindex="-1"></a><span class="do">## assemble variance matrix for items:</span></span>
-<span id="cb759-25"><a href="extract-parameter-estimates.html#cb759-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb759-26"><a href="extract-parameter-estimates.html#cb759-26" aria-hidden="true" tabindex="-1"></a><span class="do">## choose some intermediate values for correlations:</span></span>
-<span id="cb759-27"><a href="extract-parameter-estimates.html#cb759-27" aria-hidden="true" tabindex="-1"></a>corr_matrix <span class="ot">&lt;-</span> (<span class="fu">diag</span>(<span class="dv">2</span>) <span class="sc">+</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>)) <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb759-28"><a href="extract-parameter-estimates.html#cb759-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb759-29"><a href="extract-parameter-estimates.html#cb759-29" aria-hidden="true" tabindex="-1"></a>Sigma_w <span class="ot">&lt;-</span> SIN<span class="sc">::</span><span class="fu">sdcor2cov</span>(</span>
-<span id="cb759-30"><a href="extract-parameter-estimates.html#cb759-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">stddev =</span> item_ranefsd,</span>
-<span id="cb759-31"><a href="extract-parameter-estimates.html#cb759-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">corr =</span> corr_matrix</span>
-<span id="cb759-32"><a href="extract-parameter-estimates.html#cb759-32" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb855-1"><a href="extract-parameter-estimates.html#cb855-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(logrt <span class="sc">~</span> so <span class="sc">+</span></span>
+<span id="cb855-2"><a href="extract-parameter-estimates.html#cb855-2" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subject) <span class="sc">+</span></span>
+<span id="cb855-3"><a href="extract-parameter-estimates.html#cb855-3" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item),</span>
+<span id="cb855-4"><a href="extract-parameter-estimates.html#cb855-4" aria-hidden="true" tabindex="-1"></a><span class="at">data =</span> gg05e1,</span>
+<span id="cb855-5"><a href="extract-parameter-estimates.html#cb855-5" aria-hidden="true" tabindex="-1"></a><span class="do">## &quot;switch off&quot; warnings:</span></span>
+<span id="cb855-6"><a href="extract-parameter-estimates.html#cb855-6" aria-hidden="true" tabindex="-1"></a><span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb855-7"><a href="extract-parameter-estimates.html#cb855-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb857"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb857-1"><a href="extract-parameter-estimates.html#cb857-1" aria-hidden="true" tabindex="-1"></a><span class="do">## extract parameter estimates:</span></span>
+<span id="cb857-2"><a href="extract-parameter-estimates.html#cb857-2" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[, <span class="dv">1</span>], <span class="dv">4</span>)</span>
+<span id="cb857-3"><a href="extract-parameter-estimates.html#cb857-3" aria-hidden="true" tabindex="-1"></a>sigma_e <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m), <span class="st">&quot;sc&quot;</span>), <span class="dv">2</span>)</span>
+<span id="cb857-4"><a href="extract-parameter-estimates.html#cb857-4" aria-hidden="true" tabindex="-1"></a>subj_ranefsd <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>subject, <span class="st">&quot;stddev&quot;</span>), <span class="dv">4</span>)</span>
+<span id="cb857-5"><a href="extract-parameter-estimates.html#cb857-5" aria-hidden="true" tabindex="-1"></a>subj_ranefcorr <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>subject, <span class="st">&quot;corr&quot;</span>), <span class="dv">1</span>)</span>
+<span id="cb857-6"><a href="extract-parameter-estimates.html#cb857-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb857-7"><a href="extract-parameter-estimates.html#cb857-7" aria-hidden="true" tabindex="-1"></a><span class="do">## assemble variance-covariance matrix for subjects:</span></span>
+<span id="cb857-8"><a href="extract-parameter-estimates.html#cb857-8" aria-hidden="true" tabindex="-1"></a>Sigma_u <span class="ot">&lt;-</span> SIN<span class="sc">::</span><span class="fu">sdcor2cov</span>(</span>
+<span id="cb857-9"><a href="extract-parameter-estimates.html#cb857-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">stddev =</span> subj_ranefsd,</span>
+<span id="cb857-10"><a href="extract-parameter-estimates.html#cb857-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">corr =</span> subj_ranefcorr</span>
+<span id="cb857-11"><a href="extract-parameter-estimates.html#cb857-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb857-12"><a href="extract-parameter-estimates.html#cb857-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb857-13"><a href="extract-parameter-estimates.html#cb857-13" aria-hidden="true" tabindex="-1"></a>item_ranefsd <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>item, <span class="st">&quot;stddev&quot;</span>), <span class="dv">4</span>)</span>
+<span id="cb857-14"><a href="extract-parameter-estimates.html#cb857-14" aria-hidden="true" tabindex="-1"></a>item_ranefcorr <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">attr</span>(<span class="fu">VarCorr</span>(m)<span class="sc">$</span>item, <span class="st">&quot;corr&quot;</span>), <span class="dv">1</span>)</span>
+<span id="cb857-15"><a href="extract-parameter-estimates.html#cb857-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb857-16"><a href="extract-parameter-estimates.html#cb857-16" aria-hidden="true" tabindex="-1"></a><span class="do">## assemble variance matrix for items:</span></span>
+<span id="cb857-17"><a href="extract-parameter-estimates.html#cb857-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb857-18"><a href="extract-parameter-estimates.html#cb857-18" aria-hidden="true" tabindex="-1"></a><span class="do">## choose some intermediate values for correlations:</span></span>
+<span id="cb857-19"><a href="extract-parameter-estimates.html#cb857-19" aria-hidden="true" tabindex="-1"></a>corr_matrix <span class="ot">&lt;-</span> (<span class="fu">diag</span>(<span class="dv">2</span>) <span class="sc">+</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>)) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb857-20"><a href="extract-parameter-estimates.html#cb857-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb857-21"><a href="extract-parameter-estimates.html#cb857-21" aria-hidden="true" tabindex="-1"></a>Sigma_w <span class="ot">&lt;-</span> SIN<span class="sc">::</span><span class="fu">sdcor2cov</span>(</span>
+<span id="cb857-22"><a href="extract-parameter-estimates.html#cb857-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">stddev =</span> item_ranefsd,</span>
+<span id="cb857-23"><a href="extract-parameter-estimates.html#cb857-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">corr =</span> corr_matrix</span>
+<span id="cb857-24"><a href="extract-parameter-estimates.html#cb857-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
             </section>
 
@@ -498,7 +500,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

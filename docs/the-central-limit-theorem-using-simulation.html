@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.2 The central limit theorem using simulation | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.2 The central limit theorem using simulation | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="some-terminology-surrounding-typical-experiment-designs-in-linguistics-and-psychology.html"/>
 <link rel="next" href="three-examples-of-the-sampling-distribution.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,18 +391,18 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-central-limit-theorem-using-simulation" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> The central limit theorem using simulation</h2>
+<div id="the-central-limit-theorem-using-simulation" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> The central limit theorem using simulation<a href="the-central-limit-theorem-using-simulation.html#the-central-limit-theorem-using-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Suppose we collect some data, which can be represented by a vector <span class="math inline">\(y\)</span>; this is a <em>single sample</em>. Given data <span class="math inline">\(y\)</span>, and assuming for concreteness that the underlying likelihood is a <span class="math inline">\(Normal(\mu=500,\sigma=100)\)</span>, the sample mean and standard deviation, <span class="math inline">\(\bar{y}\)</span> and <span class="math inline">\(s\)</span> give us an estimate of the unknown parameters mean <span class="math inline">\(\mu\)</span> and the standard deviation <span class="math inline">\(\sigma\)</span> of the distribution from which we assume that our data come from. Figure <a href="the-central-limit-theorem-using-simulation.html#fig:normalsample">2.1</a> shows the distribution of a particular sample, where the number of data points is <span class="math inline">\(n=1000\)</span>. Note that in this example the parameters are specified by us, so they are not unknown; in a real data-collection situation, the sample mean and standard deviation are all we have as estimates of the parameters.</p>
 
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="the-central-limit-theorem-using-simulation.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="do">## sample size:</span></span>
-<span id="cb114-2"><a href="the-central-limit-theorem-using-simulation.html#cb114-2" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">1000</span></span>
-<span id="cb114-3"><a href="the-central-limit-theorem-using-simulation.html#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  independent and identically distributed sample:</span></span>
-<span id="cb114-4"><a href="the-central-limit-theorem-using-simulation.html#cb114-4" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="fu">rnorm</span>(n,<span class="at">mean=</span><span class="dv">500</span>,<span class="at">sd=</span><span class="dv">100</span>)</span>
-<span id="cb114-5"><a href="the-central-limit-theorem-using-simulation.html#cb114-5" aria-hidden="true" tabindex="-1"></a><span class="do">## histogram of data:</span></span>
-<span id="cb114-6"><a href="the-central-limit-theorem-using-simulation.html#cb114-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(y,<span class="at">freq=</span><span class="cn">FALSE</span>)</span>
-<span id="cb114-7"><a href="the-central-limit-theorem-using-simulation.html#cb114-7" aria-hidden="true" tabindex="-1"></a><span class="do">## true value of mean:</span></span>
-<span id="cb114-8"><a href="the-central-limit-theorem-using-simulation.html#cb114-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">500</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="the-central-limit-theorem-using-simulation.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="do">## sample size:</span></span>
+<span id="cb115-2"><a href="the-central-limit-theorem-using-simulation.html#cb115-2" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">1000</span></span>
+<span id="cb115-3"><a href="the-central-limit-theorem-using-simulation.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  independent and identically distributed sample:</span></span>
+<span id="cb115-4"><a href="the-central-limit-theorem-using-simulation.html#cb115-4" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="fu">rnorm</span>(n,<span class="at">mean=</span><span class="dv">500</span>,<span class="at">sd=</span><span class="dv">100</span>)</span>
+<span id="cb115-5"><a href="the-central-limit-theorem-using-simulation.html#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="do">## histogram of data:</span></span>
+<span id="cb115-6"><a href="the-central-limit-theorem-using-simulation.html#cb115-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(y,<span class="at">freq=</span><span class="cn">FALSE</span>)</span>
+<span id="cb115-7"><a href="the-central-limit-theorem-using-simulation.html#cb115-7" aria-hidden="true" tabindex="-1"></a><span class="do">## true value of mean:</span></span>
+<span id="cb115-8"><a href="the-central-limit-theorem-using-simulation.html#cb115-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">500</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:normalsample"></span>
 <img src="Freq_CogSci_files/figure-html/normalsample-1.svg" alt="A sample of data y of size n=1000, from the distribution Normal(500,100). The vertical line shows the true mean of the distribution we are sampling from." width="75%" />
 <p class="caption">
@@ -408,23 +410,23 @@ FIGURE 2.1: A sample of data y of size n=1000, from the distribution Normal(500,
 </p>
 </div>
 <p>Suppose now that you had not a single sample of size 1000 but many repeated samples. This isn’t something one can normally do in real life; we often run a single experiment or, at most, repeat the same experiment once. However, one can simulate repeated sampling easily within R. Let us take 100 repeated samples like the one above, and save the samples in a matrix containing <span class="math inline">\(n=1000\)</span> rows and 2000 columns, each column representing an experiment:</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="the-central-limit-theorem-using-simulation.html#cb115-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb115-2"><a href="the-central-limit-theorem-using-simulation.html#cb115-2" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb115-3"><a href="the-central-limit-theorem-using-simulation.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="do">## number of experiments:</span></span>
-<span id="cb115-4"><a href="the-central-limit-theorem-using-simulation.html#cb115-4" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
-<span id="cb115-5"><a href="the-central-limit-theorem-using-simulation.html#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="do">## store for data:</span></span>
-<span id="cb115-6"><a href="the-central-limit-theorem-using-simulation.html#cb115-6" aria-hidden="true" tabindex="-1"></a>y_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n <span class="sc">*</span> k), <span class="at">ncol =</span> k)</span>
-<span id="cb115-7"><a href="the-central-limit-theorem-using-simulation.html#cb115-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>k) {</span>
-<span id="cb115-8"><a href="the-central-limit-theorem-using-simulation.html#cb115-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">## expt result with sample size n:</span></span>
-<span id="cb115-9"><a href="the-central-limit-theorem-using-simulation.html#cb115-9" aria-hidden="true" tabindex="-1"></a>  y_matrix[, i] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
-<span id="cb115-10"><a href="the-central-limit-theorem-using-simulation.html#cb115-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="the-central-limit-theorem-using-simulation.html#cb116-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb116-2"><a href="the-central-limit-theorem-using-simulation.html#cb116-2" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb116-3"><a href="the-central-limit-theorem-using-simulation.html#cb116-3" aria-hidden="true" tabindex="-1"></a><span class="do">## number of experiments:</span></span>
+<span id="cb116-4"><a href="the-central-limit-theorem-using-simulation.html#cb116-4" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb116-5"><a href="the-central-limit-theorem-using-simulation.html#cb116-5" aria-hidden="true" tabindex="-1"></a><span class="do">## store for data:</span></span>
+<span id="cb116-6"><a href="the-central-limit-theorem-using-simulation.html#cb116-6" aria-hidden="true" tabindex="-1"></a>y_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n <span class="sc">*</span> k), <span class="at">ncol =</span> k)</span>
+<span id="cb116-7"><a href="the-central-limit-theorem-using-simulation.html#cb116-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>k) {</span>
+<span id="cb116-8"><a href="the-central-limit-theorem-using-simulation.html#cb116-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">## expt result with sample size n:</span></span>
+<span id="cb116-9"><a href="the-central-limit-theorem-using-simulation.html#cb116-9" aria-hidden="true" tabindex="-1"></a>  y_matrix[, i] <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
+<span id="cb116-10"><a href="the-central-limit-theorem-using-simulation.html#cb116-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Now, if we compute the means <span class="math inline">\(\bar{y}_k\)</span> of <em>each</em> of the <span class="math inline">\(k=1,\dots,100\)</span> experiments we just carried out, if certain conditions are met, these means will be normally distributed, with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma/\sqrt{n}\)</span>. To understand this point, it is useful to first visualize the distribution of means and graphically summarize this standard deviation, which confusingly is called <em>standard error</em>.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="the-central-limit-theorem-using-simulation.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="do">## compute means from each replication:</span></span>
-<span id="cb116-2"><a href="the-central-limit-theorem-using-simulation.html#cb116-2" aria-hidden="true" tabindex="-1"></a>y_means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(y_matrix)</span>
-<span id="cb116-3"><a href="the-central-limit-theorem-using-simulation.html#cb116-3" aria-hidden="true" tabindex="-1"></a><span class="do">## the mean and sd (=standard error) of the means</span></span>
-<span id="cb116-4"><a href="the-central-limit-theorem-using-simulation.html#cb116-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y_means)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="the-central-limit-theorem-using-simulation.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="do">## compute means from each replication:</span></span>
+<span id="cb117-2"><a href="the-central-limit-theorem-using-simulation.html#cb117-2" aria-hidden="true" tabindex="-1"></a>y_means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(y_matrix)</span>
+<span id="cb117-3"><a href="the-central-limit-theorem-using-simulation.html#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="do">## the mean and sd (=standard error) of the means</span></span>
+<span id="cb117-4"><a href="the-central-limit-theorem-using-simulation.html#cb117-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y_means)</span></code></pre></div>
 <pre><code>## [1] 500</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="the-central-limit-theorem-using-simulation.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(y_means)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="the-central-limit-theorem-using-simulation.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(y_means)</span></code></pre></div>
 <pre><code>## [1] 3.115</code></pre>
 <div class="figure"><span style="display:block;" id="fig:sdsmnormal"></span>
 <img src="Freq_CogSci_files/figure-html/sdsmnormal-1.svg" alt="Sampling from a normal distribution (left); and the sampling distribution of the means under repeated sampling (right). The right-hand plot shows an overlaid normal distribution, and the standard deviation (standard error) as error bars." width="75%" />
@@ -432,16 +434,17 @@ FIGURE 2.1: A sample of data y of size n=1000, from the distribution Normal(500,
 FIGURE 2.2: Sampling from a normal distribution (left); and the sampling distribution of the means under repeated sampling (right). The right-hand plot shows an overlaid normal distribution, and the standard deviation (standard error) as error bars.
 </p>
 </div>
-<p>The sampling distribution of means has a normal distribution provided two conditions are met: (a) the sample size should be ``large enough’’, and (b) <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are defined for the probability density or mass function that generated the data. This fact is called the <strong>central limit theorem</strong> (CLT). The significance of the CLT for us as researchers is that from the summary statistics computed from a <em>single</em> sample, we can obtain an estimate of this distribution of means: <span class="math inline">\(Normal(\bar{y},s/\sqrt{n})\)</span>.</p>
+<p>The sampling distribution of means has a normal distribution provided two conditions are met: (a) the sample size should be “large enough”, and (b) <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are defined for the probability density or mass function that generated the data.</p>
+<p>The statement in the preceding sentence is called the <strong>central limit theorem</strong> (CLT). The significance of the CLT for us as researchers is that from the summary statistics computed from a <em>single</em> sample, we can obtain an estimate of the sampling distribution of the sample mean: <span class="math inline">\(Normal(\bar{y},s/\sqrt{n})\)</span>.</p>
 <div class="blackbox">
 <div data-latex="">
-<p><strong>Derivation of the sampling distribution of the mean</strong></p>
+<p><strong>Derivation of the sampling distribution of the sample mean</strong></p>
 </div>
 <p>The statement that the sampling distribution of the meas will be normal, with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma/\sqrt{n}\)</span>, can be derived formally through a simple application of random variable theory. Suppose that we gather independent and identically distributed data <span class="math inline">\(y_1, \dots, y_n\)</span>, each of which is assumed to be generated by a random variable <span class="math inline">\(Y\sim Normal(\mu,\sigma)\)</span>.</p>
 <p>When we compute the mean <span class="math inline">\(\bar{y}\)</span> for each sample, we are assuming that each of the means is coming from a random variable <span class="math inline">\(\bar{Y}\)</span>, which is just a linear combination of values generated by instances of the random variable <span class="math inline">\(Y\)</span>, which itself has a pdf with mean (expectation) <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>:</p>
 <p><span class="math display">\[\begin{equation}
 \bar{Y}=\frac{1}{n} \sum_{i=1}^n Y = \frac{1}{n}Y_1 + \dots + \frac{1}{n}Y_n
- \end{equation}\]</span></p>
+\end{equation}\]</span></p>
 <p>So, the expectation of <span class="math inline">\(\bar{Y}\)</span> is</p>
 <p><span class="math display">\[\begin{equation}
 \begin{split}
@@ -476,8 +479,8 @@ E[\bar{Y}] = \mu \quad Var(\bar{Y}) = \frac{\sigma^2}{n}
 \end{equation}\]</span></p>
 </div>
 <p>The above means that we can estimate the expectation <span class="math inline">\(\bar{Y}\)</span> and the variance of <span class="math inline">\(\bar{Y}\)</span> from a <em>single</em> sample. (Of course, whether these estimates are accurate or not is subject to variation, as we will see below).</p>
-<p><strong>Central Limit Theorem</strong></p>
-<p>Let <span class="math inline">\(f(Y)\)</span> be the pdf of a random variable <span class="math inline">\(Y\)</span>, and assume that the pdf has mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. Then, the distribution of the mean <span class="math inline">\(\bar{Y}\)</span> has the following form when the sample size <span class="math inline">\(n\)</span> is large:</p>
+<p>One way to state the central limit theorem is as follows.
+Let <span class="math inline">\(f(Y)\)</span> be the pdf of a random variable <span class="math inline">\(Y\)</span>, and assume that the pdf has mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. Then, the distribution of the mean <span class="math inline">\(\bar{Y}\)</span> has the following form when the sample size <span class="math inline">\(n\)</span> is large:</p>
 <p><span class="math display">\[\begin{equation}
 \bar{Y} \sim Normal(\mu,\sigma^2/n)  
 \end{equation}\]</span></p>
@@ -493,11 +496,11 @@ E[\bar{Y}] = \mu \quad Var(\bar{Y}) = \frac{\sigma^2}{n}
 Z = \frac{\bar{Y}-\mu}{\sigma/\sqrt{n}}
 \end{equation}\]</span></p>
 <p>is the standard normal distribution (<span class="math inline">\(\mathit{normal}(\mu=0,\sigma=1)\)</span>).</p>
-<p>For a formal proof, see p. 267 of <span class="citation"><a href="#ref-millermiller" role="doc-biblioref">Miller and Miller</a> (<a href="#ref-millermiller" role="doc-biblioref">2004</a>)</span>.</p>
+<p>For a formal proof, see p. 267 of <span class="citation">Miller and Miller (<a href="#ref-millermiller" role="doc-biblioref">2004</a>)</span>.</p>
 </div>
 <p>The theorem is stated in terms of <span class="math inline">\(Z\)</span> and not <span class="math inline">\(\bar{Y}\)</span> as presented above; this is because the variance of <span class="math inline">\(\bar{Y}\)</span> approaches 0 as n approaches infinity (because <span class="math inline">\(\sigma/\sqrt{n}\)</span> will approach 0). But the way that we present the central limit theorem above is fine if we are talking about large <span class="math inline">\(n\)</span> (and not about <span class="math inline">\(n\)</span> approaching infinity).</p>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-millermiller" class="csl-entry">
 Miller, I., and M. Miller. 2004. <em>John e. Freund’s Mathematical Statistics with Applications</em>. Prentice Hall.
@@ -569,7 +572,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

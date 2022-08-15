@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.1 Discrete random variables: An example using the Binomial distribution | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.1 Discrete random variables: An example using the Binomial distribution | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="some-important-facts-about-distributions.html"/>
 <link rel="next" href="continuous-random-variables-an-example-using-the-normal-distribution.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,9 +391,9 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="discrete-random-variables-an-example-using-the-binomial-distribution" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Discrete random variables: An example using the Binomial distribution</h2>
-<p>Imagine that our data come from a grammaticality judgement task (participants see or hear sentences and have to decide whether these are grammatical or ungrammatical), and that the responses from participants are a sequence of 1’s and 0’s, where 1 represents the judgment “grammatical,” and 0 represents the judgement “ungrammatical.” Assume also that each response, coded as 1 or 0, is generated independently from the others. We can simulate the outcome of such an experiment (i.e., a sequence of 1s and 0s) in R. Let’s generate the outcome of 20 such experiments with a sample size of 10 (i.e., each experiment provides us with 10 responses). For each experiment, we count the number of 1s (or number of “successes”). The R code that generated this output will be explained soon.</p>
+<div id="discrete-random-variables-an-example-using-the-binomial-distribution" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Discrete random variables: An example using the Binomial distribution<a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#discrete-random-variables-an-example-using-the-binomial-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Imagine that our data come from a grammaticality judgement task (participants see or hear sentences and have to decide whether these are grammatical or ungrammatical), and that the responses from participants are a sequence of 1’s and 0’s, where 1 represents the judgment “grammatical”, and 0 represents the judgement “ungrammatical”. Assume also that each response, coded as 1 or 0, is generated independently from the others. We can simulate the outcome of such an experiment (i.e., a sequence of 1s and 0s) in R. Let’s generate the outcome of 20 such experiments with a sample size of 10 (i.e., each experiment provides us with 10 responses). For each experiment, we count the number of 1s (or number of “successes”). The R code that generated this output will be explained soon.</p>
 <pre><code>##  [1] 7 7 4 7 6 5 6 3 6 6 5 6 7 4 5 7 8 3 5 5</code></pre>
 <p>Outcomes such as this one (i.e., number of successes for a variable with two possible outcomes) follow a probability distribution p(Y). In more technical terms, we can say that the number of successes in each of the <span class="math inline">\(20\)</span> simulated experiments above is being generated by a <em>discrete random variable</em> <span class="math inline">\(Y\)</span> which has associated with it a probability distribution <span class="math inline">\(p(Y)\)</span> called the <strong>Binomial distribution</strong>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>As mentioned above, for a discrete random variable, the probability distribution <span class="math inline">\(p(Y)\)</span> is called a <strong>probability mass function</strong> (PMF). The PMF defines the probability of each possible outcome. In the above example, with <span class="math inline">\(n=10\)</span> trials, there are 11 possible outcomes: <span class="math inline">\(0,\dots,10\)</span> successes. Which of these outcomes is most probable depends on a numerical value called a <em>parameter</em> in the Binomial distribution that represents the probability of success. We will call this parameter <span class="math inline">\(\theta\)</span>; because it represents a probability, it must have a value between 0 and 1. The left-hand side plot in Figure <a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#fig:binomplot">1.1</a> shows an example of a Binomial PMF with <span class="math inline">\(10\)</span> trials and the parameter <span class="math inline">\(\theta\)</span> fixed at value <span class="math inline">\(0.5\)</span>. Setting <span class="math inline">\(\theta\)</span> to 0.5 leads to a PMF where the most probable outcome is 5 successes out of 10. If we had set <span class="math inline">\(\theta\)</span> to, say 0.1, then the most probable outcome would be 1 success out of 10; and if we had set <span class="math inline">\(\theta\)</span> to 0.9, then the most probable outcome would be 9 successes out of 10.</p>
@@ -404,18 +406,18 @@ FIGURE 1.1: Probability mass functions of a binomial distribution assuming 10 tr
 </div>
 <p>The probability mass function for the binomial is written as follows.</p>
 <p><span class="math display">\[\begin{equation}
-\hbox{Binomial}(k|n,\theta) = 
+\hbox{Binomial}(k|n,\theta) =
 \binom{n}{k} \theta^{k} (1-\theta)^{n-k}
 \end{equation}\]</span></p>
 <p>Here, <span class="math inline">\(n\)</span> represents the total number of trials, <span class="math inline">\(k\)</span> the number of successes, and <span class="math inline">\(\theta\)</span> the probability of success. The term <span class="math inline">\(\binom{n}{k}\)</span>, pronounced n-choose-k, represents the number of ways in which one can choose <span class="math inline">\(k\)</span> successes out of <span class="math inline">\(n\)</span> trials. For example, 1 success out of 10 can occur in 10 possible ways: the very first trial could be a 1, the second trial could be a 1, etc.
 The term <span class="math inline">\(\binom{n}{k}\)</span> expands to <span class="math inline">\(\frac{n!}{k!(n-k)!}\)</span>; the exclamation mark is the factorial (e.g., <span class="math inline">\(3!=3\times 2\times 1\)</span>). In <code>R</code>, <span class="math inline">\(\binom{n}{k}\)</span> is computed using the function <code>choose(n,k)</code>, with <span class="math inline">\(n\)</span> and <span class="math inline">\(k\)</span> representing positive integer values.</p>
-<div id="the-mean-and-variance-of-the-binomial-distribution" class="section level3" number="1.1.1">
-<h3><span class="header-section-number">1.1.1</span> The mean and variance of the Binomial distribution</h3>
+<div id="the-mean-and-variance-of-the-binomial-distribution" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> The mean and variance of the Binomial distribution<a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#the-mean-and-variance-of-the-binomial-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It is possible to analytically compute the mean and variance of the PMF associated with the Binomial random variable <span class="math inline">\(Y\)</span>. Without getting into the details of how these are derived mathematically, we just state here that the mean of <span class="math inline">\(Y\)</span> (also called the expectation, conventionally written <span class="math inline">\(E[Y]\)</span>) and variance of <span class="math inline">\(Y\)</span> (written <span class="math inline">\(Var(Y)\)</span>) of a Binomial distribution with parameter <span class="math inline">\(\theta\)</span> and <span class="math inline">\(n\)</span> trials are <span class="math inline">\(E[Y] = n\theta\)</span> and <span class="math inline">\(Var(Y) = n\theta (1-\theta)\)</span>.</p>
 <p>Of course, we always know <span class="math inline">\(n\)</span> (because we decide on the number of trials ourselves), but in real experimental situations we never know the true value of <span class="math inline">\(\theta\)</span>. But <span class="math inline">\(\theta\)</span> can be estimated from the data. From the observed data, we can compute the estimate of <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\hat \theta=k/n\)</span>. The quantity <span class="math inline">\(\hat \theta\)</span> is the observed proportion of successes, and is called the <strong>maximum likelihood estimate</strong> of the true (but unknown mean). Once we have estimated <span class="math inline">\(\theta\)</span> in this way, we can also obtain an estimate (also a maximum likelihood estimate) of the variance by computing <span class="math inline">\(n\hat\theta (1-\hat\theta)\)</span>. These estimates are then used for statistical inference.</p>
 <p>What does the term “maximum likelihood estimate” mean? The term <strong>likelihood</strong> refers to the value of the Binomial distribution function for a particular value of <span class="math inline">\(\theta\)</span>, once we have observed some data. For example, suppose you record <span class="math inline">\(n=10\)</span> trials, and observe <span class="math inline">\(k=7\)</span> successes. What is the probability of observing <span class="math inline">\(7\)</span> successes out of <span class="math inline">\(10\)</span>? We need the binomial distribution to compute this value:</p>
 <p><span class="math display">\[\begin{equation}
-\hbox{Binomial}(k=7|n=10,\theta) = 
+\hbox{Binomial}(k=7|n=10,\theta) =
 \binom{10}{7} \theta^{7} (1-\theta)^{10-7}
 \end{equation}\]</span></p>
 <p>Once we have observed the data, both <span class="math inline">\(n\)</span> and <span class="math inline">\(k\)</span> are fixed. The only variable in the above equation now is <span class="math inline">\(\theta\)</span>: the above function is now only dependent on the value of <span class="math inline">\(\theta\)</span>. When the data are fixed, the probability mass function is only dependent on the value of the parameter <span class="math inline">\(\theta\)</span>, and is called a <strong>likelihood function</strong>. It is therefore often expressed as a function of <span class="math inline">\(\theta\)</span>:</p>
@@ -430,11 +432,11 @@ FIGURE 1.2: The likelihood function for 7 successes out of 10.
 </div>
 <p>What is important about this plot is that it shows that, given the data, the maximum point is at the point <span class="math inline">\(0.7\)</span>, which corresponds to the estimated mean using the formula shown above: <span class="math inline">\(k/n = 7/10\)</span>. Thus, the maximum likelihood estimate (MLE) gives us the most likely value of the parameter <span class="math inline">\(\theta\)</span> given the data. It is crucial to note here that the phrase “most likely” does not mean that the MLE from a <em>particular</em> sample of data invariably gives us an accurate estimate of <span class="math inline">\(\theta\)</span>. For example, if we run our experiment for <span class="math inline">\(10\)</span> trials and get <span class="math inline">\(1\)</span> success out of <span class="math inline">\(10\)</span>, the MLE is <span class="math inline">\(0.10\)</span>. We could have happened to observe only one success out of ten even if the true <span class="math inline">\(\theta\)</span> were <span class="math inline">\(0.5\)</span>. The MLE would however give an accurate estimate of the true parameter <span class="math inline">\(\theta\)</span> as <span class="math inline">\(n\)</span> approaches infinity.</p>
 </div>
-<div id="what-information-does-a-probability-distribution-provide" class="section level3" number="1.1.2">
-<h3><span class="header-section-number">1.1.2</span> What information does a probability distribution provide?</h3>
+<div id="what-information-does-a-probability-distribution-provide" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> What information does a probability distribution provide?<a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#what-information-does-a-probability-distribution-provide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>What good is a probability mass function? We consider this question next. A lot of important information can be extracted from a PMF.</p>
-<div id="compute-the-probability-of-a-particular-outcome-discrete-case-only" class="section level4" number="1.1.2.1">
-<h4><span class="header-section-number">1.1.2.1</span> Compute the probability of a particular outcome (discrete case only)</h4>
+<div id="compute-the-probability-of-a-particular-outcome-discrete-case-only" class="section level4 hasAnchor" number="1.1.2.1">
+<h4><span class="header-section-number">1.1.2.1</span> Compute the probability of a particular outcome (discrete case only)<a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#compute-the-probability-of-a-particular-outcome-discrete-case-only" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The Binomial distribution shown in Figure <a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#fig:binomplot">1.1</a> already displays the probability of each possible outcome under a different value for <span class="math inline">\(\theta\)</span>. In <code>R</code>, there is a built-in function that allows us to calculate <span class="math inline">\(P(Y=k)\)</span>, the probability in the random variable <span class="math inline">\(Y\)</span> of <span class="math inline">\(k\)</span> successes out of <span class="math inline">\(n\)</span>, given a particular value of <span class="math inline">\(k\)</span> (this number constitutes our data), the number of trials <span class="math inline">\(n\)</span>, and given a particular value of <span class="math inline">\(\theta\)</span>; this is the <code>dbinom</code> function. For example, the probability of 5 successes out of 10 when <span class="math inline">\(\theta\)</span> is <span class="math inline">\(0.5\)</span> is:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#cb2-1" aria-hidden="true" tabindex="-1"></a>(prob <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="dv">5</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>))</span></code></pre></div>
 <pre><code>## [1] 0.2461</code></pre>
@@ -449,8 +451,8 @@ FIGURE 1.2: The likelihood function for 7 successes out of 10.
 <pre><code>## [1] 0.001488 0.102919</code></pre>
 <p>The above command prints out the probability of 5 successes out of 10, when <span class="math inline">\(\theta=0.1\)</span> and <span class="math inline">\(\theta=0.7\)</span>.</p>
 </div>
-<div id="compute-the-cumulative-probability-of-k-or-less-more-than-k-successes" class="section level4" number="1.1.2.2">
-<h4><span class="header-section-number">1.1.2.2</span> Compute the cumulative probability of k or less (more) than k successes</h4>
+<div id="compute-the-cumulative-probability-of-k-or-less-more-than-k-successes" class="section level4 hasAnchor" number="1.1.2.2">
+<h4><span class="header-section-number">1.1.2.2</span> Compute the cumulative probability of k or less (more) than k successes<a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#compute-the-cumulative-probability-of-k-or-less-more-than-k-successes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Instead of the probability of obtaining a given number of successes we could be interested in knowing the cumulative probability of obtaining 1 or less, or 2 or less successes. Formally, we will write this cumulative probability as <span class="math inline">\(F(2)\)</span>, and more generally, as <span class="math inline">\(F(k)\)</span>, for a particular value of <span class="math inline">\(k\)</span>. Thus, <span class="math inline">\(F(k)=P(Y\leq k)\)</span>.</p>
 <p>We can compute this cumulative probability with the <code>dbinom</code> function, through a simple summation procedure:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## the cumulative probability of obtaining</span></span>
@@ -461,7 +463,7 @@ FIGURE 1.2: The likelihood function for 7 successes out of 10.
 <pre><code>## [1] 0.05469</code></pre>
 <p>Mathematically, we could write the above summation as:</p>
 <p><span class="math display">\[\begin{equation}
-\sum_{k=0}^2 \binom{n}{k} \theta^{k} (1-\theta)^{n-k} 
+\sum_{k=0}^2 \binom{n}{k} \theta^{k} (1-\theta)^{n-k}
 \end{equation}\]</span></p>
 <p>An alternative to the cumbersome addition in the R code above is this more compact statement, which closely mimics the above mathematical expression:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">dbinom</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>))</span></code></pre></div>
@@ -480,15 +482,15 @@ FIGURE 1.3: The cumulative distribution function for a binomial distribution ass
 </p>
 </div>
 </div>
-<div id="compute-the-inverse-of-the-cumulative-distribution-function-the-quantile-function" class="section level4" number="1.1.2.3">
-<h4><span class="header-section-number">1.1.2.3</span> Compute the inverse of the cumulative distribution function (the quantile function)</h4>
+<div id="compute-the-inverse-of-the-cumulative-distribution-function-the-quantile-function" class="section level4 hasAnchor" number="1.1.2.3">
+<h4><span class="header-section-number">1.1.2.3</span> Compute the inverse of the cumulative distribution function (the quantile function)<a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#compute-the-inverse-of-the-cumulative-distribution-function-the-quantile-function" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We can also find out the value of the variable <span class="math inline">\(k\)</span> (the quantile) such that the probability of obtaining <span class="math inline">\(k\)</span> or less than <span class="math inline">\(k\)</span> successes is some specific probability value <span class="math inline">\(p\)</span>. If we switch the x and y axes of Figure <a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#fig:binomcdf">1.3</a>, we obtain another very useful function, the inverse CDF.</p>
 <p>The inverse of the CDF (known as the quantile function in R because it returns the quantile, the value k) is available in R as the function <code>qbinom</code>. The usage is as follows: to find out what the value <span class="math inline">\(k\)</span> of the outcome is such that the probability of obtaining <span class="math inline">\(k\)</span> or less successes is <span class="math inline">\(0.37\)</span>, type:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qbinom</span>(<span class="fl">0.37</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 </div>
-<div id="generate-random-data-from-a-hboxbinomialntheta-distribution" class="section level4" number="1.1.2.4">
-<h4><span class="header-section-number">1.1.2.4</span> Generate random data from a <span class="math inline">\(\hbox{Binomial}(n,\theta)\)</span> distribution</h4>
+<div id="generate-random-data-from-a-hboxbinomialntheta-distribution" class="section level4 hasAnchor" number="1.1.2.4">
+<h4><span class="header-section-number">1.1.2.4</span> Generate random data from a <span class="math inline">\(\hbox{Binomial}(n,\theta)\)</span> distribution<a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#generate-random-data-from-a-hboxbinomialntheta-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We can generate random simulated data from a Binomial distribution by specifying the number of trials and the probability of success <span class="math inline">\(\theta\)</span>. In <code>R</code>, we do this in the following way:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="discrete-random-variables-an-example-using-the-binomial-distribution.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>##  [1] 1 0 1 1 0 1 0 1 0 1</code></pre>
@@ -579,7 +581,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

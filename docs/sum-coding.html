@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.2 Sum coding | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.2 Sum coding | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="from-the-t-test-to-the-linear-mixed-model.html"/>
 <link rel="next" href="checking-model-assumptions.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,38 +391,38 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sum-coding" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Sum coding</h2>
+<div id="sum-coding" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Sum coding<a href="sum-coding.html#sum-coding" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We have established so far that the mathematical form of the model is:</p>
 <p><span class="math display">\[\begin{equation}
 rawRT = \beta_0 + \beta_1 condition + \varepsilon
 \end{equation}\]</span></p>
-<p>We can change the contrast coding of the <code>condition</code> vector in the following way. First, recode the levels of the condition column as shown below.</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="sum-coding.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="do">## new contrast coding:</span></span>
-<span id="cb271-2"><a href="sum-coding.html#cb271-2" aria-hidden="true" tabindex="-1"></a>bysubj<span class="sc">$</span>cond <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bysubj<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
-<p>Now, the two conditions are coded not as 0, 1 but as -1 and +1:</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="sum-coding.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> cond <span class="sc">+</span> condition, bysubj)</span></code></pre></div>
+<p>An important change that we will make now is to the contrast coding of the <code>condition</code> vector. First, recode the levels of the condition column as shown below.</p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="sum-coding.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="do">## new contrast coding:</span></span>
+<span id="cb289-2"><a href="sum-coding.html#cb289-2" aria-hidden="true" tabindex="-1"></a>bysubj<span class="sc">$</span>cond <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bysubj<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<p>Now, the two conditions are coded not as 0, 1 but as -1 and +1. This new coding is stored in a new column called <code>cond</code> (of course, one can call it anything one likes). It is always a good idea to quickly carry out a sanity check to ensure that the coding is correct. One way to do this is by comparing the <code>cond</code> column with the <code>condition</code> column. Many a data analysis has gone awry because the researcher neglected to check that their coding was set up the way they wanted it!</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="sum-coding.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span> cond <span class="sc">+</span> condition, bysubj)</span></code></pre></div>
 <pre><code>##     condition
 ## cond objgap subjgap
 ##   -1      0      42
 ##   1      42       0</code></pre>
-<p>With this coding, the model parameters have a different meaning:</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="sum-coding.html#cb274-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(rawRT <span class="sc">~</span> cond, bysubj)</span>
-<span id="cb274-2"><a href="sum-coding.html#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(m1))</span></code></pre></div>
+<p>With this coding, the <span class="math inline">\(\beta\)</span> parameters have a different meaning:</p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="sum-coding.html#cb292-1" aria-hidden="true" tabindex="-1"></a>m1raw <span class="ot">&lt;-</span> <span class="fu">lm</span>(rawRT <span class="sc">~</span> cond, bysubj)</span>
+<span id="cb292-2"><a href="sum-coding.html#cb292-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(m1raw))</span></code></pre></div>
 <pre><code>## (Intercept)        cond 
 ##         420          51</code></pre>
 <ul>
-<li>The intercept now represents the grand mean processing time: <span class="math inline">\(\hat \beta_0=420\)</span>.</li>
-<li>The mean object relative processing time is now: <span class="math inline">\(\hat\beta_0+\hat\beta_1\times 1=420+51=471\)</span>.</li>
-<li>The mean subject relative processing time is: <span class="math inline">\(\hat\beta_0+\hat\beta_1\times (-1)=420-51=369\)</span>.</li>
+<li>The intercept now represents the grand mean reading time: the estimate from the data is <span class="math inline">\(\hat \beta_0=420\)</span>.</li>
+<li>The estimated mean object relative reading time is: <span class="math inline">\(\hat\beta_0+\hat\beta_1\times 1=420+51=471\)</span>.</li>
+<li>The estimated mean subject relative reading time is: <span class="math inline">\(\hat\beta_0+\hat\beta_1\times (-1)=420-51=369\)</span>.</li>
 </ul>
-<p>This kind of parameterization is called <em>sum-to-zero contrast</em> or more simply <em>sum contrast</em> coding. This is the coding we will use most frequently in this book. We will elaborate on contrast coding in a later chapter; there, the advantages of sum coding over treatment coding will become clear. For now, it is sufficient to understand that one can <em>reparametrize</em> the model using different contrast codings, and that such a reparametrization impacts the interpretation of the parameters.</p>
+<p>This kind of parametrization is called <em>sum-to-zero contrast</em> or more simply <em>sum contrast</em> coding. This is the coding we will use most frequently in this book. Contrast coding will be elaborated on in a later chapter; there, the advantages of sum coding over treatment coding will become clear. For now, it is sufficient to understand that one can <em>reparametrize</em> the model using different kinds of contrast coding, and that such a reparametrization impacts the interpretation of the parameters.</p>
 <p>With sum coding, the null hypothesis for the slope is</p>
 <p><span class="math display">\[\begin{equation}
 H_0: \mathbf{1\times} \mu_{obj} + (\mathbf{-1}) \times\mu_{subj} = 0   
 \end{equation}\]</span></p>
-<p>The sum contrast coding of +1 standing for object relatives and -1 standing for subject relatives in the linear model directly refer to the <span class="math inline">\(\pm 1\)</span> coefficients in the null hypothesis above.
-Now the model is as follows.</p>
+<p>The sum contrast coding of <span class="math inline">\(+1\)</span> standing for object relatives and <span class="math inline">\(-1\)</span> standing for subject relatives in the linear model directly refer to the <span class="math inline">\(\pm 1\)</span> coefficients in the null hypothesis above.
+Now the model, using the estimates based on the data, is as follows.</p>
 <p>Object relative reading times:</p>
 <p><span class="math display">\[\begin{equation}
 rt = 420\mathbf{\times 1} + 51\mathbf{\times 1} + \varepsilon
@@ -433,7 +435,19 @@ rt = 420\mathbf{\times 1} + 51\mathbf{\times (-1)} + \varepsilon
 <p><span class="math display">\[\begin{equation}
 rt = 420 + 51\times condition + \varepsilon
 \end{equation}\]</span></p>
-<p>The term <span class="math inline">\(\varepsilon\)</span> is call the residuals; it is the amount by which the observed data deviate from the values predicted by the above model. For example, suppose that a data point for a subject relative condition is 400 ms. The model predicts a reading time of 420-51=369 ms. The residual for that data point would be 400-369= 31. Another example: suppose that a data point for an object relative condition is 200 ms. The model predicts the object relative to be 420+51=471. The residual for that data point would then be 200-471=-271. Thus, the residual is the amount of the discrepancy between the model’s predicted reading time and the actually observed reading time.</p>
+<p>The numerical values in the vector <span class="math inline">\(\varepsilon\)</span> are called the residuals; these numbers represent the amount by which the observed data (the column <code>rawRT</code> in the data) deviate from the predicted values in the above model.</p>
+<p>To see what the residuals are, first compute the reading times predicted by the intercept and slope estimates from the model output:</p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="sum-coding.html#cb294-1" aria-hidden="true" tabindex="-1"></a>b0<span class="ot">&lt;-</span><span class="fu">coef</span>(m1raw)[<span class="dv">1</span>]</span>
+<span id="cb294-2"><a href="sum-coding.html#cb294-2" aria-hidden="true" tabindex="-1"></a>b1<span class="ot">&lt;-</span><span class="fu">coef</span>(m1raw)[<span class="dv">2</span>]</span>
+<span id="cb294-3"><a href="sum-coding.html#cb294-3" aria-hidden="true" tabindex="-1"></a>bysubj<span class="sc">$</span>predicted<span class="ot">&lt;-</span>b0 <span class="sc">+</span> b1<span class="sc">*</span>bysubj<span class="sc">$</span>cond</span></code></pre></div>
+<p>Now compute the difference between the observed and predicted values. These are the residuals.</p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="sum-coding.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bysubj<span class="sc">$</span>rawRT<span class="sc">-</span>bysubj<span class="sc">$</span>predicted,<span class="at">n=</span><span class="dv">6</span>)</span></code></pre></div>
+<pre><code>## [1] -136.36  -51.99 -224.11  145.01  -75.61 -141.11</code></pre>
+<p>Notice that the fitted model’s residuals are identical to the values we computed above:</p>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="sum-coding.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">residuals</span>(m1raw)[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span></code></pre></div>
+<pre><code>##       1       2       3       4       5       6 
+## -136.36  -51.99 -224.11  145.01  -75.61 -141.11</code></pre>
+<p>Whenever a residual is negative in sign, this means that the corresponding observed data point in the <code>rawRT</code> column is faster than the predicted value from the linear model.</p>
 </div>
             </section>
 
@@ -501,7 +515,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.6 Shrinkage in linear mixed models | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.6 Shrinkage in linear mixed models | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="linear-mixed-models.html"/>
 <link rel="next" href="summary-2.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,50 +391,189 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="shrinkage-in-linear-mixed-models" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> Shrinkage in linear mixed models</h2>
-<p>The estimate of the effect for each participant computed from a linear mixed model is “pushed” towards the grand mean effect compared to when we fit a separate linear model to each subject’s data.
-This is called “shrinkage” in linear mixed models. We say that the individual-level estimates are shrunk towards the mean slope.
-The less data we have from a given subject, the greater the shrinkage.</p>
+<div id="shrinkage-in-linear-mixed-models" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Shrinkage in linear mixed models<a href="shrinkage-in-linear-mixed-models.html#shrinkage-in-linear-mixed-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The estimate of the effect for each participant computed from a linear mixed model “gravitates” towards the grand mean effect compared to when we fit a separate linear model to each subject’s data.
+This is called shrinkage in linear mixed models. We say that the individual-level estimates are shrunk towards the mean estimates over the entire data (the intercept and slope parameter estimates for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>).
+The more extreme the data from a given subject relative to the mean estimates from the data set, or the less data we have from a given subject, the greater the shrinkage. Let’s think about these two situations next.</p>
+<div id="shrinkage-of-extreme-estimates-from-individual-subjects" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Shrinkage of extreme estimates from individual subjects<a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Figure <a href="shrinkage-in-linear-mixed-models.html#fig:shrinkage">3.16</a> shows the data from three subjects who exhibit implausibly large effects of the OR-SR effect in the data. Subjects 28, 36, and 37’s estimates from the <code>lmList</code> model are as follows. These three subjects’ intercept and slope estimates are both in the upper third quantile of the respective distributions.</p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="shrinkage-in-linear-mixed-models.html#cb363-1" aria-hidden="true" tabindex="-1"></a>lmlist_m1 <span class="ot">&lt;-</span> <span class="fu">lmList</span>(logrt <span class="sc">~</span> so <span class="sc">|</span> subject, gg05e1)</span>
+<span id="cb363-2"><a href="shrinkage-in-linear-mixed-models.html#cb363-2" aria-hidden="true" tabindex="-1"></a>coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(lmlist_m1)</span>
+<span id="cb363-3"><a href="shrinkage-in-linear-mixed-models.html#cb363-3" aria-hidden="true" tabindex="-1"></a>intercepts <span class="ot">&lt;-</span> coefs[<span class="dv">1</span>]</span>
+<span id="cb363-4"><a href="shrinkage-in-linear-mixed-models.html#cb363-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(intercepts)</span></code></pre></div>
+<pre><code>##   (Intercept)  
+##  Min.   :5.14  
+##  1st Qu.:5.71  
+##  Median :5.84  
+##  Mean   :5.88  
+##  3rd Qu.:6.05  
+##  Max.   :6.62</code></pre>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="shrinkage-in-linear-mixed-models.html#cb365-1" aria-hidden="true" tabindex="-1"></a>intercepts<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>[<span class="dv">28</span>];</span></code></pre></div>
+<pre><code>## [1] 6.1</code></pre>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="shrinkage-in-linear-mixed-models.html#cb367-1" aria-hidden="true" tabindex="-1"></a>intercepts<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>[<span class="dv">36</span>];</span></code></pre></div>
+<pre><code>## [1] 6.009</code></pre>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="shrinkage-in-linear-mixed-models.html#cb369-1" aria-hidden="true" tabindex="-1"></a>intercepts<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>[<span class="dv">37</span>]</span></code></pre></div>
+<pre><code>## [1] 6.617</code></pre>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="shrinkage-in-linear-mixed-models.html#cb371-1" aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">&lt;-</span> coefs[<span class="dv">2</span>]</span>
+<span id="cb371-2"><a href="shrinkage-in-linear-mixed-models.html#cb371-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(slopes)</span></code></pre></div>
+<pre><code>##        so         
+##  Min.   :-0.1610  
+##  1st Qu.:-0.0218  
+##  Median : 0.0503  
+##  Mean   : 0.0620  
+##  3rd Qu.: 0.1281  
+##  Max.   : 0.4481</code></pre>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="shrinkage-in-linear-mixed-models.html#cb373-1" aria-hidden="true" tabindex="-1"></a>slopes<span class="sc">$</span>so[<span class="dv">28</span>];slopes<span class="sc">$</span>so[<span class="dv">36</span>];slopes<span class="sc">$</span>so[<span class="dv">37</span>]</span></code></pre></div>
+<pre><code>## [1] 0.4481</code></pre>
+<pre><code>## [1] 0.3825</code></pre>
+<pre><code>## [1] 0.3554</code></pre>
+<p>On the millisecond scale, the median reading times are implausibly large:</p>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="shrinkage-in-linear-mixed-models.html#cb377-1" aria-hidden="true" tabindex="-1"></a><span class="do">## subject 28&#39;s RC effect estimate:</span></span>
+<span id="cb377-2"><a href="shrinkage-in-linear-mixed-models.html#cb377-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(intercepts<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>[<span class="dv">28</span>]<span class="sc">+</span></span>
+<span id="cb377-3"><a href="shrinkage-in-linear-mixed-models.html#cb377-3" aria-hidden="true" tabindex="-1"></a>      slopes<span class="sc">$</span>so[<span class="dv">28</span>])<span class="sc">-</span></span>
+<span id="cb377-4"><a href="shrinkage-in-linear-mixed-models.html#cb377-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>(intercepts<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>[<span class="dv">28</span>]<span class="sc">-</span></span>
+<span id="cb377-5"><a href="shrinkage-in-linear-mixed-models.html#cb377-5" aria-hidden="true" tabindex="-1"></a>        slopes<span class="sc">$</span>so[<span class="dv">28</span>])</span></code></pre></div>
+<pre><code>## [1] 413.2</code></pre>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="shrinkage-in-linear-mixed-models.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="do">## subject 36&#39;s RC effect estimate:</span></span>
+<span id="cb379-2"><a href="shrinkage-in-linear-mixed-models.html#cb379-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(intercepts<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>[<span class="dv">36</span>]<span class="sc">+</span></span>
+<span id="cb379-3"><a href="shrinkage-in-linear-mixed-models.html#cb379-3" aria-hidden="true" tabindex="-1"></a>      slopes<span class="sc">$</span>so[<span class="dv">36</span>])<span class="sc">-</span></span>
+<span id="cb379-4"><a href="shrinkage-in-linear-mixed-models.html#cb379-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>(intercepts<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>[<span class="dv">36</span>]<span class="sc">-</span></span>
+<span id="cb379-5"><a href="shrinkage-in-linear-mixed-models.html#cb379-5" aria-hidden="true" tabindex="-1"></a>        slopes<span class="sc">$</span>so[<span class="dv">36</span>])</span></code></pre></div>
+<pre><code>## [1] 319.1</code></pre>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="shrinkage-in-linear-mixed-models.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="do">## subject 37&#39;s RC effect estimate:</span></span>
+<span id="cb381-2"><a href="shrinkage-in-linear-mixed-models.html#cb381-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(intercepts<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>[<span class="dv">37</span>]<span class="sc">+</span></span>
+<span id="cb381-3"><a href="shrinkage-in-linear-mixed-models.html#cb381-3" aria-hidden="true" tabindex="-1"></a>      slopes<span class="sc">$</span>so[<span class="dv">37</span>])<span class="sc">-</span></span>
+<span id="cb381-4"><a href="shrinkage-in-linear-mixed-models.html#cb381-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>(intercepts<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>[<span class="dv">37</span>]<span class="sc">-</span></span>
+<span id="cb381-5"><a href="shrinkage-in-linear-mixed-models.html#cb381-5" aria-hidden="true" tabindex="-1"></a>        slopes<span class="sc">$</span>so[<span class="dv">37</span>])</span></code></pre></div>
+<pre><code>## [1] 542.7</code></pre>
+<p>Subject 37’s estimate is the largest of all on the millisecond scale because that subject has the slowest average reading time of all the 42 subjects: a median of 748 ms. When we back-transform the estimates from the log ms to the ms scale, the non-linearity of the log scale has the effect that larger intercepts will translate to much larger mean effects of the OR-SR difference. For example, a slope of 0.3 on the log ms scale will translate to a much larger effect on the ms scale if the intercept is larger:</p>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="shrinkage-in-linear-mixed-models.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">5</span><span class="fl">+0.3</span>)<span class="sc">-</span><span class="fu">exp</span>(<span class="dv">5</span><span class="fl">-0.3</span>)</span></code></pre></div>
+<pre><code>## [1] 90.39</code></pre>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="shrinkage-in-linear-mixed-models.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">6</span><span class="fl">+0.3</span>)<span class="sc">-</span><span class="fu">exp</span>(<span class="dv">6</span><span class="fl">-0.3</span>)</span></code></pre></div>
+<pre><code>## [1] 245.7</code></pre>
+<p>Interestingly, if these three extreme subjects’ data are removed and a one-sample t-test is done on the slopes (the repeated measures regression), the t-value is just on the border of being significant. Compare the t-test on the full data vs. data without these unusual subjects:</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="shrinkage-in-linear-mixed-models.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="do">## full data:</span></span>
+<span id="cb387-2"><a href="shrinkage-in-linear-mixed-models.html#cb387-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(<span class="fu">t.test</span>(slopes<span class="sc">$</span>so))</span></code></pre></div>
+<pre><code>## [1] &quot;t(41)=2.81 p=0.008&quot;
+## [1] &quot;est.: 0.06 [0.02,0.11] ms&quot;</code></pre>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="shrinkage-in-linear-mixed-models.html#cb389-1" aria-hidden="true" tabindex="-1"></a><span class="do">## without subjects 28, 36, and 37:</span></span>
+<span id="cb389-2"><a href="shrinkage-in-linear-mixed-models.html#cb389-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(<span class="fu">t.test</span>(slopes<span class="sc">$</span>so[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">28</span>,<span class="dv">36</span>,<span class="dv">37</span>)]))</span></code></pre></div>
+<pre><code>## [1] &quot;t(38)=2.03 p=0.049&quot;
+## [1] &quot;est.: 0.04 [0,0.07] ms&quot;</code></pre>
+<p>The linear mixed model even shows that the relative clause effect <em>disappears</em> if the data from these three subjects are removed:</p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="shrinkage-in-linear-mixed-models.html#cb391-1" aria-hidden="true" tabindex="-1"></a>gg05e1_a<span class="ot">&lt;-</span><span class="fu">subset</span>(gg05e1,</span>
+<span id="cb391-2"><a href="shrinkage-in-linear-mixed-models.html#cb391-2" aria-hidden="true" tabindex="-1"></a>                 subject<span class="sc">!=</span><span class="dv">28</span> <span class="sc">&amp;</span> </span>
+<span id="cb391-3"><a href="shrinkage-in-linear-mixed-models.html#cb391-3" aria-hidden="true" tabindex="-1"></a>                 subject<span class="sc">!=</span><span class="dv">36</span> <span class="sc">&amp;</span> </span>
+<span id="cb391-4"><a href="shrinkage-in-linear-mixed-models.html#cb391-4" aria-hidden="true" tabindex="-1"></a>                 subject<span class="sc">!=</span><span class="dv">37</span>)</span>
+<span id="cb391-5"><a href="shrinkage-in-linear-mixed-models.html#cb391-5" aria-hidden="true" tabindex="-1"></a>m4_lmer_a<span class="ot">&lt;-</span><span class="fu">lmer</span>(logrt<span class="sc">~</span>so <span class="sc">+</span></span>
+<span id="cb391-6"><a href="shrinkage-in-linear-mixed-models.html#cb391-6" aria-hidden="true" tabindex="-1"></a>                  (<span class="dv">1</span><span class="sc">+</span>so<span class="sc">|</span>subject)<span class="sc">+</span></span>
+<span id="cb391-7"><a href="shrinkage-in-linear-mixed-models.html#cb391-7" aria-hidden="true" tabindex="-1"></a>                  (<span class="dv">1</span><span class="sc">+</span>so<span class="sc">||</span>item),gg05e1_a)</span>
+<span id="cb391-8"><a href="shrinkage-in-linear-mixed-models.html#cb391-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m4_lmer_a)<span class="sc">$</span>coefficients</span></code></pre></div>
+<pre><code>##             Estimate Std. Error t value
+## (Intercept)  5.85543    0.05134 114.048
+## so           0.03642    0.01987   1.832</code></pre>
+<p>The advantage of shrinkage is that these extreme subjects’ estimates are shrunk towards the grand mean in the linear mixed model. Compare the estimates from the <code>lmList</code> model (the repeated measures regression that analyzes each subject separately) with those from the linear mixed model:</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="shrinkage-in-linear-mixed-models.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="do">## slope estimates from lmList:</span></span>
+<span id="cb393-2"><a href="shrinkage-in-linear-mixed-models.html#cb393-2" aria-hidden="true" tabindex="-1"></a>slopes<span class="sc">$</span>so[<span class="dv">28</span>];slopes<span class="sc">$</span>so[<span class="dv">36</span>];slopes<span class="sc">$</span>so[<span class="dv">37</span>]</span></code></pre></div>
+<pre><code>## [1] 0.4481</code></pre>
+<pre><code>## [1] 0.3825</code></pre>
+<pre><code>## [1] 0.3554</code></pre>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="shrinkage-in-linear-mixed-models.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="do">## extract slope estimates from m4_lmer:</span></span>
+<span id="cb397-2"><a href="shrinkage-in-linear-mixed-models.html#cb397-2" aria-hidden="true" tabindex="-1"></a>b1<span class="ot">&lt;-</span><span class="fu">fixef</span>(m4_lmer)[<span class="dv">2</span>]</span>
+<span id="cb397-3"><a href="shrinkage-in-linear-mixed-models.html#cb397-3" aria-hidden="true" tabindex="-1"></a>lmerslopes<span class="ot">&lt;-</span>b1<span class="sc">+</span><span class="fu">ranef</span>(m4_lmer)<span class="sc">$</span>subject[,<span class="dv">2</span>]</span>
+<span id="cb397-4"><a href="shrinkage-in-linear-mixed-models.html#cb397-4" aria-hidden="true" tabindex="-1"></a>lmerslopes[<span class="dv">28</span>];lmerslopes[<span class="dv">36</span>];lmerslopes[<span class="dv">37</span>]</span></code></pre></div>
+<pre><code>## [1] 0.2757</code></pre>
+<pre><code>## [1] 0.234</code></pre>
+<pre><code>## [1] 0.2804</code></pre>
+<p>The above example illustrates one important achievement of the linear mixed model: it conservatively down-weights extreme estimates of the slope for particular subjects toward the grand mean slope. This down-weighting is sometimes referred to as “shrinkage”, and sometimes as “borrowing strength from the mean”. Figure <a href="shrinkage-in-linear-mixed-models.html#fig:shrinkage">3.16</a> illustrates the above discussion graphically.</p>
 <div class="figure"><span style="display:block;" id="fig:shrinkage"></span>
-<img src="Freq_CogSci_files/figure-html/shrinkage-1.svg" alt="The figures show linear model fits (the grand mean estimates) for three subjects; shown are the simple linear model fit on all the data (gray line), the lmList model fit to the individual subject's data (black line), and the linear mixed model fit (the broken line). In all three subjects' models, the linear mixed model estimates are shrunk towards the grand mean (gray line) estimates." width="75%" />
+<img src="Freq_CogSci_files/figure-html/shrinkage-1.svg" alt="The figures show linear model fits (the grand mean estimates) for three subjects with unusually large intercepts and slopes; shown are the simple linear model fit on all the data (gray line), the `lmList` model fit to the individual subject's data (black line), and the linear mixed model fit (the broken line). In all three subjects' models, the linear mixed model estimates are shrunk towards the grand mean (gray line) estimates." width="99%" />
 <p class="caption">
-FIGURE 3.1: The figures show linear model fits (the grand mean estimates) for three subjects; shown are the simple linear model fit on all the data (gray line), the lmList model fit to the individual subject’s data (black line), and the linear mixed model fit (the broken line). In all three subjects’ models, the linear mixed model estimates are shrunk towards the grand mean (gray line) estimates.
+FIGURE 3.16: The figures show linear model fits (the grand mean estimates) for three subjects with unusually large intercepts and slopes; shown are the simple linear model fit on all the data (gray line), the <code>lmList</code> model fit to the individual subject’s data (black line), and the linear mixed model fit (the broken line). In all three subjects’ models, the linear mixed model estimates are shrunk towards the grand mean (gray line) estimates.
 </p>
 </div>
-<div id="shrinkage-in-action-when-data-are-missing" class="section level4" number="3.6.0.1">
-<h4><span class="header-section-number">3.6.0.1</span> Shrinkage in action: when data are missing</h4>
-<p>The importance and value of shrinkage becomes clear once we simulate a situation where there is some missing data. Missingness can happen in experiments, either due to lost measurements (arising from computer error or programming errors), or some other reason. To see what happens when we have missing data, let’s randomly delete some data from one subject. We will randomly delete 50% of subject 37’s data:</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="shrinkage-in-linear-mixed-models.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4321</span>)</span>
-<span id="cb341-2"><a href="shrinkage-in-linear-mixed-models.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="do">## choose some data randomly to remove:</span></span>
-<span id="cb341-3"><a href="shrinkage-in-linear-mixed-models.html#cb341-3" aria-hidden="true" tabindex="-1"></a>rand <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">n =</span> <span class="dv">16</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+</div>
+<div id="shrinkage-when-data-are-missing" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Shrinkage when data are missing<a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The importance and value of shrinkage becomes even clearer once we simulate a situation where there is some missing data. Missingness can happen in experiments, either due to lost measurements (arising from computer error or programming errors), or some other reason. To see what happens when we have missing data, let’s randomly delete some data from one subject. We will randomly delete 50% of subject 37’s data:</p>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="shrinkage-in-linear-mixed-models.html#cb401-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4321</span>)</span>
+<span id="cb401-2"><a href="shrinkage-in-linear-mixed-models.html#cb401-2" aria-hidden="true" tabindex="-1"></a><span class="do">## choose some data randomly to remove:</span></span>
+<span id="cb401-3"><a href="shrinkage-in-linear-mixed-models.html#cb401-3" aria-hidden="true" tabindex="-1"></a>rand <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">n =</span> <span class="dv">16</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <p>Here are subject 37’s reading times (16 data points):</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="shrinkage-in-linear-mixed-models.html#cb342-1" aria-hidden="true" tabindex="-1"></a>gg05e1[<span class="fu">which</span>(gg05e1<span class="sc">$</span>subject <span class="sc">==</span> <span class="dv">37</span>), ]<span class="sc">$</span>rawRT</span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="shrinkage-in-linear-mixed-models.html#cb402-1" aria-hidden="true" tabindex="-1"></a>gg05e1[<span class="fu">which</span>(gg05e1<span class="sc">$</span>subject <span class="sc">==</span> <span class="dv">37</span>), ]<span class="sc">$</span>rawRT</span></code></pre></div>
 <pre><code>##  [1]  770  536  686  578  457  487 2419  884 3365  233
 ## [11]  715  671 1104  281 1081  971</code></pre>
 <p>Now, we randomly delete half the data:</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="shrinkage-in-linear-mixed-models.html#cb344-1" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>deletedRT <span class="ot">&lt;-</span> gg05e1<span class="sc">$</span>rawRT</span>
-<span id="cb344-2"><a href="shrinkage-in-linear-mixed-models.html#cb344-2" aria-hidden="true" tabindex="-1"></a>gg05e1[<span class="fu">which</span>(gg05e1<span class="sc">$</span>subject <span class="sc">==</span> <span class="dv">37</span>), ]<span class="sc">$</span>deletedRT <span class="ot">&lt;-</span></span>
-<span id="cb344-3"><a href="shrinkage-in-linear-mixed-models.html#cb344-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(rand, <span class="cn">NA</span>,</span>
-<span id="cb344-4"><a href="shrinkage-in-linear-mixed-models.html#cb344-4" aria-hidden="true" tabindex="-1"></a>    gg05e1[<span class="fu">which</span>(gg05e1<span class="sc">$</span>subject <span class="sc">==</span> <span class="dv">37</span>), ]<span class="sc">$</span>rawRT</span>
-<span id="cb344-5"><a href="shrinkage-in-linear-mixed-models.html#cb344-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p>Now subject 37’s estimates are going to be pretty wild, because they are based on much less data (even one extreme value can strongly influence the mean):</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="shrinkage-in-linear-mixed-models.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(gg05e1, subject <span class="sc">==</span> <span class="dv">37</span>)<span class="sc">$</span>deletedRT</span></code></pre></div>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="shrinkage-in-linear-mixed-models.html#cb404-1" aria-hidden="true" tabindex="-1"></a>gg05e1<span class="sc">$</span>deletedRT <span class="ot">&lt;-</span> gg05e1<span class="sc">$</span>rawRT</span>
+<span id="cb404-2"><a href="shrinkage-in-linear-mixed-models.html#cb404-2" aria-hidden="true" tabindex="-1"></a>gg05e1[<span class="fu">which</span>(gg05e1<span class="sc">$</span>subject <span class="sc">==</span> <span class="dv">37</span>), ]<span class="sc">$</span>deletedRT <span class="ot">&lt;-</span></span>
+<span id="cb404-3"><a href="shrinkage-in-linear-mixed-models.html#cb404-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(rand, <span class="cn">NA</span>,</span>
+<span id="cb404-4"><a href="shrinkage-in-linear-mixed-models.html#cb404-4" aria-hidden="true" tabindex="-1"></a>    gg05e1[<span class="fu">which</span>(gg05e1<span class="sc">$</span>subject <span class="sc">==</span> <span class="dv">37</span>), ]<span class="sc">$</span>rawRT</span>
+<span id="cb404-5"><a href="shrinkage-in-linear-mixed-models.html#cb404-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>Now subject 37’s estimates are going to be even more inaccurate than with 16 data points, because they are based on much less data (even one extreme value can strongly influence the mean):</p>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="shrinkage-in-linear-mixed-models.html#cb405-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(gg05e1, subject <span class="sc">==</span> <span class="dv">37</span>)<span class="sc">$</span>deletedRT</span></code></pre></div>
 <pre><code>##  [1]  770   NA  686  578   NA   NA   NA   NA 3365  233
 ## [11]   NA  671 1104   NA   NA  971</code></pre>
+<p>Here are the original estimates of the intercept and slope for subject 37:</p>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="shrinkage-in-linear-mixed-models.html#cb407-1" aria-hidden="true" tabindex="-1"></a>lmlist_m1_orig <span class="ot">&lt;-</span> <span class="fu">lmList</span>(<span class="fu">log</span>(rawRT) <span class="sc">~</span> so <span class="sc">|</span> subject, gg05e1)</span>
+<span id="cb407-2"><a href="shrinkage-in-linear-mixed-models.html#cb407-2" aria-hidden="true" tabindex="-1"></a>intercepts_orig<span class="ot">&lt;-</span><span class="fu">coef</span>(lmlist_m1_orig)[<span class="dv">1</span>]</span>
+<span id="cb407-3"><a href="shrinkage-in-linear-mixed-models.html#cb407-3" aria-hidden="true" tabindex="-1"></a>slopes_orig<span class="ot">&lt;-</span><span class="fu">coef</span>(lmlist_m1_orig)[<span class="dv">2</span>]</span>
+<span id="cb407-4"><a href="shrinkage-in-linear-mixed-models.html#cb407-4" aria-hidden="true" tabindex="-1"></a>(intercept_orig37<span class="ot">&lt;-</span>intercepts_orig<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>[<span class="dv">37</span>])</span></code></pre></div>
 <pre><code>## [1] 6.617</code></pre>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="shrinkage-in-linear-mixed-models.html#cb409-1" aria-hidden="true" tabindex="-1"></a>(slope_orig37<span class="ot">&lt;-</span>slopes_orig<span class="sc">$</span>so[<span class="dv">37</span>])</span></code></pre></div>
 <pre><code>## [1] 0.3554</code></pre>
+<p>Now look at the estimates based on the deleted data:</p>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="shrinkage-in-linear-mixed-models.html#cb411-1" aria-hidden="true" tabindex="-1"></a><span class="do">## on deleted data:</span></span>
+<span id="cb411-2"><a href="shrinkage-in-linear-mixed-models.html#cb411-2" aria-hidden="true" tabindex="-1"></a>lmlist_m1_deleted <span class="ot">&lt;-</span> <span class="fu">lmList</span>(<span class="fu">log</span>(deletedRT) <span class="sc">~</span> so <span class="sc">|</span> subject, gg05e1)</span>
+<span id="cb411-3"><a href="shrinkage-in-linear-mixed-models.html#cb411-3" aria-hidden="true" tabindex="-1"></a>intercepts_del <span class="ot">&lt;-</span> <span class="fu">coef</span>(lmlist_m1_deleted)[<span class="dv">1</span>]</span>
+<span id="cb411-4"><a href="shrinkage-in-linear-mixed-models.html#cb411-4" aria-hidden="true" tabindex="-1"></a>slopes_del <span class="ot">&lt;-</span> <span class="fu">coef</span>(lmlist_m1_deleted)[<span class="dv">2</span>]</span>
+<span id="cb411-5"><a href="shrinkage-in-linear-mixed-models.html#cb411-5" aria-hidden="true" tabindex="-1"></a><span class="do">## subject 37&#39;s new estimates on deleted data:</span></span>
+<span id="cb411-6"><a href="shrinkage-in-linear-mixed-models.html#cb411-6" aria-hidden="true" tabindex="-1"></a>(intercept_del37<span class="ot">&lt;-</span>intercepts_del<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>[<span class="dv">37</span>])</span></code></pre></div>
 <pre><code>## [1] 6.688</code></pre>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="shrinkage-in-linear-mixed-models.html#cb413-1" aria-hidden="true" tabindex="-1"></a>(slope_del37<span class="ot">&lt;-</span>slopes_del<span class="sc">$</span>so[<span class="dv">37</span>])</span></code></pre></div>
 <pre><code>## [1] 0.3884</code></pre>
-<p>Now fit the hierarchical model and examine subject 37’s estimates on undeleted vs deleted data:</p>
+<p>The estimates from subject 37 have become even more extreme once half the data from this subject have been deleted. The intercept goes from 6.62 in the original data to
+6.69 in the deleted data; and the slope from 0.36 in the original data to
+0.39 in the deleted data.</p>
+<p>Now fit two linear mixed models (<code>m4_lmer</code>), one with the original data, and another with the deleted data, and examine subject 37’s estimates on undeleted vs. deleted data.</p>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="shrinkage-in-linear-mixed-models.html#cb415-1" aria-hidden="true" tabindex="-1"></a>m1_lmer_orig<span class="ot">&lt;-</span><span class="fu">lmer</span>(<span class="fu">log</span>(rawRT)<span class="sc">~</span>so <span class="sc">+</span> (<span class="dv">1</span><span class="sc">+</span>so<span class="sc">|</span>subject)<span class="sc">+</span></span>
+<span id="cb415-2"><a href="shrinkage-in-linear-mixed-models.html#cb415-2" aria-hidden="true" tabindex="-1"></a>                     (<span class="dv">1</span><span class="sc">+</span>so<span class="sc">||</span>item),gg05e1)</span>
+<span id="cb415-3"><a href="shrinkage-in-linear-mixed-models.html#cb415-3" aria-hidden="true" tabindex="-1"></a>b0_orig<span class="ot">&lt;-</span><span class="fu">summary</span>(m1_lmer_orig)<span class="sc">$</span>coefficients[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb415-4"><a href="shrinkage-in-linear-mixed-models.html#cb415-4" aria-hidden="true" tabindex="-1"></a>b1_orig<span class="ot">&lt;-</span><span class="fu">summary</span>(m1_lmer_orig)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">1</span>]</span>
+<span id="cb415-5"><a href="shrinkage-in-linear-mixed-models.html#cb415-5" aria-hidden="true" tabindex="-1"></a>u_orig<span class="ot">&lt;-</span><span class="fu">ranef</span>(m1_lmer_orig)<span class="sc">$</span>subject</span>
+<span id="cb415-6"><a href="shrinkage-in-linear-mixed-models.html#cb415-6" aria-hidden="true" tabindex="-1"></a>u0_orig<span class="ot">&lt;-</span>u_orig<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span></span>
+<span id="cb415-7"><a href="shrinkage-in-linear-mixed-models.html#cb415-7" aria-hidden="true" tabindex="-1"></a>u1_orig<span class="ot">&lt;-</span>u_orig<span class="sc">$</span><span class="st">`</span><span class="at">so</span><span class="st">`</span></span>
+<span id="cb415-8"><a href="shrinkage-in-linear-mixed-models.html#cb415-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb415-9"><a href="shrinkage-in-linear-mixed-models.html#cb415-9" aria-hidden="true" tabindex="-1"></a><span class="do">## subject 37&#39;s estimates:</span></span>
+<span id="cb415-10"><a href="shrinkage-in-linear-mixed-models.html#cb415-10" aria-hidden="true" tabindex="-1"></a>b0_orig <span class="sc">+</span> u0_orig[<span class="dv">37</span>]</span></code></pre></div>
+<pre><code>## [1] 6.576</code></pre>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="shrinkage-in-linear-mixed-models.html#cb417-1" aria-hidden="true" tabindex="-1"></a>b1_orig <span class="sc">+</span> u1_orig[<span class="dv">37</span>]</span></code></pre></div>
+<pre><code>## [1] 0.2804</code></pre>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="shrinkage-in-linear-mixed-models.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="do">## LMM on the deleted data:</span></span>
+<span id="cb419-2"><a href="shrinkage-in-linear-mixed-models.html#cb419-2" aria-hidden="true" tabindex="-1"></a>m4_lmer_del<span class="ot">&lt;-</span><span class="fu">lmer</span>(<span class="fu">log</span>(deletedRT)<span class="sc">~</span>so <span class="sc">+</span> (<span class="dv">1</span><span class="sc">+</span>so<span class="sc">|</span>subject)<span class="sc">+</span></span>
+<span id="cb419-3"><a href="shrinkage-in-linear-mixed-models.html#cb419-3" aria-hidden="true" tabindex="-1"></a>                    (<span class="dv">1</span><span class="sc">+</span>so<span class="sc">||</span>item),gg05e1)</span>
+<span id="cb419-4"><a href="shrinkage-in-linear-mixed-models.html#cb419-4" aria-hidden="true" tabindex="-1"></a>b0_del<span class="ot">&lt;-</span><span class="fu">summary</span>(m4_lmer_del)<span class="sc">$</span>coefficients[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb419-5"><a href="shrinkage-in-linear-mixed-models.html#cb419-5" aria-hidden="true" tabindex="-1"></a>b1_del<span class="ot">&lt;-</span><span class="fu">summary</span>(m4_lmer_del)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">1</span>]</span>
+<span id="cb419-6"><a href="shrinkage-in-linear-mixed-models.html#cb419-6" aria-hidden="true" tabindex="-1"></a>u_del<span class="ot">&lt;-</span><span class="fu">ranef</span>(m4_lmer_del)<span class="sc">$</span>subject</span>
+<span id="cb419-7"><a href="shrinkage-in-linear-mixed-models.html#cb419-7" aria-hidden="true" tabindex="-1"></a>u0_del<span class="ot">&lt;-</span>u_del<span class="sc">$</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span></span>
+<span id="cb419-8"><a href="shrinkage-in-linear-mixed-models.html#cb419-8" aria-hidden="true" tabindex="-1"></a>u1_del<span class="ot">&lt;-</span>u_del<span class="sc">$</span><span class="st">`</span><span class="at">so</span><span class="st">`</span></span>
+<span id="cb419-9"><a href="shrinkage-in-linear-mixed-models.html#cb419-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb419-10"><a href="shrinkage-in-linear-mixed-models.html#cb419-10" aria-hidden="true" tabindex="-1"></a><span class="do">## subject 37&#39;s estimates:</span></span>
+<span id="cb419-11"><a href="shrinkage-in-linear-mixed-models.html#cb419-11" aria-hidden="true" tabindex="-1"></a>b0_del <span class="sc">+</span> u0_del[<span class="dv">37</span>] </span></code></pre></div>
+<pre><code>## [1] 6.605</code></pre>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="shrinkage-in-linear-mixed-models.html#cb421-1" aria-hidden="true" tabindex="-1"></a>b1_del <span class="sc">+</span> u1_del[<span class="dv">37</span>]</span></code></pre></div>
+<pre><code>## [1] 0.2654</code></pre>
+<p>The two intercept and slope estimates for subject 37 are pretty similar despite half the data from that subject being missing in the second analysis.</p>
+<p>Figure <a href="shrinkage-in-linear-mixed-models.html#fig:shrinkage2">3.17</a> illustrates the difference between the different models: there is hardly any difference between the two linear mixed model estimates; by contrast, the <code>lmList</code> estimates on the full vs. missing data differ quite a bit.</p>
 <div class="figure"><span style="display:block;" id="fig:shrinkage2"></span>
-<img src="Freq_CogSci_files/figure-html/shrinkage2-1.svg" alt="The figure shows linear model fits (the grand mean estimates) for subject 37. When using lmList, deleting data leads to very different estimates; but using lmer, deleting half the data from this subject hardly affects the individual subject's estimates." width="75%" />
+<img src="Freq_CogSci_files/figure-html/shrinkage2-1.svg" alt="The figure shows linear model fits (the grand mean estimates) for subject 37. When using lmList, deleting data leads to very different estimates; but using lmer, deleting half the data from this subject hardly affects the individual subject's estimates." width="99%" />
 <p class="caption">
-FIGURE 3.2: The figure shows linear model fits (the grand mean estimates) for subject 37. When using lmList, deleting data leads to very different estimates; but using lmer, deleting half the data from this subject hardly affects the individual subject’s estimates.
+FIGURE 3.17: The figure shows linear model fits (the grand mean estimates) for subject 37. When using lmList, deleting data leads to very different estimates; but using lmer, deleting half the data from this subject hardly affects the individual subject’s estimates.
 </p>
 </div>
-<p>What we see here is that the estimates from the hierarchical model are barely affected by the missingness, but the estimates from the lmList model are heavily affected.
-This means that linear mixed models will give you more robust estimates (think Type M error!) compared to models which fit data sepaarately for each subject. This property of shrinkage is one reason why linear mixed models are so important in cognitive science.</p>
+<p>The conclusion to take away from Figure <a href="shrinkage-in-linear-mixed-models.html#fig:shrinkage2">3.17</a> is that the estimates from the hierarchical model are almost unaffected by the missing data, but the estimates from the <code>lmList</code> model are heavily affected by the mis-estimation due to less data.</p>
+<p>Thus, shrinkage in linear mixed models has the beneficial effect that it yields more robust estimates (think Type M error!) compared to models which fit data separately for each subject. This property of shrinkage is one reason why linear mixed models are so important in cognitive science, and why they should be the standard workhorse for data analysis.</p>
 </div>
 </div>
             </section>
@@ -501,7 +642,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

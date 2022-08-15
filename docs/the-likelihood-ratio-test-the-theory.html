@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.1 The likelihood ratio test: The theory | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.1 The likelihood ratio test: The theory | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="hypothesis-testing-using-the-likelihood-ratio-test.html"/>
 <link rel="next" href="a-practical-example-using-simulated-data.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,33 +391,33 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-likelihood-ratio-test-the-theory" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> The likelihood ratio test: The theory</h2>
+<div id="the-likelihood-ratio-test-the-theory" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> The likelihood ratio test: The theory<a href="the-likelihood-ratio-test-the-theory.html#the-likelihood-ratio-test-the-theory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Suppose that <span class="math inline">\(X_1,\dots, X_n\)</span> are independent and normally distributed with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span> (assume for simplicity that <span class="math inline">\(\sigma\)</span> is known).</p>
 <p>Let the null hypothesis be <span class="math inline">\(H_0: \mu=\mu_0\)</span> and the alternative be <span class="math inline">\(H_1: \mu\neq \mu_0\)</span>. Here, <span class="math inline">\(\mu_0\)</span> is a number, such as <span class="math inline">\(0\)</span>.</p>
 <p>The likelihood of the data <span class="math inline">\(y\)</span> can be computed under the null model, in which <span class="math inline">\(\mu=\mu_0\)</span>, and under the alternative model, in which <span class="math inline">\(\mu\)</span> has some specific alternative value. To make this concrete, imagine 10 data points being generated from a Normal(0,1).</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="the-likelihood-ratio-test-the-theory.html#cb354-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="the-likelihood-ratio-test-the-theory.html#cb426-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span></code></pre></div>
 <p>We can compute the joint likelihood under a null hypothesis that <span class="math inline">\(\mu=0\)</span>:</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="the-likelihood-ratio-test-the-theory.html#cb355-1" aria-hidden="true" tabindex="-1"></a>likNULL <span class="ot">&lt;-</span> <span class="fu">prod</span>(<span class="fu">dnorm</span>(y, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb355-2"><a href="the-likelihood-ratio-test-the-theory.html#cb355-2" aria-hidden="true" tabindex="-1"></a>likNULL</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="the-likelihood-ratio-test-the-theory.html#cb427-1" aria-hidden="true" tabindex="-1"></a>likNULL <span class="ot">&lt;-</span> <span class="fu">prod</span>(<span class="fu">dnorm</span>(y, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb427-2"><a href="the-likelihood-ratio-test-the-theory.html#cb427-2" aria-hidden="true" tabindex="-1"></a>likNULL</span></code></pre></div>
 <pre><code>## [1] 9.151e-06</code></pre>
 <p>On the log scale, we would need to add the log likelihoods of each data point:</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="the-likelihood-ratio-test-the-theory.html#cb357-1" aria-hidden="true" tabindex="-1"></a>loglikNULL <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">dnorm</span>(y, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb357-2"><a href="the-likelihood-ratio-test-the-theory.html#cb357-2" aria-hidden="true" tabindex="-1"></a>loglikNULL</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="the-likelihood-ratio-test-the-theory.html#cb429-1" aria-hidden="true" tabindex="-1"></a>loglikNULL <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">dnorm</span>(y, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb429-2"><a href="the-likelihood-ratio-test-the-theory.html#cb429-2" aria-hidden="true" tabindex="-1"></a>loglikNULL</span></code></pre></div>
 <pre><code>## [1] -11.6</code></pre>
 <p>Similarly, we can compute the log likelihood with <span class="math inline">\(\mu\)</span> equal to the maximum likelihood estimate of <span class="math inline">\(\mu\)</span>, the sample mean.</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="the-likelihood-ratio-test-the-theory.html#cb359-1" aria-hidden="true" tabindex="-1"></a>loglikALT <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">dnorm</span>(y, <span class="at">mean =</span> <span class="fu">mean</span>(y), <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb359-2"><a href="the-likelihood-ratio-test-the-theory.html#cb359-2" aria-hidden="true" tabindex="-1"></a>loglikALT</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="the-likelihood-ratio-test-the-theory.html#cb431-1" aria-hidden="true" tabindex="-1"></a>loglikALT <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">dnorm</span>(y, <span class="at">mean =</span> <span class="fu">mean</span>(y), <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb431-2"><a href="the-likelihood-ratio-test-the-theory.html#cb431-2" aria-hidden="true" tabindex="-1"></a>loglikALT</span></code></pre></div>
 <pre><code>## [1] -11.59</code></pre>
 <p>Essentially, the likelihood ratio test compares the ratio of likelihoods of the two models; on the log scale, the difference in log likelihood is taken. This is because a ratio on the log scale becomes a difference. The likelihood ratio test then chooses the model with the higher log likelihood, provided that the higher likelihood is high enough (we will just make this more precise).</p>
 <p>One can specify the test in general terms as follows. Suppose that the likelihood is with respect to some parameter <span class="math inline">\(\theta\)</span>. We can evaluate the likelihood at <span class="math inline">\(\mu_0\)</span>, the null hypothesis value of the parameter, and evaluate the likelihood using the maximum likelihood estimate <span class="math inline">\(\hat\theta\)</span> of the parameter, as we did above. The likelihood ratio can then be written as follows:</p>
 <p><span class="math display">\[\begin{equation}
-\Lambda = \frac{max_{\theta\in \omega_0}(lik(\theta))}{max_{\theta\in \omega_1)}(lik(\theta))}
+\Lambda = \frac{max_{\theta\in \omega_0}(lik(\theta))}{max_{\theta\in \omega_1}(lik(\theta))}
 \end{equation}\]</span></p>
 <p>where, <span class="math inline">\(\omega_0=\{\mu_0\}\)</span> and <span class="math inline">\(\omega_1=\{\forall \mu \mid \mu\neq \mu_0\}\)</span>. The function max just selects the maximum value of any choices of parameter values; in the case of the null hypothesis there is only one value, <span class="math inline">\(\mu_0\)</span>. In the case of the alternative model, the maximum likelihood estimate <span class="math inline">\(\hat\theta\)</span> is the maximum value.</p>
-<p>Now, assuming that the data are coming from a normal distribution, the numerator of the likelihood ratio statistic is:</p>
+<p>Now, assuming for simplicity that the data are coming from a normal distribution, the numerator of the likelihood ratio statistic is:</p>
 <p><span class="math display">\[\begin{equation}
-lik(\theta=\mu_0) = \frac{1}{(\sigma\sqrt{2\pi})^n} 
+lik(\theta=\mu_0) = \frac{1}{(\sigma\sqrt{2\pi})^n}
            exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)
 \end{equation}\]</span></p>
 <p>For the denominator, the MLE <span class="math inline">\(\bar{X}\)</span> is taken as <span class="math inline">\(\mu\)</span>:</p>
@@ -425,47 +427,97 @@ lik(\theta=\bar{X}) =\frac{1}{(\sigma\sqrt{2\pi})^n} exp \left( -\frac{1}{2\sigm
 <p>The likelihood ratio statistic is then:</p>
 <p><span class="math display">\[\begin{equation}
 \Lambda = \frac{lik(\theta=\mu_0)}{lik(\theta=\bar{X})}=
-\frac{\frac{1}{(\sigma\sqrt{2\pi})^n} 
-           exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)}{\frac{1}{(\sigma\sqrt{2\pi})^n} 
+\frac{\frac{1}{(\sigma\sqrt{2\pi})^n}
+           exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)}{\frac{1}{(\sigma\sqrt{2\pi})^n}
            exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2  \right)}
 \end{equation}\]</span></p>
 <p>Canceling out common terms:</p>
 <p><span class="math display">\[\begin{equation}
-\Lambda = 
+\Lambda =
 \frac{exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)}{
         exp\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2  \right)}
 \end{equation}\]</span></p>
-<p>Taking logs:</p>
+<p>Taking logs and pulling out the common term:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{split}
-\log \Lambda =&amp; 
+\log \Lambda =&amp;
 \left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \mu_0)^2  \right)-\left( -\frac{1}{2\sigma^2} \sum_{i=1}^n (X_i - \bar{X})^2  \right)\\
 =&amp; -\frac{1}{2\sigma^2} \left( \sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2 \right)\\
 \end{split}
 \end{equation}\]</span></p>
-<p>Now, it is a standard algebraic trick to rewrite <span class="math inline">\(\sum_{i=1}^n (X_i -\mu_0)^2\)</span> as a sum of two terms:</p>
-<p><span class="math display">\[\begin{equation}
-\sum_{i=1}^n (X_i -\mu_0)^2 = \sum_{i=1}^n (X_i - \bar{X})^2 + n(\bar{X} - \mu_0)^2 
+<p>Now, it is a standard algebraic trick (see Box 4.1.1) to rewrite <span class="math inline">\(\sum_{i=1}^n (X_i -\mu_0)^2\)</span> as a sum of two terms:</p>
+<p><span class="math display" id="eq:simplification">\[\begin{equation}
+\sum_{i=1}^n (X_i -\mu_0)^2 = \sum_{i=1}^n (X_i - \bar{X})^2 + n(\bar{X} - \mu_0)^2
+\tag{4.1}
 \end{equation}\]</span></p>
-<p>If we rearrange terms, we obtain:</p>
+<div class="blackbox">
+<div data-latex="">
+<p><strong>An algebraic trick</strong></p>
+</div>
+<p>We are going to establish that equality <a href="the-likelihood-ratio-test-the-theory.html#eq:simplification">(4.1)</a> holds.</p>
+<p>Consider this expression: <span class="math inline">\(\sum_{i=1}^n (X_i -\mu_0)^2\)</span>.</p>
+<p>We can rewrite the terms inside the brackets in the following way:</p>
 <p><span class="math display">\[\begin{equation}
-\sum_{i=1}^n (X_i -\mu_0)^2 - \sum_{i=1}^n (X_i - \bar{X})^2 = n(\bar{X} - \mu_0)^2 
+\sum_{i=1}^n (X_i - \bar{X} + \bar{X} -\mu_0)^2
+\end{equation}\]</span></p>
+<p>Notice that <span class="math inline">\(-\bar{X} + \bar{X}\)</span> sums to 0, so the expression remains unchanged!</p>
+<p>Now, collect together the two pairs of terms inside the brackets as follows:</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i=1}^n ((X_i - \bar{X}) + (\bar{X} -\mu_0))^2
+\end{equation}\]</span></p>
+<p>What we are doing here is that we are treating <span class="math inline">\(X_i - \bar{X}\)</span> as one term, say <span class="math inline">\(a_i\)</span> (we have to use the index <span class="math inline">\(i\)</span> because of the index inside the brackets), and <span class="math inline">\(\bar{X} -\mu_0\)</span> as another term, say <span class="math inline">\(b\)</span>. So the above equation can be written simply as:</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i=1}^n (a_i + b)^2 = \sum_{i=1}^n (a_i^2 + b^2 + 2a_i b)
+\end{equation}\]</span></p>
+<p>Opening the brackets, we would rewrite this as:</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i=1}^n a_i^2 + \sum_{i=1}^nb^2 + 2\sum_{i=1}^n a_i b
+\end{equation}\]</span></p>
+<p>Instead of using <span class="math inline">\(a_i\)</span> and <span class="math inline">\(b\)</span>, we use the full expressions now:</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i=1}^n ((X_i - \bar{X})^2 + (\bar{X} -\mu_0)^2 + 2 (X_i - \bar{X})(\bar{X} -\mu_0) )
+\end{equation}\]</span></p>
+<p>If we remove the outside-most brackets, we have to move the summation term <span class="math inline">\(\sum_{i=1}^n\)</span> to each of the expressions inside the brackets:</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i=1}^n (X_i - \bar{X})^2 +\sum_{i=1}^n (\bar{X} -\mu_0)^2 +
+2\sum_{i=1}^n (X_i - \bar{X})(\bar{X} -\mu_0) )
+\end{equation}\]</span></p>
+<p>But <span class="math inline">\(\sum_{i=1}^n (\bar{X} -\mu_0)^2=n (\bar{X} -\mu_0)^2\)</span>, so we can rewrite the equation as:</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i=1}^n (X_i - \bar{X})^2 +n(\bar{X} -\mu_0)^2 +
+2\sum_{i=1}^n \times (X_i - \bar{X})(\bar{X} -\mu_0) )
+\end{equation}\]</span></p>
+<p>Also, <span class="math inline">\(\sum_{i=1}^n 2 (X_i - \bar{X}) = 0\)</span>, because the sum of all the deviations of the data <span class="math inline">\(x_i\)</span> from the mean has to sum to 0. This follows because the definition of the mean is <span class="math inline">\(\frac{\sum_i^n X_i}{n} = \bar{X}\)</span>, and that means that <span class="math inline">\(\sum_i^n X_i = n\bar{X}\)</span>, or <span class="math inline">\(X_1-\bar{X} + X_2 - \bar{X} \dots + X_n -\bar{X}=0\)</span>.</p>
+<p>The fact that <span class="math inline">\(2 \sum_{i=1}^n (X_i - \bar{X}) = 0\)</span> allows us to simplify</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i=1}^n (X_i - \bar{X})^2 +n(\bar{X} -\mu_0)^2)
+\end{equation}\]</span></p>
+<p>This proves that</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i=1}^n (X_i -\mu_0)^2 = \sum_{i=1}^n (X_i - \bar{X})^2 + n(\bar{X} - \mu_0)^2
+\end{equation}\]</span></p>
+</div>
+<p>Returning to equation <a href="the-likelihood-ratio-test-the-theory.html#eq:simplification">(4.1)</a>, if we rearrange the terms, we obtain:</p>
+<p><span class="math display" id="eq:rearrange">\[\begin{equation}
+\sum_{i=1}^n (X_i -\mu_0)^2 - \sum_{i=1}^n (X_i - \bar{X})^2 = n(\bar{X} - \mu_0)^2
+\tag{4.2}
 \end{equation}\]</span></p>
 <p>Now, we just established above that <span class="math inline">\(\log \Lambda\)</span> is:</p>
-<p><span class="math display">\[\begin{equation}
+<p><span class="math display" id="eq:loglambda2">\[\begin{equation}
 \log \Lambda= -\frac{1}{2\sigma^2} \left( \sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2 \right)
+\tag{4.3}
 \end{equation}\]</span></p>
 <p>Consider the term in the brackets:</p>
 <p><span class="math display">\[\begin{equation}
-(\sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2)
+\left(\sum_{i=1}^n (X_i - \mu_0)^2  -  \sum_{i=1}^n (X_i - \bar{X})^2\right)
 \end{equation}\]</span></p>
-<p>This can be rewritten as:</p>
-<p><span class="math display">\[\begin{equation}
+<p>Given equation <a href="the-likelihood-ratio-test-the-theory.html#eq:rearrange">(4.2)</a>, this can be rewritten as:</p>
+<p><span class="math display" id="eq:loglambda">\[\begin{equation}
 n(\bar{X} - \mu_0)^2
 \end{equation}\]</span></p>
-<p>Rewriting in this way gives us:</p>
+<p>Rewriting equation @ref\tag{4.4} in this way gives us:</p>
 <p><span class="math display">\[\begin{equation}
-\log \Lambda = -\frac{1}{2\sigma^2}   n(\bar{X} - \mu_0)^2 
+\log \Lambda = -\frac{1}{2\sigma^2}   n(\bar{X} - \mu_0)^2
 \end{equation}\]</span></p>
 <p>Rearranging terms:</p>
 <p><span class="math display">\[\begin{equation}
@@ -475,7 +527,8 @@ n(\bar{X} - \mu_0)^2
 <p><span class="math display">\[\begin{equation}
 -2 \log \Lambda =    \frac{(\bar{X} - \mu_0)^2 }{\frac{\sigma^2}{n}}
 \end{equation}\]</span></p>
-<p>This should remind you of the t-test! Basically, just like in the t-test, what this is saying is that we reject the null when <span class="math inline">\(\mid \bar{X} - \mu_0\mid\)</span>, or negative two times the difference in log likelihood, is large!</p>
+<p>This should remind you of the t-test; the above equation is the square of the formula for the t-distribution.</p>
+<p>Basically, just like in the t-test, what this is saying is that we reject the null when the distance between <span class="math inline">\(\bar{X}\)</span> and <span class="math inline">\(\mu_0\)</span> (normalized by the square of the standard error) is large. In other words, we reject the null hypothesis when negative two times the difference in log likelihood, is large.</p>
 <p>Now we will define what it means for <span class="math inline">\(-2\log \Lambda\)</span> to be large. There is a theorem in statistics that states that for large <span class="math inline">\(n\)</span>, the distribution of <span class="math inline">\(-2\log \Lambda\)</span> approaches the chi-squared distribution, with degrees of freedom corresponding to the difference in the number of parameters between the two models being compared.</p>
 <p>We will define the <em>likelihood ratio test statistic</em>, call it <span class="math inline">\(LRT\)</span>, as follows. Here, <span class="math inline">\(Lik(\theta)\)</span> refers to the likelihood given some value <span class="math inline">\(\theta\)</span> for the parameter, and
 <span class="math inline">\(logLik(\theta)\)</span> refers to the log likelihood.</p>
@@ -493,12 +546,12 @@ LRT =&amp; -2\times (Lik(\theta_0)/Lik(\theta_1)) \\
 <p>The above result is called <em>Wilks’ theorem</em>. The proof of Wilks’ theorem is fairly involved but you can find it in Lehmann’s textbook <em>Testing Statistical Hypotheses</em>.</p>
 <p>Note that sometimes you will see the form:</p>
 <p><span class="math display">\[\begin{equation}
- \log LRT = 2 \{logLik(\theta_1) - logLik(\theta_0)\}
+\log LRT = 2 \{logLik(\theta_1) - logLik(\theta_0)\}
 \end{equation}\]</span></p>
 <p>It should be clear that both statements are saying the same thing; in the second case, we are just subtracting the null hypothesis log likelihood from the alternative hypothesis log likelihood, so the negative sign disappears.</p>
-<p>That’s the theory. Let’s see how the likelihood ratio test works for (a) simulated data, and (b) our running example, the English relative clause data from <span class="citation"><a href="#ref-grodner" role="doc-biblioref">Grodner and Gibson</a> (<a href="#ref-grodner" role="doc-biblioref">2005</a>)</span>.</p>
+<p>That’s the theory. Let’s see how the likelihood ratio test works for (a) simulated data, and (b) our running example, the English relative clause data from <span class="citation">Grodner and Gibson (<a href="#ref-grodner" role="doc-biblioref">2005</a>)</span>.</p>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-grodner" class="csl-entry">
 Grodner, Daniel, and Edward Gibson. 2005. <span>“Consequences of the Serial Nature of Linguistic Input.”</span> <em>Cognitive Science</em> 29: 261–90.
@@ -570,7 +623,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

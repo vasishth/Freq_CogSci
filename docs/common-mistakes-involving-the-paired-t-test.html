@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.8 Common mistakes involving the (paired) t-test | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.8 Common mistakes involving the (paired) t-test | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="using-paired-t-tests-in-complex-factorial-designs.html"/>
 <link rel="next" href="summary-1.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,26 +391,24 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="common-mistakes-involving-the-paired-t-test" class="section level2" number="2.8">
-<h2><span class="header-section-number">2.8</span> Common mistakes involving the (paired) t-test</h2>
-<div id="ignoring-the-independence-assumption" class="section level3" number="2.8.1">
-<h3><span class="header-section-number">2.8.1</span> Ignoring the independence assumption</h3>
-<p>As also discussed above, the paired t-test assumes that each pair of data points that goes into the t-test is independent of the other pairs of data points. This implies that the data-frame cannot have more than one row for a particular pair. In other words, the data-frame cannot have repeated measurements spread out across rows.</p>
-<p>For example, doing a paired t-test on this hypothetical data-frame would be incorrect:</p>
-<p>Why? Because the assumption is that each row is independent of the others. This assumption is violated here (this is assuming that repeating the vowel from the same language will lead to some commonalities between the two repetitions).</p>
-<p>Consider another hypothetical example. In the table below, from subject 1 we see two data points each for condition a and for condition b.</p>
-<p>Here, we again have repeated measurements from subject 1. The independence assumption is violated. Erroneous analyses using t-tests abound in experimental science; for examples of these kinds of misuse of the t-test in phonetics, see <span class="citation"><a href="#ref-NicenboimRoettgeretal" role="doc-biblioref">Nicenboim, Roettger, and Vasishth</a> (<a href="#ref-NicenboimRoettgeretal" role="doc-biblioref">2018</a>)</span> and the references cited there.</p>
+<div id="common-mistakes-involving-the-paired-t-test" class="section level2 hasAnchor" number="2.8">
+<h2><span class="header-section-number">2.8</span> Common mistakes involving the (paired) t-test<a href="common-mistakes-involving-the-paired-t-test.html#common-mistakes-involving-the-paired-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ignoring-the-independence-assumption" class="section level3 hasAnchor" number="2.8.1">
+<h3><span class="header-section-number">2.8.1</span> Ignoring the independence assumption<a href="common-mistakes-involving-the-paired-t-test.html#ignoring-the-independence-assumption" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As also discussed above, the paired t-test assumes that each pair of data points that goes into the t-test is independent of the other pairs of data points. This implies that the data-frame cannot have more than one row for a particular pair. In other words, the data-frame cannot have repeated measurements. Why not? Because the assumption is that in each condition, each row is independent of the others.</p>
+<p>Consider a hypothetical example. In the table below, from subject 1 we see two data points each for condition a and for condition b.</p>
+<p>Here, we have repeated measurements from subject 1 for condition a and condition b. The independence assumption is violated. Erroneous analyses using t-tests abound in experimental science; for examples of these kinds of misuse of the t-test in phonetics, see <span class="citation">Nicenboim, Roettger, and Vasishth (<a href="#ref-NicenboimRoettgeretal" role="doc-biblioref">2018</a>)</span> and the references cited there.</p>
 <p>How to proceed when we have repeated measurements from each subject or each item?
 The solution is to aggregate the data so that each subject (or item) has only <em>one</em> value for each condition.</p>
-<p>This aggregation allows us to meet the independence assumption of the t-test, but it has a potentially huge drawback: it pretends we have one measurement from each subject for each condition.
+<p>A by-subject aggregation allows us to meet the independence assumption of the t-test, but it has a potentially huge drawback: it pretends we have one measurement from each subject for each condition.
 Later on we will learn how to analyze unaggregated data, but if we want to do a paired t-test, we have no choice but to aggregate the data in this way.</p>
-<p>Although an example of aggregation was already discussed above, it may be helpful to revisit the approach that is necessary using a fully worked example. Consider the following repeated measures data on subject versus object relative clauses in English; the data are from a self-paced reading study, Experiment 1 of <span class="citation"><a href="#ref-grodner" role="doc-biblioref">Grodner and Gibson</a> (<a href="#ref-grodner" role="doc-biblioref">2005</a>)</span>.</p>
-<p>Subject relative clauses are sentences like <em>The man who was standing near the doorway laughed</em>. Here, the phrase (called a relative clause) <em>who was standing near the doorway</em> modifies the noun phrase <em>man</em>; it is called a subject relative because the noun phrase <em>man</em> is the subject of the relative clause. By contrast, object relative clauses are sentences like <em>The man who was the woman was talking to near the doorway laughed</em>; here, the <em>man</em> is the grammatical object object of the relative clause <em>who was the woman was talking to near the doorway</em>.</p>
-<p>A theoretical prediction is that in English, object relatives are harder to read than subject relatives, in the relative clause verb region. We want to test this prediction.</p>
+<p>Although an example of aggregation was already discussed above, it may be helpful to revisit the approach that is necessary using a fully worked example. Consider the following repeated measures data on subject versus object relative clauses in English; the data are from a self-paced reading study, Experiment 1 of <span class="citation">Grodner and Gibson (<a href="#ref-grodner" role="doc-biblioref">2005</a>)</span>.</p>
+<p>Subject relative clauses are sentences like <em>The man who was standing near the doorway laughed</em>. Here, the phrase (called a relative clause) <em>who was standing near the doorway</em> modifies the noun phrase <em>man</em>; it is called a subject relative because the noun phrase <em>man</em> is the subject of the relative clause. By contrast, object relative clauses are sentences like <em>The man who was the woman was talking to near the doorway laughed</em>; here, the <em>man</em> is the grammatical object of the relative clause <em>who was the woman was talking to near the doorway</em>.</p>
+<p>A theoretical prediction is that in English, object relatives are harder to read than subject relatives, in the relative clause verb region. We want to test this prediction. Reading time at the region of interest (i.e., the time participants spent reading the relative clause verb) is used to index processing difficulty.</p>
 <p>First, load the data containing reading times from the region of interest (the relative clause verb):</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="do">## From the library lingpsych:</span></span>
-<span id="cb214-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb214-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_gg05e1&quot;</span>)</span>
-<span id="cb214-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb214-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_gg05e1)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="do">## From the library lingpsych:</span></span>
+<span id="cb221-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb221-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_gg05e1&quot;</span>)</span>
+<span id="cb221-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb221-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_gg05e1)</span></code></pre></div>
 <pre><code>##    subject item condition rawRT
 ## 6        1    1    objgap   320
 ## 19       1    2   subjgap   424
@@ -417,7 +417,7 @@ Later on we will learn how to analyze unaggregated data, but if we want to do a 
 ## 68       1    5    objgap   333
 ## 80       1    6   subjgap   266</code></pre>
 <p>We have repeated measurements for each condition from 42 subjects, and from 16 items arranged in a Latin square design. You can establish this by using the <code>xtabs</code> command. There are no missing data points:</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span> subject <span class="sc">+</span> condition, df_gg05e1))</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span> subject <span class="sc">+</span> condition, df_gg05e1))</span></code></pre></div>
 <pre><code>##          subject
 ## condition 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
 ##   objgap  8 8 8 8 8 8 8 8 8  8  8  8  8  8  8  8  8  8
@@ -430,7 +430,7 @@ Later on we will learn how to analyze unaggregated data, but if we want to do a 
 ## condition 34 35 36 37 38 39 40 41 42
 ##   objgap   8  8  8  8  8  8  8  8  8
 ##   subjgap  8  8  8  8  8  8  8  8  8</code></pre>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span> item <span class="sc">+</span> condition, df_gg05e1))</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span> item <span class="sc">+</span> condition, df_gg05e1))</span></code></pre></div>
 <pre><code>##          item
 ## condition  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
 ##   objgap  21 21 21 21 21 21 21 21 21 21 21 21 21 21 21
@@ -440,30 +440,30 @@ Later on we will learn how to analyze unaggregated data, but if we want to do a 
 ##   objgap  21
 ##   subjgap 21</code></pre>
 <p>It is important to stress once more that it is the researcher’s responsibility to make sure that the t-test’s assumptions are met. For example, one could fit a two-sample t-test to the data as provided. The two-sample t-test can be implemented using the syntax shown below:</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="do">## incorrect t-test!</span></span>
-<span id="cb220-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb220-2" aria-hidden="true" tabindex="-1"></a>gg05incorrectres1<span class="ot">&lt;-</span><span class="fu">t.test</span>(rawRT <span class="sc">~</span> condition, df_gg05e1)</span>
-<span id="cb220-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb220-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(gg05incorrectres1)</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="do">## incorrect t-test!</span></span>
+<span id="cb227-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb227-2" aria-hidden="true" tabindex="-1"></a>gg05incorrectres1<span class="ot">&lt;-</span><span class="fu">t.test</span>(rawRT <span class="sc">~</span> condition, df_gg05e1)</span>
+<span id="cb227-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(gg05incorrectres1)</span></code></pre></div>
 <pre><code>## [1] &quot;t(431)=3.77 p=0&quot;
 ## [1] &quot;est.: 471.36 [48.98,155.59] ms&quot;
 ## [2] &quot;est.: 369.07 [48.98,155.59] ms&quot;</code></pre>
 <p>This t-test is incorrect for several reasons, but the most egregious error here is that the data are paired (each subject delivers data for both conditions), and that property of the data is being ignored.</p>
 <p>Another common mistake is to do a paired t-test on the data without checking that the data are independent in the sense discussed above. This kind of mistake happens when researchers neglect to aggregate the data. Again, the <code>t.test</code> function will happily return a meaningless result:</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Incorrect paired t-test!</span></span>
-<span id="cb222-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb222-2" aria-hidden="true" tabindex="-1"></a>gg05incorrectres2<span class="ot">&lt;-</span><span class="fu">t.test</span>(rawRT <span class="sc">~</span> condition, </span>
-<span id="cb222-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb222-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">paired =</span> <span class="cn">TRUE</span>, df_gg05e1)</span>
-<span id="cb222-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb222-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(gg05incorrectres2)</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Incorrect paired t-test!</span></span>
+<span id="cb229-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb229-2" aria-hidden="true" tabindex="-1"></a>gg05incorrectres2<span class="ot">&lt;-</span><span class="fu">t.test</span>(rawRT <span class="sc">~</span> condition, </span>
+<span id="cb229-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb229-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">paired =</span> <span class="cn">TRUE</span>, df_gg05e1)</span>
+<span id="cb229-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb229-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(gg05incorrectres2)</span></code></pre></div>
 <pre><code>## [1] &quot;t(335)=4 p=0&quot;
 ## [1] &quot;est.: 102.29 [51.98,152.59] ms&quot;</code></pre>
 <p>Here, the degrees of freedom indicate that we have fit the incorrect model. As mentioned above, there are 42 subjects and 16 items, and the presentation of items to subjects uses a Latin square design (each subject sees only one condition per item). The 335 degrees of freedom come from <span class="math inline">\(42\times 8=336\)</span> data points, minus one. Why do we say <span class="math inline">\(42\times 8\)</span> and not <span class="math inline">\(42\times 16\)</span>? That is because each subject will return eight differences in reading time for each condition: each subject gives us eight subject-relative data points and eight object-relative data points.</p>
 <p>For each of the 42 subjects, the t-test function internally creates a vector of eight data points of subject relatives and subtracts the vector of eight data points of object relatives. That is how we end up with <span class="math inline">\(42\times 8=336\)</span> data points.</p>
 <p>The 336/2=168 data points in each condition are assumed by the t-test to be independent of each other; but this cannot be the case because each subject delivers eight data points for each condition; these are obviously dependent (correlated) because they come from the same subject.</p>
-<p>What is needed is a single data point, the mean reading time for each subject and condition. That is the by-subjects t-test: the averaging is done over the items for each subject. Analogously, it is also common to compute a by-items t-test; this time, the averaging is done over the subjects for each item. In order to conduct the t-test correctly, aggregation of the data by subjects and by items is necessary. This necessity of analyzing data both by subjects and by items is discussed by <span class="citation"><a href="#ref-clark73" role="doc-biblioref">Clark</a> (<a href="#ref-clark73" role="doc-biblioref">1973</a>)</span> in a famous article, and more recently by <span class="citation"><a href="#ref-yarkonigeneralizability" role="doc-biblioref">Yarkoni</a> (<a href="#ref-yarkonigeneralizability" role="doc-biblioref">2020</a>)</span> and <span class="citation"><a href="#ref-westfall2017" role="doc-biblioref">Westfall, Nichols, and Yarkoni</a> (<a href="#ref-westfall2017" role="doc-biblioref">2017</a>)</span>.</p>
+<p>What is needed is a single data point, the mean reading time for each subject and condition. That is the by-subjects t-test: the averaging is done over the items for each subject. Analogously, it is also common to compute a by-items t-test; this time, the averaging is done over the subjects for each item. If we want to use t-tests to analyze our data, two t-tests are necessary: by subjects and by items. This necessity of analyzing data both by subjects and by items is discussed by <span class="citation">Clark (<a href="#ref-clark73" role="doc-biblioref">1973</a>)</span> in a famous article, and more recently by <span class="citation">Yarkoni (<a href="#ref-yarkonigeneralizability" role="doc-biblioref">2020</a>)</span> and <span class="citation">Westfall, Nichols, and Yarkoni (<a href="#ref-westfall2017" role="doc-biblioref">2017</a>)</span>.</p>
 <p>Consider the by-subjects aggregation procedure below. Once the code below is run, we have only one data point for each condition and subject:</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb224-1" aria-hidden="true" tabindex="-1"></a>bysubj <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(rawRT <span class="sc">~</span> subject <span class="sc">+</span> condition,</span>
-<span id="cb224-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb224-2" aria-hidden="true" tabindex="-1"></a>  mean,</span>
-<span id="cb224-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb224-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_gg05e1</span>
-<span id="cb224-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb224-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb224-5"><a href="common-mistakes-involving-the-paired-t-test.html#cb224-5" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span> subject <span class="sc">+</span> condition, bysubj))</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb231-1" aria-hidden="true" tabindex="-1"></a>bysubj <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(rawRT <span class="sc">~</span> subject <span class="sc">+</span> condition,</span>
+<span id="cb231-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb231-2" aria-hidden="true" tabindex="-1"></a>  mean,</span>
+<span id="cb231-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb231-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_gg05e1</span>
+<span id="cb231-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb231-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb231-5"><a href="common-mistakes-involving-the-paired-t-test.html#cb231-5" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span> subject <span class="sc">+</span> condition, bysubj))</span></code></pre></div>
 <pre><code>##          subject
 ## condition 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
 ##   objgap  1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1  1  1
@@ -477,16 +477,16 @@ Later on we will learn how to analyze unaggregated data, but if we want to do a 
 ##   objgap   1  1  1  1  1  1  1  1  1
 ##   subjgap  1  1  1  1  1  1  1  1  1</code></pre>
 <p>Returning to the t-test, by aggregating the data the independence assumption of the t-test is met, and the degrees of freedom for this by-subjects analysis are now correct (<span class="math inline">\(42-1=41\)</span>):</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb226-1" aria-hidden="true" tabindex="-1"></a>gg05res<span class="ot">&lt;-</span><span class="fu">t.test</span>(rawRT <span class="sc">~</span> condition, bysubj, </span>
-<span id="cb226-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb226-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb226-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb226-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(gg05res)</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb233-1" aria-hidden="true" tabindex="-1"></a>gg05res<span class="ot">&lt;-</span><span class="fu">t.test</span>(rawRT <span class="sc">~</span> condition, bysubj, </span>
+<span id="cb233-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb233-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb233-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb233-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(gg05res)</span></code></pre></div>
 <pre><code>## [1] &quot;t(41)=3.11 p=0.003&quot;
 ## [1] &quot;est.: 102.29 [35.85,168.72] ms&quot;</code></pre>
 <p>One unsurprising property of the averaged data is that the longer the average subject relative clause reading time for a particular subject, the longer that subject’s average object relative clause reading time (Figure <a href="common-mistakes-involving-the-paired-t-test.html#fig:averageorsr">2.23</a>). This is not surprising because the mean reading times for each condition are coming from the same subject.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb228-1" aria-hidden="true" tabindex="-1"></a>SRdata <span class="ot">&lt;-</span> <span class="fu">subset</span>(bysubj, condition <span class="sc">==</span> <span class="st">&quot;subjgap&quot;</span>)<span class="sc">$</span>rawRT</span>
-<span id="cb228-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb228-2" aria-hidden="true" tabindex="-1"></a>ORdata <span class="ot">&lt;-</span> <span class="fu">subset</span>(bysubj, condition <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span>)<span class="sc">$</span>rawRT</span>
-<span id="cb228-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb228-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SRdata, ORdata)</span>
-<span id="cb228-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb228-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(ORdata <span class="sc">~</span> SRdata))</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-1" aria-hidden="true" tabindex="-1"></a>SRdata <span class="ot">&lt;-</span> <span class="fu">subset</span>(bysubj, condition <span class="sc">==</span> <span class="st">&quot;subjgap&quot;</span>)<span class="sc">$</span>rawRT</span>
+<span id="cb235-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-2" aria-hidden="true" tabindex="-1"></a>ORdata <span class="ot">&lt;-</span> <span class="fu">subset</span>(bysubj, condition <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span>)<span class="sc">$</span>rawRT</span>
+<span id="cb235-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SRdata, ORdata)</span>
+<span id="cb235-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(ORdata <span class="sc">~</span> SRdata))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:averageorsr"></span>
 <img src="Freq_CogSci_files/figure-html/averageorsr-1.svg" alt="The correlation between average object and subject relative clause reading times for the 42 subjects in the Grodner and Gibson (2005) experiment." width="672" />
 <p class="caption">
@@ -494,76 +494,108 @@ FIGURE 2.23: The correlation between average object and subject relative clause 
 </p>
 </div>
 <p>The correlation is:</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(SRdata, ORdata)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(SRdata, ORdata)</span></code></pre></div>
 <pre><code>## [1] 0.5876</code></pre>
 <p>Similar to the by-subjects aggregation done above, one could do a by-items aggregation and then a by-items t-test (What should be the degrees of freedom for the by-items analysis? There are 16 items in this data set).</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb231-1" aria-hidden="true" tabindex="-1"></a>byitem <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(rawRT <span class="sc">~</span> item <span class="sc">+</span> condition,</span>
-<span id="cb231-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb231-2" aria-hidden="true" tabindex="-1"></a>  mean,</span>
-<span id="cb231-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb231-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_gg05e1</span>
-<span id="cb231-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb231-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb231-5"><a href="common-mistakes-involving-the-paired-t-test.html#cb231-5" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span> item <span class="sc">+</span> condition, byitem))</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb238-1" aria-hidden="true" tabindex="-1"></a>byitem <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(rawRT <span class="sc">~</span> item <span class="sc">+</span> condition,</span>
+<span id="cb238-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb238-2" aria-hidden="true" tabindex="-1"></a>  mean,</span>
+<span id="cb238-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb238-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_gg05e1</span>
+<span id="cb238-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb238-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb238-5"><a href="common-mistakes-involving-the-paired-t-test.html#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">xtabs</span>(<span class="sc">~</span> item <span class="sc">+</span> condition, byitem))</span></code></pre></div>
 <pre><code>##          item
 ## condition 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
 ##   objgap  1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1
 ##   subjgap 1 1 1 1 1 1 1 1 1  1  1  1  1  1  1  1</code></pre>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb233-1" aria-hidden="true" tabindex="-1"></a>gg05itemres<span class="ot">&lt;-</span><span class="fu">t.test</span>(rawRT <span class="sc">~</span> condition, </span>
-<span id="cb233-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb233-2" aria-hidden="true" tabindex="-1"></a>                    byitem, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb233-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb233-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(gg05itemres)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb240-1" aria-hidden="true" tabindex="-1"></a>gg05itemres<span class="ot">&lt;-</span><span class="fu">t.test</span>(rawRT <span class="sc">~</span> condition, </span>
+<span id="cb240-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb240-2" aria-hidden="true" tabindex="-1"></a>                    byitem, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb240-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb240-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(gg05itemres)</span></code></pre></div>
 <pre><code>## [1] &quot;t(15)=3.75 p=0.002&quot;
 ## [1] &quot;est.: 102.29 [44.21,160.36] ms&quot;</code></pre>
 <p>As in the by-subjects analysis, there seems to be a slight correlation between the average object and subject reading times among the items, but the sparse data (16 items) leads to a lot of variability around the fitted line (Figure <a href="common-mistakes-involving-the-paired-t-test.html#fig:averageorsritems">2.24</a>).</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-1" aria-hidden="true" tabindex="-1"></a>SRdatabyitem <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
-<span id="cb235-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-2" aria-hidden="true" tabindex="-1"></a>  byitem,</span>
-<span id="cb235-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-3" aria-hidden="true" tabindex="-1"></a>  condition <span class="sc">==</span> <span class="st">&quot;subjgap&quot;</span></span>
-<span id="cb235-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-4" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>rawRT</span>
-<span id="cb235-5"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-5" aria-hidden="true" tabindex="-1"></a>ORdatabyitem <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
-<span id="cb235-6"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-6" aria-hidden="true" tabindex="-1"></a>  byitem,</span>
-<span id="cb235-7"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-7" aria-hidden="true" tabindex="-1"></a>  condition <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span></span>
-<span id="cb235-8"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-8" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>rawRT</span>
-<span id="cb235-9"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SRdatabyitem, ORdatabyitem)</span>
-<span id="cb235-10"><a href="common-mistakes-involving-the-paired-t-test.html#cb235-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(ORdatabyitem <span class="sc">~</span> SRdatabyitem))</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb242-1" aria-hidden="true" tabindex="-1"></a>SRdatabyitem <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb242-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb242-2" aria-hidden="true" tabindex="-1"></a>  byitem,</span>
+<span id="cb242-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb242-3" aria-hidden="true" tabindex="-1"></a>  condition <span class="sc">==</span> <span class="st">&quot;subjgap&quot;</span></span>
+<span id="cb242-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb242-4" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>rawRT</span>
+<span id="cb242-5"><a href="common-mistakes-involving-the-paired-t-test.html#cb242-5" aria-hidden="true" tabindex="-1"></a>ORdatabyitem <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb242-6"><a href="common-mistakes-involving-the-paired-t-test.html#cb242-6" aria-hidden="true" tabindex="-1"></a>  byitem,</span>
+<span id="cb242-7"><a href="common-mistakes-involving-the-paired-t-test.html#cb242-7" aria-hidden="true" tabindex="-1"></a>  condition <span class="sc">==</span> <span class="st">&quot;objgap&quot;</span></span>
+<span id="cb242-8"><a href="common-mistakes-involving-the-paired-t-test.html#cb242-8" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>rawRT</span>
+<span id="cb242-9"><a href="common-mistakes-involving-the-paired-t-test.html#cb242-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SRdatabyitem, ORdatabyitem)</span>
+<span id="cb242-10"><a href="common-mistakes-involving-the-paired-t-test.html#cb242-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(ORdatabyitem <span class="sc">~</span> SRdatabyitem))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:averageorsritems"></span>
-<img src="Freq_CogSci_files/figure-html/averageorsritems-1.svg" alt="The correlation between average object and subject relative clause reading times for the 42 subjects in the Grodner and Gibson (2005) experiment." width="672" />
+<img src="Freq_CogSci_files/figure-html/averageorsritems-1.svg" alt="The correlation between average object and subject relative clause reading times for the 16 items in the Grodner and Gibson (2005) experiment." width="672" />
 <p class="caption">
-FIGURE 2.24: The correlation between average object and subject relative clause reading times for the 42 subjects in the Grodner and Gibson (2005) experiment.
+FIGURE 2.24: The correlation between average object and subject relative clause reading times for the 16 items in the Grodner and Gibson (2005) experiment.
 </p>
 </div>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(SRdatabyitem, ORdatabyitem)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(SRdatabyitem, ORdatabyitem)</span></code></pre></div>
 <pre><code>## [1] 0.1744</code></pre>
 </div>
-<div id="doing-a-by-subjects-and-by-items-paired-t-test-is-generally-dangerous" class="section level3" number="2.8.2">
-<h3><span class="header-section-number">2.8.2</span> Doing a by-subjects and by-items paired t-test is generally dangerous</h3>
+<div id="doing-a-by-subjects-and-by-items-paired-t-test-is-generally-dangerous" class="section level3 hasAnchor" number="2.8.2">
+<h3><span class="header-section-number">2.8.2</span> Doing a by-subjects and by-items paired t-test is generally dangerous<a href="common-mistakes-involving-the-paired-t-test.html#doing-a-by-subjects-and-by-items-paired-t-test-is-generally-dangerous" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The paired t-test illustrated above is in general quite a dangerous way to analyze this data-set, because it ignores the fact that each subject delivers not one but eight data points per condition. Each subject’s repeated measurements will introduce a source of variance, but this source of variance is being suppressed in the by-subjects t-test, leading to a possibly over-enthusiastic t-value. Similarly, each item also delivers multiple data points, and therefore introduce a potential source of variance within each item that will be artificially ignored when we aggregate data.</p>
-<p>In order to take this variability into account simultaneously, we must switch to the linear mixed model. For example, in the <span class="citation"><a href="#ref-fedorenko2006nature" role="doc-biblioref">Fedorenko, Gibson, and Rohde</a> (<a href="#ref-fedorenko2006nature" role="doc-biblioref">2006</a>)</span> data, the interaction between Noun Type and RC type is significant when we aggregate over items; a linear mixed model that takes the item level variability into account yields a smaller t-value of -1.883, with estimate -103.208, 95% CIs [-212.844, 6.428] ms. Compare this with the t-value we obtained with the paired t-test earlier:</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(hardINTres)</span></code></pre></div>
+<p>In order to take this variability into account simultaneously, we must switch to the linear mixed model. For example, in the <span class="citation">Fedorenko, Gibson, and Rohde (<a href="#ref-fedorenko2006nature" role="doc-biblioref">2006</a>)</span> data, the interaction between Noun Type and RC type is significant when we aggregate over items; a linear mixed model that takes the item level variability into account yields a smaller t-value of -1.883, with estimate -103.208, 95% CIs [-212.844, 6.428] ms. Compare this with the t-value we obtained with the paired t-test earlier:</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(hardINTres)</span></code></pre></div>
 <pre><code>## [1] &quot;t(43)=-2.13 p=0.039&quot;
 ## [1] &quot;est.: -404.81 [-787.91,-21.71] ms&quot;</code></pre>
-<p>Thus, the conclusion can change quite dramatically depending on whether one ignores sources of variance in one’s analysis or not.</p>
+<p>Thus, if we use the p-value to check whether the effect is “significant” (<span class="math inline">\(p&lt;0.05\)</span>) or not (<span class="math inline">\(p&gt;0.05\)</span>), the conclusion can change quite dramatically depending on whether one ignores sources of variance in one’s analysis or not.</p>
 <p>The next chapter explains how to obtain the more realistic estimates from the linear mixed model by taking both subject and item variability into account simultaneously.</p>
 </div>
-<div id="the-difference-between-a-significant-and-a-non-significant-result-need-not-itself-be-significant" class="section level3" number="2.8.3">
-<h3><span class="header-section-number">2.8.3</span> The difference between a significant and a non-significant result need not itself be significant</h3>
-<p>A very common error in psychology and psycholinguistics is to find a significant effect in one study, then find a non-significant effect in another study that changes one variable from the first study. The conclusion then drawn is that the variable that differs between the two studies is “significant.” <span class="citation"><a href="#ref-gelmanhill07" role="doc-biblioref">Gelman and Hill</a> (<a href="#ref-gelmanhill07" role="doc-biblioref">2007</a>)</span> summarize this mistake as follows: “the difference between significant and non-significant is itself not significant.” Indeed, <span class="citation"><a href="#ref-nieuwenhuis2011erroneous" role="doc-biblioref">S. Nieuwenhuis, Forstmann, and Wagenmakers</a> (<a href="#ref-nieuwenhuis2011erroneous" role="doc-biblioref">2011</a>)</span> show that this mistake is widespread in areas like neuroscience.</p>
-<p>A real-life example will illustrate the problem. Recall that in the <span class="citation"><a href="#ref-fedorenko2006nature" role="doc-biblioref">Fedorenko, Gibson, and Rohde</a> (<a href="#ref-fedorenko2006nature" role="doc-biblioref">2006</a>)</span> design, the hard conditions showed a significant interaction but the easy conditions showed a non-significant interaction:</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(hardINTres)</span></code></pre></div>
+<div id="the-difference-between-a-significant-and-a-non-significant-result-need-not-itself-be-significant" class="section level3 hasAnchor" number="2.8.3">
+<h3><span class="header-section-number">2.8.3</span> The difference between a significant and a non-significant result need not itself be significant<a href="common-mistakes-involving-the-paired-t-test.html#the-difference-between-a-significant-and-a-non-significant-result-need-not-itself-be-significant" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A very common error in psychology and psycholinguistics is to find a significant effect in one study, then find a non-significant effect in another study that changes one variable from the first study. The conclusion then drawn is that the variable that differs between the two studies is “significant.” <span class="citation">Gelman and Hill (<a href="#ref-gelmanhill07" role="doc-biblioref">2007</a>)</span> summarize this mistake as follows: “the difference between significant and non-significant is itself not significant.” Indeed, <span class="citation">S. Nieuwenhuis, Forstmann, and Wagenmakers (<a href="#ref-nieuwenhuis2011erroneous" role="doc-biblioref">2011</a>)</span> show that this mistake is widespread in areas like neuroscience.</p>
+<p>A real-life example will illustrate the problem. Recall that in the <span class="citation">Fedorenko, Gibson, and Rohde (<a href="#ref-fedorenko2006nature" role="doc-biblioref">2006</a>)</span> design, the hard conditions showed a significant interaction but the easy conditions showed a non-significant interaction:</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(hardINTres)</span></code></pre></div>
 <pre><code>## [1] &quot;t(43)=-2.13 p=0.039&quot;
 ## [1] &quot;est.: -404.81 [-787.91,-21.71] ms&quot;</code></pre>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(easyINTres)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(easyINTres)</span></code></pre></div>
 <pre><code>## [1] &quot;t(43)=-0.1 p=0.922&quot;
 ## [1] &quot;est.: -15.16 [-326.05,295.74] ms&quot;</code></pre>
 <p>Is this difference between the easy and hard conditions itself significant? Not necessarily; one has to test for that by carrying out a higher-order interaction: the difference between (i) the RC vs. Noun-Type interaction in the hard condition, and (ii) the RC vs. Noun-Type interaction in the easy condition.
-In the present case, the higher-order interaction is not even remotely significant—the main claim in the <span class="citation"><a href="#ref-fedorenko2006nature" role="doc-biblioref">Fedorenko, Gibson, and Rohde</a> (<a href="#ref-fedorenko2006nature" role="doc-biblioref">2006</a>)</span> is not warranted.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb244-1" aria-hidden="true" tabindex="-1"></a>diff_hard<span class="ot">&lt;-</span>diff_name_hard<span class="sc">-</span>diff_occ_hard</span>
-<span id="cb244-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb244-2" aria-hidden="true" tabindex="-1"></a>diff_easy<span class="ot">&lt;-</span>diff_name_easy<span class="sc">-</span>diff_occ_easy</span>
-<span id="cb244-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb244-3" aria-hidden="true" tabindex="-1"></a>RCxNTxLD_INTres<span class="ot">&lt;-</span><span class="fu">t.test</span>(diff_hard,diff_easy,<span class="at">paired=</span><span class="cn">TRUE</span>)</span>
-<span id="cb244-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb244-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(RCxNTxLD_INTres)</span></code></pre></div>
+In the present case, the higher-order interaction is not even remotely significant. If we base our conclusion on the p-value, as is the norm, the main claim in the <span class="citation">Fedorenko, Gibson, and Rohde (<a href="#ref-fedorenko2006nature" role="doc-biblioref">2006</a>)</span> study is not warranted.</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb251-1" aria-hidden="true" tabindex="-1"></a>diff_hard<span class="ot">&lt;-</span>diff_name_hard<span class="sc">-</span>diff_occ_hard</span>
+<span id="cb251-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb251-2" aria-hidden="true" tabindex="-1"></a>diff_easy<span class="ot">&lt;-</span>diff_name_easy<span class="sc">-</span>diff_occ_easy</span>
+<span id="cb251-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb251-3" aria-hidden="true" tabindex="-1"></a>RCxNTxLD_INTres<span class="ot">&lt;-</span><span class="fu">t.test</span>(diff_hard,diff_easy,<span class="at">paired=</span><span class="cn">TRUE</span>)</span>
+<span id="cb251-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(RCxNTxLD_INTres)</span></code></pre></div>
 <pre><code>## [1] &quot;t(43)=-1.59 p=0.118&quot;
 ## [1] &quot;est.: -389.65 [-882.6,103.3] ms&quot;</code></pre>
-<p>Incidentally, as shown in later chapters, the above analysis can be done with a linear mixed model as well. Such an analysis shows that the t-value is -1.43, with estimate -95.765, [-229.671, 38.141] ms.
-This mistake—not explicitly checking for the interaction—is very common in psychology and psycholinguistics.</p>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<p>Incidentally, the above analysis can be done with repeated measures ANOVA, or a linear mixed model (we will discuss the linear mixed model in detail).</p>
+<p>The repeated measures ANOVA yields the following:</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="common-mistakes-involving-the-paired-t-test.html#cb254-1" aria-hidden="true" tabindex="-1"></a>bysubj2 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(RT <span class="sc">~</span> subj <span class="sc">+</span> rctype <span class="sc">+</span> nountype <span class="sc">+</span> load,</span>
+<span id="cb254-2"><a href="common-mistakes-involving-the-paired-t-test.html#cb254-2" aria-hidden="true" tabindex="-1"></a>  mean,</span>
+<span id="cb254-3"><a href="common-mistakes-involving-the-paired-t-test.html#cb254-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_fedorenko06</span>
+<span id="cb254-4"><a href="common-mistakes-involving-the-paired-t-test.html#cb254-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb254-5"><a href="common-mistakes-involving-the-paired-t-test.html#cb254-5" aria-hidden="true" tabindex="-1"></a>subj_anova<span class="ot">&lt;-</span><span class="fu">anova_test</span>(<span class="at">data =</span> bysubj2, </span>
+<span id="cb254-6"><a href="common-mistakes-involving-the-paired-t-test.html#cb254-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">dv =</span> RT, </span>
+<span id="cb254-7"><a href="common-mistakes-involving-the-paired-t-test.html#cb254-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">wid =</span> subj,</span>
+<span id="cb254-8"><a href="common-mistakes-involving-the-paired-t-test.html#cb254-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">within =</span> <span class="fu">c</span>(rctype,nountype,load)</span>
+<span id="cb254-9"><a href="common-mistakes-involving-the-paired-t-test.html#cb254-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb254-10"><a href="common-mistakes-involving-the-paired-t-test.html#cb254-10" aria-hidden="true" tabindex="-1"></a><span class="fu">get_anova_table</span>(subj_anova)</span></code></pre></div>
+<pre><code>## ANOVA Table (type III tests)
+## 
+##                 Effect DFn DFd      F        p p&lt;.05
+## 1               rctype   1  43 29.255 2.63e-06     *
+## 2             nountype   1  43  5.007 3.00e-02     *
+## 3                 load   1  43  2.117 1.53e-01      
+## 4      rctype:nountype   1  43  2.942 9.40e-02      
+## 5          rctype:load   1  43  0.098 7.56e-01      
+## 6        nountype:load   1  43  3.464 7.00e-02      
+## 7 rctype:nountype:load   1  43  2.541 1.18e-01      
+##        ges
+## 1 4.30e-02
+## 2 3.00e-03
+## 3 6.00e-03
+## 4 3.00e-03
+## 5 8.75e-05
+## 6 3.00e-03
+## 7 2.00e-03</code></pre>
+<p>Notice that the square of the t-value above is the same as the F-score (up to rounding error) in the ANOVA output: <span class="math inline">\((-1.59)^2 = 2.53\)</span>.</p>
+<p>The linear mixed models analysis shows a slightly different t-value for the three-way interaction: -1.43, with estimate -95.765, [-229.671, 38.141] ms. But it is quite close to the statistics computed using the paired t-test.</p>
+<p>This mistake—not explicitly checking for the interaction—is very common in psychology and psycholinguistics.</p>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-clark73" class="csl-entry">
 Clark, Herbert H. 1973. <span>“The Language-as-Fixed-Effect Fallacy: <span>A</span> Critique of Language Statistics in Psychological Research.”</span> <em>Journal of Verbal Learning and Verbal Behavior</em> 12 (4): 335–59.
@@ -656,7 +688,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

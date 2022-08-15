@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.1 A quick review of some basic concepts in matrix algebra | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.1 A quick review of some basic concepts in matrix algebra | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="ch:LMtheory.html"/>
 <link rel="next" href="the-essentials-of-linear-modeling-theory.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,190 +391,190 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-quick-review-of-some-basic-concepts-in-matrix-algebra" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> A quick review of some basic concepts in matrix algebra</h2>
+<div id="a-quick-review-of-some-basic-concepts-in-matrix-algebra" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> A quick review of some basic concepts in matrix algebra<a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#a-quick-review-of-some-basic-concepts-in-matrix-algebra" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A rectangular array of numbers (real numbers in our case), with <span class="math inline">\(n\)</span> rows and <span class="math inline">\(m\)</span> columns, is a matrix. The main application for us will be in solving systems of linear equations in statistics.</p>
 <p>An example of a <span class="math inline">\(2\times 2\)</span> matrix:</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="do">## a 2x2 matrix:</span></span>
-<span id="cb385-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb385-2" aria-hidden="true" tabindex="-1"></a>(m1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb457-1" aria-hidden="true" tabindex="-1"></a><span class="do">## a 2x2 matrix:</span></span>
+<span id="cb457-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb457-2" aria-hidden="true" tabindex="-1"></a>(m1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    3
 ## [2,]    2    4</code></pre>
 <p>An important operation on matrices is the transpose: the rows become columns and the columns rows. If <span class="math inline">\(X\)</span> is matrix, <span class="math inline">\(X^T\)</span> is its transpose. R has a function <code>t()</code> that transposes a matrix:</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="do">## transpose of a matrix:</span></span>
-<span id="cb387-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb387-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(m1)</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb459-1" aria-hidden="true" tabindex="-1"></a><span class="do">## transpose of a matrix:</span></span>
+<span id="cb459-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb459-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(m1)</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    2
 ## [2,]    3    4</code></pre>
-<div id="matrix-addition-subtraction-and-multiplication" class="section level3" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> Matrix addition, subtraction, and multiplication</h3>
+<div id="matrix-addition-subtraction-and-multiplication" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Matrix addition, subtraction, and multiplication<a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#matrix-addition-subtraction-and-multiplication" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Matrix addition and subtraction are easy, they are cell-wise operations. An example shows how this works:</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb389-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">+</span> m1</span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb461-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">+</span> m1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    6
 ## [2,]    4    8</code></pre>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb391-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">-</span> m1</span></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb463-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">-</span> m1</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    0    0
 ## [2,]    0    0</code></pre>
 <p>Matrix multiplication is defined as follows. Think of this simple situation first, where you have a vector of values:</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb393-1" aria-hidden="true" tabindex="-1"></a>(m2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb465-1" aria-hidden="true" tabindex="-1"></a>(m2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5</span>))</span></code></pre></div>
 <pre><code>## [1] -0.17650 -0.99922 -1.24649 -0.75233 -0.07495</code></pre>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="do">## this is a vector:</span></span>
-<span id="cb395-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb395-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(m2)</span></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb467-1" aria-hidden="true" tabindex="-1"></a><span class="do">## this is a vector:</span></span>
+<span id="cb467-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb467-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(m2)</span></code></pre></div>
 <pre><code>##  num [1:5] -0.177 -0.999 -1.246 -0.752 -0.075</code></pre>
 <p>If you want to find out the sum of the squares of these values (<span class="math inline">\(\overset{n}{\underset{i=1}\sum} x_i ^2\)</span>), then you can multiply each value <span class="math inline">\(x_i\)</span> in m2 with itself, and sum up the result. This is called a <strong>dot product</strong> of two vectors (here, <span class="math inline">\(m2\)</span> repeated twice):</p>
 <p><span class="math inline">\(x_1 \cdot x_1+x_2 \cdot x_2+x_3 \cdot x_3+x_4 \cdot x_4+x_5 \cdot x_5\)</span></p>
 <p>Using R:</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb397-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(m2 <span class="sc">*</span> m2))</span></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb469-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(m2 <span class="sc">*</span> m2))</span></code></pre></div>
 <pre><code>## [1] 3.155</code></pre>
 <p>An important observation we will need later is that if two vectors are orthogonal, i.e., at 90 degrees to one another, then their dot product is 0. A simple example is two vectors on the cartesian plane that go along the x and y axes:</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb399-1" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb399-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb399-2" aria-hidden="true" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb399-3"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb399-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(v1 <span class="sc">*</span> v2)</span></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb471-1" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb471-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb471-2" aria-hidden="true" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb471-3"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb471-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(v1 <span class="sc">*</span> v2)</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>Matrix multiplication does exactly the above dot product operation (for arbitrarily large matrices). In R, matrix multiplication is carried out using a special operator (the * operator we are used to using for multiplication is used only for ordinary scalar multiplication). Notice that we have first converted the vector with <span class="math inline">\(5\)</span> cells into a <span class="math inline">\(5\times 1\)</span> matrix:</p>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb401-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">matrix</span>(m2))</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb473-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">matrix</span>(m2))</span></code></pre></div>
 <pre><code>##         [,1]    [,2]   [,3]    [,4]     [,5]
 ## [1,] -0.1765 -0.9992 -1.246 -0.7523 -0.07495</code></pre>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb403-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(m2)</span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(m2)</span></code></pre></div>
 <pre><code>##          [,1]
 ## [1,] -0.17650
 ## [2,] -0.99922
 ## [3,] -1.24649
 ## [4,] -0.75233
 ## [5,] -0.07495</code></pre>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb405-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">matrix</span>(m2)) <span class="sc">%*%</span> <span class="fu">matrix</span>(m2)</span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb477-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">matrix</span>(m2)) <span class="sc">%*%</span> <span class="fu">matrix</span>(m2)</span></code></pre></div>
 <pre><code>##       [,1]
 ## [1,] 3.155</code></pre>
 <p>Note that two matrices can only be multiplied if they are <strong>conformable</strong>: the number of columns of the first matrix has to be the same as the number of rows of the second matrix. So, if you have an <span class="math inline">\(1\times 5\)</span> matrix, you can multiply it with an <span class="math inline">\(5\times 1\)</span> matrix, and the end result of the multiplication will be an <span class="math inline">\(1\times 1\)</span> matrix (i.e., a scalar value). In the above example, the vector m2, converted to a matrix, is <span class="math inline">\(5\times 1\)</span> in dimensions; you cannot multiply a <span class="math inline">\(5\times 1\)</span> with a <span class="math inline">\(5\times 1\)</span> matrix, but the transform of m2 to a <span class="math inline">\(1\times 5\)</span> matrix can be multiplied with the <span class="math inline">\(5\times 1\)</span> matrix.</p>
 <p>More generally, if you have an <span class="math inline">\(n\times m\)</span> matrix and multiply it with an <span class="math inline">\(m\times p\)</span> matrix, you will get a <span class="math inline">\(n\times p\)</span> matrix, and the operations we have to do is the dot product operation, repeatedly applied to each row of the first matrix and each column of the second matrix. For example:</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb407-1" aria-hidden="true" tabindex="-1"></a>X1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb407-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb407-2" aria-hidden="true" tabindex="-1"></a>X2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb407-3"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb407-3" aria-hidden="true" tabindex="-1"></a><span class="do">## matrix multiplication:</span></span>
-<span id="cb407-4"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb407-4" aria-hidden="true" tabindex="-1"></a>X1 <span class="sc">%*%</span> X2</span></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb479-1" aria-hidden="true" tabindex="-1"></a>X1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb479-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb479-2" aria-hidden="true" tabindex="-1"></a>X2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">4</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb479-3"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb479-3" aria-hidden="true" tabindex="-1"></a><span class="do">## matrix multiplication:</span></span>
+<span id="cb479-4"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb479-4" aria-hidden="true" tabindex="-1"></a>X1 <span class="sc">%*%</span> X2</span></code></pre></div>
 <pre><code>##       [,1]   [,2]
 ## [1,] 1.680 -1.677
 ## [2,] 2.655 -2.610</code></pre>
-<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="do">## is a series of dot products of vectors:</span></span>
-<span id="cb409-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb409-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(X1[<span class="dv">1</span>, ] <span class="sc">*</span> X2[, <span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb481-1" aria-hidden="true" tabindex="-1"></a><span class="do">## is a series of dot products of vectors:</span></span>
+<span id="cb481-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb481-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(X1[<span class="dv">1</span>, ] <span class="sc">*</span> X2[, <span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## [1] 1.68</code></pre>
-<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb411-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(X1[<span class="dv">1</span>, ] <span class="sc">*</span> X2[, <span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb483-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(X1[<span class="dv">1</span>, ] <span class="sc">*</span> X2[, <span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## [1] -1.677</code></pre>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(X1[<span class="dv">2</span>, ] <span class="sc">*</span> X2[, <span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb485-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(X1[<span class="dv">2</span>, ] <span class="sc">*</span> X2[, <span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## [1] 2.655</code></pre>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(X1[<span class="dv">2</span>, ] <span class="sc">*</span> X2[, <span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb487-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(X1[<span class="dv">2</span>, ] <span class="sc">*</span> X2[, <span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## [1] -2.61</code></pre>
 <p>Scalar matrix multiplication is easy. Multiplying a matrix M with a scalar value just amounts to multiplying the scalar with each cell of the matrix. The order of multiplication doesn’t matter:</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb417-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">*</span> m2</span></code></pre></div>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb489-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">*</span> m2</span></code></pre></div>
 <pre><code>## [1] -0.8825 -4.9961 -6.2324 -3.7617 -0.3748</code></pre>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb419-1" aria-hidden="true" tabindex="-1"></a>m2 <span class="sc">*</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb491-1" aria-hidden="true" tabindex="-1"></a>m2 <span class="sc">*</span> <span class="dv">5</span></span></code></pre></div>
 <pre><code>## [1] -0.8825 -4.9961 -6.2324 -3.7617 -0.3748</code></pre>
 </div>
-<div id="diagonal-matrix-and-identity-matrix" class="section level3" number="5.1.2">
-<h3><span class="header-section-number">5.1.2</span> Diagonal matrix and identity matrix</h3>
+<div id="diagonal-matrix-and-identity-matrix" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Diagonal matrix and identity matrix<a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#diagonal-matrix-and-identity-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A diagonal matrix is a square matrix that has zeros in its off-diagonals:</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb493-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    0    0
 ## [2,]    0    2    0
 ## [3,]    0    0    4</code></pre>
 <p>An identity matrix is a diagonal matrix with 1’s along its diagonal:</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb495-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    0    0
 ## [2,]    0    1    0
 ## [3,]    0    0    1</code></pre>
 <p>For a <span class="math inline">\(3\times 3\)</span> identity matrix, we can write <span class="math inline">\(I_3\)</span>, and for an nxn identity matrix, <span class="math inline">\(I_n\)</span>.</p>
 <p>Multiplying an identity matrix with any (conformable) matrix gives that matrix back:</p>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb425-1" aria-hidden="true" tabindex="-1"></a>(I <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb497-1" aria-hidden="true" tabindex="-1"></a>(I <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)))</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    0
 ## [2,]    0    1</code></pre>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb427-1" aria-hidden="true" tabindex="-1"></a>(m3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>), <span class="dv">2</span>, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb499-1" aria-hidden="true" tabindex="-1"></a>(m3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>), <span class="dv">2</span>, <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    6    8
 ## [2,]    7    9</code></pre>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb429-1" aria-hidden="true" tabindex="-1"></a>(I <span class="sc">%*%</span> m3)</span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb501-1" aria-hidden="true" tabindex="-1"></a>(I <span class="sc">%*%</span> m3)</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    6    8
 ## [2,]    7    9</code></pre>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="do">## the matrix does not have to be square:</span></span>
-<span id="cb431-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb431-2" aria-hidden="true" tabindex="-1"></a>(m4 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>), <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb503-1" aria-hidden="true" tabindex="-1"></a><span class="do">## the matrix does not have to be square:</span></span>
+<span id="cb503-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb503-2" aria-hidden="true" tabindex="-1"></a>(m4 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>), <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    2    6    8
 ## [2,]    3    7    9</code></pre>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb433-1" aria-hidden="true" tabindex="-1"></a>(I <span class="sc">%*%</span> m4)</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb505-1" aria-hidden="true" tabindex="-1"></a>(I <span class="sc">%*%</span> m4)</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    2    6    8
 ## [2,]    3    7    9</code></pre>
 </div>
-<div id="powers-of-matrices" class="section level3" number="5.1.3">
-<h3><span class="header-section-number">5.1.3</span> Powers of matrices</h3>
+<div id="powers-of-matrices" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Powers of matrices<a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#powers-of-matrices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If A is a square <span class="math inline">\(n\times n\)</span> matrix, then we write <span class="math inline">\(AA\)</span> as <span class="math inline">\(A^2\)</span>, and so on. If A is diagonal, then <span class="math inline">\(AA\)</span> is just the diagonal matrix with the diagonal elements of A squared:</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb435-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
-<span id="cb435-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb435-2" aria-hidden="true" tabindex="-1"></a>m <span class="sc">%*%</span> m</span></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb507-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb507-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb507-2" aria-hidden="true" tabindex="-1"></a>m <span class="sc">%*%</span> m</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    0    0
 ## [2,]    0    4    0
 ## [3,]    0    0    9</code></pre>
 <p>For all positive integers <span class="math inline">\(m\)</span>, <span class="math inline">\(I_n^m = I_n\)</span>.</p>
 </div>
-<div id="inverse-of-a-matrix" class="section level3" number="5.1.4">
-<h3><span class="header-section-number">5.1.4</span> Inverse of a matrix</h3>
+<div id="inverse-of-a-matrix" class="section level3 hasAnchor" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> Inverse of a matrix<a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#inverse-of-a-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If <span class="math inline">\(A,B\)</span> are square matrices, of order <span class="math inline">\(n\times n\)</span>, and the following relation is satisfied:</p>
 <p><span class="math display">\[\begin{equation}
 AB = BA= I_n
 \end{equation}\]</span></p>
 <p>then, <span class="math inline">\(B\)</span> is the inverse (it is unique) of <span class="math inline">\(A\)</span>. We write <span class="math inline">\(B=A^{-1}\)</span>. The inverse is analogous to division and allows us to solve matrix equations: AB=C can be solved by post-multiplying both sides by <span class="math inline">\(B^{-1}\)</span> to get <span class="math inline">\(ABB^{-1}=AI=A=CB^{-1}\)</span>.</p>
 <p>Pre-multiplying a matrix like <span class="math inline">\(A\)</span> above by its inverse <span class="math inline">\(A^{-1}\)</span> gives an identity matrix (the R function <code>solve</code> computes the inverse of a matrix):</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb437-1" aria-hidden="true" tabindex="-1"></a>(m5 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>), <span class="dv">2</span>, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb509-1" aria-hidden="true" tabindex="-1"></a>(m5 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>), <span class="dv">2</span>, <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    2    4
 ## [2,]    3    5</code></pre>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb439-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">round</span>(<span class="fu">solve</span>(m5) <span class="sc">%*%</span> m5))</span></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb511-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">round</span>(<span class="fu">solve</span>(m5) <span class="sc">%*%</span> m5))</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    0
 ## [2,]    0    1</code></pre>
 <p>If a matrix is not invertible, we say that it is <strong>singular</strong>.</p>
 <p>A useful fact to know about non-singular matrices is the following relationship. If A and B are non-singular matrices then <span class="math inline">\((AB)^{-1} = B^{-1}A^{-1}\)</span>. Let’s try out an example:</p>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb441-1" aria-hidden="true" tabindex="-1"></a>m6 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb441-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb441-2" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(m6)</span></code></pre></div>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb513-1" aria-hidden="true" tabindex="-1"></a>m6 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb513-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb513-2" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(m6)</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,] -4.5    4
 ## [2,]  3.5   -3</code></pre>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb443-1" aria-hidden="true" tabindex="-1"></a><span class="do">## (m5m6)^{-1}:</span></span>
-<span id="cb443-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb443-2" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(m5 <span class="sc">%*%</span> m6)</span></code></pre></div>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb515-1" aria-hidden="true" tabindex="-1"></a><span class="do">## (m5m6)^{-1}:</span></span>
+<span id="cb515-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb515-2" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(m5 <span class="sc">%*%</span> m6)</span></code></pre></div>
 <pre><code>##        [,1] [,2]
 ## [1,]  17.25  -13
 ## [2,] -13.25   10</code></pre>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb445-1" aria-hidden="true" tabindex="-1"></a><span class="do">## m6^{-1}m5^{-1}:</span></span>
-<span id="cb445-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb445-2" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(m6) <span class="sc">%*%</span> <span class="fu">solve</span>(m5)</span></code></pre></div>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb517-1" aria-hidden="true" tabindex="-1"></a><span class="do">## m6^{-1}m5^{-1}:</span></span>
+<span id="cb517-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb517-2" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(m6) <span class="sc">%*%</span> <span class="fu">solve</span>(m5)</span></code></pre></div>
 <pre><code>##        [,1] [,2]
 ## [1,]  17.25  -13
 ## [2,] -13.25   10</code></pre>
 </div>
-<div id="linear-independence-and-rank" class="section level3" number="5.1.5">
-<h3><span class="header-section-number">5.1.5</span> Linear independence, and rank</h3>
+<div id="linear-independence-and-rank" class="section level3 hasAnchor" number="5.1.5">
+<h3><span class="header-section-number">5.1.5</span> Linear independence, and rank<a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#linear-independence-and-rank" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>An important concept in matrices is linear independence. Consider a <span class="math inline">\(3\times 3\)</span> matrix.
 The rows <span class="math inline">\(r_1, r_2, r_3\)</span> are linearly <strong>dependent</strong> if
 <span class="math inline">\(\alpha, \beta, \gamma\)</span>, not all zero, exist such that
 <span class="math inline">\(\alpha r_1+ \beta r_2+ \gamma r_3 = (0,0,0)\)</span>.</p>
 <p>If the rows or columns of a matrix A are linearly dependent, then the matrix is singular, i.e., it is not invertible.</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb447-1" aria-hidden="true" tabindex="-1"></a>(m7 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="dv">3</span>, <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb519-1" aria-hidden="true" tabindex="-1"></a>(m7 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="dv">3</span>, <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    1    3
 ## [2,]    1   -1    1
 ## [3,]   -2    2    4</code></pre>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb449-1" aria-hidden="true" tabindex="-1"></a><span class="do">## invertible:</span></span>
-<span id="cb449-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb449-2" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(m7)</span></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb521-1" aria-hidden="true" tabindex="-1"></a><span class="do">## invertible:</span></span>
+<span id="cb521-2"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb521-2" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(m7)</span></code></pre></div>
 <pre><code>##      [,1]    [,2]    [,3]
 ## [1,]  0.5 -0.1667 -0.3333
 ## [2,]  0.5 -0.8333 -0.1667
 ## [3,]  0.0  0.3333  0.1667</code></pre>
 <p>Linear independence leads us to the concept of the rank of a matrix.
 The column rank of a matrix is the maximum number of linearly independent columns in the matrix. The row rank is the maximum number of linearly independent rows. Column rank is always equal to row rank, so we can just call it rank. Check the rank of matrix m7:</p>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rankMatrix</span>(m7)</span></code></pre></div>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="a-quick-review-of-some-basic-concepts-in-matrix-algebra.html#cb523-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rankMatrix</span>(m7)</span></code></pre></div>
 <pre><code>## [1] 3
 ## attr(,&quot;method&quot;)
 ## [1] &quot;tolNorm2&quot;
@@ -649,7 +651,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

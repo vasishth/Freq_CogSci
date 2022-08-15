@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.1 Contrast coding in a factorial 2 x 2 design | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.1 Contrast coding in a factorial 2 x 2 design | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="ch:coding2x2.html"/>
 <link rel="next" href="sec:contrast:covariate.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,8 +391,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sec:MR:ANOVA" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Contrast coding in a factorial 2 x 2 design</h2>
+<div id="sec:MR:ANOVA" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Contrast coding in a factorial 2 x 2 design<a href="sec:MR:ANOVA.html#sec:MR:ANOVA" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In chapter <a href="ch:contr.html#ch:contr">6</a> in section <a href="sec:4levelFactor.html#sec:4levelFactor">6.3</a>, we have used a data set with one 4-level factor. Here, we assume that the exact same four means come from an <span class="math inline">\(A(2) \times B(2)\)</span> between-subject-factor design rather than an F(4) between-subject-factor design. We load the artificial, simulated data and show summary statistics in Table <a href="sec:MR:ANOVA.html#tab:cTab4Means">7.1</a> and in Figure <a href="sec:MR:ANOVA.html#fig:twobytwosimdatFig">7.1</a>. The means and standard deviations are exactly the same as in Figure <a href="sec:4levelFactor.html#fig:helmertsimdatFig">6.2</a> and in Table <a href="sec:4levelFactor.html#tab:cTab3Means">6.3</a>.</p>
 <div class="figure"><span style="display:block;" id="fig:twobytwosimdatFig"></span>
 <img src="Freq_CogSci_files/figure-html/twobytwosimdatFig-1.svg" alt="Means and error bars (showing standard errors) for a simulated data-set with a two-by-two  between-subjects factorial design." width="480" />
@@ -507,14 +509,14 @@ B2
 </tr>
 </tbody>
 </table>
-<div id="the-difference-between-an-anova-and-a-multiple-regression" class="section level3" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> The difference between an ANOVA and a multiple regression</h3>
+<div id="the-difference-between-an-anova-and-a-multiple-regression" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> The difference between an ANOVA and a multiple regression<a href="sec:MR:ANOVA.html#the-difference-between-an-anova-and-a-multiple-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s compare the traditional ANOVA with multiple regression for analyzing these data.</p>
-<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="sec:MR:ANOVA.html#cb663-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA: B_A(2) times B_B(2)</span></span>
-<span id="cb663-2"><a href="sec:MR:ANOVA.html#cb663-2" aria-hidden="true" tabindex="-1"></a>fit_AB_aov <span class="ot">&lt;-</span> afex<span class="sc">::</span><span class="fu">aov_car</span>(DV <span class="sc">~</span> A <span class="sc">*</span> B <span class="sc">+</span> <span class="fu">Error</span>(id), <span class="at">data =</span> df_contrasts4)</span>
-<span id="cb663-3"><a href="sec:MR:ANOVA.html#cb663-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb663-4"><a href="sec:MR:ANOVA.html#cb663-4" aria-hidden="true" tabindex="-1"></a><span class="co"># MR: B_A(2) times B_B(2)</span></span>
-<span id="cb663-5"><a href="sec:MR:ANOVA.html#cb663-5" aria-hidden="true" tabindex="-1"></a>fit_AB_mr <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> A <span class="sc">*</span> B, <span class="at">data =</span> df_contrasts4)</span></code></pre></div>
+<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="sec:MR:ANOVA.html#cb758-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA: B_A(2) times B_B(2)</span></span>
+<span id="cb758-2"><a href="sec:MR:ANOVA.html#cb758-2" aria-hidden="true" tabindex="-1"></a>fit_AB_aov <span class="ot">&lt;-</span> afex<span class="sc">::</span><span class="fu">aov_car</span>(DV <span class="sc">~</span> A <span class="sc">*</span> B <span class="sc">+</span> <span class="fu">Error</span>(id), <span class="at">data =</span> df_contrasts4)</span>
+<span id="cb758-3"><a href="sec:MR:ANOVA.html#cb758-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb758-4"><a href="sec:MR:ANOVA.html#cb758-4" aria-hidden="true" tabindex="-1"></a><span class="co"># MR: B_A(2) times B_B(2)</span></span>
+<span id="cb758-5"><a href="sec:MR:ANOVA.html#cb758-5" aria-hidden="true" tabindex="-1"></a>fit_AB_mr <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> A <span class="sc">*</span> B, <span class="at">data =</span> df_contrasts4)</span></code></pre></div>
 <table>
 <caption>
 <span id="tab:table17">TABLE 7.2: </span>Estimated regression model.
@@ -612,11 +614,11 @@ AA2:BB2
 <p>The results from the two analyses, shown in the R output and in Table <a href="sec:MR:ANOVA.html#tab:table17">7.2</a>, are very different.
 How do we see these are different? Notice that it is possible to compute F-values from t-values from the fact that <span class="math inline">\(F(1,df) = t(df)^2\)</span> <span class="citation">(<a href="#ref-snedecor1967statistical" role="doc-biblioref">Snedecor and Cochran 1967</a>)</span> (where <span class="math inline">\(df\)</span> indicates degrees of freedom). When applying this to the above multiple regression model, the F-value for factor <span class="math inline">\(A\)</span> (i.e., <span class="math inline">\(AA2\)</span>) is <span class="math inline">\(0.00^2 = 0\)</span>. This is obviously not the same as in the ANOVA, where the F-value for factor <span class="math inline">\(A\)</span> is <span class="math inline">\(5\)</span>. Likewise, in the multiple regression factor <span class="math inline">\(B\)</span> (i.e., <span class="math inline">\(BB2\)</span>) has an F-value of <span class="math inline">\(1.58^2 = 2.5\)</span>, which also does not correspond to the F-value for factor <span class="math inline">\(B\)</span> in the ANOVA of <span class="math inline">\(20\)</span>. Interestingly, however, the F-value for the interaction is identical in both models, as <span class="math inline">\(2.24^2 = 5\)</span>.</p>
 <p>The reason that the results from the ANOVA and the results from the multiple regression are different is that one needs sum contrasts in the linear model to get the conventional tests from an ANOVA model. (This is true for factors with two levels, but does not generalize to factors with more levels.)</p>
-<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="sec:MR:ANOVA.html#cb664-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define sum contrasts:</span></span>
-<span id="cb664-2"><a href="sec:MR:ANOVA.html#cb664-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>A) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>)</span>
-<span id="cb664-3"><a href="sec:MR:ANOVA.html#cb664-3" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>B) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>)</span>
-<span id="cb664-4"><a href="sec:MR:ANOVA.html#cb664-4" aria-hidden="true" tabindex="-1"></a><span class="co"># frequentist LM</span></span>
-<span id="cb664-5"><a href="sec:MR:ANOVA.html#cb664-5" aria-hidden="true" tabindex="-1"></a>fit_AB_mr.sum <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> A <span class="sc">*</span> B, <span class="at">data =</span> df_contrasts4)</span></code></pre></div>
+<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="sec:MR:ANOVA.html#cb759-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define sum contrasts:</span></span>
+<span id="cb759-2"><a href="sec:MR:ANOVA.html#cb759-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>A) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>)</span>
+<span id="cb759-3"><a href="sec:MR:ANOVA.html#cb759-3" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>B) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>)</span>
+<span id="cb759-4"><a href="sec:MR:ANOVA.html#cb759-4" aria-hidden="true" tabindex="-1"></a><span class="co"># frequentist LM</span></span>
+<span id="cb759-5"><a href="sec:MR:ANOVA.html#cb759-5" aria-hidden="true" tabindex="-1"></a>fit_AB_mr.sum <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> A <span class="sc">*</span> B, <span class="at">data =</span> df_contrasts4)</span></code></pre></div>
 <table>
 <caption>
 <span id="tab:table18">TABLE 7.3: </span>Regression analysis with sum contrasts.
@@ -713,28 +715,28 @@ A1:B1
 </table>
 <p>When using sum contrasts, the results from the multiple regression models (see Table <a href="sec:MR:ANOVA.html#tab:table18">7.3</a>) are identical to the results from the ANOVA (see R output<!--Table  \@ref(tab:table16)-->). Factor <span class="math inline">\(A\)</span> now has <span class="math inline">\(t^2=-2.24^2 = 5\)</span>, factor <span class="math inline">\(B\)</span> has <span class="math inline">\(t^2=-4.47^2 = 20\)</span>, and the interaction has <span class="math inline">\(t^22.24^2 = 5\)</span>. All F-values are now the same as in the ANOVA model.</p>
 <p>Next, we reproduce the <span class="math inline">\(A(2) \times B(2)\)</span> - ANOVA with contrasts specified for the corresponding one-way <span class="math inline">\(F(4)\)</span> ANOVA, that is by treating the <span class="math inline">\(2 \times 2 = 4\)</span> condition means as four levels of a single factor F. In other words, we go back to the data frame simulated for the analysis of repeated contrasts (see chapter <a href="ch:contr.html#ch:contr">6</a>, section <a href="sec:4levelFactor.html#sec:4levelFactor">6.3</a>). We first define weights for condition means according to our hypotheses, invert this matrix, and use it as the contrast matrix for factor F in an LM. We define weights of <span class="math inline">\(1/4\)</span> and <span class="math inline">\(-1/4\)</span>. We do so because (a) we want to compare the mean of two conditions to the mean of two other conditions (e.g., factor A compares <span class="math inline">\(\frac{F1 + F2}{2}\)</span> to <span class="math inline">\(\frac{F3 + F4}{2}\)</span>). Moreover, (b) we want to use sum contrasts, where the regression coefficients assess half the difference between means. Together (a+b), this yields weights of <span class="math inline">\(1/2 \cdot 1/2 = 1/4\)</span>. The resulting contrast matrix contains contrast coefficients of <span class="math inline">\(+1\)</span> or <span class="math inline">\(-1\)</span>, showing that we successfully implemented sum contrasts. The results are identical to the previous models.</p>
-<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="sec:MR:ANOVA.html#cb665-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_contrasts3&quot;</span>)</span>
-<span id="cb665-2"><a href="sec:MR:ANOVA.html#cb665-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">fractions</span>(HcInt <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb665-3"><a href="sec:MR:ANOVA.html#cb665-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(<span class="at">F1 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F2 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F3 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F4 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>),</span>
-<span id="cb665-4"><a href="sec:MR:ANOVA.html#cb665-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="at">F1 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F2 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F3 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F4 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>),</span>
-<span id="cb665-5"><a href="sec:MR:ANOVA.html#cb665-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">AxB =</span> <span class="fu">c</span>(<span class="at">F1 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F2 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F3 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F4 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>)</span>
-<span id="cb665-6"><a href="sec:MR:ANOVA.html#cb665-6" aria-hidden="true" tabindex="-1"></a>)))</span></code></pre></div>
+<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="sec:MR:ANOVA.html#cb760-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_contrasts3&quot;</span>)</span>
+<span id="cb760-2"><a href="sec:MR:ANOVA.html#cb760-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">fractions</span>(HcInt <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb760-3"><a href="sec:MR:ANOVA.html#cb760-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(<span class="at">F1 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F2 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F3 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F4 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>),</span>
+<span id="cb760-4"><a href="sec:MR:ANOVA.html#cb760-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="at">F1 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F2 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F3 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F4 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>),</span>
+<span id="cb760-5"><a href="sec:MR:ANOVA.html#cb760-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">AxB =</span> <span class="fu">c</span>(<span class="at">F1 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F2 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F3 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>, <span class="at">F4 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">4</span>)</span>
+<span id="cb760-6"><a href="sec:MR:ANOVA.html#cb760-6" aria-hidden="true" tabindex="-1"></a>)))</span></code></pre></div>
 <pre><code>##    A    B    AxB 
 ## F1  1/4  1/4  1/4
 ## F2  1/4 -1/4 -1/4
 ## F3 -1/4  1/4 -1/4
 ## F4 -1/4 -1/4  1/4</code></pre>
-<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="sec:MR:ANOVA.html#cb667-1" aria-hidden="true" tabindex="-1"></a>(XcInt <span class="ot">&lt;-</span> <span class="fu">ginv2</span>(HcInt))</span></code></pre></div>
+<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="sec:MR:ANOVA.html#cb762-1" aria-hidden="true" tabindex="-1"></a>(XcInt <span class="ot">&lt;-</span> <span class="fu">ginv2</span>(HcInt))</span></code></pre></div>
 <pre><code>##    A  B  AxB
 ## F1  1  1  1 
 ## F2  1 -1 -1 
 ## F3 -1  1 -1 
 ## F4 -1 -1  1</code></pre>
-<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="sec:MR:ANOVA.html#cb669-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts3<span class="sc">$</span>F) <span class="ot">&lt;-</span> XcInt</span></code></pre></div>
-<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb670-1"><a href="sec:MR:ANOVA.html#cb670-1" aria-hidden="true" tabindex="-1"></a>fit_F4.sum <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
-<span id="cb670-2"><a href="sec:MR:ANOVA.html#cb670-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts3</span>
-<span id="cb670-3"><a href="sec:MR:ANOVA.html#cb670-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="sec:MR:ANOVA.html#cb671-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_F4.sum)<span class="sc">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb764-1"><a href="sec:MR:ANOVA.html#cb764-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts3<span class="sc">$</span>F) <span class="ot">&lt;-</span> XcInt</span></code></pre></div>
+<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="sec:MR:ANOVA.html#cb765-1" aria-hidden="true" tabindex="-1"></a>fit_F4.sum <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
+<span id="cb765-2"><a href="sec:MR:ANOVA.html#cb765-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts3</span>
+<span id="cb765-3"><a href="sec:MR:ANOVA.html#cb765-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="sec:MR:ANOVA.html#cb766-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_F4.sum)<span class="sc">$</span>coefficients)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
 ## (Intercept)       20          2       9        0
 ## FA                -5          2      -2        0
@@ -742,22 +744,22 @@ A1:B1
 ## FAxB               5          2       2        0</code></pre>
 <p>This shows that it is possible to specify the contrasts not only for each factor (e.g., here in the <span class="math inline">\(2 \times 2\)</span> design) separately. One can alternatively pool all experimental conditions (or design cells) into one large factor (here factor F with <span class="math inline">\(4\)</span> levels), and specify the contrasts for the main effects and for the interactions in the resulting one large contrast matrix simultaneously.</p>
 <p>In this approach, it can again be very useful to apply the <code>hypr</code> package to construct contrasts for a <span class="math inline">\(2 \times 2\)</span> design. The first hypothesis estimates the main effect A, i.e., it compares the average of <code>F1</code> and <code>F2</code> to the average of <code>F3</code> and <code>F4</code>. The second parameter estimates the main effect B, i.e., it compares the average of <code>F1</code> and <code>F3</code> to the average of <code>F2</code> and <code>F4</code>. Note that we code direct differences between the averages, i.e., we implement scaled sum contrasts instead of sum contrasts. This becomes clear below as the contrast matrix contains coefficients of <span class="math inline">\(+1/2\)</span> and <span class="math inline">\(-1/2\)</span> instead of <span class="math inline">\(+1\)</span> and <span class="math inline">\(-1\)</span>. The interaction term estimates the difference between differences, i.e., the difference between <code>F1 - F2</code> and <code>F3 - F4</code>.</p>
-<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="sec:MR:ANOVA.html#cb673-1" aria-hidden="true" tabindex="-1"></a>hAxB <span class="ot">&lt;-</span> <span class="fu">hypr</span>(</span>
-<span id="cb673-2"><a href="sec:MR:ANOVA.html#cb673-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> (F1 <span class="sc">+</span> F2) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">~</span> (F3 <span class="sc">+</span> F4) <span class="sc">/</span> <span class="dv">2</span>,</span>
-<span id="cb673-3"><a href="sec:MR:ANOVA.html#cb673-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> (F1 <span class="sc">+</span> F3) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">~</span> (F2 <span class="sc">+</span> F4) <span class="sc">/</span> <span class="dv">2</span>,</span>
-<span id="cb673-4"><a href="sec:MR:ANOVA.html#cb673-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">AxB =</span> (F1 <span class="sc">-</span> F2) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">~</span> (F3 <span class="sc">-</span> F4) <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb673-5"><a href="sec:MR:ANOVA.html#cb673-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb673-6"><a href="sec:MR:ANOVA.html#cb673-6" aria-hidden="true" tabindex="-1"></a>hAxB</span></code></pre></div>
+<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="sec:MR:ANOVA.html#cb768-1" aria-hidden="true" tabindex="-1"></a>hAxB <span class="ot">&lt;-</span> <span class="fu">hypr</span>(</span>
+<span id="cb768-2"><a href="sec:MR:ANOVA.html#cb768-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> (F1 <span class="sc">+</span> F2) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">~</span> (F3 <span class="sc">+</span> F4) <span class="sc">/</span> <span class="dv">2</span>,</span>
+<span id="cb768-3"><a href="sec:MR:ANOVA.html#cb768-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> (F1 <span class="sc">+</span> F3) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">~</span> (F2 <span class="sc">+</span> F4) <span class="sc">/</span> <span class="dv">2</span>,</span>
+<span id="cb768-4"><a href="sec:MR:ANOVA.html#cb768-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">AxB =</span> (F1 <span class="sc">-</span> F2) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">~</span> (F3 <span class="sc">-</span> F4) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb768-5"><a href="sec:MR:ANOVA.html#cb768-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb768-6"><a href="sec:MR:ANOVA.html#cb768-6" aria-hidden="true" tabindex="-1"></a>hAxB</span></code></pre></div>
 <pre><code>## hypr object containing 3 null hypotheses:
 ##   H0.A: 0 = (F1 + F2 - F3 - F4)/2
 ##   H0.B: 0 = (F1 + F3 - F2 - F4)/2
 ## H0.AxB: 0 = (F1 - F2 - F3 + F4)/2
 ## 
 ## Call:
-## hypr(A = 1/2 * F1 + 1/2 * F2 - 1/2 * F3 - 1/2 * F4 ~ 0, B = 1/2 * 
-##     F1 + 1/2 * F3 - 1/2 * F2 - 1/2 * F4 ~ 0, AxB = 1/2 * F1 - 
-##     1/2 * F2 - 1/2 * F3 + 1/2 * F4 ~ 0, levels = c(&quot;F1&quot;, &quot;F2&quot;, 
-## &quot;F3&quot;, &quot;F4&quot;))
+## hypr(A = ~1/2 * F1 + 1/2 * F2 - 1/2 * F3 - 1/2 * F4, B = ~1/2 * 
+##     F1 + 1/2 * F3 - 1/2 * F2 - 1/2 * F4, AxB = ~1/2 * F1 - 1/2 * 
+##     F2 - 1/2 * F3 + 1/2 * F4, levels = c(&quot;F1&quot;, &quot;F2&quot;, &quot;F3&quot;, &quot;F4&quot;
+## ))
 ## 
 ## Hypothesis matrix (transposed):
 ##    A    B    AxB 
@@ -772,11 +774,11 @@ A1:B1
 ## F2  1/2 -1/2 -1/2
 ## F3 -1/2  1/2 -1/2
 ## F4 -1/2 -1/2  1/2</code></pre>
-<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb675-1"><a href="sec:MR:ANOVA.html#cb675-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts3<span class="sc">$</span>F) <span class="ot">&lt;-</span> <span class="fu">contr.hypothesis</span>(hAxB)</span></code></pre></div>
-<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="sec:MR:ANOVA.html#cb676-1" aria-hidden="true" tabindex="-1"></a>fit_F4hypr <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
-<span id="cb676-2"><a href="sec:MR:ANOVA.html#cb676-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts3</span>
-<span id="cb676-3"><a href="sec:MR:ANOVA.html#cb676-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="sec:MR:ANOVA.html#cb677-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_F4hypr)<span class="sc">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb770"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb770-1"><a href="sec:MR:ANOVA.html#cb770-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts3<span class="sc">$</span>F) <span class="ot">&lt;-</span> <span class="fu">contr.hypothesis</span>(hAxB)</span></code></pre></div>
+<div class="sourceCode" id="cb771"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb771-1"><a href="sec:MR:ANOVA.html#cb771-1" aria-hidden="true" tabindex="-1"></a>fit_F4hypr <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
+<span id="cb771-2"><a href="sec:MR:ANOVA.html#cb771-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts3</span>
+<span id="cb771-3"><a href="sec:MR:ANOVA.html#cb771-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb772-1"><a href="sec:MR:ANOVA.html#cb772-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_F4hypr)<span class="sc">$</span>coefficients)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
 ## (Intercept)       20          2       9        0
 ## FA               -10          4      -2        0
@@ -784,31 +786,31 @@ A1:B1
 ## FAxB              10          4       2        0</code></pre>
 <p>The results show that the estimates have half the size as compared to the sum contrasts - this is the result of the scaling that we applied. I.e., the main effects now directly estimate the difference between averages. However, both contrasts provide the exact same hypothesis tests. Thus, the hypr package can be used to code hypotheses in a 2 x 2 design.</p>
 </div>
-<div id="nestedEffects" class="section level3" number="7.1.2">
-<h3><span class="header-section-number">7.1.2</span> Nested effects</h3>
+<div id="nestedEffects" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Nested effects<a href="sec:MR:ANOVA.html#nestedEffects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One can specify hypotheses that do not correspond directly to main effects and interaction of the traditional ANOVA. For example, in a <span class="math inline">\(2 \times 2\)</span> experimental design, where factor <span class="math inline">\(A\)</span> codes word frequency (low/high) and factor <span class="math inline">\(B\)</span> is part of speech (noun/verb), one can test the effect of word frequency within nouns and the effect of word frequency within verbs. Formally, <span class="math inline">\(A_{B1}\)</span> versus <span class="math inline">\(A_{B2}\)</span> are nested within levels of <span class="math inline">\(B\)</span>. Differently put, simple effects of factor <span class="math inline">\(A\)</span> are tested for each of the levels of factor <span class="math inline">\(B\)</span>.
 In this version, we test whether there is a main effect of part of speech (<span class="math inline">\(B\)</span>; as in traditional ANOVA). However, instead of also estimating the second main effect word frequency, <span class="math inline">\(A\)</span>, and the interaction, we estimate (1) whether the two levels of word frequency, <span class="math inline">\(A\)</span>, differ for the first level of <span class="math inline">\(B\)</span> (i.e., nouns) and (2) whether the two levels of word frequency, <span class="math inline">\(A\)</span>, differ for the second level of <span class="math inline">\(B\)</span> (i.e., verbs). In other words, we estimate whether there are differences for <span class="math inline">\(A\)</span> in each of the levels of <span class="math inline">\(B\)</span>. Often researchers have hypotheses about these differences, and not about the interaction.</p>
-<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="sec:MR:ANOVA.html#cb679-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">fractions</span>(HcNes <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb679-2"><a href="sec:MR:ANOVA.html#cb679-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="at">F1 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="at">F2 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="at">F3 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="at">F4 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>),</span>
-<span id="cb679-3"><a href="sec:MR:ANOVA.html#cb679-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">B1xA =</span> <span class="fu">c</span>(<span class="at">F1 =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">F2 =</span> <span class="dv">0</span>, <span class="at">F3 =</span> <span class="dv">1</span>, <span class="at">F4 =</span> <span class="dv">0</span>),</span>
-<span id="cb679-4"><a href="sec:MR:ANOVA.html#cb679-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">B2xA =</span> <span class="fu">c</span>(<span class="at">F1 =</span> <span class="dv">0</span>, <span class="at">F2 =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">F3 =</span> <span class="dv">0</span>, <span class="at">F4 =</span> <span class="dv">1</span>)</span>
-<span id="cb679-5"><a href="sec:MR:ANOVA.html#cb679-5" aria-hidden="true" tabindex="-1"></a>)))</span></code></pre></div>
+<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb774-1"><a href="sec:MR:ANOVA.html#cb774-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">fractions</span>(HcNes <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb774-2"><a href="sec:MR:ANOVA.html#cb774-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="at">F1 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="at">F2 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="at">F3 =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="at">F4 =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>),</span>
+<span id="cb774-3"><a href="sec:MR:ANOVA.html#cb774-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">B1xA =</span> <span class="fu">c</span>(<span class="at">F1 =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">F2 =</span> <span class="dv">0</span>, <span class="at">F3 =</span> <span class="dv">1</span>, <span class="at">F4 =</span> <span class="dv">0</span>),</span>
+<span id="cb774-4"><a href="sec:MR:ANOVA.html#cb774-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">B2xA =</span> <span class="fu">c</span>(<span class="at">F1 =</span> <span class="dv">0</span>, <span class="at">F2 =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">F3 =</span> <span class="dv">0</span>, <span class="at">F4 =</span> <span class="dv">1</span>)</span>
+<span id="cb774-5"><a href="sec:MR:ANOVA.html#cb774-5" aria-hidden="true" tabindex="-1"></a>)))</span></code></pre></div>
 <pre><code>##    B    B1xA B2xA
 ## F1  1/2   -1    0
 ## F2 -1/2    0   -1
 ## F3  1/2    1    0
 ## F4 -1/2    0    1</code></pre>
-<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb681-1"><a href="sec:MR:ANOVA.html#cb681-1" aria-hidden="true" tabindex="-1"></a>(XcNes <span class="ot">&lt;-</span> <span class="fu">ginv2</span>(HcNes))</span></code></pre></div>
+<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="sec:MR:ANOVA.html#cb776-1" aria-hidden="true" tabindex="-1"></a>(XcNes <span class="ot">&lt;-</span> <span class="fu">ginv2</span>(HcNes))</span></code></pre></div>
 <pre><code>##    B    B1xA B2xA
 ## F1  1/2 -1/2    0
 ## F2 -1/2    0 -1/2
 ## F3  1/2  1/2    0
 ## F4 -1/2    0  1/2</code></pre>
-<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="sec:MR:ANOVA.html#cb683-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts3<span class="sc">$</span>F) <span class="ot">&lt;-</span> XcNes</span></code></pre></div>
-<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="sec:MR:ANOVA.html#cb684-1" aria-hidden="true" tabindex="-1"></a>fit_Nest <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
-<span id="cb684-2"><a href="sec:MR:ANOVA.html#cb684-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts3</span>
-<span id="cb684-3"><a href="sec:MR:ANOVA.html#cb684-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb685-1"><a href="sec:MR:ANOVA.html#cb685-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_Nest)<span class="sc">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="sec:MR:ANOVA.html#cb778-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts3<span class="sc">$</span>F) <span class="ot">&lt;-</span> XcNes</span></code></pre></div>
+<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="sec:MR:ANOVA.html#cb779-1" aria-hidden="true" tabindex="-1"></a>fit_Nest <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
+<span id="cb779-2"><a href="sec:MR:ANOVA.html#cb779-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts3</span>
+<span id="cb779-3"><a href="sec:MR:ANOVA.html#cb779-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="sec:MR:ANOVA.html#cb780-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_Nest)<span class="sc">$</span>coefficients)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
 ## (Intercept)       20          2       9        0
 ## FB               -20          4      -4        0
@@ -817,12 +819,12 @@ In this version, we test whether there is a main effect of part of speech (<span
 <p>Regression coefficients estimate the GM, the difference for the main effect of word frequency (<span class="math inline">\(A\)</span>) and the two differences (for <span class="math inline">\(B\)</span>; i.e., simple main effects) within levels of word frequency (<span class="math inline">\(A\)</span>).</p>
 <p>These custom nested contrasts’ columns are scaled versions of the corresponding hypothesis matrix. This is the case because the columns are orthogonal. It illustrates the advantage of orthogonal contrasts for the interpretation of regression coefficients: the underlying hypotheses being tested are already clear from the contrast matrix.</p>
 <p>There is also a built-in R formula specification of nested designs. The order of factors in the formula from left to right specifies a top-down order of nesting within levels, i.e., here factor <span class="math inline">\(A\)</span> (word frequency) is nested within levels of the factor <span class="math inline">\(B\)</span> (part of speech). This yields the exact same result as our previous result based on custom nested contrasts:</p>
-<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb687-1"><a href="sec:MR:ANOVA.html#cb687-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>A) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">+</span><span class="fl">0.5</span>)</span>
-<span id="cb687-2"><a href="sec:MR:ANOVA.html#cb687-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>B) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">+</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
-<span id="cb687-3"><a href="sec:MR:ANOVA.html#cb687-3" aria-hidden="true" tabindex="-1"></a>fit_Nest2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> B <span class="sc">/</span> A,</span>
-<span id="cb687-4"><a href="sec:MR:ANOVA.html#cb687-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts4</span>
-<span id="cb687-5"><a href="sec:MR:ANOVA.html#cb687-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="sec:MR:ANOVA.html#cb688-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_Nest2)<span class="sc">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="sec:MR:ANOVA.html#cb782-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>A) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">+</span><span class="fl">0.5</span>)</span>
+<span id="cb782-2"><a href="sec:MR:ANOVA.html#cb782-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>B) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">+</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
+<span id="cb782-3"><a href="sec:MR:ANOVA.html#cb782-3" aria-hidden="true" tabindex="-1"></a>fit_Nest2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> B <span class="sc">/</span> A,</span>
+<span id="cb782-4"><a href="sec:MR:ANOVA.html#cb782-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts4</span>
+<span id="cb782-5"><a href="sec:MR:ANOVA.html#cb782-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb783-1"><a href="sec:MR:ANOVA.html#cb783-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_Nest2)<span class="sc">$</span>coefficients)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
 ## (Intercept)       20          2       9        0
 ## B1               -20          4      -4        0
@@ -831,21 +833,20 @@ In this version, we test whether there is a main effect of part of speech (<span
 <p>xxx</p>
 <p>Note that in cases such as these, where <span class="math inline">\(A_{B1}\)</span> vs. <span class="math inline">\(A_{B2}\)</span> are nested within levels of <span class="math inline">\(B\)</span>, it is necessary to include the effect of <span class="math inline">\(B\)</span> (part of speech) in the model, even if one is only interested in the effect of <span class="math inline">\(A\)</span> (word frequency) within levels of <span class="math inline">\(B\)</span> (part of speech). Leaving out factor <span class="math inline">\(B\)</span> in this case can lead to biases in parameter estimation in the case the data are not fully balanced.</p>
 <p>Again, we show how nested contrasts can be easily implemented using <code>hypr</code>:</p>
-<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="sec:MR:ANOVA.html#cb690-1" aria-hidden="true" tabindex="-1"></a>hNest <span class="ot">&lt;-</span> <span class="fu">hypr</span>(</span>
-<span id="cb690-2"><a href="sec:MR:ANOVA.html#cb690-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> (F1 <span class="sc">+</span> F3) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">~</span> (F2 <span class="sc">+</span> F4) <span class="sc">/</span> <span class="dv">2</span>,</span>
-<span id="cb690-3"><a href="sec:MR:ANOVA.html#cb690-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">B1xA =</span> F3 <span class="sc">~</span> F1,</span>
-<span id="cb690-4"><a href="sec:MR:ANOVA.html#cb690-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">B2xA =</span> F4 <span class="sc">~</span> F2</span>
-<span id="cb690-5"><a href="sec:MR:ANOVA.html#cb690-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb690-6"><a href="sec:MR:ANOVA.html#cb690-6" aria-hidden="true" tabindex="-1"></a>hNest</span></code></pre></div>
+<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb785-1"><a href="sec:MR:ANOVA.html#cb785-1" aria-hidden="true" tabindex="-1"></a>hNest <span class="ot">&lt;-</span> <span class="fu">hypr</span>(</span>
+<span id="cb785-2"><a href="sec:MR:ANOVA.html#cb785-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> (F1 <span class="sc">+</span> F3) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">~</span> (F2 <span class="sc">+</span> F4) <span class="sc">/</span> <span class="dv">2</span>,</span>
+<span id="cb785-3"><a href="sec:MR:ANOVA.html#cb785-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">B1xA =</span> F3 <span class="sc">~</span> F1,</span>
+<span id="cb785-4"><a href="sec:MR:ANOVA.html#cb785-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">B2xA =</span> F4 <span class="sc">~</span> F2</span>
+<span id="cb785-5"><a href="sec:MR:ANOVA.html#cb785-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb785-6"><a href="sec:MR:ANOVA.html#cb785-6" aria-hidden="true" tabindex="-1"></a>hNest</span></code></pre></div>
 <pre><code>## hypr object containing 3 null hypotheses:
 ##    H0.B: 0 = (F1 + F3 - F2 - F4)/2
 ## H0.B1xA: 0 = F3 - F1
 ## H0.B2xA: 0 = F4 - F2
 ## 
 ## Call:
-## hypr(B = 1/2 * F1 + 1/2 * F3 - 1/2 * F2 - 1/2 * F4 ~ 0, B1xA = F3 - 
-##     F1 ~ 0, B2xA = F4 - F2 ~ 0, levels = c(&quot;F1&quot;, &quot;F2&quot;, &quot;F3&quot;, 
-## &quot;F4&quot;))
+## hypr(B = ~1/2 * F1 + 1/2 * F3 - 1/2 * F2 - 1/2 * F4, B1xA = ~F3 - 
+##     F1, B2xA = ~F4 - F2, levels = c(&quot;F1&quot;, &quot;F2&quot;, &quot;F3&quot;, &quot;F4&quot;))
 ## 
 ## Hypothesis matrix (transposed):
 ##    B    B1xA B2xA
@@ -860,32 +861,31 @@ In this version, we test whether there is a main effect of part of speech (<span
 ## F2 -1/2    0 -1/2
 ## F3  1/2  1/2    0
 ## F4 -1/2    0  1/2</code></pre>
-<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="sec:MR:ANOVA.html#cb692-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts3<span class="sc">$</span>F) <span class="ot">&lt;-</span> <span class="fu">contr.hypothesis</span>(hNest)</span></code></pre></div>
-<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb693-1"><a href="sec:MR:ANOVA.html#cb693-1" aria-hidden="true" tabindex="-1"></a>fit_NestHypr <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
-<span id="cb693-2"><a href="sec:MR:ANOVA.html#cb693-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts3</span>
-<span id="cb693-3"><a href="sec:MR:ANOVA.html#cb693-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb694-1"><a href="sec:MR:ANOVA.html#cb694-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_NestHypr)<span class="sc">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="sec:MR:ANOVA.html#cb787-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts3<span class="sc">$</span>F) <span class="ot">&lt;-</span> <span class="fu">contr.hypothesis</span>(hNest)</span></code></pre></div>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb788-1"><a href="sec:MR:ANOVA.html#cb788-1" aria-hidden="true" tabindex="-1"></a>fit_NestHypr <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
+<span id="cb788-2"><a href="sec:MR:ANOVA.html#cb788-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts3</span>
+<span id="cb788-3"><a href="sec:MR:ANOVA.html#cb788-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb789-1"><a href="sec:MR:ANOVA.html#cb789-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_NestHypr)<span class="sc">$</span>coefficients)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
 ## (Intercept)       20          2       9        0
 ## FB               -20          4      -4        0
 ## FB1xA              0          6       0        1
 ## FB2xA             20          6       3        0</code></pre>
 <p>Of course, we can also ask the reverse question: Are there differences for part of speech (<span class="math inline">\(B\)</span>) in the levels of word frequency (<span class="math inline">\(A\)</span>; in addition to estimating the main effect of word frequency, <span class="math inline">\(A\)</span>)? That is, do nouns differ from verbs for low-frequency words (<span class="math inline">\(B_{A1}\)</span>) and do nouns differ from verbs for high-frequency words (<span class="math inline">\(B_{A2}\)</span>)?</p>
-<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="sec:MR:ANOVA.html#cb696-1" aria-hidden="true" tabindex="-1"></a>hNest2 <span class="ot">&lt;-</span> <span class="fu">hypr</span>(</span>
-<span id="cb696-2"><a href="sec:MR:ANOVA.html#cb696-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> (F1 <span class="sc">+</span> F2) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">~</span> (F3 <span class="sc">+</span> F4) <span class="sc">/</span> <span class="dv">2</span>,</span>
-<span id="cb696-3"><a href="sec:MR:ANOVA.html#cb696-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">A1xB =</span> F2 <span class="sc">~</span> F1,</span>
-<span id="cb696-4"><a href="sec:MR:ANOVA.html#cb696-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">A2xB =</span> F4 <span class="sc">~</span> F3</span>
-<span id="cb696-5"><a href="sec:MR:ANOVA.html#cb696-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb696-6"><a href="sec:MR:ANOVA.html#cb696-6" aria-hidden="true" tabindex="-1"></a>hNest2</span></code></pre></div>
+<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb791-1"><a href="sec:MR:ANOVA.html#cb791-1" aria-hidden="true" tabindex="-1"></a>hNest2 <span class="ot">&lt;-</span> <span class="fu">hypr</span>(</span>
+<span id="cb791-2"><a href="sec:MR:ANOVA.html#cb791-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> (F1 <span class="sc">+</span> F2) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">~</span> (F3 <span class="sc">+</span> F4) <span class="sc">/</span> <span class="dv">2</span>,</span>
+<span id="cb791-3"><a href="sec:MR:ANOVA.html#cb791-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">A1xB =</span> F2 <span class="sc">~</span> F1,</span>
+<span id="cb791-4"><a href="sec:MR:ANOVA.html#cb791-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">A2xB =</span> F4 <span class="sc">~</span> F3</span>
+<span id="cb791-5"><a href="sec:MR:ANOVA.html#cb791-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb791-6"><a href="sec:MR:ANOVA.html#cb791-6" aria-hidden="true" tabindex="-1"></a>hNest2</span></code></pre></div>
 <pre><code>## hypr object containing 3 null hypotheses:
 ##    H0.A: 0 = (F1 + F2 - F3 - F4)/2
 ## H0.A1xB: 0 = F2 - F1
 ## H0.A2xB: 0 = F4 - F3
 ## 
 ## Call:
-## hypr(A = 1/2 * F1 + 1/2 * F2 - 1/2 * F3 - 1/2 * F4 ~ 0, A1xB = F2 - 
-##     F1 ~ 0, A2xB = F4 - F3 ~ 0, levels = c(&quot;F1&quot;, &quot;F2&quot;, &quot;F3&quot;, 
-## &quot;F4&quot;))
+## hypr(A = ~1/2 * F1 + 1/2 * F2 - 1/2 * F3 - 1/2 * F4, A1xB = ~F2 - 
+##     F1, A2xB = ~F4 - F3, levels = c(&quot;F1&quot;, &quot;F2&quot;, &quot;F3&quot;, &quot;F4&quot;))
 ## 
 ## Hypothesis matrix (transposed):
 ##    A    A1xB A2xB
@@ -900,11 +900,11 @@ In this version, we test whether there is a main effect of part of speech (<span
 ## F2  1/2  1/2    0
 ## F3 -1/2    0 -1/2
 ## F4 -1/2    0  1/2</code></pre>
-<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="sec:MR:ANOVA.html#cb698-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts3<span class="sc">$</span>F) <span class="ot">&lt;-</span> <span class="fu">contr.hypothesis</span>(hNest2)</span></code></pre></div>
-<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="sec:MR:ANOVA.html#cb699-1" aria-hidden="true" tabindex="-1"></a>fit_Nest2Hypr <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
-<span id="cb699-2"><a href="sec:MR:ANOVA.html#cb699-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts3</span>
-<span id="cb699-3"><a href="sec:MR:ANOVA.html#cb699-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb700-1"><a href="sec:MR:ANOVA.html#cb700-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_Nest2Hypr)<span class="sc">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="sec:MR:ANOVA.html#cb793-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts3<span class="sc">$</span>F) <span class="ot">&lt;-</span> <span class="fu">contr.hypothesis</span>(hNest2)</span></code></pre></div>
+<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="sec:MR:ANOVA.html#cb794-1" aria-hidden="true" tabindex="-1"></a>fit_Nest2Hypr <span class="ot">&lt;-</span> <span class="fu">lm</span>(DV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> F,</span>
+<span id="cb794-2"><a href="sec:MR:ANOVA.html#cb794-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts3</span>
+<span id="cb794-3"><a href="sec:MR:ANOVA.html#cb794-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb795-1"><a href="sec:MR:ANOVA.html#cb795-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_Nest2Hypr)<span class="sc">$</span>coefficients)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error t value Pr(&gt;|t|)
 ## (Intercept)       20          2       9        0
 ## FA               -10          4      -2        0
@@ -913,32 +913,32 @@ In this version, we test whether there is a main effect of part of speech (<span
 <p>xxx</p>
 <p>Regression coefficients estimate the GM, the difference for the main effect of word frequency (<span class="math inline">\(A\)</span>) and the two part of speech effects (for <span class="math inline">\(B\)</span>; i.e., simple main effects) within levels of word frequency (<span class="math inline">\(A\)</span>).</p>
 </div>
-<div id="interactions-between-contrasts" class="section level3" number="7.1.3">
-<h3><span class="header-section-number">7.1.3</span> Interactions between contrasts</h3>
+<div id="interactions-between-contrasts" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Interactions between contrasts<a href="sec:MR:ANOVA.html#interactions-between-contrasts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We have discussed above that in a <span class="math inline">\(2 \times 2\)</span> experimental design, the results from sum contrasts are equivalent to typical ANOVA results. In addition, we had also run the analysis with treatment contrasts. It was clear that the results for treatment contrasts (see Table <a href="sec:MR:ANOVA.html#tab:table17">7.2</a>) did not correspond to the results from the ANOVA. However, if the results for treatment contrasts do not correspond to the typical ANOVA results, what do they then test? That is, is it still possible to meaningfully interpret the results from the treatment contrasts in a simple <span class="math inline">\(2 \times 2\)</span> design?</p>
 <p>This leads us to a very important principle in interpreting results from contrasts: When interactions between contrasts are included in a model, then the results of one contrast actually depend on the specification of the other contrast(s) in the analysis! This may be counter-intuitive at first. However, it is very important and essential to keep in mind when interpreting results from contrasts. How does this work in detail?</p>
 <p>The general rule to remember is that the main effect of one contrast measures its effect at the location <span class="math inline">\(0\)</span> of the other contrast(s) in the analysis. What does that mean? Let us consider the example that we use two treatment contrasts in a <span class="math inline">\(2 \times 2\)</span> design (see results in Table <a href="sec:MR:ANOVA.html#tab:table17">7.2</a>). Let’s take a look at the main effect of factor A. How can we interpret what this measures or tests? This main effect actually tests the effect of factor A at the “location” where factor B is coded as <span class="math inline">\(0\)</span>. Factor B is coded as a treatment contrast, that is, it codes a zero at its baseline condition, which is B1. Thus, the main effect of factor A tests the effect of A nested within the baseline condition of B. We take a look at the data presented in Figure <a href="sec:MR:ANOVA.html#fig:twobytwosimdatFig">7.1</a>, what this nested effect should be. Figure <a href="sec:MR:ANOVA.html#fig:twobytwosimdatFig">7.1</a> shows that the effect of factor A nested in B1 is <span class="math inline">\(0\)</span>. If we now compare this to the results from the linear model, it is indeed clear that the main effect of factor A (see Table <a href="sec:MR:ANOVA.html#tab:table17">7.2</a>) is exactly estimated as <span class="math inline">\(0\)</span>. As expected, when factor B is coded as a treatment contrast, the main effect of factor A estimates the effect of A nested within the baseline level of factor B.</p>
 <p>Next, consider the main effect of factor B. According to the same logic, this main effect estimates the effect of factor B at the “location” where factor A is <span class="math inline">\(0\)</span>. Factor A is also coded as a treatment contrast, that is, it codes its baseline condition A1 as <span class="math inline">\(0\)</span>. The main effect of factor B estimates the effect of B nested within the baseline condition of A. Figure <a href="sec:MR:ANOVA.html#fig:twobytwosimdatFig">7.1</a> shows that this effect should be <span class="math inline">\(10\)</span>; this indeed corresponds to the main effect of B as estimated in the regression model for treatment contrasts (see Table <a href="sec:MR:ANOVA.html#tab:table17">7.2</a>, the <em>Estimate</em> for BB2). As we had seen before, the interaction term, however, does not differ between the treatment contrast and ANOVA (<span class="math inline">\(t^2 = 2.24^2 = F = 5.00\)</span>).</p>
 <p>How do we know what the “location” is, where a contrast applies? For the treatment contrasts discussed here, it is possible to reason this through because all contrasts are coded as <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>. However, how is it possible to derive the “location” in general? What we can do is to look at the hypotheses tested by the treatment contrasts (or the comparisons that are estimated) in the presence of an interaction between them by using the generalized matrix inverse. We go back to the default treatment contrasts. Then we extract the contrast matrix from the design matrix:</p>
-<div class="sourceCode" id="cb702"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb702-1"><a href="sec:MR:ANOVA.html#cb702-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>A) <span class="ot">&lt;-</span> <span class="fu">contr.treatment</span>(<span class="dv">2</span>)</span>
-<span id="cb702-2"><a href="sec:MR:ANOVA.html#cb702-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>B) <span class="ot">&lt;-</span> <span class="fu">contr.treatment</span>(<span class="dv">2</span>)</span>
-<span id="cb702-3"><a href="sec:MR:ANOVA.html#cb702-3" aria-hidden="true" tabindex="-1"></a>XcTr <span class="ot">&lt;-</span> df_contrasts4 <span class="sc">%&gt;%</span></span>
-<span id="cb702-4"><a href="sec:MR:ANOVA.html#cb702-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(A, B) <span class="sc">%&gt;%</span></span>
-<span id="cb702-5"><a href="sec:MR:ANOVA.html#cb702-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb702-6"><a href="sec:MR:ANOVA.html#cb702-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model.matrix</span>(<span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> A <span class="sc">*</span> B, .) <span class="sc">%&gt;%</span></span>
-<span id="cb702-7"><a href="sec:MR:ANOVA.html#cb702-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb702-8"><a href="sec:MR:ANOVA.html#cb702-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
-<span id="cb702-9"><a href="sec:MR:ANOVA.html#cb702-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(XcTr) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A1_B1&quot;</span>, <span class="st">&quot;A1_B2&quot;</span>, <span class="st">&quot;A2_B1&quot;</span>, <span class="st">&quot;A2_B2&quot;</span>)</span>
-<span id="cb702-10"><a href="sec:MR:ANOVA.html#cb702-10" aria-hidden="true" tabindex="-1"></a>XcTr</span></code></pre></div>
+<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb797-1"><a href="sec:MR:ANOVA.html#cb797-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>A) <span class="ot">&lt;-</span> <span class="fu">contr.treatment</span>(<span class="dv">2</span>)</span>
+<span id="cb797-2"><a href="sec:MR:ANOVA.html#cb797-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>B) <span class="ot">&lt;-</span> <span class="fu">contr.treatment</span>(<span class="dv">2</span>)</span>
+<span id="cb797-3"><a href="sec:MR:ANOVA.html#cb797-3" aria-hidden="true" tabindex="-1"></a>XcTr <span class="ot">&lt;-</span> df_contrasts4 <span class="sc">%&gt;%</span></span>
+<span id="cb797-4"><a href="sec:MR:ANOVA.html#cb797-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(A, B) <span class="sc">%&gt;%</span></span>
+<span id="cb797-5"><a href="sec:MR:ANOVA.html#cb797-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb797-6"><a href="sec:MR:ANOVA.html#cb797-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model.matrix</span>(<span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> A <span class="sc">*</span> B, .) <span class="sc">%&gt;%</span></span>
+<span id="cb797-7"><a href="sec:MR:ANOVA.html#cb797-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb797-8"><a href="sec:MR:ANOVA.html#cb797-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
+<span id="cb797-9"><a href="sec:MR:ANOVA.html#cb797-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(XcTr) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A1_B1&quot;</span>, <span class="st">&quot;A1_B2&quot;</span>, <span class="st">&quot;A2_B1&quot;</span>, <span class="st">&quot;A2_B2&quot;</span>)</span>
+<span id="cb797-10"><a href="sec:MR:ANOVA.html#cb797-10" aria-hidden="true" tabindex="-1"></a>XcTr</span></code></pre></div>
 <pre><code>##       (Intercept) A2 B2 A2:B2
 ## A1_B1           1  0  0     0
 ## A1_B2           1  0  1     0
 ## A2_B1           1  1  0     0
 ## A2_B2           1  1  1     1</code></pre>
 <p>This shows the treatment contrast for factors <code>A</code> and <code>B</code>, and their interaction. We can now assign this contrast matrix to a <code>hypr</code> object. <code>hypr</code> automatically converts the contrast matrix into a hypothesis matrix, such that we can read from the hypothesis matrix which comparison are being estimated by the different contrasts.</p>
-<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb704-1"><a href="sec:MR:ANOVA.html#cb704-1" aria-hidden="true" tabindex="-1"></a>htr <span class="ot">&lt;-</span> <span class="fu">hypr</span>() <span class="co"># initialize empty hypr object</span></span>
-<span id="cb704-2"><a href="sec:MR:ANOVA.html#cb704-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cmat</span>(htr) <span class="ot">&lt;-</span> XcTr <span class="co"># assign contrast matrix to hypr object</span></span>
-<span id="cb704-3"><a href="sec:MR:ANOVA.html#cb704-3" aria-hidden="true" tabindex="-1"></a>htr <span class="co"># look at the resulting hypothesis matrix</span></span></code></pre></div>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="sec:MR:ANOVA.html#cb799-1" aria-hidden="true" tabindex="-1"></a>htr <span class="ot">&lt;-</span> <span class="fu">hypr</span>() <span class="co"># initialize empty hypr object</span></span>
+<span id="cb799-2"><a href="sec:MR:ANOVA.html#cb799-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cmat</span>(htr) <span class="ot">&lt;-</span> XcTr <span class="co"># assign contrast matrix to hypr object</span></span>
+<span id="cb799-3"><a href="sec:MR:ANOVA.html#cb799-3" aria-hidden="true" tabindex="-1"></a>htr <span class="co"># look at the resulting hypothesis matrix</span></span></code></pre></div>
 <pre><code>## hypr object containing 4 null hypotheses:
 ## H0.(Intercept): 0 = A1_B1                          (Intercept)
 ##          H0.A2: 0 = -A1_B1 + A2_B1
@@ -946,8 +946,8 @@ In this version, we test whether there is a main effect of part of speech (<span
 ##       H0.A2:B2: 0 = A1_B1 - A1_B2 - A2_B1 + A2_B2
 ## 
 ## Call:
-## hypr(`(Intercept)` = A1_B1 ~ 0, A2 = -A1_B1 + A2_B1 ~ 0, B2 = -A1_B1 + 
-##     A1_B2 ~ 0, `A2:B2` = A1_B1 - A1_B2 - A2_B1 + A2_B2 ~ 0, levels = c(&quot;A1_B1&quot;, 
+## hypr(`(Intercept)` = ~A1_B1, A2 = ~-A1_B1 + A2_B1, B2 = ~-A1_B1 + 
+##     A1_B2, `A2:B2` = ~A1_B1 - A1_B2 - A2_B1 + A2_B2, levels = c(&quot;A1_B1&quot;, 
 ## &quot;A1_B2&quot;, &quot;A2_B1&quot;, &quot;A2_B2&quot;))
 ## 
 ## Hypothesis matrix (transposed):
@@ -964,7 +964,7 @@ In this version, we test whether there is a main effect of part of speech (<span
 ## A2_B1 1           1  0  0    
 ## A2_B2 1           1  1  1</code></pre>
 <p>Note that the same result is obtained by applying the generalized inverse to the contrast matrix (this is what hypr does as well). An important fact is that when we apply the generalized inverse to the contrast matrix, we obtain the corresponding hypothesis matrix <span class="citation">(for details see <a href="#ref-schad2020capitalize" role="doc-biblioref">Schad et al. 2020b</a>)</span>.</p>
-<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb706-1"><a href="sec:MR:ANOVA.html#cb706-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">ginv2</span>(XcTr))</span></code></pre></div>
+<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb801-1"><a href="sec:MR:ANOVA.html#cb801-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">ginv2</span>(XcTr))</span></code></pre></div>
 <pre><code>##       (Intercept) A2 B2 A2:B2
 ## A1_B1  1          -1 -1  1   
 ## A1_B2  0           0  1 -1   
@@ -974,19 +974,19 @@ In this version, we test whether there is a main effect of part of speech (<span
 <p>How does this work for sum contrasts? They do not have a baseline condition that is coded as <span class="math inline">\(0\)</span>. In sum contrasts, however, the average of the contrast coefficients is <span class="math inline">\(0\)</span>. Therefore, main effects estimate the average effect across factor levels. This is what is typically also tested in standard ANOVA. Let’s look at the example shown in Table <a href="sec:MR:ANOVA.html#tab:table18">7.3</a>: given that factor B has a sum contrast, the main effect of factor A is tested as the average across levels of factor B. Figure <a href="sec:MR:ANOVA.html#fig:twobytwosimdatFig">7.1</a> shows that the effect of factor A in level B1 is <span class="math inline">\(10 - 10 = 0\)</span>, and in level B2 it is <span class="math inline">\(20 - 40 = -20\)</span>. The average effect across both levels is <span class="math inline">\((0 - 20)/2 = -10\)</span>. Due to the sum contrast coding, we have to divide this by 2, yielding an expected effect of <span class="math inline">\(-10 / 2 = -5\)</span>. This is exactly what the main effect of factor A measures (see Table <a href="sec:MR:ANOVA.html#tab:table18">7.3</a>, <em>Estimate</em> for A1).</p>
 <p>Similarly, factor B tests its effect at the location <span class="math inline">\(0\)</span> of factor A. Again, <span class="math inline">\(0\)</span> is exactly the mean of the contrast coefficients from factor A, which is coded as a sum contrast. Therefore, factor B tests the effect of B averaged across factor levels of A. For factor level A1, factor B has an effect of <span class="math inline">\(10 - 20 = -10\)</span>. For factor level A2, factor B has an effect of <span class="math inline">\(10 - 40 = -30\)</span>. The average effect is <span class="math inline">\((-10 - 30)/2 = -20\)</span>, which again needs to be divided by <span class="math inline">\(2\)</span> due to the sum contrast. This yields exactly the estimate of <span class="math inline">\(-10\)</span> that is also reported in Table <a href="sec:MR:ANOVA.html#tab:table18">7.3</a> (<em>Estimate</em> for B1).</p>
 <p>Again, we look at the hypothesis matrix for the main effects and the interaction:</p>
-<div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb708-1"><a href="sec:MR:ANOVA.html#cb708-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>A) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>)</span>
-<span id="cb708-2"><a href="sec:MR:ANOVA.html#cb708-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>B) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>)</span>
-<span id="cb708-3"><a href="sec:MR:ANOVA.html#cb708-3" aria-hidden="true" tabindex="-1"></a>XcSum <span class="ot">&lt;-</span> df_contrasts4 <span class="sc">%&gt;%</span></span>
-<span id="cb708-4"><a href="sec:MR:ANOVA.html#cb708-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(A, B) <span class="sc">%&gt;%</span></span>
-<span id="cb708-5"><a href="sec:MR:ANOVA.html#cb708-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb708-6"><a href="sec:MR:ANOVA.html#cb708-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model.matrix</span>(<span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> A <span class="sc">*</span> B, .) <span class="sc">%&gt;%</span></span>
-<span id="cb708-7"><a href="sec:MR:ANOVA.html#cb708-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb708-8"><a href="sec:MR:ANOVA.html#cb708-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
-<span id="cb708-9"><a href="sec:MR:ANOVA.html#cb708-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(XcSum) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A1_B1&quot;</span>, <span class="st">&quot;A1_B2&quot;</span>, <span class="st">&quot;A2_B1&quot;</span>, <span class="st">&quot;A2_B2&quot;</span>)</span>
-<span id="cb708-10"><a href="sec:MR:ANOVA.html#cb708-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb708-11"><a href="sec:MR:ANOVA.html#cb708-11" aria-hidden="true" tabindex="-1"></a>hsum <span class="ot">&lt;-</span> <span class="fu">hypr</span>() <span class="co"># initialize empty hypr object</span></span>
-<span id="cb708-12"><a href="sec:MR:ANOVA.html#cb708-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cmat</span>(hsum) <span class="ot">&lt;-</span> XcSum <span class="co"># assign contrast matrix to hypr object</span></span>
-<span id="cb708-13"><a href="sec:MR:ANOVA.html#cb708-13" aria-hidden="true" tabindex="-1"></a>hsum <span class="co"># look at the resulting hypothesis matrix</span></span></code></pre></div>
+<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="sec:MR:ANOVA.html#cb803-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>A) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>)</span>
+<span id="cb803-2"><a href="sec:MR:ANOVA.html#cb803-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts4<span class="sc">$</span>B) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>)</span>
+<span id="cb803-3"><a href="sec:MR:ANOVA.html#cb803-3" aria-hidden="true" tabindex="-1"></a>XcSum <span class="ot">&lt;-</span> df_contrasts4 <span class="sc">%&gt;%</span></span>
+<span id="cb803-4"><a href="sec:MR:ANOVA.html#cb803-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(A, B) <span class="sc">%&gt;%</span></span>
+<span id="cb803-5"><a href="sec:MR:ANOVA.html#cb803-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb803-6"><a href="sec:MR:ANOVA.html#cb803-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model.matrix</span>(<span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> A <span class="sc">*</span> B, .) <span class="sc">%&gt;%</span></span>
+<span id="cb803-7"><a href="sec:MR:ANOVA.html#cb803-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb803-8"><a href="sec:MR:ANOVA.html#cb803-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
+<span id="cb803-9"><a href="sec:MR:ANOVA.html#cb803-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(XcSum) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A1_B1&quot;</span>, <span class="st">&quot;A1_B2&quot;</span>, <span class="st">&quot;A2_B1&quot;</span>, <span class="st">&quot;A2_B2&quot;</span>)</span>
+<span id="cb803-10"><a href="sec:MR:ANOVA.html#cb803-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb803-11"><a href="sec:MR:ANOVA.html#cb803-11" aria-hidden="true" tabindex="-1"></a>hsum <span class="ot">&lt;-</span> <span class="fu">hypr</span>() <span class="co"># initialize empty hypr object</span></span>
+<span id="cb803-12"><a href="sec:MR:ANOVA.html#cb803-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cmat</span>(hsum) <span class="ot">&lt;-</span> XcSum <span class="co"># assign contrast matrix to hypr object</span></span>
+<span id="cb803-13"><a href="sec:MR:ANOVA.html#cb803-13" aria-hidden="true" tabindex="-1"></a>hsum <span class="co"># look at the resulting hypothesis matrix</span></span></code></pre></div>
 <pre><code>## hypr object containing 4 null hypotheses:
 ## H0.(Intercept): 0 = (A1_B1 + A1_B2 + A2_B1 + A2_B2)/4  (Intercept)
 ##          H0.A1: 0 = (A1_B1 + A1_B2 - A2_B1 - A2_B2)/4
@@ -994,11 +994,11 @@ In this version, we test whether there is a main effect of part of speech (<span
 ##       H0.A1:B1: 0 = (A1_B1 - A1_B2 - A2_B1 + A2_B2)/4
 ## 
 ## Call:
-## hypr(`(Intercept)` = 1/4 * A1_B1 + 1/4 * A1_B2 + 1/4 * A2_B1 + 
-##     1/4 * A2_B2 ~ 0, A1 = 1/4 * A1_B1 + 1/4 * A1_B2 - 1/4 * A2_B1 - 
-##     1/4 * A2_B2 ~ 0, B1 = 1/4 * A1_B1 - 1/4 * A1_B2 + 1/4 * A2_B1 - 
-##     1/4 * A2_B2 ~ 0, `A1:B1` = 1/4 * A1_B1 - 1/4 * A1_B2 - 1/4 * 
-##     A2_B1 + 1/4 * A2_B2 ~ 0, levels = c(&quot;A1_B1&quot;, &quot;A1_B2&quot;, &quot;A2_B1&quot;, 
+## hypr(`(Intercept)` = ~1/4 * A1_B1 + 1/4 * A1_B2 + 1/4 * A2_B1 + 
+##     1/4 * A2_B2, A1 = ~1/4 * A1_B1 + 1/4 * A1_B2 - 1/4 * A2_B1 - 
+##     1/4 * A2_B2, B1 = ~1/4 * A1_B1 - 1/4 * A1_B2 + 1/4 * A2_B1 - 
+##     1/4 * A2_B2, `A1:B1` = ~1/4 * A1_B1 - 1/4 * A1_B2 - 1/4 * 
+##     A2_B1 + 1/4 * A2_B2, levels = c(&quot;A1_B1&quot;, &quot;A1_B2&quot;, &quot;A2_B1&quot;, 
 ## &quot;A2_B2&quot;))
 ## 
 ## Hypothesis matrix (transposed):
@@ -1015,11 +1015,11 @@ In this version, we test whether there is a main effect of part of speech (<span
 ## A2_B1  1          -1  1 -1   
 ## A2_B2  1          -1 -1  1</code></pre>
 <p>This shows that each of the main effects now does not compute nested comparisons any more, but that they rather test their effect averaged across conditions of the other factor. The averaging involves using weights of <span class="math inline">\(1/2\)</span>. Moreover, the regression coefficients in the sum contrast measure half the distance between conditions, leading to weights of <span class="math inline">\(1/2 \cdot 1/2 = 1/4\)</span>.</p>
-<p>The general rule to remember from these examples is that when interactions between contrasts are estimated, what a main effect of a factor estimates depends on the contrast coding of the other factors in the design! The main effect of a factor estimates the effect nested within the location zero of the other contrast(s) in an analysis. If another contrast is centered, and zero is the average of this other contrast’s coefficients, then the contrast of interest tests the average effect, averaged across the levels of the other factor. Importantly, this property holds only when the interaction between two contrasts is included into a model. If the interaction is omitted and only main effects are estimated, then there is no such “action at a distance.”</p>
+<p>The general rule to remember from these examples is that when interactions between contrasts are estimated, what a main effect of a factor estimates depends on the contrast coding of the other factors in the design! The main effect of a factor estimates the effect nested within the location zero of the other contrast(s) in an analysis. If another contrast is centered, and zero is the average of this other contrast’s coefficients, then the contrast of interest tests the average effect, averaged across the levels of the other factor. Importantly, this property holds only when the interaction between two contrasts is included into a model. If the interaction is omitted and only main effects are estimated, then there is no such “action at a distance”.</p>
 <p>This may be a very surprising result for interactions of contrasts. However, it is also essential to interpreting contrast coefficients involved in interactions. It is particularly relevant for the analysis of the default treatment contrast, where the main effects estimate nested effects rather than average effects.</p>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-schad2020capitalize" class="csl-entry">
 Schad, Daniel J., Shravan Vasishth, Sven Hohenstein, and Reinhold Kliegl. 2020b. <span>“How to Capitalize on a Priori Contrasts in Linear (Mixed) Models: A Tutorial.”</span> <em>Journal of Memory and Language</em> 110: 104038.
@@ -1094,7 +1094,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.3 Interactions in generalized linear models (with non-linear link functions) | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.3 Interactions in generalized linear models (with non-linear link functions) | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="sec:contrast:covariate.html"/>
 <link rel="next" href="summary-6.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,13 +391,13 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sec:interactions:NLM" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Interactions in generalized linear models (with non-linear link functions)</h2>
+<div id="sec:interactions:NLM" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Interactions in generalized linear models (with non-linear link functions)<a href="sec:interactions:NLM.html#sec:interactions:NLM" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We next look at generalized linear models, where a linear predictor is passed through a non-linear link function to predict the dependent variable. Examples for generalized linear models include logistic regression models and models assuming a log-normal or a Poisson distribution. Here, we treat an example with a logistic model in a 2 x 2 factorial between-subject design. The logistic model has the following non-linear link function: <span class="math inline">\(p(y=1 \mid x, b) = \frac{1}{1 + \exp(-\eta)}\)</span>, where <span class="math inline">\(\eta\)</span> is the latent linear predictor. For example, in our 2 x 2 factorial design with main effects A and B and their interaction, <span class="math inline">\(\eta\)</span> is computed as a linear combination of the intercept plus the main effects and their interaction: <span class="math inline">\(\eta = 1 + \beta_A x_A + \beta_B x_B + \beta_{A \times B} x_{A \times B}\)</span>.</p>
 <p>Thus, there is a latent level of linear predictions (<span class="math inline">\(\eta\)</span>), which are then passed through a non-linear link function to predict the probability that the observed data is a success (<span class="math inline">\(p(y = 1)\)</span>). We will use this logistic model to analyze an example data set where the dependent variable is dichotomous, coded as either a 1 (indicating success) or a 0 (indicating failure).</p>
 <p>We load a simulated data set where the dependent variable codes whether a subject performed a task successfully (pDV = 1) or not (pDV = 0). Moreover, the data set has two between-subject factors A and B. The means and frequentist 95% confidence intervals for each of the four conditions are shown in Table <a href="sec:interactions:NLM.html#tab:cTab7Means">7.4</a>.</p>
-<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb733-1"><a href="sec:interactions:NLM.html#cb733-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_contrasts7&quot;</span>)</span>
-<span id="cb733-2"><a href="sec:interactions:NLM.html#cb733-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df_contrasts7)</span></code></pre></div>
+<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="sec:interactions:NLM.html#cb828-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;df_contrasts7&quot;</span>)</span>
+<span id="cb828-2"><a href="sec:interactions:NLM.html#cb828-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df_contrasts7)</span></code></pre></div>
 <pre><code>## tibble [200 × 4] (S3: tbl_df/tbl/data.frame)
 ##  $ A  : Factor w/ 2 levels &quot;A1&quot;,&quot;A2&quot;: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ B  : Factor w/ 2 levels &quot;B1&quot;,&quot;B2&quot;: 1 1 1 1 1 1 1 1 1 1 ...
@@ -481,14 +483,14 @@ B2
 </tbody>
 </table>
 <p>To analyze this data, we use scaled sum contrasts, as we had done above for the <span class="math inline">\(2 \times 2\)</span> design with response times as the dependent variable, and which allow us to interpret the main effects as main effects. Next, we fit a linear model. The model specification is the same as the model with response times - with two differences: First, the <code>family</code> argument is now specified as <code>family = binomial(link = "logit")</code> to indicate the logistic model.</p>
-<div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb735-1"><a href="sec:interactions:NLM.html#cb735-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts7<span class="sc">$</span>A) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">+</span><span class="fl">0.5</span>)</span>
-<span id="cb735-2"><a href="sec:interactions:NLM.html#cb735-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts7<span class="sc">$</span>B) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">+</span><span class="fl">0.5</span>)</span>
-<span id="cb735-3"><a href="sec:interactions:NLM.html#cb735-3" aria-hidden="true" tabindex="-1"></a><span class="co"># GLM</span></span>
-<span id="cb735-4"><a href="sec:interactions:NLM.html#cb735-4" aria-hidden="true" tabindex="-1"></a>fit_pDV_AB.sum <span class="ot">&lt;-</span> <span class="fu">glm</span>(pDV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> A <span class="sc">*</span> B,</span>
-<span id="cb735-5"><a href="sec:interactions:NLM.html#cb735-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts7,</span>
-<span id="cb735-6"><a href="sec:interactions:NLM.html#cb735-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)</span>
-<span id="cb735-7"><a href="sec:interactions:NLM.html#cb735-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb736-1"><a href="sec:interactions:NLM.html#cb736-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_pDV_AB.sum)<span class="sc">$</span>coefficients, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="sec:interactions:NLM.html#cb830-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts7<span class="sc">$</span>A) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">+</span><span class="fl">0.5</span>)</span>
+<span id="cb830-2"><a href="sec:interactions:NLM.html#cb830-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(df_contrasts7<span class="sc">$</span>B) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">+</span><span class="fl">0.5</span>)</span>
+<span id="cb830-3"><a href="sec:interactions:NLM.html#cb830-3" aria-hidden="true" tabindex="-1"></a><span class="co"># GLM</span></span>
+<span id="cb830-4"><a href="sec:interactions:NLM.html#cb830-4" aria-hidden="true" tabindex="-1"></a>fit_pDV_AB.sum <span class="ot">&lt;-</span> <span class="fu">glm</span>(pDV <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> A <span class="sc">*</span> B,</span>
+<span id="cb830-5"><a href="sec:interactions:NLM.html#cb830-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_contrasts7,</span>
+<span id="cb830-6"><a href="sec:interactions:NLM.html#cb830-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)</span>
+<span id="cb830-7"><a href="sec:interactions:NLM.html#cb830-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb831-1"><a href="sec:interactions:NLM.html#cb831-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fit_pDV_AB.sum)<span class="sc">$</span>coefficients, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##             Estimate Std. Error z value Pr(&gt;|z|)
 ## (Intercept)    -0.35       0.17   -2.06     0.04
 ## A1              0.69       0.34    2.06     0.04
@@ -562,7 +564,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

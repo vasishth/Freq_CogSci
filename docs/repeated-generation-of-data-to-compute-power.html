@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.6 Repeated generation of data to compute power | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.6 Repeated generation of data to compute power | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="define-a-function-for-generating-data.html"/>
 <link rel="next" href="what-you-can-now-do.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,92 +391,224 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="repeated-generation-of-data-to-compute-power" class="section level2" number="8.6">
-<h2><span class="header-section-number">8.6</span> Repeated generation of data to compute power</h2>
-<p>With the function for simulating data ready, we are now able to repeatedly generated simulated data. Next, we generate data 100 times, fit a linear mixed model each time, and extract the t-value from each linear mixed model fit. The vector t-values is then used to compute power: we simply look at the proportion of absolute t-values that exceed the value 2.</p>
-<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="repeated-generation-of-data-to-compute-power.html#cb792-1" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb792-2"><a href="repeated-generation-of-data-to-compute-power.html#cb792-2" aria-hidden="true" tabindex="-1"></a>sotval <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim)</span>
-<span id="cb792-3"><a href="repeated-generation-of-data-to-compute-power.html#cb792-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb792-4"><a href="repeated-generation-of-data-to-compute-power.html#cb792-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
-<span id="cb792-5"><a href="repeated-generation-of-data-to-compute-power.html#cb792-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate sim data:</span></span>
-<span id="cb792-6"><a href="repeated-generation-of-data-to-compute-power.html#cb792-6" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">gen_sim_lnorm2</span>(</span>
-<span id="cb792-7"><a href="repeated-generation-of-data-to-compute-power.html#cb792-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">nitem =</span> <span class="dv">16</span>,</span>
-<span id="cb792-8"><a href="repeated-generation-of-data-to-compute-power.html#cb792-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">nsubj =</span> <span class="dv">42</span>,</span>
-<span id="cb792-9"><a href="repeated-generation-of-data-to-compute-power.html#cb792-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> beta,</span>
-<span id="cb792-10"><a href="repeated-generation-of-data-to-compute-power.html#cb792-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Sigma_u =</span> Sigma_u,</span>
-<span id="cb792-11"><a href="repeated-generation-of-data-to-compute-power.html#cb792-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Sigma_w =</span> Sigma_w,</span>
-<span id="cb792-12"><a href="repeated-generation-of-data-to-compute-power.html#cb792-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">sigma_e =</span> sigma_e</span>
-<span id="cb792-13"><a href="repeated-generation-of-data-to-compute-power.html#cb792-13" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb792-14"><a href="repeated-generation-of-data-to-compute-power.html#cb792-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb792-15"><a href="repeated-generation-of-data-to-compute-power.html#cb792-15" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to sim data:</span></span>
-<span id="cb792-16"><a href="repeated-generation-of-data-to-compute-power.html#cb792-16" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="fu">log</span>(rt) <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subj) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item), dat,</span>
-<span id="cb792-17"><a href="repeated-generation-of-data-to-compute-power.html#cb792-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb792-18"><a href="repeated-generation-of-data-to-compute-power.html#cb792-18" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb792-19"><a href="repeated-generation-of-data-to-compute-power.html#cb792-19" aria-hidden="true" tabindex="-1"></a>  <span class="do">## extract the t-value</span></span>
-<span id="cb792-20"><a href="repeated-generation-of-data-to-compute-power.html#cb792-20" aria-hidden="true" tabindex="-1"></a>  sotval[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb792-21"><a href="repeated-generation-of-data-to-compute-power.html#cb792-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb792-22"><a href="repeated-generation-of-data-to-compute-power.html#cb792-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb792-23"><a href="repeated-generation-of-data-to-compute-power.html#cb792-23" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(sotval) <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
-<span id="cb792-24"><a href="repeated-generation-of-data-to-compute-power.html#cb792-24" aria-hidden="true" tabindex="-1"></a><span class="do">## save(pow,file=&quot;data/powerbeta1mean.Rda&quot;)</span></span></code></pre></div>
-<p>The power estimate from the above code is 0.97.</p>
+<div id="repeated-generation-of-data-to-compute-power" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> Repeated generation of data to compute power<a href="repeated-generation-of-data-to-compute-power.html#repeated-generation-of-data-to-compute-power" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>With the function for simulating data ready, we are now able to repeatedly generate simulated data. Next, we generate data 100 times, fit a linear mixed model each time, and extract the t-value from each linear mixed model fit. The vector t-values is then used to compute power: we simply look at the proportion of absolute t-values that exceed the value 2.</p>
+<div class="sourceCode" id="cb890"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb890-1"><a href="repeated-generation-of-data-to-compute-power.html#cb890-1" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb890-2"><a href="repeated-generation-of-data-to-compute-power.html#cb890-2" aria-hidden="true" tabindex="-1"></a>sotval <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim)</span>
+<span id="cb890-3"><a href="repeated-generation-of-data-to-compute-power.html#cb890-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb890-4"><a href="repeated-generation-of-data-to-compute-power.html#cb890-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
+<span id="cb890-5"><a href="repeated-generation-of-data-to-compute-power.html#cb890-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate sim data:</span></span>
+<span id="cb890-6"><a href="repeated-generation-of-data-to-compute-power.html#cb890-6" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">gen_sim_lnorm2</span>(</span>
+<span id="cb890-7"><a href="repeated-generation-of-data-to-compute-power.html#cb890-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">nitem =</span> <span class="dv">16</span>,</span>
+<span id="cb890-8"><a href="repeated-generation-of-data-to-compute-power.html#cb890-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">nsubj =</span> <span class="dv">42</span>,</span>
+<span id="cb890-9"><a href="repeated-generation-of-data-to-compute-power.html#cb890-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> beta,</span>
+<span id="cb890-10"><a href="repeated-generation-of-data-to-compute-power.html#cb890-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Sigma_u =</span> Sigma_u,</span>
+<span id="cb890-11"><a href="repeated-generation-of-data-to-compute-power.html#cb890-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Sigma_w =</span> Sigma_w,</span>
+<span id="cb890-12"><a href="repeated-generation-of-data-to-compute-power.html#cb890-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">sigma_e =</span> sigma_e</span>
+<span id="cb890-13"><a href="repeated-generation-of-data-to-compute-power.html#cb890-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb890-14"><a href="repeated-generation-of-data-to-compute-power.html#cb890-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb890-15"><a href="repeated-generation-of-data-to-compute-power.html#cb890-15" aria-hidden="true" tabindex="-1"></a>  <span class="do">## fit model to sim data:</span></span>
+<span id="cb890-16"><a href="repeated-generation-of-data-to-compute-power.html#cb890-16" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="fu">log</span>(rt) <span class="sc">~</span> so <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> subj) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> so <span class="sc">|</span> item), dat,</span>
+<span id="cb890-17"><a href="repeated-generation-of-data-to-compute-power.html#cb890-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb890-18"><a href="repeated-generation-of-data-to-compute-power.html#cb890-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb890-19"><a href="repeated-generation-of-data-to-compute-power.html#cb890-19" aria-hidden="true" tabindex="-1"></a>  <span class="do">## extract the t-value</span></span>
+<span id="cb890-20"><a href="repeated-generation-of-data-to-compute-power.html#cb890-20" aria-hidden="true" tabindex="-1"></a>  sotval[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb890-21"><a href="repeated-generation-of-data-to-compute-power.html#cb890-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb892"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb892-1"><a href="repeated-generation-of-data-to-compute-power.html#cb892-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(sotval) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>The power estimate from the above code is 0.6.</p>
 <p>The following computation will take a lot of time because we are generating and fitting data <span class="math inline">\(3\times 100\)</span> times.
 Here, we will assume that the true effect has the following range of plausible values:</p>
-<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="repeated-generation-of-data-to-compute-power.html#cb793-1" aria-hidden="true" tabindex="-1"></a><span class="do">## lower bound:</span></span>
-<span id="cb793-2"><a href="repeated-generation-of-data-to-compute-power.html#cb793-2" aria-hidden="true" tabindex="-1"></a>.<span class="dv">12</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> .<span class="dv">05</span></span></code></pre></div>
+<div class="sourceCode" id="cb893"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb893-1"><a href="repeated-generation-of-data-to-compute-power.html#cb893-1" aria-hidden="true" tabindex="-1"></a><span class="do">## lower bound:</span></span>
+<span id="cb893-2"><a href="repeated-generation-of-data-to-compute-power.html#cb893-2" aria-hidden="true" tabindex="-1"></a>.<span class="dv">12</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> .<span class="dv">05</span></span></code></pre></div>
 <pre><code>## [1] 0.02</code></pre>
-<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb795-1"><a href="repeated-generation-of-data-to-compute-power.html#cb795-1" aria-hidden="true" tabindex="-1"></a><span class="do">## mean</span></span>
-<span id="cb795-2"><a href="repeated-generation-of-data-to-compute-power.html#cb795-2" aria-hidden="true" tabindex="-1"></a>.<span class="dv">12</span></span></code></pre></div>
+<div class="sourceCode" id="cb895"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb895-1"><a href="repeated-generation-of-data-to-compute-power.html#cb895-1" aria-hidden="true" tabindex="-1"></a><span class="do">## mean</span></span>
+<span id="cb895-2"><a href="repeated-generation-of-data-to-compute-power.html#cb895-2" aria-hidden="true" tabindex="-1"></a>.<span class="dv">12</span></span></code></pre></div>
 <pre><code>## [1] 0.12</code></pre>
-<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb797-1"><a href="repeated-generation-of-data-to-compute-power.html#cb797-1" aria-hidden="true" tabindex="-1"></a><span class="do">## upper bound</span></span>
-<span id="cb797-2"><a href="repeated-generation-of-data-to-compute-power.html#cb797-2" aria-hidden="true" tabindex="-1"></a>.<span class="dv">12</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> .<span class="dv">05</span></span></code></pre></div>
+<div class="sourceCode" id="cb897"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb897-1"><a href="repeated-generation-of-data-to-compute-power.html#cb897-1" aria-hidden="true" tabindex="-1"></a><span class="do">## upper bound</span></span>
+<span id="cb897-2"><a href="repeated-generation-of-data-to-compute-power.html#cb897-2" aria-hidden="true" tabindex="-1"></a>.<span class="dv">12</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> .<span class="dv">05</span></span></code></pre></div>
 <pre><code>## [1] 0.22</code></pre>
 <p>We will run two for-loops now: the first for-loop selects one of the plausible values as the value for the slope, and then the second for-loop runs 100 simulations to compute power for that effect size.</p>
 <p>This time, instead of ignoring convergence problems, we can record the proportion of times that we get a convergence failure or problem, and we can discard that result:</p>
-<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="repeated-generation-of-data-to-compute-power.html#cb799-1" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb799-2"><a href="repeated-generation-of-data-to-compute-power.html#cb799-2" aria-hidden="true" tabindex="-1"></a><span class="do">## effect size possibilities:</span></span>
-<span id="cb799-3"><a href="repeated-generation-of-data-to-compute-power.html#cb799-3" aria-hidden="true" tabindex="-1"></a>b1_est <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.02</span>, <span class="fl">0.12</span>, <span class="fl">0.22</span>)</span>
-<span id="cb799-4"><a href="repeated-generation-of-data-to-compute-power.html#cb799-4" aria-hidden="true" tabindex="-1"></a>sotvals <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, nsim <span class="sc">*</span> <span class="fu">length</span>(b1_est)), <span class="at">ncol =</span> nsim)</span>
-<span id="cb799-5"><a href="repeated-generation-of-data-to-compute-power.html#cb799-5" aria-hidden="true" tabindex="-1"></a>failed <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, nsim <span class="sc">*</span> <span class="fu">length</span>(b1_est)), <span class="at">ncol =</span> nsim)</span>
-<span id="cb799-6"><a href="repeated-generation-of-data-to-compute-power.html#cb799-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(b1_est)) {</span>
-<span id="cb799-7"><a href="repeated-generation-of-data-to-compute-power.html#cb799-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
-<span id="cb799-8"><a href="repeated-generation-of-data-to-compute-power.html#cb799-8" aria-hidden="true" tabindex="-1"></a>    beta[<span class="dv">2</span>] <span class="ot">&lt;-</span> b1_est[j]</span>
-<span id="cb799-9"><a href="repeated-generation-of-data-to-compute-power.html#cb799-9" aria-hidden="true" tabindex="-1"></a>    dat_sim <span class="ot">&lt;-</span> <span class="fu">gen_sim_lnorm2</span>(</span>
-<span id="cb799-10"><a href="repeated-generation-of-data-to-compute-power.html#cb799-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">nitem =</span> <span class="dv">16</span>,</span>
-<span id="cb799-11"><a href="repeated-generation-of-data-to-compute-power.html#cb799-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">nsubj =</span> <span class="dv">42</span>,</span>
-<span id="cb799-12"><a href="repeated-generation-of-data-to-compute-power.html#cb799-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">beta =</span> beta,</span>
-<span id="cb799-13"><a href="repeated-generation-of-data-to-compute-power.html#cb799-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">Sigma_u =</span> Sigma_u,</span>
-<span id="cb799-14"><a href="repeated-generation-of-data-to-compute-power.html#cb799-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">Sigma_w =</span> Sigma_w,</span>
-<span id="cb799-15"><a href="repeated-generation-of-data-to-compute-power.html#cb799-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">sigma_e =</span> sigma_e</span>
-<span id="cb799-16"><a href="repeated-generation-of-data-to-compute-power.html#cb799-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb799-17"><a href="repeated-generation-of-data-to-compute-power.html#cb799-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb799-18"><a href="repeated-generation-of-data-to-compute-power.html#cb799-18" aria-hidden="true" tabindex="-1"></a>    <span class="do">## no correlations estimated to</span></span>
-<span id="cb799-19"><a href="repeated-generation-of-data-to-compute-power.html#cb799-19" aria-hidden="true" tabindex="-1"></a>    <span class="do">## minimize convergence problems:</span></span>
-<span id="cb799-20"><a href="repeated-generation-of-data-to-compute-power.html#cb799-20" aria-hidden="true" tabindex="-1"></a>    <span class="do">## analysis done after log-transforming:</span></span>
-<span id="cb799-21"><a href="repeated-generation-of-data-to-compute-power.html#cb799-21" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="fu">log</span>(rt) <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subj) <span class="sc">+</span></span>
-<span id="cb799-22"><a href="repeated-generation-of-data-to-compute-power.html#cb799-22" aria-hidden="true" tabindex="-1"></a>      (so <span class="sc">||</span> item),</span>
-<span id="cb799-23"><a href="repeated-generation-of-data-to-compute-power.html#cb799-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat_sim,</span>
-<span id="cb799-24"><a href="repeated-generation-of-data-to-compute-power.html#cb799-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb799-25"><a href="repeated-generation-of-data-to-compute-power.html#cb799-25" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb799-26"><a href="repeated-generation-of-data-to-compute-power.html#cb799-26" aria-hidden="true" tabindex="-1"></a>    <span class="do">## ignore failed trials</span></span>
-<span id="cb799-27"><a href="repeated-generation-of-data-to-compute-power.html#cb799-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">&quot;failed to converge&quot;</span>, m<span class="sc">@</span>optinfo<span class="sc">$</span>conv<span class="sc">$</span>lme4<span class="sc">$</span>messages)) <span class="sc">||</span></span>
-<span id="cb799-28"><a href="repeated-generation-of-data-to-compute-power.html#cb799-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">&quot;boundary&quot;</span>, m<span class="sc">@</span>optinfo<span class="sc">$</span>conv<span class="sc">$</span>lme4<span class="sc">$</span>messages))) {</span>
-<span id="cb799-29"><a href="repeated-generation-of-data-to-compute-power.html#cb799-29" aria-hidden="true" tabindex="-1"></a>      failed[j, i] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb799-30"><a href="repeated-generation-of-data-to-compute-power.html#cb799-30" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb799-31"><a href="repeated-generation-of-data-to-compute-power.html#cb799-31" aria-hidden="true" tabindex="-1"></a>      sotvals[j, i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb799-32"><a href="repeated-generation-of-data-to-compute-power.html#cb799-32" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb799-33"><a href="repeated-generation-of-data-to-compute-power.html#cb799-33" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb799-34"><a href="repeated-generation-of-data-to-compute-power.html#cb799-34" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb899"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb899-1"><a href="repeated-generation-of-data-to-compute-power.html#cb899-1" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb899-2"><a href="repeated-generation-of-data-to-compute-power.html#cb899-2" aria-hidden="true" tabindex="-1"></a><span class="do">## effect size possibilities:</span></span>
+<span id="cb899-3"><a href="repeated-generation-of-data-to-compute-power.html#cb899-3" aria-hidden="true" tabindex="-1"></a>b1_est <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.02</span>, <span class="fl">0.12</span>, <span class="fl">0.22</span>)</span>
+<span id="cb899-4"><a href="repeated-generation-of-data-to-compute-power.html#cb899-4" aria-hidden="true" tabindex="-1"></a>sotvals <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, nsim <span class="sc">*</span> <span class="fu">length</span>(b1_est)), <span class="at">ncol =</span> nsim)</span>
+<span id="cb899-5"><a href="repeated-generation-of-data-to-compute-power.html#cb899-5" aria-hidden="true" tabindex="-1"></a>failed <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, nsim <span class="sc">*</span> <span class="fu">length</span>(b1_est)), <span class="at">ncol =</span> nsim)</span>
+<span id="cb899-6"><a href="repeated-generation-of-data-to-compute-power.html#cb899-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(b1_est)) {</span>
+<span id="cb899-7"><a href="repeated-generation-of-data-to-compute-power.html#cb899-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim) {</span>
+<span id="cb899-8"><a href="repeated-generation-of-data-to-compute-power.html#cb899-8" aria-hidden="true" tabindex="-1"></a>    beta[<span class="dv">2</span>] <span class="ot">&lt;-</span> b1_est[j]</span>
+<span id="cb899-9"><a href="repeated-generation-of-data-to-compute-power.html#cb899-9" aria-hidden="true" tabindex="-1"></a>    dat_sim <span class="ot">&lt;-</span> <span class="fu">gen_sim_lnorm2</span>(</span>
+<span id="cb899-10"><a href="repeated-generation-of-data-to-compute-power.html#cb899-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">nitem =</span> <span class="dv">16</span>,</span>
+<span id="cb899-11"><a href="repeated-generation-of-data-to-compute-power.html#cb899-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">nsubj =</span> <span class="dv">42</span>,</span>
+<span id="cb899-12"><a href="repeated-generation-of-data-to-compute-power.html#cb899-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">beta =</span> beta,</span>
+<span id="cb899-13"><a href="repeated-generation-of-data-to-compute-power.html#cb899-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">Sigma_u =</span> Sigma_u,</span>
+<span id="cb899-14"><a href="repeated-generation-of-data-to-compute-power.html#cb899-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">Sigma_w =</span> Sigma_w,</span>
+<span id="cb899-15"><a href="repeated-generation-of-data-to-compute-power.html#cb899-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">sigma_e =</span> sigma_e</span>
+<span id="cb899-16"><a href="repeated-generation-of-data-to-compute-power.html#cb899-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb899-17"><a href="repeated-generation-of-data-to-compute-power.html#cb899-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb899-18"><a href="repeated-generation-of-data-to-compute-power.html#cb899-18" aria-hidden="true" tabindex="-1"></a>    <span class="do">## no correlations estimated to</span></span>
+<span id="cb899-19"><a href="repeated-generation-of-data-to-compute-power.html#cb899-19" aria-hidden="true" tabindex="-1"></a>    <span class="do">## minimize convergence problems:</span></span>
+<span id="cb899-20"><a href="repeated-generation-of-data-to-compute-power.html#cb899-20" aria-hidden="true" tabindex="-1"></a>    <span class="do">## analysis done after log-transforming:</span></span>
+<span id="cb899-21"><a href="repeated-generation-of-data-to-compute-power.html#cb899-21" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="fu">log</span>(rt) <span class="sc">~</span> so <span class="sc">+</span> (so <span class="sc">||</span> subj) <span class="sc">+</span></span>
+<span id="cb899-22"><a href="repeated-generation-of-data-to-compute-power.html#cb899-22" aria-hidden="true" tabindex="-1"></a>      (so <span class="sc">||</span> item),</span>
+<span id="cb899-23"><a href="repeated-generation-of-data-to-compute-power.html#cb899-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat_sim,</span>
+<span id="cb899-24"><a href="repeated-generation-of-data-to-compute-power.html#cb899-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">lmerControl</span>(<span class="at">calc.derivs =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb899-25"><a href="repeated-generation-of-data-to-compute-power.html#cb899-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb899-26"><a href="repeated-generation-of-data-to-compute-power.html#cb899-26" aria-hidden="true" tabindex="-1"></a>    <span class="do">## ignore failed trials</span></span>
+<span id="cb899-27"><a href="repeated-generation-of-data-to-compute-power.html#cb899-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">&quot;failed to converge&quot;</span>, m<span class="sc">@</span>optinfo<span class="sc">$</span>conv<span class="sc">$</span>lme4<span class="sc">$</span>messages)) <span class="sc">||</span></span>
+<span id="cb899-28"><a href="repeated-generation-of-data-to-compute-power.html#cb899-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">&quot;boundary&quot;</span>, m<span class="sc">@</span>optinfo<span class="sc">$</span>conv<span class="sc">$</span>lme4<span class="sc">$</span>messages))) {</span>
+<span id="cb899-29"><a href="repeated-generation-of-data-to-compute-power.html#cb899-29" aria-hidden="true" tabindex="-1"></a>      failed[j, i] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb899-30"><a href="repeated-generation-of-data-to-compute-power.html#cb899-30" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb899-31"><a href="repeated-generation-of-data-to-compute-power.html#cb899-31" aria-hidden="true" tabindex="-1"></a>      sotvals[j, i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(m)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb899-32"><a href="repeated-generation-of-data-to-compute-power.html#cb899-32" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb899-33"><a href="repeated-generation-of-data-to-compute-power.html#cb899-33" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb899-34"><a href="repeated-generation-of-data-to-compute-power.html#cb899-34" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>You can examine the proportion of failed convergences:</p>
-<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="repeated-generation-of-data-to-compute-power.html#cb800-1" aria-hidden="true" tabindex="-1"></a><span class="do">## proportion of convergence failures:</span></span>
-<span id="cb800-2"><a href="repeated-generation-of-data-to-compute-power.html#cb800-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rowMeans</span>(failed)</span></code></pre></div>
+<div class="sourceCode" id="cb901"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb901-1"><a href="repeated-generation-of-data-to-compute-power.html#cb901-1" aria-hidden="true" tabindex="-1"></a><span class="do">## proportion of convergence failures:</span></span>
+<span id="cb901-2"><a href="repeated-generation-of-data-to-compute-power.html#cb901-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rowMeans</span>(failed)</span></code></pre></div>
+<pre><code>## [1] 0.29 0.32 0.24</code></pre>
 <p>Power can now be computed for each effect size:</p>
-<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb801-1"><a href="repeated-generation-of-data-to-compute-power.html#cb801-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(b1_est))</span>
-<span id="cb801-2"><a href="repeated-generation-of-data-to-compute-power.html#cb801-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(b1_est)) {</span>
-<span id="cb801-3"><a href="repeated-generation-of-data-to-compute-power.html#cb801-3" aria-hidden="true" tabindex="-1"></a>  pow[k] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(sotvals[k, ]) <span class="sc">&gt;</span> <span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb801-4"><a href="repeated-generation-of-data-to-compute-power.html#cb801-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb801-5"><a href="repeated-generation-of-data-to-compute-power.html#cb801-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb801-6"><a href="repeated-generation-of-data-to-compute-power.html#cb801-6" aria-hidden="true" tabindex="-1"></a><span class="do">## save(pow,file=&quot;data/powerbeta1meanlowerupper.Rda&quot;)</span></span></code></pre></div>
-<p>The power estimate for the lower bound of the <span class="math inline">\(\beta_1\)</span> estimate is 0.09, and for the upper bound is 1. The power estimate for the mean estimate of <span class="math inline">\(\beta_1\)</span> is 0.73.</p>
+<div class="sourceCode" id="cb903"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb903-1"><a href="repeated-generation-of-data-to-compute-power.html#cb903-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(b1_est))</span>
+<span id="cb903-2"><a href="repeated-generation-of-data-to-compute-power.html#cb903-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(b1_est)) {</span>
+<span id="cb903-3"><a href="repeated-generation-of-data-to-compute-power.html#cb903-3" aria-hidden="true" tabindex="-1"></a>  pow[k] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(sotvals[k, ]) <span class="sc">&gt;</span> <span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb903-4"><a href="repeated-generation-of-data-to-compute-power.html#cb903-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The power estimate for the lower bound of the <span class="math inline">\(\beta_1\)</span> estimate is 0.06, and for the upper bound is 0.99. The power estimate for the mean estimate of <span class="math inline">\(\beta_1\)</span> is 0.71.</p>
 <p>Notice that there is a lot of uncertainty about the power estimate here!</p>
 <p>Recall that power is a <strong>function</strong> of</p>
 <ul>
@@ -482,7 +616,7 @@ Here, we will assume that the true effect has the following range of plausible v
 <li>standard deviation(s); in linear mixed models, these are all the variance components and the correlations</li>
 <li>sample size (numbers of subjects and items)</li>
 </ul>
-<p>In papers, you will often see text like “power was x%.” This statement reflects a misunderstanding; power is best plotted as a function of (a subset of) these variables.</p>
+<p>In papers, you will often see text like “power was x%”. This statement reflects a misunderstanding; power is best plotted as a function of (a subset of) these variables.</p>
 <p>In the discussion above, we display a range of power estimates; this range reflects our uncertainty about the power estimate as a function of the plausible effect sizes. Often (as here) this uncertainty will be very high! I.e., given what one knows so far, it may be difficult to pin down what the assumed effect size etc., should be, and that makes it hard to give a precise range for your power estimate.</p>
 </div>
             </section>
@@ -551,7 +685,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

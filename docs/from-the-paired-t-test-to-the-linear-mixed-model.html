@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.4 From the paired t-test to the linear mixed model | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction</title>
   <meta name="description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.4 From the paired t-test to the linear mixed model | Linear Mixed Models in Linguistics and Psychology: A Comprehensive Introduction" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/vasishth/Freq_CogSci" />
   <meta property="og:image" content="https://github.com/vasishth/Freq_CogSci/images/temporarycover.jpg" />
   <meta property="og:description" content="Linear Mixed Models for Linguistics and Psychology: A Comprehensive Introduction" />
   <meta name="github-repo" content="https://github.com/vasishth/Freq_CogSci" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Shravan Vasishth, Daniel Schad, Audrey Bürki, Reinhold Kliegl" />
 
 
-<meta name="date" content="2021-12-19" />
+<meta name="date" content="2022-08-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="checking-model-assumptions.html"/>
 <link rel="next" href="linear-mixed-models.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -52,6 +50,7 @@
 
 
 <link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections/anchor-sections.js"></script>
 <script src="libs/kePrint/kePrint.js"></script>
 <link href="libs/lightable/lightable.css" rel="stylesheet" />
@@ -220,7 +219,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.5.6" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#type-m-and-s-error-in-the-face-of-low-power"><i class="fa fa-check"></i><b>2.5.6</b> Type M and S error in the face of low power</a></li>
 <li class="chapter" data-level="2.5.7" data-path="hypothesis-testing-the-one-sample-t-test.html"><a href="hypothesis-testing-the-one-sample-t-test.html#searching-for-significance"><i class="fa fa-check"></i><b>2.5.7</b> Searching for significance</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.-the-paired-t-test.html"><a href="the-two-sample-t-test-vs.-the-paired-t-test.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
+<li class="chapter" data-level="2.6" data-path="the-two-sample-t-test-vs.html"><a href="the-two-sample-t-test-vs.html"><i class="fa fa-check"></i><b>2.6</b> The two-sample t-test vs. the paired t-test</a></li>
 <li class="chapter" data-level="2.7" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html"><i class="fa fa-check"></i><b>2.7</b> Using paired t-tests in complex factorial designs</a>
 <ul>
 <li class="chapter" data-level="2.7.1" data-path="using-paired-t-tests-in-complex-factorial-designs.html"><a href="using-paired-t-tests-in-complex-factorial-designs.html#analyzing-a-2times-2-repeated-measures-design-using-paired-t-tests"><i class="fa fa-check"></i><b>2.7.1</b> Analyzing a <span class="math inline">\(2\times 2\)</span> repeated measures design using paired t-tests</a></li>
@@ -247,10 +246,14 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-1-varying-intercepts"><i class="fa fa-check"></i><b>3.5.1</b> Model type 1: Varying intercepts</a></li>
 <li class="chapter" data-level="3.5.2" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#the-formal-statement-of-the-varying-intercepts-model"><i class="fa fa-check"></i><b>3.5.2</b> The formal statement of the varying intercepts model</a></li>
-<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and slopes, without a correlation</a></li>
+<li class="chapter" data-level="3.5.3" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-2-varying-intercepts-and-varying-slopes-without-a-correlation"><i class="fa fa-check"></i><b>3.5.3</b> Model type 2: Varying intercepts and varying slopes, without a correlation</a></li>
 <li class="chapter" data-level="3.5.4" data-path="linear-mixed-models.html"><a href="linear-mixed-models.html#model-type-3-varying-intercepts-and-varying-slopes-with-correlation"><i class="fa fa-check"></i><b>3.5.4</b> Model type 3: Varying intercepts and varying slopes, with correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a></li>
+<li class="chapter" data-level="3.6" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html"><i class="fa fa-check"></i><b>3.6</b> Shrinkage in linear mixed models</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-of-extreme-estimates-from-individual-subjects"><i class="fa fa-check"></i><b>3.6.1</b> Shrinkage of extreme estimates from individual subjects</a></li>
+<li class="chapter" data-level="3.6.2" data-path="shrinkage-in-linear-mixed-models.html"><a href="shrinkage-in-linear-mixed-models.html#shrinkage-when-data-are-missing"><i class="fa fa-check"></i><b>3.6.2</b> Shrinkage when data are missing</a></li>
+</ul></li>
 <li class="chapter" data-level="3.7" data-path="summary-2.html"><a href="summary-2.html"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="further-reading-1.html"><a href="further-reading-1.html"><i class="fa fa-check"></i><b>3.8</b> Further reading</a></li>
 <li class="chapter" data-level="3.9" data-path="sec:LMExercises1.html"><a href="sec:LMExercises1.html"><i class="fa fa-check"></i><b>3.9</b> Exercises</a></li>
@@ -367,7 +370,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.4" data-path="summary-7.html"><a href="summary-7.html"><i class="fa fa-check"></i><b>9.4</b> Summary</a></li>
 <li class="chapter" data-level="9.5" data-path="further-reading-5.html"><a href="further-reading-5.html"><i class="fa fa-check"></i><b>9.5</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ch:reproducible.html"><a href="ch:reproducible.html"><i class="fa fa-check"></i><b>10</b> Developing a reproducible workflow</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -389,149 +391,135 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="from-the-paired-t-test-to-the-linear-mixed-model" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> From the paired t-test to the linear mixed model</h2>
-<p>One important point to notice is that the observed t-value of the paired t-test and the t-test printed out by the linear model don’t match:</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(rawRT <span class="sc">~</span> condition, bysubj, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>statistic</span></code></pre></div>
-<pre><code>##     t 
-## 3.109</code></pre>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m0)<span class="sc">$</span>coefficients, <span class="dv">2</span>)[, <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)]</span></code></pre></div>
+<div id="from-the-paired-t-test-to-the-linear-mixed-model" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> From the paired t-test to the linear mixed model<a href="from-the-paired-t-test-to-the-linear-mixed-model.html#from-the-paired-t-test-to-the-linear-mixed-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>One important point to notice is that the observed t-value of the paired t-test and the t-test printed out by the simple linear model don’t match:</p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(<span class="fu">t.test</span>(rawRT <span class="sc">~</span> condition, bysubj, </span>
+<span id="cb304-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb304-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">paired =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;t(41)=3.11 p=0.003&quot;
+## [1] &quot;est.: 102.29 [35.85,168.72] ms&quot;</code></pre>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(m0raw)<span class="sc">$</span>coefficients, <span class="dv">2</span>)[, <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)]</span></code></pre></div>
 <pre><code>##                  Estimate Std. Error t value
 ## (Intercept)         471.4      31.13   15.14
 ## conditionsubjgap   -102.3      44.02   -2.32</code></pre>
 <p>This is because the linear model is equivalent to the unpaired (i.e., two sample) t-test:</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(rawRT <span class="sc">~</span> condition, bysubj))</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = rawRT ~ condition, data = bysubj)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -303.4 -116.4  -51.6   49.1  853.3 
-## 
-## Coefficients:
-##                  Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)         471.4       31.1   15.14   &lt;2e-16
-## conditionsubjgap   -102.3       44.0   -2.32    0.023
-##                     
-## (Intercept)      ***
-## conditionsubjgap *  
-## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 202 on 82 degrees of freedom
-## Multiple R-squared:  0.0618, Adjusted R-squared:  0.0503 
-## F-statistic:  5.4 on 1 and 82 DF,  p-value: 0.0226</code></pre>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">t.test</span>(rawRT <span class="sc">~</span> condition, bysubj,</span>
-<span id="cb285-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb285-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">paired =</span> <span class="cn">FALSE</span></span>
-<span id="cb285-3"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb285-3" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>statistic, <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##    t 
-## 2.32</code></pre>
-<p>The paired t-test has an equivalent in the linear modeling framework: the linear mixed model. We turn next to this extension of the simple linear model. The command corresponding to the paired t-test in the linear modeling framework is:</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb287-1" aria-hidden="true" tabindex="-1"></a>m0.lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rawRT <span class="sc">~</span> condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subject), bysubj)</span>
-<span id="cb287-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb287-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m0.lmer)<span class="sc">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(<span class="fu">t.test</span>(rawRT <span class="sc">~</span> condition, bysubj,</span>
+<span id="cb308-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb308-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">paired =</span> <span class="cn">FALSE</span></span>
+<span id="cb308-3"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb308-3" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
+<pre><code>## [1] &quot;t(57)=2.32 p=0.024&quot;
+## [1] &quot;est.: 471.36 [14.14,190.43] ms&quot;
+## [2] &quot;est.: 369.07 [14.14,190.43] ms&quot;</code></pre>
+<p>As discussed earlier, the paired t-test’s analog in the linear modeling framework is the linear mixed model with varying intercepts. We turn next to this extension of the simple linear model. The command corresponding to the paired t-test in the linear modeling framework is as follows. Notice that we are working with the aggregated data, as in the paired t-test. Later, we will switch to the unaggregated data; that will be the correct analysis of these data.</p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb310-1" aria-hidden="true" tabindex="-1"></a>m0raw_lmer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(rawRT <span class="sc">~</span> condition <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subject), bysubj)</span>
+<span id="cb310-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb310-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m0raw_lmer)<span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>##                  Estimate Std. Error t value
 ## (Intercept)         471.4      31.13  15.143
 ## conditionsubjgap   -102.3      32.90  -3.109</code></pre>
 <p>To understand the connection between the paired t-test and the above command, it is necessary to consider how a paired t-test is assembled.</p>
-<p>First, some background. If you have two random variables that have correlation <span class="math inline">\(\rho\)</span>, the variance of the difference between the two random variables is:</p>
+<p>First, some background knowledge from random variable theory. If you have two random variables that have correlation <span class="math inline">\(\rho\)</span>, the variance of the difference between the two random variables is:</p>
 <p><span class="math display">\[\begin{equation}
-Var(X_1-X_2)=Var(X_1) + Var(X_2) - 2\times Cov(X_1, X_2)
+Var(Y_1-Y_2)=Var(Y_1) + Var(Y_2) - 2\times Cov(Y_1, Y_2)
 \end{equation}\]</span></p>
-<p><span class="math inline">\(Cov(X_1, X2)\)</span> is the covariance between the two random variables and is defined as:</p>
+<p><span class="math inline">\(Cov(Y_1, X2)\)</span> is the covariance between the two random variables and is defined as:</p>
 <p><span class="math display">\[\begin{equation}
-Cov(X_1, X_2) = \rho \sqrt{Var(X_1)}\sqrt{Var(X_2)}
+Cov(Y_1, Y_2) = \rho \sqrt{Var(Y_1)}\sqrt{Var(Y_2)}
 \end{equation}\]</span></p>
-<p>You can find the proofs of the above assertions in books like <span class="citation"><a href="#ref-rice1995mathematical" role="doc-biblioref">Rice</a> (<a href="#ref-rice1995mathematical" role="doc-biblioref">1995</a>)</span>.</p>
-<p>As discussed earlier, a paired t-test is used when you have paired data from subject <span class="math inline">\(i=1,...,n\)</span> in two conditions, say conditions 1 and 2. Let’s write the data as two vectors <span class="math inline">\(X_{1}, X_{2}\)</span>. Because the pairs of data points are coming from the same subject, they are correlated with some correlation <span class="math inline">\(\rho\)</span>. Assume that both conditions 1 and 2 have standard deviation <span class="math inline">\(\sigma\)</span>.</p>
-<p>To make this discussion concrete, let’s generate some simulated bivariate data that are correlated. Assume that <span class="math inline">\(\sigma = 1\)</span>,
-<span class="math inline">\(\rho=0.5\)</span>, and that the data are balanced.</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb289-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb289-2" aria-hidden="true" tabindex="-1"></a>samplesize <span class="ot">&lt;-</span> <span class="dv">12</span></span>
-<span id="cb289-3"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb289-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">3</span>, .<span class="dv">2</span>)</span>
-<span id="cb289-4"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb289-4" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb289-5"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb289-5" aria-hidden="true" tabindex="-1"></a>stddev <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb289-6"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb289-6" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(stddev, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">diag</span>(<span class="dv">2</span>)</span>
-<span id="cb289-7"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb289-7" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> Sigma <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb289-8"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb289-8" aria-hidden="true" tabindex="-1"></a>Sigma</span></code></pre></div>
+<p>You can find the proofs of the above assertions in books like <span class="citation">Rice (<a href="#ref-rice1995mathematical" role="doc-biblioref">1995</a>)</span>.</p>
+<p>As discussed earlier, a paired t-test is used when you have paired data from subject <span class="math inline">\(i=1,...,n\)</span> in two conditions; assume that they are labeled conditions 1 and 2. Let’s write the data as two vectors <span class="math inline">\(Y_{1}, Y_{2}\)</span>. Because the pairs of data points are coming from the same subject, they are correlated with some correlation <span class="math inline">\(\rho\)</span>; recall Figure <a href="common-mistakes-involving-the-paired-t-test.html#fig:averageorsr">2.23</a>. Assume that both conditions 1 and 2 have standard deviation <span class="math inline">\(\sigma\)</span>.</p>
+<p>To make this discussion concrete, let’s generate some simulated bivariate data that are correlated. At this point, you may want to review chapter 1’s section on bivariate/multivariate distributions. Assume that <span class="math inline">\(\sigma = 1\)</span>, <span class="math inline">\(\rho=0.5\)</span>, and that the data are balanced.</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb312-1" aria-hidden="true" tabindex="-1"></a>samplesize <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb312-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb312-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">3</span>, .<span class="dv">2</span>)</span>
+<span id="cb312-3"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb312-3" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb312-4"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb312-4" aria-hidden="true" tabindex="-1"></a>stddev <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb312-5"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb312-5" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(stddev, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">diag</span>(<span class="dv">2</span>)</span>
+<span id="cb312-6"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb312-6" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> Sigma <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb312-7"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb312-7" aria-hidden="true" tabindex="-1"></a>Sigma</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]  1.0  0.5
 ## [2,]  0.5  1.0</code></pre>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="do">## simulated data:</span></span>
-<span id="cb291-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb291-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(<span class="at">n =</span> samplesize, <span class="at">mu =</span> mu, <span class="at">Sigma =</span> Sigma, <span class="at">empirical =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb291-3"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb291-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="do">## simulated data:</span></span>
+<span id="cb314-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb314-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(<span class="at">n =</span> samplesize, <span class="at">mu =</span> mu, <span class="at">Sigma =</span> Sigma, </span>
+<span id="cb314-3"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb314-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">empirical =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb314-4"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb314-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(y)</span></code></pre></div>
 <pre><code>##         [,1]     [,2]
-## [1,] -2.0298 -2.27684
-## [2,]  0.9404 -0.54592
-## [3,] -0.3580  1.76528
-## [4,]  1.2685  0.43248
-## [5,]  1.2587  0.07434
-## [6,]  0.6580  0.48275</code></pre>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb293-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> samplesize</span>
-<span id="cb293-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb293-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> x[, <span class="dv">1</span>]</span>
-<span id="cb293-3"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb293-3" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> x[, <span class="dv">2</span>]</span>
-<span id="cb293-4"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb293-4" aria-hidden="true" tabindex="-1"></a>x1</span></code></pre></div>
-<pre><code>##  [1] -2.02977  0.94043 -0.35799  1.26848  1.25872
-##  [6]  0.65803  0.68724  0.76847 -1.10476  0.75352
-## [11]  0.68126  0.07638</code></pre>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb295-1" aria-hidden="true" tabindex="-1"></a>x2</span></code></pre></div>
-<pre><code>##  [1] -2.27684 -0.54592  1.76528  0.43248  0.07434
-##  [6]  0.48275  0.09872  1.35493  0.08093  0.59181
-## [11]  0.48337 -0.14185</code></pre>
+## [1,]  1.0736 -1.42696
+## [2,]  0.2057  0.01514
+## [3,] -0.4906  0.26519
+## [4,]  0.9771  1.14904
+## [5,] -0.3875  0.52204
+## [6,]  0.8582  0.14618</code></pre>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb316-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> samplesize</span>
+<span id="cb316-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb316-2" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> y[, <span class="dv">1</span>]</span>
+<span id="cb316-3"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb316-3" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> y[, <span class="dv">2</span>]</span>
+<span id="cb316-4"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb316-4" aria-hidden="true" tabindex="-1"></a>y1</span></code></pre></div>
+<pre><code>##  [1]  1.0736  0.2057 -0.4906  0.9771 -0.3875  0.8582
+##  [7]  0.1865 -1.5633  1.0768 -0.7866  0.3463  2.1040</code></pre>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb318-1" aria-hidden="true" tabindex="-1"></a>y2</span></code></pre></div>
+<pre><code>##  [1] -1.42696  0.01514  0.26519  1.14904  0.52204
+##  [6]  0.14618 -0.47579 -0.09902  0.79568 -1.22516
+## [11]  0.45791  2.27576</code></pre>
 <p>To carry out the paired t-test,
-we need to know the variance of <span class="math inline">\(X_1-X_2\)</span> because the t-statistic will be:</p>
+we need to know the variance of <span class="math inline">\(Y_1-Y_2\)</span> because the t-statistic will be:</p>
 <p><span class="math display">\[\begin{equation}
-t_{n-1} = \frac{X_1 - X_2}{\sqrt{Var(X_1 - X_2)/n}}
+T = \frac{(\mu_{Y_1} - \mu_{Y_2})-0}{\sqrt{Var(Y_1 - Y_2)/n}}
 \end{equation}\]</span></p>
 <p>Now,</p>
 <p><span class="math display">\[\begin{equation}
-Var(X_1 - X_2) = \sigma^2 + \sigma^2 - 2 \rho \sigma\sigma = 2\sigma^2 (1-\rho)
+Var(Y_1 - Y_2) = \sigma^2 + \sigma^2 - 2 \rho \sigma\sigma = 2\sigma^2 (1-\rho)
 \end{equation}\]</span></p>
-<p>Now let’s compute the t-statistic using the above formula. Let the actual data vectors be <span class="math inline">\(x_1, x_2\)</span>.</p>
+<p>Now let’s compute the t-statistic using the above formula. Let the actual data vectors be <span class="math inline">\(y_1, y_2\)</span>.</p>
 <p><span class="math display">\[\begin{equation}
-t_{n-1} = \frac{mean(x_1) - mean(x_2)}{\sqrt{Var(X_1 - X_2)/n}}
+t_{obs} = \frac{(mean(y_1) - mean(y_2))-0}{\sqrt{Var(y_1 - y_2)/n}}
 \end{equation}\]</span></p>
 <p>This simplifies to:</p>
 <p><span class="math display">\[\begin{equation}
-t_{n-1} = \frac{mean(x_1) - mean(x_2)}{\sqrt{2\sigma^2(1-\rho)/n}}
+t_{obs} = \frac{(mean(y_1) - mean(y_2))-0}{\sqrt{2\sigma^2(1-\rho)/n}}
 \end{equation}\]</span></p>
 <p>Now compare the paired t-test output and the by-hand calculation:</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x1, x2, <span class="at">paired =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>statistic</span></code></pre></div>
-<pre><code>##      t 
-## 0.3464</code></pre>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb299-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">mean</span>(x1) <span class="sc">-</span> <span class="fu">mean</span>(x2)) <span class="sc">/</span> <span class="fu">sqrt</span>((<span class="dv">2</span> <span class="sc">*</span> stddev<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> rho)) <span class="sc">/</span> n)</span></code></pre></div>
-<pre><code>## [1] 0.3464</code></pre>
-<p>The linear mixed model we present next will fit exactly the same model as in the paired t-test above. To see this, suppose we have <span class="math inline">\(i\)</span> subjects and <span class="math inline">\(j=1,2\)</span> conditions. For simplicity, assume that each subject sees each condition once (e.g., the by-subjects aggregated English relative clause data), so we have two data points from each subject. In other words, the data are paired.</p>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary_ttest</span>(<span class="fu">t.test</span>(y1, y2, <span class="at">paired =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;t(11)=0.35 p=0.736&quot;
+## [1] &quot;est.: 0.1 [-0.54,0.74] ms&quot;</code></pre>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(((<span class="fu">mean</span>(y1) <span class="sc">-</span> <span class="fu">mean</span>(y2))<span class="sc">-</span><span class="dv">0</span>) <span class="sc">/</span> </span>
+<span id="cb322-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb322-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sqrt</span>((<span class="dv">2</span> <span class="sc">*</span> stddev<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> rho)) <span class="sc">/</span> n),<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.35</code></pre>
+<p>The two t-values are identical.</p>
+<p>The linear mixed model we present next will fit exactly the same model as the paired t-test above. We will prove that the linear mixed model and the paired t-test are exactly the same model.</p>
+<p>Suppose we have <span class="math inline">\(i\)</span> subjects and two conditions, labeled 1 and 2. For now, assume that each subject sees each condition only once (e.g., the by-subjects aggregated English relative clause data), so we have two data points from each subject. In other words, the data are paired.</p>
 <p>Then, for condition 1, the dependent variable can be described by the equation:</p>
-<p><span class="math inline">\(y_{i1} = \beta_0 + u_i + \varepsilon_{i1}\)</span></p>
-<p>Here, <span class="math inline">\(\beta_0\)</span> is the mean reading time, and <span class="math inline">\(\varepsilon\)</span> is the usual residual error term. The interesting new term is <span class="math inline">\(u_i\)</span>. This is the adjustment to the mean reading time for subject <span class="math inline">\(i\)</span>. That is, if some subject is slower than average, <span class="math inline">\(u_i\)</span> will be a positive number; if a subject is faster than average, then that subject’s adjustment <span class="math inline">\(u_i\)</span> will be negative in sign; and if a subject has exactly the same reading time as the mean for all subjects, then <span class="math inline">\(u_i\)</span> for that subject will be 0.</p>
+<p><span class="math inline">\(y_{i1} = \beta_0 + u_{0i} + \varepsilon_{i1}\)</span></p>
+<p>Here, <span class="math inline">\(\beta_0\)</span> is the mean reading time, and <span class="math inline">\(\varepsilon\)</span> is the usual residual error term. The interesting new term is <span class="math inline">\(u_{0i}\)</span>. This is a numerical value that constitutes an adjustment to the intercept <span class="math inline">\(\beta_0\)</span>, for subject <span class="math inline">\(i\)</span>. That is, if some subject is slower than <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(u_{0i}\)</span> will be a positive number; if a subject is faster than <span class="math inline">\(\beta_0\)</span>, then that subject’s adjustment <span class="math inline">\(u_{0i}\)</span> will be negative in sign; and if a subject has exactly the same reading time as the intercept <span class="math inline">\(\beta_0\)</span>, then <span class="math inline">\(u_{0i}\)</span> for that subject will be exactly 0.</p>
 <p>Similarly, for condition 2, the dependent variable is described by the equation:</p>
-<p><span class="math inline">\(y_{i2} = \beta_0 + \delta + u_i + \varepsilon_{i2}\)</span></p>
+<p><span class="math inline">\(y_{i2} = \beta_0 + \delta + u_{0i} + \varepsilon_{i2}\)</span></p>
 <p>Here, <span class="math inline">\(\delta\)</span> is the additional time taken to process condition 2 (thus, this is the treatment contrast coding we saw earlier in this chapter).</p>
 <p>If we subtract the equation for condition 2 from the equation for condition 1, the resulting equation is:</p>
 <p><span class="math inline">\(d_i=y_{i1} - y_{i2}= \delta + (\varepsilon_{i1}-\varepsilon_{i2})\)</span></p>
-<p>The expectation of <span class="math inline">\(d_i\)</span> is <span class="math inline">\(\delta\)</span> because the expectation of the <span class="math inline">\(\varepsilon\)</span> terms is 0 (we set up the model such that <span class="math inline">\(\varepsilon \sim Normal(0,\sigma)\)</span>).</p>
+<p>The <span class="math inline">\(u_{0i}\)</span> terms cancel out.
+The expectation or mean value of <span class="math inline">\(d_i\)</span> is <span class="math inline">\(\delta\)</span> because the expectation of the <span class="math inline">\(\varepsilon\)</span> terms is 0 (we set up the model such that <span class="math inline">\(\varepsilon \sim Normal(0,\sigma)\)</span>).</p>
 <p>Now, assuming that the error terms are correlated with correlation <span class="math inline">\(\rho\)</span>, the result presented at the beginning of this section applies:</p>
 <p><span class="math display">\[\begin{equation}
 Var(y_{i1}-y_{i2}) = \sigma^2 + \sigma^2-2\rho\sigma^2=2\sigma^2(1-\rho)
 \end{equation}\]</span></p>
 <p>The generative distribution for <span class="math inline">\(d_i\)</span>, the pairwise differences in the two conditions, is</p>
 <p><span class="math display">\[\begin{equation}
-d \sim Normal(\delta, \sqrt{2\sigma^2(1-\rho)})
+d_i \sim Normal(\delta, \sqrt{2\sigma^2(1-\rho)})
 \end{equation}\]</span></p>
 <p>But that is exactly the same standard deviation as the one used in the paired t-test.</p>
-<p>So, the paired t-test will deliver exactly the same t-score as the above linear mixed model.</p>
-<p>Let’s check that this is true using our simulated data. In the code below, the term <code>(1|subj)</code> is the adjustment by subject to the intercepts—the term <span class="math inline">\(u0_i\)</span> above.</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb301-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb301-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y =</span> <span class="fu">c</span>(x1, x2), <span class="at">cond =</span> <span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">each =</span> n), <span class="at">subj =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="dv">2</span>))</span>
-<span id="cb301-3"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb301-3" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>cond <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>cond)</span>
-<span id="cb301-4"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb301-4" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(dat<span class="sc">$</span>cond) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>)</span>
-<span id="cb301-5"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb301-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(dat<span class="sc">$</span>cond)</span></code></pre></div>
-<pre><code>##   [,1]
-## a    1
-## b   -1</code></pre>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> cond <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subj), dat))</span></code></pre></div>
+<p>The above result proves that the paired t-test will deliver exactly the same t-score as the linear mixed model with the additional term <span class="math inline">\(u_{0i}\)</span>. It is called a linear <em>mixed</em> model because of the new adjustment to the intercept <span class="math inline">\(\beta_0\)</span>, the term <span class="math inline">\(u_{0i}\)</span> for each subject. This term is called a <em>varying intercept</em> by subject. It is called a varying intercept because the <span class="math inline">\(u_{0i}\)</span> adjustment leads to the intercept for a particular subject becoming the sum of a fixed, unvarying term and a term that varies by subject, <span class="math inline">\(\beta_0 + u_{0i}\)</span>. Compare this to the fixed intercept <span class="math inline">\(\beta_0\)</span> in the simple linear model that corresponds to the unpaired t-test. In the linear mixed model, the intercept term is different for each subject because of the <span class="math inline">\(u_{0i}\)</span> term.</p>
+<p>Let’s check that the linear mixed model delivers exactly the same t-value as our paired t-test above. We will use our simulated data. In the code below, the term <code>(1|subj)</code> is the adjustment by subject to the intercepts—the term <span class="math inline">\(u_{0i}\)</span> above.</p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb324-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y =</span> <span class="fu">c</span>(y1, y2), </span>
+<span id="cb324-2"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb324-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">condition =</span> <span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], </span>
+<span id="cb324-3"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb324-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">each =</span> n), </span>
+<span id="cb324-4"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb324-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">subj =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="dv">2</span>))</span>
+<span id="cb324-5"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb324-5" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>condition <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>condition)</span>
+<span id="cb324-6"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb324-6" aria-hidden="true" tabindex="-1"></a><span class="do">## sum coding</span></span>
+<span id="cb324-7"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb324-7" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>cond<span class="ot">&lt;-</span><span class="fu">ifelse</span>(dat<span class="sc">$</span>condition<span class="sc">==</span><span class="st">&quot;a&quot;</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb324-8"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb324-8" aria-hidden="true" tabindex="-1"></a><span class="do">## sanity check!</span></span>
+<span id="cb324-9"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb324-9" aria-hidden="true" tabindex="-1"></a><span class="fu">xtabs</span>(<span class="sc">~</span>cond<span class="sc">+</span>condition,dat)</span></code></pre></div>
+<pre><code>##     condition
+## cond  a  b
+##   -1  0 12
+##   1  12  0</code></pre>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="from-the-paired-t-test-to-the-linear-mixed-model.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(y <span class="sc">~</span> cond <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subj), dat))</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: y ~ cond + (1 | subj)
 ##    Data: dat
@@ -539,8 +527,8 @@ d \sim Normal(\delta, \sqrt{2\sigma^2(1-\rho)})
 ## REML criterion at convergence: 65.6
 ## 
 ## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -1.3582 -0.3511  0.0926  0.4471  1.7859 
+##    Min     1Q Median     3Q    Max 
+## -1.899 -0.410  0.193  0.558  1.496 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
@@ -551,15 +539,15 @@ d \sim Normal(\delta, \sqrt{2\sigma^2(1-\rho)})
 ## Fixed effects:
 ##             Estimate Std. Error t value
 ## (Intercept)    0.250      0.250    1.00
-## cond1          0.050      0.144    0.35
+## cond           0.050      0.144    0.35
 ## 
 ## Correlation of Fixed Effects:
-##       (Intr)
-## cond1 0.000</code></pre>
+##      (Intr)
+## cond 0.000</code></pre>
 <p>The t-statistic from the linear mixed model is exactly the same as that from the paired t-test.</p>
-<p>With this as background, we are ready to look at linear mixed models in detail.</p>
+<p>Now we have the necessary background for investigating the linear mixed model in detail.</p>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-rice1995mathematical" class="csl-entry">
 Rice, John A. 1995. <em><span class="nocase">Mathematical statistics and data analysis</span></em>. Duxbury press Belmont, CA.
@@ -631,7 +619,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
