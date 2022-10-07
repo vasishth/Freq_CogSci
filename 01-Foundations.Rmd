@@ -688,8 +688,8 @@ A bivariate distribution for two random variables $X$ and $Y$, each of which com
 \Sigma
 =
 \begin{pmatrix}
-\sigma _{x}^2  & \rho\sigma _{x}\sigma _{y}\\
-\rho\sigma _{x}\sigma _{y}    & \sigma _{y}^2\\
+\sigma _{x}^2  & \rho_u\sigma _{x}\sigma _{y}\\
+\rho_u\sigma _{x}\sigma _{y}    & \sigma _{y}^2\\
 \end{pmatrix}
 \end{equation}
 
