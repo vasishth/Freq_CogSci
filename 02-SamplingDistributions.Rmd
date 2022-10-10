@@ -471,7 +471,7 @@ arrows(x0,y0=cis[,1],
        x1,y1=cis[,2],length=0,lwd=cis[,3])
 ```
 
-### Confidence interals are often misinterpreted
+### Confidence intervals are often misinterpreted
 
 The confidence interval is widely misinterpreted, i.e., as representing the range of plausible value of the $\mu$ parameter. This is the wrong interpretation because $\mu$ is a point value by assumption, it doesn't have a pdf associated with it. The frequentist CI is defined with reference to the sampling distribution of the mean under repeated sampling, not the probability distribution of $\mu$.
 By contrast, the Bayesian credible interval does have this interpretation. 
