@@ -473,7 +473,7 @@ arrows(x0,y0=cis[,1],
 
 ### Confidence intervals are often misinterpreted
 
-The confidence interval is widely misinterpreted, i.e., as representing the range of plausible value of the $\mu$ parameter. This is the wrong interpretation because $\mu$ is a point value by assumption, it doesn't have a pdf associated with it. The frequentist CI is defined with reference to the sampling distribution of the mean under repeated sampling, not the probability distribution of $\mu$.
+The confidence interval is widely misinterpreted, i.e., as representing the range of plausible values of the $\mu$ parameter. This is the wrong interpretation because $\mu$ is a point value by assumption, it doesn't have a pdf associated with it. The frequentist CI is defined with reference to the sampling distribution of the mean under repeated sampling, not the probability distribution of $\mu$.
 By contrast, the Bayesian credible interval does have this interpretation. 
 In most modeling settings that the authors have encountered in their work, the frequentist confidence interval and Bayesian credible interval have very similar widths, with the Bayesian interval being slightly wider depending on the prior specifications. But these similarities in the intervals do not change the fact that they have different meanings.
 
