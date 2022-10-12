@@ -834,7 +834,7 @@ ggplot(bysubjintercept, aes(x=b,
     ylab("subject id")+xlab("intercept estimates (log ms)")+theme_bw()
 ```
 
-### The formal statement of the varying intercepts model
+#### The formal statement of the varying intercepts model
 
 The model `m0_lmer` above prints out the following type of linear model.  $i$ indexes subject, and $j$ indexes items. 
 
