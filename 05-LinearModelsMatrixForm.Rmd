@@ -953,7 +953,7 @@ The basic idea here is that if the model fit is good, Deviance will have a $\chi
 So that is what we will use for assessing model fit.
 
 We will also use deviance for hypothesis testing.
-The difference in deviance (confusingly called residual deviance) between two models also has a $\chi^2$ distribution (this should remind you of ANOVA), with dfs being $p-q$, where $q$ is the number of parameters in the nukk model, and $p$ the number of parameters in the full model.
+The difference in deviance (confusingly called residual deviance) between two models also has a $\chi^2$ distribution (this should remind you of ANOVA), with dfs being $p-q$, where $q$ is the number of parameters in the null model, and $p$ the number of parameters in the full model.
 
 We discuss hypothesis testing first, then evaluating goodness of fit using deviance.
 
