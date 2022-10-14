@@ -859,7 +859,7 @@ x <- as.matrix(c(1, 1.7552))
 (log.odds <- t(x) %*% coef(fm1))
 ```
 
-We can also obtain the variance-covariance matrix of the fitted coefficients, and use it to compute the variance-covariance matrix for the does 1.7552:
+We can also obtain the variance-covariance matrix of the fitted coefficients, and use it to compute the variance-covariance matrix for the dose 1.7552:
 
 ```{r}
 ### compute CI for log odds:
