@@ -897,7 +897,7 @@ with 95% confidence intervals 0.30 and
 
 Note that one should not try to predict outside the range of the design matrix. For example, in the beetle data, the dose ranges from 1.69 to 1.88. We should not try to compute probabilities for dose 2.5, say, since we have no knowledge about whether the relationship remains unchanged beyond the upper bound of our design matrix.
 
-#### Multiple logistic regression: Example from Hindi data}
+#### Multiple logistic regression: Example from Hindi data
 
 We have eyetracking data from 10 participants reading Hindi sentences. The data come from @HusainVasishthNarayanan2015. We can compute skipping probability, the probability of skipping a word entirely (i.e., never fixating it). We first have to create a vector that has value 1 if the word has 0~ms total reading time, and 0 otherwise. 
 
