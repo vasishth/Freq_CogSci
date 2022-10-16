@@ -333,7 +333,7 @@ But when we have a non-deterministic model
 $y=\phi(f(x)^T,\beta,\epsilon)$, there is no solution! Now, the best we can do in an equation like $Ax=b$ is to get $Ax$ to be as close an approximation as possible to $b$. In other words, we try to minimize $\mid b-Ax\mid$. 
 
 The goal is to estimate $\beta$; we want to find a value of $\beta$ such that the observed Y is as close to its expected value $X\beta$. 
-In order to be able to identify $\beta$ from $X\beta$, the linear transformation $\beta \rightarrow X\beta$ should be one-to-one, so that every possible value of $\beta$ gives a different $X\beta$. This in turn requires that X be of full rank $p$. So, if a design matrix X is $n\times p$, then it is necessary that $n\geq p$. There must be at least as many observations as parameters. If this is not true, then the model is said to be **over-parameterized**.
+In order to be able to identify $\beta$ from $X\beta$, the linear transformation $\beta \rightarrow X\beta$ should be one-to-one, so that every possible value of $\beta$ gives a different $X\beta$. This in turn requires that $X$ be of full rank $p$. So, if a design matrix $X$ is $n\times p$, then it is necessary that $n\geq p$. There must be at least as many observations as parameters. If this is not true, then the model is said to be **over-parameterized**.
 
 Assuming that X is of full rank, and that $n>p$, 
 Y can be considered a point in n-dimensional space and the set of candidate $X\beta$ is a $p$-dimensional subspace of this space; see Figure \@ref(fig:leastsquares). There will be one point in this subspace which is closest to Y in terms of Euclidean distance. The unique $\beta$ that corresponds to this point is the **least squares estimator** of $\beta$; we will call this estimator $\hat \beta$.
@@ -859,7 +859,7 @@ x <- as.matrix(c(1, 1.7552))
 (log.odds <- t(x) %*% coef(fm1))
 ```
 
-We can also obtain the variance-covariance matrix of the fitted coefficients, and use it to compute the variance-covariance matrix for the does 1.7552:
+We can also obtain the variance-covariance matrix of the fitted coefficients, and use it to compute the variance-covariance matrix for the dose 1.7552:
 
 ```{r}
 ### compute CI for log odds:
@@ -897,7 +897,7 @@ with 95% confidence intervals 0.30 and
 
 Note that one should not try to predict outside the range of the design matrix. For example, in the beetle data, the dose ranges from 1.69 to 1.88. We should not try to compute probabilities for dose 2.5, say, since we have no knowledge about whether the relationship remains unchanged beyond the upper bound of our design matrix.
 
-#### Multiple logistic regression: Example from Hindi data}
+#### Multiple logistic regression: Example from Hindi data
 
 We have eyetracking data from 10 participants reading Hindi sentences. The data come from @HusainVasishthNarayanan2015. We can compute skipping probability, the probability of skipping a word entirely (i.e., never fixating it). We first have to create a vector that has value 1 if the word has 0~ms total reading time, and 0 otherwise. 
 
@@ -953,7 +953,7 @@ The basic idea here is that if the model fit is good, Deviance will have a $\chi
 So that is what we will use for assessing model fit.
 
 We will also use deviance for hypothesis testing.
-The difference in deviance (confusingly called residual deviance) between two models also has a $\chi^2$ distribution (this should remind you of ANOVA), with dfs being $p-q$, where $q$ is the number of parameters in the nukk model, and $p$ the number of parameters in the full model.
+The difference in deviance (confusingly called residual deviance) between two models also has a $\chi^2$ distribution (this should remind you of ANOVA), with dfs being $p-q$, where $q$ is the number of parameters in the null model, and $p$ the number of parameters in the full model.
 
 We discuss hypothesis testing first, then evaluating goodness of fit using deviance.
 

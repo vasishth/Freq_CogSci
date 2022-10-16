@@ -199,7 +199,7 @@ Given equation \@ref(eq:rearrange), this can be rewritten as:
 n(\bar{X} - \mu_0)^2
 \end{equation}
 
-Rewriting equation \@ref(#eq:loglambda) in this way gives us:
+Rewriting equation \@ref(eq:loglambda) in this way gives us:
 
 \begin{equation}
 \log \Lambda = -\frac{1}{2\sigma^2}   n(\bar{X} - \mu_0)^2 
