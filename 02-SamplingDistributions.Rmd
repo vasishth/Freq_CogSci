@@ -1092,11 +1092,9 @@ The Type I error probability is the probability of your incorrectly rejecting th
 
 ### The distribution of the p-value under the null hypothesis
 
-We have been talking about a continuous random variable as a dependent measure, and have learnt about the standard two-sided t-test, with a point null hypothesis. When we do such a test, we usually use the p-value to decide whether to reject the null hypothesis or not.
+We have been talking about a continuous random variable as a dependent measure, and have learned about the standard two-sided one-sample t-test, with a point null hypothesis. When we do such a test, we usually use the p-value to decide whether to reject the null hypothesis or not.
 
-Sometimes, you will hear  statisticians (e.g., Andrew Gelman on his blog) criticize p-values by saying that the null hypothesis significance test is a "specific random number generator".  For example, a blog post from May 5, 2016 (shorturl.at/irHS9) quotes Daniel Lakeland: "A p-value is the probability of seeing data as extreme or more extreme than the result, under the assumption that the result was produced by a specific random number generator (called the null hypothesis)."
-
-What does that sentence mean? We explain this point here because it is very helpful in understanding the p-value.
+Here is an interesting fact: if the null hypothesis really were true, the distribution of the p-value under repeated sampling would be a uniform distribution. Let's unpack this statement.
 
 Suppose that the null hypothesis is in fact true. We will now simulate the distribution of the p-value under repeated sampling, given this assumption. See Figure \@ref(fig:pvalnulltrue).
 
