@@ -471,9 +471,9 @@ arrows(x0,y0=cis[,1],
        x1,y1=cis[,2],length=0,lwd=cis[,3])
 ```
 
-### Confidence interals are often misinterpreted
+### Confidence intervals are often misinterpreted
 
-The confidence interval is widely misinterpreted, i.e., as representing the range of plausible value of the $\mu$ parameter. This is the wrong interpretation because $\mu$ is a point value by assumption, it doesn't have a pdf associated with it. The frequentist CI is defined with reference to the sampling distribution of the mean under repeated sampling, not the probability distribution of $\mu$.
+The confidence interval is widely misinterpreted, i.e., as representing the range of plausible values of the $\mu$ parameter. This is the wrong interpretation because $\mu$ is a point value by assumption, it doesn't have a pdf associated with it. The frequentist CI is defined with reference to the sampling distribution of the mean under repeated sampling, not the probability distribution of $\mu$.
 By contrast, the Bayesian credible interval does have this interpretation. 
 In most modeling settings that the authors have encountered in their work, the frequentist confidence interval and Bayesian credible interval have very similar widths, with the Bayesian interval being slightly wider depending on the prior specifications. But these similarities in the intervals do not change the fact that they have different meanings.
 
@@ -744,7 +744,7 @@ plot(density(tvals),
 )
 ```
 
-What would the t-distribution look like if the null hypothesis were false? Assume now that the null hypothesis is that $\mu=450$ as before, but that in fact the true $\mu$ is 470. Now the null hypothesis is false. Figure \@ref(fig:simtnullfalse) shows the t-distribution under repeated sampling. The t-distribution is now centered around 2; why? This is because if we plug in the hypothesized mean (450) and the true mean (470) and the standard error ($100/\sqrt(100)=10$) into the equation for computing the t-value, the expected value of the t-distribution (its mean) is $2$.
+What would the t-distribution look like if the null hypothesis were false? Assume now that the null hypothesis is that $\mu=450$ as before, but that in fact the true $\mu$ is 470. Now the null hypothesis is false. Figure \@ref(fig:simtnullfalse) shows the t-distribution under repeated sampling. The t-distribution is now centered around 2; why? This is because if we plug in the hypothesized mean (450) and the true mean (470) and the standard error ($100/\sqrt{(100)}=10$) into the equation for computing the t-value, the expected value of the t-distribution (its mean) is $2$.
 
 \begin{equation}
 \frac{470-450}{10} = 2
