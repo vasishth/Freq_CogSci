@@ -462,7 +462,7 @@ A random variable $X$ that has a chi-square distribution has the following pdf:
 \begin{equation}
 f(x; \nu)=
 \begin{cases}
-\frac{1}{2^{\nu/2} \Gamma(\nu/2)}x^{\frac{\nu-2}{2}\exp(-\frac{x}{2})} &  for x>0 ,\\
+\frac{1}{2^{\nu/2} \Gamma(\nu/2)}x^{\frac{\nu-2}{2}\exp(-\frac{x}{2})} &  \hbox{for }x>0 ,\\
 0 & \hbox{otherwise}
 \end{cases}
 \end{equation}
