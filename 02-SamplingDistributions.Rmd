@@ -1170,7 +1170,6 @@ P(Z\leq z) =& P(F(T)\leq z)\\
 \end{split}
 \end{equation}
 
-It is for this reason that statisticians like Andrew Gelman periodically point out that "the null hypothesis significance test is a specific random number generator". 
 
 ::::
 
