@@ -68,7 +68,7 @@ We are now ready to compute Type I error using simulation.
 
 Compute Type I error for a varying intercepts model using log reading times:
 
-```{r}
+```{r message=FALSE,warning=FALSE}
 ## null is true:
 beta[2]<-0
 nsim<-100
@@ -231,7 +231,7 @@ Next, let's see what simulation gives us when we fit a varying intercepts and sl
 
 First, load the data, and obtain the estimates from a fitted linear mixed model with full variance-covariance matrices for subjects and items. Because fitting such a model with `lmer` will lead to convergence errors, we fit the model using a Bayesian linear mixed model, and use the estimates from this model to simulate data. 
 
-```{r}
+```{r warning=FALSE,message=FALSE}
 library(lingpsych)
 data("dillonE1ttnested")
 library(brms)
