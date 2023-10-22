@@ -423,7 +423,7 @@ Everything checks out.
 
 With the function for simulating data ready, we are now able to repeatedly generate simulated data. Next, we generate data 100 times, fit a linear mixed model each time, and extract the t-value from each linear mixed model fit. The vector t-values is then used to compute power: we simply look at the proportion of absolute t-values that exceed the value 2. 
 
-```{r cache=TRUE}
+```{r cache=TRUE,message=FALSE,warning=FALSE}
 nsim <- 100
 sotval <- rep(NA, nsim)
 
@@ -467,7 +467,7 @@ We will run two for-loops now: the first for-loop selects one of the plausible v
 
 This time, instead of ignoring convergence problems, we can record the proportion of times that we get a convergence failure or problem, and we can discard that result:
 
-```{r cache=TRUE}
+```{r cache=TRUE,message=FALSE,warning=FALSE}
 nsim <- 100
 ## effect size possibilities:
 b1_est <- c(0.02, 0.12, 0.22)
@@ -647,7 +647,7 @@ head(dat)
 
 To compute prospective power based on the estimates from the English relative clause data, the following for-loop is run. In each iteration, data is first generated using the design set up above; this is done using the `simLMM` function from the `designr` package. Notice here that a "maximal" model is specified, but the correlations are set to zero (CP=0.0);  this has the effect that the data generated assume no correlation between the intercept and slope for subjects and items. Having generated the data, the `lmer` function is used to fit the model to the simulated data, and then the t-value of the slope is saved. This t-value can then be used to compute power in the usual way.
 
-```{r cache=TRUE}
+```{r cache=TRUE,warning=FALSE,message=FALSE}
 tvals <- rep(NA, 100)
 
 for (i in 1:100) {
@@ -676,7 +676,7 @@ mean(abs(tvals) > 2)
 
 If we also want to examine the distribution of the data generated, and the distribution of the parameters under repeated sampling, we can easily record that information within the for-loop:
 
-```{r cache=TRUE}
+```{r cache=TRUE,warning=FALSE,message=FALSE}
 n <- dim(dat)[1]
 nsim <- 100
 ysims <- matrix(rep(NA, n * nsim), ncol = nsim)
@@ -731,7 +731,7 @@ summary(m_lmer)
 
 The design remains unchanged; only the for-loop changes: the `simLMM` function is passed through the `exp()` function, to exponentiate the data generated on the log scale.
 
-```{r cache=TRUE}
+```{r cache=TRUE,warning=FALSE,message=FALSE}
 tvals <- rep(NA, 100)
 
 for (i in 1:100) {
@@ -759,7 +759,7 @@ mean(abs(tvals) > 2)
 
 The model fit on log RTs produces much more realistic data:
 
-```{r cache=TRUE}
+```{r cache=TRUE,warning=FALSE,message=FALSE}
 n <- dim(dat)[1]
 nsim <- 100
 ysims <- matrix(rep(NA, n * nsim), ncol = nsim)
@@ -855,7 +855,7 @@ Sample size calculations using simulation
 Load the data-set shown below: 
 
 ```{r}
-data("gibsonwu")
+data("df_gibsonwu")
 ```
 
 Use simulation to determine how many subjects you would need to achieve power of 80%, given 16 items, and an effect size of  0.02 on the log ms scale. Draw a power curve: on the x-axis show the number of subjects, and on the y-axis the estimated power. Now draw two further curves, one for an effect size of 0.05 and another for an effect size of 0.10. This gives you a power curve, taking the uncertainty in the effect size into account.
