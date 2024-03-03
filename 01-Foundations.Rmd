@@ -460,9 +460,9 @@ plot(u,punif(u,min=0,max=1),type="l",
 A random variable $X$ that has a chi-square distribution has the following pdf:
 
 \begin{equation}
-f(u; \nu)=
+f(x; \nu)=
 \begin{cases}
-\frac{1}{2^{\nu/2} \Gamma(\nu/2)}x^{\frac{\nu-2}{2}\exp(-\frac{x}{2})} &  for x>0 ,\\
+\frac{1}{2^{\nu/2} \Gamma(\nu/2)}x^{\frac{\nu-2}{2}\exp(-\frac{x}{2})} &  \hbox{for }x>0 ,\\
 0 & \hbox{otherwise}
 \end{cases}
 \end{equation}
@@ -484,7 +484,7 @@ plot(x,dchisq(x,df=1),type="l",
      ylab="density",main="Chi-square(df=1)")
 ```
 
-An important fact about the $\chi^2_{\nu=1}$ distribution that we will use in chapter 4 is that the quantile $x$ such that $F(X>x)=0.0.05$ is $x=3.84$.
+An important fact about the $\chi^2_{\nu=1}$ distribution that we will use in chapter 4 is that the quantile $x$ such that $F(X>x)=0.05$ is $x=3.84$.
 
 ```{r}
 qchisq(0.05,df=1,lower.tail=FALSE)
