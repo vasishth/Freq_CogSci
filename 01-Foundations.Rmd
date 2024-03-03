@@ -484,7 +484,7 @@ plot(x,dchisq(x,df=1),type="l",
      ylab="density",main="Chi-square(df=1)")
 ```
 
-An important fact about the $\chi^2_{\nu=1}$ distribution that we will use in chapter 4 is that the quantile $x$ such that $F(X>x)=0.0.05$ is $x=3.84$.
+An important fact about the $\chi^2_{\nu=1}$ distribution that we will use in chapter 4 is that the quantile $x$ such that $F(X>x)=0.05$ is $x=3.84$.
 
 ```{r}
 qchisq(0.05,df=1,lower.tail=FALSE)
